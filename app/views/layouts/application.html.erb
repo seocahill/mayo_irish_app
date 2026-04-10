@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <title>Gaeilge Mhaigh Eo</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body class="h-full bg-stone-50 text-stone-900 font-serif">
+
+    <header class="bg-emerald-900 text-white shadow-sm">
+      <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3 group">
+          <span class="text-2xl">☘</span>
+          <div>
+            <div class="font-bold text-lg leading-tight tracking-wide">Gaeilge Mhaigh Eo</div>
+            <div class="text-emerald-300 text-xs tracking-widest uppercase">Mayo Irish</div>
+          </div>
+        </a>
+        <nav class="text-sm text-emerald-200">
+          <a href="/" class="hover:text-white transition-colors">All Lessons</a>
+        </nav>
+      </div>
+    </header>
+
+    <% if notice %>
+      <div class="bg-emerald-50 border-b border-emerald-200 text-emerald-800 text-sm text-center py-2 px-4">
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+      <%= yield %>
+    </main>
+
+    <footer class="mt-16 border-t border-stone-200 bg-white">
+      <div class="max-w-4xl mx-auto px-4 py-6 text-center text-stone-400 text-sm">
+        Bunaithe ar <em>Learning Irish</em> le Mícheál Ó Siadhail &mdash; arna oiriúnú do Ghaeilge Mhaigh Eo
+      </div>
+    </footer>
+
+  </body>
+</html>

@@ -1,0 +1,130 @@
+<div class="flex items-center justify-between mb-8">
+  <div>
+    <div class="text-sm text-stone-400 uppercase tracking-widest mb-1">Á chur in eagar · Ceacht <%= @lesson.number %></div>
+    <h1 class="text-2xl font-bold text-stone-800"><%= @lesson.title %></h1>
+  </div>
+  <a href="<%= lesson_path(@lesson) %>" class="text-sm text-stone-500 hover:text-stone-800 transition-colors">
+    ← Ar ais go dtí an ceacht
+  </a>
+</div>
+
+<%= form_with model: @lesson, data: { controller: "vocab-editor" } do |f| %>
+
+  <%# ── TITLE ───────────────────────────────────────────────────── %>
+  <div class="bg-white rounded-xl border border-stone-200 px-6 py-5 mb-6">
+    <label class="editor-label">Teideal an Cheachta</label>
+    <%= f.text_field :title, class: "editor-input text-lg font-semibold" %>
+  </div>
+
+  <%# ── VOCABULARY TABLE ────────────────────────────────────────── %>
+  <div class="bg-white rounded-xl border border-stone-200 mb-6 overflow-hidden">
+    <div class="px-6 py-4 border-b border-stone-100 flex items-center justify-between">
+      <h2 class="font-bold text-stone-800">Stór Focal</h2>
+      <button type="button"
+              data-action="click->vocab-editor#addRow"
+              class="text-sm bg-emerald-800 text-white px-3 py-1.5 rounded-lg hover:bg-emerald-700 transition-colors">
+        + Focal nua
+      </button>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm" id="vocab-table">
+        <thead>
+          <tr class="bg-stone-50 border-b border-stone-200 text-stone-500 text-xs uppercase tracking-wide">
+            <th class="text-left px-3 py-2 font-medium w-[22%]">Gaeilge</th>
+            <th class="text-left px-3 py-2 font-medium w-[18%]">Fuaimniú</th>
+            <th class="text-left px-3 py-2 font-medium w-[16%]">Iolra</th>
+            <th class="text-left px-3 py-2 font-medium w-[8%]">Inscne</th>
+            <th class="text-left px-3 py-2 font-medium w-[28%]">Béarla</th>
+            <th class="px-3 py-2 w-[8%]"></th>
+          </tr>
+        </thead>
+        <tbody data-vocab-editor-target="tbody">
+          <%= f.fields_for :vocabulary_items do |vi| %>
+            <%= render "vocabulary_item_row", f: vi %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <%# ── VOCABULARY NOTES ───────────────────────────────────────── %>
+  <div class="bg-white rounded-xl border border-stone-200 px-6 py-5 mb-6">
+    <label class="editor-label">Nótaí Focail</label>
+    <%= f.text_area :vocabulary_notes,
+          rows: 4,
+          class: "editor-textarea font-mono text-xs",
+          placeholder: "Nótaí breise faoin bhfoclóir…" %>
+  </div>
+
+  <%# ── GRAMMAR ─────────────────────────────────────────────────── %>
+  <div class="bg-white rounded-xl border border-stone-200 px-6 py-5 mb-6">
+    <label class="editor-label">Gramadach</label>
+    <%= f.text_area :grammar,
+          rows: 16,
+          class: "editor-textarea",
+          placeholder: "Ábhar gramadaí an cheachta…" %>
+  </div>
+
+  <%# ── TEXTS ──────────────────────────────────────────────────── %>
+  <div class="bg-white rounded-xl border border-stone-200 px-6 py-5 mb-6">
+    <label class="editor-label">Téacsanna</label>
+    <%= f.text_area :texts,
+          rows: 10,
+          class: "editor-textarea",
+          placeholder: "Comhrá nó sleachta léitheoireachta…" %>
+  </div>
+
+  <%# ── EXERCISES ───────────────────────────────────────────────── %>
+  <div class="bg-white rounded-xl border border-stone-200 px-6 py-5 mb-6">
+    <label class="editor-label">Cleachtaí</label>
+    <%= f.text_area :exercises,
+          rows: 10,
+          class: "editor-textarea",
+          placeholder: "Cleachtaí agus aistríúcháin…" %>
+  </div>
+
+  <%# ── SUBMIT ─────────────────────────────────────────────────── %>
+  <div class="flex items-center justify-between">
+    <a href="<%= lesson_path(@lesson) %>" class="text-stone-500 hover:text-stone-800 text-sm transition-colors">
+      Cealaigh
+    </a>
+    <%= f.submit "Sábháil an ceacht",
+          class: "bg-emerald-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-colors cursor-pointer" %>
+  </div>
+
+<% end %>
+
+<%# Template row for JS cloning %>
+<template id="vocab-row-template">
+  <tr class="border-b border-stone-100 hover:bg-stone-50 vocab-row">
+    <td class="px-2 py-1.5">
+      <input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][irish]"
+             class="vocab-cell-input" placeholder="focal">
+    </td>
+    <td class="px-2 py-1.5">
+      <input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][phonetic]"
+             class="vocab-cell-input font-mono text-xs" placeholder="/fuaimniú/">
+    </td>
+    <td class="px-2 py-1.5">
+      <input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][plural]"
+             class="vocab-cell-input" placeholder="iolra">
+    </td>
+    <td class="px-2 py-1.5">
+      <select name="lesson[vocabulary_items_attributes][NEW_INDEX][gender]"
+              class="vocab-cell-input">
+        <option value="m">fir.</option>
+        <option value="f">bain.</option>
+      </select>
+    </td>
+    <td class="px-2 py-1.5">
+      <input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][english]"
+             class="vocab-cell-input" placeholder="meaning">
+    </td>
+    <td class="px-2 py-1.5 text-center">
+      <button type="button" data-action="click->vocab-editor#removeRow"
+              class="text-stone-300 hover:text-red-500 transition-colors text-lg leading-none"
+              title="Scrios">×</button>
+    </td>
+  </tr>
+</template>
