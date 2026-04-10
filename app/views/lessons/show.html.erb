@@ -57,11 +57,11 @@
 <% end %>
 
 <%# ── GRAMMAR ─────────────────────────────────────────────────── %>
-<% if @lesson.grammar.present? %>
+<% if @lesson.grammar.present? || @lesson.grammar_structured? %>
   <section class="mb-10">
     <h2 class="lesson-section-heading">Gramadach</h2>
     <div class="bg-white rounded-xl border border-stone-200 px-6 py-6">
-      <%= render_grammar @lesson.grammar %>
+      <%= render_grammar @lesson %>
     </div>
   </section>
 <% end %>

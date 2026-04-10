@@ -30,6 +30,7 @@ class LessonsController < ApplicationController
       :title,
       :vocabulary_notes,
       :grammar,
+      :grammar_data,
       :texts,
       :exercises,
       vocabulary_items_attributes: [

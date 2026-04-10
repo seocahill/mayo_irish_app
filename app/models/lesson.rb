@@ -25,4 +25,17 @@ class Lesson < ApplicationRecord
   def previous_lesson
     Lesson.where("position < ?", position).order(position: :desc).first
   end
+
+  # Returns the parsed grammar as an Array of section hashes, or [] if absent/invalid.
+  # Each section: { "number" => "1", "title" => "...", "blocks" => [...] }
+  def grammar_sections
+    return [] if grammar_data.blank?
+    JSON.parse(grammar_data)
+  rescue JSON::ParseError
+    []
+  end
+
+  def grammar_structured?
+    grammar_data.present?
+  end
 end
