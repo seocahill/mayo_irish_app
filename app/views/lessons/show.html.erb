@@ -60,8 +60,8 @@
 <% if @lesson.grammar.present? %>
   <section class="mb-10">
     <h2 class="lesson-section-heading">Gramadach</h2>
-    <div class="bg-white rounded-xl border border-stone-200 px-6 py-5 prose prose-stone max-w-none prose-headings:font-bold prose-headings:text-stone-800">
-      <%= simple_format @lesson.grammar %>
+    <div class="bg-white rounded-xl border border-stone-200 px-6 py-6">
+      <%= render_grammar @lesson.grammar %>
     </div>
   </section>
 <% end %>

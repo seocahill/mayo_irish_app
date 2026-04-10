@@ -33,4 +33,72 @@
            focus:outline-none focus:bg-emerald-50 focus:ring-1 focus:ring-emerald-400
            rounded transition-colors;
   }
+
+  /* ── Grammar display ──────────────────────────────────────── */
+
+  .grammar-section-heading {
+    @apply flex items-center gap-3 mt-8 mb-3;
+  }
+
+  .grammar-section-heading:first-child {
+    @apply mt-0;
+  }
+
+  .grammar-section-badge {
+    @apply flex-shrink-0 inline-flex items-center justify-center
+           w-8 h-8 rounded-full bg-emerald-800 text-white text-sm font-bold;
+  }
+
+  .grammar-section-heading > span:last-child {
+    @apply font-bold text-stone-800 text-base tracking-wide uppercase text-sm;
+  }
+
+  .grammar-subsection-heading {
+    @apply mt-4 mb-2 text-sm font-semibold text-emerald-700 italic;
+  }
+
+  .grammar-prose {
+    @apply text-sm text-stone-700 leading-relaxed mb-3;
+  }
+
+  /* Irish/English example pairs and table rows */
+  .grammar-examples {
+    @apply list-none my-3 space-y-1 pl-4 border-l-2 border-emerald-200 ml-2;
+  }
+
+  .grammar-examples li {
+    @apply text-sm font-mono text-stone-700 leading-snug;
+  }
+
+  /* ── Grammar accordion editor ─────────────────────────────── */
+
+  .grammar-editor-section {
+    @apply border border-stone-200 rounded-lg overflow-hidden;
+  }
+
+  .grammar-editor-header {
+    @apply flex items-center gap-3 px-4 py-3 bg-stone-50
+           hover:bg-stone-100 transition-colors cursor-pointer select-none;
+  }
+
+  .grammar-editor-badge {
+    @apply flex-shrink-0 inline-flex items-center justify-center
+           w-6 h-6 rounded-full bg-emerald-800 text-white text-xs font-bold;
+  }
+
+  .grammar-editor-chevron {
+    @apply transition-transform duration-200 ml-auto text-stone-400;
+  }
+
+  .grammar-editor-body {
+    @apply px-4 py-3 space-y-2 border-t border-stone-100;
+  }
+
+  .grammar-editor-section.collapsed .grammar-editor-body {
+    display: none;
+  }
+
+  .grammar-editor-section.collapsed .grammar-editor-chevron {
+    transform: rotate(-90deg);
+  }
 }
