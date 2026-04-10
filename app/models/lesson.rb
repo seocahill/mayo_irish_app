@@ -1,5 +1,9 @@
 class Lesson < ApplicationRecord
   has_many :vocabulary_items, -> { order(:position) }, dependent: :destroy
+  has_many :lesson_rows, dependent: :destroy
+  accepts_nested_attributes_for :lesson_rows,
+                                allow_destroy: true,
+                                reject_if: :all_blank
   accepts_nested_attributes_for :vocabulary_items,
                                 allow_destroy: true,
                                 reject_if: :all_blank
@@ -26,16 +30,4 @@ class Lesson < ApplicationRecord
     Lesson.where("position < ?", position).order(position: :desc).first
   end
 
-  # Returns the parsed grammar as an Array of section hashes, or [] if absent/invalid.
-  # Each section: { "number" => "1", "title" => "...", "blocks" => [...] }
-  def grammar_sections
-    return [] if grammar_data.blank?
-    JSON.parse(grammar_data)
-  rescue JSON::ParseError
-    []
-  end
-
-  def grammar_structured?
-    grammar_data.present?
-  end
 end

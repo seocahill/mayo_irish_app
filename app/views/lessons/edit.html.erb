@@ -57,53 +57,26 @@
           placeholder: "Nótaí breise faoin bhfoclóir…" %>
   </div>
 
-  <%# ── GRAMMAR ─────────────────────────────────────────────────── %>
-  <div class="bg-white rounded-xl border border-stone-200 mb-6 overflow-hidden"
-       data-controller="grammar-editor">
+  <%# ── GRAMMAR ROWS ────────────────────────────────────────────── %>
+  <%= render "section_row_editor", f: f, section: "grammar",
+        heading: "Gramadach",
+        col1_label: "Riail / Teideal",
+        col2_label: "Míniú",
+        col3_label: nil %>
 
-    <div class="px-4 py-3 border-b border-stone-100 flex items-center justify-between gap-3">
-      <span class="editor-label !mb-0">Gramadach</span>
-      <button type="button"
-              class="text-sm bg-emerald-800 text-white px-3 py-1.5 rounded-lg hover:bg-emerald-700 transition-colors"
-              data-action="click->grammar-editor#addSection">
-        + Rannóg nua
-      </button>
-    </div>
+  <%# ── TEXTS ROWS ─────────────────────────────────────────────── %>
+  <%= render "section_row_editor", f: f, section: "texts",
+        heading: "Téacsanna",
+        col1_label: "Gaeilge",
+        col2_label: nil,
+        col3_label: nil %>
 
-    <% unless @lesson.grammar_structured? %>
-      <div class="mx-4 my-3 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3 text-sm text-amber-800">
-        <strong>Nóta:</strong> Níl sonraí struchtúrtha ann fós.
-        Rith <code class="font-mono text-xs bg-amber-100 px-1 rounded">bin/rails grammar:import[<%= @lesson.number %>]</code>
-        chun an téacs a chomhshó, nó cuir rannóga leis de láimh.
-      </div>
-    <% end %>
-
-    <%# Block editor – rendered by Stimulus from the JSON source field %>
-    <div class="p-3 space-y-2" data-grammar-editor-target="container"></div>
-
-    <%# Hidden JSON field — the actual form value %>
-    <%= f.hidden_field :grammar_data,
-          data: { grammar_editor_target: "source" } %>
-
-  </div>
-
-  <%# ── TEXTS ──────────────────────────────────────────────────── %>
-  <div class="bg-white rounded-xl border border-stone-200 px-6 py-5 mb-6">
-    <label class="editor-label">Téacsanna</label>
-    <%= f.text_area :texts,
-          rows: 10,
-          class: "editor-textarea",
-          placeholder: "Comhrá nó sleachta léitheoireachta…" %>
-  </div>
-
-  <%# ── EXERCISES ───────────────────────────────────────────────── %>
-  <div class="bg-white rounded-xl border border-stone-200 px-6 py-5 mb-6">
-    <label class="editor-label">Cleachtaí</label>
-    <%= f.text_area :exercises,
-          rows: 10,
-          class: "editor-textarea",
-          placeholder: "Cleachtaí agus aistríúcháin…" %>
-  </div>
+  <%# ── EXERCISES ROWS ─────────────────────────────────────────── %>
+  <%= render "section_row_editor", f: f, section: "exercises",
+        heading: "Cleachtaí",
+        col1_label: "Béarla",
+        col2_label: nil,
+        col3_label: nil %>
 
   <%# ── SUBMIT ─────────────────────────────────────────────────── %>
   <div class="flex items-center justify-between">
@@ -116,7 +89,7 @@
 
 <% end %>
 
-<%# Template row for JS cloning %>
+<%# Template row for vocab JS cloning %>
 <template id="vocab-row-template">
   <tr class="border-b border-stone-100 hover:bg-stone-50 vocab-row">
     <td class="px-2 py-1.5">

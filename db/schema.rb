@@ -10,11 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2024_01_01_000002) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_10_191707) do
+  create_table "lesson_rows", force: :cascade do |t|
+    t.text "col_1"
+    t.text "col_2"
+    t.text "col_3"
+    t.datetime "created_at", null: false
+    t.integer "lesson_id"
+    t.integer "position"
+    t.string "section"
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id", "section", "position"], name: "index_lesson_rows_on_lesson_id_and_section_and_position"
+  end
+
   create_table "lessons", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.text "exercises"
     t.text "grammar"
+    t.text "grammar_data"
     t.integer "number", null: false
     t.integer "position", default: 0, null: false
     t.text "texts"
@@ -40,5 +53,6 @@ ActiveRecord::Schema[8.1].define(version: 2024_01_01_000002) do
     t.index ["lesson_id"], name: "index_vocabulary_items_on_lesson_id"
   end
 
+  add_foreign_key "lesson_rows", "lessons"
   add_foreign_key "vocabulary_items", "lessons"
 end
