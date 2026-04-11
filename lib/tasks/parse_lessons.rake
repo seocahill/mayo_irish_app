@@ -1,5 +1,5 @@
 namespace :lessons do
-  desc "Parse a lesson's sections into structured rows using OpenAI. Pass LESSON=10 or LESSON=all"
+  desc "Parse a lesson's OCR text into structured DB records using OpenAI. Pass LESSON=10 or LESSON=all"
   task parse: :environment do
     lesson_arg = ENV['LESSON'] || 'all'
 
@@ -11,19 +11,18 @@ namespace :lessons do
 
     lessons.each do |lesson|
       puts "Parsing lesson #{lesson.number}: #{lesson.title}..."
-      parser = LessonSectionParser.new(lesson)
-      parser.parse_all
+      LessonStructureParser.new(lesson).parse
       puts "  Done."
     end
   end
 
-  desc "Show raw text for a lesson without parsing. Pass LESSON=10"
+  desc "Show raw OCR text for a lesson. Pass LESSON=10"
   task inspect: :environment do
     lesson = Lesson.find_by!(number: ENV.fetch('LESSON').to_i)
-    %w[grammar texts exercises].each do |section|
-      raw = lesson.public_send(section)
-      puts "\n=== #{section.upcase} (#{raw&.length || 0} chars) ==="
-      puts raw.present? ? raw[0..800] : "(empty)"
+    %w[grammar texts exercises vocabulary_notes].each do |field|
+      raw = lesson.public_send(field)
+      puts "\n=== #{field.upcase} (#{raw&.length || 0} chars) ==="
+      puts raw.present? ? raw[0..600] : "(empty)"
     end
   end
 end

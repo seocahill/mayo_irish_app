@@ -10,7 +10,78 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_11_002129) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_11_134834) do
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
+    t.datetime "updated_at", null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.string "content_type"
+    t.datetime "created_at", null: false
+    t.string "filename", null: false
+    t.string "key", null: false
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "exercises", force: :cascade do |t|
+    t.text "answer"
+    t.datetime "created_at", null: false
+    t.integer "lesson_id", null: false
+    t.integer "number", null: false
+    t.integer "position", default: 0, null: false
+    t.text "prompt", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id", "position"], name: "index_exercises_on_lesson_id_and_position"
+    t.index ["lesson_id"], name: "index_exercises_on_lesson_id"
+  end
+
+  create_table "grammar_rules", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "lesson_id", null: false
+    t.integer "number", null: false
+    t.integer "position", default: 0, null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id", "position"], name: "index_grammar_rules_on_lesson_id_and_position"
+    t.index ["lesson_id"], name: "index_grammar_rules_on_lesson_id"
+  end
+
+  create_table "grammar_sections", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "grammar_rule_id", null: false
+    t.string "label"
+    t.integer "position", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.index ["grammar_rule_id", "position"], name: "index_grammar_sections_on_grammar_rule_id_and_position"
+    t.index ["grammar_rule_id"], name: "index_grammar_sections_on_grammar_rule_id"
+  end
+
   create_table "lesson_rows", force: :cascade do |t|
     t.text "col_1"
     t.text "col_2"
@@ -25,6 +96,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_11_002129) do
   end
 
   create_table "lessons", force: :cascade do |t|
+    t.text "content_html"
     t.datetime "created_at", null: false
     t.text "exercises"
     t.text "grammar"
@@ -37,6 +109,31 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_11_002129) do
     t.text "vocabulary_notes"
     t.index ["number"], name: "index_lessons_on_number", unique: true
     t.index ["position"], name: "index_lessons_on_position"
+  end
+
+  create_table "phrases", force: :cascade do |t|
+    t.string "audio_url"
+    t.datetime "created_at", null: false
+    t.text "english"
+    t.text "irish", null: false
+    t.integer "lesson_id", null: false
+    t.integer "position", default: 0, null: false
+    t.integer "source_id"
+    t.string "source_type"
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id", "position"], name: "index_phrases_on_lesson_id_and_position"
+    t.index ["lesson_id"], name: "index_phrases_on_lesson_id"
+    t.index ["source_type", "source_id"], name: "index_phrases_on_source_type_and_source_id"
+  end
+
+  create_table "text_passages", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "lesson_id", null: false
+    t.integer "position", default: 0, null: false
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id", "position"], name: "index_text_passages_on_lesson_id_and_position"
+    t.index ["lesson_id"], name: "index_text_passages_on_lesson_id"
   end
 
   create_table "vocabulary_items", force: :cascade do |t|
@@ -54,6 +151,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_11_002129) do
     t.index ["lesson_id"], name: "index_vocabulary_items_on_lesson_id"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "exercises", "lessons"
+  add_foreign_key "grammar_rules", "lessons"
+  add_foreign_key "grammar_sections", "grammar_rules"
   add_foreign_key "lesson_rows", "lessons"
+  add_foreign_key "phrases", "lessons"
+  add_foreign_key "text_passages", "lessons"
   add_foreign_key "vocabulary_items", "lessons"
 end
