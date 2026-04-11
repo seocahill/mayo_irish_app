@@ -16,7 +16,6 @@
 <% if @lesson.vocabulary_items.any? %>
   <section class="mb-10">
     <h2 class="lesson-section-heading">Stór Focal</h2>
-
     <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
       <table class="w-full text-sm">
         <thead>
@@ -48,8 +47,8 @@
     </div>
 
     <% if @lesson.vocabulary_notes.present? %>
-      <div class="mt-3 bg-amber-50 border border-amber-200 rounded-lg px-5 py-4 text-sm text-stone-700 prose prose-sm max-w-none">
-        <p class="font-semibold text-amber-800 mb-1 text-xs uppercase tracking-wide">Nóta Focail</p>
+      <div class="mt-3 bg-amber-50 border border-amber-200 rounded-lg px-5 py-4 text-sm text-stone-700">
+        <p class="font-semibold text-amber-800 mb-2 text-xs uppercase tracking-wide">Nótaí Focail</p>
         <%= simple_format @lesson.vocabulary_notes %>
       </div>
     <% end %>
@@ -57,80 +56,70 @@
 <% end %>
 
 <%# ── GRAMMAR ─────────────────────────────────────────────────── %>
-<% grammar_rows = @lesson.lesson_rows.for_section('grammar') %>
-<% if grammar_rows.any? %>
+<% if @lesson.grammar_rules.any? %>
   <section class="mb-10">
     <h2 class="lesson-section-heading">Gramadach</h2>
-    <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
-      <table class="w-full text-sm">
-        <tbody>
-          <% grammar_rows.each do |row| %>
-            <% case row.row_type %>
-            <% when 'section_heading' %>
-              <tr class="bg-emerald-900 text-white">
-                <td colspan="3" class="px-4 py-2 font-bold text-sm tracking-wide"><%= row.col_1 %></td>
-              </tr>
-            <% when 'subheading' %>
-              <tr class="bg-stone-100 border-t border-stone-200">
-                <td colspan="3" class="px-4 py-1.5 text-stone-600 font-semibold text-xs uppercase tracking-wide"><%= row.col_1 %></td>
-              </tr>
-            <% when 'col_header' %>
-              <tr class="bg-stone-50 border-t border-stone-200 text-stone-500 text-xs uppercase tracking-wide font-medium">
-                <td class="px-4 py-2"><%= row.col_1 %></td>
-                <td class="px-4 py-2"><%= row.col_2 %></td>
-                <% if row.col_3.present? %><td class="px-4 py-2"><%= row.col_3 %></td><% end %>
-              </tr>
-            <% when 'note' %>
-              <tr class="bg-amber-50 border-t border-amber-100">
-                <td colspan="3" class="px-4 py-2 text-stone-500 italic text-xs"><%= row.col_1 %></td>
-              </tr>
-            <% else %>
-              <tr class="border-t border-stone-100 hover:bg-stone-50 align-top">
-                <td class="px-4 py-2 text-stone-800 leading-relaxed"><%= row.col_1 %></td>
-                <% if row.col_2.present? %>
-                  <td class="px-4 py-2 text-stone-700 leading-relaxed"><%= row.col_2 %></td>
-                <% end %>
-                <% if row.col_3.present? %>
-                  <td class="px-4 py-2 text-stone-600 leading-relaxed"><%= row.col_3 %></td>
-                <% end %>
-              </tr>
-            <% end %>
+    <div class="space-y-6">
+      <% @lesson.grammar_rules.each do |rule| %>
+        <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
+          <div class="bg-emerald-900 text-white px-5 py-3">
+            <span class="font-bold text-sm"><%= rule.number %>. <%= rule.title %></span>
+          </div>
+          <% if rule.body.present? && rule.body.to_plain_text.present? %>
+            <div class="px-5 py-4 text-sm text-stone-700 prose prose-sm max-w-none border-b border-stone-100">
+              <%= rule.body %>
+            </div>
           <% end %>
-        </tbody>
-      </table>
-    </div>
-  </section>
-<% end %>
-
-<%# ── TEXTS ──────────────────────────────────────────────────── %>
-<% text_rows = @lesson.lesson_rows.for_section('texts') %>
-<% if text_rows.any? %>
-  <section class="mb-10">
-    <h2 class="lesson-section-heading">Téacsanna</h2>
-    <div class="bg-white rounded-xl border border-stone-200 px-6 py-5">
-      <% text_rows.each do |row| %>
-        <p class="text-stone-800 leading-relaxed mb-2 last:mb-0"><%= row.col_1 %></p>
+          <% rule.grammar_sections.each do |section| %>
+            <div class="border-b border-stone-100 last:border-0">
+              <% if section.label.present? %>
+                <div class="px-5 py-2 bg-stone-50 text-xs font-semibold text-stone-500 uppercase tracking-wide">
+                  <%= section.label %>
+                </div>
+              <% end %>
+              <div class="px-5 py-4 text-sm prose prose-sm max-w-none lesson-grammar-content">
+                <%= section.body %>
+              </div>
+            </div>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </section>
 <% end %>
 
+<%# ── TEXTS ──────────────────────────────────────────────────── %>
+<% if @lesson.text_passages.any? %>
+  <section class="mb-10">
+    <h2 class="lesson-section-heading">Téacsanna</h2>
+    <% @lesson.text_passages.each do |passage| %>
+      <div class="bg-white rounded-xl border border-stone-200 overflow-hidden mb-4 last:mb-0">
+        <% if passage.title.present? %>
+          <div class="bg-stone-100 px-5 py-3 font-bold text-sm text-stone-700 uppercase tracking-wide">
+            <%= passage.title %>
+          </div>
+        <% end %>
+        <div class="px-5 py-4 text-sm prose prose-sm max-w-none leading-relaxed">
+          <%= passage.body %>
+        </div>
+      </div>
+    <% end %>
+  </section>
+<% end %>
+
 <%# ── EXERCISES ────────────────────────────────────────────────── %>
-<% exercise_rows = @lesson.lesson_rows.for_section('exercises') %>
-<% if exercise_rows.any? %>
+<% if @lesson.exercises.any? %>
   <section class="mb-10">
     <h2 class="lesson-section-heading">Cleachtaí</h2>
     <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
-      <table class="w-full text-sm">
-        <tbody class="divide-y divide-stone-100">
-          <% exercise_rows.each do |row| %>
-            <tr class="hover:bg-stone-50 transition-colors">
-              <td class="px-4 py-3 text-stone-400 font-mono text-xs text-right align-top select-none w-8"><%= row.position %>.</td>
-              <td class="px-4 py-3 text-stone-700"><%= row.col_1 %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <ol class="divide-y divide-stone-100 list-none">
+        <% @lesson.exercises.each do |ex| %>
+          <li class="flex gap-4 px-5 py-3 hover:bg-stone-50 transition-colors">
+            <span class="text-stone-400 font-mono text-xs w-6 shrink-0 pt-0.5"><%= ex.number %>.</span>
+            <span class="text-stone-700 text-sm"><%= ex.prompt %></span>
+          </li>
+        <% end %>
+      </ol>
     </div>
   </section>
 <% end %>

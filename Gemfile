@@ -26,3 +26,5 @@ end
 group :development do
   gem 'web-console'
 end
+
+gem "lexxy", "~> 0.9.7.beta"
