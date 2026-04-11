@@ -6,7 +6,7 @@ class TextPassagesController < ApplicationController
 
   def update
     if @passage.update(passage_params)
-      redirect_to lesson_path(@passage.lesson), notice: "Saved."
+      redirect_to edit_lesson_path(@passage.lesson)
     else
       render :edit, status: :unprocessable_entity
     end

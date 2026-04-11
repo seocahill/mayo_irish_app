@@ -6,7 +6,7 @@ class ExercisesController < ApplicationController
 
   def update
     if @exercise.update(exercise_params)
-      redirect_to lesson_path(@exercise.lesson), notice: "Saved."
+      redirect_to edit_lesson_path(@exercise.lesson)
     else
       render :edit, status: :unprocessable_entity
     end

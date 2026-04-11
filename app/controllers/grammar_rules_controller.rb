@@ -6,7 +6,7 @@ class GrammarRulesController < ApplicationController
 
   def update
     if @rule.update(rule_params)
-      redirect_to lesson_path(@rule.lesson), notice: "Saved."
+      redirect_to edit_lesson_path(@rule.lesson)
     else
       render :edit, status: :unprocessable_entity
     end

@@ -6,7 +6,7 @@ class GrammarSectionsController < ApplicationController
 
   def update
     if @section.update(section_params)
-      redirect_to lesson_path(@section.grammar_rule.lesson), notice: "Saved."
+      redirect_to edit_lesson_path(@section.grammar_rule.lesson)
     else
       render :edit, status: :unprocessable_entity
     end

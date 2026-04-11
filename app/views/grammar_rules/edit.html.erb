@@ -1,22 +1,13 @@
-<div class="flex items-center justify-between mb-6">
-  <div>
-    <div class="text-xs text-stone-400 uppercase tracking-widest mb-1">Ceacht <%= @rule.lesson.number %> · Gramadach</div>
-    <h1 class="text-xl font-bold text-stone-800"><%= @rule.number %>. <%= @rule.title %></h1>
-  </div>
-  <a href="<%= edit_lesson_path(@rule.lesson) %>" class="text-sm text-stone-500 hover:text-stone-800 transition-colors">← Ar ais</a>
-</div>
-
-<%= form_with model: @rule, class: "bg-white rounded-xl border border-stone-200 overflow-hidden" do |f| %>
-  <div class="px-6 py-4 border-b border-stone-100">
-    <label class="editor-label">Teideal</label>
-    <%= f.text_field :title, class: "editor-input font-semibold" %>
-  </div>
-  <div class="px-6 py-4">
-    <label class="editor-label">Réamhrá (roghnach)</label>
-    <%= f.rich_text_area :body %>
-  </div>
-  <div class="px-6 py-4 border-t border-stone-100 flex justify-between">
-    <a href="<%= edit_lesson_path(@rule.lesson) %>" class="text-stone-500 hover:text-stone-800 text-sm transition-colors">Cealaigh</a>
-    <%= f.submit "Sábháil", class: "bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition-colors cursor-pointer" %>
-  </div>
-<% end %>
+<turbo-frame id="<%= dom_id(@rule) %>">
+  <%= form_with model: @rule do |f| %>
+    <div class="bg-emerald-900 px-5 py-3 flex items-center gap-3">
+      <%= f.text_field :title,
+            class: "flex-1 bg-emerald-800 text-white placeholder-emerald-400 text-sm font-bold rounded px-2 py-1 border border-emerald-700 focus:outline-none focus:border-emerald-400",
+            placeholder: "Teideal riail…" %>
+      <%= f.submit "Sábháil", class: "bg-white text-emerald-900 px-3 py-1 rounded text-xs font-semibold hover:bg-emerald-100 transition-colors cursor-pointer" %>
+      <a href="<%= edit_lesson_path(@rule.lesson) %>"
+         data-turbo-frame="<%= dom_id(@rule) %>"
+         class="text-emerald-300 hover:text-white text-xs transition-colors">Cealaigh</a>
+    </div>
+  <% end %>
+</turbo-frame>

@@ -1,22 +1,21 @@
-<div class="flex items-center justify-between mb-6">
-  <div>
-    <div class="text-xs text-stone-400 uppercase tracking-widest mb-1">Ceacht <%= @exercise.lesson.number %> · Cleachtaí</div>
-    <h1 class="text-xl font-bold text-stone-800">Cleachtadh <%= @exercise.number %></h1>
-  </div>
-  <a href="<%= edit_lesson_path(@exercise.lesson) %>" class="text-sm text-stone-500 hover:text-stone-800 transition-colors">← Ar ais</a>
-</div>
-
-<%= form_with model: @exercise, class: "bg-white rounded-xl border border-stone-200 overflow-hidden" do |f| %>
-  <div class="px-6 py-4 border-b border-stone-100">
-    <label class="editor-label">Béarla (ceist)</label>
-    <%= f.text_area :prompt, rows: 3, class: "editor-textarea" %>
-  </div>
-  <div class="px-6 py-4">
-    <label class="editor-label">Gaeilge (freagra — roghnach)</label>
-    <%= f.text_area :answer, rows: 3, class: "editor-textarea", placeholder: "Fág bán más mian leat…" %>
-  </div>
-  <div class="px-6 py-4 border-t border-stone-100 flex justify-between">
-    <a href="<%= edit_lesson_path(@exercise.lesson) %>" class="text-stone-500 hover:text-stone-800 text-sm transition-colors">Cealaigh</a>
-    <%= f.submit "Sábháil", class: "bg-emerald-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-emerald-700 transition-colors cursor-pointer" %>
-  </div>
-<% end %>
+<turbo-frame id="<%= dom_id(@exercise) %>">
+  <%= form_with model: @exercise do |f| %>
+    <div class="flex items-start gap-4 px-5 py-3 border-b border-stone-100 bg-amber-50">
+      <span class="text-stone-400 font-mono text-xs w-6 shrink-0 pt-2"><%= @exercise.number %>.</span>
+      <div class="flex-1 space-y-2">
+        <%= f.text_area :prompt, rows: 2,
+              class: "w-full text-sm border border-stone-300 rounded px-2 py-1 focus:outline-none focus:border-emerald-500 resize-none",
+              placeholder: "Béarla…" %>
+        <%= f.text_area :answer, rows: 2,
+              class: "w-full text-sm border border-stone-300 rounded px-2 py-1 focus:outline-none focus:border-emerald-500 resize-none text-emerald-800",
+              placeholder: "Gaeilge (roghnach)…" %>
+      </div>
+      <div class="flex flex-col gap-1 shrink-0">
+        <%= f.submit "Sábháil", class: "bg-emerald-800 text-white px-3 py-1 rounded text-xs font-semibold hover:bg-emerald-700 transition-colors cursor-pointer" %>
+        <a href="<%= edit_lesson_path(@exercise.lesson) %>"
+           data-turbo-frame="<%= dom_id(@exercise) %>"
+           class="text-center text-stone-400 hover:text-stone-700 text-xs transition-colors">Cealaigh</a>
+      </div>
+    </div>
+  <% end %>
+</turbo-frame>
