@@ -1,4 +1,6 @@
 class Lesson < ApplicationRecord
+  has_rich_text :vocabulary_notes_content
+
   has_many :vocabulary_items,  -> { order(:position) }, dependent: :destroy
   has_many :grammar_rules,     -> { order(:position) }, dependent: :destroy
   has_many :grammar_sections,  through: :grammar_rules

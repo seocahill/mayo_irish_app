@@ -69,6 +69,25 @@ class LessonStructureParser
     )
   end
 
+  VOCAB_PROMPT = <<~PROMPT
+    You are correcting OCR-extracted vocabulary data from a Mayo Irish (Gaeilge Chonnacht) textbook.
+    The OCR is poor — accented characters (á é í ó ú) are often stripped, and words are sometimes
+    garbled (e.g. "bias" should be "blas", "Mdirtin" should be "Máirtín").
+
+    You will receive a JSON array of vocabulary items. For each item return a corrected version with:
+    - "id": the original id (integer, unchanged)
+    - "irish": corrected Irish headword (fix fadas, fix garbled characters).
+               Keep grammatical usage notes as part of the headword, e.g. "ní móide (go/nach)",
+               "éist (le)", "ag brath (ar)" — these are part of how the word is used.
+    - "phonetic": corrected phonetic transcription (fix where possible, leave if uncertain)
+    - "plural": the plural form — extract from english field if embedded there (e.g. "buidéil bottle"
+      → plural: "buidéil", english: "bottle"), otherwise leave blank
+    - "gender": "m" or "f" — correct if obviously wrong, otherwise leave as-is
+    - "english": the English meaning only — no Irish plural prefix, corrected if garbled
+
+    Return ONLY a valid JSON array — no markdown, no explanation.
+  PROMPT
+
   def parse(replace: true)
     parts = []
     parts << "=== VOCABULARY NOTES ===\n#{@lesson.vocabulary_notes}" if @lesson.vocabulary_notes.present?
@@ -77,9 +96,11 @@ class LessonStructureParser
     parts << "=== EXERCISES ===\n#{@lesson.read_attribute(:exercises)}" if @lesson.read_attribute(:exercises).present?
     raw = parts.join("\n\n")
 
+    parse_vocabulary if @lesson.vocabulary_items.any?
+
     return if raw.blank?
 
-    puts "  Calling OpenAI..."
+    puts "  Calling OpenAI (structure)..."
     response = @client.chat(
       parameters: {
         model: 'gpt-4o',
@@ -106,7 +127,8 @@ class LessonStructureParser
 
       # Vocabulary notes
       if data['vocabulary_notes_html'].present?
-        @lesson.update_column(:vocabulary_notes, data['vocabulary_notes_html'])
+        @lesson.vocabulary_notes_content = data['vocabulary_notes_html']
+        @lesson.save!
       end
 
       # Grammar rules
@@ -187,5 +209,44 @@ class LessonStructureParser
   rescue JSON::ParserError => e
     Rails.logger.error "LessonStructureParser JSON error: #{e.message}\nContent: #{content&.first(500)}"
     raise
+  end
+
+  def parse_vocabulary
+    puts '  Calling OpenAI (vocabulary)...'
+    items = @lesson.vocabulary_items.map do |v|
+      { id: v.id, irish: v.irish, phonetic: v.phonetic, plural: v.plural,
+        gender: v.gender, english: v.english }
+    end
+
+    response = @client.chat(
+      parameters: {
+        model: 'gpt-4o',
+        messages: [
+          { role: 'system', content: VOCAB_PROMPT },
+          { role: 'user', content: items.to_json }
+        ],
+        temperature: 0.1,
+        max_tokens: 4096
+      }
+    )
+
+    content = response.dig('choices', 0, 'message', 'content').to_s.strip
+    content = content.gsub(/\A```(?:json)?\n?/, '').gsub(/\n?```\z/, '').strip
+    corrected = JSON.parse(content)
+
+    corrected.each do |row|
+      item = VocabularyItem.find_by(id: row['id'])
+      next unless item
+
+      item.update_columns(
+        irish:    row['irish'].presence    || item.irish,
+        phonetic: row['phonetic'].presence || item.phonetic,
+        plural:   row['plural'].to_s,
+        gender:   row['gender'].presence   || item.gender,
+        english:  row['english'].presence  || item.english
+      )
+    end
+
+    puts "  vocabulary:       #{corrected.size} items corrected"
   end
 end

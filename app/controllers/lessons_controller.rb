@@ -29,6 +29,7 @@ class LessonsController < ApplicationController
     params.require(:lesson).permit(
       :title,
       :vocabulary_notes,
+      :vocabulary_notes_content,
       :grammar,
       :grammar_data,
       :texts,
