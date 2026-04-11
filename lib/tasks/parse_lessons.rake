@@ -9,10 +9,23 @@ namespace :lessons do
       [ Lesson.find_by!(number: lesson_arg.to_i) ]
     end
 
+    failed = []
+
     lessons.each do |lesson|
       puts "Parsing lesson #{lesson.number}: #{lesson.title}..."
       LessonStructureParser.new(lesson).parse
       puts "  Done."
+    rescue => e
+      puts "  ERROR: #{e.message}"
+      failed << lesson.number
+      next
+    end
+
+    if failed.any?
+      puts "\nFailed lessons: #{failed.join(', ')}"
+      puts "Re-run with: bin/rails lessons:parse LESSON=<number>"
+    else
+      puts "\nAll lessons parsed successfully."
     end
   end
 
