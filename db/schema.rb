@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_10_191707) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_11_002129) do
   create_table "lesson_rows", force: :cascade do |t|
     t.text "col_1"
     t.text "col_2"
@@ -18,6 +18,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_10_191707) do
     t.datetime "created_at", null: false
     t.integer "lesson_id"
     t.integer "position"
+    t.string "row_type", default: "data", null: false
     t.string "section"
     t.datetime "updated_at", null: false
     t.index ["lesson_id", "section", "position"], name: "index_lesson_rows_on_lesson_id_and_section_and_position"

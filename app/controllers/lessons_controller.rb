@@ -37,7 +37,7 @@ class LessonsController < ApplicationController
         :id, :irish, :phonetic, :plural, :gender, :english, :notes, :position, :_destroy
       ],
       lesson_rows_attributes: [
-        :id, :section, :position, :col_1, :col_2, :col_3, :_destroy
+        :id, :section, :position, :row_type, :col_1, :col_2, :col_3, :_destroy
       ]
     )
   end

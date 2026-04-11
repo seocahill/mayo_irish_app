@@ -3,40 +3,55 @@ require 'openai'
 # Parses the raw OCR text fields of a lesson into structured LessonRow records
 # using OpenAI. Also corrects garbled Irish characters from poor OCR.
 class LessonSectionParser
+  GRAMMAR_PROMPT = <<~PROMPT
+    You are parsing OCR-extracted text from a Mayo Irish (Gaeilge Chonnacht) textbook.
+    The OCR is poor — accented Irish characters (á é í ó ú Á É Í Ó Ú) are mangled into plain ASCII.
+    Reconstruct correct Irish spelling throughout.
+
+    Your job: convert the grammar section into a flat JSON array of rows.
+    Each row has: { "row_type": "...", "col_1": "...", "col_2": "...", "col_3": "..." }
+
+    Use these row_type values:
+    - "section_heading"  — a numbered rule title, e.g. "1. IF-CLAUSES TO EXPRESS A CONDITION"
+                           Put the full heading in col_1. col_2 and col_3 are null.
+    - "subheading"       — a sub-section label like "(i) Positive", "(ii) Forms", "(iii) Pronunciation"
+                           Put the label in col_1. col_2 and col_3 are null.
+    - "col_header"       — a row of column labels for a table, e.g. "Before a consonant | Before a vowel | Contrast"
+                           Distribute into col_1, col_2, col_3.
+    - "data"             — a data row. Use as many of col_1/col_2/col_3 as there are columns in the table.
+                           For single-column text/explanation use col_1 only.
+    - "note"             — a footnote or italicised explanatory note. Put full text in col_1.
+
+    Rules:
+    - Keep Irish examples with their English translations together in the same cell.
+    - When a section has a 3-column table (like the possessive adjectives table), each row of that table
+      becomes one "data" row with col_1/col_2/col_3 filled appropriately.
+    - Prose explanation text becomes "data" rows with col_1 only.
+    - Footnote numbers (1, 2 etc.) can be dropped.
+    - Return ONLY valid JSON array — no markdown, no ```json, no prose.
+  PROMPT
+
+  TEXTS_PROMPT = <<~PROMPT
+    You are parsing OCR-extracted text from a Mayo Irish (Gaeilge Chonnacht) textbook.
+    The OCR is poor — accented Irish characters are mangled. Correct Irish spelling throughout.
+
+    Parse this reading passage / dialogue into a JSON array of rows.
+    Each row: { "row_type": "data", "col_1": "one sentence or short utterance", "col_2": null, "col_3": null }
+    The title of the passage (if any) should be row_type "section_heading".
+    Return ONLY valid JSON — no markdown, no prose.
+  PROMPT
+
+  EXERCISES_PROMPT = <<~PROMPT
+    You are parsing OCR-extracted text from a Mayo Irish (Gaeilge Chonnacht) textbook.
+    Parse this exercises section into a JSON array of rows.
+    Each numbered item becomes one row: { "row_type": "data", "col_1": "exercise sentence", "col_2": null, "col_3": null }
+    Return ONLY valid JSON — no markdown, no prose.
+  PROMPT
+
   SECTION_PROMPTS = {
-    'grammar' => <<~PROMPT,
-      You are parsing OCR-extracted text from an Irish language textbook (Mayo Irish / Gaeilge Chonnacht).
-      The OCR quality is poor — accented Irish characters (á é í ó ú Á É Í Ó Ú) are often mangled
-      into plain ASCII (e.g. 'a' instead of 'á', 'o' instead of 'ó'). Correct them using your knowledge
-      of Irish spelling.
-
-      Parse the following grammar section text into a JSON array of rows.
-      Each row represents one numbered grammar rule or sub-point.
-      Each row has: { "col_1": "rule title or heading", "col_2": "explanation and examples" }
-      Sub-points like (i), (ii) should be merged into the main rule's col_2.
-      Return ONLY valid JSON — no markdown, no prose, no ```json wrapper.
-    PROMPT
-
-    'texts' => <<~PROMPT,
-      You are parsing OCR-extracted text from an Irish language textbook (Mayo Irish / Gaeilge Chonnacht).
-      The OCR quality is poor — accented Irish characters (á é í ó ú Á É Í Ó Ú) are often mangled.
-      Correct them using your knowledge of Irish spelling and vocabulary.
-
-      Parse the following reading text / dialogue into a JSON array of rows.
-      Each row is one sentence or short exchange. Preserve paragraph structure roughly.
-      Each row has: { "col_1": "Irish sentence or line" }
-      Return ONLY valid JSON — no markdown, no prose, no ```json wrapper.
-    PROMPT
-
-    'exercises' => <<~PROMPT
-      You are parsing OCR-extracted text from an Irish language textbook (Mayo Irish / Gaeilge Chonnacht).
-      The OCR quality is poor — accented Irish characters may be mangled. Correct Irish words accordingly.
-
-      Parse the following exercises section into a JSON array of rows.
-      Each row is one numbered exercise sentence.
-      Each row has: { "col_1": "exercise text (English sentence to translate)" }
-      Return ONLY valid JSON — no markdown, no prose, no ```json wrapper.
-    PROMPT
+    'grammar'   => GRAMMAR_PROMPT,
+    'texts'     => TEXTS_PROMPT,
+    'exercises' => EXERCISES_PROMPT
   }.freeze
 
   def initialize(lesson)
@@ -55,17 +70,16 @@ class LessonSectionParser
       rows = parse_section(section, raw)
       next if rows.empty?
 
-      if replace
-        @lesson.lesson_rows.where(section: section).delete_all
-      end
+      @lesson.lesson_rows.where(section: section).delete_all if replace
 
       rows.each_with_index do |row, idx|
         @lesson.lesson_rows.create!(
-          section: section,
+          section:  section,
           position: idx + 1,
-          col_1: row['col_1'],
-          col_2: row['col_2'],
-          col_3: row['col_3']
+          row_type: row['row_type'] || 'data',
+          col_1:    row['col_1'],
+          col_2:    row['col_2'],
+          col_3:    row['col_3']
         )
       end
 
@@ -84,11 +98,14 @@ class LessonSectionParser
           { role: 'system', content: prompt },
           { role: 'user', content: text }
         ],
-        temperature: 0.1
+        temperature: 0.1,
+        max_tokens: 4096
       }
     )
 
     content = response.dig('choices', 0, 'message', 'content').to_s.strip
+    # Strip any accidental markdown fences
+    content = content.gsub(/\A```(?:json)?\n?/, '').gsub(/\n?```\z/, '').strip
     JSON.parse(content)
   rescue JSON::ParserError => e
     Rails.logger.error "LessonSectionParser JSON error for #{section}: #{e.message}\nContent: #{content}"
