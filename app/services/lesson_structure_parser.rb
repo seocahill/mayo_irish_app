@@ -18,11 +18,15 @@ class LessonStructureParser
       "sections": array of {
         "label": string or null,          -- "(i) Forms", "(ii) Pronunciation", null if no label
         "position": integer,
-        "body_html": string               -- section content as HTML
-                                          -- use <table> for tabular data, <p> for prose,
-                                          -- <p class='note'> for footnotes
+        "body_html": string               -- ALL section content as HTML — nothing omitted.
+                                          -- Include every Irish example, its English translation,
+                                          -- every prose explanation, and every footnote.
+                                          -- Use <table> for tabular data, <p> for prose,
+                                          -- <p class='note'> for footnotes.
+                                          -- Irish+English pairs: <p><strong>Irish sentence</strong> — English translation</p>
       },
-      "phrases": array of {               -- Irish example sentences extracted from this rule
+      "phrases": array of {               -- ALSO extract Irish example sentences separately here
+                                          -- (in addition to including them in body_html above)
         "irish": string,
         "english": string or null,
         "position": integer
