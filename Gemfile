@@ -28,3 +28,9 @@ group :development do
 end
 
 gem "lexxy", "~> 0.9.7.beta"
+
+gem "dockerfile-rails", ">= 1.7", group: :development
+
+gem "litestream", "~> 0.14.0"
+
+gem "aws-sdk-s3", "~> 1.219", require: false
