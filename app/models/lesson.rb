@@ -7,6 +7,7 @@ class Lesson < ApplicationRecord
   has_many :text_passages,     -> { order(:position) }, dependent: :destroy
   has_many :exercises,         -> { order(:position) }, dependent: :destroy
   has_many :phrases,           -> { order(:position) }, dependent: :destroy
+  has_many :lesson_blocks,   -> { order(:position) }, dependent: :destroy
   has_many :lesson_rows, dependent: :destroy
   accepts_nested_attributes_for :lesson_rows,
                                 allow_destroy: true,

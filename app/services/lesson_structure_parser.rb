@@ -109,7 +109,7 @@ class LessonStructureParser
           { role: 'user', content: raw }
         ],
         temperature: 0.1,
-        max_tokens: 8192
+        max_tokens: 16_384
       }
     )
 

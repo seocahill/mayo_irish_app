@@ -1,0 +1,49 @@
+<% if block.text? %>
+  <div class="lexxy-content prose text-stone-700">
+    <%= block.body %>
+  </div>
+
+<% elsif block.image? && block.file.attached? %>
+  <figure>
+    <%= image_tag block.file, class: "max-w-full rounded-xl" %>
+    <% if block.caption.present? %>
+      <figcaption class="text-sm text-stone-400 mt-2 text-center"><%= block.caption %></figcaption>
+    <% end %>
+  </figure>
+
+<% elsif block.video? && block.url.present? %>
+  <figure>
+    <div class="relative aspect-video rounded-xl overflow-hidden bg-black">
+      <iframe src="<%= video_embed_url(block.url) %>"
+              class="absolute inset-0 w-full h-full"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+    <% if block.caption.present? %>
+      <figcaption class="text-sm text-stone-400 mt-2 text-center"><%= block.caption %></figcaption>
+    <% end %>
+  </figure>
+
+<% elsif block.pdf? && block.file.attached? %>
+  <div class="bg-white rounded-xl border border-stone-200 px-5 py-4 flex items-center gap-4">
+    <svg class="w-10 h-10 text-red-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+    </svg>
+    <div>
+      <%= link_to block.caption.presence || block.file.filename,
+            rails_blob_url(block.file, disposition: "inline"),
+            target: "_blank",
+            class: "text-sm font-medium text-emerald-800 hover:underline" %>
+      <p class="text-xs text-stone-400 mt-0.5"><%= number_to_human_size(block.file.byte_size) %></p>
+    </div>
+  </div>
+
+<% elsif block.audio? && block.file.attached? %>
+  <figure class="bg-white rounded-xl border border-stone-200 px-5 py-4">
+    <audio controls src="<%= rails_blob_url(block.file) %>" class="w-full"></audio>
+    <% if block.caption.present? %>
+      <figcaption class="text-sm text-stone-400 mt-2"><%= block.caption %></figcaption>
+    <% end %>
+  </figure>
+<% end %>

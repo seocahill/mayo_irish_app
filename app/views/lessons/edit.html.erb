@@ -10,9 +10,17 @@
 
 <%# ── TITLE ───────────────────────────────────────────────────── %>
 <%= form_with model: @lesson, class: "bg-white rounded-xl border border-stone-200 px-6 py-5 mb-6" do |f| %>
-  <label class="editor-label">Teideal an Cheachta</label>
-  <%= f.text_field :title, class: "editor-input text-lg font-semibold" %>
-  <div class="mt-4 flex justify-end">
+  <div class="grid grid-cols-3 gap-4 mb-4">
+    <div class="col-span-2">
+      <label class="editor-label">Teideal an Cheachta</label>
+      <%= f.text_field :title, class: "editor-input text-lg font-semibold" %>
+    </div>
+    <div>
+      <label class="editor-label">Suíomh (position)</label>
+      <%= f.number_field :position, class: "editor-input", min: 0 %>
+    </div>
+  </div>
+  <div class="flex justify-end">
     <%= f.submit "Sábháil", class: "bg-emerald-800 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition-colors cursor-pointer" %>
   </div>
 <% end %>
@@ -134,6 +142,49 @@
         </turbo-frame>
       <% end %>
     </div>
+  </div>
+<% end %>
+
+<%# ── CONTENT BLOCKS ──────────────────────────────────────────── %>
+<div class="mb-6" data-controller="blocks" data-blocks-reorder-url="<%= reorder_lesson_lesson_blocks_path(@lesson) %>">
+  <div class="flex items-center justify-between mb-3">
+    <h2 class="lesson-section-heading mb-0">Ábhar Saibhir</h2>
+  </div>
+
+  <div class="space-y-3" data-blocks-target="list">
+    <%= render @lesson.lesson_blocks %>
+  </div>
+
+  <%# Add block buttons %>
+  <div class="mt-3 flex flex-wrap gap-2">
+    <% LessonBlock::TYPES.each do |type| %>
+      <%= button_to type.capitalize,
+            lesson_lesson_blocks_path(@lesson, block_type: type),
+            method: :post,
+            data: { turbo: false },
+            class: "text-xs px-3 py-1.5 rounded-lg border border-stone-300 text-stone-600 hover:border-emerald-600 hover:text-emerald-800 transition-colors bg-white" %>
+    <% end %>
+  </div>
+</div>
+
+<%# ── TUTOR PROMPT ───────────────────────────────────────────── %>
+<%= form_with model: @lesson, class: "bg-white rounded-xl border border-stone-200 overflow-hidden mb-6" do |f| %>
+  <div class="px-6 py-4 border-b border-stone-100 flex items-center justify-between">
+    <div>
+      <h2 class="font-bold text-stone-800">Treoracha an Mhúinteora</h2>
+      <p class="text-xs text-stone-400 mt-0.5">Fág folamh chun an réamhshocrú a úsáid</p>
+    </div>
+    <%= link_to "Oscail comhrá", lesson_chat_path(@lesson),
+          class: "text-sm text-emerald-700 hover:text-emerald-900 font-medium transition-colors" %>
+  </div>
+  <div class="px-6 py-4">
+    <%= f.text_area :tutor_prompt,
+          rows: 5,
+          placeholder: "e.g. Focus on noun gender. Test common nouns first, then ask the student to apply the gender rules to unfamiliar words...",
+          class: "w-full rounded-lg border border-stone-200 px-3 py-2 text-sm text-stone-700 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent resize-y" %>
+  </div>
+  <div class="px-6 py-4 border-t border-stone-100 flex justify-end">
+    <%= f.submit "Sábháil", class: "bg-emerald-800 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition-colors cursor-pointer" %>
   </div>
 <% end %>
 

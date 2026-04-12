@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_11_134834) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_12_145811) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -49,6 +49,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_11_134834) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "chat_messages", force: :cascade do |t|
+    t.integer "chat_session_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.string "role"
+    t.datetime "updated_at", null: false
+    t.index ["chat_session_id"], name: "index_chat_messages_on_chat_session_id"
+  end
+
+  create_table "chat_sessions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "lesson_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_chat_sessions_on_lesson_id"
+  end
+
   create_table "exercises", force: :cascade do |t|
     t.text "answer"
     t.datetime "created_at", null: false
@@ -82,6 +98,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_11_134834) do
     t.index ["grammar_rule_id"], name: "index_grammar_sections_on_grammar_rule_id"
   end
 
+  create_table "lesson_blocks", force: :cascade do |t|
+    t.string "block_type"
+    t.string "caption"
+    t.datetime "created_at", null: false
+    t.integer "lesson_id", null: false
+    t.integer "position"
+    t.datetime "updated_at", null: false
+    t.string "url"
+    t.index ["lesson_id"], name: "index_lesson_blocks_on_lesson_id"
+  end
+
   create_table "lesson_rows", force: :cascade do |t|
     t.text "col_1"
     t.text "col_2"
@@ -105,6 +132,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_11_134834) do
     t.integer "position", default: 0, null: false
     t.text "texts"
     t.string "title", null: false
+    t.text "tutor_prompt"
     t.datetime "updated_at", null: false
     t.text "vocabulary_notes"
     t.index ["number"], name: "index_lessons_on_number", unique: true
@@ -153,9 +181,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_11_134834) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chat_messages", "chat_sessions"
+  add_foreign_key "chat_sessions", "lessons"
   add_foreign_key "exercises", "lessons"
   add_foreign_key "grammar_rules", "lessons"
   add_foreign_key "grammar_sections", "grammar_rules"
+  add_foreign_key "lesson_blocks", "lessons"
   add_foreign_key "lesson_rows", "lessons"
   add_foreign_key "phrases", "lessons"
   add_foreign_key "text_passages", "lessons"
