@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_12_145811) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_15_231421) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -62,7 +62,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_12_145811) do
     t.datetime "created_at", null: false
     t.integer "lesson_id", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.index ["lesson_id"], name: "index_chat_sessions_on_lesson_id"
+    t.index ["user_id"], name: "index_chat_sessions_on_user_id"
   end
 
   create_table "exercises", force: :cascade do |t|
@@ -154,6 +156,27 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_12_145811) do
     t.index ["source_type", "source_id"], name: "index_phrases_on_source_type_and_source_id"
   end
 
+  create_table "section_progresses", force: :cascade do |t|
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.integer "lesson_id", null: false
+    t.string "section_type", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["lesson_id"], name: "index_section_progresses_on_lesson_id"
+    t.index ["user_id", "lesson_id", "section_type"], name: "index_section_progresses_uniqueness", unique: true
+    t.index ["user_id"], name: "index_section_progresses_on_user_id"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "ip_address"
+    t.datetime "updated_at", null: false
+    t.string "user_agent"
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
   create_table "text_passages", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "lesson_id", null: false
@@ -162,6 +185,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_12_145811) do
     t.datetime "updated_at", null: false
     t.index ["lesson_id", "position"], name: "index_text_passages_on_lesson_id_and_position"
     t.index ["lesson_id"], name: "index_text_passages_on_lesson_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.boolean "admin", default: false, null: false
+    t.boolean "approved", default: false, null: false
+    t.datetime "created_at", null: false
+    t.string "email_address", null: false
+    t.string "password_digest", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
   create_table "vocabulary_items", force: :cascade do |t|
@@ -183,12 +216,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_12_145811) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "chat_messages", "chat_sessions"
   add_foreign_key "chat_sessions", "lessons"
+  add_foreign_key "chat_sessions", "users"
   add_foreign_key "exercises", "lessons"
   add_foreign_key "grammar_rules", "lessons"
   add_foreign_key "grammar_sections", "grammar_rules"
   add_foreign_key "lesson_blocks", "lessons"
   add_foreign_key "lesson_rows", "lessons"
   add_foreign_key "phrases", "lessons"
+  add_foreign_key "section_progresses", "lessons"
+  add_foreign_key "section_progresses", "users"
+  add_foreign_key "sessions", "users"
   add_foreign_key "text_passages", "lessons"
   add_foreign_key "vocabulary_items", "lessons"
 end

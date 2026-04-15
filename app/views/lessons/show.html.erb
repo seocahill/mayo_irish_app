@@ -11,13 +11,15 @@
       </svg>
       Cleachtadh
     <% end %>
-    <a href="<%= edit_lesson_path(@lesson) %>"
-       class="inline-flex items-center gap-2 text-sm bg-emerald-800 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-      </svg>
-      Cuir in eagar
-    </a>
+    <% if current_user&.admin? %>
+      <a href="<%= edit_lesson_path(@lesson) %>"
+         class="inline-flex items-center gap-2 text-sm bg-emerald-800 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+        </svg>
+        Cuir in eagar
+      </a>
+    <% end %>
   </div>
 </div>
 
@@ -33,7 +35,10 @@
 <%# ── VOCABULARY ─────────────────────────────────────────────── %>
 <% if @lesson.vocabulary_items.any? %>
   <section class="mb-10">
-    <h2 class="lesson-section-heading">Stór Focal</h2>
+    <h2 class="lesson-section-heading flex items-center gap-2">
+      Stór Focal
+      <%= render "section_badge", section: "vocabulary", progress: @section_progress %>
+    </h2>
     <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
       <table class="w-full text-sm">
         <thead>
@@ -76,7 +81,10 @@
 <%# ── GRAMMAR ─────────────────────────────────────────────────── %>
 <% if @lesson.grammar_rules.any? %>
   <section class="mb-10">
-    <h2 class="lesson-section-heading">Gramadach</h2>
+    <h2 class="lesson-section-heading flex items-center gap-2">
+      Gramadach
+      <%= render "section_badge", section: "grammar", progress: @section_progress %>
+    </h2>
     <div class="space-y-6">
       <% @lesson.grammar_rules.each do |rule| %>
         <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
@@ -109,7 +117,10 @@
 <%# ── TEXTS ──────────────────────────────────────────────────── %>
 <% if @lesson.text_passages.any? %>
   <section class="mb-10">
-    <h2 class="lesson-section-heading">Téacsanna</h2>
+    <h2 class="lesson-section-heading flex items-center gap-2">
+      Téacsanna
+      <%= render "section_badge", section: "texts", progress: @section_progress %>
+    </h2>
     <% @lesson.text_passages.each do |passage| %>
       <div class="bg-white rounded-xl border border-stone-200 overflow-hidden mb-4 last:mb-0">
         <% if passage.title.present? %>
@@ -128,7 +139,10 @@
 <%# ── EXERCISES ────────────────────────────────────────────────── %>
 <% if @lesson.exercises.any? %>
   <section class="mb-10">
-    <h2 class="lesson-section-heading">Cleachtaí</h2>
+    <h2 class="lesson-section-heading flex items-center gap-2">
+      Cleachtaí
+      <%= render "section_badge", section: "exercises", progress: @section_progress %>
+    </h2>
     <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
       <ol class="divide-y divide-stone-100 list-none">
         <% @lesson.exercises.each do |ex| %>

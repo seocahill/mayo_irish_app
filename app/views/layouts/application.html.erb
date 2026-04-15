@@ -21,8 +21,15 @@
             <div class="text-emerald-300 text-xs tracking-widest uppercase">Mayo Irish</div>
           </div>
         </a>
-        <nav class="text-sm text-emerald-200">
+        <nav class="text-sm text-emerald-200 flex items-center gap-4">
           <a href="/" class="hover:text-white transition-colors">All Lessons</a>
+          <% if authenticated? %>
+            <span class="text-emerald-400 hidden sm:inline"><%= current_user.email_address %></span>
+            <%= button_to "Sign out", session_path, method: :delete,
+                  class: "text-emerald-300 hover:text-white transition-colors bg-transparent border-0 p-0 cursor-pointer text-sm" %>
+          <% else %>
+            <%= link_to "Sign in", new_session_path, class: "hover:text-white transition-colors" %>
+          <% end %>
         </nav>
       </div>
     </header>
@@ -30,6 +37,11 @@
     <% if notice %>
       <div class="bg-emerald-50 border-b border-emerald-200 text-emerald-800 text-sm text-center py-2 px-4">
         <%= notice %>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="bg-red-50 border-b border-red-200 text-red-800 text-sm text-center py-2 px-4">
+        <%= alert %>
       </div>
     <% end %>
 

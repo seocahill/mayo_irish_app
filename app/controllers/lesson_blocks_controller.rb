@@ -1,4 +1,5 @@
 class LessonBlocksController < ApplicationController
+  before_action :require_admin
   before_action :set_lesson, only: [:create, :reorder]
   before_action :set_block,  only: [:edit, :update, :destroy]
 

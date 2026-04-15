@@ -1,10 +1,15 @@
 class LessonsController < ApplicationController
   before_action :set_lesson, only: [:show, :edit, :update]
-
-
+  before_action :require_admin, only: [:new, :create, :edit, :update]
 
   def index
     @lessons = Lesson.ordered
+    if current_user
+      completed_by_lesson = current_user.section_progresses.completed.group(:lesson_id).count
+      @lesson_progress = @lessons.each_with_object({}) do |lesson, h|
+        h[lesson.id] = completed_by_lesson.fetch(lesson.id, 0)
+      end
+    end
   end
 
   def new
@@ -25,6 +30,15 @@ class LessonsController < ApplicationController
   end
 
   def show
+    if current_user
+      @section_progress = current_user.section_progresses
+                                      .where(lesson: @lesson)
+                                      .completed
+                                      .pluck(:section_type)
+                                      .to_set
+    else
+      @section_progress = Set.new
+    end
   end
 
   def edit
@@ -42,6 +56,12 @@ class LessonsController < ApplicationController
 
   def set_lesson
     @lesson = Lesson.find_by!(number: params[:id])
+  end
+
+  def require_admin
+    unless current_user&.admin?
+      redirect_to root_path, alert: "Not authorised."
+    end
   end
 
   def lesson_params

@@ -1,4 +1,5 @@
 class GrammarRulesController < ApplicationController
+  before_action :require_admin
   before_action :set_rule
 
   def edit

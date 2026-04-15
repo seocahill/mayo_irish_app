@@ -1,4 +1,5 @@
 class GrammarSectionsController < ApplicationController
+  before_action :require_admin
   before_action :set_section
 
   def edit

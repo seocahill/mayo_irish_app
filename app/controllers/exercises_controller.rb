@@ -1,4 +1,5 @@
 class ExercisesController < ApplicationController
+  before_action :require_admin
   before_action :set_exercise
 
   def edit

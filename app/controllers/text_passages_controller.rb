@@ -1,4 +1,5 @@
 class TextPassagesController < ApplicationController
+  before_action :require_admin
   before_action :set_passage
 
   def edit
