@@ -3,7 +3,17 @@
 one:
   email_address: one@example.com
   password_digest: <%= password_digest %>
+  approved: false
+  admin: false
 
 two:
   email_address: two@example.com
   password_digest: <%= password_digest %>
+  approved: true
+  admin: false
+
+admin:
+  email_address: admin@example.com
+  password_digest: <%= password_digest %>
+  approved: true
+  admin: true
