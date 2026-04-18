@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
     redirect_to pending_approval_path
   end
 
+  def require_admin
+    redirect_to root_path unless current_user&.admin?
+  end
+
   def current_user
     Current.session&.user
   end
