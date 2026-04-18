@@ -21,17 +21,17 @@
         </div>
         <div>
           <label class="editor-label">Fotheideal (roghnach)</label>
-          <%= f.text_field :caption, class: "editor-input", placeholder: "Cur síos ar an íomhá..." %>
+          <%= f.text_area :caption, rows: 3, class: "editor-input", placeholder: "Cur síos ar an íomhá..." %>
         </div>
 
       <% elsif @block.video? %>
         <div>
           <label class="editor-label">URL an Físeáin (YouTube nó Vimeo)</label>
-          <%= f.url_field :url, class: "editor-input", placeholder: "https://www.youtube.com/watch?v=..." %>
+          <%= f.text_area :url, rows: 2, class: "editor-input", placeholder: "https://www.youtube.com/watch?v=..." %>
         </div>
         <div>
           <label class="editor-label">Fotheideal (roghnach)</label>
-          <%= f.text_field :caption, class: "editor-input", placeholder: "Cur síos ar an bhfíseán..." %>
+          <%= f.text_area :caption, rows: 3, class: "editor-input", placeholder: "Cur síos ar an bhfíseán..." %>
         </div>
 
       <% elsif @block.pdf? %>
@@ -49,7 +49,7 @@
         </div>
         <div>
           <label class="editor-label">Fotheideal (roghnach)</label>
-          <%= f.text_field :caption, class: "editor-input", placeholder: "Teideal an doiciméid..." %>
+          <%= f.text_area :caption, rows: 3, class: "editor-input", placeholder: "Teideal an doiciméid..." %>
         </div>
 
       <% elsif @block.audio? %>
@@ -64,7 +64,7 @@
         </div>
         <div>
           <label class="editor-label">Fotheideal (roghnach)</label>
-          <%= f.text_field :caption, class: "editor-input", placeholder: "Cur síos ar an gcomhad fuaime..." %>
+          <%= f.text_area :caption, rows: 3, class: "editor-input", placeholder: "Cur síos ar an gcomhad fuaime..." %>
         </div>
       <% end %>
     </div>
