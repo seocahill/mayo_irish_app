@@ -26,18 +26,22 @@
   </figure>
 
 <% elsif block.pdf? && block.file.attached? %>
-  <div class="bg-white rounded-xl border border-stone-200 px-5 py-4 flex items-center gap-4">
-    <svg class="w-10 h-10 text-red-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-    </svg>
-    <div>
-      <%= link_to block.caption.presence || block.file.filename,
-            rails_blob_url(block.file, disposition: "inline"),
-            target: "_blank",
-            class: "text-sm font-medium text-emerald-800 hover:underline" %>
-      <p class="text-xs text-stone-400 mt-0.5"><%= number_to_human_size(block.file.byte_size) %></p>
+  <%= link_to rails_blob_url(block.file, disposition: "inline"), target: "_blank", class: "block group/pdf bg-white rounded-xl border border-stone-200 overflow-hidden" do %>
+    <% if block.file.previewable? %>
+      <div class="bg-stone-50 border-b border-stone-200">
+        <%= image_tag block.file.preview(resize_to_limit: [1600, 1200]), class: "w-full object-top object-cover" %>
+      </div>
+    <% end %>
+    <div class="px-5 py-4 flex items-center gap-4">
+      <svg class="w-10 h-10 text-red-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 002 2z"/>
+      </svg>
+      <div>
+        <p class="text-sm font-medium text-emerald-800 group-hover/pdf:underline"><%= block.caption.presence || block.file.filename %></p>
+        <p class="text-xs text-stone-400 mt-0.5"><%= number_to_human_size(block.file.byte_size) %></p>
+      </div>
     </div>
-  </div>
+  <% end %>
 
 <% elsif block.audio? && block.file.attached? %>
   <figure class="bg-white rounded-xl border border-stone-200 px-5 py-4">
