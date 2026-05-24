@@ -8,7 +8,7 @@ primary_region = 'lhr'
 console_command = '/rails/bin/rails console'
 
 [deploy]
-  release_command = "bash -c '/rails/bin/rails db:migrate && /rails/bin/rails vocab:import vocab:urls json_lessons:import'"
+  release_command = "bash -c '/rails/bin/rails db:migrate'"
 
 [build]
 
