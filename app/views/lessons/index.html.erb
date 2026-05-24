@@ -13,37 +13,63 @@
   <% end %>
 </div>
 
-<div class="grid gap-2">
-  <% @lessons.each do |lesson| %>
-    <% completed_count = @lesson_progress&.fetch(lesson.id, 0) || 0 %>
-    <div class="bg-white rounded-lg border border-stone-200 hover:border-emerald-400 hover:shadow-sm transition-all group">
-      <div class="flex items-center justify-between px-5 py-4">
-        <a href="<%= lesson_path(lesson) %>" class="flex items-center gap-4 flex-1 min-w-0">
-          <span class="flex-shrink-0 w-9 h-9 rounded-full bg-emerald-50 text-emerald-800 text-sm font-bold flex items-center justify-center border border-emerald-200 group-hover:bg-emerald-800 group-hover:text-white group-hover:border-emerald-800 transition-all">
-            <%= lesson.number %>
-          </span>
-          <div class="min-w-0 flex-1">
-            <div class="font-semibold text-stone-800 truncate group-hover:text-emerald-900"><%= lesson.title %></div>
-            <div class="text-xs text-stone-400 mt-0.5">
-              <%= lesson.vocabulary_items.count %> focal
-              <% if lesson.grammar.present? %> · Gramadach<% end %>
-              <% if lesson.texts.present? %> · Téacs<% end %>
-            </div>
-          </div>
-          <% if current_user && completed_count > 0 %>
-            <div class="flex gap-1 ml-3 flex-shrink-0" title="<%= completed_count %>/4 sections mastered">
-              <% 4.times do |i| %>
-                <span class="w-2 h-2 rounded-full <%= i < completed_count ? 'bg-emerald-500' : 'bg-stone-200' %>"></span>
+<%
+  sections = [
+    { key: "curriculum",     label: "Learning Irish",               desc: "Core grammar & conversation curriculum",                  dot: "bg-emerald-500" },
+    { key: "thematic_vocab", label: "Mayo Irish Vocabulary",        desc: "Thematic word lists with Wix audio",                     dot: "bg-sky-500" },
+    { key: "dias_material",  label: "DIAS Field Recordings",        desc: "Foxford & Erris dialect notes (Wagner)",                  dot: "bg-amber-500" },
+  ]
+  by_type = @lessons.group_by(&:lesson_type)
+%>
+
+<div class="space-y-10">
+  <% sections.each do |section| %>
+    <% group = by_type[section[:key]] %>
+    <% next if group.blank? %>
+
+    <section>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-3 h-3 rounded-full flex-shrink-0 <%= section[:dot] %>"></span>
+        <div>
+          <h2 class="text-lg font-bold text-stone-800 leading-tight"><%= section[:label] %></h2>
+          <p class="text-xs text-stone-400"><%= section[:desc] %></p>
+        </div>
+      </div>
+
+      <div class="grid gap-2">
+        <% group.each do |lesson| %>
+          <% completed_count = @lesson_progress&.fetch(lesson.id, 0) || 0 %>
+          <div class="bg-white rounded-lg border border-stone-200 hover:border-current hover:shadow-sm transition-all group">
+            <div class="flex items-center justify-between px-5 py-4">
+              <a href="<%= lesson_path(lesson) %>" class="flex items-center gap-4 flex-1 min-w-0">
+                <span class="flex-shrink-0 w-9 h-9 rounded-full text-sm font-bold flex items-center justify-center border transition-all <%= lesson.badge_classes %>">
+                  <%= lesson.number %>
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="font-semibold text-stone-800 truncate group-hover:text-stone-900"><%= lesson.title %></div>
+                  <div class="text-xs text-stone-400 mt-0.5">
+                    <%= lesson.vocabulary_items.count %> focal
+                    <% if lesson.grammar.present? %> · Gramadach<% end %>
+                    <% if lesson.texts.present? %> · Téacs<% end %>
+                  </div>
+                </div>
+                <% if current_user && completed_count > 0 %>
+                  <div class="flex gap-1 ml-3 flex-shrink-0" title="<%= completed_count %>/4 sections mastered">
+                    <% 4.times do |i| %>
+                      <span class="w-2 h-2 rounded-full <%= i < completed_count ? 'bg-emerald-500' : 'bg-stone-200' %>"></span>
+                    <% end %>
+                  </div>
+                <% end %>
+              </a>
+              <% if current_user&.admin? %>
+                <a href="<%= edit_lesson_path(lesson) %>" class="ml-4 flex-shrink-0 text-xs text-stone-300 hover:text-emerald-600 transition-colors px-2 py-1 rounded hover:bg-emerald-50">
+                  Cuir in eagar
+                </a>
               <% end %>
             </div>
-          <% end %>
-        </a>
-        <% if current_user&.admin? %>
-          <a href="<%= edit_lesson_path(lesson) %>" class="ml-4 flex-shrink-0 text-xs text-stone-300 hover:text-emerald-600 transition-colors px-2 py-1 rounded hover:bg-emerald-50">
-            Cuir in eagar
-          </a>
+          </div>
         <% end %>
       </div>
-    </div>
+    </section>
   <% end %>
 </div>

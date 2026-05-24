@@ -21,7 +21,27 @@ class Lesson < ApplicationRecord
   validates :title, presence: true
   validates :position, presence: true
 
-  scope :ordered, -> { order(:position) }
+  TYPES = %w[curriculum thematic_vocab dias_material].freeze
+
+  scope :ordered,      -> { order(:position) }
+  scope :curriculum,   -> { where(lesson_type: "curriculum") }
+  scope :thematic_vocab, -> { where(lesson_type: "thematic_vocab") }
+  scope :dias_material,  -> { where(lesson_type: "dias_material") }
+
+  BADGE_CLASSES = {
+    "curriculum"    => "bg-emerald-50 text-emerald-800 border-emerald-200 group-hover:bg-emerald-800 group-hover:text-white group-hover:border-emerald-800",
+    "thematic_vocab" => "bg-sky-50 text-sky-800 border-sky-200 group-hover:bg-sky-700 group-hover:text-white group-hover:border-sky-700",
+    "dias_material"  => "bg-amber-50 text-amber-800 border-amber-200 group-hover:bg-amber-700 group-hover:text-white group-hover:border-amber-700",
+  }.freeze
+
+  TYPE_LABELS = {
+    "curriculum"    => "Gaeilge",
+    "thematic_vocab" => "Stór Focal",
+    "dias_material"  => "DIAS",
+  }.freeze
+
+  def badge_classes  = BADGE_CLASSES.fetch(lesson_type, BADGE_CLASSES["curriculum"])
+  def type_label     = TYPE_LABELS.fetch(lesson_type, lesson_type)
 
   def to_param
     number.to_s

@@ -14,7 +14,7 @@ require "open-uri"
 
 namespace :vocab do
   CSV_PATH = Rails.root.join("files", "mayo_irish_vocabulary_with_audio.csv")
-  LESSON_NUMBER_OFFSET = 101
+  LESSON_NUMBER_OFFSET = 37
 
   desc "Create thematic Lessons and VocabularyItems from the Mayo Irish CSV (no audio download)"
   task import: :environment do
@@ -26,7 +26,7 @@ namespace :vocab do
     by_category.each_with_index do |(category, entries), idx|
       number = LESSON_NUMBER_OFFSET + idx
       lesson = Lesson.find_or_initialize_by(number: number)
-      lesson.assign_attributes(title: category, position: number)
+      lesson.assign_attributes(title: category, position: number, lesson_type: "thematic_vocab")
       lesson.save!
 
       entries.each_with_index do |row, pos|

@@ -9,7 +9,7 @@ require "set"
 
 namespace :json_lessons do
   JSON_PATH        = Rails.root.join("files", "lessons_full.json")
-  LESSON_OFFSET    = 201
+  LESSON_OFFSET    = 114
   CHUNK_SIZE       = 20
 
   # Tag-to-group priority list — first matching group wins.
@@ -186,6 +186,7 @@ namespace :json_lessons do
         title:        batch[:title],
         position:     batch[:number],
         content_html: attribution,
+        lesson_type:  "dias_material",
       )
       lesson.save!
 

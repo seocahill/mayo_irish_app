@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_24_000001) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_24_000002) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -130,6 +130,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_24_000001) do
     t.text "exercises"
     t.text "grammar"
     t.text "grammar_data"
+    t.string "lesson_type", default: "curriculum", null: false
     t.integer "number", null: false
     t.integer "position", default: 0, null: false
     t.text "texts"
@@ -137,6 +138,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_24_000001) do
     t.text "tutor_prompt"
     t.datetime "updated_at", null: false
     t.text "vocabulary_notes"
+    t.index ["lesson_type"], name: "index_lessons_on_lesson_type"
     t.index ["number"], name: "index_lessons_on_number", unique: true
     t.index ["position"], name: "index_lessons_on_position"
   end
