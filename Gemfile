@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'actiontext'
 gem 'bootsnap', require: false
+gem 'csv'
 gem 'image_processing', '~> 1.2'
 gem 'importmap-rails'
 gem 'jbuilder'

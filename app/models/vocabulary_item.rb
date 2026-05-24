@@ -1,5 +1,6 @@
 class VocabularyItem < ApplicationRecord
   belongs_to :lesson
+  has_one_attached :audio
 
   validates :irish, presence: true
   validates :english, presence: true

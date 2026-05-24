@@ -52,4 +52,5 @@ CLAUDE.md
 /config/credentials/*.key
 
 /secrets/*
+files
 
