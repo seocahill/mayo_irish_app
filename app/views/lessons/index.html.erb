@@ -38,7 +38,7 @@
 
       <div class="grid gap-2">
         <% group.each do |lesson| %>
-          <% completed_count = @lesson_progress&.fetch(lesson.id, 0) || 0 %>
+          <% lp = @quiz_progress&.fetch(lesson.id, nil) %>
           <div class="bg-white rounded-lg border border-stone-200 hover:border-current hover:shadow-sm transition-all group">
             <div class="flex items-center justify-between px-5 py-4">
               <a href="<%= lesson_path(lesson) %>" class="flex items-center gap-4 flex-1 min-w-0">
@@ -53,10 +53,17 @@
                     <% if lesson.texts.present? %> · Téacs<% end %>
                   </div>
                 </div>
-                <% if current_user && completed_count > 0 %>
-                  <div class="flex gap-1 ml-3 flex-shrink-0" title="<%= completed_count %>/4 sections mastered">
-                    <% 4.times do |i| %>
-                      <span class="w-2 h-2 rounded-full <%= i < completed_count ? 'bg-emerald-500' : 'bg-stone-200' %>"></span>
+                <% if lp&.started? %>
+                  <div class="ml-3 flex-shrink-0 flex items-center gap-2" title="<%= lp.known %>/<%= lp.total %> focal ar eolas">
+                    <% if lp.complete? %>
+                      <span class="text-xs font-medium text-emerald-700 inline-flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                      </span>
+                    <% else %>
+                      <span class="w-16 h-1.5 bg-stone-200 rounded-full overflow-hidden hidden sm:block">
+                        <span class="block h-full bg-emerald-500 rounded-full" style="width: <%= lp.pct %>%"></span>
+                      </span>
+                      <span class="text-xs text-stone-400 tabular-nums"><%= lp.pct %>%</span>
                     <% end %>
                   </div>
                 <% end %>

@@ -4,10 +4,18 @@ class LessonsController < ApplicationController
 
   def index
     @lessons = Lesson.ordered
+    @quiz_progress = {}
     if current_user
-      completed_by_lesson = current_user.section_progresses.completed.group(:lesson_id).count
-      @lesson_progress = @lessons.each_with_object({}) do |lesson, h|
-        h[lesson.id] = completed_by_lesson.fetch(lesson.id, 0)
+      totals = QuizQuestion.group(:lesson_id).count
+      known = QuizReview.known
+                        .where(user: current_user)
+                        .joins(:quiz_question)
+                        .group("quiz_questions.lesson_id").count
+      @quiz_progress = @lessons.each_with_object({}) do |lesson, h|
+        h[lesson.id] = LessonProgress.new(
+          known: known.fetch(lesson.id, 0),
+          total: totals.fetch(lesson.id, 0)
+        )
       end
     end
   end
@@ -30,12 +38,18 @@ class LessonsController < ApplicationController
   end
 
   def show
+    @quiz_progress = @lesson.progress_for(current_user)
+
     if current_user
+      # Grammar / texts / exercises still come from the chat tutor's mastery
+      # markers; vocabulary is now driven by the quiz tracker (source of truth).
       @section_progress = current_user.section_progresses
                                       .where(lesson: @lesson)
                                       .completed
+                                      .where.not(section_type: "vocabulary")
                                       .pluck(:section_type)
                                       .to_set
+      @section_progress << "vocabulary" if @quiz_progress.complete?
     else
       @section_progress = Set.new
     end

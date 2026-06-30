@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_24_000002) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_24_000004) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -158,6 +158,37 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_24_000002) do
     t.index ["source_type", "source_id"], name: "index_phrases_on_source_type_and_source_id"
   end
 
+  create_table "quiz_questions", force: :cascade do |t|
+    t.string "answer", null: false
+    t.datetime "created_at", null: false
+    t.string "direction", null: false
+    t.json "distractors", default: [], null: false
+    t.integer "lesson_id", null: false
+    t.text "prompt", null: false
+    t.integer "source_id", null: false
+    t.string "source_type", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_quiz_questions_on_lesson_id"
+    t.index ["source_type", "source_id", "direction"], name: "index_quiz_questions_uniqueness", unique: true
+    t.index ["source_type", "source_id"], name: "index_quiz_questions_on_source"
+  end
+
+  create_table "quiz_reviews", force: :cascade do |t|
+    t.integer "box", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "due_at"
+    t.datetime "last_reviewed_at"
+    t.integer "quiz_question_id", null: false
+    t.integer "times_correct", default: 0, null: false
+    t.integer "times_wrong", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["quiz_question_id"], name: "index_quiz_reviews_on_quiz_question_id"
+    t.index ["user_id", "due_at"], name: "index_quiz_reviews_on_user_id_and_due_at"
+    t.index ["user_id", "quiz_question_id"], name: "index_quiz_reviews_on_user_id_and_quiz_question_id", unique: true
+    t.index ["user_id"], name: "index_quiz_reviews_on_user_id"
+  end
+
   create_table "section_progresses", force: :cascade do |t|
     t.datetime "completed_at"
     t.datetime "created_at", null: false
@@ -226,6 +257,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_24_000002) do
   add_foreign_key "lesson_blocks", "lessons"
   add_foreign_key "lesson_rows", "lessons"
   add_foreign_key "phrases", "lessons"
+  add_foreign_key "quiz_questions", "lessons"
+  add_foreign_key "quiz_reviews", "quiz_questions"
+  add_foreign_key "quiz_reviews", "users"
   add_foreign_key "section_progresses", "lessons"
   add_foreign_key "section_progresses", "users"
   add_foreign_key "sessions", "users"

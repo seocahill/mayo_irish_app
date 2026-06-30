@@ -10,6 +10,7 @@ class Lesson < ApplicationRecord
   has_many :lesson_blocks,   -> { order(:position) }, dependent: :destroy
   has_many :lesson_rows, dependent: :destroy
   has_many :section_progresses, dependent: :destroy
+  has_many :quiz_questions, dependent: :destroy
   accepts_nested_attributes_for :lesson_rows,
                                 allow_destroy: true,
                                 reject_if: :all_blank
@@ -57,6 +58,21 @@ class Lesson < ApplicationRecord
 
   def previous_lesson
     Lesson.where("position < ?", position).order(position: :desc).first
+  end
+
+  # Quiz-based progress for a given user: how many of this lesson's questions
+  # the user currently "knows" (Leitner box >= KNOWN_BOX) out of the total.
+  def progress_for(user)
+    total = quiz_questions.count
+    known =
+      if user && total.positive?
+        QuizReview.known
+                  .where(user: user, quiz_question_id: quiz_questions.select(:id))
+                  .count
+      else
+        0
+      end
+    LessonProgress.new(known: known, total: total)
   end
 
 end

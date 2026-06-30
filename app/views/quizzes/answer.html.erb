@@ -1,0 +1,28 @@
+<div class="max-w-xl mx-auto">
+  <div class="mb-8">
+    <%= render "shared/progress_bar", progress: @progress, label: "Stór focal ar eolas" %>
+  </div>
+
+  <div class="bg-white rounded-2xl border shadow-sm p-8 text-center
+              <%= @correct ? 'border-emerald-300' : 'border-red-300' %>">
+    <% if @correct %>
+      <div class="text-emerald-600 text-5xl mb-3">✓</div>
+      <p class="text-xl font-bold text-emerald-700 mb-2">Togha!</p>
+    <% else %>
+      <div class="text-red-500 text-5xl mb-3">✗</div>
+      <p class="text-xl font-bold text-red-600 mb-2">Níl, faraor.</p>
+      <p class="text-sm text-stone-500">Do fhreagra: <span class="line-through"><%= @choice %></span></p>
+    <% end %>
+
+    <p class="mt-4 text-stone-500 text-sm">
+      <span class="<%= @question.prompt_lang == 'ga' ? 'italic' : '' %>"><%= @question.prompt %></span>
+      &nbsp;=&nbsp;
+      <span class="font-semibold text-stone-800 <%= @question.answer_lang == 'ga' ? 'italic' : '' %>"><%= @question.answer %></span>
+    </p>
+
+    <div class="mt-8">
+      <%= link_to (@last ? "Féach ar an toradh →" : "Ar aghaidh →"), lesson_quiz_path(@lesson),
+            class: "inline-block bg-emerald-800 text-white px-6 py-3 rounded-xl hover:bg-emerald-700 transition-colors font-medium" %>
+    </div>
+  </div>
+</div>

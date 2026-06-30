@@ -1,6 +1,7 @@
 class VocabularyItem < ApplicationRecord
   belongs_to :lesson
   has_one_attached :audio
+  has_many :quiz_questions, as: :source, dependent: :destroy
 
   validates :irish, presence: true
   validates :english, presence: true

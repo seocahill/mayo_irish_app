@@ -17,6 +17,10 @@ Rails.application.routes.draw do
       post :message,  on: :member
       delete :clear,  on: :member
     end
+    resource :quiz, only: [:show], controller: "quizzes" do
+      post   :answer, on: :member
+      delete :reset,  on: :member
+    end
   end
   get "up" => "rails/health#show", as: :rails_health_check
 end

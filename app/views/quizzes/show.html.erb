@@ -1,0 +1,37 @@
+<% prompt_lang = @question.prompt_lang %>
+<div class="max-w-xl mx-auto">
+  <div class="flex items-center justify-between mb-6">
+    <%= link_to lesson_path(@lesson), class: "text-sm text-stone-400 hover:text-stone-600 transition-colors inline-flex items-center gap-1" do %>
+      ← <%= @lesson.display_title %>
+    <% end %>
+    <span class="text-xs text-stone-400 tabular-nums">Ceist <%= @position %>/<%= @count %></span>
+  </div>
+
+  <div class="mb-8">
+    <%= render "shared/progress_bar", progress: @progress, label: "Stór focal ar eolas" %>
+  </div>
+
+  <div class="bg-white rounded-2xl border border-stone-200 shadow-sm p-8">
+    <p class="text-xs uppercase tracking-widest text-stone-400 mb-3">
+      <%= prompt_lang == "ga" ? "Cad is brí leis seo i mBéarla?" : "Cad é seo i nGaeilge?" %>
+    </p>
+    <p class="text-3xl font-bold text-stone-800 mb-8 <%= "italic" if prompt_lang == "ga" %>">
+      <%= @question.prompt %>
+    </p>
+
+    <%= form_with url: answer_lesson_quiz_path(@lesson), method: :post, class: "grid gap-3" do |f| %>
+      <%= f.hidden_field :question_id, value: @question.id %>
+      <% @question.choices.each do |choice| %>
+        <button type="submit" name="choice" value="<%= choice %>"
+                class="text-left px-5 py-4 rounded-xl border border-stone-200 bg-stone-50 hover:bg-emerald-50 hover:border-emerald-400 transition-colors text-lg text-stone-700">
+          <%= choice %>
+        </button>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="text-center mt-6">
+    <%= button_to "Éirigh as", reset_lesson_quiz_path(@lesson), method: :delete,
+          class: "text-xs text-stone-400 hover:text-stone-600 bg-transparent border-0 cursor-pointer" %>
+  </div>
+</div>

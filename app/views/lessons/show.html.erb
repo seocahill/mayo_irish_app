@@ -10,6 +10,15 @@
     <% end %>
   </div>
   <div class="flex gap-2">
+    <% if @lesson.vocabulary_items.any? %>
+      <%= link_to lesson_quiz_path(@lesson),
+            class: "inline-flex items-center gap-2 text-sm bg-emerald-700 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors" do %>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+        </svg>
+        Triail
+      <% end %>
+    <% end %>
     <%= link_to lesson_chat_path(@lesson),
           class: "inline-flex items-center gap-2 text-sm bg-stone-700 text-white px-4 py-2 rounded-lg hover:bg-stone-600 transition-colors" do %>
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -28,6 +37,12 @@
     <% end %>
   </div>
 </div>
+
+<% if current_user && @quiz_progress.any? %>
+  <div class="mb-8 -mt-2">
+    <%= render "shared/progress_bar", progress: @quiz_progress, label: "Stór focal ar eolas" %>
+  </div>
+<% end %>
 
 <%# ── CONTENT BLOCKS ──────────────────────────────────────────── %>
 <% if @lesson.lesson_blocks.any? %>

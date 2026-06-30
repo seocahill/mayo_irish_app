@@ -1,0 +1,27 @@
+dog:
+  lesson: one
+  irish: madra
+  english: dog
+  gender: m
+  position: 1
+
+house:
+  lesson: one
+  irish: teach
+  english: house
+  gender: m
+  position: 2
+
+water:
+  lesson: one
+  irish: uisce
+  english: water
+  gender: m
+  position: 3
+
+book:
+  lesson: one
+  irish: leabhar
+  english: book
+  gender: m
+  position: 4
