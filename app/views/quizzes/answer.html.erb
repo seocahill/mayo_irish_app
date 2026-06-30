@@ -3,7 +3,7 @@
     <%= render "shared/progress_bar", progress: @progress, label: "Stór focal ar eolas" %>
   </div>
 
-  <div class="bg-white rounded-2xl border shadow-sm p-8 text-center
+  <div class="bg-white rounded-2xl border shadow-sm p-6 sm:p-8 text-center
               <%= @correct ? 'border-emerald-300' : 'border-red-300' %>">
     <% if @correct %>
       <div class="text-emerald-600 text-5xl mb-3">✓</div>
@@ -22,7 +22,7 @@
 
     <div class="mt-8">
       <%= link_to (@last ? "Féach ar an toradh →" : "Ar aghaidh →"), lesson_quiz_path(@lesson),
-            class: "inline-block bg-emerald-800 text-white px-6 py-3 rounded-xl hover:bg-emerald-700 transition-colors font-medium" %>
+            class: "block sm:inline-block w-full sm:w-auto bg-emerald-800 text-white px-6 py-3 rounded-xl hover:bg-emerald-700 transition-colors font-medium" %>
     </div>
   </div>
 </div>

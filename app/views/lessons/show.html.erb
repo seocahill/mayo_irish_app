@@ -1,35 +1,35 @@
-<div class="flex items-center justify-between mb-8">
-  <div>
-    <div class="flex items-center gap-2 mb-1">
+<div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+  <div class="min-w-0">
+    <div class="flex items-center gap-2 mb-1 flex-wrap">
       <span class="text-sm text-stone-400 uppercase tracking-widest">Ceacht <%= @lesson.number %></span>
       <span class="text-xs font-medium px-2 py-0.5 rounded-full border <%= @lesson.badge_classes %>"><%= @lesson.type_label %></span>
     </div>
-    <h1 class="text-3xl font-bold text-stone-800"><%= @lesson.title %></h1>
+    <h1 class="text-2xl sm:text-3xl font-bold text-stone-800 break-words"><%= @lesson.title %></h1>
     <% if @lesson.content_html.present? %>
       <p class="text-xs text-stone-400 mt-1 italic"><%= @lesson.content_html %></p>
     <% end %>
   </div>
-  <div class="flex gap-2">
+  <div class="flex flex-wrap sm:flex-nowrap gap-2 sm:flex-shrink-0">
     <% if @lesson.vocabulary_items.any? %>
       <%= link_to lesson_quiz_path(@lesson),
-            class: "inline-flex items-center gap-2 text-sm bg-emerald-700 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors" do %>
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            class: "flex-1 sm:flex-initial justify-center inline-flex items-center gap-2 text-sm bg-emerald-700 text-white px-4 py-2.5 rounded-lg hover:bg-emerald-600 transition-colors" do %>
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
         </svg>
         Triail
       <% end %>
     <% end %>
     <%= link_to lesson_chat_path(@lesson),
-          class: "inline-flex items-center gap-2 text-sm bg-stone-700 text-white px-4 py-2 rounded-lg hover:bg-stone-600 transition-colors" do %>
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          class: "flex-1 sm:flex-initial justify-center inline-flex items-center gap-2 text-sm bg-stone-700 text-white px-4 py-2.5 rounded-lg hover:bg-stone-600 transition-colors" do %>
+      <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-3 3v-3z"/>
       </svg>
       Cleachtadh
     <% end %>
     <% if current_user&.admin? %>
       <a href="<%= edit_lesson_path(@lesson) %>"
-         class="inline-flex items-center gap-2 text-sm bg-emerald-800 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+         class="w-full sm:w-auto justify-center inline-flex items-center gap-2 text-sm bg-emerald-800 text-white px-4 py-2.5 rounded-lg hover:bg-emerald-700 transition-colors">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
         </svg>
         Cuir in eagar
@@ -39,7 +39,7 @@
 </div>
 
 <% if current_user && @quiz_progress.any? %>
-  <div class="mb-8 -mt-2">
+  <div class="mb-8">
     <%= render "shared/progress_bar", progress: @quiz_progress, label: "Stór focal ar eolas" %>
   </div>
 <% end %>
@@ -85,12 +85,12 @@
               </td>
               <td class="px-4 py-3 text-stone-600 hidden md:table-cell"><%= item.plural %></td>
               <td class="px-4 py-3 text-stone-700"><%= item.english %></td>
-              <td class="px-4 py-3">
-                <div class="flex items-center gap-3">
+              <td class="px-2 sm:px-4 py-3">
+                <div class="flex items-center gap-2 sm:gap-3 justify-end">
                   <% if item.audio.attached? %>
-                    <audio controls src="<%= rails_blob_url(item.audio) %>" class="h-8 w-40"></audio>
+                    <audio controls src="<%= rails_blob_url(item.audio) %>" class="h-8 w-28 sm:w-40"></audio>
                   <% elsif item.audio_url.present? %>
-                    <audio controls src="<%= item.audio_url %>" class="h-8 w-40"></audio>
+                    <audio controls src="<%= item.audio_url %>" class="h-8 w-28 sm:w-40"></audio>
                   <% end %>
 
                   <% if item.audio.attached? || item.audio_url.present? %>
@@ -115,7 +115,7 @@
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                       </button>
-                      <span data-recorder-target="status" class="text-xs text-stone-400 w-16"></span>
+                      <span data-recorder-target="status" class="text-xs text-stone-400 w-16 hidden sm:inline"></span>
                     </div>
                   <% end %>
                 </div>

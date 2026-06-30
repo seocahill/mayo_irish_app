@@ -60,19 +60,27 @@ class Lesson < ApplicationRecord
     Lesson.where("position < ?", position).order(position: :desc).first
   end
 
-  # Quiz-based progress for a given user: how many of this lesson's questions
-  # the user currently "knows" (Leitner box >= KNOWN_BOX) out of the total.
+  # Quiz-based progress for a given user, counted in vocabulary words: a word
+  # is "known" once every one of its quiz questions (both directions) is known
+  # (Leitner box >= KNOWN_BOX). Total is the word count, so the bar is meaningful
+  # even before any questions have been generated.
   def progress_for(user)
-    total = quiz_questions.count
-    known =
-      if user && total.positive?
-        QuizReview.known
-                  .where(user: user, quiz_question_id: quiz_questions.select(:id))
-                  .count
-      else
-        0
-      end
+    total = vocabulary_items.count
+    known = user && total.positive? ? known_word_count(user) : 0
     LessonProgress.new(known: known, total: total)
+  end
+
+  private
+
+  def known_word_count(user)
+    questions_per_word = quiz_questions.where(source_type: "VocabularyItem").group(:source_id).count
+    known_per_word = QuizReview.known
+                               .joins(:quiz_question)
+                               .where(quiz_questions: { lesson_id: id, source_type: "VocabularyItem" })
+                               .where(user: user)
+                               .group("quiz_questions.source_id").count
+
+    questions_per_word.count { |source_id, n| n.positive? && known_per_word[source_id].to_i >= n }
   end
 
 end

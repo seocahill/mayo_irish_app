@@ -1,5 +1,5 @@
 <div class="max-w-xl mx-auto text-center">
-  <div class="bg-white rounded-2xl border border-stone-200 shadow-sm p-10">
+  <div class="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 sm:p-10">
     <div class="text-4xl mb-4"><%= @progress.complete? ? "🎉" : "👏" %></div>
     <h1 class="text-2xl font-bold text-stone-800 mb-2">Babhta críochnaithe</h1>
     <p class="text-stone-500 mb-8"><%= @correct %>/<%= @answered %> ceart sa bhabhta seo</p>
@@ -12,7 +12,7 @@
       <p class="text-emerald-700 text-sm mb-6">Tá an stór focal ar fad ar eolas agat! Fillfidh ceisteanna le haghaidh athbhreithnithe.</p>
     <% end %>
 
-    <div class="flex items-center justify-center gap-3">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-2 sm:gap-3">
       <%= link_to "Lean ar aghaidh", lesson_quiz_path(@lesson),
             class: "bg-emerald-800 text-white px-5 py-3 rounded-xl hover:bg-emerald-700 transition-colors font-medium" %>
       <%= link_to "Ar ais go dtí an ceacht", lesson_path(@lesson),
