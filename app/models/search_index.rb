@@ -46,8 +46,34 @@ module SearchIndex
     # Models register themselves with Searchable as they're loaded, so make sure
     # they're all loaded before reading the registry (rake/seeds run cold).
     Rails.application.eager_load!
-    connection.exec_delete("DELETE FROM search_documents", "SearchIndex Clear", [])
+    connection.execute("DELETE FROM search_documents")
     Searchable.registered_models.each(&:reindex_all)
+  end
+
+  # Build the index only if it's currently empty. The boot-time safety net
+  # (bin/docker-entrypoint) uses this so populated indexes aren't rebuilt on
+  # every machine start. Returns the number of documents indexed, or nil if it
+  # skipped (no table yet, or already populated).
+  def rebuild_if_empty!
+    return nil unless table_exists?
+    return nil if count.positive?
+
+    rebuild!
+    count
+  end
+
+  def count
+    return 0 unless table_exists?
+    connection.select_value("SELECT COUNT(*) FROM search_documents").to_i
+  end
+
+  # ActiveRecord's `table_exists?` / `tables` deliberately exclude FTS5 virtual
+  # tables, so check sqlite_master directly.
+  def table_exists?
+    sql = ApplicationRecord.sanitize_sql_array([
+      "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ? LIMIT 1", "search_documents"
+    ])
+    connection.select_value(sql).present?
   end
 
   def bind_params(values)

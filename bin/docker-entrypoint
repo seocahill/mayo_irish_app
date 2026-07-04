@@ -9,6 +9,10 @@ fi
 # If running the rails server then create or migrate existing database
 if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
   ./bin/rails db:prepare
+  # Build the full-text search index if it's empty. This runs here (on the app
+  # machine, with the data volume mounted) rather than in Fly's release_command,
+  # whose throwaway VM can't see the volume. No-op once the index is populated.
+  ./bin/rails search:reindex_if_empty
 fi
 
 exec "${@}"
