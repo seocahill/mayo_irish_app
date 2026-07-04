@@ -69,6 +69,16 @@ class SearchTest < ActiveSupport::TestCase
                  "the old text should no longer match after an edit"
   end
 
+  test "content in draft lessons is hidden unless include_unpublished" do
+    draft = Lesson.create!(number: 9300, title: "Draft", position: 9300, published: false)
+    item = draft.vocabulary_items.create!(irish: "iomrascáil", english: "wrestling", position: 1)
+
+    # Default (learner) search excludes draft content.
+    assert_empty Search.new("wrestling").results.select { |r| r.record_id == item.id }
+    # Admin search includes it.
+    assert_includes Search.new("wrestling", include_unpublished: true).results.map(&:record_id), item.id
+  end
+
   test "table_exists? detects the FTS5 virtual table" do
     assert SearchIndex.table_exists?, "virtual table should be detected via sqlite_master"
   end

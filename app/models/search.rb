@@ -33,8 +33,9 @@ class Search
     def lesson? = record_type == "Lesson"
   end
 
-  def initialize(query)
+  def initialize(query, include_unpublished: false)
     @query = query.to_s
+    @include_unpublished = include_unpublished
   end
 
   def blank?
@@ -45,7 +46,9 @@ class Search
     return [] if blank?
 
     rows = ApplicationRecord.connection.select_all(sanitized_sql, "Search")
-    rows.map do |row|
+    rows.filter_map do |row|
+      next if hidden_lesson_numbers.include?(row["lesson_number"])
+
       Result.new(
         record_type: row["record_type"],
         record_id: row["record_id"],
@@ -57,6 +60,13 @@ class Search
   end
 
   private
+
+  # Content belonging to unpublished (draft) lessons is hidden from learners.
+  # Admins pass include_unpublished: true to search everything.
+  def hidden_lesson_numbers
+    return @hidden_lesson_numbers if defined?(@hidden_lesson_numbers)
+    @hidden_lesson_numbers = @include_unpublished ? [] : Lesson.where(published: false).pluck(:number)
+  end
 
   # Turn free-form user input into a safe FTS5 MATCH expression. Each word is
   # quoted (neutralising FTS operators like AND/OR/NEAR and punctuation) and

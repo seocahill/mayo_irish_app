@@ -34,7 +34,11 @@
           <%= f.number_field :position, class: "editor-input", min: 0 %>
         </div>
       </div>
-      <div class="flex justify-end">
+      <div class="flex items-center justify-between">
+        <label class="flex items-center gap-2 text-sm text-stone-600 cursor-pointer">
+          <%= f.check_box :published, class: "rounded border-stone-300 text-emerald-700 focus:ring-emerald-600" %>
+          <span>Foilsithe <span class="text-stone-400">(published — visible to learners)</span></span>
+        </label>
         <%= f.submit "Sábháil", class: "bg-emerald-800 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition-colors cursor-pointer" %>
       </div>
     <% end %>

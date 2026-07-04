@@ -3,7 +3,7 @@ class LessonsController < ApplicationController
   before_action :require_admin, only: [:new, :create, :edit, :update]
 
   def index
-    @lessons = Lesson.ordered
+    @lessons = Lesson.visible_to(current_user).ordered
     @quiz_progress = {}
     if current_user
       totals = VocabularyItem.group(:lesson_id).count
@@ -35,6 +35,12 @@ class LessonsController < ApplicationController
   end
 
   def show
+    # Draft lessons (e.g. created via the MCP connector) are hidden from learners
+    # until an admin publishes them.
+    unless @lesson.published? || current_user&.admin?
+      redirect_to(root_path, alert: "Lesson not found.") and return
+    end
+
     @quiz_progress = @lesson.progress_for(current_user)
 
     if current_user
@@ -95,6 +101,7 @@ class LessonsController < ApplicationController
       :title,
       :number,
       :position,
+      :published,
       :vocabulary_notes,
       :vocabulary_notes_content,
       :grammar,
