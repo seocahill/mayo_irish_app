@@ -1,5 +1,22 @@
 class Lesson < ApplicationRecord
+  include Searchable
+
   has_rich_text :vocabulary_notes_content
+
+  # A lesson's own free-text fields. Its vocabulary, grammar, texts and
+  # exercises are separate Searchable records, so they're not duplicated here.
+  searchable title: ->(l) { l.display_title },
+             body: ->(l) {
+               [
+                 l.title,
+                 l.read_attribute(:grammar),
+                 l.read_attribute(:texts),
+                 l.read_attribute(:vocabulary_notes),
+                 l.vocabulary_notes_content&.to_plain_text,
+                 ActionController::Base.helpers.strip_tags(l.read_attribute(:content_html))
+               ]
+             },
+             lesson_number: ->(l) { l.number }
 
   has_many :vocabulary_items,  -> { order(:position) }, dependent: :destroy
   has_many :grammar_rules,     -> { order(:position) }, dependent: :destroy

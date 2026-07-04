@@ -1,10 +1,16 @@
 class VocabularyItem < ApplicationRecord
+  include Searchable
+
   belongs_to :lesson
   has_one_attached :audio
   has_many :quiz_questions, as: :source, dependent: :destroy
 
   validates :irish, presence: true
   validates :english, presence: true
+
+  searchable title: ->(v) { "#{v.irish} — #{v.english}" },
+             body: ->(v) { [v.irish, v.english, v.phonetic, v.plural, v.notes] },
+             lesson_number: ->(v) { v.lesson&.number }
 
   GENDERS = { 'm' => 'Masc.', 'f' => 'Fem.' }.freeze
 

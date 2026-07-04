@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_24_000004) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_04_000001) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -265,4 +265,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_24_000004) do
   add_foreign_key "sessions", "users"
   add_foreign_key "text_passages", "lessons"
   add_foreign_key "vocabulary_items", "lessons"
+
+  # Virtual tables defined in this database.
+  # Note that virtual tables may not work with other database engines. Be careful if changing database.
+  create_virtual_table "search_documents", "fts5", ["record_type UNINDEXED", "record_id UNINDEXED", "lesson_number UNINDEXED", "title", "body", "tokenize = \"unicode61 remove_diacritics 2\""]
 end
