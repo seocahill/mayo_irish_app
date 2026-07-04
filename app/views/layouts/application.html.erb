@@ -21,8 +21,18 @@
             <div class="text-emerald-300 text-xs tracking-widest uppercase">Mayo Irish</div>
           </div>
         </a>
-        <nav class="text-sm text-emerald-200 flex items-center gap-4">
-          <a href="/" class="hover:text-white transition-colors">All Lessons</a>
+        <nav class="text-sm text-emerald-200 flex items-center gap-3 sm:gap-4">
+          <% if authenticated? %>
+            <%= form_with url: search_path, method: :get, class: "relative", data: { turbo_frame: "_top" } do |f| %>
+              <svg class="w-4 h-4 text-emerald-300 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
+              </svg>
+              <%= f.search_field :q, value: params[:q], autocomplete: "off",
+                    placeholder: "Search…", "aria-label": "Search",
+                    class: "w-28 sm:w-44 focus:w-32 sm:focus:w-56 transition-all bg-emerald-800/60 border border-emerald-700 rounded-full pl-8 pr-3 py-1.5 text-sm text-white placeholder-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-emerald-800" %>
+            <% end %>
+          <% end %>
+          <a href="/" class="hover:text-white transition-colors hidden sm:inline">All Lessons</a>
           <% if authenticated? %>
             <span class="text-emerald-400 hidden sm:inline"><%= current_user.email_address %></span>
             <%= button_to "Sign out", session_path, method: :delete,

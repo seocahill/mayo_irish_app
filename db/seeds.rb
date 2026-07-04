@@ -3045,4 +3045,8 @@ Exercise.create!(id: 617, lesson_id: 33, number: 9, prompt: "Was the President o
 Exercise.create!(id: 618, lesson_id: 33, number: 10, prompt: "Did you shut the train door?", answer: nil, created_at: "2026-04-11T23:30:55.175166Z", updated_at: "2026-04-11T23:30:55.175166Z")
 puts "  512 exercises seeded"
 
+puts "Building search index..."
+SearchIndex.rebuild!
+puts "  search index built"
+
 puts "Seed complete!"

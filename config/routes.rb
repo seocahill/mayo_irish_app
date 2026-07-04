@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :passwords, param: :token, only: %i[new create edit update]
 
   root "lessons#index"
+  get "search", to: "search#index", as: :search
   resources :lessons, only: [:index, :new, :create, :show, :edit, :update] do
     resources :grammar_rules, only: [:edit, :update], shallow: true
     resources :grammar_sections, only: [:edit, :update], shallow: true
