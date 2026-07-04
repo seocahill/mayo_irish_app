@@ -69,6 +69,23 @@ class SearchTest < ActiveSupport::TestCase
                  "the old text should no longer match after an edit"
   end
 
+  test "table_exists? detects the FTS5 virtual table" do
+    assert SearchIndex.table_exists?, "virtual table should be detected via sqlite_master"
+  end
+
+  test "rebuild_if_empty! builds only when the index is empty" do
+    ApplicationRecord.connection.execute("DELETE FROM search_documents")
+    assert_equal 0, SearchIndex.count
+
+    built = SearchIndex.rebuild_if_empty!
+    assert built.positive?, "should build when empty"
+    assert_equal built, SearchIndex.count
+
+    # Second call is a no-op because the index is now populated.
+    assert_nil SearchIndex.rebuild_if_empty!
+    assert_equal built, SearchIndex.count
+  end
+
   test "destroying a record removes it from the index" do
     item = @lesson.vocabulary_items.create!(irish: "gealach", english: "moon", position: 97)
     assert_includes Search.new("gealach").results.map(&:record_id), item.id
