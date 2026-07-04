@@ -37,3 +37,7 @@ gem "litestream", "~> 0.14.0"
 gem "aws-sdk-s3", "~> 1.219", require: false
 
 gem "bcrypt", "~> 3.1"
+
+# MCP server + OAuth 2.1 provider for the claude.ai web connector
+gem "mcp", "~> 0.22"
+gem "doorkeeper", "~> 5.9"

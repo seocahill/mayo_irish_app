@@ -45,6 +45,11 @@ class Lesson < ApplicationRecord
   scope :curriculum,   -> { where(lesson_type: "curriculum") }
   scope :thematic_vocab, -> { where(lesson_type: "thematic_vocab") }
   scope :dias_material,  -> { where(lesson_type: "dias_material") }
+  scope :published,    -> { where(published: true) }
+
+  # Learners only see published lessons; admins see everything (including
+  # drafts created through the MCP connector, pending review).
+  scope :visible_to, ->(user) { user&.admin? ? all : published }
 
   BADGE_CLASSES = {
     "curriculum"    => "bg-emerald-50 text-emerald-800 border-emerald-200 group-hover:bg-emerald-800 group-hover:text-white group-hover:border-emerald-800",
