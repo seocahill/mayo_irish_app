@@ -55,6 +55,45 @@ class McpControllerTest < ActionDispatch::IntegrationTest
     assert_not lesson.published?, "connector-created lessons must be drafts even if published:true is passed"
   end
 
+  test "tools advertise annotations so the connector can auto-approve edits" do
+    post mcp_path, params: rpc("tools/list").to_json, headers: auth_headers
+    assert_response :success
+    tools = JSON.parse(@response.body).dig("result", "tools").index_by { |t| t["name"] }
+
+    assert_equal false, tools.dig("update_record", "annotations", "destructiveHint")
+    assert_equal false, tools.dig("update_record", "annotations", "readOnlyHint")
+    assert_equal true,  tools.dig("update_record", "annotations", "idempotentHint")
+    assert_equal false, tools.dig("create_record", "annotations", "destructiveHint")
+    assert_equal true,  tools.dig("get_record", "annotations", "readOnlyHint")
+    assert_equal true,  tools.dig("list_records", "annotations", "readOnlyHint")
+  end
+
+  test "update_record edits an existing record" do
+    post mcp_path, headers: auth_headers, params: rpc("tools/call", {
+      name: "update_record",
+      arguments: { resource: "lessons", id: lessons(:one).id, attributes: { title: "Renamed" } }
+    }).to_json
+    assert_response :success
+
+    assert_equal "Renamed", lessons(:one).reload.title
+  end
+
+  test "create_record accepts phonetic and notes on phrases" do
+    post mcp_path, headers: auth_headers, params: rpc("tools/call", {
+      name: "create_record",
+      arguments: { resource: "phrases", attributes: {
+        lesson_id: lessons(:one).id, irish: "bean a chaointe",
+        english: "keening woman", phonetic: "b′an ə xiɴt′ə", notes: "§523"
+      } }
+    }).to_json
+    assert_response :success
+
+    phrase = Phrase.find_by(irish: "bean a chaointe")
+    assert_not_nil phrase
+    assert_equal "b′an ə xiɴt′ə", phrase.phonetic
+    assert_equal "§523", phrase.notes
+  end
+
   test "GET is not allowed even with a token" do
     get mcp_path, headers: auth_headers
     assert_response :method_not_allowed
