@@ -18,7 +18,7 @@ module Mcp
       "grammar_sections" => %w[grammar_rule_id label position body],
       "text_passages" => %w[lesson_id title position body],
       "exercises" => %w[lesson_id number position prompt answer],
-      "phrases" => %w[lesson_id irish english position audio_url],
+      "phrases" => %w[lesson_id irish english phonetic notes position audio_url],
       "lesson_blocks" => %w[lesson_id block_type caption position url body]
     }.freeze
 

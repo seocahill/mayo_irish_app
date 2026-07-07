@@ -8,6 +8,16 @@ module Mcp
                   "(draft) and must be published by a human in the admin UI. Call get_record or " \
                   "list_records first to learn a resource's fields. Returns the created record " \
                   "or validation errors."
+      # Adds new rows; never deletes or overwrites existing data. Not idempotent
+      # (each call makes another record), but non-destructive, so the connector
+      # need not gate it behind a manual "destructive action" confirmation.
+      annotations(
+        title: "Create record",
+        read_only_hint: false,
+        destructive_hint: false,
+        idempotent_hint: false,
+        open_world_hint: false
+      )
       input_schema(
         properties: {
           resource: {

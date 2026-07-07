@@ -3,6 +3,13 @@ module Mcp
     class GetRecord < Base
       tool_name "get_record"
       description "Fetch a single record of a resource by id."
+      annotations(
+        title: "Get record",
+        read_only_hint: true,
+        destructive_hint: false,
+        idempotent_hint: true,
+        open_world_hint: false
+      )
       input_schema(
         properties: {
           resource: {

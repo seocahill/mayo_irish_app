@@ -6,6 +6,17 @@ module Mcp
                   "unknown or non-writable fields are ignored. Rich-text fields accept HTML. A " \
                   "lesson's published/draft state cannot be changed here — that's a human action " \
                   "in the admin UI. Returns the updated record or validation errors."
+      # Editing fields is non-destructive (no deletes) and idempotent — re-sending
+      # the same attributes yields the same record. Declaring this lets the
+      # claude.ai connector auto-approve edits instead of gating every call behind
+      # a manual "destructive action" confirmation.
+      annotations(
+        title: "Update record",
+        read_only_hint: false,
+        destructive_hint: false,
+        idempotent_hint: true,
+        open_world_hint: false
+      )
       input_schema(
         properties: {
           resource: {
