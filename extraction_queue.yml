@@ -1,0 +1,186 @@
+# Extraction queue — Mayo Irish lessons.
+# The nightly routine processes the FIRST entry with status: pending.
+# Statuses: pending | done | needs_scoping (human required) | skipped
+# On completion the routine sets status: done, records created ids, and
+# increments next_lesson_number if a new lesson was created.
+
+next_lesson_number: 133
+
+units:
+  - id: erris-initial-mutation
+    status: pending
+    lesson_title: "Initial Mutation in Erris"
+    lesson_type: dias_material
+    source: "IE (Mhac an Fhailigh, The Irish of Erris)"
+    scans: "scans/erris_3/ spreads 20-23 (N.jpeg ≈ pp. 130+2N; verify printed page numbers)"
+    pages: "170-177"
+    paragraphs: "§§482-495"
+    structure: >
+      Six grammar_rules: (1) the mutation system + master consonant table
+      §§483-485 — 18 rows basic/lenited/eclipsed incl. sʟ→hl, ʃʟ′→hl′,
+      sɴ→hn, ʃɴ′→hn′, ʃr→hr, tr→dr, tr′→dr′, and the exemptions (initial h;
+      s/ʃ before b,d,g,m; ḍ ṭ). (2) Lenition of nouns §486 — all 14 numbered
+      environments as sections, incl. the article s→t rule and the ar-phrase
+      non-lenition list (ar ball, ar cuairt, ar maidin…) and gan/idir/thar
+      behaviour. (3) Lenition of adjectives §487 (environments i-ix incl.
+      dual and budh). (4) Lenition of verbs §488 + adverbs & prepositions
+      §489 (lenited adverb list; chugam/dhíom/liom pronominal forms).
+      (5) Eclipsis: nouns §490 (six environments), verbs §491.
+      (6) Provection: h §492 (nouns/adjectives/pronouns/verbs), t §493,
+      ɴ/n §494, j §495 (incl. Dú Chaocháin vs Faulmore variation).
+      Blocks: source/notation block + short asides. Phrases: any idiomatic
+      examples worth first-class records (e.g. lé haghaidh, lé chéile).
+    notes: "Most learner-critical chapter in the grammar. Dense examples — carry phonetics faithfully."
+
+  - id: erris-intro-notation
+    status: pending
+    lesson_title: "Reading Mhac an Fhailigh: districts, informants & notation"
+    lesson_type: dias_material
+    source: "IE"
+    scans: "scans/erris_front/ first spreads (pp. iii-xii region; locate by printed page numbers)"
+    pages: "iii-xii approx"
+    paragraphs: "front matter"
+    structure: >
+      Mostly lesson_blocks (prose): the Erris districts (Doohoma, Faulmore,
+      Dú Chaocháin) and informant sigla (Sb, SOG, AOS, POR, EOM…); one
+      grammar_rule "The notation" with a symbol table (ʟ ɴ, C′, :, ˜, ə, ʃ,
+      ç, x, γ, ŋ) so every later IE lesson can reference it.
+    notes: "Anchor lesson for all IE material. Small unit — good first automated run after initial-mutation."
+
+  - id: erris-vowel-phonemes
+    status: pending
+    lesson_title: "The Sound System of Erris I: vowels & diphthongs"
+    lesson_type: dias_material
+    source: "IE"
+    scans: "scans/erris_front/ (align to chapter headings; roughly pp. 1-25)"
+    pages: "~1-25 (align to chapter boundaries)"
+    paragraphs: "early §§ (vowel chapters)"
+    structure: >
+      grammar_rules per chapter: the five basic vowels /i e a o u/ with
+      length opposition; nasalised vowels; the four falling diphthongs
+      /iə uə əi əu/. Sections per phoneme with realisation notes + example
+      tables (word, phonetic, gloss). Notable minimal pairs as
+      vocabulary_items.
+    notes: "Unit boundary = chapter boundary, judged from printed headings."
+
+  - id: erris-consonant-phonemes
+    status: pending
+    lesson_title: "The Sound System of Erris II: consonants"
+    lesson_type: dias_material
+    source: "IE"
+    scans: "scans/erris_front/ (align to chapter headings; roughly pp. 25-45)"
+    pages: "~25-45 (align to chapter boundaries)"
+    paragraphs: "consonant chapters incl. §114 phoneme table"
+    structure: >
+      grammar_rules: the consonant inventory (reproduce the §114 table);
+      the palatalised/non-palatalised opposition C vs C′; the ʟ ʟ′ l l′ and
+      ɴ ɴ′ n n′ four-way lateral/nasal systems; r r′. Sections with
+      realisation + examples.
+    notes: ""
+
+  - id: erris-glides-sandhi
+    status: pending
+    lesson_title: "The Sound System of Erris III: glides, stress & sandhi"
+    lesson_type: dias_material
+    source: "IE"
+    scans: "scans/erris_front/ last spreads (roughly pp. 40-49)"
+    pages: "~40-49"
+    paragraphs: "glide/sandhi/stress chapters"
+    structure: >
+      grammar_rules per phenomenon (on-glides/off-glides, word-boundary
+      sandhi, stress placement); phrases for connected-speech examples.
+    notes: "End of available front-matter scans; pp. 50-133 have no source."
+
+  - id: erris-historical-vowels
+    status: pending
+    lesson_title: "Historical development I: vowels"
+    lesson_type: dias_material
+    source: "IE Part II"
+    scans: "scans/erris_3/ spreads 2-12 approx (pp. 134-153; verify)"
+    pages: "134-~153 (align to chapter boundaries)"
+    paragraphs: "Part II opening §§ through vowel chapters"
+    structure: >
+      grammar_rules per chapter: long vowels, diphthongs, short stressed
+      vowels, pretonic & post-tonic vowels, epenthetic vowels. Sections with
+      correspondence tables (older/standard form → Erris form).
+    notes: "Re-extraction: an earlier pass of pp. 134-157 was lost. Reference layer for vs-standard comparisons."
+
+  - id: erris-historical-consonants
+    status: pending
+    lesson_title: "Historical development II: consonants"
+    lesson_type: dias_material
+    source: "IE Part II"
+    scans: "scans/erris_3/ spreads 12-17 approx (pp. ~154-164; verify)"
+    pages: "~154-164"
+    paragraphs: "through §458"
+    structure: >
+      grammar_rules per consonant group: plosives; dh/gh; bh/mh; th; ch
+      §§408-413; s §§414-420; sh/h/fh §§421-423; nasals §§424-444 (incl.
+      cn→kr, gn→gr, mn→mr); laterals §§445-449; vibrants §§450-457. Include
+      the KEY rule §458 as its own rule: short stressed a/ai/ea LENGTHEN
+      before rr, rd, rl, rn, rng (barr ba:r, ard a:rd, gearr g'a:r…).
+    notes: ""
+
+  - id: erris-historical-interchange
+    status: pending
+    lesson_title: "Historical development III: interchange, dissimilation & metathesis"
+    lesson_type: dias_material
+    source: "IE Part II"
+    scans: "scans/erris_3/ spreads 17-19 (pp. 165-169; verify)"
+    pages: "165-169"
+    paragraphs: "§§459-481"
+    structure: >
+      grammar_rules: palatal/non-palatal interchange §§459-460 (initial,
+      medial, final, both directions); other consonant changes + prosthetic
+      f/g/t §§461-466 (incl. final -t addition: creistint, feisgint…);
+      dissimilation §467; metathesis §§468-481 (Conchubhar→Crochúr,
+      -lar→-rla in biolar/galar/iolar, thr→rh after long V, rth→h-r,
+      formulaic coisricim forms, paraffin footnote). Sections per pattern
+      with example lists.
+    notes: ""
+
+  - id: erris-singular-flexions-summary
+    status: pending
+    lesson_title: null
+    target_lesson_id: 133
+    lesson_type: dias_material
+    source: "IE"
+    scans: "scans/erris_4/ first spreads (pp. 190-191; verify)"
+    pages: "190-191"
+    paragraphs: "table of singular flexions"
+    structure: >
+      APPEND to existing lesson 133 (Noun Declension in Erris): create one
+      grammar_rule number 7, title "Summary: table of singular flexions
+      (pp. 190-191)", body = the summary table as compact HTML. No new
+      lesson; do not consume next_lesson_number.
+    notes: "Small unit. Verify rule numbers 1-6 already exist on lesson 133 before creating number 7."
+
+  - id: foxford-folklore-texts
+    status: pending
+    lesson_title: "Foxford: folklore texts & sayings (pp. 183-184)"
+    lesson_type: dias_material
+    source: "FX (Notes on a Mayo Dialect)"
+    scans: "scans/foxford/ pp. 183-184 (real PDF — rasterise these pages)"
+    pages: "183-184"
+    paragraphs: "folklore section"
+    structure: >
+      First PROBE the text_passages schema (one superset create; read the
+      response/validation errors; report findings). If usable: each folklore
+      text as a text_passage (Irish + phonetic + translation + provenance).
+      If not usable: fall back to phrases for short items and lesson_blocks
+      for longer texts. Sayings/idioms as phrases either way.
+    notes: "Re-extraction of a lost unit (~7 items). Also our first schema probe of text_passages."
+
+  - id: tourmakeady-scoping
+    status: needs_scoping
+    lesson_title: null
+    source: "TM (de Búrca, The Irish of Tourmakeady) — tourmaceady_1/2/3/4.pdf, tourmaceadypart1.pdf, tourmaceady_201.docx"
+    scans: "scans/tourmakeady/ (raw, unmapped)"
+    pages: "unknown"
+    paragraphs: "unknown"
+    structure: >
+      HUMAN + interactive Claude session required: inventory the files,
+      determine format (real PDF vs ZIP-of-JPEGs), map printed page ranges
+      and chapter structure, decide unit boundaries and the #vs-erris
+      comparison tagging strategy, then append scoped T-units to this queue.
+    notes: "Routine must STOP here and report until this is scoped."
