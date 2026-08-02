@@ -4,11 +4,18 @@
 # On completion the routine sets status: done, records created ids, and
 # increments next_lesson_number if a new lesson was created.
 
-next_lesson_number: 133
+next_lesson_number: 134
 
 units:
   - id: erris-initial-mutation
-    status: pending
+    status: done
+    completed_at: "2026-08-02"
+    created_lesson_id: 134
+    created_records:
+      grammar_rules: "180-185"
+      grammar_sections: "376-408 (399 superseded by 400; see report for human deletion of 399)"
+      lesson_blocks: "157-158"
+      phrases: "12-16"
     lesson_title: "Initial Mutation in Erris"
     lesson_type: dias_material
     source: "IE (Mhac an Fhailigh, The Irish of Erris)"
