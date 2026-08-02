@@ -1,7 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep -E \"\\\\.\\(rb|erb\\)$\")"
+      "Bash(grep -E \"\\\\.\\(rb|erb\\)$\")",
+      "Bash(pdfinfo '__TRACKED_VAR__/irishoferris/Irish of Erris 1.2.pdf')",
+      "Bash(mkdir -p probe)",
+      "Bash(pdftoppm -jpeg -r 100 -f 1 -l 1   \"irishoferris/Irish of Erris 1.2.pdf\" probe/e12_first)",
+      "Bash(pdftoppm -jpeg -r 100 -f 41 -l 41 \"irishoferris/Irish of Erris 1.2.pdf\" probe/e12_last)",
+      "Bash(pdftoppm -jpeg -r 100 -f 1 -l 1   \"irishoferris/Irish of Erris 1.1.pdf\" probe/e11_first)",
+      "Bash(pdftoppm -jpeg -r 100 -f 32 -l 32 \"irishoferris/Irish of Erris 1.1.pdf\" probe/e11_last)",
+      "Bash(pdftoppm -jpeg -r 100 -f 20 -l 20 \"irishoferris/Irish of Erris 1.2.pdf\" probe/e12_mid)"
     ]
   }
 }

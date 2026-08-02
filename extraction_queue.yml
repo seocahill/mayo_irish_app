@@ -89,7 +89,10 @@ units:
     structure: >
       grammar_rules per phenomenon (on-glides/off-glides, word-boundary
       sandhi, stress placement); phrases for connected-speech examples.
-    notes: "End of available front-matter scans; pp. 50-133 have no source."
+    notes: >
+      End of the erris_front scan (it stops at pp. 48-49). pp. 50-131 are NOT
+      missing: they are in scans/erris_1_2/ (spread N = pp. 48+2N / 49+2N).
+      No queue units cover pp. 50-131 yet — needs scoping.
 
   - id: erris-historical-vowels
     status: pending

@@ -9,6 +9,7 @@ publishes in the admin. Read this whole file before touching anything.
 
 ```
 scans/erris_front/   pp. iii–49   from Irish_of_Erris_1_1.pdf
+scans/erris_1_2/     pp. 50–131   from Irish_of_Erris_1_2.pdf
 scans/erris_3/       pp. 132–189  from Irish_of_Erris__3.pdf
 scans/erris_4/       pp. 190+     from Irish_of_Erris__4.pdf
 scans/foxford/       full book    FoxfordNOTES_ON_A_MAYO_DIALECT.pdf
@@ -18,17 +19,37 @@ EXTRACTION.md        (this file)
 reports/             one report per run
 ```
 
+Upstream: all scans come from https://github.com/seaininoceallaigh —
+repos `irishoferris`, `Foxford-Irish`, `The-Irish-of-Tourmakeady`. (The
+fourth repo, `proof-of-trace`, is an unrelated web page — not a source.)
+
 One-time setup notes:
-- The three `Irish_of_Erris_1_1 / _1_11 / _1_12` files are **byte-identical**;
-  use one.
-- Several "PDFs" are actually **ZIP archives of JPEG spreads**. If `pdftoppm`
-  fails with syntax errors, do `unzip <file> -d scans/<dir>/`.
-- `erris_3`: 29 spreads; spread `N.jpeg` ≈ printed pp. `130+2N` and `131+2N`
-  (so 20.jpeg ≈ 170–171, 28.jpeg = 186–187). **Always verify against the
-  printed page numbers on the image** and adjust ±2 spreads.
-- `erris_front` and `erris_4`: spreads in order; locate by printed page
-  numbers. Foxford is a real PDF; rasterise pages as needed.
-- Erris pp. 50–133 have **no source scan** — never invent content for them.
+- Upstream `irishoferris` holds **four distinct** files: `1.1`, `1.2`, `3`,
+  `4`. An earlier note in this file claimed the `1_1 / _1_11 / _1_12`
+  variants were byte-identical; that is **wrong for `1.2`**, which is a
+  different scan covering pp. 50–131. Do not dedupe them by name.
+- As currently downloaded (2026-08-02) **every file is a real PDF**;
+  `pdftoppm` works on all of them. Historically some "PDFs" were ZIP
+  archives of JPEG spreads — if `pdftoppm` ever fails with syntax errors,
+  do `unzip <file> -d scans/<dir>/` and treat the dir as spreads.
+- Each PDF page is **one two-page spread** (A4 landscape), left page even,
+  right page odd.
+- `erris_front` (32 spreads): spread 1 = title page; last spread = pp. 48–49.
+- `erris_1_2` (41 spreads): spread `N` = printed pp. `48+2N` and `49+2N`
+  — verified exact at N=1 (50–51), N=20 (88–89), N=41 (130–131), no drift.
+- `erris_3`: 29 spreads; spread `N` ≈ printed pp. `130+2N` and `131+2N`
+  (so 20 ≈ 170–171, 28 = 186–187). **Always verify against the printed
+  page numbers on the image** and adjust ±2 spreads.
+- `erris_4`: spreads in order; locate by printed page numbers. Foxford is a
+  real PDF; rasterise pages as needed.
+- Erris pp. iii–189+ are now **fully covered** by the four Erris scans;
+  there is no longer a gap at pp. 50–131. Still never invent content for
+  any page you cannot see.
+- `tourmakeady` holds six files: `tourmaceady_1..4.pdf` (19/21/21/29 pp.),
+  `tourmaceady_part1.pdf` (8 pp.) and `tourmaceady_201.docx`. The docx is
+  upstream's `tourmaceady%201.docx` (i.e. "tourmaceady 1.docx"); the name
+  here keeps the spelling the queue already uses. Page coverage of these is
+  still **unscoped** — see §6.
 
 ## 2. Content policy
 
