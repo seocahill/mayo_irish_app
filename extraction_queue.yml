@@ -4,7 +4,7 @@
 # On completion the routine sets status: done, records created ids, and
 # increments next_lesson_number if a new lesson was created.
 
-next_lesson_number: 134
+next_lesson_number: 135
 
 units:
   - id: erris-initial-mutation
@@ -40,19 +40,36 @@ units:
     notes: "Most learner-critical chapter in the grammar. Dense examples — carry phonetics faithfully."
 
   - id: erris-intro-notation
-    status: pending
+    status: done
+    completed_at: "2026-08-02"
+    created_lesson_id: 135
+    created_records:
+      lesson_blocks: "159-161"
+      grammar_rules: "186-187"
+      grammar_sections: "409-413"
+      phrases: "17"
     lesson_title: "Reading Mhac an Fhailigh: districts, informants & notation"
     lesson_type: dias_material
     source: "IE"
-    scans: "scans/erris_front/ first spreads (pp. iii-xii region; locate by printed page numbers)"
-    pages: "iii-xii approx"
-    paragraphs: "front matter"
+    scans: "scans/erris_front/ spreads 1-8 (title/TOC/Preface pp. iv-xvii, Chapter I pp. 1-7; verified against printed page numbers)"
+    pages: "iv-xvii (Preface) + 1-7 (Chapter I, Introductory)"
+    paragraphs: "front matter; §§1-23"
     structure: >
-      Mostly lesson_blocks (prose): the Erris districts (Doohoma, Faulmore,
-      Dú Chaocháin) and informant sigla (Sb, SOG, AOS, POR, EOM…); one
-      grammar_rule "The notation" with a symbol table (ʟ ɴ, C′, :, ˜, ə, ʃ,
-      ç, x, γ, ŋ) so every later IE lesson can reference it.
-    notes: "Anchor lesson for all IE material. Small unit — good first automated run after initial-mutation."
+      Re-scoped during extraction: no standalone "notation" symbol table
+      exists on pp. iii-xii — that material is actually §§21-23 (pp. 6-7),
+      the "Symbols" section at the end of Chapter I, right before Chapter II
+      (Vowels) begins on p. 8. Extracted: lesson_blocks (source/scope,
+      districts & geography, survey history) from the Preface (pp. xi-xv);
+      grammar_rule 1 "Principal informants & abbreviated references" with 3
+      grammar_sections (Faulmore 1935-36, other districts 1935-36, Faulmore
+      1961-62) from pp. xv-xvii; grammar_rule 2 "The notation" with 2
+      grammar_sections (master symbol table; palatal/velar terminology note)
+      from §§21-23, pp. 6-7. One phrase (cat-after-kind proverb, dialect
+      variants). Skipped as non-Erris-specific: general IPA theory §§1-20
+      (organs of speech, cardinal vowels, consonant classification by
+      organ/manner, phoneme concept) — standard textbook material, not
+      reproduced.
+    notes: "Anchor lesson for all IE material. TOC page 1 (roman pp. iv-v, chapters I-III) appears to be missing from the erris_front scan — did not block this unit since it's TOC only, but flagged for the human."
 
   - id: erris-vowel-phonemes
     status: pending
