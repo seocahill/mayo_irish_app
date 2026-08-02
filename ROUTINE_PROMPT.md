@@ -48,7 +48,9 @@ Steps, in order:
    EXTRACTION.md, including any [?] transcription uncertainties and any
    mistakenly created record ids for human deletion.
 
-8. Commit the queue and report changes with message "extraction: <unit-id>".
+8. Commit the queue and report changes with message "extraction: <unit-id>",
+   then push the commit directly to `main` — no feature branch, no pull
+   request (see EXTRACTION.md §4.7 for why).
 
 Hard rule: if anything is ambiguous enough that you would need to ask a
 question, extract the unambiguous core, flag the rest in the report, and
