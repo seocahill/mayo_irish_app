@@ -4,7 +4,7 @@
 # On completion the routine sets status: done, records created ids, and
 # increments next_lesson_number if a new lesson was created.
 
-next_lesson_number: 135
+next_lesson_number: 136
 
 units:
   - id: erris-initial-mutation
@@ -72,20 +72,49 @@ units:
     notes: "Anchor lesson for all IE material. TOC page 1 (roman pp. iv-v, chapters I-III) appears to be missing from the erris_front scan — did not block this unit since it's TOC only, but flagged for the human."
 
   - id: erris-vowel-phonemes
-    status: pending
+    status: done
+    completed_at: "2026-08-03"
+    created_lesson_id: 136
+    created_records:
+      lesson_blocks: "162-163"
+      grammar_rules: "188-190"
+      grammar_sections: "414-425"
+      vocabulary_items: "4382-4387"
+      phrases: "18-20"
     lesson_title: "The Sound System of Erris I: vowels & diphthongs"
     lesson_type: dias_material
     source: "IE"
-    scans: "scans/erris_front/ (align to chapter headings; roughly pp. 1-25)"
-    pages: "~1-25 (align to chapter boundaries)"
-    paragraphs: "early §§ (vowel chapters)"
+    scans: "scans/erris_front/Irish_of_Erris_1_1.pdf spreads 12-20 (pp. 8-23; verified exact against printed page numbers)"
+    pages: "8-23"
+    paragraphs: "§§24-103"
     structure: >
-      grammar_rules per chapter: the five basic vowels /i e a o u/ with
-      length opposition; nasalised vowels; the four falling diphthongs
-      /iə uə əi əu/. Sections per phoneme with realisation notes + example
-      tables (word, phonetic, gloss). Notable minimal pairs as
-      vocabulary_items.
-    notes: "Unit boundary = chapter boundary, judged from printed headings."
+      Three grammar_rules: (1) The vowel phonemes: quality and length
+      §§24-74 (pp.8-19) — six grammar_sections, one per phoneme: /i//i:/,
+      /e//e:/, /a//a:/, /o//o:/, /u//u:/, /ə/. (2) Nasalised vowels §§75-87
+      (pp.19-20) — sections for the five nasalised phonemes and the
+      Faulmore/Doohoma open ã: diaphonic variant (§83, district
+      attribution). (3) The falling diphthongs §§88-103 (pp.21-23) —
+      sections per diphthong /iə/, /uə/, /əi/, /əu/. Six vocabulary_items
+      for notable phoneme-boundary overlaps (agus, bior, ceird, coirce,
+      sgeallán, raibh). Three phrases (cá bhfuil sé?, go deó, ar ball).
+      Two lesson_blocks: source/notation recap + a short aside on
+      consonant-conditioned vowel quality and phoneme overlap.
+    notes: >
+      Chapter boundary confirmed precisely: Chapter II (Phonetic
+      Description of Vowels) runs pp.8-20 §§24-87, Chapter III (Diphthongs)
+      pp.21-23 §§88-103, and Chapter IV (Consonants) begins exactly at
+      p.24/§104 — the clean start point for the next queue unit
+      (erris-consonant-phonemes). This unit picks up immediately where
+      erris-intro-notation left off (that lesson ended at p.7/§23).
+      Content is dense (80 numbered paragraphs across 16 pages); example
+      tables were curated to representative environments rather than
+      reproducing every example word in the source, per the
+      accuracy-over-coverage policy. Schema note: vocabulary_items'
+      `gender` field defaulted to "m" server-side for all six records even
+      though gender was not set in the create call and several of the
+      words are not straightforwardly gendered nouns (e.g. raibh, a verb
+      form) — flagged for human review, not corrected here since gender
+      isn't in the writable-fields list we control.
 
   - id: erris-consonant-phonemes
     status: pending
