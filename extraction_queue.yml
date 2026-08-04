@@ -4,7 +4,7 @@
 # On completion the routine sets status: done, records created ids, and
 # increments next_lesson_number if a new lesson was created.
 
-next_lesson_number: 136
+next_lesson_number: 137
 
 units:
   - id: erris-initial-mutation
@@ -117,19 +117,57 @@ units:
       isn't in the writable-fields list we control.
 
   - id: erris-consonant-phonemes
-    status: pending
+    status: done
+    completed_at: "2026-08-04"
+    created_lesson_id: 137
+    created_records:
+      lesson_blocks: "164-165"
+      grammar_rules: "191-197"
+      grammar_sections: "426-448 (430, 433, 436, 444 superseded by 431, 434, 437, 446 respectively; see report for human deletion)"
+      vocabulary_items: "4388-4391"
+      phrases: "21, 23-24 (22 superseded by 24; see report for human deletion)"
     lesson_title: "The Sound System of Erris II: consonants"
     lesson_type: dias_material
     source: "IE"
-    scans: "scans/erris_front/ (align to chapter headings; roughly pp. 25-45)"
-    pages: "~25-45 (align to chapter boundaries)"
-    paragraphs: "consonant chapters incl. §114 phoneme table"
+    scans: "scans/erris_front/Irish_of_Erris_1_1.pdf spreads 20-30 (pp. 24-45; verified exact against printed page numbers)"
+    pages: "24-44"
+    paragraphs: "§§104-194"
     structure: >
-      grammar_rules: the consonant inventory (reproduce the §114 table);
-      the palatalised/non-palatalised opposition C vs C′; the ʟ ʟ′ l l′ and
-      ɴ ɴ′ n n′ four-way lateral/nasal systems; r r′. Sections with
-      realisation + examples.
-    notes: ""
+      Seven grammar_rules, matching Chapter IV exactly (which runs precisely
+      pp.24-44/§§104-194; Chapter V "Glides" begins exactly at p.45/§195,
+      confirmed by inspection — clean boundary for the next queue unit).
+      (1) Palatalisation, velarisation & the consonant phoneme system
+      §§104-114 — sections: contrastive examples, voicing/devoicing/plosion
+      mechanics, and the full §114 phoneme table (organ × manner grid).
+      (2) Plosive consonants §§115-131 — sections per organ: bilabial
+      b′p′bp, dental dt, alveolar ḍṭ (+ the affricate-replacing plosive
+      allophones d′/t′, §§125-127), velar g′k′gk. (3) Fricative consonants
+      §§132-156 — bilabial v′f′wf, sibilants ʃs (incl. the ʃr/sr
+      Faulmore variation), palatal/velar jçγx, glottal h. (4) Affricate
+      consonants d′t′ §§157-160. (5) Nasal consonants §§161-174 — bilabial
+      m′m, the four-way dental/alveolar ɴ-n-n′-ɴ′ system, velar ŋ′ŋ.
+      (6) Lateral consonants §§175-184 — the four-way ʟ-l-l′-ʟ′ system.
+      (7) Vibrant consonants r r′ §§185-194. All 19 sections curate
+      representative examples (not every numbered word) per the
+      accuracy-over-coverage policy. Three phrases (is mithid liom, i
+      n-aon-turus, ar mo shon) drawn from examples embedded in the nasal
+      sections. Four vocabulary_items for notable loanwords/exceptions
+      (b'éidir, Méiricea, giosadán — the only word in the book with z,
+      cárta). Two lesson_blocks: source/notation + a short aside on the
+      four-way lateral/nasal systems.
+    notes: >
+      Direct HTTP warm-up (GET to the Fly URL) was blocked by this session's
+      own sandbox network policy (403 at the proxy, confirmed via
+      /__agentproxy/status as a policy denial, not an app-sleep issue); the
+      mayo-irish-app MCP connector worked normally throughout, so extraction
+      proceeded per EXTRACTION.md §2's "MCP tools still unavailable" carve-out
+      not being triggered. No poppler-utils/ImageMagick/PyMuPDF were
+      preinstalled for page rendering; pymupdf was pip-installed to rasterise
+      pages for visual page-number verification (no repo files changed).
+      [?] one transcription oddity flagged in-record: the source's first
+      example in the §179 (l) list, "lag ə ʟa: lag an lá", is printed with
+      the dental ʟ despite heading the post-alveolar l examples — see the
+      note on grammar_section 446.
 
   - id: erris-glides-sandhi
     status: pending
