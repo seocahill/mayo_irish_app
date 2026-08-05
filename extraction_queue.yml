@@ -4,7 +4,7 @@
 # On completion the routine sets status: done, records created ids, and
 # increments next_lesson_number if a new lesson was created.
 
-next_lesson_number: 137
+next_lesson_number: 138
 
 units:
   - id: erris-initial-mutation
@@ -170,20 +170,60 @@ units:
       note on grammar_section 446.
 
   - id: erris-glides-sandhi
-    status: pending
-    lesson_title: "The Sound System of Erris III: glides, stress & sandhi"
+    status: done
+    completed_at: "2026-08-05"
+    created_lesson_id: 138
+    created_records:
+      lesson_blocks: "166-167"
+      grammar_rules: "198-200"
+      grammar_sections: "449-460"
+      vocabulary_items: "4392-4395"
+      phrases: "25-27"
+    lesson_title: "The Sound System of Erris III: glides, nasalization & the opening of sandhi"
     lesson_type: dias_material
     source: "IE"
-    scans: "scans/erris_front/ last spreads (roughly pp. 40-49)"
-    pages: "~40-49"
-    paragraphs: "glide/sandhi/stress chapters"
+    scans: "scans/erris_front/Irish_of_Erris_1_1.pdf spreads 30-32 (pp. 44-49; verified exact against printed page numbers)"
+    pages: "45-49"
+    paragraphs: "§§195-217 (§217 incomplete, cut off at scan boundary)"
     structure: >
-      grammar_rules per phenomenon (on-glides/off-glides, word-boundary
-      sandhi, stress placement); phrases for connected-speech examples.
+      Re-scoped during extraction: no standalone "stress" chapter exists
+      within pp.45-49 — Chapter V "Glides" (§§195-205) is immediately
+      followed by Chapter VI "Nasalization" (§§206-209) and the opening of
+      Chapter VII "Sandhi" (§§210-217+), which is still mid-example when the
+      erris_front scan ends at printed p.49. Three grammar_rules: (1) Glides
+      — sections for off-glides (§198), on-glides (§§199-202), and the
+      transitional d/t stop in ʟr/nr clusters (§§203-205). (2) Nasalization
+      — sections for nasalized vowels (§§206-207), nasalization of w/v′
+      (§208), and nasalized r (§209). (3) Sandhi opening rules — six
+      sections, one per numbered assimilation pattern §§212-217; §217's
+      example list is cut off mid-sentence at the p.49/p.50 page break (its
+      last example's Irish gloss is not visible in this scan) and is marked
+      [?] in grammar_section 460. Four vocabulary_items (comhra, geamhar,
+      maide rámha, sgannraigh). Three phrases (gan rath, an gcluin tú?, ní
+      fhuil aon chiall leis). Two lesson_blocks: source/notation + a scope
+      note flagging the missing stress chapter and the sandhi continuation.
     notes: >
-      End of the erris_front scan (it stops at pp. 48-49). pp. 50-131 are NOT
-      missing: they are in scans/erris_1_2/ (spread N = pp. 48+2N / 49+2N).
-      No queue units cover pp. 50-131 yet — needs scoping.
+      Chapter VII "Sandhi" continues past p.49 into scans/erris_1_2/
+      (spread N = pp. 48+2N / 49+2N, so p.50 = spread 1), which is NOT yet
+      covered by a queue unit — needs a follow-up unit for the sandhi
+      continuation and whatever "stress" material (if any) follows it, using
+      erris_1_2. This was the last unit scoped to erris_front; that scan is
+      now fully consumed (pp. iii-49 across the four erris-* front/consonant/
+      vowel/glide-sandhi lessons). Schema note (recurring): vocabulary_items'
+      `gender` field again defaulted to "m" server-side for all four records
+      even though gender was not set in the create call and not all are
+      straightforwardly gendered nouns — flagged for human review, not
+      corrected here (not in the writable-fields list, per prior lessons'
+      notes).
+      Direct HTTP warm-up (GET to the Fly URL) was again blocked by this
+      session's sandbox network policy (403 at the proxy, confirmed via
+      /__agentproxy/status as a policy denial, same as the prior run); the
+      mayo-irish-app MCP connector worked normally throughout (verified with
+      a get_record call before writing), so extraction proceeded per
+      EXTRACTION.md §4.1's "MCP tools still unavailable" carve-out not being
+      triggered. pymupdf + pillow were pip-installed to rasterise pages for
+      visual page-number verification (no repo files changed; poppler-utils
+      still not preinstalled).
 
   - id: erris-historical-vowels
     status: pending
