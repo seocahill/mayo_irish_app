@@ -4,7 +4,7 @@
 # On completion the routine sets status: done, records created ids, and
 # increments next_lesson_number if a new lesson was created.
 
-next_lesson_number: 138
+next_lesson_number: 139
 
 units:
   - id: erris-initial-mutation
@@ -226,18 +226,72 @@ units:
       still not preinstalled).
 
   - id: erris-historical-vowels
-    status: pending
+    status: done
+    completed_at: "2026-08-06"
+    created_lesson_id: 139
+    created_records:
+      lesson_blocks: "168-169"
+      grammar_rules: "201-205"
+      grammar_sections: "461-477"
+      vocabulary_items: "4396-4399"
+      phrases: "28-30"
     lesson_title: "Historical development I: vowels"
     lesson_type: dias_material
     source: "IE Part II"
-    scans: "scans/erris_3/ spreads 2-12 approx (pp. 134-153; verify)"
-    pages: "134-~153 (align to chapter boundaries)"
-    paragraphs: "Part II opening §§ through vowel chapters"
+    scans: "scans/erris_3/Irish_of_Erris__3.pdf spreads 1-7 (pp. 132-145; verified exact against printed page numbers — formula 130+2N held with no drift)"
+    pages: "134-144"
+    paragraphs: "§§281-333"
     structure: >
-      grammar_rules per chapter: long vowels, diphthongs, short stressed
-      vowels, pretonic & post-tonic vowels, epenthetic vowels. Sections with
-      correspondence tables (older/standard form → Erris form).
-    notes: "Re-extraction: an earlier pass of pp. 134-157 was lost. Reference layer for vs-standard comparisons."
+      Five grammar_rules matching Chapter XIV "Vowels and Diphthongs" exactly
+      (which runs precisely pp.135-144/§§285-333, preceded by the Part II/
+      "Introductory" framing §§281-284; Chapter XV "Consonants" begins exactly
+      at p.145/§334, confirmed by inspection — clean boundary for the next
+      queue unit, erris-historical-consonants). (1) Long vowels §§285-294 — 5
+      sections (á/ái; ae/aé/ao/aoi; é/éa/éi; ó/ói/eó; í/ío/iú/ú). (2)
+      Diphthongs §§295-296 — 2 sections (ia/iai; ua/uai). (3) Short stressed
+      vowels §§297-311 — 5 sections (a/ai/ea; e/ei/eo; i/io/iu; o/oi; u/ui).
+      (4) Short unstressed vowels: pretonic & post-tonic §§312-326 — 3
+      sections ((a) pretonic; (b) post-tonic incl. the i: plural/dative
+      marker; prepositional-pronoun endings & final -e). (5) Epenthetic
+      vowels §§327-333 — 2 sections (svarabhakti table; further epenthesis
+      incl. devoiced p/f/k and fossilised historical stages tarbh/dorgha).
+      All 17 sections curate representative examples (not every numbered
+      word) per the accuracy-over-coverage policy. Four vocabulary_items for
+      notable irregulars (ae 'liver' — irregular disyllabification; aon
+      'one' — three variant pronunciations; taisbeán — irregular loss of
+      first syllable; amadán). Three phrases (Dé hAoine, acht uiread,
+      riaghail Dhubhagáin). Two lesson_blocks: source/notation (Part I
+      synchronic vs. Part II diachronic framing, §§281-284) + a short aside
+      on chapter shape and the next boundary.
+    notes: >
+      Re-extraction: an earlier pass of pp.134-157 was lost; this unit covers
+      pp.134-144 only (the vowel chapter) — pp.145-157 (opening of the
+      consonants chapter) is now scoped to erris-historical-consonants,
+      whose queue entry's own estimate (spreads 12-17 ≈ pp.~154-164) should
+      be corrected to start at spread 7/p.145 instead, since Chapter XV
+      begins there, not at p.154 — flagged for human correction of that
+      entry before its run.
+      One phrase (riaghail Dhubhagáin) is recorded with its phonetic form
+      but no English gloss, since the source cites it only as a phonetic
+      example (§295, ia>e:) without translating the idiom itself — flagged
+      for human review/lookup, not invented here.
+      Direct HTTP warm-up (GET to the Fly URL) was again blocked by this
+      session's own sandbox network policy (403 at the proxy, confirmed via
+      /__agentproxy/status as a policy denial, not an app-sleep issue, same
+      as the two prior runs); the mayo-irish-app MCP connector worked
+      normally throughout (verified with a list_records call before
+      writing), so extraction proceeded per EXTRACTION.md §4.1's "MCP tools
+      still unavailable" carve-out not being triggered.
+      Schema/state check: the queue header's next_lesson_number (138) matched
+      the app's actual next available lesson id/number exactly (verified via
+      get_record before creating) — the apparent "staleness" noted by a
+      cursory read of the header was not a bug; lessons.id = lessons.number+1
+      consistently, and the header is the number field, not the id.
+      pymupdf was pip-installed to rasterise pages for visual page-number
+      verification (no repo files changed; poppler-utils still not
+      preinstalled). No new [?] transcription uncertainties: one ambiguous
+      glyph (cnoc, §306) was resolved by zooming into the source scan — it
+      is a nasalisation tilde over u (krũk), not a length mark.
 
   - id: erris-historical-consonants
     status: pending
