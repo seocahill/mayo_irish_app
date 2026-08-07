@@ -4,7 +4,7 @@
 # On completion the routine sets status: done, records created ids, and
 # increments next_lesson_number if a new lesson was created.
 
-next_lesson_number: 139
+next_lesson_number: 140
 
 units:
   - id: erris-initial-mutation
@@ -294,20 +294,86 @@ units:
       is a nasalisation tilde over u (krũk), not a length mark.
 
   - id: erris-historical-consonants
-    status: pending
+    status: done
+    completed_at: "2026-08-07"
+    created_lesson_id: 140
+    created_records:
+      lesson_blocks: "170-171"
+      grammar_rules: "206-211"
+      grammar_sections: "478-500 (493 superseded by 494; see report for human deletion of 493)"
+      vocabulary_items: "4400-4403"
+      phrases: "31-33"
     lesson_title: "Historical development II: consonants"
     lesson_type: dias_material
     source: "IE Part II"
-    scans: "scans/erris_3/ spreads 12-17 approx (pp. ~154-164; verify)"
-    pages: "~154-164"
-    paragraphs: "through §458"
+    scans: "scans/erris_3/Irish_of_Erris__3.pdf spreads 7-17 (pp. 145-164; verified exact against printed page numbers — corrected from the prior spreads-12-17/pp.~154-164 estimate, which was already flagged wrong by the previous run: Chapter XV 'Consonants' begins exactly at p.145/§334, spread 7, not p.154)"
+    pages: "145-164"
+    paragraphs: "§§334-458"
     structure: >
-      grammar_rules per consonant group: plosives; dh/gh; bh/mh; th; ch
-      §§408-413; s §§414-420; sh/h/fh §§421-423; nasals §§424-444 (incl.
-      cn→kr, gn→gr, mn→mr); laterals §§445-449; vibrants §§450-457. Include
-      the KEY rule §458 as its own rule: short stressed a/ai/ea LENGTHEN
-      before rr, rd, rl, rn, rng (barr ba:r, ard a:rd, gearr g'a:r…).
-    notes: ""
+      Six grammar_rules matching Chapter XV exactly (which runs precisely
+      pp.145-164/§§334-458; Chapter XVI "Interchange of Consonants" begins
+      exactly at p.165/§459, confirmed by inspection — clean boundary for
+      the next queue unit, erris-historical-interchange, whose own scan
+      estimate (spreads 17-19, pp.165-169) was already correct). (1)
+      Plosive consonants §§334-355 — 4 sections: d assimilation/loss, g
+      silence/loss/shift to c, t/c interchange, eclipsis & cross-refs. (2)
+      Fricative consonants §§356-423 — 7 sections, one per fricative class:
+      dh/gh, bh/mh, th, f/ph, ch, s, sh+h+fh. (3) Nasal consonants
+      §§424-444 — 5 sections: m; n (article's -n & elision); n (lenition,
+      devoicing, the cn→kr/gn→gr/mn→mr cluster rule); n (final-position
+      under-differentiation, Dú Chaocháin variants); ng. (4) Lateral
+      consonants §§445-450 — 3 sections: unlenited l (ʟ vs l), lenited l
+      & the preposition lé, vowels before laterals. (5) Vibrant consonants
+      §§451-457 — 3 sections: lenited r & loss of initial contrast,
+      medial/final r & the rh development, further shifts (r>l', r>n',
+      thr>ʃ). (6) KEY RULE §458 (vowel lengthening before rr/rd/rl/rn/rng)
+      as its own rule per the queue's explicit instruction, with a full
+      example table (barr, ard, gearr, cairde, tharla, bearna…). All
+      sections curate representative examples (not every numbered word)
+      per the accuracy-over-coverage policy — this chapter is unusually
+      dense, averaging ~5 paragraphs per section rather than reproducing
+      all 125. Four vocabulary_items for notable irregulars (adubhairt,
+      féin, oidhche, deirbhshiúr). Three phrases (ó tharla, Dé Dardaoin >
+      Dé ardaoin, níor mhaith liom). Two lesson_blocks: source/notation +
+      a short aside on chapter shape and the next boundary.
+    notes: >
+      Transcription-error correction (create-only, no delete tool):
+      grammar_section 493 ("ng", §444) contained two spurious characters
+      introduced during transcription — "tarɩɴ′" instead of "tarɴ′" for
+      tarraing, and "tarəg′ir′əxd" instead of "tarəgir′əxd" for
+      tarrngaireacht (an extra prime mark). Both were caught by re-zooming
+      into the source scan before moving on, and grammar_section 494 was
+      created as the corrected replacement. grammar_section 493 is flagged
+      for human deletion.
+      [?] vocabulary_item 4402 (oidhche, "night"): the standalone phonetic
+      i:ʒə given for the record is NOT directly attested in the source —
+      §412 only transcribes oidhche in the fixed phrase "Oidhche fhéil
+      Muire" → i:l' mir'ə (which folds in loss of fh and elision of the
+      following word), and never gives the bare word in isolation. My
+      standalone phonetic is a reconstruction I should not have invented
+      (it also uses ʒ, a symbol the source's notation never employs) —
+      flagged for human correction: either delete the phonetic field or
+      replace it with a note pointing to the phrase-level example only.
+      [?] grammar_section 500 ("further sporadic shifts"): "cairde" is
+      cited by the source (§458 table) purely as a phonological example of
+      the ai+rd cluster, with no gloss given; I supplied "friends" (plural
+      of cara) as a plausible but unverified gloss in grammar_section 211
+      — flagged for human review, not the source's own translation.
+      Direct HTTP warm-up (GET to the Fly URL) was again blocked by this
+      session's own sandbox network policy (403 at the proxy, "CONNECT
+      tunnel failed, response 403", consistent with the four prior runs);
+      the mayo-irish-app MCP connector worked normally throughout (verified
+      with a list_records call before writing), so extraction proceeded
+      per EXTRACTION.md §4.1's "MCP tools still unavailable" carve-out not
+      being triggered.
+      Schema/state check: queue header's next_lesson_number (139) matched
+      the app's actual next available number exactly (verified via
+      get_record on lesson 139 before creating: id=139, number=138,
+      position=138, confirming id = number+1 and position = number, same
+      pattern noted by the prior run).
+      pymupdf + pillow were pip-installed to rasterise pages for visual
+      page-number verification (no repo files changed; poppler-utils still
+      not preinstalled).
 
   - id: erris-historical-interchange
     status: pending
