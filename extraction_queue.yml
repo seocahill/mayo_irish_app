@@ -4,7 +4,7 @@
 # On completion the routine sets status: done, records created ids, and
 # increments next_lesson_number if a new lesson was created.
 
-next_lesson_number: 140
+next_lesson_number: 141
 
 units:
   - id: erris-initial-mutation
@@ -376,22 +376,88 @@ units:
       not preinstalled).
 
   - id: erris-historical-interchange
-    status: pending
+    status: done
+    completed_at: "2026-08-08"
+    created_lesson_id: 141
+    created_records:
+      lesson_blocks: "172-173"
+      grammar_rules: "212-215"
+      grammar_sections: "501-512 (508 superseded by 509; 511 superseded by 512; see report for human deletion of 508 and 511)"
+      vocabulary_items: "4404-4408 (4407 superseded by 4408; see report for human deletion of 4407)"
+      phrases: "34-36"
     lesson_title: "Historical development III: interchange, dissimilation & metathesis"
     lesson_type: dias_material
     source: "IE Part II"
-    scans: "scans/erris_3/ spreads 17-19 (pp. 165-169; verify)"
+    scans: "scans/erris_3/Irish_of_Erris__3.pdf spreads 17-19 (pp. 165-169; verified exact against printed page numbers — formula 130+2N held with no drift)"
     pages: "165-169"
     paragraphs: "§§459-481"
     structure: >
-      grammar_rules: palatal/non-palatal interchange §§459-460 (initial,
-      medial, final, both directions); other consonant changes + prosthetic
-      f/g/t §§461-466 (incl. final -t addition: creistint, feisgint…);
-      dissimilation §467; metathesis §§468-481 (Conchubhar→Crochúr,
-      -lar→-rla in biolar/galar/iolar, thr→rh after long V, rth→h-r,
-      formulaic coisricim forms, paraffin footnote). Sections per pattern
-      with example lists.
-    notes: ""
+      Four grammar_rules matching the actual chapter headings exactly
+      (Chapter XVI "Interchange of Consonants" runs pp.165-167/§§459-467;
+      Chapter XVII "Metathesis" runs pp.168-169/§§468-481; p.170/§482 opens
+      Chapter XVIII "Grammatical Supplement — Initial Mutation", already
+      covered by lesson 134, confirming a clean boundary with no gap or
+      overlap). (1) Interchange of consonant quality: palatals and
+      non-palatals §§459-464 — 3 sections (non-palatal>palatal; palatal>
+      non-palatal; consonant quality assimilating to a following vowel-
+      initial word, §§461-464). (2) Other consonant changes: initial/final
+      shifts and prosthesis §§465-466 — 2 sections (initial substitutions +
+      prosthetic f/g/t; final -t/-d addition, incl. creistint, feisgint,
+      fanúint etc. and ag rádh's two forms). (3) Dissimilation §467 — 1
+      section, all five patterns with district/informant attribution
+      (Sb, SOG, Faulmore/Dú Chaocháin). (4) Metathesis (Ch. XVII) §§468-481
+      — 4 sections: palatal cluster metathesis (ds/gs/ls, incl. dísle);
+      liquids/nasals in stressed & unstressed syllables (Conchubhar>Crochúr,
+      -lar>-rla in biolar/galar/iolar, lr>rl); thr/fr/rth clusters (briathra,
+      cófra, comhartha); formulaic & sporadic cases (coisricim tale-formula,
+      luiprín, deargnait, cinéal, gearr-chaile, Domhnach Chrom Dubh / an
+      chroch chéasta, paraffin footnote). Note: this re-scopes the original
+      queue guess of "§§459-460 / §§461-466" into "§§459-464 / §§465-466" —
+      the source's own section headings ("Palatals and Non-Palatals" then
+      "Other Consonant Changes") group §461-464 with 459-460, not with 465-466.
+      Four vocabulary_items (Conchubhar, dísle, luiprín, paraffin). Three
+      phrases (Domhnach Chrom Dubh, an chroch chéasta, goirim is coisricim
+      thú). Two lesson_blocks: source/notation + a short aside on chapter
+      shape and the next (already-covered) boundary.
+    notes: >
+      Three transcription errors caught and corrected before moving on
+      (create-only, no delete tool): grammar_section 508 gave the
+      caisearbhán metathesis chain as "caisearbhán > kasʟ'əwa:n" (wrong
+      sibilant, and missing the attested intermediate form) — corrected in
+      grammar_section 509 to "caisearbhán > caisreabhán > kaʃʟ'əwa:n".
+      grammar_section 511 misread §477 as "luirpín seems to represent
+      luirpín" (should be "luiprín seems to represent luirpín") and §478's
+      headword as "dearagnait" (should be "deargnait") — corrected in
+      grammar_section 512. vocabulary_item 4407's note said the paraffin
+      p>b shift "devoices" when p>b is in fact voicing, not devoicing —
+      corrected in vocabulary_item 4408. grammar_section 508, 511 and
+      vocabulary_item 4407 are flagged for human deletion.
+      [?] vocabulary_item 4406 (luiprin, §477, IE p.169): the headword is
+      recorded without its length mark (luiprín) — flagged for human
+      correction since a third create-only replacement for a single
+      diacritic seemed like unwarranted record churn; the correct form is
+      "luiprín" per the zoomed source image.
+      [?] grammar_section 502 (§460(iii), IE p.165): the source is printed
+      "Palatal m > m in uaim wum", i.e. apparently identical before and
+      after — this looks like a possible loss of a prime mark in the
+      original typesetting (expected "m' > m", palatal becoming non-palatal,
+      matching the rule's own heading), but is transcribed exactly as
+      printed since the glyph itself is not visibly damaged in the scan —
+      flagged for human review.
+      Schema/state check: queue header's next_lesson_number (140) matched
+      the app's actual next available number exactly (verified via
+      get_record on lesson 140 before creating: id=140, number=139,
+      confirming id = number+1, same pattern as all prior runs).
+      Direct HTTP warm-up (GET to the Fly URL) was again blocked by this
+      session's own sandbox network policy ("CONNECT tunnel failed,
+      response 403", confirmed via /__agentproxy/status as a policy denial,
+      consistent with all five prior runs); the mayo-irish-app MCP connector
+      worked normally throughout (verified with a get_record call before
+      writing), so extraction proceeded per EXTRACTION.md §4.1's "MCP tools
+      still unavailable" carve-out not being triggered.
+      pymupdf + pillow were pip-installed to rasterise pages for visual
+      page-number verification (no repo files changed; poppler-utils still
+      not preinstalled).
 
   - id: erris-singular-flexions-summary
     status: pending
