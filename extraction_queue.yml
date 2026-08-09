@@ -460,20 +460,31 @@ units:
       not preinstalled).
 
   - id: erris-singular-flexions-summary
-    status: pending
-    lesson_title: null
+    status: done
+    completed_at: "2026-08-09"
     target_lesson_id: 133
+    created_records:
+      grammar_rules: "216"
+    lesson_title: null
     lesson_type: dias_material
     source: "IE"
-    scans: "scans/erris_4/ first spreads (pp. 190-191; verify)"
+    scans: "scans/erris_4/Irish_of_Erris__4.pdf spread 1 (pp. 190-191; verified exact against printed page numbers)"
     pages: "190-191"
-    paragraphs: "table of singular flexions"
+    paragraphs: "§525 (table of singular flexions)"
     structure: >
-      APPEND to existing lesson 133 (Noun Declension in Erris): create one
-      grammar_rule number 7, title "Summary: table of singular flexions
-      (pp. 190-191)", body = the summary table as compact HTML. No new
-      lesson; do not consume next_lesson_number.
-    notes: "Small unit. Verify rule numbers 1-6 already exist on lesson 133 before creating number 7."
+      APPENDED to existing lesson 133 (Noun Declension in Erris): created
+      grammar_rule number 7 (id 216), title "Summary: table of singular
+      flexions (pp. 190-191)", body = the §525 summary table (Classes I-V)
+      as compact HTML, cross-referencing rules 1-6. No new lesson; did not
+      consume next_lesson_number.
+    notes: >
+      Rule numbers 1-6 were confirmed present on lesson 133 before creating
+      number 7 (ids 168-173), but the same six rules also exist a second
+      time under a duplicate set (ids 174-179, same numbers 1-6, created
+      ~18 minutes later same day with reworded but equivalent bodies) —
+      pre-existing duplication unrelated to this unit, flagged for human
+      review/dedup, not touched here (create-only, no delete tool, and out
+      of this unit's scope). Only one new rule (7/id 216) was created.
 
   - id: foxford-folklore-texts
     status: pending
