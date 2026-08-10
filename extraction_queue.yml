@@ -4,7 +4,7 @@
 # On completion the routine sets status: done, records created ids, and
 # increments next_lesson_number if a new lesson was created.
 
-next_lesson_number: 141
+next_lesson_number: 142
 
 units:
   - id: erris-initial-mutation
@@ -487,20 +487,81 @@ units:
       of this unit's scope). Only one new rule (7/id 216) was created.
 
   - id: foxford-folklore-texts
-    status: pending
+    status: done
+    completed_at: "2026-08-10"
+    created_lesson_id: 142
+    created_records:
+      lesson_blocks: "174-175"
+      text_passages: "64-69 (65 superseded by 67; see report for human deletion of 65)"
+      phrases: "37-38"
+      vocabulary_items: "4409"
     lesson_title: "Foxford: folklore texts & sayings (pp. 183-184)"
     lesson_type: dias_material
     source: "FX (Notes on a Mayo Dialect)"
-    scans: "scans/foxford/ pp. 183-184 (real PDF — rasterise these pages)"
+    scans: "scans/foxford/FoxfordNOTES_ON_A_MAYO_DIALECT.pdf pages 13-14 of 14 (printed pp. 183-184; verified exact against printed page numbers — offset printed_page = pdf_index+171, no drift)"
     pages: "183-184"
-    paragraphs: "folklore section"
+    paragraphs: "folklore section (Tobac Corp, Tobar Beannuighthe, Alia: Na Deich nAitheanta, Feóil a' Mhadaigh, An Frog, Trí Ní)"
     structure: >
-      First PROBE the text_passages schema (one superset create; read the
-      response/validation errors; report findings). If usable: each folklore
-      text as a text_passage (Irish + phonetic + translation + provenance).
-      If not usable: fall back to phrases for short items and lesson_blocks
-      for longer texts. Sayings/idioms as phrases either way.
-    notes: "Re-extraction of a lost unit (~7 items). Also our first schema probe of text_passages."
+      Probed text_passages first (superset create on the first record with
+      extra candidate fields "phonetic" and "notes" alongside the real
+      lesson_id/position/title/body): both extra fields were silently
+      dropped from the response, confirming text_passages' writable fields
+      are exactly lesson_id, position, title, body (HTML) — matching what
+      list_records already showed from 51 pre-existing records, no more, no
+      less. Usable as scoped: five text_passages, one per titled folklore
+      text (Tobac Corp — wake-house tobacco prayer; Na Deich nAitheanta —
+      versified Ten Commandments under the source's "Alia" heading, spanning
+      pp.183-184; Feóil a' Mhadaigh — the dog-and-reflection fable; An Frog;
+      Trí Ní — a short rhyme signed by Éamonn Mhac an Fhailigh himself, the
+      article's author). Two phrases from Tobar Beannuighthe (the Tobar na
+      bhFiann well-cure formulas "tá leis ann" / "tá do thurus leat
+      abhaile"), which mixes phonetic fragments into English narration
+      rather than giving a clean text, so it fit phrases better than
+      text_passages per the fallback rule. One vocabulary_item (breac, the
+      well's omen-fish). Two lesson_blocks: source/notation (JD, Rinn an
+      Eanaigh, recorded 21 May 1968; notation = IE's plus æ and h′) + a short
+      aside on the "Alia" section heading marking the shift from
+      conversational material to traditional recitations.
+    notes: >
+      Re-extraction of a lost unit; final count was 5 text_passages + 2
+      phrases + 1 vocabulary_item = 8 records (matching the queue's "~7
+      items" estimate).
+      Scan discrepancy: scans/foxford/FoxfordNOTES_ON_A_MAYO_DIALECT.pdf is
+      NOT the full monograph as EXTRACTION.md §1 states — it is a single
+      14-page journal article/offprint covering only pp.171-184 (PDF page
+      index 0 = unnumbered title page/p.171 through index 13 = p.184, a
+      clean 1:1 mapping, printed_page = index+171, no spreads unlike the
+      Erris scans). Flagged for a human to correct EXTRACTION.md §1's
+      description; the whole Foxford source is therefore already covered up
+      to p.182 or is a gap needing a future queue unit, not "full book"
+      remaining — a human should check which pp.171-182 material, if any,
+      already exists in the app before scoping a next Foxford unit.
+      Self-caught transcription error (create-only, no delete tool):
+      text_passage 65 ("Na Deich nAitheanta") was created with a typo,
+      "sanɴti:" instead of the source's "saɴti:" (an extra inserted "n"),
+      caught by re-comparing against the source image before moving on;
+      text_passage 67 was created as the corrected replacement. Record 65 is
+      flagged for human deletion.
+      Not extracted (out of this unit's pp.183-184 scope, per accuracy-over-
+      coverage): an untitled item opening p.183 — a story about a
+      legendary milk-giving cow and the place-names "Buaile-ar-a-chosa",
+      "Bun Abhanna Buí", "i bPollach" — continues mid-sentence from p.182,
+      which this unit does not cover; noted in lesson_block 174 for a human
+      to fold into a future pp.181-182 (or similar) Foxford unit if wanted.
+      Direct HTTP warm-up (GET to the Fly URL) was again blocked by this
+      session's own sandbox network policy ("CONNECT tunnel failed,
+      response 403", confirmed via /__agentproxy/status as a policy denial,
+      consistent with all six prior runs); the mayo-irish-app MCP connector
+      worked normally throughout (verified with list_records calls before
+      writing), so extraction proceeded per EXTRACTION.md §4.1's "MCP tools
+      still unavailable" carve-out not being triggered.
+      pymupdf + pillow were pip-installed to rasterise pages at 200dpi then
+      400dpi crops for visual page-number and glyph verification (no repo
+      files changed; poppler-utils still not preinstalled).
+      Schema/state check: queue header's next_lesson_number (141) matched
+      the app's actual next available number exactly (new lesson created as
+      id=142, number=141, position=141, confirming id = number+1, same
+      pattern as all seven prior runs).
 
   - id: tourmakeady-scoping
     status: needs_scoping
