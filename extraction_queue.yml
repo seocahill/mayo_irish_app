@@ -563,6 +563,141 @@ units:
       id=142, number=141, position=141, confirming id = number+1, same
       pattern as all seven prior runs).
 
+  - id: erris-nouns-adjectives-numerals
+    status: pending
+    lesson_title: "Nouns, Adjectives & Numerals in Erris: flexions, the dual, comparison, counting"
+    lesson_type: dias_material
+    source: "IE"
+    scans: "scans/erris_4/Irish_of_Erris__4.pdf spreads 2-5 (pp. 192-199; verified exact against printed page numbers on 2026-08-15 — the running-head chapter 'Nouns and Adjectives' that pp.190-191/§525-529 already belong to (lesson 133) continues through p.199; Chapter XX 'Pronouns, Prepositions, etc.' begins exactly at p.200/§562)"
+    pages: "192-199"
+    paragraphs: "§§530-561"
+    structure: >
+      Continuation of the Nouns and Adjectives chapter that lesson 133 (Noun
+      Declension in Erris) and its grammar_rule 7 (pp.190-191, §525-529)
+      already cover up to the Table of Singular Flexions. This unit picks up
+      at §530: (1) further plural-suffix classes (i)-(x) with allegro/strong
+      form pairs (pp.192-193), genitive plural formation and dialectal
+      instability (§§531-534, pp.193-194). (2) The dual — still vigorous in
+      the dialect, nom./dat. syncretism, gen. = gen. pl. (§535, p.194).
+      (3) Declension of adjectives — living vs. petrified forms, the mór
+      paradigm table (masc./fem. x n./d./g./v.), disyllabic/trisyllabic
+      adjective flexion, indeclinable adjectives (§§536-544, pp.194-196).
+      (4) Comparatives — regular -C'ə pattern, stem vowel alternations,
+      syncope, -xd'ə forms, irregular comparatives table (§§545-551,
+      pp.196-197). (5) Numerals — cardinals, the forms used before nouns
+      (with ceann), sg./pl. noun usage after 3-10, lenition/eclipsis rules,
+      approximate-number and age idioms, ordinals, collectives (§§552-561,
+      pp.197-199). Suggest one grammar_rule per numbered subsection above
+      (5-6 rules), each with grammar_sections for the sub-tables; the mór
+      paradigm and irregular-comparatives tables are natural compact HTML
+      tables. New lesson (do not append to 133 — this unit's scope is
+      broader than noun declension alone).
+    notes: >
+      Newly scoped 2026-08-15 during a routine run that investigated a user
+      question about how complete Erris coverage actually was. pp.192-216 of
+      erris_4 (this unit + erris-pronouns-prepositions + the two
+      erris-verbs-* units below) were found never to have been queued,
+      despite sitting directly between the noun-flexion material already
+      extracted (pp.190-191, lesson 133) and the index (correctly skipped
+      per EXTRACTION.md §6 — confirmed by direct inspection to start exactly
+      at p.217). Chapter/page boundaries above were verified directly
+      against rendered page images, not estimated from a spread-count
+      formula — should not need the usual ±2 spread adjustment, but
+      re-verify against the actual scan before extracting regardless.
+
+  - id: erris-pronouns-prepositions
+    status: pending
+    lesson_title: "Pronouns, Prepositions & Demonstratives in Erris"
+    lesson_type: dias_material
+    source: "IE"
+    scans: "scans/erris_4/Irish_of_Erris__4.pdf spreads 6-8 (pp. 200-205; verified exact against printed page numbers on 2026-08-15 — Chapter XX 'Pronouns, Prepositions, etc.' runs precisely pp.200-205/§§562-573; Chapter XXI 'Verbs' begins exactly at p.206/§574)"
+    pages: "200-205"
+    paragraphs: "§§562-573"
+    structure: >
+      Chapter XX in full. (1) Personal pronouns §§562-563 — simple + emphatic
+      paradigms (subject-of-active-verb forms; separate object/copula/
+      passive/absolute forms for 2sg and 3sg). (2) Demonstratives §§564-567
+      — basic demonstratives + combination with 3rd person pronouns, forms
+      after the copula/nax/gurb, forms following a defined noun, the
+      voici/voilà adverbial use. (3) Possessives §568 — full paradigm table
+      (preceding-consonant / preceding-vowel forms) + emphatic-suffix
+      construction. (4) Prepositional pronouns §§569-573 — full paradigms for
+      several prepositions (fé/faoi, i/ann, idir, lé, ó, roimh, thar, tré),
+      plus the chun/ag merger note and the emphatic-suffix rule. Suggest one
+      grammar_rule per numbered subsection (4 rules), with a grammar_section
+      per prepositional-pronoun set in (4) — that's the densest part, ~8
+      paradigm tables.
+    notes: "Newly scoped 2026-08-15 — see erris-nouns-adjectives-numerals's note above for context. Boundaries verified directly against page images."
+
+  - id: erris-verbs-i-conjugation-classes
+    status: pending
+    lesson_title: "The Verb System in Erris I: conjugation classes & the first irregular verbs"
+    lesson_type: dias_material
+    source: "IE"
+    scans: "scans/erris_4/Irish_of_Erris__4.pdf spreads 9-11 (pp. 206-211; verified exact against printed page numbers on 2026-08-15 — Chapter XXI 'Verbs' opens exactly at p.206/§574; this unit covers §§574-588, ending at the fágbhaim paradigm on p.211 just before feicim/§589 opens the next page)"
+    pages: "206-211"
+    paragraphs: "§§574-588"
+    structure: >
+      (1) Allegro and pausa forms §574 — the convention used throughout the
+      chapter (pronoun-subject vs. noun-subject/no-subject forms, slant-line
+      notation). (2) Monosyllabic stems §§575-582 — full paradigm of caillim
+      as the model verb (all tenses/moods incl. rel., pass., pret.); caithim
+      and other group (i)/(ii)/(iii) verbs (stems in ç/j/w-diphthong) given
+      more compactly; léighim as a second fully-paradigmed model;
+      snámhaim/treabhaim noted as conjugating like the w-diphthong group.
+      (3) Irregular verbs, first six: beirim (fut. stem, pret. rug), cluinim
+      (pret. + interrogative + vn. irregularities only), deánaim (Faulmore
+      pret. rinne, dependent forms), deirim (rel./frequentative/dependent
+      forms), faghaim (dependent wi:-/fhuigh- stem, Faulmore variant),
+      fágbhaim (pret. only, otherwise regular) — §§583-588, pp.208-211.
+      Suggest one grammar_rule for (1)+(2) with each major conjugation class
+      as a grammar_section (the caillim table is the centerpiece — reproduce
+      in full given its role as the model paradigm), one grammar_rule for
+      (3) with one grammar_section per irregular verb.
+    notes: >
+      Newly scoped 2026-08-15 — see erris-nouns-adjectives-numerals's note
+      above for context. This chapter is the densest and most learner-
+      valuable gap found (full verb conjugation was entirely missing from
+      the app). Given the density, deliberately split into two queue units
+      (this one + erris-verbs-ii-irregular-copula) rather than one — prefer
+      two carefully-extracted lessons over one rushed one, per the
+      accuracy-over-coverage policy. Boundaries verified directly against
+      page images.
+
+  - id: erris-verbs-ii-irregular-copula
+    status: pending
+    lesson_title: "The Verb System in Erris II: the remaining irregular verbs & the copula"
+    lesson_type: dias_material
+    source: "IE"
+    scans: "scans/erris_4/Irish_of_Erris__4.pdf spreads 11-14 (pp. 211-216; verified exact against printed page numbers on 2026-08-15 — continues directly from erris-verbs-i-conjugation-classes at §589/p.211; Chapter XXI ends and the Index begins exactly at p.217, on the same rendered spread as p.216 — do not extract past p.216)"
+    pages: "211-216"
+    paragraphs: "§§589-602"
+    structure: >
+      Remaining irregular verbs §§589-594: feicim (pret. chonnaic, dependent
+      neg.), ithim (retained historic s-forms in fut./cond.), táim — the
+      fullest paradigm in the chapter (pres., dependent, consuetudinal pres.
+      bíonn, impf., fut., cond., pret. bhí + pausa forms, imperative, two
+      distinct pres. subj./optative forms), tigim, tugaim. The copula §595 —
+      full pres.-fut. and pret.-cond. tables (positive/negative x absolute/
+      interrogative/dependent/relative), pp.212-213. Disyllabic stems §§596-
+      600 — -(a)igh verbs (íslighim model paradigm), the j-glide type
+      (gnóaigheann), retained simple-stem forms in the 2sg impv. and 3sg
+      pret. Formation of verbal nouns §§601-602 — velar-medial vs.
+      palatal-medial contrast pairs (báthadh/báitheadh type), the
+      -án/-achán verbal noun ending. Suggest one grammar_rule for the
+      remaining irregular verbs (one grammar_section per verb, táim gets the
+      fullest treatment), one grammar_rule for the copula (2 sections:
+      pres.-fut., pret.-cond.), one grammar_rule for disyllabic stems +
+      verbal noun formation.
+    notes: >
+      Newly scoped 2026-08-15 — see erris-nouns-adjectives-numerals's note
+      above for context, and erris-verbs-i-conjugation-classes's note for
+      why this chapter was split into two units. Hard stop at p.216: do NOT
+      continue onto p.217, which is the Index (out of scope permanently per
+      EXTRACTION.md §6, confirmed by direct inspection 2026-08-15) — the
+      Index heading appears on the same rendered spread as p.216, so take
+      care when rasterising not to transcribe past the page boundary.
+
   - id: tourmakeady-scoping
     status: needs_scoping
     lesson_title: null
