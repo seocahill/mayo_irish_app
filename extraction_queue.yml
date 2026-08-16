@@ -4,7 +4,7 @@
 # On completion the routine sets status: done, records created ids, and
 # increments next_lesson_number if a new lesson was created.
 
-next_lesson_number: 142
+next_lesson_number: 143
 
 units:
   - id: erris-initial-mutation
@@ -564,7 +564,15 @@ units:
       pattern as all seven prior runs).
 
   - id: erris-nouns-adjectives-numerals
-    status: pending
+    status: done
+    completed_at: "2026-08-16"
+    created_lesson_id: 143
+    created_records:
+      lesson_blocks: "176-177"
+      grammar_rules: "217-221"
+      grammar_sections: "513-533 (513 superseded by 514; see report for human deletion of 513)"
+      vocabulary_items: "4410-4413"
+      phrases: "39-41"
     lesson_title: "Nouns, Adjectives & Numerals in Erris: flexions, the dual, comparison, counting"
     lesson_type: dias_material
     source: "IE"
@@ -574,36 +582,60 @@ units:
     structure: >
       Continuation of the Nouns and Adjectives chapter that lesson 133 (Noun
       Declension in Erris) and its grammar_rule 7 (pp.190-191, §525-529)
-      already cover up to the Table of Singular Flexions. This unit picks up
-      at §530: (1) further plural-suffix classes (i)-(x) with allegro/strong
-      form pairs (pp.192-193), genitive plural formation and dialectal
-      instability (§§531-534, pp.193-194). (2) The dual — still vigorous in
-      the dialect, nom./dat. syncretism, gen. = gen. pl. (§535, p.194).
-      (3) Declension of adjectives — living vs. petrified forms, the mór
-      paradigm table (masc./fem. x n./d./g./v.), disyllabic/trisyllabic
-      adjective flexion, indeclinable adjectives (§§536-544, pp.194-196).
-      (4) Comparatives — regular -C'ə pattern, stem vowel alternations,
-      syncope, -xd'ə forms, irregular comparatives table (§§545-551,
-      pp.196-197). (5) Numerals — cardinals, the forms used before nouns
-      (with ceann), sg./pl. noun usage after 3-10, lenition/eclipsis rules,
-      approximate-number and age idioms, ordinals, collectives (§§552-561,
-      pp.197-199). Suggest one grammar_rule per numbered subsection above
-      (5-6 rules), each with grammar_sections for the sub-tables; the mór
-      paradigm and irregular-comparatives tables are natural compact HTML
-      tables. New lesson (do not append to 133 — this unit's scope is
-      broader than noun declension alone).
+      already cover up to the Table of Singular Flexions. All five page
+      boundaries (spreads 2-5 = pp.192-199 exactly, and the p.199/200 chapter
+      boundary) were verified directly against rendered page images before
+      extracting — no drift from the queue's estimate. Five grammar_rules:
+      (1) Further plural-suffix classes & the genitive plural §§530-534 — 3
+      sections (classes (i)-(v) table; classes (vi)-(x) table, incl. the
+      bláth/tráigh coalescence forms; genitive plural formation & dialectal
+      instability). (2) The dual §535 — 1 section (nom./dat. syncretism,
+      gen. = gen. pl., 7 examples incl. dhá dtrian, greim dhá chos air).
+      (3) Declension of adjectives §§536-544 — 4 sections (living vs.
+      petrified forms + the mór paradigm table masc./fem. x n./d./g./v.;
+      vowel-change gs. forms deas/dubh/trom/maith; disyllabic/trisyllabic
+      uasal + inconclusive -úil/-mhar data; indeclinable -ach and vowel-final
+      adjectives). (4) Comparatives §§545-551 — 5 sections (regular -C/-C'ə;
+      vowel-change; disyllabic alternation & syncope; -əx/-i: and -xd'ə
+      forms; irregular comparatives table incl. olc>m'asə, maith>f'a:r).
+      (5) Numerals §§552-561 — 7 sections (cardinals; forms before nouns
+      with ceann; noun number & mutation after 3-10; approximate numbers &
+      age idioms; noun form after cupla/céad/fiche/míle; ordinals;
+      collectives). 21 grammar_sections total. Four vocabulary_items (olc,
+      maith — suppletive comparatives; alt 'cliff' — source's own bracketed
+      gloss, a specialized sense; fada — irregular comparative fid'ə). Three
+      phrases (dhá dtrian, bó i gcionn a dhá bhliain, cúigear nó seisear).
+      Two lesson_blocks: source/notation + a short aside on chapter shape and
+      the p.200/§562 boundary into erris-pronouns-prepositions.
     notes: >
       Newly scoped 2026-08-15 during a routine run that investigated a user
-      question about how complete Erris coverage actually was. pp.192-216 of
-      erris_4 (this unit + erris-pronouns-prepositions + the two
-      erris-verbs-* units below) were found never to have been queued,
-      despite sitting directly between the noun-flexion material already
-      extracted (pp.190-191, lesson 133) and the index (correctly skipped
-      per EXTRACTION.md §6 — confirmed by direct inspection to start exactly
-      at p.217). Chapter/page boundaries above were verified directly
-      against rendered page images, not estimated from a spread-count
-      formula — should not need the usual ±2 spread adjustment, but
-      re-verify against the actual scan before extracting regardless.
+      question about how complete Erris coverage actually was — see that
+      run's note for the wider pp.192-216 gap this unit is part of.
+      Self-caught transcription-placement error (create-only, no delete
+      tool): grammar_section 513 (plural-suffix classes (i)-(v)) incorrectly
+      included a row for "cioth" and the bláth/tráigh coalescence examples,
+      which actually belong to class (vi) and the (vi)/(vii) boundary on the
+      facing page (p.193), not classes (i)-(v) on p.192. Caught by
+      re-comparing against the source image before moving on; grammar_section
+      514 was created as the corrected replacement (the cioth row and
+      coalescence examples were correctly placed in grammar_section 515
+      instead). Section 513 is flagged for human deletion.
+      Direct HTTP warm-up (GET to the Fly URL) was again blocked by this
+      session's own sandbox network policy (EGRESS_BLOCKED via WebFetch,
+      consistent with all eight prior runs); the mayo-irish-app MCP connector
+      worked normally throughout (verified with a get_record call before
+      writing), so extraction proceeded per EXTRACTION.md §4.1's "MCP tools
+      still unavailable" carve-out not being triggered.
+      pymupdf + pillow were pip-installed to rasterise pages at 200dpi for
+      visual page-number verification (no repo files changed; poppler-utils
+      still not preinstalled).
+      Schema/state check: queue header's next_lesson_number (142) matched the
+      app's actual next available number exactly (new lesson created as
+      id=143, number=142, position=142, confirming id = number+1, same
+      pattern as all prior runs). vocabulary_items' gender field again
+      defaulted to "m" server-side for all four records despite not being set
+      in the create call — same recurring schema issue noted in prior runs,
+      not corrected here (not in the writable-fields list).
 
   - id: erris-pronouns-prepositions
     status: pending
