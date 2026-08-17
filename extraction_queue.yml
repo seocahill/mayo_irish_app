@@ -4,7 +4,7 @@
 # On completion the routine sets status: done, records created ids, and
 # increments next_lesson_number if a new lesson was created.
 
-next_lesson_number: 143
+next_lesson_number: 144
 
 units:
   - id: erris-initial-mutation
@@ -638,28 +638,87 @@ units:
       not corrected here (not in the writable-fields list).
 
   - id: erris-pronouns-prepositions
-    status: pending
+    status: done
+    completed_at: "2026-08-17"
+    created_lesson_id: 144
+    created_records:
+      lesson_blocks: "178-180 (178 superseded by 179; see report for human deletion of 178)"
+      grammar_rules: "222-225"
+      grammar_sections: "534-551 (539 superseded by 540; see report for human deletion of 539)"
+      vocabulary_items: "4414-4415"
+      phrases: "42-44"
     lesson_title: "Pronouns, Prepositions & Demonstratives in Erris"
     lesson_type: dias_material
     source: "IE"
-    scans: "scans/erris_4/Irish_of_Erris__4.pdf spreads 6-8 (pp. 200-205; verified exact against printed page numbers on 2026-08-15 — Chapter XX 'Pronouns, Prepositions, etc.' runs precisely pp.200-205/§§562-573; Chapter XXI 'Verbs' begins exactly at p.206/§574)"
+    scans: "scans/erris_4/Irish_of_Erris__4.pdf spreads 6-8 (pp. 200-205; verified exact against printed page numbers on 2026-08-17 — Chapter XX 'Pronouns, Prepositions, etc.' runs precisely pp.200-205/§§562-573; Chapter XXI 'Verbs' begins exactly at p.206/§574, confirmed by direct inspection)"
     pages: "200-205"
     paragraphs: "§§562-573"
     structure: >
-      Chapter XX in full. (1) Personal pronouns §§562-563 — simple + emphatic
-      paradigms (subject-of-active-verb forms; separate object/copula/
-      passive/absolute forms for 2sg and 3sg). (2) Demonstratives §§564-567
-      — basic demonstratives + combination with 3rd person pronouns, forms
-      after the copula/nax/gurb, forms following a defined noun, the
-      voici/voilà adverbial use. (3) Possessives §568 — full paradigm table
-      (preceding-consonant / preceding-vowel forms) + emphatic-suffix
-      construction. (4) Prepositional pronouns §§569-573 — full paradigms for
-      several prepositions (fé/faoi, i/ann, idir, lé, ó, roimh, thar, tré),
-      plus the chun/ag merger note and the emphatic-suffix rule. Suggest one
-      grammar_rule per numbered subsection (4 rules), with a grammar_section
-      per prepositional-pronoun set in (4) — that's the densest part, ~8
-      paradigm tables.
-    notes: "Newly scoped 2026-08-15 — see erris-nouns-adjectives-numerals's note above for context. Boundaries verified directly against page images."
+      Chapter XX in full, four grammar_rules matching the source's own four
+      printed headings exactly: (1) Personal Pronouns §§562-563 — simple +
+      emphatic subject-of-active-verb paradigm, plus the special object/
+      copula/passive/absolute forms. (2) Demonstratives §§564-567 — basic
+      demonstratives + combination with 3rd person pronouns, forms after the
+      copula/nach/gurb, forms following a defined noun, the voici/voilà
+      adverbial use. (3) Possessives §§568-569 — full paradigm table
+      (preceding-consonant/preceding-vowel forms) + the emphatic-suffix
+      construction (re-scoped: §569 is the tail of the Possessives section,
+      not the start of Prepositions — no new heading appears in the source
+      until "PREPOSITIONS" immediately before §570). (4) Prepositions
+      §§570-573 — the full list of simple prepositions, then full singular/
+      plural pronominal-form paradigms for all thirteen prepositions that
+      take one (ag, ar, as, de, do, faoi, i/ann, idir, lé, ó, roimh, thar,
+      tré — grouped into 6 grammar_sections by page/theme rather than 13
+      one-per-preposition, since several share a compact table on the same
+      page), the chun/ag merger note (incl. the irregular h-prefixed warning
+      form chugad), and the emphatic-suffix rule. 18 grammar_sections total.
+      Two vocabulary_items (muid/sinn doublet; chugad, irregular). Three
+      phrases (nach eo é do mhac?; seo chugainn 'next'; chugad an púca!
+      warning cry). Two lesson_blocks: source/notation + a short aside on
+      chapter shape (paradigm-table-heavy) and the p.206/§574 boundary into
+      erris-verbs-i-conjugation-classes.
+    notes: >
+      Newly scoped 2026-08-15 — see erris-nouns-adjectives-numerals's note
+      above for context. Boundaries verified directly against page images
+      on both 2026-08-15 (initial scoping) and 2026-08-17 (this run, ahead
+      of writing).
+      Self-caught transcription errors (create-only, no delete tool):
+      lesson_block 178 used the wrong Unicode codepoint for ɴ (velarised
+      nasal) in its notation-legend prose, rendering as ɛ instead — caught
+      immediately after creation by reading the record back; lesson_block
+      179 was created as the corrected replacement. Block 178 is flagged for
+      human deletion. grammar_section 539 (§567, demonstrative-adverb
+      examples) mis-glossed the second example as isolated "thíos é" when
+      the source actually glosses the full phonetic "hin′ e: hi:s e:" as
+      "sin é thíos é" — caught by re-zooming into the source image before
+      moving on to §568; grammar_section 540 was created as the corrected
+      replacement. Section 539 is flagged for human deletion.
+      [?] grammar_section 537 (§565, demonstrative-after-copula examples):
+      the source's own phonetic transcription of its second example reads
+      "mu dahir′" (which would correspond to "m'athair", my father) while
+      the Irish/English gloss given alongside it is "d'athair"/"your
+      father" — phonetic and gloss disagree on possessor. Transcribed
+      exactly as printed (not silently corrected); flagged for human review
+      as a probable original typesetting slip.
+      Direct HTTP warm-up (GET to the Fly URL) was again blocked by this
+      session's own sandbox network policy (five retries over ~100s all
+      returned HTTP 000/connection failure, consistent with all nine prior
+      runs); the mayo-irish-app MCP connector worked normally throughout
+      (verified with a get_record call on lesson 143 before writing), so
+      extraction proceeded per EXTRACTION.md §4.1's "MCP tools still
+      unavailable" carve-out not being triggered.
+      pymupdf + pillow were pip-installed to rasterise pages at 200dpi
+      (500-600dpi crops for dense/ambiguous passages) for visual page-number
+      and glyph verification (no repo files changed; poppler-utils still
+      not preinstalled).
+      Schema/state check: queue header's next_lesson_number (143) matched
+      the app's actual next available number exactly (new lesson created as
+      id=144, number=143, position=143, confirming id = number+1, same
+      pattern as all prior runs). vocabulary_items' gender field again
+      defaulted to "m" server-side for both new records despite not being
+      set in the create call — same recurring schema issue noted in every
+      prior run that created vocabulary_items, not corrected here (not in
+      the writable-fields list).
 
   - id: erris-verbs-i-conjugation-classes
     status: pending
