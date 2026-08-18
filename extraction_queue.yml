@@ -4,7 +4,7 @@
 # On completion the routine sets status: done, records created ids, and
 # increments next_lesson_number if a new lesson was created.
 
-next_lesson_number: 144
+next_lesson_number: 145
 
 units:
   - id: erris-initial-mutation
@@ -721,7 +721,15 @@ units:
       the writable-fields list).
 
   - id: erris-verbs-i-conjugation-classes
-    status: pending
+    status: done
+    completed_at: "2026-08-18"
+    created_lesson_id: 145
+    created_records:
+      lesson_blocks: "182-183 (181 superseded by 182; see report for human deletion of 181)"
+      grammar_rules: "226-227"
+      grammar_sections: "552-562"
+      vocabulary_items: "4416-4419"
+      phrases: "45-46"
     lesson_title: "The Verb System in Erris I: conjugation classes & the first irregular verbs"
     lesson_type: dias_material
     source: "IE"
@@ -729,23 +737,42 @@ units:
     pages: "206-211"
     paragraphs: "§§574-588"
     structure: >
-      (1) Allegro and pausa forms §574 — the convention used throughout the
-      chapter (pronoun-subject vs. noun-subject/no-subject forms, slant-line
-      notation). (2) Monosyllabic stems §§575-582 — full paradigm of caillim
-      as the model verb (all tenses/moods incl. rel., pass., pret.); caithim
-      and other group (i)/(ii)/(iii) verbs (stems in ç/j/w-diphthong) given
-      more compactly; léighim as a second fully-paradigmed model;
-      snámhaim/treabhaim noted as conjugating like the w-diphthong group.
-      (3) Irregular verbs, first six: beirim (fut. stem, pret. rug), cluinim
-      (pret. + interrogative + vn. irregularities only), deánaim (Faulmore
-      pret. rinne, dependent forms), deirim (rel./frequentative/dependent
-      forms), faghaim (dependent wi:-/fhuigh- stem, Faulmore variant),
-      fágbhaim (pret. only, otherwise regular) — §§583-588, pp.208-211.
-      Suggest one grammar_rule for (1)+(2) with each major conjugation class
-      as a grammar_section (the caillim table is the centerpiece — reproduce
-      in full given its role as the model paradigm), one grammar_rule for
-      (3) with one grammar_section per irregular verb.
+      Two grammar_rules matching the queue's own suggested split. (1)
+      Allegro/pausa forms and monosyllabic-stem verbs §§574-582 — 5
+      grammar_sections: the allegro/pausa convention (§574); caillim's full
+      paradigm as the model verb, all tenses/moods incl. rel., pass., pret.,
+      plus the muid/sinn 1st-pl. pronoun rule (§§575-576); group (i)
+      ç-stems, caithim full paradigm + 7 other verbs given compactly
+      wherever they diverge (§§577-579); group (ii) j-stems, léighim full
+      paradigm + 6 other verbs compactly (§§577, 580-581); group (iii)
+      w-diphthong stems, snámhaim/treabhaim paired paradigm + sgríobhaim/
+      lobhaim/gabhaim conjugation notes incl. gabhaim's own by-forms
+      (§§577, 582). (2) The first irregular verbs §§583-588 — 6
+      grammar_sections, one per verb: beirim (fut. stem, pret. rug),
+      cluinim (pret. + interrogative + vn. irregularities only), deánaim
+      (Faulmore pret. rinne, dependent forms), deirim (dabair-/abair-/
+      deir-/deár- stems, rel./frequentative/dependent forms — the densest
+      of the six), faghaim (dependent wi:-/fhuigh- stem, Faulmore variant),
+      fágbhaim (pret. only, otherwise regular). Four vocabulary_items for
+      non-paradigm group members mentioned only in passing (brúighim,
+      dóighim, sgríobhaim, gabhaim). Two phrases (an gcluin tú?, an ndearna
+      sé? — the two irregular interrogative forms). Two lesson_blocks:
+      source/notation (incl. the allegro/pausa convention itself) + a short
+      aside on chapter shape and the p.211/§589 boundary into
+      erris-verbs-ii-irregular-copula.
     notes: >
+      Page boundaries verified directly against rendered page images before
+      extracting (spreads 9-11 = pp.206-211 exactly, matching the queue's
+      2026-08-15 estimate with no drift); §588 (fágbhaim) and §589 (feicim)
+      confirmed to sit side-by-side on the two columns of p.211, so this
+      unit stops cleanly at §588 without touching §589.
+      Self-caught transcription error (create-only, no delete tool):
+      lesson_block 181 (source/notation) used wrong numeric HTML character
+      entities for the velarised lateral/nasal (&#658;/&#626;, which render
+      as ʒ/ɲ) instead of the correct ʟ/ɴ codepoints — caught immediately
+      after creation by reading the record back; lesson_block 182 was
+      created as the corrected replacement using literal Unicode characters
+      instead of numeric entities. Block 181 is flagged for human deletion.
       Newly scoped 2026-08-15 — see erris-nouns-adjectives-numerals's note
       above for context. This chapter is the densest and most learner-
       valuable gap found (full verb conjugation was entirely missing from
