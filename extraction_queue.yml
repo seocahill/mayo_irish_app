@@ -4,7 +4,7 @@
 # On completion the routine sets status: done, records created ids, and
 # increments next_lesson_number if a new lesson was created.
 
-next_lesson_number: 145
+next_lesson_number: 146
 
 units:
   - id: erris-initial-mutation
@@ -783,7 +783,15 @@ units:
       page images.
 
   - id: erris-verbs-ii-irregular-copula
-    status: pending
+    status: done
+    completed_at: "2026-08-19"
+    created_lesson_id: 146
+    created_records:
+      lesson_blocks: "184-185"
+      grammar_rules: "228-230"
+      grammar_sections: "563-573"
+      vocabulary_items: "4420-4423"
+      phrases: "47-48"
     lesson_title: "The Verb System in Erris II: the remaining irregular verbs & the copula"
     lesson_type: dias_material
     source: "IE"
@@ -815,6 +823,39 @@ units:
       EXTRACTION.md §6, confirmed by direct inspection 2026-08-15) — the
       Index heading appears on the same rendered spread as p.216, so take
       care when rasterising not to transcribe past the page boundary.
+      Execution (2026-08-19): page boundaries verified directly against
+      rendered page images before extracting (spreads 11-14 = pp.210/211,
+      212/213, 214/215, 216/217 exactly, matching the 2026-08-15 estimate
+      with no drift); confirmed §602 ends on p.216 and the Index starts
+      exactly at p.217 on the same rendered spread, so extraction stopped
+      cleanly at §602 with no risk of crossing into the Index. No
+      transcription errors this run — dense/ambiguous passages (táim's
+      paradigm, the copula tables, the -(a)igh and -í: verb classes, the
+      verbal-noun contrast pairs) were double-checked at 400dpi crops
+      against the source images before creating records. Direct HTTP
+      warm-up (GET to the Fly URL) was again blocked by this session's own
+      sandbox network policy (five retries over ~100s all returned HTTP
+      000/connection failure, consistent with all ten prior runs); the
+      mayo-irish-app MCP connector worked normally throughout (verified
+      with a get_record call on lesson 145 before writing: id=145,
+      number=144, confirming id = number+1, same pattern as every prior
+      run), so extraction proceeded per EXTRACTION.md §4.1's "MCP tools
+      still unavailable" carve-out not being triggered. pymupdf + pillow
+      were pip-installed to rasterise pages at 200dpi (400dpi crops for
+      dense passages) for visual page-number and glyph verification (no
+      repo files changed; poppler-utils still not preinstalled). Schema/
+      state check: queue header's next_lesson_number (145) matched the
+      app's actual next available number exactly (new lesson created as
+      id=146, number=145, position=145). vocabulary_items' gender field
+      again defaulted to "m" server-side for all four new records despite
+      not being set in the create call — same recurring schema issue noted
+      in every prior run that created vocabulary_items, not corrected here
+      (not in the writable-fields list). This was the last unit scoped from
+      Chapter XXI (Verbs); Chapter XXI/the whole "Verbs" material is now
+      fully covered pp.206-216. No further Erris queue units are scoped —
+      a human should decide whether to scope further Erris material (if
+      any remains beyond p.216/the Index) or move to Foxford/Tourmakeady
+      next.
 
   - id: tourmakeady-scoping
     status: needs_scoping
