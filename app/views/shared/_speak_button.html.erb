@@ -1,5 +1,5 @@
-<%# Plays synthetic speech from `src` (see the pronounce Stimulus controller). %>
-<span data-controller="pronounce" data-pronounce-src-value="<%= src %>" class="inline-flex items-center gap-1.5">
+<%# Plays synthetic speech from `src` (see the pronounce Stimulus controller). Pass autoplay: true to play it once on load. %>
+<span data-controller="pronounce" data-pronounce-src-value="<%= src %>" <%= "data-pronounce-autoplay-value=true" if local_assigns[:autoplay] %> class="inline-flex items-center gap-1.5">
   <button type="button"
           data-pronounce-target="button"
           data-action="pronounce#play"

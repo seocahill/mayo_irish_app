@@ -4,6 +4,7 @@ class LessonsController < ApplicationController
 
   def index
     @lessons = Lesson.visible_to(current_user).ordered
+    @flagged_count = ChatMessage.flagged.count if current_user&.admin?
     @quiz_progress = {}
     if current_user
       totals = VocabularyItem.group(:lesson_id).count

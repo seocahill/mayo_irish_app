@@ -44,8 +44,8 @@ class LessonChatController < ApplicationController
     history = @chat_session.chat_messages.map { |m| { role: m.role, content: m.content } }
 
     client = OpenAI::Client.new(
-      access_token: Rails.application.credentials.openai.openai_key,
-      organization_id: Rails.application.credentials.openai.openai_org
+      access_token: Rails.application.credentials.dig(:openai, :openai_key),
+      organization_id: Rails.application.credentials.dig(:openai, :openai_org)
     )
 
     response = client.chat(
@@ -80,10 +80,10 @@ class LessonChatController < ApplicationController
 
   def set_chat_session
     chat_session_id = session[session_key]
-    @chat_session = ChatSession.find_by(id: chat_session_id, lesson: @lesson)
+    @chat_session = ChatSession.tutor.find_by(id: chat_session_id, lesson: @lesson)
 
     unless @chat_session
-      @chat_session = ChatSession.create!(lesson: @lesson, user: current_user)
+      @chat_session = ChatSession.tutor.create!(lesson: @lesson, user: current_user)
       session[session_key] = @chat_session.id
     end
   end
@@ -92,52 +92,13 @@ class LessonChatController < ApplicationController
     parts = []
     parts << "You are a fluent Mayo Irish (Gaeilge Chonnacht) tutor.\n\n#{tutor_instructions}"
     parts << LANGUAGE_RULES
-    parts << intro_context if intro_context.present?
-    parts << grammar_context if grammar_context.present?
-    parts << vocab_context   if vocab_context.present?
+    parts << LessonContext.new(@lesson).to_s.presence
     parts << MASTERY_MARKER_INSTRUCTIONS
-    parts.join("\n\n")
+    parts.compact.join("\n\n")
   end
 
   def tutor_instructions
     @lesson.tutor_prompt.presence || DEFAULT_TUTOR_PROMPT
-  end
-
-  def intro_context
-    return if @lesson.intro_video_transcript.blank?
-
-    "LESSON INTRODUCTION (transcript of the teacher's intro video):\n#{@lesson.intro_video_transcript.strip}"
-  end
-
-  def grammar_context
-    rules = @lesson.grammar_rules.includes(:grammar_sections)
-    return nil if rules.empty?
-
-    lines = [ "GRAMMAR RULES:" ]
-    rules.each do |rule|
-      lines << "\n#{rule.number}. #{rule.title}"
-      lines << rule.body.to_plain_text.strip if rule.body.present?
-      rule.grammar_sections.each do |section|
-        lines << "  #{section.label}:" if section.label.present?
-        lines << "  #{section.body.to_plain_text.strip}" if section.body.present?
-      end
-    end
-    lines.join("\n")
-  end
-
-  def vocab_context
-    items = @lesson.vocabulary_items
-    return nil if items.empty?
-
-    lines = [ "VOCABULARY:" ]
-    items.each do |v|
-      gender = v.gender == "m" ? "masc." : "fem."
-      parts = [ "#{v.irish} (#{gender})" ]
-      parts << "pl. #{v.plural}" if v.plural.present?
-      parts << "— #{v.english}" if v.english.present?
-      lines << parts.join(" ")
-    end
-    lines.join("\n")
   end
 
   def session_key

@@ -2,10 +2,17 @@ import { Controller } from "@hotwired/stimulus"
 import { t } from "translations"
 
 // Plays synthetic speech from a URL. The first play fetches it (and the browser
-// keeps it), so the button shows a busy state while it loads.
+// keeps it), so the button shows a busy state while it loads. With autoplay it
+// plays once on its own; if the browser won't allow that, the button still works.
 export default class extends Controller {
   static targets = ["button", "status"]
-  static values = { src: String }
+  static values = { src: String, autoplay: Boolean }
+
+  connect() {
+    if (!this.autoplayValue) return
+    this.audio = this.buildAudio()
+    this.audio.play().catch(() => this.setState(null))
+  }
 
   disconnect() {
     this.audio?.pause()

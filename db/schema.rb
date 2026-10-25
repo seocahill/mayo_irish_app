@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_25_150943) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_25_230000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -53,17 +53,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_25_150943) do
     t.integer "chat_session_id", null: false
     t.text "content"
     t.datetime "created_at", null: false
+    t.text "english"
+    t.datetime "flagged_at"
+    t.text "note"
     t.string "role"
     t.datetime "updated_at", null: false
     t.index ["chat_session_id"], name: "index_chat_messages_on_chat_session_id"
+    t.index ["flagged_at"], name: "index_chat_messages_on_flagged_at"
   end
 
   create_table "chat_sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.string "kind", default: "tutor", null: false
     t.integer "lesson_id", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.index ["lesson_id"], name: "index_chat_sessions_on_lesson_id"
+    t.index ["user_id", "lesson_id", "kind"], name: "index_chat_sessions_on_user_id_and_lesson_id_and_kind"
     t.index ["user_id"], name: "index_chat_sessions_on_user_id"
   end
 

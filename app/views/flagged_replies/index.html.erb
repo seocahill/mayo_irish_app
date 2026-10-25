@@ -1,0 +1,39 @@
+<div class="max-w-2xl mx-auto flex flex-col gap-6">
+  <header>
+    <p class="eyebrow text-labhair"><%= t(".eyebrow") %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
+    <p class="text-muted mt-1 text-sm"><%= t(".summary") %></p>
+  </header>
+
+  <% if @replies.empty? %>
+    <p class="card px-4 py-6 text-center text-muted text-sm"><%= t(".empty") %></p>
+  <% else %>
+    <ul class="flex flex-col gap-4">
+      <% @replies.each do |reply| %>
+        <% chat = reply.chat_session %>
+        <% said = chat.chat_messages.select { |m| m.role == "user" && m.id < reply.id }.last %>
+        <li class="card px-4 py-4 flex flex-col gap-3 text-sm">
+          <div class="flex flex-wrap items-baseline justify-between gap-2 text-xs text-muted">
+            <%= link_to t(".lesson", number: chat.lesson.number, title: chat.lesson.title), lesson_path(chat.lesson), class: "hover:text-ink underline underline-offset-2" %>
+            <span><%= t(".flagged_by", name: chat.user.email_address, when: l(reply.flagged_at, format: :short)) %></span>
+          </div>
+          <% if said %>
+            <div>
+              <p class="eyebrow"><%= t(".learner_said") %></p>
+              <p class="mt-0.5 break-words"><%= said.content %></p>
+            </div>
+          <% end %>
+          <div>
+            <p class="eyebrow"><%= t(".reply") %></p>
+            <p lang="ga" class="mt-0.5 text-base break-words"><%= reply.content %></p>
+            <% if reply.english.present? %><p class="text-muted mt-1"><%= reply.english %></p><% end %>
+            <% if reply.note.present? %><p class="text-xs text-muted mt-1 border-l-2 border-labhair/40 pl-2"><%= reply.note %></p><% end %>
+          </div>
+          <div class="text-right">
+            <%= button_to t(".dismiss"), flagged_reply_path(reply), method: :delete, class: "btn-outline text-xs" %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

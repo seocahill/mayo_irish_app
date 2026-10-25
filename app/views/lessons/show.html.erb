@@ -17,6 +17,7 @@
     <% if @lesson.vocabulary_items.any? %>
       <%= link_to t(".quiz"), lesson_quiz_path(@lesson), class: "btn-solid flex-1 sm:flex-initial" %>
     <% end %>
+    <%= link_to t(".conversation"), lesson_conversation_path(@lesson), class: "btn-outline flex-1 sm:flex-initial" %>
     <%= link_to t(".practice"), lesson_chat_path(@lesson), class: "btn-outline flex-1 sm:flex-initial" %>
     <% if current_user&.admin? && !@preview %>
       <%= link_to t("shared.edit"), edit_lesson_path(@lesson), class: "btn-outline flex-1 sm:flex-initial border-line text-muted" %>

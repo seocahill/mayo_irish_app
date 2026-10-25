@@ -21,6 +21,11 @@ Rails.application.routes.draw do
   resources :vocabulary_items, only: [] do
     resource :pronunciation, only: :show
   end
+  resources :chat_messages, only: [] do
+    resource :pronunciation, only: :show, controller: "chat_message_pronunciations"
+    resource :flag, only: :create, controller: "chat_message_flags"
+  end
+  resources :flagged_replies, only: %i[index destroy]
   resources :lessons, only: [:index, :new, :create, :show, :edit, :update] do
     resource :review, only: %i[create destroy], controller: "lesson_reviews"
     resources :versions, only: :index do
@@ -34,6 +39,9 @@ Rails.application.routes.draw do
     resource :chat, only: [:show], controller: "lesson_chat" do
       post :message,  on: :member
       delete :clear,  on: :member
+    end
+    resource :conversation, only: %i[show destroy], controller: "lesson_conversations" do
+      post :message, on: :member
     end
     resource :quiz, only: [:show], controller: "quizzes" do
       post   :answer, on: :member
