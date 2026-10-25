@@ -25,8 +25,6 @@ class LessonChatController < ApplicationController
     own line, after your message to the student):
     [MASTERED:vocabulary] — student knows the lesson vocabulary well
     [MASTERED:grammar]    — student has grasped the grammar rules
-    [MASTERED:texts]      — student understands the text passages
-    [MASTERED:exercises]  — student can handle the exercise-type translations
 
     Only include a marker when genuinely warranted. You may include multiple markers if several
     areas are mastered. These markers will be hidden from the student.

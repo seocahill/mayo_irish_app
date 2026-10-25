@@ -9,8 +9,8 @@
     <h2 class="font-bold text-ink"><%= heading %></h2>
     <button type="button"
             data-action="click->row-editor#addRow"
-            class="text-sm bg-ink text-white px-3 py-1.5 rounded-sm hover:opacity-90 transition-colors">
-      + New row
+            class="text-sm bg-ink text-surface px-3 py-1.5 rounded-sm hover:opacity-90 transition-colors">
+      <%= t(".new_row") %>
     </button>
   </div>
 
@@ -56,7 +56,7 @@
             <td class="px-2 py-1.5 text-center">
               <button type="button" data-action="click->row-editor#removeRow"
                       class="text-stone-300 hover:text-red-500 transition-colors text-lg leading-none"
-                      title="Delete">×</button>
+                      title="<%= t("shared.delete") %>">×</button>
             </td>
           </tr>
         <% end %>
@@ -93,7 +93,7 @@
     <td class="px-2 py-1.5 text-center">
       <button type="button" data-action="click->row-editor#removeRow"
               class="text-stone-300 hover:text-red-500 transition-colors text-lg leading-none"
-              title="Delete">×</button>
+              title="<%= t("shared.delete") %>">×</button>
     </td>
   </tr>
 </template>

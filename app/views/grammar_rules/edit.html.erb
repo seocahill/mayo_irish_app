@@ -1,13 +1,11 @@
 <turbo-frame id="<%= dom_id(@rule) %>">
   <%= form_with model: @rule do |f| %>
-    <div class="bg-ink px-5 py-3 flex items-center gap-3">
-      <%= f.text_field :title,
-            class: "flex-1 bg-ink text-white placeholder-emerald-400 text-sm font-bold rounded px-2 py-1 border border-line focus:outline-none focus:border-line",
-            placeholder: "Teideal riail…" %>
-      <%= f.submit "Save", class: "bg-surface text-ink px-3 py-1 rounded text-xs font-semibold hover:bg-ink transition-colors cursor-pointer" %>
+    <div class="bg-canvas border-b border-line px-5 py-3 flex items-center gap-3">
+      <%= f.text_field :title, class: "editor-input flex-1 !py-1 text-sm font-semibold", placeholder: t(".title_placeholder") %>
+      <%= f.submit t("shared.save"), class: "btn-solid !px-3 !py-1 text-xs" %>
       <a href="<%= edit_lesson_path(@rule.lesson) %>"
          data-turbo-frame="<%= dom_id(@rule) %>"
-         class="text-ink hover:text-white text-xs transition-colors">Cealaigh</a>
+         class="text-muted hover:text-ink text-xs transition-colors"><%= t("shared.cancel") %></a>
     </div>
   <% end %>
 </turbo-frame>

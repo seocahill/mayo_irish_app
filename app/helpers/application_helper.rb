@@ -39,4 +39,10 @@ module ApplicationHelper
       end
     end
   end
+
+  # Strings the Stimulus controllers need, rendered into the page by the layout
+  # (see the `js` keys in config/locales).
+  def js_translations
+    { js: I18n.t("js") }
+  end
 end

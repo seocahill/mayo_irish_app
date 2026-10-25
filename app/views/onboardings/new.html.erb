@@ -1,9 +1,9 @@
 <div class="max-w-xl mx-auto flex flex-col gap-8">
 
   <header class="flex flex-col gap-2">
-    <p class="font-mono text-xs uppercase tracking-wider text-muted">Welcome</p>
-    <h1 class="font-display text-3xl leading-tight">Where are you from?</h1>
-    <p class="text-muted">Or where is your family from? This sets which Mayo speakers you hear first. You can change it any time.</p>
+    <p class="font-mono text-xs uppercase tracking-wider text-muted"><%= t(".welcome") %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
+    <p class="text-muted"><%= t(".intro") %></p>
   </header>
 
   <%= form_with model: @user, url: onboarding_path, method: :post, class: "flex flex-col gap-8" do |form| %>
@@ -16,22 +16,22 @@
     <% end %>
 
     <div class="flex flex-col gap-2">
-      <%= form.label :place, "Your place", class: "font-semibold" %>
+      <%= form.label :place, t(".your_place"), class: "font-semibold" %>
       <%= form.text_field :place, required: true, autofocus: true, autocomplete: "off",
-            placeholder: "For example: Ballindine, Belmullet, Achill",
+            placeholder: t(".place_placeholder"),
             class: "w-full bg-surface border border-line rounded-sm px-3 py-3 focus:outline-none focus:ring-2 focus:ring-ink" %>
       <p class="text-sm">
-        <a href="<%= OnboardingsHelper::GAELTACHT_1926_URL %>" target="_blank" rel="noopener" class="text-muted underline underline-offset-2">See how your area was classed in 1926</a>
+        <a href="<%= OnboardingsHelper::GAELTACHT_1926_URL %>" target="_blank" rel="noopener" class="text-muted underline underline-offset-2"><%= t(".see_1926") %></a>
       </p>
     </div>
 
     <fieldset class="flex flex-col gap-2">
-      <legend class="font-semibold mb-1">Which part of Mayo is closest?</legend>
-      <% OnboardingsHelper::REGIONS.each do |key, ga, note| %>
+      <legend class="font-semibold mb-1"><%= t(".region_legend") %></legend>
+      <% region_choices.each do |key, name, note| %>
         <label class="flex items-start gap-3 bg-surface border border-line rounded-sm px-4 py-3 cursor-pointer has-[:checked]:border-ink has-[:checked]:ring-1 has-[:checked]:ring-ink has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ink">
           <%= form.radio_button :dialect_region, key, required: true, class: "mt-1 accent-ink" %>
           <span>
-            <span class="font-display text-lg block leading-tight"><%= ga %></span>
+            <span class="font-display text-lg block leading-tight"><%= name %></span>
             <span class="text-sm text-muted"><%= note %></span>
           </span>
         </label>
@@ -39,19 +39,19 @@
     </fieldset>
 
     <fieldset class="flex flex-col gap-2">
-      <legend class="font-semibold mb-1">Where are you starting from?</legend>
-      <% OnboardingsHelper::DOORS.each do |key, ga, note| %>
+      <legend class="font-semibold mb-1"><%= t(".door_legend") %></legend>
+      <% door_choices.each do |key, name, note| %>
         <label class="flex items-start gap-3 bg-surface border border-line rounded-sm px-4 py-3 cursor-pointer has-[:checked]:border-ink has-[:checked]:ring-1 has-[:checked]:ring-ink has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ink">
           <%= form.radio_button :door, key, required: true, class: "mt-1 accent-ink" %>
           <span>
-            <span class="font-display text-lg block leading-tight"><%= ga %></span>
+            <span class="font-display text-lg block leading-tight"><%= name %></span>
             <span class="text-sm text-muted"><%= note %></span>
           </span>
         </label>
       <% end %>
     </fieldset>
 
-    <%= form.submit "Continue", class: "bg-ink text-surface font-semibold rounded-sm px-6 py-3 cursor-pointer hover:opacity-90 transition-opacity self-start" %>
+    <%= form.submit t(".continue"), class: "btn-solid self-start" %>
   <% end %>
 
 </div>

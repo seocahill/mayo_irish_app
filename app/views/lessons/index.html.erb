@@ -2,32 +2,25 @@
 
   <header class="flex items-start justify-between gap-4">
     <div>
-      <p class="eyebrow">Course</p>
-      <h1 class="font-display text-3xl leading-tight">Gaeilge Mhaigh Eo</h1>
-      <p class="text-muted mt-1"><%= pluralize(@lessons.count, "lesson") %> · Based on the Mayo dialect</p>
+      <p class="eyebrow"><%= t(".course") %></p>
+      <h1 class="font-display text-3xl leading-tight"><%= t("app_name") %></h1>
+      <p class="text-muted mt-1"><%= t(".summary", count: @lessons.count) %></p>
     </div>
     <% if current_user&.admin? %>
-      <%= link_to "New lesson", new_lesson_path, class: "btn-solid shrink-0" %>
+      <%= link_to t(".new_lesson"), new_lesson_path, class: "btn-solid shrink-0" %>
     <% end %>
   </header>
 
-  <%
-    sections = [
-      { key: "curriculum",     label: "Learning Irish",        desc: "Core grammar and conversation curriculum" },
-      { key: "thematic_vocab", label: "Mayo Irish vocabulary", desc: "Thematic word lists with audio" },
-      { key: "dias_material",  label: "DIAS field recordings", desc: "Foxford and Erris dialect notes (Wagner)" },
-    ]
-    by_type = @lessons.group_by(&:lesson_type)
-  %>
+  <% by_type = @lessons.group_by(&:lesson_type) %>
 
-  <% sections.each do |section| %>
-    <% group = by_type[section[:key]] %>
+  <% %w[curriculum thematic_vocab dias_material].each do |type| %>
+    <% group = by_type[type] %>
     <% next if group.blank? %>
 
     <section class="flex flex-col gap-3">
       <div>
-        <h2 class="eyebrow"><%= section[:label] %></h2>
-        <p class="text-sm text-muted"><%= section[:desc] %></p>
+        <h2 class="eyebrow"><%= t(".sections.#{type}.label") %></h2>
+        <p class="text-sm text-muted"><%= t(".sections.#{type}.description") %></p>
       </div>
 
       <ul class="card divide-y divide-line">
@@ -42,17 +35,17 @@
                 <span class="block leading-snug">
                   <%= lesson.title %>
                   <% unless lesson.published? %>
-                    <span class="chip border-labhair text-labhair ml-1 align-middle">Draft</span>
+                    <span class="chip border-labhair text-labhair ml-1 align-middle"><%= t(".draft") %></span>
                   <% end %>
                 </span>
                 <span class="block font-mono text-[11px] uppercase tracking-wider text-muted mt-0.5">
-                  <%= lesson.vocabulary_items.size %> words<% if lesson.grammar.present? %> · Grammar<% end %><% if lesson.texts.present? %> · Texts<% end %>
+                  <%= t(".word_count", count: lesson.vocabulary_items.size) %><% if lesson.grammar.present? %> · <%= t(".grammar") %><% end %>
                 </span>
               </span>
               <% if lp&.started? %>
-                <span class="flex items-center gap-2" title="<%= lp.known %>/<%= lp.total %> words known">
+                <span class="flex items-center gap-2" title="<%= t(".progress_title", known: lp.known, total: lp.total) %>">
                   <% if lp.complete? %>
-                    <span class="<%= level[:text] %>" aria-label="Complete">
+                    <span class="<%= level[:text] %>" aria-label="<%= t(".complete") %>">
                       <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                     </span>
                   <% else %>
@@ -65,7 +58,7 @@
               <% end %>
             </a>
             <% if current_user&.admin? %>
-              <a href="<%= edit_lesson_path(lesson) %>" class="eyebrow self-center px-4 hover:text-ink">Edit</a>
+              <a href="<%= edit_lesson_path(lesson) %>" class="eyebrow self-center px-4 hover:text-ink"><%= t("shared.edit") %></a>
             <% end %>
           </li>
         <% end %>

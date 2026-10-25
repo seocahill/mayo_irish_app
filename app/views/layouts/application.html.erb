@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="<%= I18n.locale %>" class="h-full">
   <head>
-    <title>Gaeilge Mhaigh Eo</title>
+    <title><%= t("app_name") %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta charset="utf-8">
     <%= csrf_meta_tags %>
@@ -12,29 +12,30 @@
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "lexxy", "data-turbo-track": "reload" %>
+    <%= tag.script json_escape(js_translations.to_json).html_safe, type: "application/json", id: "js-translations" %>
     <%= javascript_importmap_tags %>
   </head>
   <body class="h-full bg-canvas text-ink font-sans">
 
     <header class="bg-surface border-b border-line">
       <div class="max-w-4xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-        <a href="<%= root_path %>" class="font-display text-xl leading-tight text-ink">Gaeilge Mhaigh Eo</a>
+        <a href="<%= root_path %>" class="font-display text-xl leading-tight text-ink"><%= t("app_name") %></a>
         <nav class="text-sm text-muted flex items-center gap-4">
           <% if authenticated? %>
-            <a href="<%= root_path %>" class="hover:text-ink transition-colors py-1">Today</a>
-            <a href="<%= lessons_path %>" class="hover:text-ink transition-colors py-1">Lessons</a>
+            <a href="<%= root_path %>" class="hover:text-ink transition-colors py-1"><%= t(".today") %></a>
+            <a href="<%= lessons_path %>" class="hover:text-ink transition-colors py-1"><%= t(".lessons") %></a>
             <%= form_with url: search_path, method: :get, class: "relative", data: { turbo_frame: "_top" } do |f| %>
               <svg class="w-4 h-4 text-muted absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
               </svg>
               <%= f.search_field :q, value: params[:q], autocomplete: "off",
-                    placeholder: "Search…", "aria-label": "Search",
+                    placeholder: t(".search_placeholder"), "aria-label": t(".search_label"),
                     class: "w-28 sm:w-40 focus:w-36 sm:focus:w-52 transition-all bg-canvas border border-line rounded-full pl-8 pr-3 py-1.5 text-sm text-ink placeholder-muted focus:outline-none focus:ring-2 focus:ring-ink" %>
             <% end %>
-            <%= button_to "Sign out", session_path, method: :delete,
+            <%= button_to t(".sign_out"), session_path, method: :delete,
                   class: "text-muted hover:text-ink transition-colors bg-transparent border-0 p-0 cursor-pointer text-sm" %>
           <% else %>
-            <%= link_to "Sign in", new_session_path, class: "hover:text-ink transition-colors" %>
+            <%= link_to t(".sign_in"), new_session_path, class: "hover:text-ink transition-colors" %>
           <% end %>
         </nav>
       </div>
@@ -57,7 +58,7 @@
 
     <footer class="mt-16 border-t border-line bg-surface">
       <div class="max-w-4xl mx-auto px-4 py-6 text-center text-muted text-sm">
-        Based on <em>Learning Irish</em> by Mícheál Ó Siadhail, adapted for Mayo Irish
+        <%= t(".footer_html") %>
       </div>
     </footer>
 

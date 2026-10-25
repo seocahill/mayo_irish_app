@@ -1,12 +1,12 @@
 <div class="max-w-xl mx-auto flex flex-col gap-8">
 
   <header>
-    <p class="font-mono text-xs uppercase tracking-wider text-muted">Welcome back</p>
-    <h1 class="font-display text-3xl leading-tight">Your day</h1>
+    <p class="font-mono text-xs uppercase tracking-wider text-muted"><%= t(".welcome_back") %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
   </header>
 
   <section aria-labelledby="today-heading" class="flex flex-col gap-3">
-    <h2 id="today-heading" class="font-mono text-xs uppercase tracking-wider text-muted">Up next</h2>
+    <h2 id="today-heading" class="font-mono text-xs uppercase tracking-wider text-muted"><%= t(".up_next") %></h2>
 
     <% if @daily_path.items.any? %>
       <ul class="bg-surface border border-line rounded-sm divide-y divide-line">
@@ -25,23 +25,21 @@
       </ul>
     <% else %>
       <div class="bg-surface border border-line rounded-sm px-4 py-5 text-muted">
-        Nothing is due today.
-        <a href="<%= lessons_path %>" class="text-foghlaim underline underline-offset-2">Pick a lesson</a>
-        to get started.
+        <%= t(".nothing_due_html", link: link_to(t(".pick_a_lesson"), lessons_path, class: "text-foghlaim underline underline-offset-2")) %>
       </div>
     <% end %>
   </section>
 
   <section aria-labelledby="progress-heading" class="flex flex-col gap-3">
-    <h2 id="progress-heading" class="font-mono text-xs uppercase tracking-wider text-muted">So far</h2>
+    <h2 id="progress-heading" class="font-mono text-xs uppercase tracking-wider text-muted"><%= t(".so_far") %></h2>
     <p class="text-muted">
       <span class="font-display text-3xl text-ink"><%= @daily_path.known_words %></span>
-      <%= "word".pluralize(@daily_path.known_words) %> known
+      <%= t(".words_known", count: @daily_path.known_words) %>
     </p>
   </section>
 
   <section aria-labelledby="place-heading" class="flex flex-col gap-3">
-    <h2 id="place-heading" class="font-mono text-xs uppercase tracking-wider text-muted">Your place</h2>
+    <h2 id="place-heading" class="font-mono text-xs uppercase tracking-wider text-muted"><%= t(".your_place") %></h2>
     <div class="bg-surface border border-line rounded-sm px-4 py-4 flex flex-col gap-2">
       <p>
         <span class="font-semibold"><%= current_user.place %></span>
@@ -50,8 +48,8 @@
         <% end %>
       </p>
       <p class="text-sm flex flex-wrap gap-x-4 gap-y-1">
-        <a href="<%= OnboardingsHelper::GAELTACHT_1926_URL %>" target="_blank" rel="noopener" class="text-ink underline underline-offset-2">How was this area classed in 1926?</a>
-        <a href="<%= new_onboarding_path %>" class="text-muted underline underline-offset-2">Change</a>
+        <a href="<%= OnboardingsHelper::GAELTACHT_1926_URL %>" target="_blank" rel="noopener" class="text-ink underline underline-offset-2"><%= t(".classed_1926") %></a>
+        <a href="<%= new_onboarding_path %>" class="text-muted underline underline-offset-2"><%= t(".change") %></a>
       </p>
     </div>
   </section>

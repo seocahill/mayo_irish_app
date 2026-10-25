@@ -1,6 +1,6 @@
 <div class="max-w-md mx-auto mt-8">
-  <h1 class="text-2xl font-display text-ink mb-2">Register</h1>
-  <p class="text-muted text-sm mb-6">Your account will be checked before you get access.</p>
+  <h1 class="text-2xl font-display text-ink mb-2"><%= t(".title") %></h1>
+  <p class="text-muted text-sm mb-6"><%= t(".intro") %></p>
 
   <%= form_with model: @user, url: registration_path do |form| %>
     <% if @user.errors.any? %>
@@ -13,14 +13,14 @@
 
     <div class="space-y-4">
       <div>
-        <%= form.label :email_address, "Email", class: "block text-sm font-semibold mb-1" %>
+        <%= form.label :email_address, t(".email"), class: "block text-sm font-semibold mb-1" %>
         <%= form.email_field :email_address, required: true, autofocus: true,
               autocomplete: "username",
               class: "field" %>
       </div>
 
       <div>
-        <%= form.label :password, "Password", class: "block text-sm font-semibold mb-1" %>
+        <%= form.label :password, t(".password"), class: "block text-sm font-semibold mb-1" %>
         <%= form.password_field :password, required: true,
               autocomplete: "new-password",
               maxlength: 72,
@@ -28,19 +28,19 @@
       </div>
 
       <div>
-        <%= form.label :password_confirmation, "Deimhnigh pasfhocal", class: "block text-sm font-semibold mb-1" %>
+        <%= form.label :password_confirmation, t(".password_confirmation"), class: "block text-sm font-semibold mb-1" %>
         <%= form.password_field :password_confirmation, required: true,
               autocomplete: "new-password",
               maxlength: 72,
               class: "field" %>
       </div>
 
-      <%= form.submit "Register",
+      <%= form.submit t(".submit"),
             class: "btn-solid w-full" %>
     </div>
   <% end %>
 
   <p class="mt-6 text-sm text-muted">
-    Already have an account? <%= link_to "Sign in", new_session_path, class: "text-ink underline underline-offset-2" %>
+    <%= t(".have_account_html", link: link_to(t(".sign_in"), new_session_path, class: "text-ink underline underline-offset-2")) %>
   </p>
 </div>

@@ -2,17 +2,17 @@
   <div class="card p-6 sm:p-10 flex flex-col gap-6">
     <% if @progress.any? %>
       <div>
-        <p class="eyebrow text-foghlaim mb-2">All done</p>
-        <h1 class="font-display text-3xl leading-tight">Nothing left to review right now</h1>
-        <p class="text-muted mt-2">You know all the vocabulary in this lesson. Questions will come back when they are due for review.</p>
+        <p class="eyebrow text-foghlaim mb-2"><%= t(".all_done") %></p>
+        <h1 class="font-display text-3xl leading-tight"><%= t(".nothing_left") %></h1>
+        <p class="text-muted mt-2"><%= t(".all_known") %></p>
       </div>
-      <%= render "shared/progress_bar", progress: @progress, label: "Words known" %>
+      <%= render "shared/progress_bar", progress: @progress, label: t("shared.words_known") %>
     <% else %>
       <div>
-        <h1 class="font-display text-3xl leading-tight">No questions yet</h1>
-        <p class="text-muted mt-2">This lesson has no vocabulary to quiz yet.</p>
+        <h1 class="font-display text-3xl leading-tight"><%= t(".no_questions") %></h1>
+        <p class="text-muted mt-2"><%= t(".no_vocabulary") %></p>
       </div>
     <% end %>
-    <%= link_to "Back to the lesson", lesson_path(@lesson), class: "btn-solid self-start" %>
+    <%= link_to t(".back_to_lesson"), lesson_path(@lesson), class: "btn-solid self-start" %>
   </div>
 </div>

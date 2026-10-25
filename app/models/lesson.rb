@@ -51,13 +51,7 @@ class Lesson < ApplicationRecord
   # drafts created through the MCP connector, pending review).
   scope :visible_to, ->(user) { user&.admin? ? all : published }
 
-  TYPE_LABELS = {
-    "curriculum"    => "Core course",
-    "thematic_vocab" => "Vocabulary",
-    "dias_material"  => "Field recordings",
-  }.freeze
-
-  def type_label     = TYPE_LABELS.fetch(lesson_type, lesson_type)
+  def type_label = I18n.t("lessons.types.#{lesson_type}", default: lesson_type.to_s)
 
   # Words known per lesson for a user (a word counts once all its questions are
   # known), computed in a couple of grouped queries rather than per lesson.

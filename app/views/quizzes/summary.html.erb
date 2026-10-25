@@ -1,20 +1,20 @@
 <div class="max-w-xl mx-auto">
   <div class="card p-6 sm:p-10 flex flex-col gap-6">
     <div>
-      <p class="eyebrow text-foghlaim mb-2">Round complete</p>
-      <h1 class="font-display text-4xl leading-tight"><%= @correct %> of <%= @answered %></h1>
-      <p class="text-muted mt-1">correct this round</p>
+      <p class="eyebrow text-foghlaim mb-2"><%= t(".round_complete") %></p>
+      <h1 class="font-display text-4xl leading-tight"><%= t(".score", correct: @correct, answered: @answered) %></h1>
+      <p class="text-muted mt-1"><%= t(".correct_this_round") %></p>
     </div>
 
-    <%= render "shared/progress_bar", progress: @progress, label: "Words known" %>
+    <%= render "shared/progress_bar", progress: @progress, label: t("shared.words_known") %>
 
     <% if @progress.complete? %>
-      <p class="text-sm text-foghlaim">You know all the vocabulary in this lesson. Questions will come back for review.</p>
+      <p class="text-sm text-foghlaim"><%= t(".all_known") %></p>
     <% end %>
 
     <div class="flex flex-col sm:flex-row gap-2">
-      <%= link_to "Keep going", lesson_quiz_path(@lesson), class: "btn-solid" %>
-      <%= link_to "Back to the lesson", lesson_path(@lesson), class: "btn-outline border-line text-muted" %>
+      <%= link_to t(".keep_going"), lesson_quiz_path(@lesson), class: "btn-solid" %>
+      <%= link_to t(".back_to_lesson"), lesson_path(@lesson), class: "btn-outline border-line text-muted" %>
     </div>
   </div>
 </div>

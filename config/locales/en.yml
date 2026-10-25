@@ -1,0 +1,344 @@
+---
+en:
+  app_name: Gaeilge Mhaigh Eo
+  daily_path:
+    lesson_label: Learn · Lesson %{number}
+    lesson_title: "%{title} (%{known} of %{total} words known)"
+    review_label: Review · %{count} due
+    review_title: Review the words that are due
+    tutor_label: Practise · text chat
+    tutor_title: Talk it through with the tutor
+  exercises:
+    edit:
+      english_placeholder: English…
+      irish_placeholder: Irish (optional)…
+  grammar_rules:
+    edit:
+      title_placeholder: Rule title…
+  grammar_sections:
+    edit:
+      content: Content
+      label: Label
+      label_placeholder: "(i) Forms…"
+  home:
+    show:
+      change: Change
+      classed_1926: How was this area classed in 1926?
+      nothing_due_html: Nothing is due today. %{link} to get started.
+      pick_a_lesson: Pick a lesson
+      so_far: So far
+      title: Your day
+      up_next: Up next
+      welcome_back: Welcome back
+      words_known:
+        one: word known
+        other: words known
+      your_place: Your place
+  js:
+    recorder:
+      no_permission: No permission
+      not_supported: Not supported
+      ready: Ready
+      recording: Recording…
+  layouts:
+    application:
+      footer_html: Based on <em>Learning Irish</em> by Mícheál Ó Siadhail, adapted
+        for Mayo Irish
+      lessons: Lessons
+      search_label: Search
+      search_placeholder: Search…
+      sign_in: Sign in
+      sign_out: Sign out
+      today: Today
+  lesson_blocks:
+    edit:
+      audio_caption_placeholder: Describe the audio file...
+      audio_file: Audio file
+      block_title: "%{type} block"
+      caption: Caption (optional)
+      image_caption_placeholder: Describe the image...
+      pdf_caption_placeholder: Document title...
+      pdf_file: PDF file
+      video_caption_placeholder: Describe the video...
+      video_url: Video URL (YouTube or Vimeo)
+    lesson_block:
+      drag_to_reorder: Drag to reorder
+      no_audio: No audio file attached yet.
+      no_image: No image attached yet.
+      no_pdf: No PDF attached yet.
+      no_video: No video URL yet.
+    types:
+      audio: Audio
+      image: Image
+      pdf: PDF
+      text: Text
+      video: Video
+  lesson_chat:
+    show:
+      back_to_lesson: "← Back to the lesson"
+      empty_state: Type "start" or anything to begin the lesson.
+      placeholder: Write your answer...
+      practise_label: Practise · Lesson %{number}
+      send: Send
+      start_again: Start again
+  lessons:
+    edit:
+      add_block: Add a new block
+      back_to_lesson: "← Back to the lesson"
+      content_description: Grammar notes parsed from the book
+      content_title: Lesson content
+      details_description: Title, vocabulary and notes
+      details_title: Lesson details
+      editing: Editing · Lesson %{number}
+      english: English
+      gender: Gender
+      grammar: Grammar
+      irish: Irish
+      lesson_title: Lesson title
+      meaning_placeholder: meaning
+      new_word: "+ New word"
+      open_chat: Open chat
+      plural: Plural
+      plural_placeholder: plural
+      position: Position
+      pronunciation: Pronunciation
+      pronunciation_placeholder: "/pronunciation/"
+      published: Published
+      published_note: "(visible to learners)"
+      rich_content: Rich content
+      rich_content_description: Free text, videos, images and PDFs, in any order
+      tutor_description: Guide the AI chat. Leave empty to use the general default.
+      tutor_focus: What should the AI focus on in this lesson?
+      tutor_instructions: Tutor instructions
+      tutor_placeholder: e.g. Focus on noun gender. Test common nouns first, then
+        ask the student to apply the gender rules to unfamiliar words. Note any Mayo
+        dialect exceptions...
+      tutor_title: AI tutor settings
+      vocabulary: Vocabulary
+      vocabulary_notes: Vocabulary notes
+      word_placeholder: word
+    flash:
+      not_authorised: Not authorised.
+      not_found: Lesson not found.
+      saved: Lesson saved.
+    genders:
+      feminine: f.
+      masculine: m.
+    index:
+      complete: Complete
+      course: Course
+      draft: Draft
+      grammar: Grammar
+      new_lesson: New lesson
+      progress_title: "%{known}/%{total} words known"
+      sections:
+        curriculum:
+          description: Core grammar and conversation curriculum
+          label: Learning Irish
+        dias_material:
+          description: Foxford and Erris dialect notes (Wagner)
+          label: DIAS field recordings
+        thematic_vocab:
+          description: Thematic word lists with audio
+          label: Mayo Irish vocabulary
+      summary:
+        one: "%{count} lesson · Based on the Mayo dialect"
+        other: "%{count} lessons · Based on the Mayo dialect"
+      word_count:
+        one: "%{count} word"
+        other: "%{count} words"
+    new:
+      create: Create lesson
+      eyebrow: New lesson
+      lesson_title: Title
+      next_free_position: 'Next free position: %{position}'
+      number: Lesson number
+      number_placeholder: e.g. 0
+      position: Position
+      title: Add a lesson
+      title_placeholder: e.g. Lesson title
+    section_badge:
+      known: Known
+    section_row_editor:
+      new_row: "+ New row"
+    show:
+      all_lessons: All lessons
+      english: English
+      feminine: f.
+      grammar: Grammar
+      irish: Irish
+      lesson_label: Lesson %{number} · %{type}
+      lesson_number: Lesson %{number}
+      play_recording: Play your recording
+      plural: Plural
+      practice: Practice
+      pronunciation: Pronunciation
+      quiz: Quiz
+      record: Record
+      record_yourself: Record yourself
+      vocabulary: Vocabulary
+      vocabulary_notes: Vocabulary notes
+    types:
+      curriculum: Core course
+      dias_material: Field recordings
+      thematic_vocab: Vocabulary
+    vocabulary_item_row:
+      meaning: meaning
+      plural: plural
+      pronunciation: "/pronunciation/"
+      word: word
+  onboardings:
+    doors:
+      beginner:
+        name: New to Irish
+        note: I'm starting from scratch
+      family:
+        name: Family
+        note: I'm learning with children
+      school_irish:
+        name: School Irish
+        note: I had school Irish and lost confidence
+      speaks_irish:
+        name: Speaks Irish already
+        note: I speak Irish, but not Mayo Irish
+    new:
+      continue: Continue
+      door_legend: Where are you starting from?
+      intro: Or where is your family from? This sets which Mayo speakers you hear
+        first. You can change it any time.
+      place_placeholder: 'For example: Ballindine, Belmullet, Achill'
+      region_legend: Which part of Mayo is closest?
+      see_1926: See how your area was classed in 1926
+      title: Where are you from?
+      welcome: Welcome
+      your_place: Your place
+    regions:
+      achill:
+        name: Achill
+        note: Achill Island and nearby
+      east_mayo:
+        name: East Mayo
+        note: Foxford, Ballindine and the Sligo border
+      erris:
+        name: Erris
+        note: Belmullet, Carrowteige, Geesala
+      other:
+        name: Somewhere else
+        note: Another part of Ireland or abroad, or not sure
+      tourmakeady:
+        name: Tourmakeady
+        note: South Mayo, by Lough Mask
+  passwords:
+    edit:
+      confirmation_placeholder: Repeat new password
+      password_placeholder: Enter new password
+      title: Update your password
+    flash:
+      invalid_link: Password reset link is invalid or has expired.
+      mismatch: Passwords did not match.
+      reset_done: Password has been reset.
+      reset_sent: Password reset instructions sent (if user with that email address
+        exists).
+      try_again_later: Try again later.
+    new:
+      email_placeholder: Enter your email address
+      submit: Email reset instructions
+      title: Forgot your password?
+  passwords_mailer:
+    reset:
+      expiry: This link will expire in %{time}.
+      intro: You can reset your password on
+      intro_html: You can reset your password on %{link}.
+      link_text: this password reset page
+      subject: Reset your password
+  quizzes:
+    answer:
+      correct: Correct
+      incorrect: Incorrect
+      next: Next
+      not_quite: Not quite.
+      see_results: See results
+      well_done: Well done!
+      your_answer: 'Your answer:'
+    empty:
+      all_done: All done
+      all_known: You know all the vocabulary in this lesson. Questions will come back
+        when they are due for review.
+      back_to_lesson: Back to the lesson
+      no_questions: No questions yet
+      no_vocabulary: This lesson has no vocabulary to quiz yet.
+      nothing_left: Nothing left to review right now
+    show:
+      how_to_say_in_irish: How do you say this in Irish?
+      meaning_in_english: What does this mean in English?
+      question_count: Question %{position}/%{count}
+      quit: Quit
+    summary:
+      all_known: You know all the vocabulary in this lesson. Questions will come back
+        for review.
+      back_to_lesson: Back to the lesson
+      correct_this_round: correct this round
+      keep_going: Keep going
+      round_complete: Round complete
+      score: "%{correct} of %{answered}"
+  registrations:
+    new:
+      email: Email
+      have_account_html: Already have an account? %{link}
+      intro: Your account will be checked before you get access.
+      password: Password
+      password_confirmation: Confirm password
+      sign_in: Sign in
+      submit: Register
+      title: Register
+    pending:
+      back: Back to the site
+      message: Your account has been created. You will be told when an administrator
+        approves it.
+      title: Waiting for approval
+  search:
+    index:
+      empty_query: Type something above to search the whole course.
+      intro: 'Search across every lesson: vocabulary and grammar. Works in English
+        and in Irish (fadas optional).'
+      lesson_number: Lesson %{number}
+      no_results_html: No results for <span class="font-semibold">“%{query}”</span>.
+      placeholder: e.g. house, dog, lenition…
+      result_count:
+        one: "%{count} result"
+        other: "%{count} results"
+      title: Search
+      top_note: " (showing the top %{max})"
+      try_again: Try fewer or different words.
+    types:
+      GrammarRule: Grammar
+      GrammarSection: Grammar
+      Lesson: Lesson
+      LessonBlock: Content
+      Phrase: Phrase
+      VocabularyItem: Vocabulary
+  sessions:
+    flash:
+      invalid_credentials: Try another email address or password.
+      try_again_later: Try again later.
+    new:
+      email: Email
+      forgot_password: Forgot your password?
+      no_account_html: No account? %{link}
+      password: Password
+      register_here: Register here
+      submit: Sign in
+      title: Sign in
+  shared:
+    cancel: Cancel
+    confirm: Are you sure?
+    delete: Delete
+    edit: Edit
+    progress_bar:
+      complete: Complete
+      default_label: Progress
+    save: Save
+    words_known: Words known
+  text_passages:
+    edit:
+      title_placeholder: Title…

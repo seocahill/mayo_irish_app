@@ -13,8 +13,8 @@ class OnboardingsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "h1", "Where are you from?"
     assert_select "input[name='user[place]']"
-    assert_select "input[type=radio][name='user[dialect_region]']", OnboardingsHelper::REGIONS.size
-    assert_select "input[type=radio][name='user[door]']", OnboardingsHelper::DOORS.size
+    assert_select "input[type=radio][name='user[dialect_region]']", User.dialect_regions.size
+    assert_select "input[type=radio][name='user[door]']", User.doors.size
   end
 
   test "saves the answers and goes home" do

@@ -38,7 +38,7 @@ class LessonsController < ApplicationController
     # Draft lessons (e.g. created via the MCP connector) are hidden from learners
     # until an admin publishes them.
     unless @lesson.published? || current_user&.admin?
-      redirect_to(root_path, alert: "Lesson not found.") and return
+      redirect_to(root_path, alert: t("lessons.flash.not_found")) and return
     end
 
     @quiz_progress = @lesson.progress_for(current_user)
@@ -63,7 +63,7 @@ class LessonsController < ApplicationController
 
   def update
     if @lesson.update(lesson_params)
-      redirect_to lesson_path(@lesson), notice: "Lesson saved."
+      redirect_to lesson_path(@lesson), notice: t("lessons.flash.saved")
     else
       render :edit, status: :unprocessable_entity
     end
@@ -77,7 +77,7 @@ class LessonsController < ApplicationController
 
   def require_admin
     unless current_user&.admin?
-      redirect_to root_path, alert: "Not authorised."
+      redirect_to root_path, alert: t("lessons.flash.not_authorised")
     end
   end
 
