@@ -59,7 +59,14 @@ jobs:
           fi
 
       - name: Deploy this branch
+        id: deploy
         run: flyctl deploy --remote-only --ha=false -a "$PREVIEW_APP"
+
+      - name: Show the app's logs if it didn't come up
+        if: failure() && steps.deploy.conclusion == 'failure'
+        run: |
+          flyctl status -a "$PREVIEW_APP" || true
+          flyctl logs -a "$PREVIEW_APP" --no-tail | tail -80 || true
 
       - name: Copy the production database
         if: >-
