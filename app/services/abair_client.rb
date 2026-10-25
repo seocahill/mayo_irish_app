@@ -28,8 +28,9 @@ class AbairClient
     @voice = voice
   end
 
+  # v4's encoding enum is "wav" or "MP3", case and all.
   def synthesise(text)
-    request = Net::HTTP::Post.new(uri("/synthesis", outputType: "JSON", audioEncoding: "WAV"), "Content-Type" => "application/json")
+    request = Net::HTTP::Post.new(uri("/synthesis", outputType: "JSON", audioEncoding: "wav"), "Content-Type" => "application/json")
     request.body = { input: text, voice: @voice, speed: 1.0 }.to_json
 
     Base64.decode64(perform(request).fetch("audioContent"))
