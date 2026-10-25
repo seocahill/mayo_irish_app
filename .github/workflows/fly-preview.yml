@@ -84,8 +84,15 @@ jobs:
           flyctl ssh sftp get /tmp/preview-snapshot.sqlite3 snapshot.sqlite3 -a "$PROD_APP"
           flyctl ssh console -a "$PROD_APP" -C "rm -f /tmp/preview-snapshot.sqlite3"
 
+          # The preview auto-stops when idle too, so wake it before each step.
+          beta_machine=$(flyctl machines list -a "$PREVIEW_APP" --json | jq -r '.[0].id')
+          wake_beta() { flyctl machine start "$beta_machine" -a "$PREVIEW_APP" >/dev/null || true; flyctl machine wait "$beta_machine" -a "$PREVIEW_APP" --state started --wait-timeout 60 || true; }
+
+          wake_beta
           flyctl ssh console -a "$PREVIEW_APP" -C "sh -c 'rm -f /data/production.sqlite3 /data/production.sqlite3-wal /data/production.sqlite3-shm'"
+          wake_beta
           echo "put snapshot.sqlite3 /data/production.sqlite3" | flyctl ssh sftp shell -a "$PREVIEW_APP"
+          wake_beta
           flyctl ssh console -a "$PREVIEW_APP" -C "chown 1000:1000 /data/production.sqlite3"
           # Restarting runs db:prepare, which migrates the copy to this branch's schema.
           flyctl apps restart "$PREVIEW_APP"
