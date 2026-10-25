@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_25_000003) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_25_150943) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -300,6 +300,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_25_000003) do
     t.string "place"
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
+  end
+
+  create_table "versions", force: :cascade do |t|
+    t.datetime "created_at"
+    t.string "event", null: false
+    t.bigint "item_id", null: false
+    t.string "item_type", null: false
+    t.integer "lesson_id"
+    t.text "object"
+    t.text "object_changes"
+    t.string "whodunnit"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+    t.index ["lesson_id", "created_at"], name: "index_versions_on_lesson_id_and_created_at"
   end
 
   create_table "vocabulary_items", force: :cascade do |t|

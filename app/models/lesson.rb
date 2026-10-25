@@ -1,5 +1,12 @@
 class Lesson < ApplicationRecord
   include Searchable
+  include EditHistory
+
+  # Review marks aren't content, and the legacy book columns aren't edited.
+  tracked_in_lesson_history lesson_id: ->(l) { l.id },
+                            label: ->(l) { l.title },
+                            only: %i[title number position published lesson_type intro_video_url
+                                     intro_video_transcript tutor_prompt]
 
   has_rich_text :vocabulary_notes_content
 

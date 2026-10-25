@@ -1,5 +1,9 @@
 class GrammarRule < ApplicationRecord
   include Searchable
+  include EditHistory
+
+  tracked_in_lesson_history lesson_id: ->(r) { r.lesson_id },
+                            label: ->(r) { r.title }
 
   belongs_to :lesson
   has_many :grammar_sections, -> { order(:position) }, dependent: :destroy

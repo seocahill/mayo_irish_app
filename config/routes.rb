@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   get "search", to: "search#index", as: :search
   resources :lessons, only: [:index, :new, :create, :show, :edit, :update] do
     resource :review, only: %i[create destroy], controller: "lesson_reviews"
+    resources :versions, only: :index do
+      resource :undo, only: :create, controller: "version_undos"
+    end
     resources :grammar_rules, only: [:edit, :update], shallow: true
     resources :grammar_sections, only: [:edit, :update], shallow: true
     resources :lesson_blocks, only: [:create, :edit, :update, :destroy], shallow: true do

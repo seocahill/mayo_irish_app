@@ -1,5 +1,9 @@
 class VocabularyItem < ApplicationRecord
   include Searchable
+  include EditHistory
+
+  tracked_in_lesson_history lesson_id: ->(v) { v.lesson_id },
+                            label: ->(v) { v.irish }
 
   belongs_to :lesson
   has_one_attached :audio

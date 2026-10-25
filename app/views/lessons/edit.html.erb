@@ -28,6 +28,7 @@
   </div>
   <div class="flex flex-wrap gap-2">
     <%= link_to t(".view_as_learner"), lesson_path(@lesson, preview: 1), class: "btn-outline border-line text-muted !py-2" %>
+    <%= link_to t(".history"), lesson_versions_path(@lesson), class: "btn-outline border-line text-muted !py-2" %>
     <% if @lesson.reviewed? %>
       <%= button_to t(".clear_review"), lesson_review_path(@lesson), method: :delete, class: "btn-outline border-line text-muted !py-2" %>
     <% else %>

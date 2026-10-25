@@ -2,6 +2,10 @@ class LessonBlock < ApplicationRecord
   TYPES = %w[text image video pdf audio].freeze
 
   include Searchable
+  include EditHistory
+
+  tracked_in_lesson_history lesson_id: ->(b) { b.lesson_id },
+                            label: ->(b) { b.caption.presence || b.block_type.to_s.titleize }
 
   belongs_to :lesson
   has_rich_text :body

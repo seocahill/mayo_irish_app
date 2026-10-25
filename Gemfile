@@ -42,3 +42,4 @@ gem "bcrypt", "~> 3.1"
 # MCP server + OAuth 2.1 provider for the claude.ai web connector
 gem "mcp", "~> 0.22"
 gem "doorkeeper", "~> 5.9"
+gem "paper_trail", "~> 17.0"

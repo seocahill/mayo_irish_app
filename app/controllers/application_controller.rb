@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
 
   before_action :require_approval
+  # PaperTrail's own copy of this runs before sign-in is resolved, so re-declare
+  # it to run after, and edits are attributed to the signed-in user.
+  before_action :set_paper_trail_whodunnit
 
   private
 

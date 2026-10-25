@@ -78,6 +78,16 @@ class McpControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Renamed", lessons(:one).reload.title
   end
 
+  test "connector edits are attributed to the connected user in the lesson history" do
+    post mcp_path, headers: auth_headers, params: rpc("tools/call", {
+      name: "update_record",
+      arguments: { resource: "lessons", id: lessons(:one).id, attributes: { title: "Renamed" } }
+    }).to_json
+
+    version = PaperTrail::Version.where(lesson_id: lessons(:one).id).order(:id).last
+    assert_equal @admin.id.to_s, version.whodunnit
+  end
+
   test "create_record accepts phonetic and notes on phrases" do
     post mcp_path, headers: auth_headers, params: rpc("tools/call", {
       name: "create_record",

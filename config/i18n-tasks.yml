@@ -24,6 +24,7 @@ search:
 # validation messages Rails looks up itself (errors.add(:field, :symbol)) are not
 # visible to the scanner.
 ignore_unused:
+  - activerecord.attributes.*
   - errors.messages.*
   - lessons.types.*
   - lessons.genders.*
