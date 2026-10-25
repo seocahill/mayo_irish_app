@@ -1,15 +1,15 @@
 <turbo-frame id="<%= dom_id(lesson_block) %>" class="block">
-  <div class="bg-white rounded-xl border border-stone-200 overflow-hidden group">
+  <div class="bg-surface rounded-sm border border-line overflow-hidden group">
     <%# Block type badge + actions %>
-    <div class="px-5 py-2.5 bg-stone-50 border-b border-stone-100 flex items-center justify-between">
-      <span class="text-xs font-semibold text-stone-400 uppercase tracking-wide"><%= lesson_block.block_type %></span>
+    <div class="px-5 py-2.5 bg-stone-50 border-b border-line flex items-center justify-between">
+      <span class="text-xs font-semibold text-muted uppercase tracking-wide"><%= lesson_block.block_type %></span>
       <div class="flex items-center gap-3">
-        <span class="text-stone-300 hover:text-stone-500 cursor-grab text-sm transition-colors" data-blocks-handle title="Athordaigh">⠿</span>
+        <span class="text-stone-300 hover:text-muted cursor-grab text-sm transition-colors" data-blocks-handle title="Athordaigh">⠿</span>
         <span class="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-3">
           <%= link_to "Cuir in eagar", edit_lesson_block_path(lesson_block),
-                class: "text-stone-400 hover:text-emerald-800 text-xs transition-colors" %>
+                class: "text-muted hover:text-ink text-xs transition-colors" %>
           <%= button_to "Scrios", lesson_block_path(lesson_block), method: :delete,
-                class: "text-stone-400 hover:text-red-500 text-xs transition-colors bg-transparent border-none cursor-pointer",
+                class: "text-muted hover:text-red-500 text-xs transition-colors bg-transparent border-none cursor-pointer",
                 data: { turbo_confirm: "An bhfuil tú cinnte?" } %>
         </span>
       </div>
@@ -18,26 +18,26 @@
     <%# Block content %>
     <div class="px-5 py-4">
       <% if lesson_block.text? %>
-        <div class="lexxy-content prose-sm text-stone-700">
+        <div class="lexxy-content prose-sm text-ink">
           <%= lesson_block.body %>
         </div>
 
       <% elsif lesson_block.image? %>
         <% if lesson_block.file.attached? %>
           <figure>
-            <%= image_tag lesson_block.file, class: "max-w-full rounded-lg" %>
+            <%= image_tag lesson_block.file, class: "max-w-full rounded-sm" %>
             <% if lesson_block.caption.present? %>
-              <figcaption class="text-xs text-stone-400 mt-2 text-center"><%= lesson_block.caption %></figcaption>
+              <figcaption class="text-xs text-muted mt-2 text-center"><%= lesson_block.caption %></figcaption>
             <% end %>
           </figure>
         <% else %>
-          <p class="text-sm text-stone-400 italic">Níl íomhá nasctha fós.</p>
+          <p class="text-sm text-muted italic">Níl íomhá nasctha fós.</p>
         <% end %>
 
       <% elsif lesson_block.video? %>
         <% if lesson_block.url.present? %>
           <figure>
-            <div class="relative aspect-video rounded-lg overflow-hidden bg-black">
+            <div class="relative aspect-video rounded-sm overflow-hidden bg-black">
               <iframe src="<%= video_embed_url(lesson_block.url) %>"
                       class="absolute inset-0 w-full h-full"
                       frameborder="0"
@@ -45,18 +45,18 @@
                       allowfullscreen></iframe>
             </div>
             <% if lesson_block.caption.present? %>
-              <figcaption class="text-xs text-stone-400 mt-2 text-center"><%= lesson_block.caption %></figcaption>
+              <figcaption class="text-xs text-muted mt-2 text-center"><%= lesson_block.caption %></figcaption>
             <% end %>
           </figure>
         <% else %>
-          <p class="text-sm text-stone-400 italic">Níl URL físeáin ann fós.</p>
+          <p class="text-sm text-muted italic">Níl URL físeáin ann fós.</p>
         <% end %>
 
       <% elsif lesson_block.pdf? %>
         <% if lesson_block.file.attached? %>
           <%= link_to rails_blob_url(lesson_block.file, disposition: "inline"), target: "_blank", class: "block group/pdf" do %>
             <% if lesson_block.file.previewable? %>
-              <div class="rounded-lg overflow-hidden border border-stone-200 mb-3 bg-stone-50">
+              <div class="rounded-sm overflow-hidden border border-line mb-3 bg-stone-50">
                 <%= image_tag lesson_block.file.preview(resize_to_limit: [1600, 1200]), class: "w-full object-top object-cover" %>
               </div>
             <% end %>
@@ -65,13 +65,13 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
               </svg>
               <div>
-                <p class="text-sm font-medium text-emerald-800 group-hover/pdf:underline"><%= lesson_block.caption.presence || lesson_block.file.filename %></p>
-                <p class="text-xs text-stone-400"><%= number_to_human_size(lesson_block.file.byte_size) %></p>
+                <p class="text-sm font-medium text-ink group-hover/pdf:underline"><%= lesson_block.caption.presence || lesson_block.file.filename %></p>
+                <p class="text-xs text-muted"><%= number_to_human_size(lesson_block.file.byte_size) %></p>
               </div>
             </div>
           <% end %>
         <% else %>
-          <p class="text-sm text-stone-400 italic">Níl PDF nasctha fós.</p>
+          <p class="text-sm text-muted italic">Níl PDF nasctha fós.</p>
         <% end %>
 
       <% elsif lesson_block.audio? %>
@@ -79,11 +79,11 @@
           <figure>
             <audio controls src="<%= rails_blob_url(lesson_block.file) %>" class="w-full"></audio>
             <% if lesson_block.caption.present? %>
-              <figcaption class="text-xs text-stone-400 mt-2"><%= lesson_block.caption %></figcaption>
+              <figcaption class="text-xs text-muted mt-2"><%= lesson_block.caption %></figcaption>
             <% end %>
           </figure>
         <% else %>
-          <p class="text-sm text-stone-400 italic">Níl comhad fuaime nasctha fós.</p>
+          <p class="text-sm text-muted italic">Níl comhad fuaime nasctha fós.</p>
         <% end %>
       <% end %>
     </div>

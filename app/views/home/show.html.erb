@@ -11,7 +11,7 @@
     <% if @daily_path.items.any? %>
       <ul class="bg-surface border border-line rounded-sm divide-y divide-line">
         <% @daily_path.items.each do |item| %>
-          <% level = OnboardingsHelper::LEVEL_CLASSES.fetch(item.level) %>
+          <% level = level_classes(item.level) %>
           <li>
             <a href="<%= item.path %>" class="grid grid-cols-[6px_1fr] gap-4 px-4 py-4 hover:bg-canvas transition-colors">
               <span class="rounded-sm <%= level[:stripe] %>" aria-hidden="true"></span>

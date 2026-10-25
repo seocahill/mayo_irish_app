@@ -1,6 +1,6 @@
 <turbo-frame id="<%= dom_id(@section) %>">
   <%= form_with model: @section do |f| %>
-    <div class="border-b border-stone-100 px-5 py-4 bg-stone-50">
+    <div class="border-b border-line px-5 py-4 bg-stone-50">
       <label class="editor-label">Lipéad</label>
       <%= f.text_field :label, class: "editor-input", placeholder: "(i) Foirmeacha…" %>
     </div>
@@ -8,11 +8,11 @@
       <label class="editor-label mb-2 block">Ábhar</label>
       <%= f.rich_text_area :body %>
     </div>
-    <div class="px-5 py-3 border-t border-stone-100 flex items-center justify-between bg-stone-50">
+    <div class="px-5 py-3 border-t border-line flex items-center justify-between bg-stone-50">
       <a href="<%= edit_lesson_path(@section.grammar_rule.lesson) %>"
          data-turbo-frame="<%= dom_id(@section) %>"
-         class="text-sm text-stone-500 hover:text-stone-800 transition-colors">Cealaigh</a>
-      <%= f.submit "Sábháil", class: "bg-emerald-800 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition-colors cursor-pointer" %>
+         class="text-sm text-muted hover:text-ink transition-colors">Cealaigh</a>
+      <%= f.submit "Sábháil", class: "btn-solid" %>
     </div>
   <% end %>
 </turbo-frame>

@@ -16,14 +16,6 @@ module OnboardingsHelper
     [ "family", "Teaghlach", "I'm learning with children" ]
   ].freeze
 
-  # Full class strings so Tailwind can see them.
-  LEVEL_CLASSES = {
-    eist: { stripe: "bg-eist", text: "text-eist" },
-    foghlaim: { stripe: "bg-foghlaim", text: "text-foghlaim" },
-    cleacht: { stripe: "bg-cleacht", text: "text-cleacht" },
-    labhair: { stripe: "bg-labhair", text: "text-labhair" }
-  }.freeze
-
   def region_name(user)
     ga, en = REGIONS.find { |key, *| key == user.dialect_region }&.drop(1)
     ga ? "#{ga} (#{en.split(':').first})" : nil

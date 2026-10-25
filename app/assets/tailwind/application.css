@@ -64,29 +64,61 @@
 }
 
 @layer components {
+  /* Shared building blocks, named after the mock-up patterns. */
+  .card {
+    @apply bg-surface border border-line rounded-sm;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-wider text-muted;
+  }
+
+  .btn-solid {
+    @apply inline-flex items-center justify-center gap-2 bg-ink text-surface font-semibold
+           rounded-sm px-5 py-3 text-sm cursor-pointer hover:opacity-90 transition-opacity;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 border border-ink text-ink font-semibold
+           rounded-sm px-5 py-3 text-sm hover:bg-canvas transition-colors;
+  }
+
+  .field {
+    @apply w-full bg-surface border border-line rounded-sm px-3 py-3 text-ink
+           focus:outline-none focus:ring-2 focus:ring-ink;
+  }
+
+  .meter {
+    @apply h-2 bg-line rounded-full overflow-hidden;
+  }
+
+  .chip {
+    @apply inline-block font-mono text-[10px] uppercase tracking-wider border rounded-full px-2 py-0.5;
+  }
+
   .lesson-section-heading {
-    @apply text-xs font-bold uppercase tracking-widest text-stone-400 mb-3 flex items-center gap-2;
+    @apply font-mono text-[11px] uppercase tracking-wider text-muted mb-3 flex items-center gap-2;
   }
 
   .lesson-section-heading::after {
     content: '';
-    @apply flex-1 h-px bg-stone-200;
+    @apply flex-1 h-px bg-line;
   }
 
   .editor-label {
-    @apply block text-xs font-semibold uppercase tracking-widest text-stone-400 mb-2;
+    @apply block font-mono text-[11px] uppercase tracking-wider text-muted mb-2;
   }
 
   .editor-input {
-    @apply w-full border border-stone-200 rounded-lg px-3 py-2 text-stone-800
-           focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent
-           transition-colors bg-stone-50 focus:bg-white;
+    @apply w-full border border-line rounded-sm px-3 py-2 text-ink
+           focus:outline-none focus:ring-2 focus:ring-ink
+           transition-colors bg-surface;
   }
 
   .editor-textarea {
-    @apply w-full border border-stone-200 rounded-lg px-3 py-2 text-stone-800 text-sm
-           focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent
-           transition-colors bg-stone-50 focus:bg-white resize-y leading-relaxed;
+    @apply w-full border border-line rounded-sm px-3 py-2 text-ink text-sm
+           focus:outline-none focus:ring-2 focus:ring-ink
+           transition-colors bg-surface resize-y leading-relaxed;
   }
 
   .vocab-cell-input {

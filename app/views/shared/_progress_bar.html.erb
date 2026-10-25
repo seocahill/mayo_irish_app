@@ -1,12 +1,11 @@
 <%# locals: progress (LessonProgress), label (optional String) %>
 <% label ||= "Dul chun cinn" %>
 <div>
-  <div class="flex items-baseline justify-between text-xs text-stone-500 mb-1">
+  <div class="flex items-baseline justify-between eyebrow mb-1.5">
     <span><%= label %></span>
     <span class="tabular-nums"><%= progress.known %>/<%= progress.total %><% if progress.complete? %> · Críochnaithe<% end %></span>
   </div>
-  <div class="h-2 bg-stone-200 rounded-full overflow-hidden">
-    <div class="h-full rounded-full transition-all duration-500 <%= progress.complete? ? 'bg-emerald-600' : 'bg-emerald-500' %>"
-         style="width: <%= progress.pct %>%"></div>
+  <div class="meter">
+    <div class="h-full rounded-full bg-foghlaim transition-all duration-500" style="width: <%= progress.pct %>%"></div>
   </div>
 </div>
