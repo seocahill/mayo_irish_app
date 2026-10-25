@@ -74,6 +74,11 @@ jobs:
           contains(github.event.pull_request.labels.*.name, 'refresh-preview-db')
         run: |
           set -euo pipefail
+          # Production auto-stops when idle; wake it the way a visitor's request would.
+          prod_machine=$(flyctl machines list -a "$PROD_APP" --json | jq -r '.[0].id')
+          flyctl machine start "$prod_machine" -a "$PROD_APP" || true
+          flyctl machine status "$prod_machine" -a "$PROD_APP" | grep -qi started || sleep 15
+
           # Read-only on production: a consistent snapshot into /tmp, then removed.
           flyctl ssh console -a "$PROD_APP" -C "sqlite3 /data/production.sqlite3 \".backup /tmp/preview-snapshot.sqlite3\""
           flyctl ssh sftp get /tmp/preview-snapshot.sqlite3 snapshot.sqlite3 -a "$PROD_APP"
