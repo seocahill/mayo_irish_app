@@ -2,13 +2,13 @@
   <div class="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 sm:p-10">
     <div class="text-4xl mb-4">✅</div>
     <% if @progress.any? %>
-      <h1 class="text-2xl font-bold text-stone-800 mb-2">Gach rud déanta faoi láthair</h1>
+      <h1 class="text-2xl font-display text-ink mb-2">Gach rud déanta faoi láthair</h1>
       <p class="text-stone-500 mb-8">Tá an stór focal ar fad ar eolas agat. Fillfidh ceisteanna nuair a bheidh siad le hathbhreithniú.</p>
       <div class="mb-8 text-left">
         <%= render "shared/progress_bar", progress: @progress, label: "Stór focal ar eolas" %>
       </div>
     <% else %>
-      <h1 class="text-2xl font-bold text-stone-800 mb-2">Níl aon cheist ann go fóill</h1>
+      <h1 class="text-2xl font-display text-ink mb-2">Níl aon cheist ann go fóill</h1>
       <p class="text-stone-500 mb-8">Níl aon stór focal sa cheacht seo le ceistiú.</p>
     <% end %>
     <%= link_to "Ar ais go dtí an ceacht", lesson_path(@lesson),

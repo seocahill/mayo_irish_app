@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /* Design tokens from the platform mock-ups: one colour per level of exposure
-   (listen, learn, practise, speak) on a cool limestone ground. Light theme only
-   for now; the older lesson pages still use stone/emerald utilities. */
+   (listen, learn, practise, speak) on a cool, neutral ground. Light theme only
+   for now. */
 @theme inline {
   --font-display: "Young Serif", Georgia, "Times New Roman", serif;
   --font-sans: "Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -17,6 +17,36 @@
   --color-foghlaim: var(--sea);
   --color-cleacht: var(--heather);
   --color-labhair: var(--fuchsia);
+}
+
+/* The older pages were written with emerald and stone utilities. Redefining
+   those two ramps as cool neutrals moves every existing page onto the same
+   look without touching each template. "Emerald" is now the ink ramp used for
+   primary actions and focus; "stone" is the neutral ramp for text and borders. */
+@theme {
+  --color-emerald-50: #f3f6f6;
+  --color-emerald-100: #e4eae9;
+  --color-emerald-200: #cbd6d5;
+  --color-emerald-300: #a7b8b7;
+  --color-emerald-400: #7d9393;
+  --color-emerald-500: #5a7377;
+  --color-emerald-600: #44595e;
+  --color-emerald-700: #33474c;
+  --color-emerald-800: #1f3338;
+  --color-emerald-900: #12262b;
+  --color-emerald-950: #0b181c;
+
+  --color-stone-50: #f8faf9;
+  --color-stone-100: #eff3f2;
+  --color-stone-200: #dde5e3;
+  --color-stone-300: #c9d4d2;
+  --color-stone-400: #7d8f8e;
+  --color-stone-500: #5f7477;
+  --color-stone-600: #526a6e;
+  --color-stone-700: #3c5156;
+  --color-stone-800: #22373c;
+  --color-stone-900: #12262b;
+  --color-stone-950: #0b181c;
 }
 
 @layer base {

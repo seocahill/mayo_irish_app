@@ -4,7 +4,7 @@
       <span class="text-sm text-stone-400 uppercase tracking-widest">Ceacht <%= @lesson.number %></span>
       <span class="text-xs font-medium px-2 py-0.5 rounded-full border <%= @lesson.badge_classes %>"><%= @lesson.type_label %></span>
     </div>
-    <h1 class="text-2xl sm:text-3xl font-bold text-stone-800 break-words"><%= @lesson.title %></h1>
+    <h1 class="text-2xl sm:text-3xl font-display text-ink break-words"><%= @lesson.title %></h1>
     <% if @lesson.content_html.present? %>
       <p class="text-xs text-stone-400 mt-1 italic"><%= @lesson.content_html %></p>
     <% end %>
