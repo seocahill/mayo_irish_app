@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   root "home#show"
   resource :onboarding, only: %i[new create]
   get "search", to: "search#index", as: :search
+  resources :vocabulary_items, only: [] do
+    resource :pronunciation, only: :show
+  end
   resources :lessons, only: [:index, :new, :create, :show, :edit, :update] do
     resource :review, only: %i[create destroy], controller: "lesson_reviews"
     resources :versions, only: :index do

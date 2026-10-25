@@ -90,9 +90,12 @@
                     <audio controls src="<%= rails_blob_url(item.audio) %>" class="h-8 w-28 sm:w-40"></audio>
                   <% elsif item.audio_url.present? %>
                     <audio controls src="<%= item.audio_url %>" class="h-8 w-28 sm:w-40"></audio>
+                  <% elsif AbairClient.configured? %>
+                    <%= render "shared/speak_button", src: vocabulary_item_pronunciation_path(item),
+                                                      label: t(".hear_word", word: item.irish) %>
                   <% end %>
 
-                  <% if item.audio.attached? || item.audio_url.present? %>
+                  <% if item.audio.attached? || item.audio_url.present? || AbairClient.configured? %>
                     <div data-controller="recorder" class="flex items-center gap-1.5" title="<%= t(".record_yourself") %>">
                       <button type="button"
                               data-recorder-target="recordButton"

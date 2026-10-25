@@ -25,6 +25,10 @@ group :development, :test do
   gem 'i18n-tasks', require: false
 end
 
+group :test do
+  gem 'webmock'
+end
+
 group :development do
   gem 'web-console'
 end
