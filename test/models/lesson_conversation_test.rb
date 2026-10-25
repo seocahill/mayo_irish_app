@@ -51,7 +51,7 @@ class LessonConversationTest < ActiveSupport::TestCase
 
     LessonConversation.new(@chat_session, client: client).reply_to(nil)
 
-    assert_equal [ "system" ], client.requests.sole[:messages].map { |m| m[:role] }
+    assert_equal [ "system" ], client.requests.sole[:messages].pluck(:role)
     assert_equal [ "assistant" ], @chat_session.chat_messages.reload.map(&:role)
   end
 
@@ -61,7 +61,7 @@ class LessonConversationTest < ActiveSupport::TestCase
 
     LessonConversation.new(@chat_session.reload, client: client).reply_to("second")
 
-    roles = client.requests.sole[:messages].map { |m| m[:role] }
+    roles = client.requests.sole[:messages].pluck(:role)
     assert_equal %w[system user assistant user], roles
     assert_equal "reply in irish", JSON.parse(client.requests.sole[:messages][2][:content])["irish"]
   end

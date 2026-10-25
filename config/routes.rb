@@ -41,7 +41,7 @@ Rails.application.routes.draw do
       delete :clear,  on: :member
     end
     resource :conversation, only: %i[show destroy], controller: "lesson_conversations" do
-      post :message, on: :member
+      resources :messages, only: :create, controller: "lesson_conversation_messages"
     end
     resource :quiz, only: [:show], controller: "quizzes" do
       post   :answer, on: :member

@@ -80,7 +80,7 @@ class AbairClient
 
   def error_message(response)
     body = JSON.parse(response.body)
-    "ABAIR #{response.code}: #{body['message'] || body['error'] || response.body}"
+    "ABAIR #{response.code}: #{body["message"] || body["error"] || response.body}"
   rescue JSON::ParserError
     "ABAIR returned #{response.code}"
   end

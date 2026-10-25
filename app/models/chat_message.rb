@@ -4,6 +4,7 @@ class ChatMessage < ApplicationRecord
   validates :content, presence: true
 
   scope :flagged, -> { where.not(flagged_at: nil) }
+  scope :conversation_replies_to, ->(user) { where(role: "assistant").joins(:chat_session).merge(user.chat_sessions.conversation) }
 
   # Comhrá replies a learner thinks have wrong Irish, for an editor to check.
   def flagged? = flagged_at.present?

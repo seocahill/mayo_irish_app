@@ -20,13 +20,13 @@ class LessonConversationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "[role=note]", text: I18n.t("lesson_conversations.show.ai_notice")
-    assert_select "form[action=?] button", message_lesson_conversation_path(@lesson), text: I18n.t("lesson_conversations.show.begin")
+    assert_select "form[action=?] button", lesson_conversation_messages_path(@lesson), text: I18n.t("lesson_conversations.show.begin")
   end
 
   test "beginning gets an opening line" do
     stub_conversation_reply(irish: "an opening line")
 
-    post message_lesson_conversation_path(@lesson)
+    post lesson_conversation_messages_path(@lesson)
     follow_redirect!
 
     assert_equal [ "assistant" ], conversation.chat_messages.map(&:role)
@@ -37,7 +37,7 @@ class LessonConversationsControllerTest < ActionDispatch::IntegrationTest
     stub_conversation_reply(irish: "reply in irish", english: "the reply in english", note: "a tip")
 
     with_abair_key do
-      post message_lesson_conversation_path(@lesson), params: { message: "what the learner said" }
+      post lesson_conversation_messages_path(@lesson), params: { message: "what the learner said" }
       follow_redirect!
     end
 
@@ -53,7 +53,7 @@ class LessonConversationsControllerTest < ActionDispatch::IntegrationTest
 
   test "the newest reply only plays on its own straight after it arrives" do
     stub_conversation_reply
-    post message_lesson_conversation_path(@lesson), params: { message: "hello" }
+    post lesson_conversation_messages_path(@lesson), params: { message: "hello" }
 
     with_abair_key do
       follow_redirect!
@@ -75,7 +75,7 @@ class LessonConversationsControllerTest < ActionDispatch::IntegrationTest
     asr = stub_request(:post, RECOGNITION_URL).to_return(status: 200, body: { text: "what was heard" }.to_json)
     stub_conversation_reply
 
-    with_abair_key { post message_lesson_conversation_path(@lesson), params: { audio: recording } }
+    with_abair_key { post lesson_conversation_messages_path(@lesson), params: { audio: recording } }
 
     assert_requested asr
     assert_equal [ "what was heard", "reply in irish" ], conversation.chat_messages.map(&:content)
@@ -85,48 +85,48 @@ class LessonConversationsControllerTest < ActionDispatch::IntegrationTest
   test "a recording with nothing in it is not sent on" do
     stub_request(:post, RECOGNITION_URL).to_return(status: 200, body: { text: " " }.to_json)
 
-    with_abair_key { post message_lesson_conversation_path(@lesson), params: { audio: recording } }
+    with_abair_key { post lesson_conversation_messages_path(@lesson), params: { audio: recording } }
 
-    assert_equal I18n.t("lesson_conversations.message.not_heard"), flash[:alert]
+    assert_equal I18n.t("lesson_conversation_messages.create.not_heard"), flash[:alert]
     assert_not_requested :post, OpenaiTestHelper::CHAT_URL
   end
 
   test "says so when the speech service is down" do
     stub_request(:post, RECOGNITION_URL).to_return(status: 503, body: "{}")
 
-    with_abair_key { post message_lesson_conversation_path(@lesson), params: { audio: recording } }
+    with_abair_key { post lesson_conversation_messages_path(@lesson), params: { audio: recording } }
 
-    assert_equal I18n.t("lesson_conversations.message.no_speech_service"), flash[:alert]
+    assert_equal I18n.t("lesson_conversation_messages.create.no_speech_service"), flash[:alert]
   end
 
   test "a recording over the size limit is turned away" do
-    with_abair_key { post message_lesson_conversation_path(@lesson), params: { audio: recording("x" * (AbairClient::MAX_AUDIO_BYTES + 1)) } }
+    with_abair_key { post lesson_conversation_messages_path(@lesson), params: { audio: recording("x" * (AbairClient::MAX_AUDIO_BYTES + 1)) } }
 
-    assert_equal I18n.t("lesson_conversations.message.too_long"), flash[:alert]
+    assert_equal I18n.t("lesson_conversation_messages.create.too_long"), flash[:alert]
     assert_not_requested :post, RECOGNITION_URL
   end
 
   test "when no reply comes back nothing is saved" do
     stub_conversation_reply(status: 500)
 
-    post message_lesson_conversation_path(@lesson), params: { message: "hello" }
+    post lesson_conversation_messages_path(@lesson), params: { message: "hello" }
 
-    assert_equal I18n.t("lesson_conversations.message.no_reply"), flash[:alert]
+    assert_equal I18n.t("lesson_conversation_messages.create.no_reply"), flash[:alert]
     assert_nil conversation
   end
 
   test "a blank message only opens an empty conversation" do
     stub_conversation_reply
-    post message_lesson_conversation_path(@lesson)
+    post lesson_conversation_messages_path(@lesson)
 
-    post message_lesson_conversation_path(@lesson), params: { message: "  " }
+    post lesson_conversation_messages_path(@lesson), params: { message: "  " }
 
     assert_requested :post, OpenaiTestHelper::CHAT_URL, times: 1
   end
 
   test "starting again keeps the old conversation for review" do
     stub_conversation_reply
-    post message_lesson_conversation_path(@lesson), params: { message: "hello" }
+    post lesson_conversation_messages_path(@lesson), params: { message: "hello" }
     old = conversation
 
     delete lesson_conversation_path(@lesson)

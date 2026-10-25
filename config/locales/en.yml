@@ -136,14 +136,15 @@ en:
       practise_label: Practise · Lesson %{number}
       send: Send
       start_again: Start again
-  lesson_conversations:
-    message:
+  lesson_conversation_messages:
+    create:
       daily_limit: That's today's limit for conversation. Come back tomorrow.
       no_reply: Couldn't get a reply. Try again.
       no_speech_service: The speech service couldn't be reached. Try typing instead.
       not_heard: Didn't catch that. Try again, or type it.
       too_fast: Slow down a little, then try again.
       too_long: That recording is too long. Keep it under 30 seconds.
+  lesson_conversations:
     show:
       ai_generated: AI-generated
       ai_notice: Replies here are written by AI and read by a synthetic voice, so

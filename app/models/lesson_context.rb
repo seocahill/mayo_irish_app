@@ -48,7 +48,7 @@ class LessonContext
   def vocabulary_text(items)
     lines = [ "VOCABULARY:" ]
     items.each do |v|
-      gender = v.gender == "m" ? "masc." : "fem."
+      gender = (v.gender == "m") ? "masc." : "fem."
       parts = [ "#{v.irish} (#{gender})" ]
       parts << "pl. #{v.plural}" if v.plural.present?
       parts << "— #{v.english}" if v.english.present?
