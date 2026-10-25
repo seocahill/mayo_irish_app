@@ -92,6 +92,7 @@ class LessonChatController < ApplicationController
     parts = []
     parts << "You are a fluent Mayo Irish (Gaeilge Chonnacht) tutor.\n\n#{tutor_instructions}"
     parts << LANGUAGE_RULES
+    parts << intro_context if intro_context.present?
     parts << grammar_context if grammar_context.present?
     parts << vocab_context   if vocab_context.present?
     parts << MASTERY_MARKER_INSTRUCTIONS
@@ -100,6 +101,12 @@ class LessonChatController < ApplicationController
 
   def tutor_instructions
     @lesson.tutor_prompt.presence || DEFAULT_TUTOR_PROMPT
+  end
+
+  def intro_context
+    return if @lesson.intro_video_transcript.blank?
+
+    "LESSON INTRODUCTION (transcript of the teacher's intro video):\n#{@lesson.intro_video_transcript.strip}"
   end
 
   def grammar_context

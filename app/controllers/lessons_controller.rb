@@ -42,6 +42,8 @@ class LessonsController < ApplicationController
     end
 
     @quiz_progress = @lesson.progress_for(current_user)
+    # Admins can see the page as a learner would, without the admin controls.
+    @preview = current_user&.admin? && params[:preview].present?
 
     if current_user
       # Grammar / texts / exercises still come from the chat tutor's mastery
@@ -90,15 +92,13 @@ class LessonsController < ApplicationController
       :vocabulary_notes,
       :vocabulary_notes_content,
       :grammar,
-      :grammar_data,
       :texts,
       :exercises,
       :tutor_prompt,
+      :intro_video_url,
+      :intro_video_transcript,
       vocabulary_items_attributes: [
         :id, :irish, :phonetic, :plural, :gender, :english, :notes, :position, :_destroy
-      ],
-      lesson_rows_attributes: [
-        :id, :section, :position, :row_type, :col_1, :col_2, :col_3, :_destroy
       ]
     )
   end

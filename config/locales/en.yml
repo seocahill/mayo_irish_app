@@ -8,10 +8,10 @@ en:
     review_title: Review the words that are due
     tutor_label: Practise · text chat
     tutor_title: Talk it through with the tutor
-  exercises:
-    edit:
-      english_placeholder: English…
-      irish_placeholder: Irish (optional)…
+  errors:
+    messages:
+      unsupported_video: isn't a supported video. Use a YouTube or Vimeo link, an
+        embed code, or an https link to an .mp4 or .webm file.
   grammar_rules:
     edit:
       title_placeholder: Rule title…
@@ -81,10 +81,15 @@ en:
       practise_label: Practise · Lesson %{number}
       send: Send
       start_again: Start again
+  lesson_reviews:
+    flash:
+      cleared: Review cleared.
+      reviewed: Marked as reviewed.
   lessons:
     edit:
       add_block: Add a new block
       back_to_lesson: "← Back to the lesson"
+      clear_review: Clear review
       content_description: Grammar notes parsed from the book
       content_title: Lesson content
       details_description: Title, vocabulary and notes
@@ -93,10 +98,19 @@ en:
       english: English
       gender: Gender
       grammar: Grammar
+      intro_description: A short video that opens the lesson
+      intro_title: Intro video
+      intro_url_help: YouTube and Vimeo links and embed codes work, as do https links
+        to .mp4 or .webm files.
+      intro_url_label: Video link or embed code
+      intro_url_placeholder: Paste a YouTube or Vimeo link, an embed code, or a link
+        to an .mp4 file
       irish: Irish
       lesson_title: Lesson title
+      mark_reviewed: Mark as reviewed
       meaning_placeholder: meaning
       new_word: "+ New word"
+      not_reviewed: Not reviewed yet.
       open_chat: Open chat
       plural: Plural
       plural_placeholder: plural
@@ -105,8 +119,13 @@ en:
       pronunciation_placeholder: "/pronunciation/"
       published: Published
       published_note: "(visible to learners)"
+      review_title: Review
+      reviewed_by: Reviewed by %{name} on %{date}
       rich_content: Rich content
       rich_content_description: Free text, videos, images and PDFs, in any order
+      someone: someone
+      transcript_help: Shown to learners under the video, and used by the tutor.
+      transcript_label: Transcript (optional)
       tutor_description: Guide the AI chat. Leave empty to use the general default.
       tutor_focus: What should the AI focus on in this lesson?
       tutor_instructions: Tutor instructions
@@ -114,6 +133,7 @@ en:
         ask the student to apply the gender rules to unfamiliar words. Note any Mayo
         dialect exceptions...
       tutor_title: AI tutor settings
+      view_as_learner: View as learner
       vocabulary: Vocabulary
       vocabulary_notes: Vocabulary notes
       word_placeholder: word
@@ -129,6 +149,7 @@ en:
       course: Course
       draft: Draft
       grammar: Grammar
+      needs_review: Needs review
       new_lesson: New lesson
       progress_title: "%{known}/%{total} words known"
       sections:
@@ -159,23 +180,26 @@ en:
       title_placeholder: e.g. Lesson title
     section_badge:
       known: Known
-    section_row_editor:
-      new_row: "+ New row"
     show:
       all_lessons: All lessons
       english: English
+      exit_preview: Exit preview
       feminine: f.
       grammar: Grammar
+      intro_video: Lesson introduction
       irish: Irish
       lesson_label: Lesson %{number} · %{type}
       lesson_number: Lesson %{number}
       play_recording: Play your recording
       plural: Plural
       practice: Practice
+      preview_banner: Previewing this lesson as a learner sees it.
       pronunciation: Pronunciation
       quiz: Quiz
       record: Record
       record_yourself: Record yourself
+      transcript: Transcript
+      view_as_learner: View as learner
       vocabulary: Vocabulary
       vocabulary_notes: Vocabulary notes
     types:
@@ -338,7 +362,6 @@ en:
       complete: Complete
       default_label: Progress
     save: Save
+    video:
+      title: Lesson video
     words_known: Words known
-  text_passages:
-    edit:
-      title_placeholder: Title…

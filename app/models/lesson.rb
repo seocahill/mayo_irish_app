@@ -26,14 +26,14 @@ class Lesson < ApplicationRecord
   has_many :phrases,           -> { order(:position) }, dependent: :destroy
   has_many :lesson_blocks,   -> { order(:position) }, dependent: :destroy
   has_many :lesson_rows, dependent: :destroy
+  belongs_to :reviewed_by, class_name: "User", optional: true
   has_many :section_progresses, dependent: :destroy
   has_many :quiz_questions, dependent: :destroy
-  accepts_nested_attributes_for :lesson_rows,
-                                allow_destroy: true,
-                                reject_if: :all_blank
   accepts_nested_attributes_for :vocabulary_items,
                                 allow_destroy: true,
                                 reject_if: :all_blank
+
+  validate :intro_video_must_be_embeddable
 
   validates :number, presence: true, uniqueness: true
   validates :title, presence: true
@@ -50,6 +50,22 @@ class Lesson < ApplicationRecord
   # Learners only see published lessons; admins see everything (including
   # drafts created through the MCP connector, pending review).
   scope :visible_to, ->(user) { user&.admin? ? all : published }
+
+  # The intro video the teacher recorded for this lesson, if one is set.
+  def intro_video = VideoEmbed.parse(intro_video_url)
+
+  def reviewed? = reviewed_at.present?
+
+  # Drafts nobody has checked yet.
+  def needs_review? = !published? && !reviewed?
+
+  def mark_reviewed(by:)
+    update!(reviewed_at: Time.current, reviewed_by: by)
+  end
+
+  def clear_review
+    update!(reviewed_at: nil, reviewed_by: nil)
+  end
 
   def type_label = I18n.t("lessons.types.#{lesson_type}", default: lesson_type.to_s)
 
@@ -107,4 +123,9 @@ class Lesson < ApplicationRecord
     questions_per_word.count { |source_id, n| n.positive? && known_per_word[source_id].to_i >= n }
   end
 
+  def intro_video_must_be_embeddable
+    return if intro_video_url.blank? || intro_video
+
+    errors.add(:intro_video_url, :unsupported_video)
+  end
 end

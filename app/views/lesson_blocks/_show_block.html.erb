@@ -11,15 +11,9 @@
     <% end %>
   </figure>
 
-<% elsif block.video? && block.url.present? %>
+<% elsif block.video? && block.video_embed %>
   <figure>
-    <div class="relative aspect-video rounded-sm overflow-hidden bg-black">
-      <iframe src="<%= video_embed_url(block.url) %>"
-              class="absolute inset-0 w-full h-full"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
-    </div>
+    <%= render "shared/video", embed: block.video_embed %>
     <% if block.caption.present? %>
       <figcaption class="text-sm text-muted mt-2 text-center"><%= block.caption %></figcaption>
     <% end %>

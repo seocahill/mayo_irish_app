@@ -20,9 +20,11 @@ search:
     - app/mailers
     - app/views
 
-# Keys built at runtime, for example t("lessons.types.#{type}"), are not
+# Keys built at runtime, for example t("lessons.types.#{type}"), and the
+# validation messages Rails looks up itself (errors.add(:field, :symbol)) are not
 # visible to the scanner.
 ignore_unused:
+  - errors.messages.*
   - lessons.types.*
   - lessons.genders.*
   - lessons.index.sections.*

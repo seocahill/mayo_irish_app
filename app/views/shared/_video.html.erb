@@ -1,0 +1,16 @@
+<%# locals: embed (VideoEmbed) %>
+<div class="relative aspect-video rounded-sm overflow-hidden bg-black">
+  <% if embed.iframe? %>
+    <iframe src="<%= embed.src %>"
+            title="<%= t("shared.video.title") %>"
+            class="absolute inset-0 w-full h-full"
+            frameborder="0"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+  <% else %>
+    <video src="<%= embed.src %>" controls playsinline preload="metadata"
+           class="absolute inset-0 w-full h-full"></video>
+  <% end %>
+</div>

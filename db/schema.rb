@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_25_000002) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_25_000003) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -130,10 +130,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_25_000002) do
     t.text "exercises"
     t.text "grammar"
     t.text "grammar_data"
+    t.text "intro_video_transcript"
+    t.text "intro_video_url"
     t.string "lesson_type", default: "curriculum", null: false
     t.integer "number", null: false
     t.integer "position", default: 0, null: false
     t.boolean "published", default: true, null: false
+    t.datetime "reviewed_at"
+    t.integer "reviewed_by_id"
     t.text "texts"
     t.string "title", null: false
     t.text "tutor_prompt"
@@ -143,6 +147,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_25_000002) do
     t.index ["number"], name: "index_lessons_on_number", unique: true
     t.index ["position"], name: "index_lessons_on_position"
     t.index ["published"], name: "index_lessons_on_published"
+    t.index ["reviewed_by_id"], name: "index_lessons_on_reviewed_by_id"
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
@@ -323,6 +328,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_25_000002) do
   add_foreign_key "grammar_sections", "grammar_rules"
   add_foreign_key "lesson_blocks", "lessons"
   add_foreign_key "lesson_rows", "lessons"
+  add_foreign_key "lessons", "users", column: "reviewed_by_id"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"

@@ -19,10 +19,9 @@ Rails.application.routes.draw do
   resource :onboarding, only: %i[new create]
   get "search", to: "search#index", as: :search
   resources :lessons, only: [:index, :new, :create, :show, :edit, :update] do
+    resource :review, only: %i[create destroy], controller: "lesson_reviews"
     resources :grammar_rules, only: [:edit, :update], shallow: true
     resources :grammar_sections, only: [:edit, :update], shallow: true
-    resources :text_passages, only: [:edit, :update], shallow: true
-    resources :exercises, only: [:edit, :update], shallow: true
     resources :lesson_blocks, only: [:create, :edit, :update, :destroy], shallow: true do
       post :reorder, on: :collection
     end

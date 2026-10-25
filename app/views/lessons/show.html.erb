@@ -1,4 +1,10 @@
 <% level = level_classes(lesson_level(@lesson)) %>
+<% if @preview %>
+  <div class="mb-6 flex items-center justify-between gap-4 bg-eist/10 border border-eist/30 rounded-sm px-4 py-3 text-sm">
+    <span><%= t(".preview_banner") %></span>
+    <%= link_to t(".exit_preview"), lesson_path(@lesson), class: "underline underline-offset-2 shrink-0" %>
+  </div>
+<% end %>
 <header class="flex flex-col gap-5 mb-8">
   <div class="min-w-0">
     <p class="eyebrow <%= level[:text] %>"><%= t(".lesson_label", number: @lesson.number, type: @lesson.type_label) %></p>
@@ -12,11 +18,24 @@
       <%= link_to t(".quiz"), lesson_quiz_path(@lesson), class: "btn-solid flex-1 sm:flex-initial" %>
     <% end %>
     <%= link_to t(".practice"), lesson_chat_path(@lesson), class: "btn-outline flex-1 sm:flex-initial" %>
-    <% if current_user&.admin? %>
+    <% if current_user&.admin? && !@preview %>
       <%= link_to t("shared.edit"), edit_lesson_path(@lesson), class: "btn-outline flex-1 sm:flex-initial border-line text-muted" %>
+      <%= link_to t(".view_as_learner"), lesson_path(@lesson, preview: 1), class: "btn-outline flex-1 sm:flex-initial border-line text-muted" %>
     <% end %>
   </div>
 </header>
+
+<% if @lesson.intro_video %>
+  <section class="mb-8 flex flex-col gap-3" aria-label="<%= t(".intro_video") %>">
+    <%= render "shared/video", embed: @lesson.intro_video %>
+    <% if @lesson.intro_video_transcript.present? %>
+      <details class="card px-4 py-3">
+        <summary class="eyebrow cursor-pointer"><%= t(".transcript") %></summary>
+        <div class="mt-3 text-sm leading-relaxed whitespace-pre-line"><%= @lesson.intro_video_transcript %></div>
+      </details>
+    <% end %>
+  </section>
+<% end %>
 
 <% if current_user && @quiz_progress.any? %>
   <div class="mb-8">

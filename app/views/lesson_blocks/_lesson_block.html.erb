@@ -35,15 +35,9 @@
         <% end %>
 
       <% elsif lesson_block.video? %>
-        <% if lesson_block.url.present? %>
+        <% if lesson_block.url.present? && lesson_block.video_embed %>
           <figure>
-            <div class="relative aspect-video rounded-sm overflow-hidden bg-black">
-              <iframe src="<%= video_embed_url(lesson_block.url) %>"
-                      class="absolute inset-0 w-full h-full"
-                      frameborder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen></iframe>
-            </div>
+            <%= render "shared/video", embed: lesson_block.video_embed %>
             <% if lesson_block.caption.present? %>
               <figcaption class="text-xs text-muted mt-2 text-center"><%= lesson_block.caption %></figcaption>
             <% end %>

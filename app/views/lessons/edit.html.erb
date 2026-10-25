@@ -8,6 +8,34 @@
   </a>
 </div>
 
+<% if @lesson.errors.any? %>
+  <div class="mb-6 bg-red-50 border border-red-200 rounded-sm px-4 py-3 text-sm text-red-700" role="alert">
+    <% @lesson.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+  </div>
+<% end %>
+
+<%# Review status: has someone checked this lesson? %>
+<div class="mb-8 card px-5 py-4 flex flex-wrap items-center justify-between gap-3">
+  <div>
+    <p class="eyebrow"><%= t(".review_title") %></p>
+    <% if @lesson.reviewed? %>
+      <p class="text-sm mt-1"><%= t(".reviewed_by", name: @lesson.reviewed_by&.email_address || t(".someone"), date: l(@lesson.reviewed_at.to_date, format: :long)) %></p>
+    <% else %>
+      <p class="text-sm mt-1 text-muted"><%= t(".not_reviewed") %></p>
+    <% end %>
+  </div>
+  <div class="flex flex-wrap gap-2">
+    <%= link_to t(".view_as_learner"), lesson_path(@lesson, preview: 1), class: "btn-outline border-line text-muted !py-2" %>
+    <% if @lesson.reviewed? %>
+      <%= button_to t(".clear_review"), lesson_review_path(@lesson), method: :delete, class: "btn-outline border-line text-muted !py-2" %>
+    <% else %>
+      <%= button_to t(".mark_reviewed"), lesson_review_path(@lesson), method: :post, class: "btn-solid !py-2" %>
+    <% end %>
+  </div>
+</div>
+
 <%# ══════════════════════════════════════════════════════════════
     ZONE 1 — LESSON DETAILS
     Title, position, vocabulary, vocab notes
@@ -94,12 +122,51 @@
 </div>
 
 <%# ══════════════════════════════════════════════════════════════
-    ZONE 2 — RICH MEDIA CONTENT
+    ZONE 2 — INTRO VIDEO
+    A short video from the teacher that opens the lesson
+    ══════════════════════════════════════════════════════════════ %>
+<div class="mb-10">
+  <div class="flex items-center gap-3 mb-4">
+    <div class="flex items-center justify-center w-7 h-7 rounded-full bg-eist text-surface text-xs font-bold">2</div>
+    <div>
+      <h2 class="font-bold text-ink leading-none"><%= t(".intro_title") %></h2>
+      <p class="text-xs text-muted mt-0.5"><%= t(".intro_description") %></p>
+    </div>
+  </div>
+
+  <div class="pl-10">
+    <%= form_with model: @lesson, class: "bg-surface rounded-sm border border-line overflow-hidden" do |f| %>
+      <div class="px-6 py-5 space-y-4">
+        <div>
+          <label class="editor-label" for="lesson_intro_video_url"><%= t(".intro_url_label") %></label>
+          <%= f.text_area :intro_video_url, rows: 2, class: "editor-textarea", placeholder: t(".intro_url_placeholder") %>
+          <p class="text-xs text-muted mt-1"><%= t(".intro_url_help") %></p>
+        </div>
+
+        <% if @lesson.intro_video %>
+          <div class="max-w-lg"><%= render "shared/video", embed: @lesson.intro_video %></div>
+        <% end %>
+
+        <div>
+          <label class="editor-label" for="lesson_intro_video_transcript"><%= t(".transcript_label") %></label>
+          <%= f.text_area :intro_video_transcript, rows: 6, class: "editor-textarea" %>
+          <p class="text-xs text-muted mt-1"><%= t(".transcript_help") %></p>
+        </div>
+      </div>
+      <div class="px-6 py-4 border-t border-line flex justify-end">
+        <%= f.submit t("shared.save"), class: "btn-solid" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%# ══════════════════════════════════════════════════════════════
+    ZONE 3 — RICH MEDIA CONTENT
     Free-form blocks: text, image, video, PDF, audio
     ══════════════════════════════════════════════════════════════ %>
 <div class="mb-10">
   <div class="flex items-center gap-3 mb-4">
-    <div class="flex items-center justify-center w-7 h-7 rounded-full bg-foghlaim text-surface text-xs font-bold">2</div>
+    <div class="flex items-center justify-center w-7 h-7 rounded-full bg-foghlaim text-surface text-xs font-bold">3</div>
     <div>
       <h2 class="font-bold text-ink leading-none"><%= t(".rich_content") %></h2>
       <p class="text-xs text-muted mt-0.5"><%= t(".rich_content_description") %></p>
@@ -127,13 +194,13 @@
 </div>
 
 <%# ══════════════════════════════════════════════════════════════
-    ZONE 3 — PARSED LESSON CONTENT
+    ZONE 4 — PARSED LESSON CONTENT
     Grammar rules (from OCR parse)
     ══════════════════════════════════════════════════════════════ %>
 <% if @lesson.grammar_rules.any? %>
   <div class="mb-10">
     <div class="flex items-center gap-3 mb-4">
-      <div class="flex items-center justify-center w-7 h-7 rounded-full bg-ink text-surface text-xs font-bold">3</div>
+      <div class="flex items-center justify-center w-7 h-7 rounded-full bg-ink text-surface text-xs font-bold">4</div>
       <div>
         <h2 class="font-bold text-ink leading-none"><%= t(".content_title") %></h2>
         <p class="text-xs text-muted mt-0.5"><%= t(".content_description") %></p>
@@ -180,11 +247,11 @@
 <% end %>
 
 <%# ══════════════════════════════════════════════════════════════
-    ZONE 4 — TUTOR / CHAT SETTINGS
+    ZONE 5 — TUTOR / CHAT SETTINGS
     ══════════════════════════════════════════════════════════════ %>
 <div class="mb-10">
   <div class="flex items-center gap-3 mb-4">
-    <div class="flex items-center justify-center w-7 h-7 rounded-full bg-cleacht text-surface text-xs font-bold">4</div>
+    <div class="flex items-center justify-center w-7 h-7 rounded-full bg-cleacht text-surface text-xs font-bold">5</div>
     <div>
       <h2 class="font-bold text-ink leading-none"><%= t(".tutor_title") %></h2>
       <p class="text-xs text-muted mt-0.5"><%= t(".tutor_description") %></p>

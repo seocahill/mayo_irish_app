@@ -36,6 +36,9 @@
                   <%= lesson.title %>
                   <% unless lesson.published? %>
                     <span class="chip border-labhair text-labhair ml-1 align-middle"><%= t(".draft") %></span>
+                    <% if current_user&.admin? && lesson.needs_review? %>
+                      <span class="chip border-eist text-eist ml-1 align-middle"><%= t(".needs_review") %></span>
+                    <% end %>
                   <% end %>
                 </span>
                 <span class="block font-mono text-[11px] uppercase tracking-wider text-muted mt-0.5">

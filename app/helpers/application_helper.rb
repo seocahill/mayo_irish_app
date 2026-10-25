@@ -5,20 +5,6 @@ module ApplicationHelper
   #
   # For single-line items (texts, exercises): title is nil, body has the content.
   # For multi-line items (grammar): the first line becomes the title, the rest the body.
-  def video_embed_url(url)
-    return url if url.blank?
-
-    # YouTube: watch?v=ID or youtu.be/ID → embed/ID
-    if url =~ /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/
-      "https://www.youtube.com/embed/#{$1}"
-    # Vimeo: vimeo.com/ID → player.vimeo.com/video/ID
-    elsif url =~ /vimeo\.com\/(\d+)/
-      "https://player.vimeo.com/video/#{$1}"
-    else
-      url
-    end
-  end
-
   def parse_numbered_items(text)
     return [] if text.blank?
 
