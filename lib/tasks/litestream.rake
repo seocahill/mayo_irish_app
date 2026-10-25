@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 LITESTREAM_CONFIG = ENV["LITESTREAM_CONFIG"] || Rails.root.join("tmp/litestream.yml").to_s
 
+# Litestream replicates to BUCKET_NAME. A preview app can point BUCKET_NAME at
+# production's bucket (read-only credentials) to show its uploaded files, and
+# sets DISABLE_LITESTREAM so it never restores from or replicates to it.
+LITESTREAM_ENABLED = ENV["BUCKET_NAME"].present? && ENV["DISABLE_LITESTREAM"].blank?
+
 LITESTREAM_TEMPLATE = <<-EOF
 # This is the configuration file for litestream.
 #
@@ -37,7 +42,7 @@ namespace :litestream do
     end
 
     @dbs.each do |db|
-      next if File.exist?(db) || !ENV["BUCKET_NAME"]
+      next if File.exist?(db) || !LITESTREAM_ENABLED
       system "litestream restore -config #{LITESTREAM_CONFIG} -if-replica-exists #{db}"
       exit $?.exitstatus unless $?.exitstatus == 0
     end
@@ -46,7 +51,7 @@ namespace :litestream do
   task :run do
     require "shellwords"
 
-    if ENV["BUCKET_NAME"]
+    if LITESTREAM_ENABLED
       exec(*%w[bundle exec litestream replicate -config],
         LITESTREAM_CONFIG, "-exec", Shellwords.join(ARGV[1..]))
     else

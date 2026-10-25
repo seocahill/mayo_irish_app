@@ -2,9 +2,10 @@
 # looked at with real-ish data before it is merged. Add the `preview` label to
 # a PR to turn it on (every later push redeploys). Production is only read from.
 #
-# The preview app has no BUCKET_NAME, so Litestream stays off and it can never
-# replicate into (or restore from) production's bucket. Uploaded files live in
-# that bucket, so audio and images from production won't show in the preview.
+# The preview app has no BUCKET_NAME by default, so Litestream stays off and it
+# can never replicate into (or restore from) production's bucket. Uploaded files
+# live in that bucket, so audio and images from production don't show unless the
+# preview is given read-only credentials for it plus DISABLE_LITESTREAM=1.
 #
 # On first creation the production database is copied across (a consistent
 # SQLite snapshot). Add the `refresh-preview-db` label to copy it again.
@@ -53,8 +54,9 @@ jobs:
 
       - name: Never replicate to production's bucket
         run: |
-          if flyctl secrets list -a "$PREVIEW_APP" | grep -q BUCKET_NAME; then
-            echo "::error::$PREVIEW_APP has BUCKET_NAME set; Litestream would replicate into the production bucket"
+          secrets=$(flyctl secrets list -a "$PREVIEW_APP")
+          if echo "$secrets" | grep -q BUCKET_NAME && ! echo "$secrets" | grep -q DISABLE_LITESTREAM; then
+            echo "::error::$PREVIEW_APP has BUCKET_NAME set without DISABLE_LITESTREAM; Litestream would replicate into the production bucket"
             exit 1
           fi
 
