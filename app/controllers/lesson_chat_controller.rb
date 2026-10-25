@@ -11,6 +11,14 @@ class LessonChatController < ApplicationController
     content at hand.
   PROMPT
 
+  LANGUAGE_RULES = <<~RULES.freeze
+    LANGUAGE RULES (these override anything above): Write to the student in English.
+    Use Irish only when it appears in this lesson's grammar rules or vocabulary below,
+    quoted exactly as written there. Never compose, translate or correct Irish sentences
+    yourself. If the student needs Irish that is not in the lesson material, say so and
+    point them to the lesson text.
+  RULES
+
   MASTERY_MARKER_INSTRUCTIONS = <<~INSTRUCTIONS.freeze
     PROGRESS TRACKING: When you are confident the student has demonstrated adequate understanding
     of a topic area, include one of the following markers at the very end of your response (on its
@@ -85,6 +93,7 @@ class LessonChatController < ApplicationController
   def system_prompt
     parts = []
     parts << "You are a fluent Mayo Irish (Gaeilge Chonnacht) tutor.\n\n#{tutor_instructions}"
+    parts << LANGUAGE_RULES
     parts << grammar_context if grammar_context.present?
     parts << vocab_context   if vocab_context.present?
     parts << MASTERY_MARKER_INSTRUCTIONS

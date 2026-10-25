@@ -1,9 +1,9 @@
 <div class="max-w-xl mx-auto flex flex-col gap-8">
 
   <header class="flex flex-col gap-2">
-    <p class="font-mono text-xs uppercase tracking-wider text-muted">Fáilte</p>
-    <h1 class="font-display text-3xl leading-tight">Cá as thú?</h1>
-    <p class="text-muted">Where are you from, or where is your family from? This sets which Mayo speakers you hear first. You can change it any time.</p>
+    <p class="font-mono text-xs uppercase tracking-wider text-muted">Welcome</p>
+    <h1 class="font-display text-3xl leading-tight">Where are you from?</h1>
+    <p class="text-muted">Or where is your family from? This sets which Mayo speakers you hear first. You can change it any time.</p>
   </header>
 
   <%= form_with model: @user, url: onboarding_path, method: :post, class: "flex flex-col gap-8" do |form| %>
@@ -51,7 +51,7 @@
       <% end %>
     </fieldset>
 
-    <%= form.submit "Tosaigh", class: "bg-ink text-surface font-semibold rounded-sm px-6 py-3 cursor-pointer hover:opacity-90 transition-opacity self-start" %>
+    <%= form.submit "Continue", class: "bg-ink text-surface font-semibold rounded-sm px-6 py-3 cursor-pointer hover:opacity-90 transition-opacity self-start" %>
   <% end %>
 
 </div>

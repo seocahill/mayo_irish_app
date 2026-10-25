@@ -44,7 +44,7 @@ class DailyPath
     lesson = Lesson.find_by(id: lesson_id)
     return unless lesson
 
-    Item.new(level: :foghlaim, label: "Athbhreithniú · #{count} due",
+    Item.new(level: :foghlaim, label: "Review · #{count} due",
              title: "Review the words that are due", path: lesson_quiz_path(lesson))
   end
 
@@ -52,7 +52,7 @@ class DailyPath
     return unless current_lesson
 
     progress = current_lesson.progress_for(user)
-    Item.new(level: :foghlaim, label: "Foghlaim · Ceacht #{current_lesson.number}",
+    Item.new(level: :foghlaim, label: "Learn · Lesson #{current_lesson.number}",
              title: "#{current_lesson.title} (#{progress.known} of #{progress.total} words known)",
              path: lesson_path(current_lesson))
   end
@@ -60,7 +60,7 @@ class DailyPath
   def tutor_item
     return unless current_lesson
 
-    Item.new(level: :cleacht, label: "Cleacht · text chat",
+    Item.new(level: :cleacht, label: "Practise · text chat",
              title: "Talk it through with the tutor", path: lesson_chat_path(current_lesson))
   end
 

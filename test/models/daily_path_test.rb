@@ -11,7 +11,7 @@ class DailyPathTest < ActiveSupport::TestCase
     items = DailyPath.new(@user).items
 
     assert_equal [ :foghlaim, :cleacht ], items.map(&:level)
-    assert_equal "Foghlaim · Ceacht 1", items.first.label
+    assert_equal "Learn · Lesson 1", items.first.label
     assert_equal "/lessons/1", items.first.path
     assert_equal "/lessons/1/chat", items.last.path
   end
@@ -24,7 +24,7 @@ class DailyPathTest < ActiveSupport::TestCase
     review = DailyPath.new(@user).items.first
 
     assert_equal :foghlaim, review.level
-    assert_equal "Athbhreithniú · 3 due", review.label
+    assert_equal "Review · 3 due", review.label
     assert_equal "/lessons/1/quiz", review.path
   end
 

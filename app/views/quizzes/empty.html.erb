@@ -2,17 +2,17 @@
   <div class="card p-6 sm:p-10 flex flex-col gap-6">
     <% if @progress.any? %>
       <div>
-        <p class="eyebrow text-foghlaim mb-2">Réidh</p>
-        <h1 class="font-display text-3xl leading-tight">Gach rud déanta faoi láthair</h1>
-        <p class="text-muted mt-2">Tá an stór focal ar fad ar eolas agat. Fillfidh ceisteanna nuair a bheidh siad le hathbhreithniú.</p>
+        <p class="eyebrow text-foghlaim mb-2">All done</p>
+        <h1 class="font-display text-3xl leading-tight">Nothing left to review right now</h1>
+        <p class="text-muted mt-2">You know all the vocabulary in this lesson. Questions will come back when they are due for review.</p>
       </div>
-      <%= render "shared/progress_bar", progress: @progress, label: "Stór focal ar eolas" %>
+      <%= render "shared/progress_bar", progress: @progress, label: "Words known" %>
     <% else %>
       <div>
-        <h1 class="font-display text-3xl leading-tight">Níl aon cheist ann go fóill</h1>
-        <p class="text-muted mt-2">Níl aon stór focal sa cheacht seo le ceistiú.</p>
+        <h1 class="font-display text-3xl leading-tight">No questions yet</h1>
+        <p class="text-muted mt-2">This lesson has no vocabulary to quiz yet.</p>
       </div>
     <% end %>
-    <%= link_to "Ar ais go dtí an ceacht", lesson_path(@lesson), class: "btn-solid self-start" %>
+    <%= link_to "Back to the lesson", lesson_path(@lesson), class: "btn-solid self-start" %>
   </div>
 </div>

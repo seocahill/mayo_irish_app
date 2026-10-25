@@ -5,14 +5,14 @@
       <span class="shrink-0">←</span>
       <span class="truncate"><%= @lesson.display_title %></span>
     <% end %>
-    <span class="eyebrow tabular-nums shrink-0">Ceist <%= @position %>/<%= @count %></span>
+    <span class="eyebrow tabular-nums shrink-0">Question <%= @position %>/<%= @count %></span>
   </div>
 
-  <%= render "shared/progress_bar", progress: @progress, label: "Stór focal ar eolas" %>
+  <%= render "shared/progress_bar", progress: @progress, label: "Words known" %>
 
   <div class="card p-6 sm:p-8">
     <p class="eyebrow text-foghlaim mb-3">
-      <%= prompt_lang == "ga" ? "Cad is brí leis seo i mBéarla?" : "Cad é seo i nGaeilge?" %>
+      <%= prompt_lang == "ga" ? "What does this mean in English?" : "How do you say this in Irish?" %>
     </p>
     <p class="font-display text-3xl sm:text-4xl leading-tight mb-8 break-words">
       <%= @question.prompt %>
@@ -30,7 +30,7 @@
   </div>
 
   <div class="text-center">
-    <%= button_to "Éirigh as", reset_lesson_quiz_path(@lesson), method: :delete,
+    <%= button_to "Quit", reset_lesson_quiz_path(@lesson), method: :delete,
           class: "text-sm text-muted hover:text-ink bg-transparent border-0 cursor-pointer" %>
   </div>
 </div>

@@ -59,7 +59,7 @@ class QuizzesControllerTest < ActionDispatch::IntegrationTest
     post answer_lesson_quiz_path(@lesson), params: { question_id: question.id, choice: question.answer }
     follow_redirect! if response.redirect?
     get lesson_quiz_path(@lesson) # round exhausted -> summary
-    assert_match(/Babhta críochnaithe/, response.body)
+    assert_match(/Round complete/, response.body)
   end
 
   test "all-known lesson with nothing due renders the caught-up state" do
@@ -71,7 +71,7 @@ class QuizzesControllerTest < ActionDispatch::IntegrationTest
 
     get lesson_quiz_path(@lesson)
     assert_response :success
-    assert_match(/déanta faoi láthair/, response.body)
+    assert_match(/Nothing left to review right now/, response.body)
   end
 
   test "reset clears the round and returns to the lesson" do

@@ -11,7 +11,7 @@ class OnboardingsControllerTest < ActionDispatch::IntegrationTest
     get new_onboarding_path
 
     assert_response :success
-    assert_select "h1", "Cá as thú?"
+    assert_select "h1", "Where are you from?"
     assert_select "input[name='user[place]']"
     assert_select "input[type=radio][name='user[dialect_region]']", OnboardingsHelper::REGIONS.size
     assert_select "input[type=radio][name='user[door]']", OnboardingsHelper::DOORS.size

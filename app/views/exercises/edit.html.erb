@@ -5,13 +5,13 @@
       <div class="flex-1 space-y-2">
         <%= f.text_area :prompt, rows: 2,
               class: "w-full text-sm border border-stone-300 rounded px-2 py-1 focus:outline-none focus:border-line resize-none",
-              placeholder: "Béarla…" %>
+              placeholder: "English…" %>
         <%= f.text_area :answer, rows: 2,
               class: "w-full text-sm border border-stone-300 rounded px-2 py-1 focus:outline-none focus:border-line resize-none text-ink",
-              placeholder: "Gaeilge (roghnach)…" %>
+              placeholder: "Irish (optional)…" %>
       </div>
       <div class="flex flex-col gap-1 shrink-0">
-        <%= f.submit "Sábháil", class: "bg-ink text-white px-3 py-1 rounded text-xs font-semibold hover:opacity-90 transition-colors cursor-pointer" %>
+        <%= f.submit "Save", class: "bg-ink text-white px-3 py-1 rounded text-xs font-semibold hover:opacity-90 transition-colors cursor-pointer" %>
         <a href="<%= edit_lesson_path(@exercise.lesson) %>"
            data-turbo-frame="<%= dom_id(@exercise) %>"
            class="text-center text-muted hover:text-ink text-xs transition-colors">Cealaigh</a>

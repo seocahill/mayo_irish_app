@@ -1,10 +1,10 @@
 <div class="max-w-md mx-auto mt-8">
-  <h1 class="text-2xl font-display text-ink mb-6">Sínigh isteach</h1>
+  <h1 class="text-2xl font-display text-ink mb-6">Sign in</h1>
 
   <%= form_with url: session_url do |form| %>
     <div class="space-y-4">
       <div>
-        <%= form.label :email_address, "Ríomhphost", class: "block text-sm font-semibold mb-1" %>
+        <%= form.label :email_address, "Email", class: "block text-sm font-semibold mb-1" %>
         <%= form.email_field :email_address, required: true, autofocus: true,
               autocomplete: "username",
               value: params[:email_address],
@@ -12,20 +12,20 @@
       </div>
 
       <div>
-        <%= form.label :password, "Pasfhocal", class: "block text-sm font-semibold mb-1" %>
+        <%= form.label :password, "Password", class: "block text-sm font-semibold mb-1" %>
         <%= form.password_field :password, required: true,
               autocomplete: "current-password",
               maxlength: 72,
               class: "field" %>
       </div>
 
-      <%= form.submit "Sínigh isteach",
+      <%= form.submit "Sign in",
             class: "btn-solid w-full" %>
     </div>
   <% end %>
 
   <div class="mt-6 text-sm text-muted space-y-2">
-    <p><%= link_to "Pasfhocal ar iarraidh?", new_password_path, class: "text-ink underline underline-offset-2" %></p>
-    <p>Gan cuntas? <%= link_to "Cláraigh anseo", new_registration_path, class: "text-ink underline underline-offset-2" %></p>
+    <p><%= link_to "Forgot your password?", new_password_path, class: "text-ink underline underline-offset-2" %></p>
+    <p>No account? <%= link_to "Register here", new_registration_path, class: "text-ink underline underline-offset-2" %></p>
   </div>
 </div>

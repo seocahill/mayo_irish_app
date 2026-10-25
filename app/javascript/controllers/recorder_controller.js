@@ -27,14 +27,14 @@ export default class extends Controller {
 
   async start() {
     if (!navigator.mediaDevices?.getUserMedia) {
-      this.setStatus("Gan tacaíocht", true)
+      this.setStatus("Not supported", true)
       return
     }
 
     try {
       this.stream = await navigator.mediaDevices.getUserMedia({ audio: true })
     } catch (e) {
-      this.setStatus("Gan cead", true)
+      this.setStatus("No permission", true)
       return
     }
 
@@ -50,14 +50,14 @@ export default class extends Controller {
       const blob = new Blob(this.chunks, { type: this.mediaRecorder.mimeType })
       this.audioUrl = URL.createObjectURL(blob)
       if (this.hasPlayButtonTarget) this.playButtonTarget.disabled = false
-      this.setStatus("Réidh")
+      this.setStatus("Ready")
       this.stopStream()
     })
 
     this.mediaRecorder.start()
     this.recording = true
     this.recordButtonTarget.classList.add("text-red-600", "animate-pulse")
-    this.setStatus("Ag taifeadadh…")
+    this.setStatus("Recording…")
   }
 
   stop() {

@@ -46,11 +46,11 @@ export default class extends Controller {
     <span class="ge-section-badge">${num}</span>
     <input type="text" value="${title}"
            class="ge-section-title"
-           placeholder="Teideal na rannóige"
+           placeholder="Section title"
            onclick="event.stopPropagation()">
     <button type="button" class="ge-icon-btn ge-danger ml-auto mr-2"
             data-action="click->grammar-editor#removeSection"
-            title="Scrios rannóg" onclick="event.stopPropagation()">✕</button>
+            title="Delete section" onclick="event.stopPropagation()">✕</button>
     <svg class="ge-chevron w-4 h-4 text-stone-400" fill="none"
          stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -68,11 +68,11 @@ export default class extends Controller {
 
   addBlockMenuHTML(sectionIdx) {
     const types = [
-      ["subsection", "Fo-rannóg"],
-      ["prose",      "Prós"],
-      ["examples",   "Samplaí (2 cholún)"],
-      ["table",      "Tábla"],
-      ["note",       "Nóta"],
+      ["subsection", "Subsection"],
+      ["prose",      "Prose"],
+      ["examples",   "Examples (2 columns)"],
+      ["table",      "Table"],
+      ["note",       "Note"],
     ]
     const btns = types.map(([t, label]) =>
       `<button type="button" class="ge-add-block-btn"
@@ -96,8 +96,8 @@ export default class extends Controller {
     }[type]?.() ?? this.proseBlockHTML(block)
 
     const label = {
-      subsection: "Fo-rannóg", prose: "Prós", examples: "Samplaí",
-      table: "Tábla", note: "Nóta",
+      subsection: "Subsection", prose: "Prose", examples: "Examples",
+      table: "Table", note: "Note",
     }[type] ?? type
 
     return `
@@ -119,18 +119,18 @@ export default class extends Controller {
   <input type="text" value="${this.esc(block.label||'')}"
          class="ge-input w-20 font-mono" placeholder="(i)" data-field="label">
   <input type="text" value="${this.esc(block.title||'')}"
-         class="ge-input flex-1" placeholder="Teideal fo-rannóige" data-field="title">
+         class="ge-input flex-1" placeholder="Subsection title" data-field="title">
 </div>`
   }
 
   proseBlockHTML(block) {
     return `<textarea class="ge-textarea" rows="3"
-                      data-field="text" placeholder="Téacs próis…">${this.esc(block.text||'')}</textarea>`
+                      data-field="text" placeholder="Prose text…">${this.esc(block.text||'')}</textarea>`
   }
 
   noteBlockHTML(block) {
     return `<textarea class="ge-textarea ge-textarea-note" rows="2"
-                      data-field="text" placeholder="Nóta nó fonóta…">${this.esc(block.text||'')}</textarea>`
+                      data-field="text" placeholder="Note or footnote…">${this.esc(block.text||'')}</textarea>`
   }
 
   examplesBlockHTML(block) {
@@ -139,8 +139,8 @@ export default class extends Controller {
 <table class="ge-edit-table w-full">
   <thead>
     <tr>
-      <th class="ge-th">Gaeilge</th>
-      <th class="ge-th">Béarla</th>
+      <th class="ge-th">Irish</th>
+      <th class="ge-th">English</th>
       <th class="ge-th w-8"></th>
     </tr>
   </thead>
@@ -157,7 +157,7 @@ export default class extends Controller {
     const english = this.esc((row || [])[1] || "")
     return `
 <tr data-example-row>
-  <td><input type="text" value="${irish}"   class="ge-cell-input" data-col="0" placeholder="Gaeilge"></td>
+  <td><input type="text" value="${irish}"   class="ge-cell-input" data-col="0" placeholder="Irish"></td>
   <td><input type="text" value="${english}" class="ge-cell-input" data-col="1" placeholder="English"></td>
   <td class="text-center">
     <button type="button" class="ge-icon-btn ge-danger"
@@ -171,7 +171,7 @@ export default class extends Controller {
     const rows    = block.rows    || []
 
     const headerCells = headers.map(h =>
-      `<th><input type="text" value="${this.esc(h)}" class="ge-th-input" data-header placeholder="Ceanntásc"></th>`
+      `<th><input type="text" value="${this.esc(h)}" class="ge-th-input" data-header placeholder="Header"></th>`
     ).join("")
     const addHeaderBtn = `<th><button type="button" class="ge-icon-btn"
                                        data-action="click->grammar-editor#addTableColumn">+</button></th>`
@@ -181,7 +181,7 @@ export default class extends Controller {
     const note = this.esc(block.note || "")
     const noteField = `<div class="mt-2">
       <input type="text" value="${note}" class="ge-input w-full text-xs"
-             data-field="note" placeholder="Nóta tábla (roghnach)">
+             data-field="note" placeholder="Table note (optional)">
     </div>`
 
     return `
@@ -237,7 +237,7 @@ ${noteField}`
   }
 
   removeSection(event) {
-    if (!confirm("Scrios an rannóg seo?")) return
+    if (!confirm("Delete this section?")) return
     event.target.closest(".ge-section")?.remove()
   }
 
@@ -294,7 +294,7 @@ ${noteField}`
     const headerRow = block.querySelector("[data-header-row]")
     const addBtn    = headerRow.lastElementChild
     const newTh = document.createElement("th")
-    newTh.innerHTML = `<input type="text" value="" class="ge-th-input" data-header placeholder="Ceanntásc">`
+    newTh.innerHTML = `<input type="text" value="" class="ge-th-input" data-header placeholder="Header">`
     headerRow.insertBefore(newTh, addBtn)
     // Add cell to each body row
     block.querySelectorAll("[data-table-row]").forEach(tr => {

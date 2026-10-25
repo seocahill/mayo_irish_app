@@ -1,14 +1,14 @@
 <div class="max-w-xl mx-auto flex flex-col gap-6">
-  <%= render "shared/progress_bar", progress: @progress, label: "Stór focal ar eolas" %>
+  <%= render "shared/progress_bar", progress: @progress, label: "Words known" %>
 
   <div class="card p-6 sm:p-8 <%= @correct ? 'border-foghlaim' : 'border-red-700' %>">
     <% if @correct %>
-      <p class="eyebrow text-foghlaim mb-2">Ceart</p>
-      <p class="font-display text-3xl mb-1">Togha!</p>
+      <p class="eyebrow text-foghlaim mb-2">Correct</p>
+      <p class="font-display text-3xl mb-1">Well done!</p>
     <% else %>
-      <p class="eyebrow text-red-700 mb-2">Mícheart</p>
-      <p class="font-display text-3xl mb-1">Níl, faraor.</p>
-      <p class="text-sm text-muted">Do fhreagra: <span class="line-through"><%= @choice %></span></p>
+      <p class="eyebrow text-red-700 mb-2">Incorrect</p>
+      <p class="font-display text-3xl mb-1">Not quite.</p>
+      <p class="text-sm text-muted">Your answer: <span class="line-through"><%= @choice %></span></p>
     <% end %>
 
     <p class="mt-6 pt-6 border-t border-line text-lg">
@@ -18,7 +18,7 @@
     </p>
 
     <div class="mt-8">
-      <%= link_to (@last ? "Féach ar an toradh" : "Ar aghaidh"), lesson_quiz_path(@lesson), class: "btn-solid w-full sm:w-auto" %>
+      <%= link_to (@last ? "See results" : "Next"), lesson_quiz_path(@lesson), class: "btn-solid w-full sm:w-auto" %>
     </div>
   </div>
 </div>

@@ -52,9 +52,9 @@ class Lesson < ApplicationRecord
   scope :visible_to, ->(user) { user&.admin? ? all : published }
 
   TYPE_LABELS = {
-    "curriculum"    => "Gaeilge",
-    "thematic_vocab" => "Stór Focal",
-    "dias_material"  => "DIAS",
+    "curriculum"    => "Core course",
+    "thematic_vocab" => "Vocabulary",
+    "dias_material"  => "Field recordings",
   }.freeze
 
   def type_label     = TYPE_LABELS.fetch(lesson_type, lesson_type)

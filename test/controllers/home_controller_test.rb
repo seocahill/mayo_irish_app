@@ -17,11 +17,11 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     get root_path
 
     assert_response :success
-    assert_select "h1", "Mo lá"
+    assert_select "h1", "Your day"
     assert_select "a[href=?]", lesson_path(lessons(:one))
     assert_select "a[href=?]", lesson_chat_path(lessons(:one))
     assert_match "Ballindine", response.body
-    assert_match "Oirthear Mhaigh Eo", response.body
+    assert_match "East Mayo", response.body
     assert_select "a[href=?]", OnboardingsHelper::GAELTACHT_1926_URL
   end
 

@@ -21,8 +21,8 @@
         <a href="<%= root_path %>" class="font-display text-xl leading-tight text-ink">Gaeilge Mhaigh Eo</a>
         <nav class="text-sm text-muted flex items-center gap-4">
           <% if authenticated? %>
-            <a href="<%= root_path %>" class="hover:text-ink transition-colors py-1">Mo lá</a>
-            <a href="<%= lessons_path %>" class="hover:text-ink transition-colors py-1">Ceachtanna</a>
+            <a href="<%= root_path %>" class="hover:text-ink transition-colors py-1">Today</a>
+            <a href="<%= lessons_path %>" class="hover:text-ink transition-colors py-1">Lessons</a>
             <%= form_with url: search_path, method: :get, class: "relative", data: { turbo_frame: "_top" } do |f| %>
               <svg class="w-4 h-4 text-muted absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
@@ -57,7 +57,7 @@
 
     <footer class="mt-16 border-t border-line bg-surface">
       <div class="max-w-4xl mx-auto px-4 py-6 text-center text-muted text-sm">
-        Bunaithe ar <em>Learning Irish</em> le Mícheál Ó Siadhail &mdash; arna oiriúnú do Ghaeilge Mhaigh Eo
+        Based on <em>Learning Irish</em> by Mícheál Ó Siadhail, adapted for Mayo Irish
       </div>
     </footer>
 

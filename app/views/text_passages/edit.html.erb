@@ -4,7 +4,7 @@
       <%= f.text_field :title,
             class: "flex-1 bg-stone-600 text-white placeholder-stone-400 text-sm font-bold rounded px-2 py-1 border border-stone-500 focus:outline-none focus:border-stone-300",
             placeholder: "Teideal…" %>
-      <%= f.submit "Sábháil", class: "bg-surface text-ink px-3 py-1 rounded text-xs font-semibold hover:bg-stone-100 transition-colors cursor-pointer" %>
+      <%= f.submit "Save", class: "bg-surface text-ink px-3 py-1 rounded text-xs font-semibold hover:bg-stone-100 transition-colors cursor-pointer" %>
       <a href="<%= edit_lesson_path(@passage.lesson) %>"
          data-turbo-frame="<%= dom_id(@passage) %>"
          class="text-stone-300 hover:text-white text-xs transition-colors">Cealaigh</a>
