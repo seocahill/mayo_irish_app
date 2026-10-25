@@ -12,9 +12,9 @@ class AbairClient
 
   BASE_URL = "https://api.abair.ie/v4".freeze
 
-  # A Donegal (Ulster) woman's voice, the one used on Abairt. v4 ids look like
-  # "anb.piper"; check `voices` and override with ABAIR_VOICE if this is wrong.
-  DEFAULT_VOICE = "anb.piper".freeze
+  # Bríd, a Mayo woman's voice, the only Mayo voice v4 has. `voices` lists the
+  # others (Connemara, Kerry, Donegal…); ABAIR_VOICE overrides.
+  DEFAULT_VOICE = "brid.piper".freeze
 
   # Limit of the recognition API.
   MAX_AUDIO_BYTES = 5.megabytes

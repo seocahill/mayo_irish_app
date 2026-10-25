@@ -1,11 +1,11 @@
 require "test_helper"
 
 class AbairClientTest < ActiveSupport::TestCase
-  setup { @client = AbairClient.new(api_key: "k", voice: "anb.piper") }
+  setup { @client = AbairClient.new(api_key: "k", voice: "brid.piper") }
 
   test "synthesise returns the decoded WAV and sends the key, voice and text" do
     stub = stub_request(:post, "https://api.abair.ie/v4/synthesis?audioEncoding=wav&outputType=JSON")
-           .with(headers: { "abair-api-key" => "k" }, body: hash_including("input" => "an bád", "voice" => "anb.piper"))
+           .with(headers: { "abair-api-key" => "k" }, body: hash_including("input" => "an bád", "voice" => "brid.piper"))
            .to_return(status: 200, body: { audioContent: Base64.strict_encode64("wav") }.to_json)
 
     assert_equal "wav", @client.synthesise("an bád")
@@ -21,9 +21,9 @@ class AbairClientTest < ActiveSupport::TestCase
   end
 
   test "voices lists what the key may use" do
-    stub_request(:get, "https://api.abair.ie/v4/synthesis/voices").to_return(status: 200, body: [ { id: "anb.piper" } ].to_json)
+    stub_request(:get, "https://api.abair.ie/v4/synthesis/voices").to_return(status: 200, body: [ { id: "brid.piper" } ].to_json)
 
-    assert_equal [ { "id" => "anb.piper" } ], @client.voices
+    assert_equal [ { "id" => "brid.piper" } ], @client.voices
   end
 
   test "errors are told apart" do
