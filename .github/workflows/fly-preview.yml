@@ -21,7 +21,9 @@ concurrency:
 env:
   PROD_APP: mayo-irish-app
   PREVIEW_APP: mayo-irish-app-beta
-  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  # The deploy token used for main is scoped to the production app, so the
+  # preview needs an org token (`fly tokens create org`) saved as this secret.
+  FLY_API_TOKEN: ${{ secrets.FLY_PREVIEW_TOKEN }}
 
 jobs:
   preview:
