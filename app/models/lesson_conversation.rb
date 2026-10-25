@@ -3,6 +3,10 @@
 # Irish, so the page labels every reply as AI-generated and lets the learner
 # flag it for an editor, and nothing here is ever saved as course material.
 #
+# Replies come from ABAIR's conversational AI (AbairS2sClient), with OpenAI as
+# the fallback when ABAIR fails or gives something unusable. Each reply records
+# which one wrote it.
+#
 #   conversation = LessonConversation.new(chat_session)
 #   conversation.reply_to("what the learner said")  # => the reply ChatMessage
 #   conversation.reply_to(nil)                      # => an opening line
@@ -19,6 +23,8 @@ class LessonConversation
     and keep to its vocabulary and grammar as far as you can.
 
     - Reply in Irish, in one or two short, simple sentences. Use Mayo (Connacht) forms.
+    - Use at least two words from the lesson's VOCABULARY list in every reply.
+    - Don't tell the learner that you prefer to speak Irish; just carry on in Irish.
     - End most replies with a simple question, so the conversation keeps going.
     - The learner may type or speak. Speech comes through a recogniser, so expect missing
       accents and odd word breaks, and read it charitably. If the learner writes English
@@ -29,6 +35,9 @@ class LessonConversation
       needed. Quote Irish words in it only to explain them.
     - If the learner has not said anything yet, open with a greeting and a first simple
       question.
+
+    Respond ONLY with a JSON object with the keys "irish", "english" and "note" (note may be
+    null), and no other text.
   PROMPT
 
   RESPONSE_FORMAT = {
@@ -49,7 +58,7 @@ class LessonConversation
     }
   }.freeze
 
-  def self.client
+  def self.openai_client
     OpenAI::Client.new(
       access_token: Rails.application.credentials.dig(:openai, :openai_key),
       organization_id: Rails.application.credentials.dig(:openai, :openai_org),
@@ -57,9 +66,10 @@ class LessonConversation
     )
   end
 
-  def initialize(chat_session, client: self.class.client)
+  def initialize(chat_session, abair: AbairS2sClient.new, openai: self.class.openai_client)
     @chat_session = chat_session
-    @client = client
+    @abair = abair
+    @openai = openai
   end
 
   # Saves the learner's message and the reply together, only once a usable
@@ -82,20 +92,26 @@ class LessonConversation
   private
 
   def ask(said)
-    response = @client.chat(parameters: {
-      model: MODEL,
-      messages: [ { role: "system", content: system_prompt } ] + history(said),
-      response_format: RESPONSE_FORMAT,
-      temperature: 0.7,
-      max_tokens: 300
-    })
-    parse(response.dig("choices", 0, "message", "content"))
+    messages = [ { role: "system", content: system_prompt } ] + history(said)
+    from_abair(messages) || from_openai(messages)
+  end
+
+  def from_abair(messages)
+    parse(@abair.reply(messages)).merge(source: "abair")
+  rescue AbairS2sClient::Error, Error => e
+    Rails.logger.warn("[comhrá] ABAIR gave no usable reply, asking OpenAI: #{e.message}")
+    nil
+  end
+
+  def from_openai(messages)
+    response = @openai.chat(parameters: { model: MODEL, messages: messages, response_format: RESPONSE_FORMAT, temperature: 0.7, max_tokens: 300 })
+    parse(response.dig("choices", 0, "message", "content")).merge(source: "openai")
   rescue Faraday::Error => e
     raise Error, "The conversation model could not be reached: #{e.message}"
   end
 
   def system_prompt
-    [ INSTRUCTIONS, LessonContext.new(@chat_session.lesson).to_s.presence ].compact.join("\n\n")
+    [ INSTRUCTIONS, LessonContext.new(@chat_session.lesson).brief.presence ].compact.join("\n\n")
   end
 
   def history(said)
@@ -109,8 +125,9 @@ class LessonConversation
     end
   end
 
+  # ABAIR isn't held to the schema, so take the JSON object out of whatever it says.
   def parse(content)
-    reply = JSON.parse(content.to_s)
+    reply = JSON.parse(content.to_s[/\{.*\}/m].to_s)
     raise Error, "The conversation model gave no Irish" if reply["irish"].blank?
 
     { content: reply["irish"].strip, english: reply["english"].presence&.strip, note: reply["note"].presence&.strip }

@@ -6,8 +6,17 @@ class LessonContext
     @lesson = lesson
   end
 
+  BRIEF_INTRO_CHARACTERS = 1500
+
   def to_s
     [ intro, grammar, vocabulary ].compact.join("\n\n")
+  end
+
+  # A shorter version for the comhrá: all the vocabulary, but only the grammar
+  # rules' titles and the start of the intro, so even the longest lesson stays
+  # around 3,000 characters.
+  def brief
+    [ intro&.truncate(BRIEF_INTRO_CHARACTERS), grammar_titles, vocabulary ].compact.join("\n\n")
   end
 
   def intro
@@ -28,6 +37,13 @@ class LessonContext
 
     items = @lesson.vocabulary_items.to_a
     @vocabulary = (vocabulary_text(items) if items.any?)
+  end
+
+  def grammar_titles
+    titles = @lesson.grammar_rules.map(&:title)
+    return if titles.empty?
+
+    ([ "GRAMMAR RULES (titles only):" ] + titles.each_with_index.map { |title, i| "#{i + 1}. #{title}" }).join("\n")
   end
 
   private

@@ -88,7 +88,7 @@ class LessonConversationsControllerTest < ActionDispatch::IntegrationTest
     with_abair_key { post lesson_conversation_messages_path(@lesson), params: { audio: recording } }
 
     assert_equal I18n.t("lesson_conversation_messages.create.not_heard"), flash[:alert]
-    assert_not_requested :post, OpenaiTestHelper::CHAT_URL
+    assert_not_requested :post, OpenaiTestHelper::S2S_URL
   end
 
   test "says so when the speech service is down" do
@@ -106,8 +106,18 @@ class LessonConversationsControllerTest < ActionDispatch::IntegrationTest
     assert_not_requested :post, RECOGNITION_URL
   end
 
+  test "when ABAIR can't reply, OpenAI does" do
+    stub_conversation_reply(status: 500)
+    stub_openai_chat({ irish: "from openai", english: "in english", note: nil })
+
+    post lesson_conversation_messages_path(@lesson), params: { message: "hello" }
+
+    assert_equal [ "from openai", "openai" ], conversation.chat_messages.last.values_at(:content, :source)
+  end
+
   test "when no reply comes back nothing is saved" do
     stub_conversation_reply(status: 500)
+    stub_openai_chat(status: 500)
 
     post lesson_conversation_messages_path(@lesson), params: { message: "hello" }
 
@@ -121,7 +131,7 @@ class LessonConversationsControllerTest < ActionDispatch::IntegrationTest
 
     post lesson_conversation_messages_path(@lesson), params: { message: "  " }
 
-    assert_requested :post, OpenaiTestHelper::CHAT_URL, times: 1
+    assert_requested :post, OpenaiTestHelper::S2S_URL, times: 1
   end
 
   test "starting again keeps the old conversation for review" do

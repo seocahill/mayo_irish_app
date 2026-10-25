@@ -6,7 +6,7 @@ class FlaggedRepliesTest < ActionDispatch::IntegrationTest
     @learner = users(:two)
     @session = @learner.chat_sessions.conversation.create!(lesson: lessons(:one))
     @said = @session.chat_messages.create!(role: "user", content: "what the learner said")
-    @reply = @session.chat_messages.create!(role: "assistant", content: "reply in irish", english: "the reply in english")
+    @reply = @session.chat_messages.create!(role: "assistant", content: "reply in irish", english: "the reply in english", source: "abair")
   end
 
   test "a learner flags a reply in their own conversation" do
@@ -38,6 +38,7 @@ class FlaggedRepliesTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "p", text: "what the learner said"
     assert_select "[lang=ga]", text: "reply in irish"
+    assert_select ".eyebrow", text: /#{I18n.t("flagged_replies.index.by_abair")}/
 
     delete flagged_reply_path(@reply)
     assert_not @reply.reload.flagged?

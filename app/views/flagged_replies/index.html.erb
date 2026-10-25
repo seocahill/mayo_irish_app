@@ -24,7 +24,10 @@
             </div>
           <% end %>
           <div>
-            <p class="eyebrow"><%= t(".reply") %></p>
+            <p class="eyebrow">
+              <%= t(".reply") %>
+              <% if reply.source.present? %>· <%= reply.source == "abair" ? t(".by_abair") : t(".by_openai") %><% end %>
+            </p>
             <p lang="ga" class="mt-0.5 text-base break-words"><%= reply.content %></p>
             <% if reply.english.present? %><p class="text-muted mt-1"><%= reply.english %></p><% end %>
             <% if reply.note.present? %><p class="text-xs text-muted mt-1 border-l-2 border-labhair/40 pl-2"><%= reply.note %></p><% end %>

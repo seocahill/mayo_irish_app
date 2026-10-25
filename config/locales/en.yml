@@ -42,6 +42,8 @@ en:
     destroy:
       dismissed: Flag dismissed.
     index:
+      by_abair: written by ABAIR
+      by_openai: written by OpenAI
       dismiss: Dismiss
       empty: Nothing is flagged.
       eyebrow: Conversation review

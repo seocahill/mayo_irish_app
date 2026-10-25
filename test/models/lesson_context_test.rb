@@ -20,6 +20,18 @@ class LessonContextTest < ActiveSupport::TestCase
     assert_includes LessonContext.new(@lesson).to_s, "what the teacher says"
   end
 
+  test "the brief version keeps the vocabulary but only the grammar's titles" do
+    @lesson.update!(intro_video_transcript: "t" * 3000)
+    brief = LessonContext.new(@lesson).brief
+
+    assert_includes brief, LessonContext.new(@lesson).vocabulary
+    assert_includes brief, "1. #{grammar_rules(:one).title}"
+    assert_not_includes brief, "GRAMMAR RULES:\n"
+    assert_operator brief.length, :<, LessonContext.new(@lesson).to_s.length
+    assert_includes brief, "t" * 1000
+    assert_not_includes brief, "t" * 3000
+  end
+
   test "leaves out what a lesson doesn't have" do
     empty = Lesson.create!(number: 9300, title: "Empty", position: 9300)
 
