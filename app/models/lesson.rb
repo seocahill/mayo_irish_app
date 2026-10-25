@@ -61,6 +61,12 @@ class Lesson < ApplicationRecord
   # The intro video the teacher recorded for this lesson, if one is set.
   def intro_video = VideoEmbed.parse(intro_video_url)
 
+  # Words without a recording of the course's own, for which Abairt may have
+  # one (including ones already taken from Abairt, so they can be changed).
+  def words_open_to_abairt_recordings
+    vocabulary_items.ordered.with_attached_audio.reject { |item| item.audio.attached? || (item.audio_url.present? && item.audio_credit.blank?) }
+  end
+
   def reviewed? = reviewed_at.present?
 
   # Drafts nobody has checked yet.

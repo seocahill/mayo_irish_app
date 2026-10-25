@@ -1,0 +1,36 @@
+<div class="max-w-2xl mx-auto flex flex-col gap-6">
+  <header class="flex flex-col gap-2">
+    <p class="eyebrow text-eist"><%= t(".eyebrow", number: @lesson.number) %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= @lesson.title %></h1>
+    <p class="text-muted text-sm"><%= t(".summary") %></p>
+    <div class="flex flex-wrap items-center gap-3 mt-1">
+      <%= link_to t(".back_to_lesson"), lesson_path(@lesson), class: "text-sm text-muted hover:text-ink" %>
+      <% if @checked_count.positive? %>
+        <%= button_to t(".approve_checked", count: @checked_count), lesson_recording_approval_path(@lesson), class: "btn-solid",
+              form: { data: { turbo_confirm: t(".approve_checked_confirm", count: @checked_count) } } %>
+      <% end %>
+    </div>
+  </header>
+
+  <% if !AbairtClient.configured? %>
+    <p class="card px-4 py-6 text-center text-muted text-sm"><%= t(".not_configured") %></p>
+  <% elsif @words.empty? %>
+    <p class="card px-4 py-6 text-center text-muted text-sm"><%= t(".all_recorded") %></p>
+  <% else %>
+    <ul class="flex flex-col gap-4">
+      <% @words.each do |item| %>
+        <li class="card px-4 py-4 flex flex-col gap-3">
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <p><span lang="ga" class="text-lg font-medium"><%= item.irish %></span> <span class="text-muted text-sm">— <%= item.english %></span></p>
+            <% if item.audio_credit.present? %>
+              <span class="chip border-foghlaim text-foghlaim"><%= t(".in_use", name: item.audio_credit) %></span>
+            <% end %>
+          </div>
+          <%= turbo_frame_tag dom_id(item, :recording_suggestions), src: vocabulary_item_recording_suggestions_path(item), loading: :lazy do %>
+            <p class="text-sm text-muted animate-pulse"><%= t(".searching") %></p>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

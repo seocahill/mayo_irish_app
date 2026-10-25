@@ -168,6 +168,31 @@ en:
       show_english: Show English
       start_again: Start again
       thinking: Thinking…
+  lesson_recording_approvals:
+    create:
+      approved:
+        one: Approved 1 checked recording.
+        other: Approved %{count} checked recordings.
+        zero: There were no checked recordings to approve.
+  lesson_recording_suggestions:
+    index:
+      all_recorded: Every word in this lesson has a recording.
+      approve_checked:
+        one: Approve 1 checked recording
+        other: Approve %{count} checked recordings
+      approve_checked_confirm:
+        one: Approve the best checked recording for 1 word? Learners will hear it
+          straight away.
+        other: Approve the best checked recording for %{count} words? Learners will
+          hear them straight away.
+      back_to_lesson: "← Back to the lesson"
+      eyebrow: Abairt recordings · Lesson %{number}
+      in_use: Using %{name}
+      not_configured: Set ABAIRT_API_TOKEN to search Abairt for recordings.
+      searching: Searching Abairt…
+      summary: Real Mayo recordings from Abairt for the words that have none. Listen
+        before approving; learners hear a recording as soon as it's approved, credited
+        to the speaker.
   lesson_reviews:
     flash:
       cleared: Review cleared.
@@ -272,6 +297,7 @@ en:
     section_badge:
       known: Known
     show:
+      abairt_recordings: Abairt recordings
       all_lessons: All lessons
       conversation: Conversation
       english: English
@@ -291,6 +317,7 @@ en:
       quiz: Quiz
       record: Record
       record_yourself: Record yourself
+      recorded_by: Recorded by %{name}
       transcript: Transcript
       view_as_learner: View as learner
       vocabulary: Vocabulary
@@ -479,3 +506,15 @@ en:
       title: History of %{title}
       undo: Undo
       undo_confirm: Undo this change?
+  vocabulary_item_recording_suggestions:
+    index:
+      approve: Approve
+      approved: In use
+      check_failed: 'The recogniser didn''t hear the word. It heard:'
+      check_passed: The recogniser heard the word.
+      none_found: No Mayo recordings of this word on Abairt.
+      not_checked: Couldn't be checked.
+      rate_limited: Abairt's hourly search limit is used up. Try again later.
+      reject: Reject
+      rejected: Rejected
+      unavailable: Abairt couldn't be reached. Try again later.

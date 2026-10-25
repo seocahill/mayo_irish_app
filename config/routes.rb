@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   get "search", to: "search#index", as: :search
   resources :vocabulary_items, only: [] do
     resource :pronunciation, only: :show
+    resources :recording_suggestions, only: :index, controller: "vocabulary_item_recording_suggestions"
   end
+  resources :recording_suggestions, only: :update
   resources :chat_messages, only: [] do
     resource :pronunciation, only: :show, controller: "chat_message_pronunciations"
     resource :flag, only: :create, controller: "chat_message_flags"
@@ -28,6 +30,8 @@ Rails.application.routes.draw do
   resources :flagged_replies, only: %i[index destroy]
   resources :lessons, only: [:index, :new, :create, :show, :edit, :update] do
     resource :review, only: %i[create destroy], controller: "lesson_reviews"
+    resources :recording_suggestions, only: :index, controller: "lesson_recording_suggestions"
+    resource :recording_approval, only: :create, controller: "lesson_recording_approvals"
     resources :versions, only: :index do
       resource :undo, only: :create, controller: "version_undos"
     end

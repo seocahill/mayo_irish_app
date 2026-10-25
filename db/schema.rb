@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_26_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_26_100000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -249,6 +249,26 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_26_090000) do
     t.index ["user_id"], name: "index_quiz_reviews_on_user_id"
   end
 
+  create_table "recording_suggestions", force: :cascade do |t|
+    t.integer "abairt_entry_id", null: false
+    t.string "audio_url", null: false
+    t.boolean "check_passed", default: false, null: false
+    t.datetime "created_at", null: false
+    t.string "english"
+    t.text "heard"
+    t.string "irish", null: false
+    t.datetime "reviewed_at"
+    t.integer "reviewed_by_id"
+    t.string "speaker_dialect"
+    t.string "speaker_name"
+    t.string "status", default: "pending", null: false
+    t.datetime "updated_at", null: false
+    t.integer "vocabulary_item_id", null: false
+    t.index ["reviewed_by_id"], name: "index_recording_suggestions_on_reviewed_by_id"
+    t.index ["vocabulary_item_id", "abairt_entry_id"], name: "idx_on_vocabulary_item_id_abairt_entry_id_9b4a07da05", unique: true
+    t.index ["vocabulary_item_id"], name: "index_recording_suggestions_on_vocabulary_item_id"
+  end
+
   create_table "review_logs", force: :cascade do |t|
     t.datetime "answered_at", null: false
     t.integer "box_after", null: false
@@ -323,6 +343,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_26_090000) do
   end
 
   create_table "vocabulary_items", force: :cascade do |t|
+    t.string "audio_credit"
     t.string "audio_url"
     t.datetime "created_at", null: false
     t.string "english", null: false
@@ -333,6 +354,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_26_090000) do
     t.string "phonetic"
     t.string "plural"
     t.integer "position", default: 0, null: false
+    t.datetime "recordings_searched_at"
     t.datetime "updated_at", null: false
     t.index ["lesson_id", "position"], name: "index_vocabulary_items_on_lesson_id_and_position"
     t.index ["lesson_id"], name: "index_vocabulary_items_on_lesson_id"
@@ -357,6 +379,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_26_090000) do
   add_foreign_key "quiz_questions", "lessons"
   add_foreign_key "quiz_reviews", "quiz_questions"
   add_foreign_key "quiz_reviews", "users"
+  add_foreign_key "recording_suggestions", "users", column: "reviewed_by_id"
+  add_foreign_key "recording_suggestions", "vocabulary_items"
   add_foreign_key "review_logs", "quiz_questions", on_delete: :nullify
   add_foreign_key "review_logs", "users"
   add_foreign_key "section_progresses", "lessons"

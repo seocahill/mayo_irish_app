@@ -1,0 +1,37 @@
+<%= turbo_frame_tag dom_id(@item, :recording_suggestions) do %>
+  <% if @error %>
+    <p class="text-sm text-red-600"><%= @error %></p>
+  <% elsif @suggestions.empty? %>
+    <p class="text-sm text-muted"><%= t(".none_found") %></p>
+  <% else %>
+    <ul class="flex flex-col divide-y divide-line">
+      <% @suggestions.each do |suggestion| %>
+        <li class="py-3 first:pt-0 last:pb-0 flex flex-col gap-2 text-sm">
+          <div>
+            <p lang="ga" class="break-words"><%= suggestion.irish %></p>
+            <% if suggestion.english.present? %><p class="text-muted"><%= suggestion.english %></p><% end %>
+            <p class="text-xs text-muted mt-0.5"><%= [ suggestion.speaker_name, suggestion.speaker_dialect&.humanize ].compact.join(" · ") %></p>
+          </div>
+          <audio controls preload="none" src="<%= suggestion.audio_url %>" class="h-8 w-full max-w-xs"></audio>
+          <p class="text-xs <%= suggestion.check_passed? ? "text-foghlaim" : "text-labhair" %>">
+            <% if suggestion.check_passed? %>
+              <%= t(".check_passed") %>
+            <% elsif suggestion.heard.present? %>
+              <%= t(".check_failed") %> <span lang="ga">“<%= suggestion.heard %>”</span>
+            <% else %>
+              <%= t(".not_checked") %>
+            <% end %>
+          </p>
+          <div class="flex items-center gap-3">
+            <% if suggestion.pending? %>
+              <%= button_to t(".approve"), recording_suggestion_path(suggestion), method: :patch, params: { status: "approved" }, class: "btn-solid text-xs" %>
+              <%= button_to t(".reject"), recording_suggestion_path(suggestion), method: :patch, params: { status: "rejected" }, class: "btn-outline text-xs" %>
+            <% else %>
+              <span class="chip <%= suggestion.approved? ? "border-foghlaim text-foghlaim" : "border-line text-muted" %>"><%= suggestion.approved? ? t(".approved") : t(".rejected") %></span>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
