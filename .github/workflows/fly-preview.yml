@@ -1,0 +1,79 @@
+# Deploys a pull request to its own throwaway Fly app, so a branch can be
+# looked at with real-ish data before it is merged. Add the `preview` label to
+# a PR to turn it on (every later push redeploys). Production is only read from.
+#
+# The preview app has no BUCKET_NAME, so Litestream stays off and it can never
+# replicate into (or restore from) production's bucket. Uploaded files live in
+# that bucket, so audio and images from production won't show in the preview.
+#
+# On first creation the production database is copied across (a consistent
+# SQLite snapshot). Add the `refresh-preview-db` label to copy it again.
+name: Fly Preview
+
+on:
+  pull_request:
+    types: [labeled, synchronize, reopened]
+
+concurrency:
+  group: fly-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+env:
+  PROD_APP: mayo-irish-app
+  PREVIEW_APP: mayo-irish-app-beta
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+jobs:
+  preview:
+    name: Deploy preview
+    if: >-
+      contains(github.event.pull_request.labels.*.name, 'preview') &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Create the preview app and its volume if they don't exist
+        id: app
+        run: |
+          set -euo pipefail
+          test "$PREVIEW_APP" != "$PROD_APP"
+          if flyctl status -a "$PREVIEW_APP" >/dev/null 2>&1; then
+            echo "created=false" >> "$GITHUB_OUTPUT"
+          else
+            org=$(flyctl apps list --json | jq -r --arg app "$PROD_APP" '.[] | select(.Name == $app) | .Organization.Slug')
+            flyctl apps create "$PREVIEW_APP" --org "$org"
+            flyctl volumes create data --size 1 --region lhr -a "$PREVIEW_APP" --yes
+            flyctl secrets set SECRET_KEY_BASE="$(openssl rand -hex 64)" -a "$PREVIEW_APP" --stage
+            echo "created=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Never replicate to production's bucket
+        run: |
+          if flyctl secrets list -a "$PREVIEW_APP" | grep -q BUCKET_NAME; then
+            echo "::error::$PREVIEW_APP has BUCKET_NAME set; Litestream would replicate into the production bucket"
+            exit 1
+          fi
+
+      - name: Deploy this branch
+        run: flyctl deploy --remote-only --ha=false -a "$PREVIEW_APP"
+
+      - name: Copy the production database
+        if: >-
+          steps.app.outputs.created == 'true' ||
+          contains(github.event.pull_request.labels.*.name, 'refresh-preview-db')
+        run: |
+          set -euo pipefail
+          # Read-only on production: a consistent snapshot into /tmp, then removed.
+          flyctl ssh console -a "$PROD_APP" -C "sqlite3 /data/production.sqlite3 \".backup /tmp/preview-snapshot.sqlite3\""
+          flyctl ssh sftp get /tmp/preview-snapshot.sqlite3 snapshot.sqlite3 -a "$PROD_APP"
+          flyctl ssh console -a "$PROD_APP" -C "rm -f /tmp/preview-snapshot.sqlite3"
+
+          flyctl ssh console -a "$PREVIEW_APP" -C "sh -c 'rm -f /data/production.sqlite3 /data/production.sqlite3-wal /data/production.sqlite3-shm'"
+          echo "put snapshot.sqlite3 /data/production.sqlite3" | flyctl ssh sftp shell -a "$PREVIEW_APP"
+          flyctl ssh console -a "$PREVIEW_APP" -C "chown 1000:1000 /data/production.sqlite3"
+          # Restarting runs db:prepare, which migrates the copy to this branch's schema.
+          flyctl apps restart "$PREVIEW_APP"
+
+      - run: echo "Preview deployed to https://${PREVIEW_APP}.fly.dev" >> "$GITHUB_STEP_SUMMARY"
