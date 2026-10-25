@@ -15,7 +15,8 @@ Rails.application.routes.draw do
   get "pending", to: "registrations#pending", as: :pending_approval
   resources :passwords, param: :token, only: %i[new create edit update]
 
-  root "lessons#index"
+  root "home#show"
+  resource :onboarding, only: %i[new create]
   get "search", to: "search#index", as: :search
   resources :lessons, only: [:index, :new, :create, :show, :edit, :update] do
     resources :grammar_rules, only: [:edit, :update], shallow: true

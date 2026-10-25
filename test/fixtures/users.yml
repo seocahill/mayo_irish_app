@@ -11,9 +11,23 @@ two:
   password_digest: <%= password_digest %>
   approved: true
   admin: false
+  place: Ballindine
+  dialect_region: east_mayo
+  door: school_irish
+  onboarded_at: <%= Time.utc(2026, 10, 1) %>
 
 admin:
   email_address: admin@example.com
   password_digest: <%= password_digest %>
   approved: true
   admin: true
+  place: Ballina
+  dialect_region: east_mayo
+  door: speaks_irish
+  onboarded_at: <%= Time.utc(2026, 10, 1) %>
+
+newcomer:
+  email_address: newcomer@example.com
+  password_digest: <%= password_digest %>
+  approved: true
+  admin: false

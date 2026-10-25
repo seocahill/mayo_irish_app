@@ -66,6 +66,21 @@ class Lesson < ApplicationRecord
   def badge_classes  = BADGE_CLASSES.fetch(lesson_type, BADGE_CLASSES["curriculum"])
   def type_label     = TYPE_LABELS.fetch(lesson_type, lesson_type)
 
+  # Words known per lesson for a user (a word counts once all its questions are
+  # known), computed in a couple of grouped queries rather than per lesson.
+  def self.known_word_counts_for(user)
+    questions = QuizQuestion.where(source_type: "VocabularyItem")
+                            .group(:lesson_id, :source_id).count
+    known = QuizReview.known
+                      .joins(:quiz_question)
+                      .where(user: user, quiz_questions: { source_type: "VocabularyItem" })
+                      .group("quiz_questions.lesson_id", "quiz_questions.source_id").count
+
+    questions.each_with_object(Hash.new(0)) do |((lesson_id, source_id), n), acc|
+      acc[lesson_id] += 1 if n.positive? && known[[ lesson_id, source_id ]].to_i >= n
+    end
+  end
+
   def to_param
     number.to_s
   end

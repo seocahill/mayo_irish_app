@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_07_000002) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_25_000002) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -237,6 +237,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_07_000002) do
     t.index ["user_id"], name: "index_quiz_reviews_on_user_id"
   end
 
+  create_table "review_logs", force: :cascade do |t|
+    t.datetime "answered_at", null: false
+    t.integer "box_after", null: false
+    t.integer "box_before", null: false
+    t.boolean "correct", null: false
+    t.datetime "created_at", null: false
+    t.string "prompt", null: false
+    t.integer "quiz_question_id"
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["quiz_question_id"], name: "index_review_logs_on_quiz_question_id"
+    t.index ["user_id", "answered_at"], name: "index_review_logs_on_user_id_and_answered_at"
+    t.index ["user_id"], name: "index_review_logs_on_user_id"
+  end
+
   create_table "section_progresses", force: :cascade do |t|
     t.datetime "completed_at"
     t.datetime "created_at", null: false
@@ -272,8 +287,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_07_000002) do
     t.boolean "admin", default: false, null: false
     t.boolean "approved", default: false, null: false
     t.datetime "created_at", null: false
+    t.string "dialect_region"
+    t.string "door"
     t.string "email_address", null: false
+    t.datetime "onboarded_at"
     t.string "password_digest", null: false
+    t.string "place"
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
@@ -312,6 +331,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_07_000002) do
   add_foreign_key "quiz_questions", "lessons"
   add_foreign_key "quiz_reviews", "quiz_questions"
   add_foreign_key "quiz_reviews", "users"
+  add_foreign_key "review_logs", "quiz_questions", on_delete: :nullify
+  add_foreign_key "review_logs", "users"
   add_foreign_key "section_progresses", "lessons"
   add_foreign_key "section_progresses", "users"
   add_foreign_key "sessions", "users"

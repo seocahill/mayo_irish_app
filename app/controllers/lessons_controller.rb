@@ -7,7 +7,7 @@ class LessonsController < ApplicationController
     @quiz_progress = {}
     if current_user
       totals = VocabularyItem.group(:lesson_id).count
-      known = known_words_by_lesson(current_user)
+      known = Lesson.known_word_counts_for(current_user)
       @quiz_progress = @lessons.each_with_object({}) do |lesson, h|
         h[lesson.id] = LessonProgress.new(
           known: known.fetch(lesson.id, 0),
@@ -70,21 +70,6 @@ class LessonsController < ApplicationController
   end
 
   private
-
-  # Words known per lesson (a word counts once all its questions are known),
-  # computed in a couple of grouped queries rather than per-lesson.
-  def known_words_by_lesson(user)
-    questions = QuizQuestion.where(source_type: "VocabularyItem")
-                            .group(:lesson_id, :source_id).count
-    known = QuizReview.known
-                      .joins(:quiz_question)
-                      .where(user: user, quiz_questions: { source_type: "VocabularyItem" })
-                      .group("quiz_questions.lesson_id", "quiz_questions.source_id").count
-
-    questions.each_with_object(Hash.new(0)) do |((lesson_id, source_id), n), acc|
-      acc[lesson_id] += 1 if n.positive? && known[[lesson_id, source_id]].to_i >= n
-    end
-  end
 
   def set_lesson
     @lesson = Lesson.find_by!(number: params[:id])

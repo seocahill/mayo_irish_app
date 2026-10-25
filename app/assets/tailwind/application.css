@@ -1,5 +1,38 @@
 @import "tailwindcss";
 
+/* Design tokens from the platform mock-ups: one colour per level of exposure
+   (listen, learn, practise, speak) on a cool limestone ground. Light theme only
+   for now; the older lesson pages still use stone/emerald utilities. */
+@theme inline {
+  --font-display: "Young Serif", Georgia, "Times New Roman", serif;
+  --font-sans: "Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-eist: var(--bog);
+  --color-foghlaim: var(--sea);
+  --color-cleacht: var(--heather);
+  --color-labhair: var(--fuchsia);
+}
+
+@layer base {
+  :root {
+    --canvas: #ecefed;
+    --surface: #f8faf9;
+    --ink: #12262b;
+    --muted: #526a6e;
+    --line: #c9d4d2;
+    --sea: #17625f;
+    --bog: #86500f;
+    --heather: #62499c;
+    --fuchsia: #ae1b58;
+  }
+}
+
 @layer components {
   .lesson-section-heading {
     @apply text-xs font-bold uppercase tracking-widest text-stone-400 mb-3 flex items-center gap-2;

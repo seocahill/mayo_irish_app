@@ -43,4 +43,37 @@ class QuizReviewTest < ActiveSupport::TestCase
     @review.update!(due_at: 1.hour.ago)
     assert_includes QuizReview.due, @review
   end
+
+  test "an answer is logged with the box before and after" do
+    assert_difference -> { ReviewLog.count }, 1 do
+      @review.record_answer(correct: true)
+    end
+
+    log = ReviewLog.last
+    assert_equal @user, log.user
+    assert_equal @question, log.quiz_question
+    assert_equal @question.prompt, log.prompt
+    assert log.correct
+    assert_equal [ 1, 2 ], [ log.box_before, log.box_after ]
+  end
+
+  test "a wrong answer is logged as a drop back to box 1" do
+    3.times { @review.record_answer(correct: true) }
+    @review.record_answer(correct: false)
+
+    log = ReviewLog.order(:id).last
+    assert_not log.correct
+    assert_equal [ 4, 1 ], [ log.box_before, log.box_after ]
+    assert_equal 4, ReviewLog.where(user: @user).count
+  end
+
+  test "logs survive when the question is removed" do
+    @review.record_answer(correct: true)
+    log = ReviewLog.last
+
+    @question.destroy
+
+    assert_nil log.reload.quiz_question
+    assert log.prompt.present?
+  end
 end
