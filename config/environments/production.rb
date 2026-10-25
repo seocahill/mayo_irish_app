@@ -24,8 +24,9 @@ Rails.application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
 
-  # Store uploaded files on S3 (see config/storage.yml for options).
-  config.active_storage.service = :tigris
+  # Store uploaded files on S3 (see config/storage.yml for options). Preview
+  # apps have no bucket, so they keep files on local disk instead.
+  config.active_storage.service = ENV["BUCKET_NAME"] ? :tigris : :local
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   config.assume_ssl = true
