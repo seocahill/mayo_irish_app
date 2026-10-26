@@ -11,7 +11,7 @@ class DailyPath
   end
 
   def items
-    [ review_item, lesson_item, tutor_item ].compact
+    [ answer_item, review_item, lesson_item, tutor_item ].compact
   end
 
   def due_count
@@ -63,6 +63,15 @@ class DailyPath
 
     Item.new(level: :cleacht, label: I18n.t("daily_path.tutor_label"),
              title: I18n.t("daily_path.tutor_title"), path: lesson_chat_path(current_lesson))
+  end
+
+  # Answers from native speakers the learner hasn't heard yet come first.
+  def answer_item
+    count = user.native_questions.unseen_answers.count
+    return unless count.positive?
+
+    Item.new(level: :eist, label: I18n.t("daily_path.answer_label"),
+             title: I18n.t("daily_path.answer_title", count: count), path: native_questions_path)
   end
 
   def curriculum_lessons

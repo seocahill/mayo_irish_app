@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     resource :flag, only: :create, controller: "chat_message_flags"
   end
   resources :flagged_replies, only: %i[index destroy]
+  resources :native_questions, only: %i[index create]
   resources :lessons, only: [:index, :new, :create, :show, :edit, :update] do
     resource :review, only: %i[create destroy], controller: "lesson_reviews"
     resources :recording_suggestions, only: :index, controller: "lesson_recording_suggestions"

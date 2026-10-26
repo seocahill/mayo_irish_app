@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_26_100000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_26_130000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -155,6 +155,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_26_100000) do
     t.index ["position"], name: "index_lessons_on_position"
     t.index ["published"], name: "index_lessons_on_published"
     t.index ["reviewed_by_id"], name: "index_lessons_on_reviewed_by_id"
+  end
+
+  create_table "native_questions", force: :cascade do |t|
+    t.integer "abairt_question_id", null: false
+    t.string "answer_audio_url"
+    t.datetime "answer_seen_at"
+    t.datetime "answered_at"
+    t.string "audio_url"
+    t.datetime "created_at", null: false
+    t.integer "lesson_id"
+    t.string "status", default: "waiting", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["abairt_question_id"], name: "index_native_questions_on_abairt_question_id", unique: true
+    t.index ["lesson_id"], name: "index_native_questions_on_lesson_id"
+    t.index ["user_id"], name: "index_native_questions_on_user_id"
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
@@ -371,6 +387,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_26_100000) do
   add_foreign_key "lesson_blocks", "lessons"
   add_foreign_key "lesson_rows", "lessons"
   add_foreign_key "lessons", "users", column: "reviewed_by_id"
+  add_foreign_key "native_questions", "lessons"
+  add_foreign_key "native_questions", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
