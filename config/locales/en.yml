@@ -28,6 +28,10 @@ en:
     create:
       flagged: Thanks. An editor will check that reply.
   daily_path:
+    answer_label: Listen · native speaker
+    answer_title:
+      one: A native speaker has answered your question
+      other: Native speakers have answered %{count} of your questions
     lesson_label: Learn · Lesson %{number}
     lesson_title: "%{title} (%{known} of %{total} words known)"
     review_label: Review · %{count} due
@@ -87,6 +91,10 @@ en:
   js:
     pronounce:
       failed: Couldn't load the audio.
+    question_recorder:
+      no_permission: Allow the microphone to record your question.
+      not_supported: This browser can't record.
+      recording: Recording… Tap Stop when you've finished.
     recorder:
       no_permission: No permission
       not_supported: Not supported
@@ -299,6 +307,7 @@ en:
     show:
       abairt_recordings: Abairt recordings
       all_lessons: All lessons
+      ask_native_speaker: Ask a native speaker
       conversation: Conversation
       english: English
       exit_preview: Exit preview
@@ -331,6 +340,35 @@ en:
       plural: plural
       pronunciation: "/pronunciation/"
       word: word
+  native_questions:
+    create:
+      no_recording: Record your question first.
+      not_sent: Your question couldn't be sent. Try again later.
+      sent: Sent. A native speaker will answer by voice when they're free.
+    index:
+      about_lesson: About lesson %{number}, %{title}
+      answer: The answer
+      asked_ago: Asked %{time} ago
+      back_to_lesson: "← Back to lesson %{number}, %{title}"
+      eyebrow: Native speakers
+      lesson: Lesson %{number}
+      listen_back: Listen back before you send it.
+      new_answer: New
+      none_yet: You haven't asked anything yet.
+      record: Record your question
+      record_again: Record again
+      send: Send to a native speaker
+      sending: Sending…
+      stop: Stop
+      summary: Record a question about a word, a phrase or anything you're stuck on.
+        It goes to a native speaker from Mayo, who answers by voice when they're free.
+        You can ask in English or Irish.
+      title: Ask a native speaker
+      unavailable: Asking native speakers isn't set up yet.
+      waiting: Waiting for a speaker.
+      with_a_speaker: With a speaker. Their answer will appear here.
+      your_question: Your question
+      your_questions: Your questions
   onboardings:
     doors:
       beginner:

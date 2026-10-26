@@ -19,6 +19,9 @@
     <% end %>
     <%= link_to t(".conversation"), lesson_conversation_path(@lesson), class: "btn-outline flex-1 sm:flex-initial" %>
     <%= link_to t(".practice"), lesson_chat_path(@lesson), class: "btn-outline flex-1 sm:flex-initial" %>
+    <% if AbairtClient.configured? %>
+      <%= link_to t(".ask_native_speaker"), native_questions_path(lesson: @lesson.number), class: "btn-outline flex-1 sm:flex-initial" %>
+    <% end %>
     <% if current_user&.admin? && !@preview %>
       <%= link_to t("shared.edit"), edit_lesson_path(@lesson), class: "btn-outline flex-1 sm:flex-initial border-line text-muted" %>
       <%= link_to t(".view_as_learner"), lesson_path(@lesson, preview: 1), class: "btn-outline flex-1 sm:flex-initial border-line text-muted" %>

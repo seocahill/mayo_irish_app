@@ -1,0 +1,83 @@
+<div class="max-w-2xl mx-auto flex flex-col gap-6">
+  <header class="flex flex-col gap-2">
+    <p class="eyebrow text-eist"><%= t(".eyebrow") %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
+    <p class="text-muted text-sm"><%= t(".summary") %></p>
+    <% if @lesson %>
+      <%= link_to t(".back_to_lesson", number: @lesson.number, title: @lesson.title), lesson_path(@lesson), class: "text-sm text-muted hover:text-ink" %>
+    <% end %>
+  </header>
+
+  <% if AbairtClient.configured? %>
+    <%= form_with url: native_questions_path, method: :post, multipart: true,
+          class: "card px-4 py-5 flex flex-col items-center gap-4 text-center",
+          data: { controller: "question-recorder" } do |f| %>
+      <%= hidden_field_tag :lesson, @lesson&.number if @lesson %>
+      <%= f.file_field :audio, accept: "audio/*", class: "hidden", tabindex: -1, "aria-hidden": true,
+            data: { question_recorder_target: "audio" } %>
+      <% if @lesson %>
+        <p class="text-sm text-muted"><%= t(".about_lesson", number: @lesson.number, title: @lesson.title) %></p>
+      <% end %>
+
+      <button type="button" class="btn-solid gap-2" data-question-recorder-target="recordButton" data-action="question-recorder#start">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+        </svg>
+        <%= t(".record") %>
+      </button>
+      <button type="button" hidden class="btn-outline gap-2 border-red-600 text-red-600 animate-pulse" data-question-recorder-target="stopButton" data-action="question-recorder#stop">
+        <%= t(".stop") %> <span class="font-mono tabular-nums" data-question-recorder-target="timer">0:00</span>
+      </button>
+      <div hidden class="flex flex-col items-center gap-3 w-full" data-question-recorder-target="review">
+        <p class="text-sm text-muted"><%= t(".listen_back") %></p>
+        <audio controls class="w-full max-w-xs" data-question-recorder-target="preview"></audio>
+        <div class="flex flex-wrap justify-center gap-2">
+          <%= f.button t(".send"), class: "btn-solid", data: { turbo_submits_with: t(".sending") } %>
+          <button type="button" class="btn-outline" data-action="question-recorder#again"><%= t(".record_again") %></button>
+        </div>
+      </div>
+      <p class="text-xs text-muted min-h-4" aria-live="polite" data-question-recorder-target="status"></p>
+    <% end %>
+  <% else %>
+    <p class="card px-4 py-6 text-center text-muted text-sm"><%= t(".unavailable") %></p>
+  <% end %>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="eyebrow"><%= t(".your_questions") %></h2>
+    <% if @questions.empty? %>
+      <p class="text-sm text-muted"><%= t(".none_yet") %></p>
+    <% else %>
+      <ul class="flex flex-col gap-3">
+        <% @questions.each do |question| %>
+          <li class="card px-4 py-4 flex flex-col gap-3 text-sm" id="<%= dom_id(question) %>">
+            <div class="flex flex-wrap items-baseline justify-between gap-2 text-xs text-muted">
+              <span>
+                <%= t(".asked_ago", time: time_ago_in_words(question.created_at)) %>
+                <% if question.lesson %>· <%= link_to t(".lesson", number: question.lesson.number), lesson_path(question.lesson), class: "underline underline-offset-2 hover:text-ink" %><% end %>
+              </span>
+              <% if question.new_answer? %>
+                <span class="chip border-eist text-eist"><%= t(".new_answer") %></span>
+              <% end %>
+            </div>
+            <% if question.audio_url.present? %>
+              <div>
+                <p class="eyebrow mb-1"><%= t(".your_question") %></p>
+                <audio controls preload="none" src="<%= question.audio_url %>" class="h-8 w-full max-w-xs"></audio>
+              </div>
+            <% end %>
+            <% if question.answered? && question.answer_audio_url.present? %>
+              <div>
+                <p class="eyebrow mb-1 text-eist"><%= t(".answer") %></p>
+                <audio controls preload="metadata" src="<%= question.answer_audio_url %>" class="h-8 w-full max-w-xs"></audio>
+              </div>
+            <% elsif question.sent? %>
+              <p class="text-muted"><%= t(".with_a_speaker") %></p>
+            <% else %>
+              <p class="text-muted"><%= t(".waiting") %></p>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
+</div>
