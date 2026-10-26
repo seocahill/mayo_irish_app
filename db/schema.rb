@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_26_130000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_26_212705) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -58,6 +58,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_26_130000) do
     t.text "note"
     t.string "role"
     t.string "source"
+    t.integer "spoken_seconds"
     t.datetime "updated_at", null: false
     t.index ["chat_session_id"], name: "index_chat_messages_on_chat_session_id"
     t.index ["flagged_at"], name: "index_chat_messages_on_flagged_at"

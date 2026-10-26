@@ -75,11 +75,24 @@ class LessonConversationsControllerTest < ActionDispatch::IntegrationTest
     asr = stub_request(:post, RECOGNITION_URL).to_return(status: 200, body: { text: "what was heard" }.to_json)
     stub_conversation_reply
 
-    with_abair_key { post lesson_conversation_messages_path(@lesson), params: { audio: recording } }
+    with_abair_key { post lesson_conversation_messages_path(@lesson), params: { audio: recording, spoken_seconds: "7" } }
 
     assert_requested asr
     assert_equal [ "what was heard", "reply in irish" ], conversation.chat_messages.map(&:content)
+    assert_equal 7, conversation.chat_messages.first.spoken_seconds
     assert_redirected_to lesson_conversation_path(@lesson)
+  end
+
+  test "a spoken turn's length is kept within the recogniser's limit; a typed one has none" do
+    stub_request(:post, RECOGNITION_URL).to_return(status: 200, body: { text: "what was heard" }.to_json)
+    stub_conversation_reply
+
+    with_abair_key do
+      post lesson_conversation_messages_path(@lesson), params: { audio: recording, spoken_seconds: "600" }
+      post lesson_conversation_messages_path(@lesson), params: { message: "typed", spoken_seconds: "5" }
+    end
+
+    assert_equal [ 30, nil ], conversation.chat_messages.where(role: "user").map(&:spoken_seconds)
   end
 
   test "a recording with nothing in it is not sent on" do

@@ -32,10 +32,19 @@
 
   <section aria-labelledby="progress-heading" class="flex flex-col gap-3">
     <h2 id="progress-heading" class="font-mono text-xs uppercase tracking-wider text-muted"><%= t(".so_far") %></h2>
-    <p class="text-muted">
-      <span class="font-display text-3xl text-ink"><%= @daily_path.known_words %></span>
-      <%= t(".words_known", count: @daily_path.known_words) %>
-    </p>
+    <div class="flex flex-wrap gap-x-8 gap-y-2">
+      <p class="text-muted">
+        <span class="font-display text-3xl text-ink"><%= @daily_path.known_words %></span>
+        <%= t(".words_known", count: @daily_path.known_words) %>
+      </p>
+      <p class="text-muted">
+        <span class="font-display text-3xl text-ink"><%= @spoken_time.minutes %></span>
+        <%= t(".minutes_spoken", count: @spoken_time.minutes) %>
+        <% if @spoken_time.minutes.positive? %>
+          <span class="text-sm">· <%= t(".this_week", count: @spoken_time.minutes_this_week) %></span>
+        <% end %>
+      </p>
+    </div>
   </section>
 
   <section aria-labelledby="place-heading" class="flex flex-col gap-3">

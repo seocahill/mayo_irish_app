@@ -83,7 +83,7 @@
 
   <%# ── VOCABULARY ─────────────────────────────────────────────── %>
   <% if @lesson.vocabulary_items.any? %>
-    <section class="mb-10">
+    <section id="vocabulary" class="mb-10 scroll-mt-4">
       <h2 class="lesson-section-heading flex items-center gap-2">
         <%= t(".vocabulary") %>
         <%= render "section_badge", section: "vocabulary", progress: @section_progress %>

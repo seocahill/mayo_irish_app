@@ -11,7 +11,7 @@ class DailyPath
   end
 
   def items
-    [ answer_item, review_item, lesson_item, tutor_item ].compact
+    [ answer_item, listen_item, review_item, lesson_item, tutor_item, conversation_item ].compact
   end
 
   def due_count
@@ -63,6 +63,27 @@ class DailyPath
 
     Item.new(level: :cleacht, label: I18n.t("daily_path.tutor_label"),
              title: I18n.t("daily_path.tutor_title"), path: lesson_chat_path(current_lesson))
+  end
+
+  # The comhrá on the current lesson: talking, out loud, in Irish.
+  def conversation_item
+    return unless current_lesson
+
+    Item.new(level: :labhair, label: I18n.t("daily_path.conversation_label"),
+             title: I18n.t("daily_path.conversation_title", number: current_lesson.number),
+             path: lesson_conversation_path(current_lesson))
+  end
+
+  # The current lesson's words as Mayo speakers say them, where there are recordings.
+  def listen_item
+    return unless current_lesson
+
+    count = current_lesson.vocabulary_items.with_recording.count
+    return unless count.positive?
+
+    Item.new(level: :eist, label: I18n.t("daily_path.listen_label"),
+             title: I18n.t("daily_path.listen_title", count: count, number: current_lesson.number),
+             path: lesson_path(current_lesson, anchor: "vocabulary"))
   end
 
   # Answers from native speakers the learner hasn't heard yet come first.

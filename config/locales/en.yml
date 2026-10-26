@@ -32,8 +32,14 @@ en:
     answer_title:
       one: A native speaker has answered your question
       other: Native speakers have answered %{count} of your questions
+    conversation_label: Speak · conversation
+    conversation_title: Talk about Lesson %{number} out loud, in Irish
     lesson_label: Learn · Lesson %{number}
     lesson_title: "%{title} (%{known} of %{total} words known)"
+    listen_label: Listen · Mayo speakers
+    listen_title:
+      one: Hear a word from Lesson %{number} said by a Mayo speaker
+      other: Hear %{count} words from Lesson %{number} said by Mayo speakers
     review_label: Review · %{count} due
     review_title: Review the words that are due
     tutor_label: Practise · text chat
@@ -78,9 +84,13 @@ en:
     show:
       change: Change
       classed_1926: How was this area classed in 1926?
+      minutes_spoken:
+        one: minute spoken
+        other: minutes spoken
       nothing_due_html: Nothing is due today. %{link} to get started.
       pick_a_lesson: Pick a lesson
       so_far: So far
+      this_week: "%{count} this week"
       title: Your day
       up_next: Up next
       welcome_back: Welcome back

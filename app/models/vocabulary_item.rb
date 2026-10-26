@@ -20,6 +20,8 @@ class VocabularyItem < ApplicationRecord
   GENDERS = { 'm' => 'Masc.', 'f' => 'Fem.' }.freeze
 
   scope :ordered, -> { order(:position) }
+  # Said by a speaker: an uploaded recording or an approved one from Abairt.
+  scope :with_recording, -> { left_joins(:audio_attachment).where("vocabulary_items.audio_url <> '' OR active_storage_attachments.id IS NOT NULL") }
 
   def gender_label
     GENDERS[gender] || ''

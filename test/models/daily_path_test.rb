@@ -7,13 +7,22 @@ class DailyPathTest < ActiveSupport::TestCase
     QuizQuestion.sync_for(@lesson)
   end
 
-  test "suggests the first unfinished lesson and a tutor chat for it" do
+  test "suggests the first unfinished lesson, a tutor chat and a conversation for it" do
     items = DailyPath.new(@user).items
 
-    assert_equal [ :foghlaim, :cleacht ], items.map(&:level)
+    assert_equal [ :foghlaim, :cleacht, :labhair ], items.map(&:level)
     assert_equal "Learn · Lesson 1", items.first.label
-    assert_equal "/lessons/1", items.first.path
-    assert_equal "/lessons/1/chat", items.last.path
+    assert_equal [ "/lessons/1", "/lessons/1/chat", "/lessons/1/conversation" ], items.map(&:path)
+  end
+
+  test "offers the lesson's words from Mayo speakers when there are recordings" do
+    vocabulary_items(:dog).update!(audio_url: "https://abairt.com/madra.mp3")
+
+    listen = DailyPath.new(@user).items.first
+
+    assert_equal :eist, listen.level
+    assert_equal "Hear a word from Lesson 1 said by a Mayo speaker", listen.title
+    assert_equal "/lessons/1#vocabulary", listen.path
   end
 
   test "adds a review item with the due count and quiz link" do

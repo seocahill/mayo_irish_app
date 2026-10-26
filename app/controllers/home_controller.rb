@@ -3,6 +3,7 @@ class HomeController < ApplicationController
 
   def show
     @daily_path = DailyPath.new(current_user)
+    @spoken_time = SpokenTime.new(current_user)
   end
 
   private

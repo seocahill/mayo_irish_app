@@ -3,11 +3,12 @@ import { t } from "translations"
 
 // Records what the learner says and sends it with the form, as a file for the
 // server to pass to the speech recogniser. Tap once to start, again to send.
-// Recording stops on its own at the recogniser's 30-second limit.
+// Recording stops on its own at the recogniser's 30-second limit. How long the
+// learner spoke goes with it, for their minutes spoken.
 const MAX_SECONDS = 30
 
 export default class extends Controller {
-  static targets = ["micButton", "audio", "input", "status"]
+  static targets = ["micButton", "audio", "input", "status", "spokenSeconds"]
 
   disconnect() {
     clearTimeout(this.timer)
@@ -47,20 +48,23 @@ export default class extends Controller {
       clearTimeout(this.timer)
       this.stopStream()
       delete this.micButtonTarget.dataset.state
-      if (!this.discard && chunks.length) this.send(new Blob(chunks, { type: this.recorder.mimeType }))
+      const seconds = Math.ceil((Date.now() - this.startedAt) / 1000)
+      if (!this.discard && chunks.length) this.send(new Blob(chunks, { type: this.recorder.mimeType }), seconds)
     })
 
     this.recorder.start()
+    this.startedAt = Date.now()
     this.timer = setTimeout(() => this.recorder.stop(), MAX_SECONDS * 1000)
     this.micButtonTarget.dataset.state = "recording"
     this.setStatus(t("js.speech_input.recording"))
   }
 
-  send(blob) {
+  send(blob, seconds) {
     const file = new File([blob], `speech.${this.extensionFor(blob.type)}`, { type: blob.type })
     const files = new DataTransfer()
     files.items.add(file)
     this.audioTarget.files = files.files
+    if (this.hasSpokenSecondsTarget) this.spokenSecondsTarget.value = seconds
     this.inputTarget.value = ""
     this.setStatus(t("js.speech_input.sending"))
     this.element.requestSubmit()
