@@ -1,46 +1,49 @@
-<div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+<% level = level_classes(lesson_level(@lesson)) %>
+<% if @preview %>
+  <div class="mb-6 flex items-center justify-between gap-4 bg-eist/10 border border-eist/30 rounded-sm px-4 py-3 text-sm">
+    <span><%= t(".preview_banner") %></span>
+    <%= link_to t(".exit_preview"), lesson_path(@lesson), class: "underline underline-offset-2 shrink-0" %>
+  </div>
+<% end %>
+<header class="flex flex-col gap-5 mb-8">
   <div class="min-w-0">
-    <div class="flex items-center gap-2 mb-1 flex-wrap">
-      <span class="text-sm text-stone-400 uppercase tracking-widest">Ceacht <%= @lesson.number %></span>
-      <span class="text-xs font-medium px-2 py-0.5 rounded-full border <%= @lesson.badge_classes %>"><%= @lesson.type_label %></span>
-    </div>
-    <h1 class="text-2xl sm:text-3xl font-bold text-stone-800 break-words"><%= @lesson.title %></h1>
+    <p class="eyebrow <%= level[:text] %>"><%= t(".lesson_label", number: @lesson.number, type: @lesson.type_label) %></p>
+    <h1 class="text-3xl sm:text-4xl font-display text-ink leading-tight break-words mt-1"><%= @lesson.title %></h1>
     <% if @lesson.content_html.present? %>
-      <p class="text-xs text-stone-400 mt-1 italic"><%= @lesson.content_html %></p>
+      <p class="text-sm text-muted mt-2 italic"><%= @lesson.content_html %></p>
     <% end %>
   </div>
-  <div class="flex flex-wrap sm:flex-nowrap gap-2 sm:flex-shrink-0">
+  <div class="flex flex-wrap gap-2">
     <% if @lesson.vocabulary_items.any? %>
-      <%= link_to lesson_quiz_path(@lesson),
-            class: "flex-1 sm:flex-initial justify-center inline-flex items-center gap-2 text-sm bg-emerald-700 text-white px-4 py-2.5 rounded-lg hover:bg-emerald-600 transition-colors" do %>
-        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
-        </svg>
-        Triail
+      <%= link_to t(".quiz"), lesson_quiz_path(@lesson), class: "btn-solid flex-1 sm:flex-initial" %>
+    <% end %>
+    <%= link_to t(".conversation"), lesson_conversation_path(@lesson), class: "btn-outline flex-1 sm:flex-initial" %>
+    <%= link_to t(".practice"), lesson_chat_path(@lesson), class: "btn-outline flex-1 sm:flex-initial" %>
+    <% if current_user&.admin? && !@preview %>
+      <%= link_to t("shared.edit"), edit_lesson_path(@lesson), class: "btn-outline flex-1 sm:flex-initial border-line text-muted" %>
+      <%= link_to t(".view_as_learner"), lesson_path(@lesson, preview: 1), class: "btn-outline flex-1 sm:flex-initial border-line text-muted" %>
+      <% if AbairtClient.configured? && @lesson.vocabulary_items.any? %>
+        <%= link_to t(".abairt_recordings"), lesson_recording_suggestions_path(@lesson), class: "btn-outline flex-1 sm:flex-initial border-line text-muted" %>
       <% end %>
     <% end %>
-    <%= link_to lesson_chat_path(@lesson),
-          class: "flex-1 sm:flex-initial justify-center inline-flex items-center gap-2 text-sm bg-stone-700 text-white px-4 py-2.5 rounded-lg hover:bg-stone-600 transition-colors" do %>
-      <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-3 3v-3z"/>
-      </svg>
-      Cleachtadh
-    <% end %>
-    <% if current_user&.admin? %>
-      <a href="<%= edit_lesson_path(@lesson) %>"
-         class="w-full sm:w-auto justify-center inline-flex items-center gap-2 text-sm bg-emerald-800 text-white px-4 py-2.5 rounded-lg hover:bg-emerald-700 transition-colors">
-        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-        </svg>
-        Cuir in eagar
-      </a>
-    <% end %>
   </div>
-</div>
+</header>
+
+<% if @lesson.intro_video %>
+  <section class="mb-8 flex flex-col gap-3" aria-label="<%= t(".intro_video") %>">
+    <%= render "shared/video", embed: @lesson.intro_video %>
+    <% if @lesson.intro_video_transcript.present? %>
+      <details class="card px-4 py-3">
+        <summary class="eyebrow cursor-pointer"><%= t(".transcript") %></summary>
+        <div class="mt-3 text-sm leading-relaxed whitespace-pre-line"><%= @lesson.intro_video_transcript %></div>
+      </details>
+    <% end %>
+  </section>
+<% end %>
 
 <% if current_user && @quiz_progress.any? %>
   <div class="mb-8">
-    <%= render "shared/progress_bar", progress: @quiz_progress, label: "Stór focal ar eolas" %>
+    <%= render "shared/progress_bar", progress: @quiz_progress, label: t("shared.words_known") %>
   </div>
 <% end %>
 
@@ -57,49 +60,57 @@
 <% if @lesson.vocabulary_items.any? %>
   <section class="mb-10">
     <h2 class="lesson-section-heading flex items-center gap-2">
-      Stór Focal
+      <%= t(".vocabulary") %>
       <%= render "section_badge", section: "vocabulary", progress: @section_progress %>
     </h2>
-    <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
+    <div class="card overflow-hidden">
       <table class="w-full text-sm">
         <thead>
-          <tr class="bg-stone-50 border-b border-stone-200 text-stone-500 text-xs uppercase tracking-wide">
-            <th class="text-left px-4 py-3 font-medium">Gaeilge</th>
-            <th class="text-left px-4 py-3 font-medium hidden sm:table-cell">Fuaimniú</th>
-            <th class="text-left px-4 py-3 font-medium hidden md:table-cell">Iolra</th>
-            <th class="text-left px-4 py-3 font-medium">Béarla</th>
+          <tr class="border-b border-line eyebrow">
+            <th class="text-left px-4 py-3 font-normal"><%= t(".irish") %></th>
+            <th class="text-left px-4 py-3 font-normal hidden sm:table-cell"><%= t(".pronunciation") %></th>
+            <th class="text-left px-4 py-3 font-normal hidden md:table-cell"><%= t(".plural") %></th>
+            <th class="text-left px-4 py-3 font-normal"><%= t(".english") %></th>
             <th class="px-4 py-3"></th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-stone-100">
+        <tbody class="divide-y divide-line">
           <% @lesson.vocabulary_items.each do |item| %>
-            <tr class="hover:bg-stone-50 transition-colors">
-              <td class="px-4 py-3 font-semibold text-emerald-900">
+            <tr class="hover:bg-canvas transition-colors">
+              <td class="px-4 py-3 font-semibold text-ink">
                 <%= item.irish %>
                 <% if item.gender == 'f' %>
-                  <span class="text-xs text-stone-400 font-normal ml-1">bain.</span>
+                  <span class="text-xs text-muted font-normal ml-1"><%= t(".feminine") %></span>
                 <% end %>
               </td>
-              <td class="px-4 py-3 text-stone-500 font-mono text-xs hidden sm:table-cell">
+              <td class="px-4 py-3 text-muted font-mono text-xs hidden sm:table-cell">
                 <% if item.phonetic.present? %>/<%= item.phonetic %>/<% end %>
               </td>
-              <td class="px-4 py-3 text-stone-600 hidden md:table-cell"><%= item.plural %></td>
-              <td class="px-4 py-3 text-stone-700"><%= item.english %></td>
+              <td class="px-4 py-3 text-ink hidden md:table-cell"><%= item.plural %></td>
+              <td class="px-4 py-3 text-ink"><%= item.english %></td>
               <td class="px-2 sm:px-4 py-3">
                 <div class="flex items-center gap-2 sm:gap-3 justify-end">
                   <% if item.audio.attached? %>
                     <audio controls src="<%= rails_blob_url(item.audio) %>" class="h-8 w-28 sm:w-40"></audio>
                   <% elsif item.audio_url.present? %>
-                    <audio controls src="<%= item.audio_url %>" class="h-8 w-28 sm:w-40"></audio>
+                    <span class="inline-flex flex-col items-end gap-0.5">
+                      <audio controls src="<%= item.audio_url %>" class="h-8 w-28 sm:w-40"></audio>
+                      <% if item.audio_credit.present? %>
+                        <span class="text-[11px] text-muted"><%= t(".recorded_by", name: item.audio_credit) %></span>
+                      <% end %>
+                    </span>
+                  <% elsif AbairClient.configured? %>
+                    <%= render "shared/speak_button", src: vocabulary_item_pronunciation_path(item),
+                                                      label: t(".hear_word", word: item.irish) %>
                   <% end %>
 
-                  <% if item.audio.attached? || item.audio_url.present? %>
-                    <div data-controller="recorder" class="flex items-center gap-1.5" title="Taifead tú féin">
+                  <% if item.audio.attached? || item.audio_url.present? || AbairClient.configured? %>
+                    <div data-controller="recorder" class="flex items-center gap-1.5" title="<%= t(".record_yourself") %>">
                       <button type="button"
                               data-recorder-target="recordButton"
                               data-action="recorder#toggle"
-                              class="text-stone-400 hover:text-red-600 transition-colors"
-                              aria-label="Taifead">
+                              class="text-muted hover:text-red-600 transition-colors"
+                              aria-label="<%= t(".record") %>">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-14 0m7 7v4m0-4a3 3 0 01-3-3V5a3 3 0 016 0v6a3 3 0 01-3 3z"/>
                         </svg>
@@ -108,14 +119,14 @@
                               data-recorder-target="playButton"
                               data-action="recorder#play"
                               disabled
-                              class="text-stone-400 hover:text-emerald-700 transition-colors disabled:opacity-30 disabled:hover:text-stone-400"
-                              aria-label="Seinn an taifeadadh agat">
+                              class="text-muted hover:text-ink transition-colors disabled:opacity-30 disabled:hover:text-muted"
+                              aria-label="<%= t(".play_recording") %>">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                       </button>
-                      <span data-recorder-target="status" class="text-xs text-stone-400 w-16 hidden sm:inline"></span>
+                      <span data-recorder-target="status" class="text-xs text-muted w-16 hidden sm:inline"></span>
                     </div>
                   <% end %>
                 </div>
@@ -127,8 +138,8 @@
     </div>
 
     <% if @lesson.vocabulary_notes_content.present? && @lesson.vocabulary_notes_content.to_plain_text.present? %>
-      <div class="mt-3 bg-amber-50 border border-amber-200 rounded-lg px-5 py-4 text-sm text-stone-700">
-        <p class="font-semibold text-amber-800 mb-2 text-xs uppercase tracking-wide">Nótaí Focail</p>
+      <div class="mt-3 bg-eist/10 border border-eist/30 rounded-sm px-5 py-4 text-sm text-ink">
+        <p class="eyebrow text-eist mb-2"><%= t(".vocabulary_notes") %></p>
         <%= @lesson.vocabulary_notes_content %>
       </div>
     <% end %>
@@ -139,24 +150,25 @@
 <% if @lesson.grammar_rules.any? %>
   <section class="mb-10">
     <h2 class="lesson-section-heading flex items-center gap-2">
-      Gramadach
+      <%= t(".grammar") %>
       <%= render "section_badge", section: "grammar", progress: @section_progress %>
     </h2>
     <div class="space-y-6">
       <% @lesson.grammar_rules.each do |rule| %>
-        <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
-          <div class="bg-emerald-900 text-white px-5 py-3">
-            <span class="font-bold text-sm"><%= rule.number %>. <%= rule.title %></span>
+        <div class="card overflow-hidden">
+          <div class="border-b border-line px-5 py-4 flex items-baseline gap-3">
+            <span class="font-mono text-sm text-muted tabular-nums"><%= rule.number %></span>
+            <span class="font-display text-lg leading-snug"><%= rule.title %></span>
           </div>
           <% if rule.body.present? && rule.body.to_plain_text.present? %>
-            <div class="px-5 py-4 text-sm text-stone-700 prose prose-sm max-w-none border-b border-stone-100">
+            <div class="px-5 py-4 text-sm text-ink prose prose-sm max-w-none border-b border-line">
               <%= rule.body %>
             </div>
           <% end %>
           <% rule.grammar_sections.each do |section| %>
-            <div class="border-b border-stone-100 last:border-0">
+            <div class="border-b border-line last:border-0">
               <% if section.label.present? %>
-                <div class="px-5 py-2 bg-stone-50 text-xs font-semibold text-stone-500 uppercase tracking-wide">
+                <div class="px-5 py-2 bg-canvas eyebrow">
                   <%= section.label %>
                 </div>
               <% end %>
@@ -171,63 +183,21 @@
   </section>
 <% end %>
 
-<%# ── TEXTS ──────────────────────────────────────────────────── %>
-<% if @lesson.text_passages.any? %>
-  <section class="mb-10">
-    <h2 class="lesson-section-heading flex items-center gap-2">
-      Téacsanna
-      <%= render "section_badge", section: "texts", progress: @section_progress %>
-    </h2>
-    <% @lesson.text_passages.each do |passage| %>
-      <div class="bg-white rounded-xl border border-stone-200 overflow-hidden mb-4 last:mb-0">
-        <% if passage.title.present? %>
-          <div class="bg-stone-100 px-5 py-3 font-bold text-sm text-stone-700 uppercase tracking-wide">
-            <%= passage.title %>
-          </div>
-        <% end %>
-        <div class="px-5 py-4 text-sm prose prose-sm max-w-none leading-relaxed">
-          <%= passage.body %>
-        </div>
-      </div>
-    <% end %>
-  </section>
-<% end %>
-
-<%# ── EXERCISES ────────────────────────────────────────────────── %>
-<% if @lesson.exercises.any? %>
-  <section class="mb-10">
-    <h2 class="lesson-section-heading flex items-center gap-2">
-      Cleachtaí
-      <%= render "section_badge", section: "exercises", progress: @section_progress %>
-    </h2>
-    <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
-      <ol class="divide-y divide-stone-100 list-none">
-        <% @lesson.exercises.each do |ex| %>
-          <li class="flex gap-4 px-5 py-3 hover:bg-stone-50 transition-colors">
-            <span class="text-stone-400 font-mono text-xs w-6 shrink-0 pt-0.5"><%= ex.number %>.</span>
-            <span class="text-stone-700 text-sm"><%= ex.prompt %></span>
-          </li>
-        <% end %>
-      </ol>
-    </div>
-  </section>
-<% end %>
-
 <%# ── NAV ─────────────────────────────────────────────────────── %>
-<div class="flex justify-between items-center mt-12 pt-6 border-t border-stone-200">
+<div class="flex justify-between items-center mt-12 pt-6 border-t border-line">
   <div>
     <% if @lesson.previous_lesson %>
-      <a href="<%= lesson_path(@lesson.previous_lesson) %>" class="inline-flex items-center gap-2 text-sm text-stone-500 hover:text-emerald-800 transition-colors">
+      <a href="<%= lesson_path(@lesson.previous_lesson) %>" class="inline-flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-        Ceacht <%= @lesson.previous_lesson.number %>
+        <%= t(".lesson_number", number: @lesson.previous_lesson.number) %>
       </a>
     <% end %>
   </div>
-  <a href="<%= root_path %>" class="text-sm text-stone-400 hover:text-stone-700 transition-colors">Gach Ceacht</a>
+  <a href="<%= lessons_path %>" class="text-sm text-muted hover:text-ink transition-colors"><%= t(".all_lessons") %></a>
   <div>
     <% if @lesson.next_lesson %>
-      <a href="<%= lesson_path(@lesson.next_lesson) %>" class="inline-flex items-center gap-2 text-sm text-stone-500 hover:text-emerald-800 transition-colors">
-        Ceacht <%= @lesson.next_lesson.number %>
+      <a href="<%= lesson_path(@lesson.next_lesson) %>" class="inline-flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors">
+        <%= t(".lesson_number", number: @lesson.next_lesson.number) %>
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
     <% end %>

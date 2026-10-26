@@ -2,12 +2,17 @@ class LessonBlock < ApplicationRecord
   TYPES = %w[text image video pdf audio].freeze
 
   include Searchable
+  include EditHistory
+
+  tracked_in_lesson_history lesson_id: ->(b) { b.lesson_id },
+                            label: ->(b) { b.caption.presence || b.block_type.to_s.titleize }
 
   belongs_to :lesson
   has_rich_text :body
   has_one_attached :file
 
   validates :block_type, inclusion: { in: TYPES }
+  validate :video_url_must_be_embeddable
 
   searchable title: ->(b) { b.caption.presence || b.block_type&.titleize },
              body: ->(b) { [b.caption, b.body&.to_plain_text] },
@@ -20,4 +25,14 @@ class LessonBlock < ApplicationRecord
   def video? = block_type == "video"
   def pdf? = block_type == "pdf"
   def audio? = block_type == "audio"
+
+  def video_embed = VideoEmbed.parse(url)
+
+  private
+
+  def video_url_must_be_embeddable
+    return unless video? && url.present? && video_embed.nil?
+
+    errors.add(:url, :unsupported_video)
+  end
 end

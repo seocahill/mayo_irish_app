@@ -1,27 +1,27 @@
-<tr class="border-b border-stone-100 hover:bg-stone-50 vocab-row">
+<tr class="border-b border-line hover:bg-canvas vocab-row">
   <%= f.hidden_field :id %>
   <%= f.hidden_field :_destroy, class: "destroy-flag" %>
   <td class="px-2 py-1.5">
-    <%= f.text_field :irish, class: "vocab-cell-input", placeholder: "focal" %>
+    <%= f.text_field :irish, class: "vocab-cell-input", placeholder: t(".word") %>
   </td>
   <td class="px-2 py-1.5">
-    <%= f.text_field :phonetic, class: "vocab-cell-input font-mono text-xs", placeholder: "/fuaimniú/" %>
+    <%= f.text_field :phonetic, class: "vocab-cell-input font-mono text-xs", placeholder: t(".pronunciation") %>
   </td>
   <td class="px-2 py-1.5">
-    <%= f.text_field :plural, class: "vocab-cell-input", placeholder: "iolra" %>
+    <%= f.text_field :plural, class: "vocab-cell-input", placeholder: t(".plural") %>
   </td>
   <td class="px-2 py-1.5">
     <%= f.select :gender,
-          [["fir.", "m"], ["bain.", "f"]],
+          [[t("lessons.genders.masculine"), "m"], [t("lessons.genders.feminine"), "f"]],
           {},
           class: "vocab-cell-input" %>
   </td>
   <td class="px-2 py-1.5">
-    <%= f.text_field :english, class: "vocab-cell-input", placeholder: "meaning" %>
+    <%= f.text_field :english, class: "vocab-cell-input", placeholder: t(".meaning") %>
   </td>
   <td class="px-2 py-1.5 text-center">
     <button type="button" data-action="click->vocab-editor#removeRow"
             class="text-stone-300 hover:text-red-500 transition-colors text-lg leading-none"
-            title="Scrios">×</button>
+            title="<%= t("shared.delete") %>">×</button>
   </td>
 </tr>

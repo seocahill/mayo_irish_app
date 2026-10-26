@@ -9,14 +9,14 @@ class LessonsVisibilityTest < ActionDispatch::IntegrationTest
 
   test "learners do not see draft lessons on the index" do
     sign_in_as(@learner)
-    get root_path
+    get lessons_path
     assert_response :success
     assert_no_match "Draft Lesson", @response.body
   end
 
   test "admins do see draft lessons on the index" do
     sign_in_as(@admin)
-    get root_path
+    get lessons_path
     assert_response :success
     assert_match "Draft Lesson", @response.body
   end

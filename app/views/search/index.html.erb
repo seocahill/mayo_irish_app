@@ -1,45 +1,45 @@
 <div class="mb-8">
-  <h1 class="text-3xl font-bold text-stone-800 mb-2">Cuardach</h1>
-  <p class="text-stone-500">Search across every lesson — vocabulary, grammar, texts and exercises. Works in English and as Gaeilge (fadas optional).</p>
+  <h1 class="text-3xl font-display text-ink mb-2"><%= t(".title") %></h1>
+  <p class="text-muted"><%= t(".intro") %></p>
 </div>
 
 <%= form_with url: search_path, method: :get, data: { turbo_frame: "_top" }, class: "mb-8" do |f| %>
   <div class="relative">
-    <svg class="w-5 h-5 text-stone-400 absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg class="w-5 h-5 text-muted absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
     </svg>
     <%= f.search_field :q, value: @query, autofocus: true, autocomplete: "off",
-          placeholder: "e.g. fáilte, house, séimhiú…",
-          class: "w-full border border-stone-300 rounded-lg pl-12 pr-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600" %>
+          placeholder: t(".placeholder"),
+          class: "field pl-12 pr-4 text-lg" %>
   </div>
 <% end %>
 
 <% if @query.blank? %>
-  <p class="text-stone-400 text-center py-12">Type something above to search the whole course.</p>
+  <p class="text-muted text-center py-12"><%= t(".empty_query") %></p>
 <% elsif @results.empty? %>
   <div class="text-center py-12">
-    <p class="text-stone-600 text-lg mb-1">No results for <span class="font-semibold">“<%= @query %>”</span>.</p>
-    <p class="text-stone-400 text-sm">Try fewer or different words.</p>
+    <p class="text-ink text-lg mb-1"><%= t(".no_results_html", query: @query) %></p>
+    <p class="text-muted text-sm"><%= t(".try_again") %></p>
   </div>
 <% else %>
-  <p class="text-stone-400 text-sm mb-4">
-    <%= pluralize(@results.size, "result") %><%= " (showing the top #{Search::MAX_RESULTS})" if @results.size >= Search::MAX_RESULTS %>
+  <p class="text-muted text-sm mb-4">
+    <%= t(".result_count", count: @results.size) %><%= t(".top_note", max: Search::MAX_RESULTS) if @results.size >= Search::MAX_RESULTS %>
   </p>
 
   <div class="space-y-2">
     <% @results.each do |result| %>
-      <%= link_to lesson_path(result.lesson_number), class: "block bg-white rounded-lg border border-stone-200 hover:border-emerald-400 hover:shadow-sm transition-all px-5 py-4 group" do %>
+      <%= link_to lesson_path(result.lesson_number), class: "block card hover:border-ink transition-colors px-5 py-4 group" do %>
         <div class="flex items-start gap-3">
-          <span class="flex-shrink-0 mt-0.5 text-[11px] font-semibold uppercase tracking-wide text-emerald-800 bg-emerald-50 border border-emerald-200 rounded px-2 py-0.5">
+          <span class="chip shrink-0 mt-0.5 border-line text-muted">
             <%= result.type_label %>
           </span>
           <div class="min-w-0 flex-1">
-            <div class="font-semibold text-stone-800 group-hover:text-emerald-800 truncate"><%= result.title %></div>
+            <div class="font-semibold text-ink truncate"><%= result.title %></div>
             <% if result.snippet.present? %>
-              <div class="text-sm text-stone-500 mt-1 leading-snug"><%= highlighted_snippet(result.snippet) %></div>
+              <div class="text-sm text-muted mt-1 leading-snug"><%= highlighted_snippet(result.snippet) %></div>
             <% end %>
             <% if result.lesson_number.present? && !result.lesson? %>
-              <div class="text-xs text-stone-400 mt-1">Lesson <%= result.lesson_number %></div>
+              <div class="text-xs text-muted mt-1"><%= t(".lesson_number", number: result.lesson_number) %></div>
             <% end %>
           </div>
         </div>

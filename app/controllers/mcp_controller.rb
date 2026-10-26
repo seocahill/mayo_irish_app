@@ -4,6 +4,7 @@
 class McpController < ActionController::Base
   skip_forgery_protection
   before_action :require_mcp_token
+  before_action { PaperTrail.request.whodunnit = current_resource_owner&.id }
 
   def invoke
     unless request.post?

@@ -4,10 +4,11 @@ class LessonsController < ApplicationController
 
   def index
     @lessons = Lesson.visible_to(current_user).ordered
+    @flagged_count = ChatMessage.flagged.count if current_user&.admin?
     @quiz_progress = {}
     if current_user
       totals = VocabularyItem.group(:lesson_id).count
-      known = known_words_by_lesson(current_user)
+      known = Lesson.known_word_counts_for(current_user)
       @quiz_progress = @lessons.each_with_object({}) do |lesson, h|
         h[lesson.id] = LessonProgress.new(
           known: known.fetch(lesson.id, 0),
@@ -38,10 +39,12 @@ class LessonsController < ApplicationController
     # Draft lessons (e.g. created via the MCP connector) are hidden from learners
     # until an admin publishes them.
     unless @lesson.published? || current_user&.admin?
-      redirect_to(root_path, alert: "Lesson not found.") and return
+      redirect_to(root_path, alert: t("lessons.flash.not_found")) and return
     end
 
     @quiz_progress = @lesson.progress_for(current_user)
+    # Admins can see the page as a learner would, without the admin controls.
+    @preview = current_user&.admin? && params[:preview].present?
 
     if current_user
       # Grammar / texts / exercises still come from the chat tutor's mastery
@@ -63,7 +66,7 @@ class LessonsController < ApplicationController
 
   def update
     if @lesson.update(lesson_params)
-      redirect_to lesson_path(@lesson), notice: "Lesson saved."
+      redirect_to lesson_path(@lesson), notice: t("lessons.flash.saved")
     else
       render :edit, status: :unprocessable_entity
     end
@@ -71,28 +74,13 @@ class LessonsController < ApplicationController
 
   private
 
-  # Words known per lesson (a word counts once all its questions are known),
-  # computed in a couple of grouped queries rather than per-lesson.
-  def known_words_by_lesson(user)
-    questions = QuizQuestion.where(source_type: "VocabularyItem")
-                            .group(:lesson_id, :source_id).count
-    known = QuizReview.known
-                      .joins(:quiz_question)
-                      .where(user: user, quiz_questions: { source_type: "VocabularyItem" })
-                      .group("quiz_questions.lesson_id", "quiz_questions.source_id").count
-
-    questions.each_with_object(Hash.new(0)) do |((lesson_id, source_id), n), acc|
-      acc[lesson_id] += 1 if n.positive? && known[[lesson_id, source_id]].to_i >= n
-    end
-  end
-
   def set_lesson
     @lesson = Lesson.find_by!(number: params[:id])
   end
 
   def require_admin
     unless current_user&.admin?
-      redirect_to root_path, alert: "Not authorised."
+      redirect_to root_path, alert: t("lessons.flash.not_authorised")
     end
   end
 
@@ -105,15 +93,13 @@ class LessonsController < ApplicationController
       :vocabulary_notes,
       :vocabulary_notes_content,
       :grammar,
-      :grammar_data,
       :texts,
       :exercises,
       :tutor_prompt,
+      :intro_video_url,
+      :intro_video_transcript,
       vocabulary_items_attributes: [
         :id, :irish, :phonetic, :plural, :gender, :english, :notes, :position, :_destroy
-      ],
-      lesson_rows_attributes: [
-        :id, :section, :position, :row_type, :col_1, :col_2, :col_3, :_destroy
       ]
     )
   end

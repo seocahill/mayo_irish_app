@@ -1,0 +1,54 @@
+<div class="flex flex-col gap-8">
+
+  <header class="flex flex-col-reverse sm:flex-row sm:items-start justify-between gap-2 sm:gap-4">
+    <div>
+      <p class="eyebrow"><%= t(".eyebrow") %></p>
+      <h1 class="font-display text-2xl sm:text-3xl leading-tight"><%= t(".title", title: @lesson.title) %></h1>
+      <p class="text-muted mt-1 max-w-prose"><%= t(".intro") %></p>
+    </div>
+    <%= link_to t(".back_to_editor"), edit_lesson_path(@lesson), class: "text-sm text-muted hover:text-ink transition-colors shrink-0" %>
+  </header>
+
+  <% if @entries.empty? %>
+    <p class="card px-5 py-6 text-muted"><%= t(".empty") %></p>
+  <% else %>
+    <ul class="card divide-y divide-line">
+      <% @entries.each do |entry| %>
+        <li class="px-5 py-4 flex flex-col gap-2">
+          <div class="flex items-start justify-between gap-4">
+            <div class="min-w-0">
+              <p class="leading-snug">
+                <span class="chip border-line text-muted mr-1 align-middle"><%= t(".events.#{entry.event}") %></span>
+                <span class="text-muted"><%= entry.kind %></span>
+                <span class="font-semibold"><%= entry.subject %></span>
+              </p>
+              <p class="text-xs text-muted mt-1">
+                <%= l(entry.at, format: :short) %> · <%= entry.who || t(".system") %>
+              </p>
+            </div>
+            <% if entry.undoable? %>
+              <%= button_to t(".undo"), lesson_version_undo_path(@lesson, entry.version),
+                            method: :post, class: "btn-outline border-line text-muted !py-1.5 shrink-0",
+                            form: { data: { turbo_confirm: t(".undo_confirm") } } %>
+            <% end %>
+          </div>
+
+          <% if entry.changes.any? %>
+            <dl class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
+              <% entry.changes.each do |change| %>
+                <dt class="text-muted"><%= change.field %></dt>
+                <dd class="min-w-0 break-words">
+                  <% if change.from.present? %>
+                    <del class="text-muted"><%= change.from %></del>
+                  <% end %>
+                  <ins class="no-underline"><%= change.to.presence || "—" %></ins>
+                </dd>
+              <% end %>
+            </dl>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+</div>

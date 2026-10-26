@@ -35,4 +35,43 @@ class LessonTest < ActiveSupport::TestCase
     assert progress.complete?
     assert_equal 100, progress.pct
   end
+
+  test "the intro video comes from the saved link" do
+    assert_nil @lesson.intro_video
+
+    @lesson.update!(intro_video_url: "https://youtu.be/dQw4w9WgXcQ")
+
+    assert_equal "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ", @lesson.intro_video.src
+  end
+
+  test "an intro video link that cannot be embedded is invalid" do
+    @lesson.intro_video_url = "https://example.com/not-a-video"
+
+    assert_not @lesson.valid?
+    assert_includes @lesson.errors[:intro_video_url].first, "supported video"
+  end
+
+  test "a blank intro video link is fine" do
+    @lesson.intro_video_url = ""
+
+    assert @lesson.valid?
+  end
+
+  test "drafts need review until someone reviews them" do
+    draft = Lesson.create!(number: 9300, title: "Draft", position: 9300, published: false)
+    assert draft.needs_review?
+
+    draft.mark_reviewed(by: users(:admin))
+
+    assert draft.reviewed?
+    assert_equal users(:admin), draft.reviewed_by
+    assert_not draft.needs_review?
+
+    draft.clear_review
+    assert draft.needs_review?
+  end
+
+  test "published lessons never need review" do
+    assert_not @lesson.needs_review?
+  end
 end

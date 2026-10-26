@@ -1,0 +1,102 @@
+<div class="max-w-2xl mx-auto">
+  <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 mb-4">
+    <div>
+      <div class="eyebrow text-labhair mb-1"><%= t(".label", number: @lesson.number) %></div>
+      <h1 class="text-3xl font-display text-ink leading-tight"><%= @lesson.title %></h1>
+    </div>
+    <%= link_to t(".back_to_lesson"), lesson_path(@lesson), class: "text-sm text-muted hover:text-ink transition-colors shrink-0" %>
+  </div>
+
+  <p class="mb-4 bg-eist/10 border border-eist/30 rounded-sm px-4 py-3 text-sm text-ink" role="note">
+    <%= t(".ai_notice") %>
+  </p>
+
+  <div class="card flex flex-col h-[55dvh] sm:h-[65dvh] min-h-80">
+    <%# Reversed so the newest message is in view without any script. %>
+    <div class="flex-1 overflow-y-auto flex flex-col-reverse px-4 sm:px-6 py-5">
+      <div class="space-y-4">
+      <% if @messages.empty? %>
+        <div class="flex flex-col items-center gap-4 text-center mt-8">
+          <p class="text-muted text-sm max-w-sm"><%= t(".empty_state") %></p>
+          <%= button_to t(".begin"), lesson_conversation_messages_path(@lesson), class: "btn-solid",
+                data: { turbo_submits_with: t(".thinking") } %>
+        </div>
+      <% end %>
+
+      <% @messages.each do |message| %>
+        <% if message.role == "user" %>
+          <div class="flex justify-end">
+            <div class="bg-ink text-surface rounded-2xl rounded-tr-sm px-4 py-2.5 max-w-[85%] text-sm break-words"><%= message.content %></div>
+          </div>
+        <% else %>
+          <div class="flex justify-start">
+            <div class="bg-labhair/10 border border-line text-ink rounded-2xl rounded-tl-sm px-4 py-3 max-w-[85%] text-sm flex flex-col gap-2">
+              <div class="flex items-start gap-2">
+                <p lang="ga" class="text-base leading-snug flex-1 break-words"><%= message.content %></p>
+                <% if @speech %>
+                  <%= render "shared/speak_button", src: chat_message_pronunciation_path(message),
+                        label: t(".listen"), autoplay: flash[:play] == message.id %>
+                <% end %>
+              </div>
+              <% if message.english.present? %>
+                <details class="text-muted">
+                  <summary class="cursor-pointer select-none text-xs"><%= t(".show_english") %></summary>
+                  <p class="mt-1"><%= message.english %></p>
+                </details>
+              <% end %>
+              <% if message.note.present? %>
+                <p class="text-xs text-muted border-l-2 border-labhair/40 pl-2"><%= message.note %></p>
+              <% end %>
+              <div class="flex items-center justify-between gap-3 text-xs text-muted">
+                <span class="chip border-line text-muted"><%= t(".ai_generated") %></span>
+                <% if message.flagged? %>
+                  <span><%= t(".flagged") %></span>
+                <% else %>
+                  <%= button_to t(".flag"), chat_message_flag_path(message),
+                        class: "underline underline-offset-2 hover:text-ink bg-transparent border-0 p-0 cursor-pointer",
+                        form: { data: { turbo_confirm: t(".flag_confirm") } } %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      </div>
+    </div>
+
+    <div class="border-t border-line px-3 sm:px-4 py-3">
+      <%= form_with url: lesson_conversation_messages_path(@lesson), method: :post, multipart: true,
+            data: { controller: "chat speech-input", action: "submit->speech-input#submit turbo:submit-start->speech-input#busy" } do |f| %>
+        <%= f.file_field :audio, accept: "audio/*", class: "hidden", tabindex: -1, "aria-hidden": true,
+              data: { speech_input_target: "audio" } %>
+        <div class="flex gap-2 items-end">
+          <%= f.text_area :message, rows: 1, maxlength: LessonConversation::MAX_INPUT_CHARACTERS,
+                placeholder: t(".placeholder"), "aria-label": t(".placeholder"), lang: "ga",
+                class: "flex-1 min-w-0 resize-none rounded-sm border border-line bg-surface px-3 py-2.5 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-ink",
+                data: { chat_target: "input", speech_input_target: "input", action: "keydown.enter->chat#submitOnEnter" } %>
+          <% if @speech %>
+            <button type="button"
+                    data-speech-input-target="micButton"
+                    data-action="speech-input#toggle"
+                    class="btn-outline shrink-0 px-3 data-[state=recording]:text-red-600 data-[state=recording]:border-red-600 data-[state=recording]:animate-pulse disabled:opacity-50"
+                    title="<%= t(".record") %>" aria-label="<%= t(".record") %>">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+              </svg>
+            </button>
+          <% end %>
+          <%= f.button t(".send"), class: "btn-solid shrink-0", data: { turbo_submits_with: t(".thinking") } %>
+        </div>
+        <p data-speech-input-target="status" class="text-xs text-muted mt-2 min-h-4" aria-live="polite">
+          <%= t(".record_hint") if @speech %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mt-3 text-right">
+    <%= button_to t(".start_again"), lesson_conversation_path(@lesson), method: :delete,
+          class: "text-sm text-muted hover:text-ink transition-colors bg-transparent border-none cursor-pointer" %>
+  </div>
+</div>
+

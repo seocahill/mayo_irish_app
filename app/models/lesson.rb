@@ -1,5 +1,12 @@
 class Lesson < ApplicationRecord
   include Searchable
+  include EditHistory
+
+  # Review marks aren't content, and the legacy book columns aren't edited.
+  tracked_in_lesson_history lesson_id: ->(l) { l.id },
+                            label: ->(l) { l.title },
+                            only: %i[title number position published lesson_type intro_video_url
+                                     intro_video_transcript tutor_prompt]
 
   has_rich_text :vocabulary_notes_content
 
@@ -26,14 +33,14 @@ class Lesson < ApplicationRecord
   has_many :phrases,           -> { order(:position) }, dependent: :destroy
   has_many :lesson_blocks,   -> { order(:position) }, dependent: :destroy
   has_many :lesson_rows, dependent: :destroy
+  belongs_to :reviewed_by, class_name: "User", optional: true
   has_many :section_progresses, dependent: :destroy
   has_many :quiz_questions, dependent: :destroy
-  accepts_nested_attributes_for :lesson_rows,
-                                allow_destroy: true,
-                                reject_if: :all_blank
   accepts_nested_attributes_for :vocabulary_items,
                                 allow_destroy: true,
                                 reject_if: :all_blank
+
+  validate :intro_video_must_be_embeddable
 
   validates :number, presence: true, uniqueness: true
   validates :title, presence: true
@@ -51,20 +58,44 @@ class Lesson < ApplicationRecord
   # drafts created through the MCP connector, pending review).
   scope :visible_to, ->(user) { user&.admin? ? all : published }
 
-  BADGE_CLASSES = {
-    "curriculum"    => "bg-emerald-50 text-emerald-800 border-emerald-200 group-hover:bg-emerald-800 group-hover:text-white group-hover:border-emerald-800",
-    "thematic_vocab" => "bg-sky-50 text-sky-800 border-sky-200 group-hover:bg-sky-700 group-hover:text-white group-hover:border-sky-700",
-    "dias_material"  => "bg-amber-50 text-amber-800 border-amber-200 group-hover:bg-amber-700 group-hover:text-white group-hover:border-amber-700",
-  }.freeze
+  # The intro video the teacher recorded for this lesson, if one is set.
+  def intro_video = VideoEmbed.parse(intro_video_url)
 
-  TYPE_LABELS = {
-    "curriculum"    => "Gaeilge",
-    "thematic_vocab" => "Stór Focal",
-    "dias_material"  => "DIAS",
-  }.freeze
+  # Words without a recording of the course's own, for which Abairt may have
+  # one (including ones already taken from Abairt, so they can be changed).
+  def words_open_to_abairt_recordings
+    vocabulary_items.ordered.with_attached_audio.reject { |item| item.audio.attached? || (item.audio_url.present? && item.audio_credit.blank?) }
+  end
 
-  def badge_classes  = BADGE_CLASSES.fetch(lesson_type, BADGE_CLASSES["curriculum"])
-  def type_label     = TYPE_LABELS.fetch(lesson_type, lesson_type)
+  def reviewed? = reviewed_at.present?
+
+  # Drafts nobody has checked yet.
+  def needs_review? = !published? && !reviewed?
+
+  def mark_reviewed(by:)
+    update!(reviewed_at: Time.current, reviewed_by: by)
+  end
+
+  def clear_review
+    update!(reviewed_at: nil, reviewed_by: nil)
+  end
+
+  def type_label = I18n.t("lessons.types.#{lesson_type}", default: lesson_type.to_s)
+
+  # Words known per lesson for a user (a word counts once all its questions are
+  # known), computed in a couple of grouped queries rather than per lesson.
+  def self.known_word_counts_for(user)
+    questions = QuizQuestion.where(source_type: "VocabularyItem")
+                            .group(:lesson_id, :source_id).count
+    known = QuizReview.known
+                      .joins(:quiz_question)
+                      .where(user: user, quiz_questions: { source_type: "VocabularyItem" })
+                      .group("quiz_questions.lesson_id", "quiz_questions.source_id").count
+
+    questions.each_with_object(Hash.new(0)) do |((lesson_id, source_id), n), acc|
+      acc[lesson_id] += 1 if n.positive? && known[[ lesson_id, source_id ]].to_i >= n
+    end
+  end
 
   def to_param
     number.to_s
@@ -105,4 +136,9 @@ class Lesson < ApplicationRecord
     questions_per_word.count { |source_id, n| n.positive? && known_per_word[source_id].to_i >= n }
   end
 
+  def intro_video_must_be_embeddable
+    return if intro_video_url.blank? || intro_video
+
+    errors.add(:intro_video_url, :unsupported_video)
+  end
 end

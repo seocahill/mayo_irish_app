@@ -9,5 +9,6 @@ module MayoIrish
     config.autoload_lib(ignore: %w[assets tasks])
     config.time_zone = "Dublin"
     config.i18n.default_locale = :en
+    config.i18n.available_locales = [ :en ]
   end
 end

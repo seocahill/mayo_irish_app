@@ -1,42 +1,49 @@
 <turbo-frame id="<%= dom_id(@block) %>">
-  <%= form_with model: @block, class: "bg-white rounded-xl border border-stone-200 overflow-hidden" do |f| %>
+  <%= form_with model: @block, class: "bg-surface rounded-sm border border-line overflow-hidden" do |f| %>
 
-    <div class="px-5 py-3 bg-stone-100 border-b border-stone-200 flex items-center gap-2">
-      <span class="text-xs font-semibold text-stone-500 uppercase tracking-wide"><%= @block.block_type %> block</span>
+    <div class="px-5 py-3 bg-canvas border-b border-line flex items-center gap-2">
+      <span class="text-xs font-semibold text-muted uppercase tracking-wide"><%= t(".block_title", type: t("lesson_blocks.types.#{@block.block_type}")) %></span>
     </div>
 
     <div class="px-5 py-4 space-y-4">
+      <% if @block.errors.any? %>
+        <div class="bg-red-50 border border-red-200 rounded-sm px-4 py-3 text-sm text-red-700" role="alert">
+          <% @block.errors.full_messages.each do |message| %>
+            <p><%= message %></p>
+          <% end %>
+        </div>
+      <% end %>
       <% if @block.text? %>
         <%= f.rich_text_area :body, class: "min-h-[200px]" %>
 
       <% elsif @block.image? %>
         <% if @block.file.attached? %>
           <div class="mb-3">
-            <%= image_tag @block.file, class: "max-h-48 rounded-lg object-cover" %>
+            <%= image_tag @block.file, class: "max-h-48 rounded-sm object-cover" %>
           </div>
         <% end %>
         <div>
-          <label class="editor-label">Íomhá</label>
+          <label class="editor-label"><%= t("lesson_blocks.types.image") %></label>
           <%= f.file_field :file, accept: "image/*", class: "editor-input" %>
         </div>
         <div>
-          <label class="editor-label">Fotheideal (roghnach)</label>
-          <%= f.text_area :caption, rows: 3, class: "editor-textarea", placeholder: "Cur síos ar an íomhá..." %>
+          <label class="editor-label"><%= t(".caption") %></label>
+          <%= f.text_area :caption, rows: 3, class: "editor-textarea", placeholder: t(".image_caption_placeholder") %>
         </div>
 
       <% elsif @block.video? %>
         <div>
-          <label class="editor-label">URL an Físeáin (YouTube nó Vimeo)</label>
+          <label class="editor-label"><%= t(".video_url") %></label>
           <%= f.text_area :url, rows: 2, class: "editor-textarea", placeholder: "https://www.youtube.com/watch?v=..." %>
         </div>
         <div>
-          <label class="editor-label">Fotheideal (roghnach)</label>
-          <%= f.text_area :caption, rows: 3, class: "editor-textarea", placeholder: "Cur síos ar an bhfíseán..." %>
+          <label class="editor-label"><%= t(".caption") %></label>
+          <%= f.text_area :caption, rows: 3, class: "editor-textarea", placeholder: t(".video_caption_placeholder") %>
         </div>
 
       <% elsif @block.pdf? %>
         <% if @block.file.attached? %>
-          <div class="mb-3 flex items-center gap-2 text-sm text-stone-600">
+          <div class="mb-3 flex items-center gap-2 text-sm text-ink">
             <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
             </svg>
@@ -44,12 +51,12 @@
           </div>
         <% end %>
         <div>
-          <label class="editor-label">Comhad PDF</label>
+          <label class="editor-label"><%= t(".pdf_file") %></label>
           <%= f.file_field :file, accept: ".pdf", class: "editor-input" %>
         </div>
         <div>
-          <label class="editor-label">Fotheideal (roghnach)</label>
-          <%= f.text_area :caption, rows: 3, class: "editor-textarea", placeholder: "Teideal an doiciméid..." %>
+          <label class="editor-label"><%= t(".caption") %></label>
+          <%= f.text_area :caption, rows: 3, class: "editor-textarea", placeholder: t(".pdf_caption_placeholder") %>
         </div>
 
       <% elsif @block.audio? %>
@@ -59,20 +66,20 @@
           </div>
         <% end %>
         <div>
-          <label class="editor-label">Comhad Fuaime</label>
+          <label class="editor-label"><%= t(".audio_file") %></label>
           <%= f.file_field :file, accept: "audio/*", class: "editor-input" %>
         </div>
         <div>
-          <label class="editor-label">Fotheideal (roghnach)</label>
-          <%= f.text_area :caption, rows: 3, class: "editor-textarea", placeholder: "Cur síos ar an gcomhad fuaime..." %>
+          <label class="editor-label"><%= t(".caption") %></label>
+          <%= f.text_area :caption, rows: 3, class: "editor-textarea", placeholder: t(".audio_caption_placeholder") %>
         </div>
       <% end %>
     </div>
 
-    <div class="px-5 py-3 border-t border-stone-100 flex items-center justify-between">
-      <%= link_to "Cealaigh", edit_lesson_path(@block.lesson),
-            class: "text-sm text-stone-500 hover:text-stone-700 transition-colors" %>
-      <%= f.submit "Sábháil", class: "bg-emerald-800 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition-colors cursor-pointer" %>
+    <div class="px-5 py-3 border-t border-line flex items-center justify-between">
+      <%= link_to t("shared.cancel"), edit_lesson_path(@block.lesson),
+            class: "text-sm text-muted hover:text-ink transition-colors" %>
+      <%= f.submit t("shared.save"), class: "btn-solid" %>
     </div>
   <% end %>
 </turbo-frame>

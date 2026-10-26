@@ -19,4 +19,7 @@ Rails.application.configure do
   config.active_support.deprecation = :stderr
 
   config.action_controller.raise_on_missing_callback_actions = true
+
+  # Fail loudly on a missing translation instead of rendering a placeholder.
+  config.i18n.raise_on_missing_translations = true
 end

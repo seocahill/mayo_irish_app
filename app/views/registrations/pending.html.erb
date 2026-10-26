@@ -1,19 +1,14 @@
 <div class="max-w-md mx-auto mt-16 text-center">
-  <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
-    <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <div class="w-16 h-16 bg-eist/10 rounded-full flex items-center justify-center mx-auto mb-6">
+    <svg class="w-8 h-8 text-eist" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
     </svg>
   </div>
 
-  <h1 class="text-2xl font-bold text-stone-800 mb-3">Ag fanacht le ceadú</h1>
-  <p class="text-stone-500 mb-2">
-    Tá do chuntas cruthaithe. Cuirfear ar an eolas tú nuair a bheidh sé ceadaithe ag riarthóir.
-  </p>
-  <p class="text-stone-400 text-sm">
-    Your account has been created. You'll be notified when an admin approves it.
-  </p>
+  <h1 class="text-2xl font-display text-ink mb-3"><%= t(".title") %></h1>
+  <p class="text-muted"><%= t(".message") %></p>
 
   <div class="mt-8">
-    <%= link_to "Ar ais chuig an suíomh", new_session_path, class: "text-sm text-emerald-700 hover:underline" %>
+    <%= link_to t(".back"), new_session_path, class: "text-sm text-ink underline underline-offset-2" %>
   </div>
 </div>

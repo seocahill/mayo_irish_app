@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_07_000002) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_26_100000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -53,17 +53,24 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_07_000002) do
     t.integer "chat_session_id", null: false
     t.text "content"
     t.datetime "created_at", null: false
+    t.text "english"
+    t.datetime "flagged_at"
+    t.text "note"
     t.string "role"
+    t.string "source"
     t.datetime "updated_at", null: false
     t.index ["chat_session_id"], name: "index_chat_messages_on_chat_session_id"
+    t.index ["flagged_at"], name: "index_chat_messages_on_flagged_at"
   end
 
   create_table "chat_sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.string "kind", default: "tutor", null: false
     t.integer "lesson_id", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.index ["lesson_id"], name: "index_chat_sessions_on_lesson_id"
+    t.index ["user_id", "lesson_id", "kind"], name: "index_chat_sessions_on_user_id_and_lesson_id_and_kind"
     t.index ["user_id"], name: "index_chat_sessions_on_user_id"
   end
 
@@ -130,10 +137,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_07_000002) do
     t.text "exercises"
     t.text "grammar"
     t.text "grammar_data"
+    t.text "intro_video_transcript"
+    t.text "intro_video_url"
     t.string "lesson_type", default: "curriculum", null: false
     t.integer "number", null: false
     t.integer "position", default: 0, null: false
     t.boolean "published", default: true, null: false
+    t.datetime "reviewed_at"
+    t.integer "reviewed_by_id"
     t.text "texts"
     t.string "title", null: false
     t.text "tutor_prompt"
@@ -143,6 +154,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_07_000002) do
     t.index ["number"], name: "index_lessons_on_number", unique: true
     t.index ["position"], name: "index_lessons_on_position"
     t.index ["published"], name: "index_lessons_on_published"
+    t.index ["reviewed_by_id"], name: "index_lessons_on_reviewed_by_id"
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
@@ -237,6 +249,41 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_07_000002) do
     t.index ["user_id"], name: "index_quiz_reviews_on_user_id"
   end
 
+  create_table "recording_suggestions", force: :cascade do |t|
+    t.integer "abairt_entry_id", null: false
+    t.string "audio_url", null: false
+    t.boolean "check_passed", default: false, null: false
+    t.datetime "created_at", null: false
+    t.string "english"
+    t.text "heard"
+    t.string "irish", null: false
+    t.datetime "reviewed_at"
+    t.integer "reviewed_by_id"
+    t.string "speaker_dialect"
+    t.string "speaker_name"
+    t.string "status", default: "pending", null: false
+    t.datetime "updated_at", null: false
+    t.integer "vocabulary_item_id", null: false
+    t.index ["reviewed_by_id"], name: "index_recording_suggestions_on_reviewed_by_id"
+    t.index ["vocabulary_item_id", "abairt_entry_id"], name: "idx_on_vocabulary_item_id_abairt_entry_id_9b4a07da05", unique: true
+    t.index ["vocabulary_item_id"], name: "index_recording_suggestions_on_vocabulary_item_id"
+  end
+
+  create_table "review_logs", force: :cascade do |t|
+    t.datetime "answered_at", null: false
+    t.integer "box_after", null: false
+    t.integer "box_before", null: false
+    t.boolean "correct", null: false
+    t.datetime "created_at", null: false
+    t.string "prompt", null: false
+    t.integer "quiz_question_id"
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["quiz_question_id"], name: "index_review_logs_on_quiz_question_id"
+    t.index ["user_id", "answered_at"], name: "index_review_logs_on_user_id_and_answered_at"
+    t.index ["user_id"], name: "index_review_logs_on_user_id"
+  end
+
   create_table "section_progresses", force: :cascade do |t|
     t.datetime "completed_at"
     t.datetime "created_at", null: false
@@ -272,13 +319,31 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_07_000002) do
     t.boolean "admin", default: false, null: false
     t.boolean "approved", default: false, null: false
     t.datetime "created_at", null: false
+    t.string "dialect_region"
+    t.string "door"
     t.string "email_address", null: false
+    t.datetime "onboarded_at"
     t.string "password_digest", null: false
+    t.string "place"
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  create_table "versions", force: :cascade do |t|
+    t.datetime "created_at"
+    t.string "event", null: false
+    t.bigint "item_id", null: false
+    t.string "item_type", null: false
+    t.integer "lesson_id"
+    t.text "object"
+    t.text "object_changes"
+    t.string "whodunnit"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+    t.index ["lesson_id", "created_at"], name: "index_versions_on_lesson_id_and_created_at"
+  end
+
   create_table "vocabulary_items", force: :cascade do |t|
+    t.string "audio_credit"
     t.string "audio_url"
     t.datetime "created_at", null: false
     t.string "english", null: false
@@ -289,6 +354,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_07_000002) do
     t.string "phonetic"
     t.string "plural"
     t.integer "position", default: 0, null: false
+    t.datetime "recordings_searched_at"
     t.datetime "updated_at", null: false
     t.index ["lesson_id", "position"], name: "index_vocabulary_items_on_lesson_id_and_position"
     t.index ["lesson_id"], name: "index_vocabulary_items_on_lesson_id"
@@ -304,6 +370,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_07_000002) do
   add_foreign_key "grammar_sections", "grammar_rules"
   add_foreign_key "lesson_blocks", "lessons"
   add_foreign_key "lesson_rows", "lessons"
+  add_foreign_key "lessons", "users", column: "reviewed_by_id"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
@@ -312,6 +379,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_07_000002) do
   add_foreign_key "quiz_questions", "lessons"
   add_foreign_key "quiz_reviews", "quiz_questions"
   add_foreign_key "quiz_reviews", "users"
+  add_foreign_key "recording_suggestions", "users", column: "reviewed_by_id"
+  add_foreign_key "recording_suggestions", "vocabulary_items"
+  add_foreign_key "review_logs", "quiz_questions", on_delete: :nullify
+  add_foreign_key "review_logs", "users"
   add_foreign_key "section_progresses", "lessons"
   add_foreign_key "section_progresses", "users"
   add_foreign_key "sessions", "users"

@@ -17,8 +17,10 @@ class QuizReview < ApplicationRecord
     box >= KNOWN_BOX
   end
 
-  # Apply an answer outcome and reschedule the next review.
+  # Apply an answer outcome, reschedule the next review, and log the answer.
   def record_answer(correct:)
+    box_before = box
+
     if correct
       self.box = [ box + 1, MAX_BOX ].min
       self.times_correct += 1
@@ -29,6 +31,12 @@ class QuizReview < ApplicationRecord
 
     self.last_reviewed_at = Time.current
     self.due_at = Time.current + INTERVALS.fetch(box).days
-    save!
+
+    transaction do
+      save!
+      ReviewLog.create!(user: user, quiz_question: quiz_question, prompt: quiz_question.prompt,
+                        correct: correct, box_before: box_before, box_after: box,
+                        answered_at: last_reviewed_at)
+    end
   end
 end

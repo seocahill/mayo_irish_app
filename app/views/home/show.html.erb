@@ -1,0 +1,57 @@
+<div class="max-w-xl mx-auto flex flex-col gap-8">
+
+  <header>
+    <p class="font-mono text-xs uppercase tracking-wider text-muted"><%= t(".welcome_back") %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
+  </header>
+
+  <section aria-labelledby="today-heading" class="flex flex-col gap-3">
+    <h2 id="today-heading" class="font-mono text-xs uppercase tracking-wider text-muted"><%= t(".up_next") %></h2>
+
+    <% if @daily_path.items.any? %>
+      <ul class="bg-surface border border-line rounded-sm divide-y divide-line">
+        <% @daily_path.items.each do |item| %>
+          <% level = level_classes(item.level) %>
+          <li>
+            <a href="<%= item.path %>" class="grid grid-cols-[6px_1fr] gap-4 px-4 py-4 hover:bg-canvas transition-colors">
+              <span class="rounded-sm <%= level[:stripe] %>" aria-hidden="true"></span>
+              <span class="flex flex-col gap-0.5">
+                <span class="font-mono text-[11px] uppercase tracking-wider <%= level[:text] %>"><%= item.label %></span>
+                <span class="leading-snug"><%= item.title %></span>
+              </span>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="bg-surface border border-line rounded-sm px-4 py-5 text-muted">
+        <%= t(".nothing_due_html", link: link_to(t(".pick_a_lesson"), lessons_path, class: "text-foghlaim underline underline-offset-2")) %>
+      </div>
+    <% end %>
+  </section>
+
+  <section aria-labelledby="progress-heading" class="flex flex-col gap-3">
+    <h2 id="progress-heading" class="font-mono text-xs uppercase tracking-wider text-muted"><%= t(".so_far") %></h2>
+    <p class="text-muted">
+      <span class="font-display text-3xl text-ink"><%= @daily_path.known_words %></span>
+      <%= t(".words_known", count: @daily_path.known_words) %>
+    </p>
+  </section>
+
+  <section aria-labelledby="place-heading" class="flex flex-col gap-3">
+    <h2 id="place-heading" class="font-mono text-xs uppercase tracking-wider text-muted"><%= t(".your_place") %></h2>
+    <div class="bg-surface border border-line rounded-sm px-4 py-4 flex flex-col gap-2">
+      <p>
+        <span class="font-semibold"><%= current_user.place %></span>
+        <% if region_name(current_user) %>
+          <span class="text-muted"> · <%= region_name(current_user) %></span>
+        <% end %>
+      </p>
+      <p class="text-sm flex flex-wrap gap-x-4 gap-y-1">
+        <a href="<%= OnboardingsHelper::GAELTACHT_1926_URL %>" target="_blank" rel="noopener" class="text-ink underline underline-offset-2"><%= t(".classed_1926") %></a>
+        <a href="<%= new_onboarding_path %>" class="text-muted underline underline-offset-2"><%= t(".change") %></a>
+      </p>
+    </div>
+  </section>
+
+</div>

@@ -15,19 +15,37 @@ Rails.application.routes.draw do
   get "pending", to: "registrations#pending", as: :pending_approval
   resources :passwords, param: :token, only: %i[new create edit update]
 
-  root "lessons#index"
+  root "home#show"
+  resource :onboarding, only: %i[new create]
   get "search", to: "search#index", as: :search
+  resources :vocabulary_items, only: [] do
+    resource :pronunciation, only: :show
+    resources :recording_suggestions, only: :index, controller: "vocabulary_item_recording_suggestions"
+  end
+  resources :recording_suggestions, only: :update
+  resources :chat_messages, only: [] do
+    resource :pronunciation, only: :show, controller: "chat_message_pronunciations"
+    resource :flag, only: :create, controller: "chat_message_flags"
+  end
+  resources :flagged_replies, only: %i[index destroy]
   resources :lessons, only: [:index, :new, :create, :show, :edit, :update] do
+    resource :review, only: %i[create destroy], controller: "lesson_reviews"
+    resources :recording_suggestions, only: :index, controller: "lesson_recording_suggestions"
+    resource :recording_approval, only: :create, controller: "lesson_recording_approvals"
+    resources :versions, only: :index do
+      resource :undo, only: :create, controller: "version_undos"
+    end
     resources :grammar_rules, only: [:edit, :update], shallow: true
     resources :grammar_sections, only: [:edit, :update], shallow: true
-    resources :text_passages, only: [:edit, :update], shallow: true
-    resources :exercises, only: [:edit, :update], shallow: true
     resources :lesson_blocks, only: [:create, :edit, :update, :destroy], shallow: true do
       post :reorder, on: :collection
     end
     resource :chat, only: [:show], controller: "lesson_chat" do
       post :message,  on: :member
       delete :clear,  on: :member
+    end
+    resource :conversation, only: %i[show destroy], controller: "lesson_conversations" do
+      resources :messages, only: :create, controller: "lesson_conversation_messages"
     end
     resource :quiz, only: [:show], controller: "quizzes" do
       post   :answer, on: :member

@@ -1,0 +1,57 @@
+<div class="max-w-xl mx-auto flex flex-col gap-8">
+
+  <header class="flex flex-col gap-2">
+    <p class="font-mono text-xs uppercase tracking-wider text-muted"><%= t(".welcome") %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
+    <p class="text-muted"><%= t(".intro") %></p>
+  </header>
+
+  <%= form_with model: @user, url: onboarding_path, method: :post, class: "flex flex-col gap-8" do |form| %>
+    <% if @user.errors.any? %>
+      <div class="bg-red-50 border border-red-200 rounded-sm px-4 py-3 text-sm text-red-700" role="alert">
+        <% @user.errors.full_messages.each do |message| %>
+          <p><%= message %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="flex flex-col gap-2">
+      <%= form.label :place, t(".your_place"), class: "font-semibold" %>
+      <%= form.text_field :place, required: true, autofocus: true, autocomplete: "off",
+            placeholder: t(".place_placeholder"),
+            class: "w-full bg-surface border border-line rounded-sm px-3 py-3 focus:outline-none focus:ring-2 focus:ring-ink" %>
+      <p class="text-sm">
+        <a href="<%= OnboardingsHelper::GAELTACHT_1926_URL %>" target="_blank" rel="noopener" class="text-muted underline underline-offset-2"><%= t(".see_1926") %></a>
+      </p>
+    </div>
+
+    <fieldset class="flex flex-col gap-2">
+      <legend class="font-semibold mb-1"><%= t(".region_legend") %></legend>
+      <% region_choices.each do |key, name, note| %>
+        <label class="flex items-start gap-3 bg-surface border border-line rounded-sm px-4 py-3 cursor-pointer has-[:checked]:border-ink has-[:checked]:ring-1 has-[:checked]:ring-ink has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ink">
+          <%= form.radio_button :dialect_region, key, required: true, class: "mt-1 accent-ink" %>
+          <span>
+            <span class="font-display text-lg block leading-tight"><%= name %></span>
+            <span class="text-sm text-muted"><%= note %></span>
+          </span>
+        </label>
+      <% end %>
+    </fieldset>
+
+    <fieldset class="flex flex-col gap-2">
+      <legend class="font-semibold mb-1"><%= t(".door_legend") %></legend>
+      <% door_choices.each do |key, name, note| %>
+        <label class="flex items-start gap-3 bg-surface border border-line rounded-sm px-4 py-3 cursor-pointer has-[:checked]:border-ink has-[:checked]:ring-1 has-[:checked]:ring-ink has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ink">
+          <%= form.radio_button :door, key, required: true, class: "mt-1 accent-ink" %>
+          <span>
+            <span class="font-display text-lg block leading-tight"><%= name %></span>
+            <span class="text-sm text-muted"><%= note %></span>
+          </span>
+        </label>
+      <% end %>
+    </fieldset>
+
+    <%= form.submit t(".continue"), class: "btn-solid self-start" %>
+  <% end %>
+
+</div>

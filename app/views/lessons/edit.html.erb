@@ -1,11 +1,40 @@
 <div class="flex items-center justify-between mb-8">
   <div>
-    <div class="text-sm text-stone-400 uppercase tracking-widest mb-1">Á chur in eagar · Ceacht <%= @lesson.number %></div>
-    <h1 class="text-2xl font-bold text-stone-800"><%= @lesson.title %></h1>
+    <div class="text-sm text-muted uppercase tracking-widest mb-1"><%= t(".editing", number: @lesson.number) %></div>
+    <h1 class="text-2xl font-display text-ink"><%= @lesson.title %></h1>
   </div>
-  <a href="<%= lesson_path(@lesson) %>" class="text-sm text-stone-500 hover:text-stone-800 transition-colors">
-    ← Ar ais go dtí an ceacht
+  <a href="<%= lesson_path(@lesson) %>" class="text-sm text-muted hover:text-ink transition-colors">
+    <%= t(".back_to_lesson") %>
   </a>
+</div>
+
+<% if @lesson.errors.any? %>
+  <div class="mb-6 bg-red-50 border border-red-200 rounded-sm px-4 py-3 text-sm text-red-700" role="alert">
+    <% @lesson.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+  </div>
+<% end %>
+
+<%# Review status: has someone checked this lesson? %>
+<div class="mb-8 card px-5 py-4 flex flex-wrap items-center justify-between gap-3">
+  <div>
+    <p class="eyebrow"><%= t(".review_title") %></p>
+    <% if @lesson.reviewed? %>
+      <p class="text-sm mt-1"><%= t(".reviewed_by", name: @lesson.reviewed_by&.email_address || t(".someone"), date: l(@lesson.reviewed_at.to_date, format: :long)) %></p>
+    <% else %>
+      <p class="text-sm mt-1 text-muted"><%= t(".not_reviewed") %></p>
+    <% end %>
+  </div>
+  <div class="flex flex-wrap gap-2">
+    <%= link_to t(".view_as_learner"), lesson_path(@lesson, preview: 1), class: "btn-outline border-line text-muted !py-2" %>
+    <%= link_to t(".history"), lesson_versions_path(@lesson), class: "btn-outline border-line text-muted !py-2" %>
+    <% if @lesson.reviewed? %>
+      <%= button_to t(".clear_review"), lesson_review_path(@lesson), method: :delete, class: "btn-outline border-line text-muted !py-2" %>
+    <% else %>
+      <%= button_to t(".mark_reviewed"), lesson_review_path(@lesson), method: :post, class: "btn-solid !py-2" %>
+    <% end %>
+  </div>
 </div>
 
 <%# ══════════════════════════════════════════════════════════════
@@ -14,50 +43,50 @@
     ══════════════════════════════════════════════════════════════ %>
 <div class="mb-10">
   <div class="flex items-center gap-3 mb-4">
-    <div class="flex items-center justify-center w-7 h-7 rounded-full bg-stone-700 text-white text-xs font-bold">1</div>
+    <div class="flex items-center justify-center w-7 h-7 rounded-full bg-ink text-surface text-xs font-bold">1</div>
     <div>
-      <h2 class="font-bold text-stone-800 leading-none">Sonraí an Cheachta</h2>
-      <p class="text-xs text-stone-400 mt-0.5">Teideal, stór focal, agus nótaí</p>
+      <h2 class="font-bold text-ink leading-none"><%= t(".details_title") %></h2>
+      <p class="text-xs text-muted mt-0.5"><%= t(".details_description") %></p>
     </div>
   </div>
 
   <div class="pl-10 space-y-4">
     <%# Title %>
-    <%= form_with model: @lesson, class: "bg-white rounded-xl border border-stone-200 px-6 py-5" do |f| %>
+    <%= form_with model: @lesson, class: "bg-surface rounded-sm border border-line px-6 py-5" do |f| %>
       <div class="grid grid-cols-3 gap-4 mb-4">
         <div class="col-span-2">
-          <label class="editor-label">Teideal an Cheachta</label>
+          <label class="editor-label"><%= t(".lesson_title") %></label>
           <%= f.text_field :title, class: "editor-input text-lg font-semibold" %>
         </div>
         <div>
-          <label class="editor-label">Suíomh (position)</label>
+          <label class="editor-label"><%= t(".position") %></label>
           <%= f.number_field :position, class: "editor-input", min: 0 %>
         </div>
       </div>
       <div class="flex items-center justify-between">
-        <label class="flex items-center gap-2 text-sm text-stone-600 cursor-pointer">
-          <%= f.check_box :published, class: "rounded border-stone-300 text-emerald-700 focus:ring-emerald-600" %>
-          <span>Foilsithe <span class="text-stone-400">(published — visible to learners)</span></span>
+        <label class="flex items-center gap-2 text-sm text-ink cursor-pointer">
+          <%= f.check_box :published, class: "rounded border-stone-300 text-ink focus:ring-ink" %>
+          <span><%= t(".published") %> <span class="text-muted"><%= t(".published_note") %></span></span>
         </label>
-        <%= f.submit "Sábháil", class: "bg-emerald-800 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition-colors cursor-pointer" %>
+        <%= f.submit t("shared.save"), class: "btn-solid" %>
       </div>
     <% end %>
 
     <%# Vocabulary %>
-    <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
-      <div class="px-6 py-4 border-b border-stone-100 flex items-center justify-between">
-        <h3 class="font-semibold text-stone-700">Stór Focal</h3>
+    <div class="bg-surface rounded-sm border border-line overflow-hidden">
+      <div class="px-6 py-4 border-b border-line flex items-center justify-between">
+        <h3 class="font-semibold text-ink"><%= t(".vocabulary") %></h3>
       </div>
       <%= form_with model: @lesson, data: { controller: "vocab-editor" } do |f| %>
         <div class="overflow-x-auto">
           <table class="w-full text-sm" id="vocab-table">
             <thead>
-              <tr class="bg-stone-50 border-b border-stone-200 text-stone-500 text-xs uppercase tracking-wide">
-                <th class="text-left px-3 py-2 font-medium w-[22%]">Gaeilge</th>
-                <th class="text-left px-3 py-2 font-medium w-[18%]">Fuaimniú</th>
-                <th class="text-left px-3 py-2 font-medium w-[16%]">Iolra</th>
-                <th class="text-left px-3 py-2 font-medium w-[8%]">Inscne</th>
-                <th class="text-left px-3 py-2 font-medium">Béarla</th>
+              <tr class="bg-canvas border-b border-line text-muted text-xs uppercase tracking-wide">
+                <th class="text-left px-3 py-2 font-medium w-[22%]"><%= t(".irish") %></th>
+                <th class="text-left px-3 py-2 font-medium w-[18%]"><%= t(".pronunciation") %></th>
+                <th class="text-left px-3 py-2 font-medium w-[16%]"><%= t(".plural") %></th>
+                <th class="text-left px-3 py-2 font-medium w-[8%]"><%= t(".gender") %></th>
+                <th class="text-left px-3 py-2 font-medium"><%= t(".english") %></th>
                 <th class="px-3 py-2 w-8"></th>
               </tr>
             </thead>
@@ -68,41 +97,80 @@
             </tbody>
           </table>
         </div>
-        <div class="px-6 py-3 border-t border-stone-100 flex items-center justify-between">
+        <div class="px-6 py-3 border-t border-line flex items-center justify-between">
           <button type="button" data-action="click->vocab-editor#addRow"
-                  class="text-sm text-emerald-800 hover:text-emerald-700 font-medium transition-colors">
-            + Focal nua
+                  class="text-sm text-ink hover:text-ink font-medium transition-colors">
+            <%= t(".new_word") %>
           </button>
-          <%= f.submit "Sábháil", class: "bg-emerald-800 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition-colors cursor-pointer" %>
+          <%= f.submit t("shared.save"), class: "btn-solid" %>
         </div>
       <% end %>
     </div>
 
     <%# Vocab notes %>
-    <%= form_with model: @lesson, class: "bg-white rounded-xl border border-stone-200 overflow-hidden" do |f| %>
-      <div class="px-6 py-4 border-b border-stone-100">
-        <h3 class="font-semibold text-stone-700">Nótaí Focail</h3>
+    <%= form_with model: @lesson, class: "bg-surface rounded-sm border border-line overflow-hidden" do |f| %>
+      <div class="px-6 py-4 border-b border-line">
+        <h3 class="font-semibold text-ink"><%= t(".vocabulary_notes") %></h3>
       </div>
       <div class="px-6 py-4">
         <%= f.rich_text_area :vocabulary_notes_content %>
       </div>
-      <div class="px-6 py-4 border-t border-stone-100 flex justify-end">
-        <%= f.submit "Sábháil", class: "bg-emerald-800 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition-colors cursor-pointer" %>
+      <div class="px-6 py-4 border-t border-line flex justify-end">
+        <%= f.submit t("shared.save"), class: "btn-solid" %>
       </div>
     <% end %>
   </div>
 </div>
 
 <%# ══════════════════════════════════════════════════════════════
-    ZONE 2 — RICH MEDIA CONTENT
+    ZONE 2 — INTRO VIDEO
+    A short video from the teacher that opens the lesson
+    ══════════════════════════════════════════════════════════════ %>
+<div class="mb-10">
+  <div class="flex items-center gap-3 mb-4">
+    <div class="flex items-center justify-center w-7 h-7 rounded-full bg-eist text-surface text-xs font-bold">2</div>
+    <div>
+      <h2 class="font-bold text-ink leading-none"><%= t(".intro_title") %></h2>
+      <p class="text-xs text-muted mt-0.5"><%= t(".intro_description") %></p>
+    </div>
+  </div>
+
+  <div class="pl-10">
+    <%= form_with model: @lesson, class: "bg-surface rounded-sm border border-line overflow-hidden" do |f| %>
+      <div class="px-6 py-5 space-y-4">
+        <div>
+          <label class="editor-label" for="lesson_intro_video_url"><%= t(".intro_url_label") %></label>
+          <%= f.text_area :intro_video_url, rows: 2, class: "editor-textarea", placeholder: t(".intro_url_placeholder") %>
+          <p class="text-xs text-muted mt-1"><%= t(".intro_url_help") %></p>
+        </div>
+
+        <% if @lesson.intro_video %>
+          <div class="max-w-lg"><%= render "shared/video", embed: @lesson.intro_video %></div>
+        <% end %>
+
+        <div>
+          <label class="editor-label" for="lesson_intro_video_transcript"><%= t(".transcript_label") %></label>
+          <%= f.text_area :intro_video_transcript, rows: 6, class: "editor-textarea" %>
+          <p class="text-xs text-muted mt-1"><%= t(".transcript_help") %></p>
+        </div>
+      </div>
+      <div class="px-6 py-4 border-t border-line flex justify-end">
+        <%= f.submit t("shared.save"), class: "btn-solid" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%# ══════════════════════════════════════════════════════════════
+    ZONE 3 — RICH MEDIA CONTENT
     Free-form blocks: text, image, video, PDF, audio
     ══════════════════════════════════════════════════════════════ %>
 <div class="mb-10">
   <div class="flex items-center gap-3 mb-4">
-    <div class="flex items-center justify-center w-7 h-7 rounded-full bg-sky-600 text-white text-xs font-bold">2</div>
+    <div class="flex items-center justify-center w-7 h-7 rounded-full bg-foghlaim text-surface text-xs font-bold">3</div>
     <div>
-      <h2 class="font-bold text-stone-800 leading-none">Ábhar Saibhir</h2>
-      <p class="text-xs text-stone-400 mt-0.5">Téacs saor, físeáin, íomhánna, comhaid PDF — cuir san ord is mian leat</p>
+      <h2 class="font-bold text-ink leading-none"><%= t(".rich_content") %></h2>
+      <p class="text-xs text-muted mt-0.5"><%= t(".rich_content_description") %></p>
     </div>
   </div>
 
@@ -111,15 +179,15 @@
       <%= render @lesson.lesson_blocks %>
     </div>
 
-    <div class="bg-sky-50 border border-sky-200 rounded-xl px-5 py-4">
-      <p class="text-xs font-semibold text-sky-700 uppercase tracking-wide mb-3">Bloc nua a chur leis</p>
+    <div class="bg-foghlaim/10 border border-foghlaim/40 rounded-sm px-5 py-4">
+      <p class="text-xs font-semibold text-foghlaim uppercase tracking-wide mb-3"><%= t(".add_block") %></p>
       <div class="flex flex-wrap gap-2">
-        <% ({ "Téacs" => "text", "Íomhá" => "image", "Físeán" => "video", "PDF" => "pdf", "Fuaim" => "audio" }).each do |label, type| %>
-          <%= button_to label,
+        <% LessonBlock::TYPES.each do |type| %>
+          <%= button_to t("lesson_blocks.types.#{type}"),
                 lesson_lesson_blocks_path(@lesson, block_type: type),
                 method: :post,
                 data: { turbo: false },
-                class: "text-xs px-3 py-1.5 rounded-lg border border-sky-300 text-sky-700 hover:bg-sky-600 hover:text-white hover:border-sky-600 transition-colors bg-white font-medium" %>
+                class: "text-xs px-3 py-1.5 rounded-sm border border-foghlaim/40 text-foghlaim hover:bg-foghlaim hover:text-surface transition-colors bg-surface font-medium" %>
         <% end %>
       </div>
     </div>
@@ -127,16 +195,16 @@
 </div>
 
 <%# ══════════════════════════════════════════════════════════════
-    ZONE 3 — PARSED LESSON CONTENT
-    Grammar rules, texts, exercises (from OCR parse)
+    ZONE 4 — PARSED LESSON CONTENT
+    Grammar rules (from OCR parse)
     ══════════════════════════════════════════════════════════════ %>
-<% if @lesson.grammar_rules.any? || @lesson.text_passages.any? || @lesson.exercises.any? %>
+<% if @lesson.grammar_rules.any? %>
   <div class="mb-10">
     <div class="flex items-center gap-3 mb-4">
-      <div class="flex items-center justify-center w-7 h-7 rounded-full bg-emerald-700 text-white text-xs font-bold">3</div>
+      <div class="flex items-center justify-center w-7 h-7 rounded-full bg-ink text-surface text-xs font-bold">4</div>
       <div>
-        <h2 class="font-bold text-stone-800 leading-none">Ábhar an Cheachta</h2>
-        <p class="text-xs text-stone-400 mt-0.5">Gramadach, téacsanna agus cleachtaí — arna bparsáil ón leabhar</p>
+        <h2 class="font-bold text-ink leading-none"><%= t(".content_title") %></h2>
+        <p class="text-xs text-muted mt-0.5"><%= t(".content_description") %></p>
       </div>
     </div>
 
@@ -144,28 +212,28 @@
       <%# Grammar %>
       <% if @lesson.grammar_rules.any? %>
         <div>
-          <h3 class="text-xs font-semibold text-stone-500 uppercase tracking-widest mb-3">Gramadach</h3>
+          <h3 class="text-xs font-semibold text-muted uppercase tracking-widest mb-3"><%= t(".grammar") %></h3>
           <div class="space-y-4">
             <% @lesson.grammar_rules.each do |rule| %>
-              <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
+              <div class="bg-surface rounded-sm border border-line overflow-hidden">
                 <turbo-frame id="<%= dom_id(rule) %>">
-                  <div class="bg-emerald-900 text-white px-5 py-3 flex items-center justify-between">
-                    <span class="font-bold text-sm"><%= rule.number %>. <%= rule.title %></span>
-                    <a href="<%= edit_grammar_rule_path(rule) %>" class="text-emerald-300 hover:text-white text-xs transition-colors">Cuir in eagar</a>
+                  <div class="bg-canvas border-b border-line text-ink px-5 py-3 flex items-center justify-between">
+                    <span class="font-semibold text-sm"><%= rule.number %>. <%= rule.title %></span>
+                    <a href="<%= edit_grammar_rule_path(rule) %>" class="text-muted hover:text-ink text-xs transition-colors"><%= t("shared.edit") %></a>
                   </div>
                 </turbo-frame>
                 <% rule.grammar_sections.each do |section| %>
                   <turbo-frame id="<%= dom_id(section) %>">
-                    <div class="border-b border-stone-100 last:border-0 flex items-start justify-between gap-4 px-5 py-3 hover:bg-stone-50 transition-colors">
+                    <div class="border-b border-line last:border-0 flex items-start justify-between gap-4 px-5 py-3 hover:bg-canvas transition-colors">
                       <div class="flex-1 min-w-0">
                         <% if section.label.present? %>
-                          <p class="text-xs font-semibold text-stone-500 uppercase tracking-wide mb-1"><%= section.label %></p>
+                          <p class="text-xs font-semibold text-muted uppercase tracking-wide mb-1"><%= section.label %></p>
                         <% end %>
-                        <div class="text-sm text-stone-700 lexxy-content line-clamp-2">
+                        <div class="text-sm text-ink lexxy-content line-clamp-2">
                           <%= section.body %>
                         </div>
                       </div>
-                      <a href="<%= edit_grammar_section_path(section) %>" class="text-stone-400 hover:text-emerald-800 text-xs shrink-0 transition-colors">Cuir in eagar</a>
+                      <a href="<%= edit_grammar_section_path(section) %>" class="text-muted hover:text-ink text-xs shrink-0 transition-colors"><%= t("shared.edit") %></a>
                     </div>
                   </turbo-frame>
                 <% end %>
@@ -175,82 +243,45 @@
         </div>
       <% end %>
 
-      <%# Texts %>
-      <% if @lesson.text_passages.any? %>
-        <div>
-          <h3 class="text-xs font-semibold text-stone-500 uppercase tracking-widest mb-3">Téacsanna</h3>
-          <div class="space-y-4">
-            <% @lesson.text_passages.each do |passage| %>
-              <turbo-frame id="<%= dom_id(passage) %>" class="block bg-white rounded-xl border border-stone-200 overflow-hidden">
-                <div class="bg-stone-700 text-white px-5 py-3 flex items-center justify-between">
-                  <span class="font-bold text-sm"><%= passage.title.presence || "Téacs" %></span>
-                  <a href="<%= edit_text_passage_path(passage) %>" class="text-stone-300 hover:text-white text-xs transition-colors">Cuir in eagar</a>
-                </div>
-                <div class="px-5 py-3 text-sm text-stone-600 lexxy-content line-clamp-3">
-                  <%= passage.body %>
-                </div>
-              </turbo-frame>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-
-      <%# Exercises %>
-      <% if @lesson.exercises.any? %>
-        <div>
-          <h3 class="text-xs font-semibold text-stone-500 uppercase tracking-widest mb-3">Cleachtaí</h3>
-          <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
-            <% @lesson.exercises.each do |ex| %>
-              <turbo-frame id="<%= dom_id(ex) %>">
-                <div class="flex items-start gap-4 px-5 py-3 border-b border-stone-100 last:border-0 hover:bg-stone-50 transition-colors">
-                  <span class="text-stone-400 font-mono text-xs w-6 shrink-0 pt-0.5"><%= ex.number %>.</span>
-                  <span class="text-stone-700 text-sm flex-1"><%= ex.prompt %></span>
-                  <a href="<%= edit_exercise_path(ex) %>" class="text-stone-400 hover:text-emerald-800 text-xs shrink-0 transition-colors">Cuir in eagar</a>
-                </div>
-              </turbo-frame>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
     </div>
   </div>
 <% end %>
 
 <%# ══════════════════════════════════════════════════════════════
-    ZONE 4 — TUTOR / CHAT SETTINGS
+    ZONE 5 — TUTOR / CHAT SETTINGS
     ══════════════════════════════════════════════════════════════ %>
 <div class="mb-10">
   <div class="flex items-center gap-3 mb-4">
-    <div class="flex items-center justify-center w-7 h-7 rounded-full bg-violet-600 text-white text-xs font-bold">4</div>
+    <div class="flex items-center justify-center w-7 h-7 rounded-full bg-cleacht text-surface text-xs font-bold">5</div>
     <div>
-      <h2 class="font-bold text-stone-800 leading-none">Socruithe an Mhúinteora AI</h2>
-      <p class="text-xs text-stone-400 mt-0.5">Cuir treoir ar an gcomhrá AI — fág folamh chun an réamhshocrú ginearálta a úsáid</p>
+      <h2 class="font-bold text-ink leading-none"><%= t(".tutor_title") %></h2>
+      <p class="text-xs text-muted mt-0.5"><%= t(".tutor_description") %></p>
     </div>
   </div>
 
   <div class="pl-10">
-    <%= form_with model: @lesson, class: "bg-white rounded-xl border border-violet-200 overflow-hidden" do |f| %>
-      <div class="px-6 py-4 border-b border-violet-100 flex items-center justify-between bg-violet-50">
+    <%= form_with model: @lesson, class: "bg-surface rounded-sm border border-cleacht/30 overflow-hidden" do |f| %>
+      <div class="px-6 py-4 border-b border-cleacht/30 flex items-center justify-between bg-cleacht/10">
         <div>
-          <h3 class="font-semibold text-violet-900">Treoracha don Mhúinteoir</h3>
-          <p class="text-xs text-violet-500 mt-0.5">Cad ba chóir don AI a dhíriú air sa cheacht seo?</p>
+          <h3 class="font-semibold text-ink"><%= t(".tutor_instructions") %></h3>
+          <p class="text-xs text-muted mt-0.5"><%= t(".tutor_focus") %></p>
         </div>
         <%= link_to lesson_chat_path(@lesson),
-              class: "inline-flex items-center gap-1.5 text-sm bg-violet-600 text-white px-3 py-1.5 rounded-lg hover:bg-violet-700 transition-colors font-medium" do %>
+              class: "inline-flex items-center gap-1.5 text-sm bg-cleacht text-surface px-3 py-1.5 rounded-sm hover:opacity-90 transition-colors font-medium" do %>
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-3 3v-3z"/>
           </svg>
-          Oscail comhrá
+          <%= t(".open_chat") %>
         <% end %>
       </div>
       <div class="px-6 py-4">
         <%= f.text_area :tutor_prompt,
               rows: 5,
-              placeholder: "e.g. Focus on noun gender. Test common nouns first, then ask the student to apply the gender rules to unfamiliar words. Note any Mayo dialect exceptions...",
-              class: "w-full rounded-lg border border-stone-200 px-3 py-2 text-sm text-stone-700 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent resize-y" %>
+              placeholder: t(".tutor_placeholder"),
+              class: "w-full rounded-sm border border-line px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-ink resize-y" %>
       </div>
-      <div class="px-6 py-4 border-t border-violet-100 flex justify-end bg-violet-50">
-        <%= f.submit "Sábháil", class: "bg-violet-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-violet-700 transition-colors cursor-pointer" %>
+      <div class="px-6 py-4 border-t border-cleacht/30 flex justify-end bg-cleacht/10">
+        <%= f.submit t("shared.save"), class: "btn-solid" %>
       </div>
     <% end %>
   </div>
@@ -258,19 +289,19 @@
 
 <%# Template row for vocab JS cloning %>
 <template id="vocab-row-template">
-  <tr class="border-b border-stone-100 hover:bg-stone-50 vocab-row">
-    <td class="px-2 py-1.5"><input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][irish]" class="vocab-cell-input" placeholder="focal"></td>
-    <td class="px-2 py-1.5"><input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][phonetic]" class="vocab-cell-input font-mono text-xs" placeholder="/fuaimniú/"></td>
-    <td class="px-2 py-1.5"><input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][plural]" class="vocab-cell-input" placeholder="iolra"></td>
+  <tr class="border-b border-line hover:bg-canvas vocab-row">
+    <td class="px-2 py-1.5"><input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][irish]" class="vocab-cell-input" placeholder="<%= t(".word_placeholder") %>"></td>
+    <td class="px-2 py-1.5"><input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][phonetic]" class="vocab-cell-input font-mono text-xs" placeholder="<%= t(".pronunciation_placeholder") %>"></td>
+    <td class="px-2 py-1.5"><input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][plural]" class="vocab-cell-input" placeholder="<%= t(".plural_placeholder") %>"></td>
     <td class="px-2 py-1.5">
       <select name="lesson[vocabulary_items_attributes][NEW_INDEX][gender]" class="vocab-cell-input">
-        <option value="m">fir.</option>
-        <option value="f">bain.</option>
+        <option value="m"><%= t("lessons.genders.masculine") %></option>
+        <option value="f"><%= t("lessons.genders.feminine") %></option>
       </select>
     </td>
-    <td class="px-2 py-1.5"><input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][english]" class="vocab-cell-input" placeholder="meaning"></td>
+    <td class="px-2 py-1.5"><input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][english]" class="vocab-cell-input" placeholder="<%= t(".meaning_placeholder") %>"></td>
     <td class="px-2 py-1.5 text-center">
-      <button type="button" data-action="click->vocab-editor#removeRow" class="text-stone-300 hover:text-red-500 transition-colors text-lg leading-none" title="Scrios">×</button>
+      <button type="button" data-action="click->vocab-editor#removeRow" class="text-muted hover:text-red-500 transition-colors text-lg leading-none" title="<%= t("shared.delete") %>">×</button>
     </td>
   </tr>
 </template>

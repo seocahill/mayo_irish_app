@@ -14,20 +14,12 @@ class Search
   HIGHLIGHT_OPEN = "\u0002"
   HIGHLIGHT_CLOSE = "\u0003"
 
-  # How each record type is labelled and linked in the results list.
-  TYPES = {
-    "Lesson"        => { label: "Lesson" },
-    "VocabularyItem" => { label: "Vocabulary" },
-    "Phrase"        => { label: "Phrase" },
-    "Exercise"      => { label: "Exercise" },
-    "GrammarRule"   => { label: "Grammar" },
-    "GrammarSection" => { label: "Grammar" },
-    "TextPassage"   => { label: "Text" },
-    "LessonBlock"   => { label: "Content" }
-  }.freeze
+  # Only these record types are searchable (labels live in the locale file). The
+  # book's reading texts and exercises are not shown to learners.
+  TYPES = %w[Lesson VocabularyItem Phrase GrammarRule GrammarSection LessonBlock].freeze
 
   Result = Struct.new(:record_type, :record_id, :lesson_number, :title, :snippet, keyword_init: true) do
-    def type_label = Search::TYPES.dig(record_type, :label) || record_type
+    def type_label = I18n.t("search.types.#{record_type}", default: record_type)
 
     # Everything indexed lives inside a lesson, so results link to the lesson.
     def lesson? = record_type == "Lesson"
@@ -85,12 +77,14 @@ class Search
                snippet(search_documents, 4, ?, ?, '…', 12) AS snippet
         FROM search_documents
         WHERE search_documents MATCH ?
+          AND record_type IN (?)
         ORDER BY rank
         LIMIT ?
       SQL
       HIGHLIGHT_OPEN,
       HIGHLIGHT_CLOSE,
       match_expression,
+      TYPES,
       MAX_RESULTS
     ])
   end

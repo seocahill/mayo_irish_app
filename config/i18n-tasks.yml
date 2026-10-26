@@ -1,0 +1,36 @@
+# i18n-tasks finds missing and unused translations.
+#   bundle exec i18n-tasks missing
+#   bundle exec i18n-tasks unused
+#   bundle exec i18n-tasks normalize
+base_locale: en
+locales: [en]
+
+data:
+  read:
+    - config/locales/%{locale}.yml
+  write:
+    - config/locales/%{locale}.yml
+
+search:
+  paths:
+    - app/
+  relative_roots:
+    - app/controllers
+    - app/helpers
+    - app/mailers
+    - app/views
+
+# Keys built at runtime, for example t("lessons.types.#{type}"), and the
+# validation messages Rails looks up itself (errors.add(:field, :symbol)) are not
+# visible to the scanner.
+ignore_unused:
+  - activerecord.attributes.*
+  - errors.messages.*
+  - lessons.types.*
+  - lessons.genders.*
+  - lessons.index.sections.*
+  - lesson_blocks.types.*
+  - onboardings.regions.*
+  - onboardings.doors.*
+  - search.types.*
+  - daily_path.*

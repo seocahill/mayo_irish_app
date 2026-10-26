@@ -1,0 +1,520 @@
+---
+en:
+  activerecord:
+    attributes:
+      action_text/rich_text:
+        body: Text
+      grammar_rule:
+        title: Title
+      grammar_section:
+        label: Label
+      lesson:
+        intro_video_transcript: Intro video transcript
+        intro_video_url: Intro video link
+        lesson_type: Type
+        tutor_prompt: Tutor instructions
+      lesson_block:
+        caption: Caption
+        url: Link
+      vocabulary_item:
+        english: English
+        gender: Gender
+        irish: Irish
+        notes: Notes
+        phonetic: Phonetic
+        plural: Plural
+  app_name: Gaeilge Mhaigh Eo
+  chat_message_flags:
+    create:
+      flagged: Thanks. An editor will check that reply.
+  daily_path:
+    lesson_label: Learn · Lesson %{number}
+    lesson_title: "%{title} (%{known} of %{total} words known)"
+    review_label: Review · %{count} due
+    review_title: Review the words that are due
+    tutor_label: Practise · text chat
+    tutor_title: Talk it through with the tutor
+  errors:
+    messages:
+      unsupported_video: isn't a supported video. Use a YouTube or Vimeo link, an
+        embed code, or an https link to an .mp4 or .webm file.
+  flagged_replies:
+    destroy:
+      dismissed: Flag dismissed.
+    index:
+      by_abair: written by ABAIR
+      by_openai: written by OpenAI
+      dismiss: Dismiss
+      empty: Nothing is flagged.
+      eyebrow: Conversation review
+      flagged_by: Flagged by %{name}, %{when}
+      learner_said: The learner said
+      lesson: Lesson %{number} · %{title}
+      reply: The reply
+      summary: AI replies that learners thought had wrong Irish. Check each one, then
+        dismiss it.
+      title: Flagged replies
+  grammar_rules:
+    edit:
+      title_placeholder: Rule title…
+  grammar_sections:
+    edit:
+      content: Content
+      label: Label
+      label_placeholder: "(i) Forms…"
+  history:
+    kinds:
+      action_text_rich_text: Text
+      grammar_rule: Grammar rule
+      grammar_section: Grammar section
+      lesson: Lesson
+      lesson_block: Block
+      vocabulary_item: Word
+  home:
+    show:
+      change: Change
+      classed_1926: How was this area classed in 1926?
+      nothing_due_html: Nothing is due today. %{link} to get started.
+      pick_a_lesson: Pick a lesson
+      so_far: So far
+      title: Your day
+      up_next: Up next
+      welcome_back: Welcome back
+      words_known:
+        one: word known
+        other: words known
+      your_place: Your place
+  js:
+    pronounce:
+      failed: Couldn't load the audio.
+    recorder:
+      no_permission: No permission
+      not_supported: Not supported
+      ready: Ready
+      recording: Recording…
+    speech_input:
+      no_permission: Allow the microphone to speak.
+      not_supported: This browser can't record.
+      recording: Recording… Tap the microphone again to send.
+      sending: Sending…
+  layouts:
+    application:
+      footer_html: Based on <em>Learning Irish</em> by Mícheál Ó Siadhail, adapted
+        for Mayo Irish
+      lessons: Lessons
+      search_label: Search
+      search_placeholder: Search…
+      sign_in: Sign in
+      sign_out: Sign out
+      today: Today
+  lesson_blocks:
+    edit:
+      audio_caption_placeholder: Describe the audio file...
+      audio_file: Audio file
+      block_title: "%{type} block"
+      caption: Caption (optional)
+      image_caption_placeholder: Describe the image...
+      pdf_caption_placeholder: Document title...
+      pdf_file: PDF file
+      video_caption_placeholder: Describe the video...
+      video_url: Video URL (YouTube or Vimeo)
+    lesson_block:
+      drag_to_reorder: Drag to reorder
+      no_audio: No audio file attached yet.
+      no_image: No image attached yet.
+      no_pdf: No PDF attached yet.
+      no_video: No video URL yet.
+    types:
+      audio: Audio
+      image: Image
+      pdf: PDF
+      text: Text
+      video: Video
+  lesson_chat:
+    show:
+      back_to_lesson: "← Back to the lesson"
+      empty_state: Type "start" or anything to begin the lesson.
+      placeholder: Write your answer...
+      practise_label: Practise · Lesson %{number}
+      send: Send
+      start_again: Start again
+  lesson_conversation_messages:
+    create:
+      daily_limit: That's today's limit for conversation. Come back tomorrow.
+      no_reply: Couldn't get a reply. Try again.
+      no_speech_service: The speech service couldn't be reached. Try typing instead.
+      not_heard: Didn't catch that. Try again, or type it.
+      too_fast: Slow down a little, then try again.
+      too_long: That recording is too long. Keep it under 30 seconds.
+  lesson_conversations:
+    show:
+      ai_generated: AI-generated
+      ai_notice: Replies here are written by AI and read by a synthetic voice, so
+        the Irish may contain mistakes. If something looks wrong, flag it and an editor
+        will check it.
+      back_to_lesson: "← Back to the lesson"
+      begin: Begin
+      empty_state: Have a short conversation in Irish about this lesson. Type or record
+        what you say.
+      flag: Flag
+      flag_confirm: Flag this reply for an editor to check?
+      flagged: Flagged
+      label: Conversation · Lesson %{number}
+      listen: Listen
+      placeholder: Say something…
+      record: Record
+      record_hint: Tap the microphone to speak, and again to send.
+      send: Send
+      show_english: Show English
+      start_again: Start again
+      thinking: Thinking…
+  lesson_recording_approvals:
+    create:
+      approved:
+        one: Approved 1 checked recording.
+        other: Approved %{count} checked recordings.
+        zero: There were no checked recordings to approve.
+  lesson_recording_suggestions:
+    index:
+      all_recorded: Every word in this lesson has a recording.
+      approve_checked:
+        one: Approve 1 checked recording
+        other: Approve %{count} checked recordings
+      approve_checked_confirm:
+        one: Approve the best checked recording for 1 word? Learners will hear it
+          straight away.
+        other: Approve the best checked recording for %{count} words? Learners will
+          hear them straight away.
+      back_to_lesson: "← Back to the lesson"
+      eyebrow: Abairt recordings · Lesson %{number}
+      in_use: Using %{name}
+      not_configured: Set ABAIRT_API_TOKEN to search Abairt for recordings.
+      searching: Searching Abairt…
+      summary: Real Mayo recordings from Abairt for the words that have none. Listen
+        before approving; learners hear a recording as soon as it's approved, credited
+        to the speaker.
+  lesson_reviews:
+    flash:
+      cleared: Review cleared.
+      reviewed: Marked as reviewed.
+  lessons:
+    edit:
+      add_block: Add a new block
+      back_to_lesson: "← Back to the lesson"
+      clear_review: Clear review
+      content_description: Grammar notes parsed from the book
+      content_title: Lesson content
+      details_description: Title, vocabulary and notes
+      details_title: Lesson details
+      editing: Editing · Lesson %{number}
+      english: English
+      gender: Gender
+      grammar: Grammar
+      history: History
+      intro_description: A short video that opens the lesson
+      intro_title: Intro video
+      intro_url_help: YouTube and Vimeo links and embed codes work, as do https links
+        to .mp4 or .webm files.
+      intro_url_label: Video link or embed code
+      intro_url_placeholder: Paste a YouTube or Vimeo link, an embed code, or a link
+        to an .mp4 file
+      irish: Irish
+      lesson_title: Lesson title
+      mark_reviewed: Mark as reviewed
+      meaning_placeholder: meaning
+      new_word: "+ New word"
+      not_reviewed: Not reviewed yet.
+      open_chat: Open chat
+      plural: Plural
+      plural_placeholder: plural
+      position: Position
+      pronunciation: Pronunciation
+      pronunciation_placeholder: "/pronunciation/"
+      published: Published
+      published_note: "(visible to learners)"
+      review_title: Review
+      reviewed_by: Reviewed by %{name} on %{date}
+      rich_content: Rich content
+      rich_content_description: Free text, videos, images and PDFs, in any order
+      someone: someone
+      transcript_help: Shown to learners under the video, and used by the tutor.
+      transcript_label: Transcript (optional)
+      tutor_description: Guide the AI chat. Leave empty to use the general default.
+      tutor_focus: What should the AI focus on in this lesson?
+      tutor_instructions: Tutor instructions
+      tutor_placeholder: e.g. Focus on noun gender. Test common nouns first, then
+        ask the student to apply the gender rules to unfamiliar words. Note any Mayo
+        dialect exceptions...
+      tutor_title: AI tutor settings
+      view_as_learner: View as learner
+      vocabulary: Vocabulary
+      vocabulary_notes: Vocabulary notes
+      word_placeholder: word
+    flash:
+      not_authorised: Not authorised.
+      not_found: Lesson not found.
+      saved: Lesson saved.
+    genders:
+      feminine: f.
+      masculine: m.
+    index:
+      complete: Complete
+      course: Course
+      draft: Draft
+      flagged_replies:
+        one: 1 flagged reply
+        other: "%{count} flagged replies"
+      grammar: Grammar
+      needs_review: Needs review
+      new_lesson: New lesson
+      progress_title: "%{known}/%{total} words known"
+      sections:
+        curriculum:
+          description: Core grammar and conversation curriculum
+          label: Learning Irish
+        dias_material:
+          description: Foxford and Erris dialect notes (Wagner)
+          label: DIAS field recordings
+        thematic_vocab:
+          description: Thematic word lists with audio
+          label: Mayo Irish vocabulary
+      summary:
+        one: "%{count} lesson · Based on the Mayo dialect"
+        other: "%{count} lessons · Based on the Mayo dialect"
+      word_count:
+        one: "%{count} word"
+        other: "%{count} words"
+    new:
+      create: Create lesson
+      eyebrow: New lesson
+      lesson_title: Title
+      next_free_position: 'Next free position: %{position}'
+      number: Lesson number
+      number_placeholder: e.g. 0
+      position: Position
+      title: Add a lesson
+      title_placeholder: e.g. Lesson title
+    section_badge:
+      known: Known
+    show:
+      abairt_recordings: Abairt recordings
+      all_lessons: All lessons
+      conversation: Conversation
+      english: English
+      exit_preview: Exit preview
+      feminine: f.
+      grammar: Grammar
+      hear_word: Hear %{word}
+      intro_video: Lesson introduction
+      irish: Irish
+      lesson_label: Lesson %{number} · %{type}
+      lesson_number: Lesson %{number}
+      play_recording: Play your recording
+      plural: Plural
+      practice: Practice
+      preview_banner: Previewing this lesson as a learner sees it.
+      pronunciation: Pronunciation
+      quiz: Quiz
+      record: Record
+      record_yourself: Record yourself
+      recorded_by: Recorded by %{name}
+      transcript: Transcript
+      view_as_learner: View as learner
+      vocabulary: Vocabulary
+      vocabulary_notes: Vocabulary notes
+    types:
+      curriculum: Core course
+      dias_material: Field recordings
+      thematic_vocab: Vocabulary
+    vocabulary_item_row:
+      meaning: meaning
+      plural: plural
+      pronunciation: "/pronunciation/"
+      word: word
+  onboardings:
+    doors:
+      beginner:
+        name: New to Irish
+        note: I'm starting from scratch
+      family:
+        name: Family
+        note: I'm learning with children
+      school_irish:
+        name: School Irish
+        note: I had school Irish and lost confidence
+      speaks_irish:
+        name: Speaks Irish already
+        note: I speak Irish, but not Mayo Irish
+    new:
+      continue: Continue
+      door_legend: Where are you starting from?
+      intro: Or where is your family from? This sets which Mayo speakers you hear
+        first. You can change it any time.
+      place_placeholder: 'For example: Ballindine, Belmullet, Achill'
+      region_legend: Which part of Mayo is closest?
+      see_1926: See how your area was classed in 1926
+      title: Where are you from?
+      welcome: Welcome
+      your_place: Your place
+    regions:
+      achill:
+        name: Achill
+        note: Achill Island and nearby
+      east_mayo:
+        name: East Mayo
+        note: Foxford, Ballindine and the Sligo border
+      erris:
+        name: Erris
+        note: Belmullet, Carrowteige, Geesala
+      other:
+        name: Somewhere else
+        note: Another part of Ireland or abroad, or not sure
+      tourmakeady:
+        name: Tourmakeady
+        note: South Mayo, by Lough Mask
+  passwords:
+    edit:
+      confirmation_placeholder: Repeat new password
+      password_placeholder: Enter new password
+      title: Update your password
+    flash:
+      invalid_link: Password reset link is invalid or has expired.
+      mismatch: Passwords did not match.
+      reset_done: Password has been reset.
+      reset_sent: Password reset instructions sent (if user with that email address
+        exists).
+      try_again_later: Try again later.
+    new:
+      email_placeholder: Enter your email address
+      submit: Email reset instructions
+      title: Forgot your password?
+  passwords_mailer:
+    reset:
+      expiry: This link will expire in %{time}.
+      intro: You can reset your password on
+      intro_html: You can reset your password on %{link}.
+      link_text: this password reset page
+      subject: Reset your password
+  quizzes:
+    answer:
+      correct: Correct
+      incorrect: Incorrect
+      next: Next
+      not_quite: Not quite.
+      see_results: See results
+      well_done: Well done!
+      your_answer: 'Your answer:'
+    empty:
+      all_done: All done
+      all_known: You know all the vocabulary in this lesson. Questions will come back
+        when they are due for review.
+      back_to_lesson: Back to the lesson
+      no_questions: No questions yet
+      no_vocabulary: This lesson has no vocabulary to quiz yet.
+      nothing_left: Nothing left to review right now
+    show:
+      how_to_say_in_irish: How do you say this in Irish?
+      meaning_in_english: What does this mean in English?
+      question_count: Question %{position}/%{count}
+      quit: Quit
+    summary:
+      all_known: You know all the vocabulary in this lesson. Questions will come back
+        for review.
+      back_to_lesson: Back to the lesson
+      correct_this_round: correct this round
+      keep_going: Keep going
+      round_complete: Round complete
+      score: "%{correct} of %{answered}"
+  registrations:
+    new:
+      email: Email
+      have_account_html: Already have an account? %{link}
+      intro: Your account will be checked before you get access.
+      password: Password
+      password_confirmation: Confirm password
+      sign_in: Sign in
+      submit: Register
+      title: Register
+    pending:
+      back: Back to the site
+      message: Your account has been created. You will be told when an administrator
+        approves it.
+      title: Waiting for approval
+  search:
+    index:
+      empty_query: Type something above to search the whole course.
+      intro: 'Search across every lesson: vocabulary and grammar. Works in English
+        and in Irish (fadas optional).'
+      lesson_number: Lesson %{number}
+      no_results_html: No results for <span class="font-semibold">“%{query}”</span>.
+      placeholder: e.g. house, dog, lenition…
+      result_count:
+        one: "%{count} result"
+        other: "%{count} results"
+      title: Search
+      top_note: " (showing the top %{max})"
+      try_again: Try fewer or different words.
+    types:
+      GrammarRule: Grammar
+      GrammarSection: Grammar
+      Lesson: Lesson
+      LessonBlock: Content
+      Phrase: Phrase
+      VocabularyItem: Vocabulary
+  sessions:
+    flash:
+      invalid_credentials: Try another email address or password.
+      try_again_later: Try again later.
+    new:
+      email: Email
+      forgot_password: Forgot your password?
+      no_account_html: No account? %{link}
+      password: Password
+      register_here: Register here
+      submit: Sign in
+      title: Sign in
+  shared:
+    cancel: Cancel
+    confirm: Are you sure?
+    delete: Delete
+    edit: Edit
+    progress_bar:
+      complete: Complete
+      default_label: Progress
+    save: Save
+    speak_button:
+      title: Synthetic voice from ABAIR, not a recording of a speaker
+    video:
+      title: Lesson video
+    words_known: Words known
+  version_undos:
+    create:
+      failed: 'Couldn''t undo that change: %{reason}'
+      undone: Change undone.
+  versions:
+    index:
+      back_to_editor: Back to the editor
+      empty: Nothing has been edited yet.
+      events:
+        create: Added
+        destroy: Deleted
+        update: Edited
+      eyebrow: Edit history
+      intro: Every change to this lesson, newest first. Undoing a change puts back
+        what it replaced, and the undo is recorded too.
+      system: System
+      title: History of %{title}
+      undo: Undo
+      undo_confirm: Undo this change?
+  vocabulary_item_recording_suggestions:
+    index:
+      approve: Approve
+      approved: In use
+      check_failed: 'The recogniser didn''t hear the word. It heard:'
+      check_passed: The recogniser heard the word.
+      none_found: No Mayo recordings of this word on Abairt.
+      not_checked: Couldn't be checked.
+      rate_limited: Abairt's hourly search limit is used up. Try again later.
+      reject: Reject
+      rejected: Rejected
+      unavailable: Abairt couldn't be reached. Try again later.

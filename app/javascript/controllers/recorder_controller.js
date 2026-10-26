@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+import { t } from "translations"
 
 // Lets the learner record their own pronunciation and play it back
 // straight away to compare against the native speaker audio.
@@ -27,14 +28,14 @@ export default class extends Controller {
 
   async start() {
     if (!navigator.mediaDevices?.getUserMedia) {
-      this.setStatus("Gan tacaíocht", true)
+      this.setStatus(t("js.recorder.not_supported"), true)
       return
     }
 
     try {
       this.stream = await navigator.mediaDevices.getUserMedia({ audio: true })
     } catch (e) {
-      this.setStatus("Gan cead", true)
+      this.setStatus(t("js.recorder.no_permission"), true)
       return
     }
 
@@ -50,14 +51,14 @@ export default class extends Controller {
       const blob = new Blob(this.chunks, { type: this.mediaRecorder.mimeType })
       this.audioUrl = URL.createObjectURL(blob)
       if (this.hasPlayButtonTarget) this.playButtonTarget.disabled = false
-      this.setStatus("Réidh")
+      this.setStatus(t("js.recorder.ready"))
       this.stopStream()
     })
 
     this.mediaRecorder.start()
     this.recording = true
     this.recordButtonTarget.classList.add("text-red-600", "animate-pulse")
-    this.setStatus("Ag taifeadadh…")
+    this.setStatus(t("js.recorder.recording"))
   }
 
   stop() {
