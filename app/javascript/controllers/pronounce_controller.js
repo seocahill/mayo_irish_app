@@ -18,6 +18,13 @@ export default class extends Controller {
     this.audio?.pause()
   }
 
+  // The speakable controller points one button at each new selection.
+  srcValueChanged() {
+    this.audio?.pause()
+    this.audio = null
+    if (this.hasButtonTarget) this.setState(null)
+  }
+
   async play() {
     this.audio ??= this.buildAudio()
     this.audio.currentTime = 0

@@ -100,6 +100,8 @@ en:
       not_supported: Not supported
       ready: Ready
       recording: Recording…
+    speakable:
+      hear: Hear
     speech_input:
       no_permission: Allow the microphone to speak.
       not_supported: This browser can't record.
@@ -313,6 +315,7 @@ en:
       exit_preview: Exit preview
       feminine: f.
       grammar: Grammar
+      hear_selection: Hear it
       hear_word: Hear %{word}
       intro_video: Lesson introduction
       irish: Irish
