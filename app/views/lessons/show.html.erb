@@ -32,8 +32,8 @@
   </div>
 </header>
 
-<%# Any Irish in the lesson can be heard: bold examples get a speaker button, and
-    selected text a "Hear it" button (see the speakable controller). %>
+<%# Any Irish in the lesson can be heard: marked Irish (see SpeakableIrish) gets a
+    speaker button, and selected text a "Hear it" button (see the speakable controller). %>
 <div class="relative" <%= tag.attributes(data: { controller: "speakable", speakable_src_value: speech_path }) if AbairClient.configured? %>>
   <% if AbairClient.configured? %>
     <template data-speakable-target="inline">
@@ -165,7 +165,7 @@
       <% if @lesson.vocabulary_notes_content.present? && @lesson.vocabulary_notes_content.to_plain_text.present? %>
         <div class="mt-3 bg-eist/10 border border-eist/30 rounded-sm px-5 py-4 text-sm text-ink" data-speakable-target="content">
           <p class="eyebrow text-eist mb-2"><%= t(".vocabulary_notes") %></p>
-          <%= @lesson.vocabulary_notes_content %>
+          <%= speakable_irish(@lesson.vocabulary_notes_content) %>
         </div>
       <% end %>
     </section>
@@ -187,7 +187,7 @@
             </div>
             <% if rule.body.present? && rule.body.to_plain_text.present? %>
               <div class="px-5 py-4 text-sm text-ink prose prose-sm max-w-none border-b border-line" data-speakable-target="content">
-                <%= rule.body %>
+                <%= speakable_irish(rule.body) %>
               </div>
             <% end %>
             <% rule.grammar_sections.each do |section| %>
@@ -198,7 +198,7 @@
                   </div>
                 <% end %>
                 <div class="px-5 py-4 text-sm prose prose-sm max-w-none lesson-grammar-content" data-speakable-target="content">
-                  <%= section.body %>
+                  <%= speakable_irish(section.body) %>
                 </div>
               </div>
             <% end %>

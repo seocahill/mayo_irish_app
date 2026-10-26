@@ -1,10 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
 import { t } from "translations"
 
-// Lets the learner hear any Irish on a lesson page in the synthetic voice. Bold
-// text in the lesson's rich text (nearly always an Irish example) gets a speaker
-// button after it, and selecting any text shows a "Hear it" button below it.
-// Both are pronounce controllers pointed at the speech endpoint.
+// Lets the learner hear any Irish on a lesson page in the synthetic voice. The
+// Irish the server marked in the lesson's rich text (data-speak, see
+// SpeakableIrish) gets a speaker button, and selecting any text shows a "Hear
+// it" button below it. Both are pronounce controllers pointed at the speech
+// endpoint.
 const MAX_CHARACTERS = 400
 
 export default class extends Controller {
@@ -22,18 +23,15 @@ export default class extends Controller {
   }
 
   contentTargetConnected(element) {
-    element.querySelectorAll("strong").forEach((strong) => {
+    element.querySelectorAll("[data-speak]").forEach((irish) => {
       // Turbo restores the page with the buttons already in it.
-      if (strong.dataset.speakable) return
-      strong.dataset.speakable = "true"
-
-      const text = speakableText(strong.textContent)
-      if (!text) return
+      if (irish.dataset.speakable) return
+      irish.dataset.speakable = "true"
 
       const button = this.inlineTarget.content.firstElementChild.cloneNode(true)
-      button.dataset.pronounceSrcValue = this.urlFor(text)
-      button.querySelector("button").setAttribute("aria-label", `${t("js.speakable.hear")}: ${text}`)
-      strong.after(" ", button)
+      button.dataset.pronounceSrcValue = this.urlFor(irish.dataset.speak)
+      button.querySelector("button").setAttribute("aria-label", `${t("js.speakable.hear")}: ${irish.dataset.speak}`)
+      irish.matches("td") ? irish.append(" ", button) : irish.after(" ", button)
     })
   }
 
@@ -72,10 +70,12 @@ export default class extends Controller {
   }
 }
 
-// The text to read: without the course's section references, such as "(§589)",
-// and only if there's something to read and not too much of it.
+// The selected text to read: without phonetics or the course's section
+// references, such as "(§589)", and only if there's something to read and not
+// too much of it.
 function speakableText(text) {
   const cleaned = text
+    .replace(/\/[^/]*\//g, " ")
     .replace(/\([^)]*§[^)]*\)/g, " ")
     .replace(/§\s*[\d.]+/g, " ")
     .replace(/\s+/g, " ")
