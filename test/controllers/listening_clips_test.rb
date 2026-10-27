@@ -82,4 +82,28 @@ class ListeningClipsTest < ActionDispatch::IntegrationTest
     assert_select "audio[src=?]", "https://clips.test/7"
     assert_equal 7, house.listening_clips.sole.abairt_entry_id
   end
+
+  test "the learner can go back to what they've listened to" do
+    @clip.update!(abairt_recording_id: 15, abairt_recording_title: "A Story")
+    hidden = ListeningClip.create!(vocabulary_item: vocabulary_items(:house), abairt_entry_id: 2, irish: "one teach two", english: "another",
+                                   audio_url: "https://clips.test/2", word_count: 3)
+    learner = users(:two)
+    learner.listens.create!(listening_clip: @clip, understood: false)
+    learner.listens.create!(listening_clip: hidden, understood: true)
+    hidden.hide!(by: users(:admin))
+    learner.listening_times.create!(abairt_recording_id: 15, seconds: 150)
+    sign_in_as(learner)
+
+    get root_path
+    assert_select "a[href=?]", listens_path
+
+    get listens_path
+
+    assert_response :success
+    assert_select "a[href=?]", recording_path(15), text: /A Story/
+    assert_select "a[href=?]", listening_clip_path(@clip)
+    assert_select "audio[src=?]", "https://clips.test/1"
+    assert_select "span.chip", text: I18n.t("listens.index.not_yet")
+    assert_select "audio[src=?]", "https://clips.test/2", count: 0
+  end
 end

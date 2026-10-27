@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :listening_clips, only: %i[show update] do
     resource :listen, only: :create
   end
+  resources :listens, only: :index
   resources :recordings, only: :show do
     resource :listening_time, only: :update
   end

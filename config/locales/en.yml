@@ -105,6 +105,7 @@ en:
       words_known:
         one: word known
         other: words known
+      your_listening: Your listening
       your_place: Your place
   js:
     pronounce:
@@ -393,6 +394,25 @@ en:
   listens:
     create:
       saved: Saved. There will be another clip tomorrow.
+    index:
+      ago: "%{time} ago"
+      conversations: Conversations
+      eyebrow: Listen
+      got_it: Got it
+      listened:
+        one: 1 minute
+        other: "%{count} minutes"
+      no_conversations: None yet. Each phrase leads on to the conversation it came
+        from.
+      no_phrases: None yet. A new phrase comes up on the daily path once you've finished
+        a lesson.
+      not_yet: Not yet
+      phrases: Phrases
+      summary: Everything you've listened to, to go back to. Phrases you didn't get
+        the first time are worth another go.
+      title: Your listening
+      try_again: Try it again
+      untitled: A recording from Abairt
   native_questions:
     create:
       no_recording: Record your question first.

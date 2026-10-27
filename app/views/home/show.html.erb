@@ -49,6 +49,7 @@
         <%= t(".minutes_listened", count: @listening_minutes) %>
       </p>
     </div>
+    <%= link_to t(".your_listening"), listens_path, class: "text-sm text-muted underline underline-offset-2 hover:text-ink self-start" %>
   </section>
 
   <section aria-labelledby="place-heading" class="flex flex-col gap-3">
