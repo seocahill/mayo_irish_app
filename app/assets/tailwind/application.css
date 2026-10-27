@@ -125,6 +125,11 @@
     --lexxy-color-ink-lightest: var(--canvas);
   }
 
+  /* A wide table scrolls sideways on a phone rather than widening the page. */
+  .lexxy-content table {
+    @apply block max-w-full overflow-x-auto;
+  }
+
   /* Shared building blocks, named after the mock-up patterns. */
   .card {
     @apply bg-surface border border-line rounded-sm;

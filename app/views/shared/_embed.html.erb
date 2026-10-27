@@ -1,0 +1,13 @@
+<%# locals: block (LessonBlock, an embed) %>
+<figure>
+  <iframe src="<%= block.url %>"
+          title="<%= block.caption.presence || t("shared.embed.title") %>"
+          class="w-full h-[40rem] border-0"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          data-controller="embed-frame"
+          data-embed-frame-origin-value="<%= block.embed_origin %>"></iframe>
+  <% if block.caption.present? %>
+    <figcaption class="text-sm text-muted mt-2 text-center"><%= block.caption %></figcaption>
+  <% end %>
+</figure>
