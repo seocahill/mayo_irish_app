@@ -16,7 +16,7 @@
       <a href="#listening" class="underline underline-offset-2 text-muted hover:text-ink">Listening</a>
       <a href="#native-speakers" class="underline underline-offset-2 text-muted hover:text-ink">Native speakers</a>
       <a href="#your-recordings" class="underline underline-offset-2 text-muted hover:text-ink">Your recordings</a>
-      <% if current_user.admin? %>
+      <% if current_user&.admin? %>
         <a href="#editors" class="underline underline-offset-2 text-muted hover:text-ink">For editors</a>
       <% end %>
     </nav>
@@ -43,6 +43,11 @@
     <p>
       The course follows <em>Learning Irish</em> by Mícheál Ó Siadhail, lesson by lesson, adapted for the Irish of Mayo.
       Most courses teach Connemara or the standard; this one aims for what is still spoken in Erris, Achill, Tourmakeady and the rest of the county.
+    </p>
+    <p class="card px-4 py-4">
+      A hundred years ago far more of Mayo spoke Irish. In 1925 the new state counted Irish speakers district by district along the west coast,
+      and in 1926 it drew the first official map of the Gaeltacht. Abairt has that map:
+      <a href="<%= OnboardingsHelper::GAELTACHT_1926_URL %>" target="_blank" rel="noopener" class="underline underline-offset-2">find your own town or parish and see how it was classed in 1926</a>.
     </p>
     <p>
       Grammar and word lists matter, but a language is learnt mostly by hearing it and using it.
@@ -174,11 +179,22 @@
     </p>
   </section>
 
-  <% if current_user.admin? %>
+  <% if current_user&.admin? %>
     <%= render "editors" %>
   <% end %>
 
-  <p class="text-sm text-muted border-t border-line pt-6">
-    Something unclear, wrong, or missing? Say so. In a beta, that's the most useful thing you can do.
-  </p>
+  <% if authenticated? %>
+    <p class="text-sm text-muted border-t border-line pt-6">
+      Something unclear, wrong, or missing? Say so. In a beta, that's the most useful thing you can do.
+    </p>
+  <% else %>
+    <section id="joining" class="flex flex-col gap-3 scroll-mt-4 border-t border-line pt-6">
+      <h2 class="font-display text-2xl">Joining</h2>
+      <p>
+        The course is invite only until it's ready.
+        <%= link_to "Register", new_registration_path, class: "underline underline-offset-2" %> and your account will be checked before you get in,
+        or <%= link_to "sign in", new_session_path, class: "underline underline-offset-2" %> if you already have one.
+      </p>
+    </section>
+  <% end %>
 </article>
