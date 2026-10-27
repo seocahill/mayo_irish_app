@@ -60,9 +60,16 @@ jobs:
             exit 1
           fi
 
+      # Production stays awake; the preview sleeps when nobody is using it.
+      - name: Let the preview sleep when idle
+        run: |
+          sed -e "s/^  auto_stop_machines = .*/  auto_stop_machines = 'stop'/" \
+              -e "s/^  min_machines_running = .*/  min_machines_running = 0/" fly.toml > fly.preview.toml
+          grep -q "auto_stop_machines = 'stop'" fly.preview.toml && grep -q "min_machines_running = 0" fly.preview.toml
+
       - name: Deploy this branch
         id: deploy
-        run: flyctl deploy --remote-only --ha=false -a "$PREVIEW_APP"
+        run: flyctl deploy --remote-only --ha=false --config fly.preview.toml -a "$PREVIEW_APP"
 
       - name: Show the app's logs if it didn't come up
         if: failure() && steps.deploy.conclusion == 'failure'
