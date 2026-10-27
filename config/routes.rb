@@ -21,8 +21,16 @@ Rails.application.routes.draw do
   resources :vocabulary_items, only: [] do
     resource :pronunciation, only: :show
     resources :recording_suggestions, only: :index, controller: "vocabulary_item_recording_suggestions"
+    resources :listening_clips, only: :index, controller: "vocabulary_item_listening_clips"
   end
   resources :recording_suggestions, only: :update
+  resources :listening_clips, only: %i[show update] do
+    resource :listen, only: :create
+  end
+  resources :listens, only: :index
+  resources :recordings, only: :show do
+    resource :listening_time, only: :update
+  end
   resources :chat_messages, only: [] do
     resource :pronunciation, only: :show, controller: "chat_message_pronunciations"
     resource :flag, only: :create, controller: "chat_message_flags"
@@ -34,6 +42,7 @@ Rails.application.routes.draw do
     resource :review, only: %i[create destroy], controller: "lesson_reviews"
     resources :recording_suggestions, only: :index, controller: "lesson_recording_suggestions"
     resource :recording_approval, only: :create, controller: "lesson_recording_approvals"
+    resources :listening_clips, only: :index, controller: "lesson_listening_clips"
     resources :versions, only: :index do
       resource :undo, only: :create, controller: "version_undos"
     end

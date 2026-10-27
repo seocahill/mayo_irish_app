@@ -5,6 +5,7 @@
 #   AbairtClient.new.recordings_of("madra")           # => [ { "id" => 1, "word_or_phrase" => …, "audio_url" => …, "speaker" => {…} } ]
 #   AbairtClient.new.ask(audio, asker_label: "philip") # => { "id" => 7, "status" => "waiting", … }
 #   AbairtClient.new.question(7)                      # => { "status" => "answered", "answer_audio_url" => …, … }
+#   AbairtClient.new.recording(15)                    # => { "title" => …, "audio_url" => …, "lines" => [ { "start" => 3.7, … } ] }
 class AbairtClient
   class Error < StandardError; end
   class RateLimited < Error; end
@@ -23,6 +24,9 @@ class AbairtClient
   rescue KeyError
     raise Error, "Abairt returned something unexpected"
   end
+
+  # A whole recording with its confirmed transcript, line by line with times.
+  def recording(id) = perform(Net::HTTP::Get.new(uri("/api/voice_recordings/#{id.to_i}"), headers))
 
   # Sends a spoken question to a native speaker, on behalf of `asker_label`.
   def ask(audio, asker_label:)

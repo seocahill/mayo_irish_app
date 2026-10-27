@@ -1,0 +1,23 @@
+<div class="max-w-2xl mx-auto flex flex-col gap-6">
+  <header class="flex flex-col gap-2">
+    <p class="eyebrow text-eist"><%= t(".eyebrow", number: @lesson.number) %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= @lesson.title %></h1>
+    <p class="text-muted text-sm"><%= t(".summary") %></p>
+    <%= link_to t(".back_to_lesson"), lesson_path(@lesson), class: "text-sm text-muted hover:text-ink" %>
+  </header>
+
+  <% if !AbairtClient.configured? || !AbairClient.configured? %>
+    <p class="card px-4 py-6 text-center text-muted text-sm"><%= t(".not_configured") %></p>
+  <% else %>
+    <ul class="flex flex-col gap-4">
+      <% @words.each do |item| %>
+        <li class="card px-4 py-4 flex flex-col gap-3">
+          <p><span lang="ga" class="text-lg font-medium"><%= item.irish %></span> <span class="text-muted text-sm">— <%= item.english %></span></p>
+          <%= turbo_frame_tag dom_id(item, :listening_clips), src: vocabulary_item_listening_clips_path(item), loading: :lazy do %>
+            <p class="text-sm text-muted animate-pulse"><%= t(".searching") %></p>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

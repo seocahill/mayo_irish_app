@@ -1,0 +1,53 @@
+<div class="max-w-2xl mx-auto flex flex-col gap-8">
+  <header class="flex flex-col gap-2">
+    <p class="eyebrow text-eist"><%= t(".eyebrow") %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
+    <p class="text-muted text-sm"><%= t(".summary") %></p>
+  </header>
+
+  <section class="flex flex-col gap-3" aria-labelledby="conversations-heading">
+    <h2 id="conversations-heading" class="eyebrow"><%= t(".conversations") %></h2>
+    <% if @listening_times.empty? %>
+      <p class="text-sm text-muted"><%= t(".no_conversations") %></p>
+    <% else %>
+      <ul class="bg-surface border border-line rounded-sm divide-y divide-line">
+        <% @listening_times.each do |time| %>
+          <li>
+            <%= link_to recording_path(time.abairt_recording_id), class: "flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-4 py-3 hover:bg-canvas" do %>
+              <span><%= @recording_titles[time.abairt_recording_id].presence || t(".untitled") %></span>
+              <span class="text-xs text-muted">
+                <%= t(".listened", count: time.seconds.fdiv(60).ceil) %> · <%= t(".ago", time: time_ago_in_words(time.updated_at)) %>
+              </span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
+
+  <section class="flex flex-col gap-3" aria-labelledby="phrases-heading">
+    <h2 id="phrases-heading" class="eyebrow"><%= t(".phrases") %></h2>
+    <% if @listens.empty? %>
+      <p class="text-sm text-muted"><%= t(".no_phrases") %></p>
+    <% else %>
+      <ul class="flex flex-col gap-3">
+        <% @listens.each do |listen| %>
+          <% clip = listen.listening_clip %>
+          <li class="card px-4 py-3 flex flex-col gap-2 text-sm">
+            <div class="flex flex-wrap items-baseline justify-between gap-2">
+              <p>
+                <span lang="ga" class="font-medium"><%= clip.vocabulary_item.irish %></span>
+                <span class="text-muted">— <%= clip.vocabulary_item.english %></span>
+              </p>
+              <span class="chip <%= listen.understood? ? "border-foghlaim text-foghlaim" : "border-labhair text-labhair" %>">
+                <%= listen.understood? ? t(".got_it") : t(".not_yet") %>
+              </span>
+            </div>
+            <audio controls preload="none" src="<%= clip.audio_url %>" class="h-8 w-full max-w-xs"></audio>
+            <%= link_to t(".try_again"), listening_clip_path(clip), class: "text-muted underline underline-offset-2 hover:text-ink self-start" %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
+</div>

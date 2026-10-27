@@ -62,3 +62,75 @@ class DailyPathTest < ActiveSupport::TestCase
     assert_nil DailyPath.new(@user).current_lesson
   end
 end
+
+class DailyPathListeningTest < ActiveSupport::TestCase
+  setup do
+    @user = users(:two)
+    @first = lessons(:one)
+    @second = Lesson.create!(number: 2, title: "Lesson Two", position: 2)
+    @second.vocabulary_items.create!(irish: "bord", english: "table", position: 1)
+    [ @first, @second ].each { |lesson| QuizQuestion.sync_for(lesson) }
+    @clip = ListeningClip.create!(vocabulary_item: vocabulary_items(:dog), abairt_entry_id: 1, irish: "one madra two",
+                                  english: "a phrase", audio_url: "https://clips.test/1", word_count: 3)
+  end
+
+  def finish(lesson)
+    lesson.quiz_questions.each { |question| QuizReview.create!(user: @user, quiz_question: question, box: 3, due_at: 2.days.from_now) }
+  end
+
+  def clip_item = DailyPath.new(@user).items.find { |item| item.label == "Listen · real speech" }
+
+  test "offers a phrase using a word from a lesson the learner has finished" do
+    finish(@first)
+
+    assert_equal "Hear a Mayo speaker use “madra” in a phrase", clip_item.title
+    assert_equal "/listening_clips/#{@clip.id}", clip_item.path
+  end
+
+  test "offers no phrases from the lesson the learner is still on" do
+    assert_nil clip_item
+  end
+
+  test "offers one phrase a day" do
+    finish(@first)
+    ListeningClip.create!(vocabulary_item: vocabulary_items(:house), abairt_entry_id: 2, irish: "one teach two",
+                          english: "another phrase", audio_url: "https://clips.test/2", word_count: 3)
+    @user.listens.create!(listening_clip: @clip, understood: false)
+
+    assert_nil clip_item
+  end
+
+  test "offers a theme's words from Mayo speakers when the current lesson has no recordings" do
+    theme = Lesson.create!(number: 50, title: "Animals", position: 50, lesson_type: "thematic_vocab")
+    theme.vocabulary_items.create!(irish: "cat", english: "cat", position: 1, audio_url: "https://abairt.com/cat.mp3")
+
+    listen = DailyPath.new(@user).items.find { |item| item.label == "Listen · Mayo speakers" }
+
+    assert_equal "Animals: hear the words said by Mayo speakers", listen.title
+    assert_equal "/lessons/50#vocabulary", listen.path
+  end
+
+  def recording_item = DailyPath.new(@user).items.find { |item| item.label == "Listen · conversation" }
+
+  test "offers the whole conversation behind a clip, about once a week" do
+    @clip.update!(abairt_recording_id: 15, abairt_recording_title: "A Story")
+
+    assert_equal "A few minutes of Mayo speakers talking: A Story", recording_item.title
+    assert_equal "/recordings/15", recording_item.path
+
+    @user.listening_times.create!(abairt_recording_id: 15, seconds: 60)
+    assert_nil recording_item
+
+    travel 8.days
+    assert_nil recording_item, "already heard, and there's no other"
+  end
+
+  test "offers the conversation behind the clip the learner heard most recently" do
+    @clip.update!(abairt_recording_id: 15, abairt_recording_title: "A Story")
+    heard = ListeningClip.create!(vocabulary_item: vocabulary_items(:house), abairt_entry_id: 2, irish: "one teach two", english: "another",
+                                  audio_url: "https://clips.test/2", word_count: 5, abairt_recording_id: 16, abairt_recording_title: "Another Story")
+    @user.listens.create!(listening_clip: heard, understood: true)
+
+    assert_equal "/recordings/16", recording_item.path
+  end
+end

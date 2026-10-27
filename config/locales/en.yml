@@ -32,6 +32,8 @@ en:
     answer_title:
       one: A native speaker has answered your question
       other: Native speakers have answered %{count} of your questions
+    clip_label: Listen · real speech
+    clip_title: Hear a Mayo speaker use “%{word}” in a phrase
     conversation_label: Speak · conversation
     conversation_title: Talk about Lesson %{number} out loud, in Irish
     lesson_label: Learn · Lesson %{number}
@@ -40,8 +42,11 @@ en:
     listen_title:
       one: Hear a word from Lesson %{number} said by a Mayo speaker
       other: Hear %{count} words from Lesson %{number} said by Mayo speakers
+    recording_label: Listen · conversation
+    recording_title: 'A few minutes of Mayo speakers talking: %{title}'
     review_label: Review · %{count} due
     review_title: Review the words that are due
+    theme_listen_title: "%{title}: hear the words said by Mayo speakers"
     tutor_label: Practise · text chat
     tutor_title: Talk it through with the tutor
   errors:
@@ -84,6 +89,9 @@ en:
     show:
       change: Change
       classed_1926: How was this area classed in 1926?
+      minutes_listened:
+        one: minute listened
+        other: minutes listened
       minutes_spoken:
         one: minute spoken
         other: minutes spoken
@@ -97,6 +105,7 @@ en:
       words_known:
         one: word known
         other: words known
+      your_listening: Your listening
       your_place: Your place
   js:
     pronounce:
@@ -188,6 +197,16 @@ en:
       show_english: Show English
       start_again: Start again
       thinking: Thinking…
+  lesson_listening_clips:
+    index:
+      back_to_lesson: "← Back to the lesson"
+      eyebrow: Listening clips · Lesson %{number}
+      not_configured: Finding clips needs both Abairt and ABAIR to be set up.
+      searching: Searching Abairt…
+      summary: Short phrases from Abairt in which a Mayo speaker uses one of this
+        lesson’s words. Only clips in which ABAIR’s recogniser hears the word are
+        kept. Learners who have finished the lesson get one a day, shortest first.
+        Hide any that aren’t suitable.
   lesson_recording_approvals:
     create:
       approved:
@@ -331,6 +350,7 @@ en:
       irish: Irish
       lesson_label: Lesson %{number} · %{type}
       lesson_number: Lesson %{number}
+      listening_clips: Listening clips
       play_recording: Play your recording
       plural: Plural
       practice: Practice
@@ -353,6 +373,46 @@ en:
       plural: plural
       pronunciation: "/pronunciation/"
       word: word
+  listening_clips:
+    show:
+      all_clips: All clips for lesson %{number}
+      eyebrow: Listen · real speech
+      hidden: Hidden from learners
+      hide: Hide from learners
+      how_did_it_go: Could you make it out?
+      list: Show to learners again
+      listen_for_html: A Mayo speaker, in a phrase from Abairt. Listen for %{word}
+        (%{english}) and try to work out the rest. Play it as often as you like.
+      not_yet: Not yet
+      show_words: Show the words
+      slower: Slower
+      title: What do you hear?
+      understood: I got it
+      untitled: an Abairt recording
+      whole_conversation: Hear it in context
+      whole_conversation_title: 'The conversation this came from: %{title}'
+  listens:
+    create:
+      saved: Saved. There will be another clip tomorrow.
+    index:
+      ago: "%{time} ago"
+      conversations: Conversations
+      eyebrow: Listen
+      got_it: Got it
+      listened:
+        one: 1 minute
+        other: "%{count} minutes"
+      no_conversations: None yet. Each phrase leads on to the conversation it came
+        from.
+      no_phrases: None yet. A new phrase comes up on the daily path once you've finished
+        a lesson.
+      not_yet: Not yet
+      phrases: Phrases
+      summary: Everything you've listened to, to go back to. Phrases you didn't get
+        the first time are worth another go.
+      title: Your listening
+      try_again: Try it again
+      untitled: A recording from Abairt
   native_questions:
     create:
       no_recording: Record your question first.
@@ -476,6 +536,18 @@ en:
       keep_going: Keep going
       round_complete: Round complete
       score: "%{correct} of %{answered}"
+  recordings:
+    show:
+      eyebrow: Listen · conversation
+      from_abairt: Recorded and transcribed on Abairt. Only checked lines are shown,
+        so there are some gaps.
+      how_to_listen: Don't try to catch every word. Listen for the rhythm of the talk
+        and for words you know, and tap a line to hear it again.
+      no_transcript: This recording hasn't been transcribed yet. Listen anyway.
+      show_english: English
+      slower: Slower
+      unavailable: The recording couldn't be loaded from Abairt. Try again later.
+      untitled: A recording from Abairt
   registrations:
     new:
       email: Email
@@ -557,6 +629,14 @@ en:
       title: History of %{title}
       undo: Undo
       undo_confirm: Undo this change?
+  vocabulary_item_listening_clips:
+    index:
+      hidden: Hidden
+      hide: Hide from learners
+      list: Show to learners again
+      none_found: No suitable phrases on Abairt yet.
+      rate_limited: Abairt’s hourly limit is used up. Try again later.
+      unavailable: Abairt couldn’t be reached. Try again later.
   vocabulary_item_recording_suggestions:
     index:
       approve: Approve

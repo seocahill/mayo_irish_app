@@ -44,7 +44,12 @@
           <span class="text-sm">· <%= t(".this_week", count: @spoken_time.minutes_this_week) %></span>
         <% end %>
       </p>
+      <p class="text-muted">
+        <span class="font-display text-3xl text-ink"><%= @listening_minutes %></span>
+        <%= t(".minutes_listened", count: @listening_minutes) %>
+      </p>
     </div>
+    <%= link_to t(".your_listening"), listens_path, class: "text-sm text-muted underline underline-offset-2 hover:text-ink self-start" %>
   </section>
 
   <section aria-labelledby="place-heading" class="flex flex-col gap-3">
