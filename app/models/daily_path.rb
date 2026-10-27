@@ -11,7 +11,7 @@ class DailyPath
   end
 
   def items
-    [ answer_item, listen_item, review_item, lesson_item, tutor_item, conversation_item ].compact
+    [ answer_item, listen_item, clip_item, review_item, lesson_item, tutor_item, conversation_item ].compact
   end
 
   def due_count
@@ -74,16 +74,37 @@ class DailyPath
              path: lesson_conversation_path(current_lesson))
   end
 
-  # The current lesson's words as Mayo speakers say them, where there are recordings.
+  # The current lesson's words as Mayo speakers say them, or, when it has no
+  # recordings, a theme's words: a different theme each day.
   def listen_item
-    return unless current_lesson
-
-    count = current_lesson.vocabulary_items.with_recording.count
-    return unless count.positive?
+    count = current_lesson&.vocabulary_items&.with_recording&.count.to_i
+    return theme_listen_item unless count.positive?
 
     Item.new(level: :eist, label: I18n.t("daily_path.listen_label"),
              title: I18n.t("daily_path.listen_title", count: count, number: current_lesson.number),
              path: lesson_path(current_lesson, anchor: "vocabulary"))
+  end
+
+  def theme_listen_item
+    themes = Lesson.visible_to(user).thematic_vocab.where(id: VocabularyItem.with_recording.select(:lesson_id)).ordered.ids
+    return if themes.empty?
+
+    theme = Lesson.find(themes[Date.current.yday % themes.size])
+    Item.new(level: :eist, label: I18n.t("daily_path.listen_label"),
+             title: I18n.t("daily_path.theme_listen_title", title: theme.title),
+             path: lesson_path(theme, anchor: "vocabulary"))
+  end
+
+  # A Mayo speaker using a word from a lesson the learner has finished, in a
+  # phrase: one clip a day, the shortest first.
+  def clip_item
+    return if user.listens.today.exists?
+
+    clip = ListeningClip.next_for(user, lessons: finished_lessons)
+    return unless clip
+
+    Item.new(level: :eist, label: I18n.t("daily_path.clip_label"),
+             title: I18n.t("daily_path.clip_title", word: clip.vocabulary_item.irish), path: listening_clip_path(clip))
   end
 
   # Answers from native speakers the learner hasn't heard yet come first.
@@ -93,6 +114,10 @@ class DailyPath
 
     Item.new(level: :eist, label: I18n.t("daily_path.answer_label"),
              title: I18n.t("daily_path.answer_title", count: count), path: native_questions_path)
+  end
+
+  def finished_lessons
+    current_lesson ? curriculum_lessons.take_while { |lesson| lesson != current_lesson } : curriculum_lessons
   end
 
   def curriculum_lessons

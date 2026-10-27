@@ -27,6 +27,7 @@
       <%= link_to t(".view_as_learner"), lesson_path(@lesson, preview: 1), class: "btn-outline flex-1 sm:flex-initial border-line text-muted" %>
       <% if AbairtClient.configured? && @lesson.vocabulary_items.any? %>
         <%= link_to t(".abairt_recordings"), lesson_recording_suggestions_path(@lesson), class: "btn-outline flex-1 sm:flex-initial border-line text-muted" %>
+        <%= link_to t(".listening_clips"), lesson_listening_clips_path(@lesson), class: "btn-outline flex-1 sm:flex-initial border-line text-muted" %>
       <% end %>
     <% end %>
   </div>

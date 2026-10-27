@@ -1,0 +1,28 @@
+<%= turbo_frame_tag dom_id(@item, :listening_clips) do %>
+  <% if @error %>
+    <p class="text-sm text-red-600"><%= @error %></p>
+  <% elsif @clips.empty? %>
+    <p class="text-sm text-muted"><%= t(".none_found") %></p>
+  <% else %>
+    <ul class="flex flex-col divide-y divide-line">
+      <% @clips.each do |clip| %>
+        <li class="py-3 first:pt-0 last:pb-0 flex flex-col gap-2 text-sm">
+          <div>
+            <p lang="ga" class="break-words"><%= clip.irish %></p>
+            <p class="text-muted"><%= clip.english %></p>
+            <p class="text-xs text-muted mt-0.5"><%= [ clip.speaker_name, clip.speaker_dialect&.humanize ].compact.join(" · ") %></p>
+          </div>
+          <audio controls preload="none" src="<%= clip.audio_url %>" class="h-8 w-full max-w-xs"></audio>
+          <div class="flex items-center gap-3">
+            <% if clip.listed? %>
+              <%= button_to t(".hide"), listening_clip_path(clip), method: :patch, params: { status: "hidden" }, class: "btn-outline text-xs" %>
+            <% else %>
+              <span class="chip border-line text-muted"><%= t(".hidden") %></span>
+              <%= button_to t(".list"), listening_clip_path(clip), method: :patch, params: { status: "listed" }, class: "btn-outline text-xs" %>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

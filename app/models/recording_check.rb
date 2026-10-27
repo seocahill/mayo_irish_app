@@ -5,8 +5,10 @@
 #   check = RecordingCheck.new("https://…/clip.mp3", word: "madra")
 #   check.heard    # => what the recogniser made of it
 #   check.passed?  # => whether it heard the word
+#   check.mostly?(phrase)  # => whether it heard most of a longer phrase
 class RecordingCheck
   MAX_REDIRECTS = 3
+  MOSTLY = 0.6
 
   attr_reader :heard
 
@@ -16,6 +18,14 @@ class RecordingCheck
   end
 
   def passed? = IrishText.includes?(@heard, @word)
+
+  # The recogniser rarely gets every word of a dialect speaker right, so a
+  # phrase passes when it heard most of them.
+  def mostly?(phrase)
+    expected = IrishText.words(phrase)
+    heard = IrishText.words(@heard)
+    expected.any? && expected.count { |word| heard.include?(word) } >= expected.size * MOSTLY
+  end
 
   private
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_26_212705) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_27_004423) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -156,6 +156,37 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_26_212705) do
     t.index ["position"], name: "index_lessons_on_position"
     t.index ["published"], name: "index_lessons_on_published"
     t.index ["reviewed_by_id"], name: "index_lessons_on_reviewed_by_id"
+  end
+
+  create_table "listening_clips", force: :cascade do |t|
+    t.integer "abairt_entry_id", null: false
+    t.string "audio_url", null: false
+    t.datetime "created_at", null: false
+    t.string "english", null: false
+    t.text "heard"
+    t.string "irish", null: false
+    t.datetime "reviewed_at"
+    t.integer "reviewed_by_id"
+    t.string "speaker_dialect"
+    t.string "speaker_name"
+    t.string "status", default: "listed", null: false
+    t.datetime "updated_at", null: false
+    t.integer "vocabulary_item_id", null: false
+    t.integer "word_count", null: false
+    t.index ["abairt_entry_id"], name: "index_listening_clips_on_abairt_entry_id", unique: true
+    t.index ["reviewed_by_id"], name: "index_listening_clips_on_reviewed_by_id"
+    t.index ["vocabulary_item_id"], name: "index_listening_clips_on_vocabulary_item_id"
+  end
+
+  create_table "listens", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "listening_clip_id", null: false
+    t.boolean "understood", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["listening_clip_id"], name: "index_listens_on_listening_clip_id"
+    t.index ["user_id", "listening_clip_id"], name: "index_listens_on_user_id_and_listening_clip_id", unique: true
+    t.index ["user_id"], name: "index_listens_on_user_id"
   end
 
   create_table "native_questions", force: :cascade do |t|
@@ -362,6 +393,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_26_212705) do
   create_table "vocabulary_items", force: :cascade do |t|
     t.string "audio_credit"
     t.string "audio_url"
+    t.datetime "clips_searched_at"
     t.datetime "created_at", null: false
     t.string "english", null: false
     t.string "gender", default: "m"
@@ -388,6 +420,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_26_212705) do
   add_foreign_key "lesson_blocks", "lessons"
   add_foreign_key "lesson_rows", "lessons"
   add_foreign_key "lessons", "users", column: "reviewed_by_id"
+  add_foreign_key "listening_clips", "users", column: "reviewed_by_id"
+  add_foreign_key "listening_clips", "vocabulary_items"
+  add_foreign_key "listens", "listening_clips"
+  add_foreign_key "listens", "users"
   add_foreign_key "native_questions", "lessons"
   add_foreign_key "native_questions", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
