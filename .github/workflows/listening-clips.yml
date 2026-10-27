@@ -1,0 +1,33 @@
+# Searches Abairt for listening clips for the next course words, once an hour.
+# Each run stops at Abairt's hourly limit (about 100 words) and the next one
+# carries on, so the whole course fills in over a day; after that a run finds
+# nothing new and only picks up words added since. Run it by hand from the
+# Actions tab, or remove the schedule to stop it.
+
+name: Find listening clips
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+concurrency: listening-clips
+
+env:
+  APP: mayo-irish-app
+
+jobs:
+  find:
+    runs-on: ubuntu-latest
+    env:
+      FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+    steps:
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Make sure production is running
+        run: |
+          machine=$(flyctl machines list -a "$APP" --json | jq -r '.[0].id')
+          flyctl machine start "$machine" -a "$APP" || true
+          flyctl machine wait "$machine" -a "$APP" --state started --wait-timeout 60s
+
+      - name: Search Abairt for the next words' clips
+        run: flyctl ssh console -a "$APP" -C "sh -c 'cd /rails && bin/rails listening:find'"
