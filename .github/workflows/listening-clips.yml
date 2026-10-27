@@ -27,7 +27,7 @@ jobs:
         run: |
           machine=$(flyctl machines list -a "$APP" --json | jq -r '.[0].id')
           flyctl machine start "$machine" -a "$APP" || true
-          flyctl machine wait "$machine" -a "$APP" --state started --wait-timeout 60
+          flyctl machine wait "$machine" -a "$APP" --state started --wait-timeout 60s
 
       - name: Search Abairt for the next words' clips
         run: flyctl ssh console -a "$APP" -C "sh -c 'cd /rails && bin/rails listening:find'"
