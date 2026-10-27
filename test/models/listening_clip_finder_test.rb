@@ -21,7 +21,8 @@ class ListeningClipFinderTest < ActiveSupport::TestCase
 
   def entry(id, irish, url: "https://clips.test/#{id}", translation: "english #{id}")
     stub_request(:get, url).to_return(status: 200, body: irish)
-    { "id" => id, "word_or_phrase" => irish, "translation" => translation, "audio_url" => url, "speaker" => { "name" => "Speaker #{id}", "dialect" => "acaill" } }
+    { "id" => id, "word_or_phrase" => irish, "translation" => translation, "audio_url" => url, "region_start" => "#{id}.5",
+      "speaker" => { "name" => "Speaker #{id}", "dialect" => "acaill" }, "voice_recording" => { "id" => 100 + id, "title" => "Recording #{id}" } }
   end
 
   def find(entries, item: @item) = ListeningClipFinder.new(item, abairt: Abairt.new(entries), abair: Abair.new).call
@@ -32,6 +33,7 @@ class ListeningClipFinderTest < ActiveSupport::TestCase
     assert_equal [ 3, 4 ], clips.map(&:abairt_entry_id)
     assert_equal [ 3, 4 ], clips.map(&:word_count)
     assert_equal "Speaker 3", clips.first.speaker_name
+    assert_equal [ 103, "Recording 3", 3.5 ], clips.first.values_at(:abairt_recording_id, :abairt_recording_title, :starts_at)
   end
 
   test "leaves out phrases that are too long, untranslated, or don't use the word" do

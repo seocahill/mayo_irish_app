@@ -59,7 +59,10 @@ class ListeningClipFinder
       speaker_name: entry.dig("speaker", "name")&.squish,
       speaker_dialect: entry.dig("speaker", "dialect"),
       word_count: word_count(entry),
-      heard: check.heard
+      heard: check.heard,
+      abairt_recording_id: entry.dig("voice_recording", "id"),
+      abairt_recording_title: entry.dig("voice_recording", "title")&.squish,
+      starts_at: entry["region_start"]&.to_f
     }
   rescue AbairClient::Error => e
     Rails.logger.warn("[listening] couldn't check Abairt entry #{entry["id"]}: #{e.message}")

@@ -42,6 +42,8 @@ en:
     listen_title:
       one: Hear a word from Lesson %{number} said by a Mayo speaker
       other: Hear %{count} words from Lesson %{number} said by Mayo speakers
+    recording_label: Listen · conversation
+    recording_title: 'A few minutes of Mayo speakers talking: %{title}'
     review_label: Review · %{count} due
     review_title: Review the words that are due
     theme_listen_title: "%{title}: hear the words said by Mayo speakers"
@@ -87,6 +89,9 @@ en:
     show:
       change: Change
       classed_1926: How was this area classed in 1926?
+      minutes_listened:
+        one: minute listened
+        other: minutes listened
       minutes_spoken:
         one: minute spoken
         other: minutes spoken
@@ -382,6 +387,9 @@ en:
       slower: Slower
       title: What do you hear?
       understood: I got it
+      untitled: an Abairt recording
+      whole_conversation: Hear it in context
+      whole_conversation_title: 'The conversation this came from: %{title}'
   listens:
     create:
       saved: Saved. There will be another clip tomorrow.
@@ -508,6 +516,18 @@ en:
       keep_going: Keep going
       round_complete: Round complete
       score: "%{correct} of %{answered}"
+  recordings:
+    show:
+      eyebrow: Listen · conversation
+      from_abairt: Recorded and transcribed on Abairt. Only checked lines are shown,
+        so there are some gaps.
+      how_to_listen: Don't try to catch every word. Listen for the rhythm of the talk
+        and for words you know, and tap a line to hear it again.
+      no_transcript: This recording hasn't been transcribed yet. Listen anyway.
+      show_english: English
+      slower: Slower
+      unavailable: The recording couldn't be loaded from Abairt. Try again later.
+      untitled: A recording from Abairt
   registrations:
     new:
       email: Email

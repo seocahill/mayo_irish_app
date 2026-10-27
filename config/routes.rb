@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   resources :listening_clips, only: %i[show update] do
     resource :listen, only: :create
   end
+  resources :recordings, only: :show do
+    resource :listening_time, only: :update
+  end
   resources :chat_messages, only: [] do
     resource :pronunciation, only: :show, controller: "chat_message_pronunciations"
     resource :flag, only: :create, controller: "chat_message_flags"

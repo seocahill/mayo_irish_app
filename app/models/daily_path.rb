@@ -11,7 +11,7 @@ class DailyPath
   end
 
   def items
-    [ answer_item, listen_item, clip_item, review_item, lesson_item, tutor_item, conversation_item ].compact
+    [ answer_item, listen_item, clip_item, recording_item, review_item, lesson_item, tutor_item, conversation_item ].compact
   end
 
   def due_count
@@ -114,6 +114,19 @@ class DailyPath
 
     Item.new(level: :eist, label: I18n.t("daily_path.answer_label"),
              title: I18n.t("daily_path.answer_title", count: count), path: native_questions_path)
+  end
+
+  # About once a week, a whole conversation, to hear how the talk flows: the
+  # one behind a clip the learner has heard, where there is one.
+  def recording_item
+    return if user.listening_times.recent.exists?
+
+    clip = ListeningClip.next_recording_for(user)
+    return unless clip
+
+    Item.new(level: :eist, label: I18n.t("daily_path.recording_label"),
+             title: I18n.t("daily_path.recording_title", title: clip.abairt_recording_title),
+             path: recording_path(clip.abairt_recording_id))
   end
 
   def finished_lessons

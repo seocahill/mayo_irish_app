@@ -44,6 +44,10 @@
           <span class="text-sm">· <%= t(".this_week", count: @spoken_time.minutes_this_week) %></span>
         <% end %>
       </p>
+      <p class="text-muted">
+        <span class="font-display text-3xl text-ink"><%= @listening_minutes %></span>
+        <%= t(".minutes_listened", count: @listening_minutes) %>
+      </p>
     </div>
   </section>
 

@@ -10,14 +10,6 @@ class ListeningClipsTest < ActionDispatch::IntegrationTest
                                   audio_url: "https://clips.test/1", speaker_name: "A Speaker", word_count: 3)
   end
 
-  def with_abairt_token(token = "t")
-    previous = ENV["ABAIRT_API_TOKEN"]
-    ENV["ABAIRT_API_TOKEN"] = token
-    yield
-  ensure
-    ENV["ABAIRT_API_TOKEN"] = previous
-  end
-
   test "a learner hears the clip, with the words behind a reveal" do
     sign_in_as(users(:two))
 

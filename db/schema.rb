@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_27_004423) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_27_011751) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -160,6 +160,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_004423) do
 
   create_table "listening_clips", force: :cascade do |t|
     t.integer "abairt_entry_id", null: false
+    t.integer "abairt_recording_id"
+    t.string "abairt_recording_title"
     t.string "audio_url", null: false
     t.datetime "created_at", null: false
     t.string "english", null: false
@@ -169,13 +171,25 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_004423) do
     t.integer "reviewed_by_id"
     t.string "speaker_dialect"
     t.string "speaker_name"
+    t.float "starts_at"
     t.string "status", default: "listed", null: false
     t.datetime "updated_at", null: false
     t.integer "vocabulary_item_id", null: false
     t.integer "word_count", null: false
     t.index ["abairt_entry_id"], name: "index_listening_clips_on_abairt_entry_id", unique: true
+    t.index ["abairt_recording_id"], name: "index_listening_clips_on_abairt_recording_id"
     t.index ["reviewed_by_id"], name: "index_listening_clips_on_reviewed_by_id"
     t.index ["vocabulary_item_id"], name: "index_listening_clips_on_vocabulary_item_id"
+  end
+
+  create_table "listening_times", force: :cascade do |t|
+    t.integer "abairt_recording_id", null: false
+    t.datetime "created_at", null: false
+    t.integer "seconds", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id", "abairt_recording_id"], name: "index_listening_times_on_user_id_and_abairt_recording_id", unique: true
+    t.index ["user_id"], name: "index_listening_times_on_user_id"
   end
 
   create_table "listens", force: :cascade do |t|
@@ -422,6 +436,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_004423) do
   add_foreign_key "lessons", "users", column: "reviewed_by_id"
   add_foreign_key "listening_clips", "users", column: "reviewed_by_id"
   add_foreign_key "listening_clips", "vocabulary_items"
+  add_foreign_key "listening_times", "users"
   add_foreign_key "listens", "listening_clips"
   add_foreign_key "listens", "users"
   add_foreign_key "native_questions", "lessons"

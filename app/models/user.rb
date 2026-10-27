@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :chat_sessions, dependent: :destroy
   has_many :native_questions, dependent: :destroy
   has_many :listens, dependent: :destroy
+  has_many :listening_times, dependent: :destroy
   has_many :section_progresses, dependent: :destroy
   has_many :quiz_reviews, dependent: :destroy
   has_many :review_logs, dependent: :destroy

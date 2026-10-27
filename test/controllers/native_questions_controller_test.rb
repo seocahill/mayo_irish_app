@@ -7,14 +7,6 @@ class NativeQuestionsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as(@learner)
   end
 
-  def with_abairt_token(token = "t")
-    previous = ENV["ABAIRT_API_TOKEN"]
-    ENV["ABAIRT_API_TOKEN"] = token
-    yield
-  ensure
-    ENV["ABAIRT_API_TOKEN"] = previous
-  end
-
   def recording = Rack::Test::UploadedFile.new(StringIO.new("recording"), "audio/webm", original_filename: "question.webm")
 
   test "the page offers to record a question, about a lesson if one is given" do

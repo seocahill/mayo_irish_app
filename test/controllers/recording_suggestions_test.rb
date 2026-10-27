@@ -10,14 +10,6 @@ class RecordingSuggestionsTest < ActionDispatch::IntegrationTest
     sign_in_as(users(:admin))
   end
 
-  def with_abairt_token(token = "t")
-    previous = ENV["ABAIRT_API_TOKEN"]
-    ENV["ABAIRT_API_TOKEN"] = token
-    yield
-  ensure
-    ENV["ABAIRT_API_TOKEN"] = previous
-  end
-
   def suggestion(id = 1, checked: true)
     @item.recording_suggestions.create!(abairt_entry_id: id, irish: @item.irish, audio_url: "https://clips.test/#{id}", speaker_name: "Speaker #{id}", check_passed: checked)
   end

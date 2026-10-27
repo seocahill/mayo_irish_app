@@ -109,4 +109,28 @@ class DailyPathListeningTest < ActiveSupport::TestCase
     assert_equal "Animals: hear the words said by Mayo speakers", listen.title
     assert_equal "/lessons/50#vocabulary", listen.path
   end
+
+  def recording_item = DailyPath.new(@user).items.find { |item| item.label == "Listen · conversation" }
+
+  test "offers the whole conversation behind a clip, about once a week" do
+    @clip.update!(abairt_recording_id: 15, abairt_recording_title: "A Story")
+
+    assert_equal "A few minutes of Mayo speakers talking: A Story", recording_item.title
+    assert_equal "/recordings/15", recording_item.path
+
+    @user.listening_times.create!(abairt_recording_id: 15, seconds: 60)
+    assert_nil recording_item
+
+    travel 8.days
+    assert_nil recording_item, "already heard, and there's no other"
+  end
+
+  test "offers the conversation behind the clip the learner heard most recently" do
+    @clip.update!(abairt_recording_id: 15, abairt_recording_title: "A Story")
+    heard = ListeningClip.create!(vocabulary_item: vocabulary_items(:house), abairt_entry_id: 2, irish: "one teach two", english: "another",
+                                  audio_url: "https://clips.test/2", word_count: 5, abairt_recording_id: 16, abairt_recording_title: "Another Story")
+    @user.listens.create!(listening_clip: heard, understood: true)
+
+    assert_equal "/recordings/16", recording_item.path
+  end
 end

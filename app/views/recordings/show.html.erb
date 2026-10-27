@@ -1,0 +1,56 @@
+<div class="max-w-2xl mx-auto flex flex-col gap-6">
+  <header class="flex flex-col gap-2">
+    <p class="eyebrow text-eist"><%= t(".eyebrow") %></p>
+    <% if @recording %>
+      <h1 class="font-display text-3xl leading-tight"><%= @recording.title.presence || t(".untitled") %></h1>
+      <p class="text-xs text-muted"><%= [ @recording.speakers.to_sentence.presence, @recording.dialect_region&.humanize ].compact.join(" · ") %></p>
+    <% end %>
+    <p class="text-muted text-sm"><%= t(".how_to_listen") %></p>
+  </header>
+
+  <% if @error %>
+    <p class="card px-4 py-6 text-center text-muted text-sm"><%= @error %></p>
+  <% else %>
+    <div class="flex flex-col gap-4"
+         data-controller="playback transcript"
+         data-transcript-start-value="<%= @start %>"
+         data-transcript-report-url-value="<%= recording_listening_time_path(@recording.id) %>">
+      <div class="card px-4 py-4 flex flex-col gap-3 sticky top-0 z-10">
+        <audio controls preload="metadata" src="<%= @recording.audio_url %>" class="w-full"
+               data-playback-target="audio" data-transcript-target="audio"
+               data-action="timeupdate->transcript#follow play->transcript#started pause->transcript#report ended->transcript#report"></audio>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" class="btn-outline text-sm aria-pressed:border-eist aria-pressed:text-eist" aria-pressed="false"
+                  data-playback-target="toggle" data-action="playback#toggleSlow"><%= t(".slower") %></button>
+          <button type="button" class="btn-outline text-sm aria-pressed:border-eist aria-pressed:text-eist" aria-pressed="false"
+                  data-transcript-target="englishToggle" data-action="transcript#toggleEnglish"><%= t(".show_english") %></button>
+        </div>
+      </div>
+
+      <% if @recording.lines.empty? %>
+        <p class="text-sm text-muted"><%= t(".no_transcript") %></p>
+      <% else %>
+        <ol class="flex flex-col">
+          <% @recording.turns.each do |turn| %>
+            <% if turn.first.speaker %>
+              <li><p class="eyebrow mt-3 mb-1"><%= turn.first.speaker %></p></li>
+            <% end %>
+            <% turn.each do |line| %>
+              <li>
+                <button type="button" class="w-full text-left rounded-sm px-2 py-1.5 border-l-2 border-transparent hover:bg-canvas aria-[current=true]:border-eist aria-[current=true]:bg-surface"
+                        data-transcript-target="line" data-start="<%= line.start %>" data-end="<%= line.end %>"
+                        data-action="transcript#seek">
+                  <span lang="ga" class="block"><%= line.irish %></span>
+                  <% if line.english %>
+                    <span class="block text-sm text-muted" hidden data-transcript-target="english"><%= line.english %></span>
+                  <% end %>
+                </button>
+              </li>
+            <% end %>
+          <% end %>
+        </ol>
+      <% end %>
+      <p class="text-xs text-muted"><%= t(".from_abairt") %></p>
+    </div>
+  <% end %>
+</div>

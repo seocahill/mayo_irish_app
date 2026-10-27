@@ -25,6 +25,18 @@ class ListeningClip < ApplicationRecord
           .shortest_first.first
   end
 
+  # Whole recordings are only offered where they're behind a clip the user can see.
+  def self.recording_offered?(id, to:) = visible_to(to).exists?(abairt_recording_id: id)
+
+  # A clip whose whole recording the learner hasn't listened to yet: one they
+  # heard most recently first, otherwise the first in the course.
+  def self.next_recording_for(user)
+    clips = listed.where.not(abairt_recording_id: nil)
+                  .where.not(abairt_recording_id: user.listening_times.select(:abairt_recording_id))
+    clips.joins(:listens).merge(user.listens).order(listens: { created_at: :desc }).first ||
+      clips.joins(vocabulary_item: :lesson).order("lessons.position", :word_count).first
+  end
+
   def hide!(by:) = update!(status: "hidden", reviewed_by: by, reviewed_at: Time.current)
 
   def list!(by:) = update!(status: "listed", reviewed_by: by, reviewed_at: Time.current)
