@@ -77,6 +77,18 @@ en:
       content: Content
       label: Label
       label_placeholder: "(i) Forms…"
+  guides:
+    summary:
+      about: It follows Learning Irish lesson by lesson, adapted for the Irish still
+        spoken in Mayo, with recordings of native Mayo speakers wherever there are
+        any. It's free, and always will be.
+      alongside: The best way to learn is in the Gaeltacht, or from a native speaker
+        you get to know. This course goes alongside that, and is the next best thing
+        when you can't.
+      invite_only: It's invite only until the course is ready. Register, and your
+        account will be checked before you get in.
+      more: How the course works
+      title: A course in the Irish of Mayo
   history:
     kinds:
       action_text_rich_text: Text

@@ -59,9 +59,7 @@
     <footer class="mt-16 border-t border-line bg-surface">
       <div class="max-w-4xl mx-auto px-4 py-6 text-center text-muted text-sm">
         <%= t(".footer_html") %>
-        <% if authenticated? %>
-          <p class="mt-2"><%= link_to t(".guide"), guide_path, class: "underline underline-offset-2 hover:text-ink" %></p>
-        <% end %>
+        <p class="mt-2"><%= link_to t(".guide"), guide_path, class: "underline underline-offset-2 hover:text-ink" %></p>
       </div>
     </footer>
 
