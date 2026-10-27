@@ -32,159 +32,182 @@
   </div>
 </header>
 
-<% if @lesson.intro_video %>
-  <section class="mb-8 flex flex-col gap-3" aria-label="<%= t(".intro_video") %>">
-    <%= render "shared/video", embed: @lesson.intro_video %>
-    <% if @lesson.intro_video_transcript.present? %>
-      <details class="card px-4 py-3">
-        <summary class="eyebrow cursor-pointer"><%= t(".transcript") %></summary>
-        <div class="mt-3 text-sm leading-relaxed whitespace-pre-line"><%= @lesson.intro_video_transcript %></div>
-      </details>
-    <% end %>
-  </section>
-<% end %>
-
-<% if current_user && @quiz_progress.any? %>
-  <div class="mb-8">
-    <%= render "shared/progress_bar", progress: @quiz_progress, label: t("shared.words_known") %>
-  </div>
-<% end %>
-
-<%# ── CONTENT BLOCKS ──────────────────────────────────────────── %>
-<% if @lesson.lesson_blocks.any? %>
-  <section class="mb-10 space-y-4">
-    <% @lesson.lesson_blocks.each do |block| %>
-      <%= render "lesson_blocks/show_block", block: block %>
-    <% end %>
-  </section>
-<% end %>
-
-<%# ── VOCABULARY ─────────────────────────────────────────────── %>
-<% if @lesson.vocabulary_items.any? %>
-  <section class="mb-10">
-    <h2 class="lesson-section-heading flex items-center gap-2">
-      <%= t(".vocabulary") %>
-      <%= render "section_badge", section: "vocabulary", progress: @section_progress %>
-    </h2>
-    <div class="card overflow-hidden">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="border-b border-line eyebrow">
-            <th class="text-left px-4 py-3 font-normal"><%= t(".irish") %></th>
-            <th class="text-left px-4 py-3 font-normal hidden sm:table-cell"><%= t(".pronunciation") %></th>
-            <th class="text-left px-4 py-3 font-normal hidden md:table-cell"><%= t(".plural") %></th>
-            <th class="text-left px-4 py-3 font-normal"><%= t(".english") %></th>
-            <th class="px-4 py-3"></th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-line">
-          <% @lesson.vocabulary_items.each do |item| %>
-            <tr class="hover:bg-canvas transition-colors">
-              <td class="px-4 py-3 font-semibold text-ink">
-                <%= item.irish %>
-                <% if item.gender == 'f' %>
-                  <span class="text-xs text-muted font-normal ml-1"><%= t(".feminine") %></span>
-                <% end %>
-              </td>
-              <td class="px-4 py-3 text-muted font-mono text-xs hidden sm:table-cell">
-                <% if item.phonetic.present? %>/<%= item.phonetic %>/<% end %>
-              </td>
-              <td class="px-4 py-3 text-ink hidden md:table-cell"><%= item.plural %></td>
-              <td class="px-4 py-3 text-ink"><%= item.english %></td>
-              <td class="px-2 sm:px-4 py-3">
-                <div class="flex items-center gap-2 sm:gap-3 justify-end">
-                  <% if item.audio.attached? %>
-                    <audio controls src="<%= rails_blob_url(item.audio) %>" class="h-8 w-28 sm:w-40"></audio>
-                  <% elsif item.audio_url.present? %>
-                    <span class="inline-flex flex-col items-end gap-0.5">
-                      <audio controls src="<%= item.audio_url %>" class="h-8 w-28 sm:w-40"></audio>
-                      <% if item.audio_credit.present? %>
-                        <span class="text-[11px] text-muted"><%= t(".recorded_by", name: item.audio_credit) %></span>
-                      <% end %>
-                    </span>
-                  <% elsif AbairClient.configured? %>
-                    <%= render "shared/speak_button", src: vocabulary_item_pronunciation_path(item),
-                                                      label: t(".hear_word", word: item.irish) %>
-                  <% end %>
-
-                  <% if item.audio.attached? || item.audio_url.present? || AbairClient.configured? %>
-                    <div data-controller="recorder" class="flex items-center gap-1.5" title="<%= t(".record_yourself") %>">
-                      <button type="button"
-                              data-recorder-target="recordButton"
-                              data-action="recorder#toggle"
-                              class="text-muted hover:text-red-600 transition-colors"
-                              aria-label="<%= t(".record") %>">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-14 0m7 7v4m0-4a3 3 0 01-3-3V5a3 3 0 016 0v6a3 3 0 01-3 3z"/>
-                        </svg>
-                      </button>
-                      <button type="button"
-                              data-recorder-target="playButton"
-                              data-action="recorder#play"
-                              disabled
-                              class="text-muted hover:text-ink transition-colors disabled:opacity-30 disabled:hover:text-muted"
-                              aria-label="<%= t(".play_recording") %>">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                      </button>
-                      <span data-recorder-target="status" class="text-xs text-muted w-16 hidden sm:inline"></span>
-                    </div>
-                  <% end %>
-                </div>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+<%# Any Irish in the lesson can be heard: marked Irish (see SpeakableIrish) gets a
+    speaker button, and selected text a "Hear it" button (see the speakable controller). %>
+<div class="relative" <%= tag.attributes(data: { controller: "speakable", speakable_src_value: speech_path }) if AbairClient.configured? %>>
+  <% if AbairClient.configured? %>
+    <template data-speakable-target="inline">
+      <%= render "shared/speak_button", src: "", label: "", compact: true %>
+    </template>
+    <div hidden class="absolute z-30" data-speakable-target="selection" data-controller="pronounce" data-pronounce-src-value="">
+      <button type="button"
+              data-pronounce-target="button"
+              data-action="mousedown->speakable#keepSelection click->pronounce#play"
+              class="btn-solid gap-1.5 px-3 py-1.5 text-xs shadow-lg data-[state=loading]:animate-pulse data-[state=error]:bg-red-600"
+              title="<%= t("shared.speak_button.title") %>">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M11 5L6 9H2v6h4l5 4V5z"/>
+        </svg>
+        <%= t(".hear_selection") %>
+      </button>
+      <span data-pronounce-target="status" class="sr-only" aria-live="polite"></span>
     </div>
+  <% end %>
 
-    <% if @lesson.vocabulary_notes_content.present? && @lesson.vocabulary_notes_content.to_plain_text.present? %>
-      <div class="mt-3 bg-eist/10 border border-eist/30 rounded-sm px-5 py-4 text-sm text-ink">
-        <p class="eyebrow text-eist mb-2"><%= t(".vocabulary_notes") %></p>
-        <%= @lesson.vocabulary_notes_content %>
+  <% if @lesson.intro_video %>
+    <section class="mb-8 flex flex-col gap-3" aria-label="<%= t(".intro_video") %>">
+      <%= render "shared/video", embed: @lesson.intro_video %>
+      <% if @lesson.intro_video_transcript.present? %>
+        <details class="card px-4 py-3">
+          <summary class="eyebrow cursor-pointer"><%= t(".transcript") %></summary>
+          <div class="mt-3 text-sm leading-relaxed whitespace-pre-line"><%= @lesson.intro_video_transcript %></div>
+        </details>
+      <% end %>
+    </section>
+  <% end %>
+
+  <% if current_user && @quiz_progress.any? %>
+    <div class="mb-8">
+      <%= render "shared/progress_bar", progress: @quiz_progress, label: t("shared.words_known") %>
+    </div>
+  <% end %>
+
+  <%# ── CONTENT BLOCKS ──────────────────────────────────────────── %>
+  <% if @lesson.lesson_blocks.any? %>
+    <section class="mb-10 space-y-4">
+      <% @lesson.lesson_blocks.each do |block| %>
+        <%= render "lesson_blocks/show_block", block: block %>
+      <% end %>
+    </section>
+  <% end %>
+
+  <%# ── VOCABULARY ─────────────────────────────────────────────── %>
+  <% if @lesson.vocabulary_items.any? %>
+    <section class="mb-10">
+      <h2 class="lesson-section-heading flex items-center gap-2">
+        <%= t(".vocabulary") %>
+        <%= render "section_badge", section: "vocabulary", progress: @section_progress %>
+      </h2>
+      <div class="card overflow-hidden">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-line eyebrow">
+              <th class="text-left px-4 py-3 font-normal"><%= t(".irish") %></th>
+              <th class="text-left px-4 py-3 font-normal hidden sm:table-cell"><%= t(".pronunciation") %></th>
+              <th class="text-left px-4 py-3 font-normal hidden md:table-cell"><%= t(".plural") %></th>
+              <th class="text-left px-4 py-3 font-normal"><%= t(".english") %></th>
+              <th class="px-4 py-3"></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-line">
+            <% @lesson.vocabulary_items.each do |item| %>
+              <tr class="hover:bg-canvas transition-colors">
+                <td class="px-4 py-3 font-semibold text-ink">
+                  <%= item.irish %>
+                  <% if item.gender == 'f' %>
+                    <span class="text-xs text-muted font-normal ml-1"><%= t(".feminine") %></span>
+                  <% end %>
+                </td>
+                <td class="px-4 py-3 text-muted font-mono text-xs hidden sm:table-cell">
+                  <% if item.phonetic.present? %>/<%= item.phonetic %>/<% end %>
+                </td>
+                <td class="px-4 py-3 text-ink hidden md:table-cell"><%= item.plural %></td>
+                <td class="px-4 py-3 text-ink"><%= item.english %></td>
+                <td class="px-2 sm:px-4 py-3">
+                  <div class="flex items-center gap-2 sm:gap-3 justify-end">
+                    <% if item.audio.attached? %>
+                      <audio controls src="<%= rails_blob_url(item.audio) %>" class="h-8 w-28 sm:w-40"></audio>
+                    <% elsif item.audio_url.present? %>
+                      <span class="inline-flex flex-col items-end gap-0.5">
+                        <audio controls src="<%= item.audio_url %>" class="h-8 w-28 sm:w-40"></audio>
+                        <% if item.audio_credit.present? %>
+                          <span class="text-[11px] text-muted"><%= t(".recorded_by", name: item.audio_credit) %></span>
+                        <% end %>
+                      </span>
+                    <% elsif AbairClient.configured? %>
+                      <%= render "shared/speak_button", src: vocabulary_item_pronunciation_path(item),
+                                                        label: t(".hear_word", word: item.irish) %>
+                    <% end %>
+
+                    <% if item.audio.attached? || item.audio_url.present? || AbairClient.configured? %>
+                      <div data-controller="recorder" class="flex items-center gap-1.5" title="<%= t(".record_yourself") %>">
+                        <button type="button"
+                                data-recorder-target="recordButton"
+                                data-action="recorder#toggle"
+                                class="text-muted hover:text-red-600 transition-colors"
+                                aria-label="<%= t(".record") %>">
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-14 0m7 7v4m0-4a3 3 0 01-3-3V5a3 3 0 016 0v6a3 3 0 01-3 3z"/>
+                          </svg>
+                        </button>
+                        <button type="button"
+                                data-recorder-target="playButton"
+                                data-action="recorder#play"
+                                disabled
+                                class="text-muted hover:text-ink transition-colors disabled:opacity-30 disabled:hover:text-muted"
+                                aria-label="<%= t(".play_recording") %>">
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                          </svg>
+                        </button>
+                        <span data-recorder-target="status" class="text-xs text-muted w-16 hidden sm:inline"></span>
+                      </div>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
-    <% end %>
-  </section>
-<% end %>
 
-<%# ── GRAMMAR ─────────────────────────────────────────────────── %>
-<% if @lesson.grammar_rules.any? %>
-  <section class="mb-10">
-    <h2 class="lesson-section-heading flex items-center gap-2">
-      <%= t(".grammar") %>
-      <%= render "section_badge", section: "grammar", progress: @section_progress %>
-    </h2>
-    <div class="space-y-6">
-      <% @lesson.grammar_rules.each do |rule| %>
-        <div class="card overflow-hidden">
-          <div class="border-b border-line px-5 py-4 flex items-baseline gap-3">
-            <span class="font-mono text-sm text-muted tabular-nums"><%= rule.number %></span>
-            <span class="font-display text-lg leading-snug"><%= rule.title %></span>
-          </div>
-          <% if rule.body.present? && rule.body.to_plain_text.present? %>
-            <div class="px-5 py-4 text-sm text-ink prose prose-sm max-w-none border-b border-line">
-              <%= rule.body %>
-            </div>
-          <% end %>
-          <% rule.grammar_sections.each do |section| %>
-            <div class="border-b border-line last:border-0">
-              <% if section.label.present? %>
-                <div class="px-5 py-2 bg-canvas eyebrow">
-                  <%= section.label %>
-                </div>
-              <% end %>
-              <div class="px-5 py-4 text-sm prose prose-sm max-w-none lesson-grammar-content">
-                <%= section.body %>
-              </div>
-            </div>
-          <% end %>
+      <% if @lesson.vocabulary_notes_content.present? && @lesson.vocabulary_notes_content.to_plain_text.present? %>
+        <div class="mt-3 bg-eist/10 border border-eist/30 rounded-sm px-5 py-4 text-sm text-ink" data-speakable-target="content">
+          <p class="eyebrow text-eist mb-2"><%= t(".vocabulary_notes") %></p>
+          <%= speakable_irish(@lesson.vocabulary_notes_content) %>
         </div>
       <% end %>
-    </div>
-  </section>
-<% end %>
+    </section>
+  <% end %>
+
+  <%# ── GRAMMAR ─────────────────────────────────────────────────── %>
+  <% if @lesson.grammar_rules.any? %>
+    <section class="mb-10">
+      <h2 class="lesson-section-heading flex items-center gap-2">
+        <%= t(".grammar") %>
+        <%= render "section_badge", section: "grammar", progress: @section_progress %>
+      </h2>
+      <div class="space-y-6">
+        <% @lesson.grammar_rules.each do |rule| %>
+          <div class="card overflow-hidden">
+            <div class="border-b border-line px-5 py-4 flex items-baseline gap-3">
+              <span class="font-mono text-sm text-muted tabular-nums"><%= rule.number %></span>
+              <span class="font-display text-lg leading-snug"><%= rule.title %></span>
+            </div>
+            <% if rule.body.present? && rule.body.to_plain_text.present? %>
+              <div class="px-5 py-4 text-sm text-ink prose prose-sm max-w-none border-b border-line" data-speakable-target="content">
+                <%= speakable_irish(rule.body) %>
+              </div>
+            <% end %>
+            <% rule.grammar_sections.each do |section| %>
+              <div class="border-b border-line last:border-0">
+                <% if section.label.present? %>
+                  <div class="px-5 py-2 bg-canvas eyebrow">
+                    <%= section.label %>
+                  </div>
+                <% end %>
+                <div class="px-5 py-4 text-sm prose prose-sm max-w-none lesson-grammar-content" data-speakable-target="content">
+                  <%= speakable_irish(section.body) %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
+</div>
 
 <%# ── NAV ─────────────────────────────────────────────────────── %>
 <div class="flex justify-between items-center mt-12 pt-6 border-t border-line">

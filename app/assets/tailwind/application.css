@@ -115,6 +115,16 @@
 }
 
 @layer components {
+  /* Rich text from the Lexxy editor, shown in the page's colours so it reads in
+     the dark scheme too (Lexxy's own assume a white page). */
+  .lexxy-content {
+    --lexxy-color-ink: var(--ink);
+    --lexxy-color-ink-medium: var(--muted);
+    --lexxy-color-ink-light: var(--muted);
+    --lexxy-color-ink-lighter: var(--line);
+    --lexxy-color-ink-lightest: var(--canvas);
+  }
+
   /* Shared building blocks, named after the mock-up patterns. */
   .card {
     @apply bg-surface border border-line rounded-sm;

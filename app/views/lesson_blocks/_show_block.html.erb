@@ -1,6 +1,6 @@
 <% if block.text? %>
-  <div class="lexxy-content prose text-ink">
-    <%= block.body %>
+  <div class="lexxy-content prose text-ink" data-speakable-target="content">
+    <%= speakable_irish(block.body) %>
   </div>
 
 <% elsif block.image? && block.file.attached? %>

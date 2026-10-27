@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   end
   resources :flagged_replies, only: %i[index destroy]
   resources :native_questions, only: %i[index create]
+  resource :speech, only: :show
   resources :lessons, only: [:index, :new, :create, :show, :edit, :update] do
     resource :review, only: %i[create destroy], controller: "lesson_reviews"
     resources :recording_suggestions, only: :index, controller: "lesson_recording_suggestions"
