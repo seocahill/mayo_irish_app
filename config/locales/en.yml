@@ -89,6 +89,7 @@ en:
     show:
       change: Change
       classed_1926: How was this area classed in 1926?
+      how_it_works: How this course works
       minutes_listened:
         one: minute listened
         other: minutes listened
@@ -130,6 +131,7 @@ en:
     application:
       footer_html: Based on <em>Learning Irish</em> by Mícheál Ó Siadhail, adapted
         for Mayo Irish
+      guide: How this course works
       lessons: Lessons
       search_label: Search
       search_placeholder: Search…

@@ -3,6 +3,7 @@
   <header>
     <p class="font-mono text-xs uppercase tracking-wider text-muted"><%= t(".welcome_back") %></p>
     <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
+    <%= link_to t(".how_it_works"), guide_path, class: "text-sm text-muted underline underline-offset-2 hover:text-ink" %>
   </header>
 
   <section aria-labelledby="today-heading" class="flex flex-col gap-3">

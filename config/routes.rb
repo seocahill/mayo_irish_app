@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :passwords, param: :token, only: %i[new create edit update]
 
   root "home#show"
+  resource :guide, only: :show
   resource :onboarding, only: %i[new create]
   get "search", to: "search#index", as: :search
   resources :vocabulary_items, only: [] do

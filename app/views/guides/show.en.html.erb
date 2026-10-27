@@ -1,0 +1,167 @@
+<article class="max-w-2xl mx-auto flex flex-col gap-10 leading-relaxed">
+  <header class="flex flex-col gap-3">
+    <p class="eyebrow">Guide</p>
+    <h1 class="font-display text-3xl leading-tight">How this course works</h1>
+    <p class="text-muted">
+      What each part of the course is for, where the Irish you hear comes from, and why it's built the way it is.
+      This is a closed beta, so things change often, and what you notice is the most useful thing you can send back.
+    </p>
+    <nav aria-label="On this page" class="text-sm flex flex-wrap gap-x-4 gap-y-1">
+      <a href="#approach" class="underline underline-offset-2 text-muted hover:text-ink">The approach</a>
+      <a href="#today" class="underline underline-offset-2 text-muted hover:text-ink">Today</a>
+      <a href="#lessons" class="underline underline-offset-2 text-muted hover:text-ink">Lessons and words</a>
+      <a href="#voices" class="underline underline-offset-2 text-muted hover:text-ink">Whose voice you hear</a>
+      <a href="#speaking" class="underline underline-offset-2 text-muted hover:text-ink">Speaking</a>
+      <a href="#listening" class="underline underline-offset-2 text-muted hover:text-ink">Listening</a>
+      <a href="#native-speakers" class="underline underline-offset-2 text-muted hover:text-ink">Native speakers</a>
+      <a href="#your-recordings" class="underline underline-offset-2 text-muted hover:text-ink">Your recordings</a>
+      <% if current_user.admin? %>
+        <a href="#editors" class="underline underline-offset-2 text-muted hover:text-ink">For editors</a>
+      <% end %>
+    </nav>
+  </header>
+
+  <section id="approach" class="flex flex-col gap-3 scroll-mt-4">
+    <h2 class="font-display text-2xl">The approach</h2>
+    <p>
+      The course follows <em>Learning Irish</em> by Mícheál Ó Siadhail, lesson by lesson, adapted for the Irish of Mayo.
+      Most courses teach Connemara or the standard; this one aims for what is still spoken in Erris, Achill, Tourmakeady and the rest of the county.
+    </p>
+    <p>
+      Grammar and word lists matter, but a language is learnt mostly by hearing it and using it.
+      So the course mixes four kinds of practice, each with its own colour on the Today screen:
+    </p>
+    <ul class="list-disc pl-5 flex flex-col gap-1">
+      <li><strong>Learn</strong>: the lesson itself, and reviewing its words.</li>
+      <li><strong>Practise</strong>: a text chat with an AI tutor about the lesson.</li>
+      <li><strong>Speak</strong>: a short spoken conversation about the lesson.</li>
+      <li><strong>Listen</strong>: real Mayo speakers, from single words up to whole conversations.</li>
+    </ul>
+    <p>
+      Two rules run through all of it. Wherever possible you hear real native speakers from Mayo rather than a computer.
+      And the Irish in the course isn't written by AI: the one place an AI makes up Irish is the spoken conversation, where every reply is labelled as such.
+    </p>
+  </section>
+
+  <section id="today" class="flex flex-col gap-3 scroll-mt-4">
+    <h2 class="font-display text-2xl">Today</h2>
+    <p>
+      The Today screen suggests what to do next, built from where you are: words due for review, the lesson you're on,
+      a conversation about it, something to listen to, and any answers from native speakers.
+      Work down the list as far as you have time for. Nothing is compulsory, and the list is different tomorrow.
+    </p>
+    <p>
+      Under <strong>So far</strong> you'll see the words you know, the minutes you've spent speaking, and the minutes you've spent listening to whole conversations.
+      Minutes spent using the language are a better measure of progress than lessons finished.
+    </p>
+  </section>
+
+  <section id="lessons" class="flex flex-col gap-3 scroll-mt-4">
+    <h2 class="font-display text-2xl">Lessons and words</h2>
+    <p>
+      Each lesson has its words and phrases, grammar notes from the book, and sometimes an introduction video.
+      <strong>Any Irish on a lesson page can be heard</strong>: tap the speaker button beside it, or select any piece of text and tap <strong>Hear it</strong>.
+    </p>
+    <p>
+      The quiz asks each word both ways, Irish to English and English to Irish. A word counts as known once you've got it right both ways.
+      Words you get right come back after longer and longer gaps (a day, three days, a week, three weeks), and a word you get wrong starts again.
+      This is spaced repetition: you spend your time on the words you're about to forget, not the ones you already know.
+    </p>
+    <p>The Lessons page has three groups:</p>
+    <ul class="list-disc pl-5 flex flex-col gap-1">
+      <li><strong>Learning Irish</strong>: the course itself, in order. Today follows these.</li>
+      <li><strong>Mayo Irish vocabulary</strong>: word lists by theme, most with recordings of Mayo speakers.</li>
+      <li><strong>DIAS field recordings</strong>: notes on the Irish of Foxford and Erris from Heinrich Wagner's survey, for reference.</li>
+    </ul>
+  </section>
+
+  <section id="voices" class="flex flex-col gap-3 scroll-mt-4">
+    <h2 class="font-display text-2xl">Whose voice you hear</h2>
+    <p>There are two kinds of audio in the course, and it always says which one you're hearing.</p>
+    <p>
+      <strong>Real speakers.</strong> The themed word lists come with their own recordings.
+      Beyond those, recordings come from Abairt, a growing collection of Mayo Irish recorded from native speakers and transcribed line by line.
+      A speech recogniser checks that an Abairt recording really says the word, an editor approves it before you hear it, and it's credited to its speaker.
+    </p>
+    <p>
+      <strong>A synthetic voice.</strong> Where there's no recording, the course uses ABAIR, the Irish speech technology from Trinity College Dublin,
+      with its voice Bríd, the only Mayo voice it has. It's good for getting close to the sound of a word or sentence, but it is a computer:
+      the rhythm can be flat, and it doesn't replace hearing people.
+    </p>
+    <p>
+      That's why recordings of real people always come first, and why more of the course will use them as the collection grows.
+    </p>
+  </section>
+
+  <section id="speaking" class="flex flex-col gap-3 scroll-mt-4">
+    <h2 class="font-display text-2xl">Speaking</h2>
+    <p>
+      <strong>Conversation</strong> is a short spoken chat about the lesson. Tap the microphone, say something, and tap again to send; you can type instead.
+      Your speech goes through ABAIR's recogniser, the reply is written by AI and read out in the Bríd voice, and <strong>Show English</strong> helps when you're stuck.
+    </p>
+    <p>
+      This is the only place in the course where an AI writes Irish, which is why each reply is labelled <strong>AI-generated</strong>.
+      The replies come from ABAIR's own conversational AI where possible, and from OpenAI when that isn't available.
+      They can contain mistakes. If a reply looks wrong, tap <strong>Flag</strong> and an editor will check it. Nothing from a conversation ever becomes course material.
+    </p>
+    <p>
+      The point is to say things out loud, often, without the pressure of a real person waiting.
+      Every recorded turn adds to your minutes spoken; typed turns don't count.
+    </p>
+    <p>
+      <strong>Practise</strong> is a text chat with an AI tutor (OpenAI) that quizzes you on the lesson's grammar and words, one question at a time, and explains as it goes.
+      It quotes Irish only from the lesson itself and doesn't make up its own; if you need Irish the lesson doesn't have, it says so.
+    </p>
+  </section>
+
+  <section id="listening" class="flex flex-col gap-3 scroll-mt-4">
+    <h2 class="font-display text-2xl">Listening</h2>
+    <p>Listening builds up in three steps, from words to phrases to whole conversations.</p>
+    <p>
+      <strong>Words.</strong> When a lesson's words have recordings of Mayo speakers, Today offers them, or a theme from the vocabulary lists when they don't.
+    </p>
+    <p>
+      <strong>Phrases.</strong> Once you've finished a lesson, Today offers one short phrase a day in which a Mayo speaker uses a word from it, the shortest first.
+      You're told which word to listen for. Play it as often as you like, slow it down, and only then open <strong>Show the words</strong>.
+      Then say whether you made it out. Phrases are cut from real conversations, so they're quick, run together, and sometimes rough at the edges, which is how people really talk.
+    </p>
+    <p>
+      <strong>Whole conversations.</strong> Each phrase leads on to the conversation it came from, and about once a week Today suggests one.
+      The words follow along as it plays, and you can tap a line to hear it again or turn on the English.
+      Don't try to catch every word. Listen for the rhythm of the talk and the words you know; understanding builds up from there.
+    </p>
+    <p>
+      Everything you've listened to is kept under <strong>Your listening</strong>, linked from Today, so you can go back to the phrases you didn't get.
+    </p>
+  </section>
+
+  <section id="native-speakers" class="flex flex-col gap-3 scroll-mt-4">
+    <h2 class="font-display text-2xl">Native speakers</h2>
+    <p>
+      <strong>Ask a native speaker</strong>, on any lesson, lets you record a question, about a word, a sound, or how something is said in Mayo, and send it to native speakers.
+      It goes to them through Abairt on Telegram, and one of them answers by voice when they're free.
+      The answer shows on Today and on the questions page.
+    </p>
+    <p>
+      These are real people giving their time, so you listen back before sending, and short, specific questions work best.
+    </p>
+  </section>
+
+  <section id="your-recordings" class="flex flex-col gap-3 scroll-mt-4">
+    <h2 class="font-display text-2xl">Your recordings</h2>
+    <p>
+      When you speak in a conversation, the recording is sent to ABAIR to be turned into text, and the conversation's text goes to ABAIR's AI, or to OpenAI when that isn't available, for a reply.
+      The tutor chat goes to OpenAI.
+      A question for a native speaker is kept on Abairt, where the speakers who answer can hear it, labelled with the first part of your email address.
+      Nothing you record is used as course material.
+    </p>
+  </section>
+
+  <% if current_user.admin? %>
+    <%= render "editors" %>
+  <% end %>
+
+  <p class="text-sm text-muted border-t border-line pt-6">
+    Something unclear, wrong, or missing? Say so. In a beta, that's the most useful thing you can do.
+  </p>
+</article>
