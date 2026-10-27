@@ -75,8 +75,12 @@ class LessonConversation
 
   # Saves the learner's message and the reply together, only once a usable
   # reply has come back, so a failed call leaves the conversation as it was.
-  def reply_to(text)
-    said = @chat_session.chat_messages.build(role: "user", content: text.to_s.squish.first(MAX_INPUT_CHARACTERS)) if text.present?
+  # spoken_seconds is how long the learner spoke, when they said it aloud.
+  def reply_to(text, spoken_seconds: nil)
+    if text.present?
+      said = @chat_session.chat_messages.build(role: "user", content: text.to_s.squish.first(MAX_INPUT_CHARACTERS),
+                                               spoken_seconds: spoken_seconds)
+    end
     reply = @chat_session.chat_messages.build(role: "assistant", **ask(said))
 
     ChatSession.transaction do

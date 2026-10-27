@@ -69,6 +69,7 @@
             data: { controller: "chat speech-input", action: "submit->speech-input#submit turbo:submit-start->speech-input#busy" } do |f| %>
         <%= f.file_field :audio, accept: "audio/*", class: "hidden", tabindex: -1, "aria-hidden": true,
               data: { speech_input_target: "audio" } %>
+        <%= hidden_field_tag :spoken_seconds, nil, id: nil, data: { speech_input_target: "spokenSeconds" } %>
         <div class="flex gap-2 items-end">
           <%= f.text_area :message, rows: 1, maxlength: LessonConversation::MAX_INPUT_CHARACTERS,
                 placeholder: t(".placeholder"), "aria-label": t(".placeholder"), lang: "ga",

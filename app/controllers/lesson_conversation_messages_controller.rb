@@ -17,7 +17,7 @@ class LessonConversationMessagesController < ApplicationController
     text = params[:message].presence || transcribe(params[:audio])
     return back_with(nil) if text.blank? && @chat_session.chat_messages.any?
 
-    flash[:play] = LessonConversation.new(@chat_session).reply_to(text).id
+    flash[:play] = LessonConversation.new(@chat_session).reply_to(text, spoken_seconds: spoken_seconds).id
     back_with(nil)
   rescue LessonConversation::Error
     back_with t(".no_reply")
@@ -37,6 +37,11 @@ class LessonConversationMessagesController < ApplicationController
 
     heard = AbairClient.new.recognise(audio.read, filename: audio.original_filename.presence || "speech.webm").squish
     heard.presence || raise(NothingHeard)
+  end
+
+  # How long the learner spoke, as the page measured it, for a recorded turn.
+  def spoken_seconds
+    params[:spoken_seconds].to_i.clamp(ChatMessage::SPOKEN_SECONDS) if params[:message].blank? && params[:audio].present?
   end
 
   def back_with(alert)
