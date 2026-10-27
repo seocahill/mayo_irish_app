@@ -120,6 +120,11 @@ en:
         other: words known
       your_listening: Your listening
       your_place: Your place
+    welcome:
+      how_it_works: How the course works
+      invite_only: A course in the Irish of Mayo. Invite only until it's ready.
+      register: Register
+      sign_in: Sign in
   js:
     pronounce:
       failed: Couldn't load the audio.

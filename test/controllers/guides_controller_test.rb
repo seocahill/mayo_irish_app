@@ -45,6 +45,12 @@ class GuidesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "the guide links to the 1926 Gaeltacht map" do
+    get guide_path
+
+    assert_select "#approach a[href=?]", OnboardingsHelper::GAELTACHT_1926_URL
+  end
+
   test "the sign-in and register pages send people already signed in to Today" do
     sign_in_as(users(:admin))
 
