@@ -41,6 +41,16 @@
           <%= f.text_area :caption, rows: 3, class: "editor-textarea", placeholder: t(".video_caption_placeholder") %>
         </div>
 
+      <% elsif @block.embed? %>
+        <div>
+          <label class="editor-label"><%= t(".embed_url") %></label>
+          <%= f.text_field :url, class: "editor-input", placeholder: "https://abairt.com/1926?embed" %>
+        </div>
+        <div>
+          <label class="editor-label"><%= t(".caption") %></label>
+          <%= f.text_area :caption, rows: 3, class: "editor-textarea", placeholder: t(".embed_caption_placeholder") %>
+        </div>
+
       <% elsif @block.pdf? %>
         <% if @block.file.attached? %>
           <div class="mb-3 flex items-center gap-2 text-sm text-ink">

@@ -46,6 +46,13 @@
           <p class="text-sm text-muted italic"><%= t(".no_video") %></p>
         <% end %>
 
+      <% elsif lesson_block.embed? %>
+        <% if lesson_block.embed_origin %>
+          <%= render "shared/embed", block: lesson_block %>
+        <% else %>
+          <p class="text-sm text-muted italic"><%= t(".no_embed") %></p>
+        <% end %>
+
       <% elsif lesson_block.pdf? %>
         <% if lesson_block.file.attached? %>
           <%= link_to rails_blob_url(lesson_block.file, disposition: "inline"), target: "_blank", class: "block group/pdf" do %>

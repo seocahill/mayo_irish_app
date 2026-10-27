@@ -19,6 +19,9 @@
     <% end %>
   </figure>
 
+<% elsif block.embed? && block.embed_origin %>
+  <%= render "shared/embed", block: block %>
+
 <% elsif block.pdf? && block.file.attached? %>
   <%= link_to rails_blob_url(block.file, disposition: "inline"), target: "_blank", class: "block group/pdf bg-surface rounded-sm border border-line overflow-hidden" do %>
     <% if block.file.previewable? %>

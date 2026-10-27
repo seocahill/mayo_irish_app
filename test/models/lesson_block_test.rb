@@ -20,6 +20,21 @@ class LessonBlockTest < ActiveSupport::TestCase
     assert @lesson.lesson_blocks.build(block_type: "video").valid?
   end
 
+  test "an embed block shows only Abairt pages" do
+    assert @lesson.lesson_blocks.build(block_type: "embed", url: "https://abairt.com/1926?embed").valid?
+
+    [ "https://example.com/1926", "http://abairt.com/1926", "javascript:alert(1)", "not a url" ].each do |url|
+      block = @lesson.lesson_blocks.build(block_type: "embed", url: url)
+
+      assert_not block.valid?, "#{url} should be refused"
+      assert_includes block.errors[:url].first, "Abairt"
+    end
+  end
+
+  test "an embed block knows where its page's messages come from" do
+    assert_equal "https://abairt.com", @lesson.lesson_blocks.build(block_type: "embed", url: "https://abairt.com/1926?embed").embed_origin
+  end
+
   test "other block types ignore the url" do
     assert @lesson.lesson_blocks.build(block_type: "text", url: "whatever").valid?
   end

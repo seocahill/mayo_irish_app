@@ -51,6 +51,7 @@ en:
     tutor_title: Talk it through with the tutor
   errors:
     messages:
+      unsupported_embed: isn't an Abairt page. Use an https://abairt.com link.
       unsupported_video: isn't a supported video. Use a YouTube or Vimeo link, an
         embed code, or an https link to an .mp4 or .webm file.
   flagged_replies:
@@ -161,6 +162,8 @@ en:
       audio_file: Audio file
       block_title: "%{type} block"
       caption: Caption (optional)
+      embed_caption_placeholder: Say what the page shows...
+      embed_url: Abairt page link
       image_caption_placeholder: Describe the image...
       pdf_caption_placeholder: Document title...
       pdf_file: PDF file
@@ -169,11 +172,13 @@ en:
     lesson_block:
       drag_to_reorder: Drag to reorder
       no_audio: No audio file attached yet.
+      no_embed: No Abairt page link yet.
       no_image: No image attached yet.
       no_pdf: No PDF attached yet.
       no_video: No video URL yet.
     types:
       audio: Audio
+      embed: Abairt page
       image: Image
       pdf: PDF
       text: Text
@@ -620,6 +625,8 @@ en:
     confirm: Are you sure?
     delete: Delete
     edit: Edit
+    embed:
+      title: A page from Abairt
     progress_bar:
       complete: Complete
       default_label: Progress
