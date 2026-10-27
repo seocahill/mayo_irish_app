@@ -45,6 +45,16 @@ class GuidesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "the sign-in and register pages send people already signed in to Today" do
+    sign_in_as(users(:admin))
+
+    [ new_session_path, new_registration_path ].each do |path|
+      get path
+
+      assert_redirected_to root_path
+    end
+  end
+
   test "the sign-in and register pages sum it up and say it's invite only" do
     [ new_session_path, new_registration_path ].each do |path|
       get path

@@ -1,6 +1,7 @@
 class RegistrationsController < ApplicationController
   allow_unauthenticated_access only: %i[new create pending]
   skip_before_action :require_approval, only: %i[pending]
+  before_action :redirect_if_authenticated, only: :new
 
   def new
     @user = User.new

@@ -35,6 +35,11 @@ module Authentication
       redirect_to new_session_path
     end
 
+    # The sign-in and register pages aren't for people already signed in.
+    def redirect_if_authenticated
+      redirect_to root_path if authenticated?
+    end
+
     def after_authentication_url
       session.delete(:return_to_after_authenticating) || root_url
     end
