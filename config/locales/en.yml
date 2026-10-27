@@ -169,6 +169,7 @@ en:
       pdf_file: PDF file
       video_caption_placeholder: Describe the video...
       video_url: Video URL (YouTube or Vimeo)
+    full_size: Open the full-size image
     lesson_block:
       drag_to_reorder: Drag to reorder
       no_audio: No audio file attached yet.

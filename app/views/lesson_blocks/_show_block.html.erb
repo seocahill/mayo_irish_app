@@ -5,7 +5,9 @@
 
 <% elsif block.image? && block.file.attached? %>
   <figure>
-    <%= image_tag block.file, class: "max-w-full rounded-sm" %>
+    <%= link_to rails_blob_url(block.file, disposition: "inline"), target: "_blank", title: t("lesson_blocks.full_size") do %>
+      <%= image_tag block.file, class: "block mx-auto max-w-full h-auto rounded-sm" %>
+    <% end %>
     <% if block.caption.present? %>
       <figcaption class="text-sm text-muted mt-2 text-center"><%= block.caption %></figcaption>
     <% end %>
