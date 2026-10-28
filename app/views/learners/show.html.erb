@@ -1,0 +1,66 @@
+<div class="max-w-2xl mx-auto flex flex-col gap-8">
+  <header>
+    <%= link_to t(".back"), learners_path, class: "text-sm text-muted underline underline-offset-2 hover:text-ink" %>
+    <p class="eyebrow mt-4"><%= t(".eyebrow") %></p>
+    <h1 class="font-display text-2xl leading-tight break-all"><%= @learner.email_address %></h1>
+    <p class="text-muted mt-1 text-sm">
+      <%= t(".joined", date: l(@learner.created_at.to_date, format: :long)) %>
+      <% if @learner.place.present? %>· <%= @learner.place %><% end %>
+      <% if @learner.door.present? %>· <%= t("onboardings.doors.#{@learner.door}.name") %><% end %>
+    </p>
+  </header>
+
+  <section aria-labelledby="totals-heading" class="flex flex-col gap-3">
+    <h2 id="totals-heading" class="lesson-section-heading"><%= t(".so_far") %></h2>
+    <dl class="card px-4 py-4 grid grid-cols-3 gap-2 text-center">
+      <%= render "figure", label: t(".words_known"), value: @lessons.values.sum(&:known) %>
+      <%= render "figure", label: t(".minutes_spoken"), value: @spoken_minutes %>
+      <%= render "figure", label: t(".minutes_listened"), value: @listening_minutes %>
+    </dl>
+  </section>
+
+  <section aria-labelledby="weeks-heading" class="flex flex-col gap-3">
+    <h2 id="weeks-heading" class="lesson-section-heading"><%= t(".by_week") %></h2>
+    <div class="card overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="text-xs text-muted text-left">
+          <tr class="border-b border-line">
+            <th class="px-4 py-2 font-normal"><%= t(".week_of") %></th>
+            <th class="px-4 py-2 font-normal text-right"><%= t(".answers") %></th>
+            <th class="px-4 py-2 font-normal text-right"><%= t(".clips") %></th>
+            <th class="px-4 py-2 font-normal text-right"><%= t(".minutes_spoken") %></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-line">
+          <% @weeks.each do |week| %>
+            <tr>
+              <td class="px-4 py-2 whitespace-nowrap"><%= l(week.starts_on, format: :short) %></td>
+              <td class="px-4 py-2 text-right whitespace-nowrap">
+                <%= week.answers %>
+                <% if week.answers.positive? %><span class="text-xs text-muted"><%= t(".correct", count: week.correct) %></span><% end %>
+              </td>
+              <td class="px-4 py-2 text-right"><%= week.clips %></td>
+              <td class="px-4 py-2 text-right"><%= week.minutes_spoken %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="lessons-heading" class="flex flex-col gap-3">
+    <h2 id="lessons-heading" class="lesson-section-heading"><%= t(".lessons") %></h2>
+    <% if @lessons.empty? %>
+      <p class="card px-4 py-6 text-center text-muted text-sm"><%= t(".no_lessons") %></p>
+    <% else %>
+      <ul class="card divide-y divide-line">
+        <% @lessons.each do |lesson, progress| %>
+          <li class="px-4 py-3 flex flex-col gap-2 text-sm">
+            <%= link_to t(".lesson", number: lesson.number, title: lesson.title), lesson_path(lesson), class: "hover:underline underline-offset-2" %>
+            <%= render "shared/progress_bar", progress: progress, label: t("shared.words_known") %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
+</div>

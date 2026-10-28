@@ -1,0 +1,48 @@
+<div class="max-w-2xl mx-auto flex flex-col gap-8">
+  <header>
+    <p class="eyebrow"><%= t(".eyebrow") %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
+    <p class="text-muted mt-1 text-sm"><%= t(".summary") %></p>
+  </header>
+
+  <% if @pending.any? %>
+    <section aria-labelledby="pending-heading" class="flex flex-col gap-3">
+      <h2 id="pending-heading" class="lesson-section-heading"><%= t(".pending", count: @pending.size) %></h2>
+      <ul class="card divide-y divide-line">
+        <% @pending.each do |user| %>
+          <li class="px-4 py-3 flex flex-wrap items-center justify-between gap-3 text-sm">
+            <div>
+              <p class="font-semibold break-all"><%= user.email_address %></p>
+              <p class="text-xs text-muted"><%= t(".signed_up", when: time_ago_in_words(user.created_at)) %></p>
+            </div>
+            <%= button_to t(".approve"), learner_approval_path(user), class: "btn-solid text-xs" %>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+
+  <section aria-labelledby="learners-heading" class="flex flex-col gap-3">
+    <h2 id="learners-heading" class="lesson-section-heading"><%= t(".this_week") %></h2>
+    <ul class="flex flex-col gap-3">
+      <% @activity.rows.each do |row| %>
+        <li>
+          <%= link_to learner_path(row.user), class: "card px-4 py-3 flex flex-col gap-2 text-sm hover:bg-canvas transition-colors" do %>
+            <div class="flex flex-wrap items-baseline justify-between gap-2">
+              <span class="font-semibold break-all"><%= row.user.email_address %></span>
+              <span class="text-xs text-muted">
+                <%= row.last_active_at ? t(".last_active", when: time_ago_in_words(row.last_active_at)) : t(".never_active") %>
+              </span>
+            </div>
+            <dl class="grid grid-cols-4 gap-2 text-center">
+              <%= render "figure", label: t(".answers"), value: row.answers %>
+              <%= render "figure", label: t(".clips"), value: row.clips %>
+              <%= render "figure", label: t(".minutes_spoken"), value: row.minutes_spoken %>
+              <%= render "figure", label: t(".lessons_started"), value: row.lessons_started %>
+            </dl>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+</div>

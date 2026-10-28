@@ -156,6 +156,45 @@ en:
       sign_in: Sign in
       sign_out: Sign out
       today: Today
+  learner_approvals:
+    create:
+      approved: "%{email} can now sign in to the course."
+  learners:
+    index:
+      answers: Answers
+      approve: Approve
+      clips: Clips heard
+      eyebrow: Admin
+      last_active: Active %{when} ago
+      lessons_started: Lessons started
+      minutes_spoken: Minutes spoken
+      never_active: Not active yet
+      pending:
+        one: 1 waiting for approval
+        other: "%{count} waiting for approval"
+      signed_up: Signed up %{when} ago
+      summary: Who has signed up, and what they've done this week. Open a learner
+        for their weeks and lessons.
+      this_week: This week
+      title: Learners
+    show:
+      answers: Answers
+      back: "← All learners"
+      by_week: By week
+      clips: Clips heard
+      correct:
+        one: "(1 right)"
+        other: "(%{count} right)"
+      eyebrow: Learner
+      joined: Joined %{date}
+      lesson: Lesson %{number} · %{title}
+      lessons: Lessons
+      minutes_listened: Minutes listened
+      minutes_spoken: Minutes spoken
+      no_lessons: No quiz answers yet.
+      so_far: So far
+      week_of: Week of
+      words_known: Words known
   lesson_blocks:
     edit:
       audio_caption_placeholder: Describe the audio file...
@@ -329,6 +368,7 @@ en:
         one: 1 flagged reply
         other: "%{count} flagged replies"
       grammar: Grammar
+      learners: Learners
       needs_review: Needs review
       new_lesson: New lesson
       progress_title: "%{known}/%{total} words known"
