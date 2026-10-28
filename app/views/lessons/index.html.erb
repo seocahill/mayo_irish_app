@@ -11,6 +11,7 @@
         <% if @flagged_count.positive? %>
           <%= link_to t(".flagged_replies", count: @flagged_count), flagged_replies_path, class: "btn-outline border-labhair text-labhair" %>
         <% end %>
+        <%= link_to t(".learners"), learners_path, class: "btn-outline" %>
         <%= link_to t(".new_lesson"), new_lesson_path, class: "btn-solid" %>
       </div>
     <% end %>

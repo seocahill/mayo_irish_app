@@ -41,6 +41,10 @@ class User < ApplicationRecord
     approved
   end
 
+  def approve!
+    update!(approved: true)
+  end
+
   def admin?
     admin
   end
