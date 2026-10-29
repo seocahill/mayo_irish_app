@@ -47,6 +47,7 @@ class LessonsController < ApplicationController
     @preview = current_user&.admin? && params[:preview].present?
 
     if current_user
+      LessonVisit.record(user: current_user, lesson: @lesson)
       # Grammar / texts / exercises still come from the chat tutor's mastery
       # markers; vocabulary is now driven by the quiz tracker (source of truth).
       @section_progress = current_user.section_progresses
