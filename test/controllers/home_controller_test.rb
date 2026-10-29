@@ -1,14 +1,15 @@
 require "test_helper"
 
 class HomeControllerTest < ActionDispatch::IntegrationTest
-  test "signed-out visitors are led to signing in, registering and the guide" do
+  test "signed-out visitors are led to signing in and the guide, not registering" do
     get root_path
 
     assert_response :success
     assert_select "p", text: /Invite only/
-    [ new_session_path, new_registration_path, guide_path ].each do |path|
+    [ new_session_path, guide_path ].each do |path|
       assert_select "main a[href=?]", path
     end
+    assert_select "main a[href=?]", new_registration_path, count: 0
   end
 
   test "learners who have not onboarded are sent to onboarding" do

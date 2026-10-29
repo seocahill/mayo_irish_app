@@ -5,6 +5,34 @@
     <p class="text-muted mt-1 text-sm"><%= t(".summary") %></p>
   </header>
 
+  <section aria-labelledby="invitations-heading" class="flex flex-col gap-3">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <h2 id="invitations-heading" class="lesson-section-heading"><%= t(".invitations") %></h2>
+      <%= button_to t(".invite"), invitations_path, class: "btn-solid text-xs" %>
+    </div>
+    <p class="text-sm text-muted"><%= t(".invitations_summary", days: Invitation::LIFETIME.in_days.to_i) %></p>
+    <% if @invitations.any? %>
+      <ul class="card divide-y divide-line">
+        <% @invitations.each do |invitation| %>
+          <li class="px-4 py-3 flex flex-col gap-2 text-sm"
+              data-controller="clipboard" data-clipboard-copied-value="<%= t(".copied") %>">
+            <input type="text" readonly value="<%= new_registration_url(invitation: invitation.token) %>"
+                   aria-label="<%= t(".invitation_link") %>"
+                   class="field text-xs font-mono" data-clipboard-target="source">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <span class="text-xs text-muted"><%= t(".expires", when: time_ago_in_words(invitation.expires_at)) %></span>
+              <div class="flex items-center gap-2">
+                <button type="button" class="btn-outline text-xs"
+                        data-clipboard-target="button" data-action="clipboard#copy"><%= t(".copy") %></button>
+                <%= button_to t(".revoke"), invitation_path(invitation), method: :delete, class: "btn-outline text-xs" %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
+
   <% if @pending.any? %>
     <section aria-labelledby="pending-heading" class="flex flex-col gap-3">
       <h2 id="pending-heading" class="lesson-section-heading"><%= t(".pending", count: @pending.size) %></h2>

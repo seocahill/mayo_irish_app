@@ -1,0 +1,16 @@
+open:
+  token: open-invitation-token
+  inviter: admin
+  expires_at: <%= 7.days.from_now %>
+
+accepted:
+  token: accepted-invitation-token
+  inviter: admin
+  user: two
+  accepted_at: <%= 1.day.ago %>
+  expires_at: <%= 6.days.from_now %>
+
+expired:
+  token: expired-invitation-token
+  inviter: admin
+  expires_at: <%= 1.day.ago %>

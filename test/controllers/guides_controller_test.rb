@@ -34,7 +34,8 @@ class GuidesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#listening"
     assert_select "#editors", count: 0
-    assert_select "#joining a[href=?]", new_registration_path
+    assert_select "#joining", text: /invitation link/
+    assert_select "#joining a[href=?]", new_session_path
   end
 
   test "people waiting to be let in can read it" do
@@ -54,7 +55,7 @@ class GuidesControllerTest < ActionDispatch::IntegrationTest
   test "the sign-in and register pages send people already signed in to Today" do
     sign_in_as(users(:admin))
 
-    [ new_session_path, new_registration_path ].each do |path|
+    [ new_session_path, new_registration_path(invitation: invitations(:open).token) ].each do |path|
       get path
 
       assert_redirected_to root_path
@@ -62,7 +63,7 @@ class GuidesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "the sign-in and register pages sum it up and say it's invite only" do
-    [ new_session_path, new_registration_path ].each do |path|
+    [ new_session_path, new_registration_path(invitation: invitations(:open).token) ].each do |path|
       get path
 
       assert_select "section h2", text: "A course in the Irish of Mayo"
