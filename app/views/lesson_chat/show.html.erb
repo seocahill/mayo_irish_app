@@ -14,7 +14,7 @@
   <div class="card flex flex-col" style="height: 70vh;">
 
     <%# Messages %>
-    <div id="chat-messages" class="flex-1 overflow-y-auto px-6 py-5 space-y-4">
+    <div id="chat-messages" class="flex-1 overflow-y-auto px-6 py-5 space-y-4" data-controller="scroll-to-end">
       <% if @messages.empty? %>
         <div class="text-muted text-sm text-center mt-8">
           <%= t(".empty_state") %>
@@ -64,11 +64,3 @@
           class: "text-sm text-muted hover:text-ink transition-colors bg-transparent border-none cursor-pointer" %>
   </div>
 </div>
-
-<script>
-  // Scroll to bottom on load
-  document.addEventListener("DOMContentLoaded", function() {
-    const el = document.getElementById("chat-messages");
-    if (el) el.scrollTop = el.scrollHeight;
-  });
-</script>

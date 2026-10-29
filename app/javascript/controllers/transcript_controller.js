@@ -4,6 +4,8 @@ import { Controller } from "@hotwired/stimulus"
 // and kept in view, and tapping a line plays from there. Also reports to the
 // course, every half minute or so, how long the learner has been listening.
 const REPORT_EVERY = 30
+// How long a line stays marked after it ends, through a speaker's pause.
+const HOLD = 3
 
 export default class extends Controller {
   static targets = ["audio", "line", "english", "englishToggle"]
@@ -57,9 +59,12 @@ export default class extends Controller {
     if (this.listened >= REPORT_EVERY) this.report()
   }
 
-  // The line that started most recently, held until the next one starts.
+  // The line being said, held through a short pause. Only checked lines are
+  // shown, so a recording can go minutes without one; nothing is marked there,
+  // rather than a line from long before.
   mark(now) {
-    const current = this.lineTargets.findLast((line) => Number(line.dataset.start) <= now)
+    const current = this.lineTargets.findLast((line) =>
+      Number(line.dataset.start) <= now && now < Number(line.dataset.end) + HOLD)
     if (current === this.current) return
 
     this.current?.removeAttribute("aria-current")
