@@ -46,6 +46,7 @@ en:
     recording_title: 'A few minutes of Mayo speakers talking: %{title}'
     review_label: Review · %{count} due
     review_title: Review the words that are due
+    start_label: Start here · Lesson %{number}
     theme_listen_title: "%{title}: hear the words said by Mayo speakers"
     tutor_label: Practise · text chat
     tutor_title: Talk it through with the tutor

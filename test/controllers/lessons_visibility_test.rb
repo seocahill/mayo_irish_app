@@ -21,6 +21,14 @@ class LessonsVisibilityTest < ActionDispatch::IntegrationTest
     assert_match "Draft Lesson", @response.body
   end
 
+  test "opening a lesson is recorded, so Today can move on from it" do
+    sign_in_as(@learner)
+
+    assert_difference -> { @learner.lesson_visits.count } do
+      get lesson_path(lessons(:one))
+    end
+  end
+
   test "learners are redirected away from a draft lesson page" do
     sign_in_as(@learner)
     get lesson_path(@draft)

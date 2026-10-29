@@ -36,6 +36,7 @@ class Lesson < ApplicationRecord
   belongs_to :reviewed_by, class_name: "User", optional: true
   has_many :section_progresses, dependent: :destroy
   has_many :quiz_questions, dependent: :destroy
+  has_many :lesson_visits, dependent: :destroy
   accepts_nested_attributes_for :vocabulary_items,
                                 allow_destroy: true,
                                 reject_if: :all_blank
@@ -53,6 +54,7 @@ class Lesson < ApplicationRecord
   scope :thematic_vocab, -> { where(lesson_type: "thematic_vocab") }
   scope :dias_material,  -> { where(lesson_type: "dias_material") }
   scope :published,    -> { where(published: true) }
+  scope :with_recordings, -> { where(id: VocabularyItem.with_recording.select(:lesson_id)) }
 
   # Learners only see published lessons; admins see everything (including
   # drafts created through the MCP connector, pending review).

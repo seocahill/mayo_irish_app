@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :section_progresses, dependent: :destroy
   has_many :quiz_reviews, dependent: :destroy
   has_many :review_logs, dependent: :destroy
+  has_many :lesson_visits, dependent: :destroy
   has_many :invitations, foreign_key: :inviter_id, inverse_of: :inviter, dependent: :destroy
 
   # Where the learner is from sets which Mayo dialect they hear first. The

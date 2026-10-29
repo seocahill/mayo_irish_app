@@ -11,7 +11,7 @@ class DailyPath
   end
 
   def items
-    [ answer_item, listen_item, clip_item, recording_item, review_item, lesson_item, tutor_item, conversation_item ].compact
+    [ start_item, answer_item, listen_item, clip_item, recording_item, review_item, lesson_item, tutor_item, conversation_item ].compact
   end
 
   def due_count
@@ -26,9 +26,8 @@ class DailyPath
   def current_lesson
     return @current_lesson if defined?(@current_lesson)
 
-    totals = VocabularyItem.group(:lesson_id).count
     @current_lesson = curriculum_lessons.find do |lesson|
-      total = totals.fetch(lesson.id, 0)
+      total = words_in(lesson)
       total.positive? && known_by_lesson.fetch(lesson.id, 0) < total
     end
   end
@@ -74,8 +73,20 @@ class DailyPath
              path: lesson_conversation_path(current_lesson))
   end
 
+  # The lessons with no words to learn (the introduction, the alphabet) that come
+  # before the current lesson, one at a time, until the learner has opened them.
+  def start_item
+    lesson = curriculum_lessons.take_while { |l| l != current_lesson }
+                               .find { |l| words_in(l).zero? && !visited?(l) }
+    return unless lesson
+
+    Item.new(level: :foghlaim, label: I18n.t("daily_path.start_label", number: lesson.number),
+             title: lesson.title, path: lesson_path(lesson))
+  end
+
   # The current lesson's words as Mayo speakers say them, or, when it has no
-  # recordings, a theme's words: a different theme each day.
+  # recordings, the first theme the learner hasn't opened yet (or, once they've
+  # opened them all, the one they opened longest ago).
   def listen_item
     count = current_lesson&.vocabulary_items&.with_recording&.count.to_i
     return theme_listen_item unless count.positive?
@@ -86,10 +97,9 @@ class DailyPath
   end
 
   def theme_listen_item
-    themes = Lesson.visible_to(user).thematic_vocab.where(id: VocabularyItem.with_recording.select(:lesson_id)).ordered.ids
-    return if themes.empty?
+    theme = next_theme
+    return unless theme
 
-    theme = Lesson.find(themes[Date.current.yday % themes.size])
     Item.new(level: :eist, label: I18n.t("daily_path.listen_label"),
              title: I18n.t("daily_path.theme_listen_title", title: theme.title),
              path: lesson_path(theme, anchor: "vocabulary"))
@@ -136,6 +146,17 @@ class DailyPath
   def curriculum_lessons
     @curriculum_lessons ||= Lesson.visible_to(user).curriculum.ordered.to_a
   end
+
+  def next_theme
+    Lesson.visible_to(user).thematic_vocab.with_recordings.ordered
+          .min_by { |lesson| [ visited?(lesson) ? 1 : 0, visits[lesson.id].to_i ] }
+  end
+
+  def words_in(lesson) = (@words_by_lesson ||= VocabularyItem.group(:lesson_id).count).fetch(lesson.id, 0)
+
+  def visited?(lesson) = visits.key?(lesson.id)
+
+  def visits = @visits ||= user.lesson_visits.pluck(:lesson_id, :created_at).to_h
 
   def due_by_lesson
     @due_by_lesson ||= QuizReview.due.where(user: user)

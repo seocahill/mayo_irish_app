@@ -56,6 +56,20 @@ class DailyPathTest < ActiveSupport::TestCase
     assert_empty path.items
   end
 
+  test "starts a new learner on the lessons with no words to learn, one at a time, until they've opened them" do
+    @lesson.update!(position: 2)
+    intro = Lesson.create!(number: 0, title: "Background", position: 0)
+    alphabet = Lesson.create!(number: 90, title: "The Alphabet", position: 1)
+
+    assert_equal [ "Start here · Lesson 0", "/lessons/0" ], DailyPath.new(@user).items.first.to_h.values_at(:label, :path)
+
+    LessonVisit.record(user: @user, lesson: intro)
+    assert_equal "/lessons/90", DailyPath.new(@user).items.first.path
+
+    LessonVisit.record(user: @user, lesson: alphabet)
+    assert_equal "/lessons/1", DailyPath.new(@user).items.first.path
+  end
+
   test "does not suggest draft lessons to learners" do
     @lesson.update!(published: false)
 
@@ -108,6 +122,22 @@ class DailyPathListeningTest < ActiveSupport::TestCase
 
     assert_equal "Animals: hear the words said by Mayo speakers", listen.title
     assert_equal "/lessons/50#vocabulary", listen.path
+  end
+
+  test "offers the first theme the learner hasn't opened, then the one opened longest ago" do
+    animals, birds = [ "Animals", "Birds" ].each_with_index.map do |title, i|
+      Lesson.create!(number: 50 + i, title: title, position: 50 + i, lesson_type: "thematic_vocab").tap do |theme|
+        theme.vocabulary_items.create!(irish: title, english: title, position: 1, audio_url: "https://abairt.com/#{i}.mp3")
+      end
+    end
+    theme_listen = -> { DailyPath.new(@user).items.find { |item| item.label == "Listen · Mayo speakers" }.path }
+
+    assert_equal "/lessons/50#vocabulary", theme_listen.call
+    LessonVisit.record(user: @user, lesson: animals)
+    assert_equal "/lessons/51#vocabulary", theme_listen.call
+    travel 1.minute
+    LessonVisit.record(user: @user, lesson: birds)
+    assert_equal "/lessons/50#vocabulary", theme_listen.call
   end
 
   def recording_item = DailyPath.new(@user).items.find { |item| item.label == "Listen · conversation" }
