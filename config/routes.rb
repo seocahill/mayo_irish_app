@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     resource :flag, only: :create, controller: "chat_message_flags"
   end
   resources :flagged_replies, only: %i[index destroy]
+  resources :invitations, only: %i[create destroy]
   resources :learners, only: %i[index show] do
     resource :approval, only: :create, controller: "learner_approvals"
   end

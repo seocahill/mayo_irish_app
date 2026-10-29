@@ -3,6 +3,7 @@ class LearnersController < ApplicationController
   before_action :require_admin
 
   def index
+    @invitations = Invitation.open.order(created_at: :desc)
     @pending = User.pending_approval.order(created_at: :desc)
     @activity = LearnerActivity.new(User.where(approved: true))
   end

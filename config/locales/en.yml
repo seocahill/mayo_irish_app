@@ -86,8 +86,8 @@ en:
       alongside: The best way to learn is in the Gaeltacht, or from a native speaker
         you get to know. This course goes alongside that, and is the next best thing
         when you can't.
-      invite_only: It's invite only until the course is ready. Register, and your
-        account will be checked before you get in.
+      invite_only: It's invite only until the course is ready. If you've been sent
+        an invitation link, open it to register.
       more: How the course works
       title: A course in the Irish of Mayo
   history:
@@ -124,8 +124,12 @@ en:
     welcome:
       how_it_works: How the course works
       invite_only: A course in the Irish of Mayo. Invite only until it's ready.
-      register: Register
       sign_in: Sign in
+  invitations:
+    create:
+      created: Invitation made. Copy the link and send it on.
+    destroy:
+      revoked: Invitation taken back. The link no longer works.
   js:
     pronounce:
       failed: Couldn't load the audio.
@@ -164,7 +168,15 @@ en:
       answers: Answers
       approve: Approve
       clips: Clips heard
+      copied: Copied
+      copy: Copy link
+      expires: Expires in %{when}
       eyebrow: Admin
+      invitation_link: Invitation link
+      invitations: Invitations
+      invitations_summary: Each link lets one person register, and they're let in
+        straight away. Links expire after %{days} days.
+      invite: New invitation link
       last_active: Active %{when} ago
       lessons_started: Lessons started
       minutes_spoken: Minutes spoken
@@ -172,6 +184,7 @@ en:
       pending:
         one: 1 waiting for approval
         other: "%{count} waiting for approval"
+      revoke: Take back
       signed_up: Signed up %{when} ago
       summary: Who has signed up, and what they've done this week. Open a learner
         for their weeks and lessons.
@@ -614,10 +627,16 @@ en:
       unavailable: The recording couldn't be loaded from Abairt. Try again later.
       untitled: A recording from Abairt
   registrations:
+    invite_only:
+      have_account_html: Already have an account? %{link}
+      message: Registering is by invitation only, and this link is missing, used or
+        out of date. Ask whoever invited you for a new one.
+      sign_in: Sign in
+      title: Invite only
     new:
       email: Email
       have_account_html: Already have an account? %{link}
-      intro: Your account will be checked before you get access.
+      intro: You've been invited. Choose a password to get started.
       password: Password
       password_confirmation: Confirm password
       sign_in: Sign in
@@ -656,9 +675,9 @@ en:
     new:
       email: Email
       forgot_password: Forgot your password?
-      no_account_html: No account? %{link}
+      no_account: No account? It's invite only for now, so you'll need an invitation
+        link.
       password: Password
-      register_here: Register here
       submit: Sign in
       title: Sign in
   shared:

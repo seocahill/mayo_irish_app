@@ -1,0 +1,3 @@
+# Invite-only course: keep it out of search engines for now.
+User-agent: *
+Disallow: /

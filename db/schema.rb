@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_27_011751) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_29_002131) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -106,6 +106,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_011751) do
     t.datetime "updated_at", null: false
     t.index ["grammar_rule_id", "position"], name: "index_grammar_sections_on_grammar_rule_id_and_position"
     t.index ["grammar_rule_id"], name: "index_grammar_sections_on_grammar_rule_id"
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.datetime "accepted_at"
+    t.datetime "created_at", null: false
+    t.datetime "expires_at", null: false
+    t.integer "inviter_id", null: false
+    t.string "token", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["inviter_id"], name: "index_invitations_on_inviter_id"
+    t.index ["token"], name: "index_invitations_on_token", unique: true
+    t.index ["user_id"], name: "index_invitations_on_user_id"
   end
 
   create_table "lesson_blocks", force: :cascade do |t|
@@ -431,6 +444,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_011751) do
   add_foreign_key "exercises", "lessons"
   add_foreign_key "grammar_rules", "lessons"
   add_foreign_key "grammar_sections", "grammar_rules"
+  add_foreign_key "invitations", "users", column: "inviter_id"
+  add_foreign_key "invitations", "users", on_delete: :nullify
   add_foreign_key "lesson_blocks", "lessons"
   add_foreign_key "lesson_rows", "lessons"
   add_foreign_key "lessons", "users", column: "reviewed_by_id"

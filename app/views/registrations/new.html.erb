@@ -5,6 +5,7 @@
   <p class="text-muted text-sm mb-6"><%= t(".intro") %></p>
 
   <%= form_with model: @user, url: registration_path do |form| %>
+    <%= hidden_field_tag :invitation, @invitation.token %>
     <% if @user.errors.any? %>
       <div class="bg-red-50 border border-red-200 rounded-sm px-4 py-3 mb-4 text-sm text-red-700">
         <% @user.errors.full_messages.each do |msg| %>
