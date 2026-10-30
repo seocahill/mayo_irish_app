@@ -21,10 +21,17 @@
 #   OUT    output directory (default: html/ next to this script)
 #   DELAY  seconds between requests (default 1.5). Be gentle with the archive.
 #   LIMIT  only fetch the first N item pages, for a trial run
+#   HEADWORDS  JSON list of {"headword": ...} from the earlier scrape (default:
+#          mayo_list_view.json next to this script). Headwords not found on the archived
+#          list pages get their item URL predicted and tried; misses go to
+#          predicted_not_archived.csv rather than failures.csv.
+#   LIST_ALIASES  comma-separated alternative list paths tried when a list page
+#          404s (default /counties/maigh-eo)
 require "cgi"
 require "csv"
 require "digest"
 require "fileutils"
+require "json"
 require "net/http"
 require "nokogiri"
 require "uri"
@@ -34,6 +41,10 @@ START = ENV.fetch("START", "/counties/8651")
 OUT = ENV.fetch("OUT", File.join(__dir__, "html"))
 DELAY = Float(ENV.fetch("DELAY", "1.5"))
 LIMIT = ENV["LIMIT"]&.to_i
+# The same list is also served under its slug; the archive may hold pages under either URL.
+LIST_ALIASES = ENV.fetch("LIST_ALIASES", "/counties/maigh-eo").split(",")
+# Headwords from the earlier list-view scrape, used to look for items whose list page isn't archived.
+HEADWORDS = ENV.fetch("HEADWORDS", File.join(__dir__, "mayo_list_view.json"))
 MAX_TRIES = 6
 MAX_REDIRECTS = 5
 USER_AGENT = "focail-fholaithe-archiver (non-commercial research)"
@@ -105,6 +116,15 @@ def item_file(path)
   File.join(OUT, "items", "#{name}.html")
 end
 
+SMALL_WORDS = %w[a an as at before but by for from is in into like of off on onto per since than the this that to up via with and or].freeze
+
+# The path the site gives an item (Drupal's pathauto): lowercase, apostrophes dropped, other
+# punctuation and spaces become hyphens, small words removed.
+def predict_slug(headword)
+  words = headword.downcase.delete("'’´`").gsub(/[^[:alnum:]\s-]/, " ").split(/[\s-]+/).reject(&:empty?)
+  (words - SMALL_WORDS).then { |kept| kept.empty? ? words : kept }.join("-")
+end
+
 def to_path(href)
   uri = URI(escape(href.strip))
   uri.path + (uri.query ? "?#{uri.query}" : "")
@@ -124,15 +144,27 @@ result = download(START, first_file, row_selector: "li.views-row")
 record.call(START, result)
 abort "Could not fetch the first list page (#{START}); nothing to do." unless File.size?(first_file)
 
-last_href = Nokogiri::HTML(File.read(first_file)).at_css('a[title="Go to last page"]')&.[]("href")
+last_href = Nokogiri::HTML(File.read(first_file, encoding: "UTF-8")).at_css('a[title="Go to last page"]')&.[]("href")
 last_page = last_href ? Integer(last_href[/page=(\d+)/, 1]) : 0
 list_path = last_href ? to_path(last_href).split("?").first : START
 puts "List has #{last_page + 1} pages (0..#{last_page}), path #{list_path}"
 
+bases = [list_path, *LIST_ALIASES].uniq
 (1..last_page).each do |page|
-  path = "#{list_path}?page=#{page}"
-  result = download(path, File.join(OUT, "list", format("page-%04d.html", page)), row_selector: "li.views-row")
-  record.call(path, result)
+  file = File.join(OUT, "list", format("page-%04d.html", page))
+  result = nil
+  bases.each do |base|
+    path = "#{base}?page=#{page}"
+    result = download(path, file, row_selector: "li.views-row")
+    if result == :ok
+      bases.unshift(bases.delete(base)) # try whichever URL form worked first next time
+      break
+    end
+    break if result == :skipped
+
+    warn "  #{path}: #{result}"
+  end
+  record.call("#{list_path}?page=#{page}", result)
   puts "list page #{page}/#{last_page}: #{result}" if result == :ok && (page % 10).zero?
 end
 
@@ -142,27 +174,55 @@ items = {}
   file = File.join(OUT, "list", format("page-%04d.html", page))
   next warn("missing list page #{page}") unless File.size?(file)
 
-  Nokogiri::HTML(File.read(file)).css("li.views-row").each_with_index do |li, row|
+  Nokogiri::HTML(File.read(file, encoding: "UTF-8")).css("li.views-row").each_with_index do |li, row|
     link = li.at_css(".views-field-title a")
     next unless link
 
     path = to_path(link["href"])
     warn "duplicate link #{path} (page #{page}, row #{row}); keeping the first" if items.key?(path)
-    items[path] ||= [page, row, link.text.strip, path, item_file(path).delete_prefix("#{OUT}/")]
+    items[path] ||= [page, row, link.text.strip, path, item_file(path).delete_prefix("#{OUT}/"), "list"]
   end
 end
+
+# 2b. The archive holds many item pages whose list page it never captured. Item URLs are the
+# headword, lowercased, without punctuation or small words (a ro -> /content/ro), with -0, -1
+# added when a headword repeats. For headwords the list pages did not give us, try that URL.
+if File.exist?(HEADWORDS)
+  slug_hits = items.values.count { |row| CGI.unescape(row[3].delete_prefix("/content/")) == predict_slug(row[2]) }
+  puts "URL prediction matches #{slug_hits} of #{items.size} items known from the list pages"
+
+  known = items.values.map { |row| row[2] }.tally
+  JSON.parse(File.read(HEADWORDS, encoding: "UTF-8")).map { |entry| entry["headword"] }.tally.each do |headword, count|
+    next unless count > known.fetch(headword, 0)
+
+    slug = predict_slug(headword)
+    candidates = count == 1 ? [slug] : [slug, *(0...count).map { |suffix| "#{slug}-#{suffix}" }]
+    candidates.each do |candidate|
+      path = to_path("/content/#{candidate}")
+      items[path] ||= [nil, nil, headword, path, item_file(path).delete_prefix("#{OUT}/"), "predicted"]
+    end
+  end
+end
+
 CSV.open(File.join(OUT, "manifest.csv"), "w") do |csv|
-  csv << %w[page row headword path file]
+  csv << %w[page row headword path file source]
   items.each_value { |row| csv << row }
 end
-puts "#{items.size} items in manifest.csv"
+puts "#{items.size} items in manifest.csv (#{items.values.count { |row| row[5] == 'predicted' }} predicted)"
 
 # 3. Item pages.
 todo = items.values
 todo = todo.first(LIMIT) if LIMIT
 counts = Hash.new(0)
-todo.each_with_index do |(_, _, headword, path, file), index|
+not_archived = []
+todo.each_with_index do |(_, _, headword, path, file, source), index|
   result = download(path, File.join(OUT, file))
+  if source == "predicted" && result == "404 not found"
+    not_archived << [path, headword]
+    counts[:not_archived] += 1
+    next
+  end
+
   record.call(path, result)
   counts[result.is_a?(Symbol) ? result : :failed] += 1
   puts "[#{index + 1}/#{todo.size}] #{headword} #{result == :skipped ? '(already have it)' : result}" unless result == :skipped && (index % 50).nonzero?
@@ -172,5 +232,10 @@ CSV.open(File.join(OUT, "failures.csv"), "w") do |csv|
   csv << %w[path error]
   failures.each { |row| csv << row }
 end
-puts "Done. items: #{counts[:ok]} downloaded, #{counts[:skipped]} already on disk, #{counts[:failed]} failed. " \
+CSV.open(File.join(OUT, "predicted_not_archived.csv"), "w") do |csv|
+  csv << %w[path headword]
+  not_archived.each { |row| csv << row }
+end
+puts "Done. items: #{counts[:ok]} downloaded, #{counts[:skipped]} already on disk, #{counts[:failed]} failed, " \
+     "#{counts[:not_archived]} predicted URLs not in the archive. " \
      "#{failures.size} failures in total (see failures.csv)."
