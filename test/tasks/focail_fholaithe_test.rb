@@ -17,6 +17,11 @@ class FocailFholaitheTaskTest < ActiveSupport::TestCase
     assert_equal [ "thematic_vocab" ], lessons.pluck(:lesson_type).uniq
     assert words.positive?
 
+    items = VocabularyItem.where(lesson: lessons)
+    assert items.where.not(phonetic: [ nil, "" ]).exists?, "pronunciations should be carried over"
+    assert items.where("notes LIKE ?", "%Area: Ní fios%").none?, "unknown areas should be left out"
+    assert items.where(english: [ nil, "" ]).none?
+
     Rake::Task["focail_fholaithe:import"].reenable
     capture_io { Rake::Task["focail_fholaithe:import"].invoke }
     assert_equal words, VocabularyItem.where(lesson: lessons).count
