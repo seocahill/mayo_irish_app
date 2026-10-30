@@ -1,0 +1,4832 @@
+[
+  {
+    "position": 1,
+    "county": "maigh-eo",
+    "headword": "a ro",
+    "meaning_en": null,
+    "usage": "bhí tú ar an aonach, a Pheatsaí. (Freagra) bhí, a'ro, I was, yes; I was indeed."
+  },
+  {
+    "position": 2,
+    "county": "maigh-eo",
+    "headword": "a' tárlú",
+    "meaning_en": "happening",
+    "usage": null
+  },
+  {
+    "position": 3,
+    "county": "maigh-eo",
+    "headword": "ábalt",
+    "meaning_en": null,
+    "usage": "Níl sé ar ábalt ' a sgríobh, he's not able to write it"
+  },
+  {
+    "position": 4,
+    "county": "maigh-eo",
+    "headword": "acfuinneach",
+    "meaning_en": "strong, durable, hardy",
+    "usage": "duine acfuinneach .i. duine urradhanta/urúnta/."
+  },
+  {
+    "position": 5,
+    "county": "maigh-eo",
+    "headword": "adhlacadh",
+    "meaning_en": "'was buried', (occurs only in prayers.)",
+    "usage": null
+  },
+  {
+    "position": 6,
+    "county": "maigh-eo",
+    "headword": "aduain",
+    "meaning_en": "strange, unusual",
+    "usage": null
+  },
+  {
+    "position": 7,
+    "county": "maigh-eo",
+    "headword": "aer",
+    "meaning_en": "sky",
+    "usage": "tá an ghealach ar an aer."
+  },
+  {
+    "position": 8,
+    "county": "maigh-eo",
+    "headword": "aghaidh béil",
+    "meaning_en": "turn your lip on, give out (abusive language) to the priest.",
+    "usage": "aghaidh béil a thabhairt ar a' tsagart,"
+  },
+  {
+    "position": 9,
+    "county": "maigh-eo",
+    "headword": "aghaidh chuimealt",
+    "meaning_en": "file (for sharpening)",
+    "usage": null
+  },
+  {
+    "position": 10,
+    "county": "maigh-eo",
+    "headword": "Aibreán",
+    "meaning_en": "April",
+    "usage": "bog braonach agus Bealtaine béil-fhliuch /be:l´ux/, (sean-ocal) i. an ideal season for growth."
+  },
+  {
+    "position": 11,
+    "county": "maigh-eo",
+    "headword": "aidhbheirseoir",
+    "meaning_en": "devil",
+    "usage": null
+  },
+  {
+    "position": 12,
+    "county": "maigh-eo",
+    "headword": "aifir",
+    "meaning_en": "avenge",
+    "usage": "nár aifridh Dia ort é, God forgive you; ní aifreó mé ort é, I'll forgive you for it (TmB)"
+  },
+  {
+    "position": 13,
+    "county": "maigh-eo",
+    "headword": "aighneasúil",
+    "meaning_en": "chatty, talkative",
+    "usage": "na hAlbanaigh - na seandaoine is measa; an dream óg - tá siad níos aighneasúl' , more affable, more communicative, more sociable"
+  },
+  {
+    "position": 14,
+    "county": "maigh-eo",
+    "headword": "aimlí",
+    "meaning_en": "miserable, wet weather",
+    "usage": "cf. Máire Saoghal Corrach, 'iad a bheith aimlidhe i ndiaidh na troda'"
+  },
+  {
+    "position": 15,
+    "county": "maigh-eo",
+    "headword": "aimseógaí",
+    "meaning_en": "fairies",
+    "usage": "'siad na haimseógaí a chuir ann é"
+  },
+  {
+    "position": 16,
+    "county": "maigh-eo",
+    "headword": "aintiléad",
+    "meaning_en": null,
+    "usage": "cuirigí suas aintiléad, (said) when there is big wind, to keep the roof (thatch) from blowing."
+  },
+  {
+    "position": 17,
+    "county": "maigh-eo",
+    "headword": "air",
+    "meaning_en": "he had got to do it (?)",
+    "usage": "bhí sé air aige"
+  },
+  {
+    "position": 18,
+    "county": "maigh-eo",
+    "headword": "airde",
+    "meaning_en": null,
+    "usage": "ní rabh mé an airde sin, I wasn't that height, i. I was only a small child at the time (Sb). teach i n-airde cabhlach, side-wall high, or ready roofing (AOS)."
+  },
+  {
+    "position": 19,
+    "county": "maigh-eo",
+    "headword": "aireachtáil",
+    "meaning_en": null,
+    "usage": "(tá mé) gam aireachtáil go maith, I am feeling well"
+  },
+  {
+    "position": 20,
+    "county": "maigh-eo",
+    "headword": "airicis",
+    "meaning_en": null,
+    "usage": "tine chnámh in ' airicis, to receive him, to welcome him home."
+  },
+  {
+    "position": 21,
+    "county": "maigh-eo",
+    "headword": "airigead beó",
+    "meaning_en": "quick silver (behind mirror /sga: ha: n/ )",
+    "usage": null
+  },
+  {
+    "position": 22,
+    "county": "maigh-eo",
+    "headword": "aisling",
+    "meaning_en": "a dream",
+    "usage": null
+  },
+  {
+    "position": 23,
+    "county": "maigh-eo",
+    "headword": "aiteall",
+    "meaning_en": "lull in the rain",
+    "usage": null
+  },
+  {
+    "position": 24,
+    "county": "maigh-eo",
+    "headword": "áith",
+    "meaning_en": null,
+    "usage": "'siad na mná a dhóigh an áith, 'twas the women burned the kiln (sean-ocal)."
+  },
+  {
+    "position": 25,
+    "county": "maigh-eo",
+    "headword": "aith-dhéanamh",
+    "meaning_en": "re-making cocks (of hay), i.e. putting little ones into big ones",
+    "usage": null
+  },
+  {
+    "position": 26,
+    "county": "maigh-eo",
+    "headword": "aithinne dearg",
+    "meaning_en": "a live coal, as distinguished from sméarthóidí, cinders",
+    "usage": "Ní i gcoinní aithinne a thainic tusa, said to a casual visitor who is inclined to stay too long, as a hint that it is time to be going."
+  },
+  {
+    "position": 27,
+    "county": "maigh-eo",
+    "headword": "ala",
+    "meaning_en": null,
+    "usage": "ar ala na huaire, immediately, without delay"
+  },
+  {
+    "position": 28,
+    "county": "maigh-eo",
+    "headword": "áladh",
+    "meaning_en": null,
+    "usage": "thug a' t-asal áladh ar a' bpáipéar, made a charge at, rush at the paper, to get it in its teeth"
+  },
+  {
+    "position": 29,
+    "county": "maigh-eo",
+    "headword": "alam 'paéir",
+    "meaning_en": null,
+    "usage": "tá sé lán le alam 'paéir, full of devilment"
+  },
+  {
+    "position": 30,
+    "county": "maigh-eo",
+    "headword": "alamais",
+    "meaning_en": "gibberish, caint nach dtigféá",
+    "usage": "tá alamais mhór aige, níl aige ach alamais; alamais ag a' bpáiste beag, ní thigfeá é (AL); an alamais a bhí acú, i. Franncaigh (SBh)."
+  },
+  {
+    "position": 31,
+    "county": "maigh-eo",
+    "headword": "allagar",
+    "meaning_en": null,
+    "usage": "glór árd, ag a' rón, go fheithide beag"
+  },
+  {
+    "position": 32,
+    "county": "maigh-eo",
+    "headword": "alóg",
+    "meaning_en": "flake",
+    "usage": "chomh geal le alóg sneachta."
+  },
+  {
+    "position": 33,
+    "county": "maigh-eo",
+    "headword": "alt",
+    "meaning_en": "cliff",
+    "usage": "thuit sé le alt, fell over the cliff into the sea."
+  },
+  {
+    "position": 34,
+    "county": "maigh-eo",
+    "headword": "am",
+    "meaning_en": null,
+    "usage": "i n-amanna, eidir amaí, occasionally, sometimes."
+  },
+  {
+    "position": 35,
+    "county": "maigh-eo",
+    "headword": "amhail",
+    "meaning_en": null,
+    "usage": "ní bheith aon amhail agad ann, you'd get used to it (after a while)"
+  },
+  {
+    "position": 36,
+    "county": "maigh-eo",
+    "headword": "amháin",
+    "meaning_en": null,
+    "usage": "in phrase h-é amháin from ní h-é amháin, not to mention, even: d'ólfainn sláinte madadh as Éire, h-é amháin amadán as Éire; bhéarfainn punt dó h-é amháin sciling, I'd give him a pound not to mention a shilling. h-é amháin is often used finally at the end of an utterance meaning 'even'."
+  },
+  {
+    "position": 37,
+    "county": "maigh-eo",
+    "headword": "an cheist",
+    "meaning_en": "This is what you would ask a ghost. It has never been printed (ní rabh i bprionda riamh). Only two people (in Glosh) have the Ceist",
+    "usage": null
+  },
+  {
+    "position": 38,
+    "county": "maigh-eo",
+    "headword": "an chíonóg",
+    "meaning_en": "the five of trumps in the card game of twenty-five",
+    "usage": null
+  },
+  {
+    "position": 39,
+    "county": "maigh-eo",
+    "headword": "an mhuing mheara",
+    "meaning_en": "hemlock (Sb); this is exactly the same form as that used by Seaghán Mac Meanman in Ó Chamhaoir go Clap-sholus, p. 211; it seems to be due to popular etymology.",
+    "usage": null
+  },
+  {
+    "position": 40,
+    "county": "maigh-eo",
+    "headword": "anabaí",
+    "meaning_en": "huge, stout",
+    "usage": "fear anabaí, fear mór reamhar (CN); fear mór millteach."
+  },
+  {
+    "position": 41,
+    "county": "maigh-eo",
+    "headword": "anachain",
+    "meaning_en": null,
+    "usage": "d'ordaigh Dia an anachainn a sheachaint (sean-ocal); used to warn a person to avoid a house in which people were down with 'flu."
+  },
+  {
+    "position": 42,
+    "county": "maigh-eo",
+    "headword": "angar",
+    "meaning_en": null,
+    "usage": ".i. droch-seileadh bróch (MCd); seileadh agus angar .i. diachair (MMt)"
+  },
+  {
+    "position": 43,
+    "county": "maigh-eo",
+    "headword": "annadh",
+    "meaning_en": null,
+    "usage": "tá annadh air .i. uair mhaith; annadh na Samhna, fine weather to the end of October, Indian summer"
+  },
+  {
+    "position": 44,
+    "county": "maigh-eo",
+    "headword": "anróiteach",
+    "meaning_en": null,
+    "usage": "bhí an grá Dia ionntú, bhí siad bocht nocht anróiteach .i. na seandaoine fadó"
+  },
+  {
+    "position": 45,
+    "county": "maigh-eo",
+    "headword": "antráthach",
+    "meaning_en": null,
+    "usage": "uair antráthach, a very late hour, well after midnight"
+  },
+  {
+    "position": 46,
+    "county": "maigh-eo",
+    "headword": "aoibhinn Dia",
+    "meaning_en": null,
+    "usage": "is aoibhinn Dia dhó, 'tis happy for him, well for him."
+  },
+  {
+    "position": 47,
+    "county": "maigh-eo",
+    "headword": "árach",
+    "meaning_en": null,
+    "usage": "níl aon árach agam air, I cannot help it."
+  },
+  {
+    "position": 48,
+    "county": "maigh-eo",
+    "headword": "asarlaigheacht",
+    "meaning_en": "magic power",
+    "usage": "bhí a. aicí, i. ag cailleach i sean-scéal."
+  },
+  {
+    "position": 49,
+    "county": "maigh-eo",
+    "headword": "ascaill sa bhfaraige",
+    "meaning_en": null,
+    "usage": ".i. lúbán isteach, tá fascadh ann."
+  },
+  {
+    "position": 50,
+    "county": "maigh-eo",
+    "headword": "átha",
+    "meaning_en": "in the sea a creek or channel between two rocks or between rock and cliff, cuinéal eidir carraic agus alt",
+    "usage": "rithfe muid an átha."
+  },
+  {
+    "position": 51,
+    "county": "maigh-eo",
+    "headword": "athchomair",
+    "meaning_en": null,
+    "usage": "tá sí sin ag imeacht go hathchomair, travelling fast. This was quoted for me by PsC as a Donegallism, i. the word athchomair."
+  },
+  {
+    "position": 52,
+    "county": "maigh-eo",
+    "headword": "bachlóg",
+    "meaning_en": null,
+    "usage": "chuir siad bachlóg ar a theangaidh, after which he could not speak properly or at all."
+  },
+  {
+    "position": 53,
+    "county": "maigh-eo",
+    "headword": "báchrán",
+    "meaning_en": "bog bane",
+    "usage": null
+  },
+  {
+    "position": 54,
+    "county": "maigh-eo",
+    "headword": "bacóg",
+    "meaning_en": "armful of turf",
+    "usage": "bacóg mhónadh ar leathláimh, brosna eidir a' dá láimh (TmB); thug sé leath na cruaiche leis g'ea(n)-bhacóg amháin."
+  },
+  {
+    "position": 55,
+    "county": "maigh-eo",
+    "headword": "bail",
+    "meaning_en": null,
+    "usage": "(fear) a chuirfeadh bail air héin, get married in time and set up a home for himself (MMt); go ngohadh droch-bhail orthaí, that she'd come to misfortune (a young pretty girl) at the hands of Arthur Nash (SBh)"
+  },
+  {
+    "position": 56,
+    "county": "maigh-eo",
+    "headword": "baint",
+    "meaning_en": "set crazy, driven daft",
+    "usage": "tá mé baintí as mo mheabhair"
+  },
+  {
+    "position": 57,
+    "county": "maigh-eo",
+    "headword": "balabhán",
+    "meaning_en": "stammerer",
+    "usage": null
+  },
+  {
+    "position": 58,
+    "county": "maigh-eo",
+    "headword": "balach",
+    "meaning_en": "completely",
+    "usage": "níor ghearr sé balach é"
+  },
+  {
+    "position": 59,
+    "county": "maigh-eo",
+    "headword": "balach",
+    "meaning_en": "exactly",
+    "usage": null
+  },
+  {
+    "position": 60,
+    "county": "maigh-eo",
+    "headword": "baladh",
+    "meaning_en": null,
+    "usage": "madadh a' cur baladh, scenting, on the trail"
+  },
+  {
+    "position": 61,
+    "county": "maigh-eo",
+    "headword": "ball dóráin",
+    "meaning_en": "mole on skin",
+    "usage": "also applied to the parting of hair on each side of neck ar fhíor-chapall; this is somewhat like the deisealán on a pig's rump."
+  },
+  {
+    "position": 62,
+    "county": "maigh-eo",
+    "headword": "baltaí na bó",
+    "meaning_en": "cow's baren (note the first a is short)",
+    "usage": null
+  },
+  {
+    "position": 63,
+    "county": "maigh-eo",
+    "headword": "bánú",
+    "meaning_en": null,
+    "usage": "bhí an t-oileán le bánú .i. na daoine le n-a thréiscint, to be evacuated."
+  },
+  {
+    "position": 64,
+    "county": "maigh-eo",
+    "headword": "bárr",
+    "meaning_en": null,
+    "usage": "tá bár míoltógaí ann, a lot of midges (out this evening), they would eat you."
+  },
+  {
+    "position": 65,
+    "county": "maigh-eo",
+    "headword": "bárr-phéist",
+    "meaning_en": "ringworm",
+    "usage": null
+  },
+  {
+    "position": 66,
+    "county": "maigh-eo",
+    "headword": "barrach",
+    "meaning_en": null,
+    "usage": "a cíoradh baraigh, combing flax"
+  },
+  {
+    "position": 67,
+    "county": "maigh-eo",
+    "headword": "bascaéd",
+    "meaning_en": "flasket basket, or round skib, used for 'teeming' potatoes",
+    "usage": null
+  },
+  {
+    "position": 68,
+    "county": "maigh-eo",
+    "headword": "baslú",
+    "meaning_en": null,
+    "usage": "a baslú fataí"
+  },
+  {
+    "position": 69,
+    "county": "maigh-eo",
+    "headword": "bead",
+    "meaning_en": "is the call word used when calling a single goose (to food)",
+    "usage": null
+  },
+  {
+    "position": 70,
+    "county": "maigh-eo",
+    "headword": "beadaidhe",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 71,
+    "county": "maigh-eo",
+    "headword": "béal",
+    "meaning_en": null,
+    "usage": "tá tú cailltí púnáiltí i mbéal síogáin lá gimhridh (SBh), said of a person who has not the comfort of a hayshed, and has to stand in the face of a rick getting out fodder on a wet windy winter's day."
+  },
+  {
+    "position": 72,
+    "county": "maigh-eo",
+    "headword": "bean-ghabhair",
+    "meaning_en": "another name for the mionnán aerach or male snipe drumming in flight.",
+    "usage": null
+  },
+  {
+    "position": 73,
+    "county": "maigh-eo",
+    "headword": "beart",
+    "meaning_en": "A boy from Turlough near Castlebar once gave me the following description of a beart: When oats is cut and tied in sheaves it is then made into bearts to dry and season. The beart consists of 20 sheaves. Ten sheaves are first placed standing against each other five on each side. Then three sheaves are placed in openings left by the other sheaves, to strengthen it. Then four head-sheaves are tied on top of the others to keep the under sheaves dry. The beart is left in the field for a week or ten days to season. It may be left out for two or three weeks as no rain affects it.",
+    "usage": null
+  },
+  {
+    "position": 74,
+    "county": "maigh-eo",
+    "headword": "beartín Mhuire",
+    "meaning_en": "is another name for dréimire Muire (CN);",
+    "usage": "beart gon tsagart paráiste, stuca gon tséiplíneach, these were the proportionate amounts when paying tithes to the priest (Wm)."
+  },
+  {
+    "position": 75,
+    "county": "maigh-eo",
+    "headword": "beathaighthe",
+    "meaning_en": "fat, plump",
+    "usage": null
+  },
+  {
+    "position": 76,
+    "county": "maigh-eo",
+    "headword": "beilt",
+    "meaning_en": null,
+    "usage": "beilt ar shaighdiúr; also applied to a dog's collar"
+  },
+  {
+    "position": 77,
+    "county": "maigh-eo",
+    "headword": "béinn",
+    "meaning_en": null,
+    "usage": "A. Tá É. a' teacht aríst. B. Béinn Dé ort, a' bhfuil? (ML), and confirmed by (BR); the meaning seems to be something like 'Go to God, do you tell me so?' expressing a mixture of wonder and delight."
+  },
+  {
+    "position": 78,
+    "county": "maigh-eo",
+    "headword": "béinne",
+    "meaning_en": null,
+    "usage": "rinne siad béinne de (le buillí), they knocked him stiff"
+  },
+  {
+    "position": 79,
+    "county": "maigh-eo",
+    "headword": "beir",
+    "meaning_en": null,
+    "usage": "bhéarfadh sé scian ort, he would take a knife to you (ML); bheir sé air, the dog bit him (MC); bheir a' chearc, the hen laid (MR)"
+  },
+  {
+    "position": 80,
+    "county": "maigh-eo",
+    "headword": "bharamhail",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 81,
+    "county": "maigh-eo",
+    "headword": "bidhg",
+    "meaning_en": null,
+    "usage": "bás bíg, sudden death."
+  },
+  {
+    "position": 82,
+    "county": "maigh-eo",
+    "headword": "bileóg",
+    "meaning_en": "name of top of a local hill, site of the annual bonfire . . . See D. where one meaning is 'table leaf': this would describe the hill top exactly.",
+    "usage": "thuas ar a' mbileóig."
+  },
+  {
+    "position": 83,
+    "county": "maigh-eo",
+    "headword": "bin! bin! bin!",
+    "meaning_en": "call for turkeys (to food)",
+    "usage": null
+  },
+  {
+    "position": 84,
+    "county": "maigh-eo",
+    "headword": "bing",
+    "meaning_en": "an upward limit or ceiling to be set to the number of cattle to be taken in from each tenant for grazing on commons land",
+    "usage": "bing a bheith air"
+  },
+  {
+    "position": 85,
+    "county": "maigh-eo",
+    "headword": "blas do",
+    "meaning_en": "taste",
+    "usage": "blas dó go bhfeicidh tú, taste it. Bainne na bó agus (a) ól ar a blas, i. undiluted by water added"
+  },
+  {
+    "position": 86,
+    "county": "maigh-eo",
+    "headword": "blátháin",
+    "meaning_en": "pollock fry",
+    "usage": null
+  },
+  {
+    "position": 87,
+    "county": "maigh-eo",
+    "headword": "bláthmhar",
+    "meaning_en": "of work well done, neat and tasty, e.g. cocks of hay neatly headed off with súgáns on them",
+    "usage": "bláfar cuimscear, neat and tidy (of dress); well off: (tá siad) i n-a suí go bláfar."
+  },
+  {
+    "position": 88,
+    "county": "maigh-eo",
+    "headword": "bleacht",
+    "meaning_en": null,
+    "usage": "bó bhleacht ionnlaogh"
+  },
+  {
+    "position": 89,
+    "county": "maigh-eo",
+    "headword": "bliain chorr",
+    "meaning_en": "leap-year",
+    "usage": "chaon cheathrú bliain a bhíons bliain chorr ann."
+  },
+  {
+    "position": 90,
+    "county": "maigh-eo",
+    "headword": "blocán a'bhuaidh",
+    "meaning_en": "block of cork on a buoy",
+    "usage": null
+  },
+  {
+    "position": 91,
+    "county": "maigh-eo",
+    "headword": "bloinic",
+    "meaning_en": "fat, grease",
+    "usage": null
+  },
+  {
+    "position": 92,
+    "county": "maigh-eo",
+    "headword": "bó ghamhnaí",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 93,
+    "county": "maigh-eo",
+    "headword": "bó ghamhnaigh",
+    "meaning_en": "stripper cow",
+    "usage": null
+  },
+  {
+    "position": 94,
+    "county": "maigh-eo",
+    "headword": "bóbha",
+    "meaning_en": "call to an ass to stop, halt",
+    "usage": null
+  },
+  {
+    "position": 95,
+    "county": "maigh-eo",
+    "headword": "boc",
+    "meaning_en": "buck, lad (not complimentary)",
+    "usage": "'séard a bhí ann boc (AC); boc achrannach ar a mhisc, a contrary buck when drunk (HE)."
+  },
+  {
+    "position": 96,
+    "county": "maigh-eo",
+    "headword": "bocht",
+    "meaning_en": "a common meaning is miserly, mean",
+    "usage": null
+  },
+  {
+    "position": 97,
+    "county": "maigh-eo",
+    "headword": "bodail",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 98,
+    "county": "maigh-eo",
+    "headword": "bogach",
+    "meaning_en": "the usual word for peat bog",
+    "usage": null
+  },
+  {
+    "position": 99,
+    "county": "maigh-eo",
+    "headword": "boglus",
+    "meaning_en": "leaves of ragwort",
+    "usage": null
+  },
+  {
+    "position": 100,
+    "county": "maigh-eo",
+    "headword": "boilig an lae",
+    "meaning_en": "mid-day and after (in summer)",
+    "usage": "ní cóir bheith ag obair bhoilig a' lae"
+  },
+  {
+    "position": 101,
+    "county": "maigh-eo",
+    "headword": "bolag uisce",
+    "meaning_en": "the water-bag from a cow about to calve",
+    "usage": null
+  },
+  {
+    "position": 102,
+    "county": "maigh-eo",
+    "headword": "bolagán béice",
+    "meaning_en": "fuzzball",
+    "usage": "tá mo cheann i n-a bholagán béice agad, you have me moithered with the noise you are causing. In Westmeath the fuzzball is called a 'sheep's fart'."
+  },
+  {
+    "position": 103,
+    "county": "maigh-eo",
+    "headword": "boráiste",
+    "meaning_en": "charlock, which in other parts of the country is called praiseach",
+    "usage": null
+  },
+  {
+    "position": 104,
+    "county": "maigh-eo",
+    "headword": "botún",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 105,
+    "county": "maigh-eo",
+    "headword": "bráca",
+    "meaning_en": "hovels, bad houses",
+    "usage": null
+  },
+  {
+    "position": 106,
+    "county": "maigh-eo",
+    "headword": "bradán",
+    "meaning_en": "frog in asses' hoof",
+    "usage": null
+  },
+  {
+    "position": 107,
+    "county": "maigh-eo",
+    "headword": "bradhall",
+    "meaning_en": "cormorant",
+    "usage": null
+  },
+  {
+    "position": 108,
+    "county": "maigh-eo",
+    "headword": "breacadh",
+    "meaning_en": "roughening",
+    "usage": "a' breacadh na bróine le bior iarainn"
+  },
+  {
+    "position": 109,
+    "county": "maigh-eo",
+    "headword": "breacadh",
+    "meaning_en": "streaks of different colour, markings",
+    "usage": "tá breacadh an scadáin ionntú, .i. tá do lorgain breac ag a' tinidh (Sb). Vb.: ní caoirigh iad go mbreaca siad, ní ba go ndubha siad, sheep are not mature or full grown until they brighten in colour, nor cows until they become fully black (when younger, black cattle are usually brownish in colour) (MMt)."
+  },
+  {
+    "position": 110,
+    "county": "maigh-eo",
+    "headword": "bréag",
+    "meaning_en": null,
+    "usage": "níl mé a' cur bréige air, I'm not belying him"
+  },
+  {
+    "position": 111,
+    "county": "maigh-eo",
+    "headword": "bréan-lóib",
+    "meaning_en": "black rotten bog matter under blown sand at sea-edge. The slip (céibh) should have been built on rocks, but instead it was built on the bréanlóib, consequently had no proper foundation and did not last.",
+    "usage": null
+  },
+  {
+    "position": 112,
+    "county": "maigh-eo",
+    "headword": "bréan-lóib",
+    "meaning_en": null,
+    "usage": "cailín breabhsach, cailín óg leitheadach, prancing and showing off (MMt); bean bhreabhsach, bean a mbíonn a cuid gruaige foscailte agus i n-aimhréidh (TmB)."
+  },
+  {
+    "position": 113,
+    "county": "maigh-eo",
+    "headword": "Breathnach",
+    "meaning_en": null,
+    "usage": "Riocard a' Bhreathnaigh, Riocard a' Tower, was a well known seanachai"
+  },
+  {
+    "position": 114,
+    "county": "maigh-eo",
+    "headword": "bríce",
+    "meaning_en": "brick",
+    "usage": "chomh díreach leis a' mbríce"
+  },
+  {
+    "position": 115,
+    "county": "maigh-eo",
+    "headword": "brígh",
+    "meaning_en": null,
+    "usage": "faoi bhrí mo mhionna níl aon dath aige sin duithe ach orad liom-s', upon my oath he has none of it (sheep) more than I."
+  },
+  {
+    "position": 116,
+    "county": "maigh-eo",
+    "headword": "brionglán",
+    "meaning_en": "barb (on wire)",
+    "usage": null
+  },
+  {
+    "position": 117,
+    "county": "maigh-eo",
+    "headword": "broc",
+    "meaning_en": "badger",
+    "usage": "chomh fallsa le broc, as lasy as a badger."
+  },
+  {
+    "position": 118,
+    "county": "maigh-eo",
+    "headword": "brocach",
+    "meaning_en": "dirty, filthy",
+    "usage": "tá d'éadan bróch brocach salach"
+  },
+  {
+    "position": 119,
+    "county": "maigh-eo",
+    "headword": "brochán",
+    "meaning_en": "limpets boiled with flour",
+    "usage": null
+  },
+  {
+    "position": 120,
+    "county": "maigh-eo",
+    "headword": "brochán lom",
+    "meaning_en": "gruel",
+    "usage": null
+  },
+  {
+    "position": 121,
+    "county": "maigh-eo",
+    "headword": "bróg",
+    "meaning_en": null,
+    "usage": "marbh le bród, very pleased, delighted."
+  },
+  {
+    "position": 122,
+    "county": "maigh-eo",
+    "headword": "brógaí taidhbhs'",
+    "meaning_en": "young of dogfish, also young of skate",
+    "usage": null
+  },
+  {
+    "position": 123,
+    "county": "maigh-eo",
+    "headword": "broim",
+    "meaning_en": null,
+    "usage": "is fiúntáí broim ná brúcht (sean-ocal)"
+  },
+  {
+    "position": 124,
+    "county": "maigh-eo",
+    "headword": "broimíl",
+    "meaning_en": "farting",
+    "usage": null
+  },
+  {
+    "position": 125,
+    "county": "maigh-eo",
+    "headword": "brúghadh",
+    "meaning_en": "pressing towards",
+    "usage": null
+  },
+  {
+    "position": 126,
+    "county": "maigh-eo",
+    "headword": "brúghadh",
+    "meaning_en": null,
+    "usage": "tilleadh uisce a' brú análl, more rain coming; coming near the book, i. age for old age pension. a' brú ar a' leabhar"
+  },
+  {
+    "position": 127,
+    "county": "maigh-eo",
+    "headword": "bruicheallán",
+    "meaning_en": "a kind of sea-weed: mar sleámógaí iad; bonn mór orthú, mar charraigín; ar nós fataí.",
+    "usage": "Mí na mbruicheallán a tugtaí ar July; bhíodh deireadh na bhfataí cait"
+  },
+  {
+    "position": 128,
+    "county": "maigh-eo",
+    "headword": "bruídeáil",
+    "meaning_en": null,
+    "usage": "bruídeáileann sé .i. anfíogach (Sb), meaning that the dogfish is viviparous, giving birth to its young alive and not by laying eggs."
+  },
+  {
+    "position": 129,
+    "county": "maigh-eo",
+    "headword": "bruiméan",
+    "meaning_en": "some sea-bird",
+    "usage": null
+  },
+  {
+    "position": 130,
+    "county": "maigh-eo",
+    "headword": "bruíníneacht",
+    "meaning_en": null,
+    "usage": "vn. a' bruíníneacht, ag achrann, squabbling"
+  },
+  {
+    "position": 131,
+    "county": "maigh-eo",
+    "headword": "buacall",
+    "meaning_en": "a creeping plant growing in sand, somewhat like scutch-grass; it is used a' ceangailt na mbaoití ins na potaí (gliomach).",
+    "usage": null
+  },
+  {
+    "position": 132,
+    "county": "maigh-eo",
+    "headword": "buail",
+    "meaning_en": null,
+    "usage": "in common phr. bhuail air, he started, commenced determinedly, got going at."
+  },
+  {
+    "position": 133,
+    "county": "maigh-eo",
+    "headword": "buarach",
+    "meaning_en": "rope tied round cow's neck in byre",
+    "usage": null
+  },
+  {
+    "position": 134,
+    "county": "maigh-eo",
+    "headword": "Buile an Bhodaigh",
+    "meaning_en": "name of a constellation: thoir dtuaidh a bhíons sé, Lá'l Muire beag a bhíon sé le feiceál (Sb); this description would seem to indicate the Pleiades. See Pádraig Ó Moghráin in Béaloideas, xiii, pp. 166, 184. MCd described it as 3 réalt agus 4 réalt, while TmB mentioned seacht réalt, and added faoi fhéil Páraic tá sí thiar, faoi Nollaic ó dheas, which would indicate rather Oríon, perh. See also Celtica, xii, 182.",
+    "usage": null
+  },
+  {
+    "position": 135,
+    "county": "maigh-eo",
+    "headword": "builte ar",
+    "meaning_en": "beside, close to",
+    "usage": "bhí an caisleán buailte air, the castle was beside him, quite near him."
+  },
+  {
+    "position": 136,
+    "county": "maigh-eo",
+    "headword": "búirthín",
+    "meaning_en": "spancel ar a' dá chos tosaigh",
+    "usage": null
+  },
+  {
+    "position": 137,
+    "county": "maigh-eo",
+    "headword": "bun",
+    "meaning_en": null,
+    "usage": "tá bun gon uair seo air, seasfa sí, it will stand, i. the weather will remain fine, Tá bun maith orthú, they are well off, well to do."
+  },
+  {
+    "position": 138,
+    "county": "maigh-eo",
+    "headword": "bun a chúl",
+    "meaning_en": "well off",
+    "usage": "tá siad i n-a suí go bláfar bun a chúl .i. a dtastáil acú"
+  },
+  {
+    "position": 139,
+    "county": "maigh-eo",
+    "headword": "bun bárr",
+    "meaning_en": "entirely, totally",
+    "usage": null
+  },
+  {
+    "position": 140,
+    "county": "maigh-eo",
+    "headword": "bundún",
+    "meaning_en": null,
+    "usage": "tá sé go bhundún air"
+  },
+  {
+    "position": 141,
+    "county": "maigh-eo",
+    "headword": "búst",
+    "meaning_en": "a thick ill-mannered fellow, a surly boor",
+    "usage": null
+  },
+  {
+    "position": 142,
+    "county": "maigh-eo",
+    "headword": "ca fhad",
+    "meaning_en": null,
+    "usage": "cád a fuai' tú? go dtí tiompó ar ais"
+  },
+  {
+    "position": 143,
+    "county": "maigh-eo",
+    "headword": "cábán",
+    "meaning_en": "tent (to sell drink, etc.)",
+    "usage": "na cábáin ag na rásaí"
+  },
+  {
+    "position": 144,
+    "county": "maigh-eo",
+    "headword": "cabhail",
+    "meaning_en": null,
+    "usage": "bhí an teach i n-oirde cabhlach agam, sidewall high"
+  },
+  {
+    "position": 145,
+    "county": "maigh-eo",
+    "headword": "cábhóg",
+    "meaning_en": "chough",
+    "usage": null
+  },
+  {
+    "position": 146,
+    "county": "maigh-eo",
+    "headword": "cabhsae",
+    "meaning_en": "an old stony bare place",
+    "usage": null
+  },
+  {
+    "position": 147,
+    "county": "maigh-eo",
+    "headword": "caidir",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 148,
+    "county": "maigh-eo",
+    "headword": "cáilidheacht",
+    "meaning_en": "character, nature",
+    "usage": "(chuile shórt) a' rith le na cháilidheacht héin, everything in nature follows its own instinct (Sb); rinne mé é do réir mo cháilidheacht, mar facthas dom go mba chóir a dhéanamh; 'tá cáilidheacht trom ort' adéarfaí le duine a bheith a' tuitim i n-a cholladh lá fliuch (TmB)."
+  },
+  {
+    "position": 149,
+    "county": "maigh-eo",
+    "headword": "cailleach",
+    "meaning_en": "a súgán rolled up",
+    "usage": null
+  },
+  {
+    "position": 150,
+    "county": "maigh-eo",
+    "headword": "caimbéal",
+    "meaning_en": null,
+    "usage": "bhí mé ag ithe an chaimbéal íochtair duíom héin faoi n-a dhéanamh, I regretted very much having done it"
+  },
+  {
+    "position": 151,
+    "county": "maigh-eo",
+    "headword": "caindéal",
+    "meaning_en": "bottom of barrel (stanna)",
+    "usage": null
+  },
+  {
+    "position": 152,
+    "county": "maigh-eo",
+    "headword": "caipín a't-sonais",
+    "meaning_en": "caul",
+    "usage": "an té a mbíonn a' caipín seo ar a cheann nuair a thigeann sé ar a' tsaol, ní féidir a bháthadh (Sb); ní bheith sé gearr i n-airigead (MMt)."
+  },
+  {
+    "position": 153,
+    "county": "maigh-eo",
+    "headword": "cáir",
+    "meaning_en": "grimace",
+    "usage": "anc a' cáir atá air = draoch / dri: x/"
+  },
+  {
+    "position": 154,
+    "county": "maigh-eo",
+    "headword": "caislín",
+    "meaning_en": "wheat-ear; considered to be one of the \"sleepers\"",
+    "usage": null
+  },
+  {
+    "position": 155,
+    "county": "maigh-eo",
+    "headword": "cáithleán",
+    "meaning_en": "a kind of sea-grass: a' fás ar a' milliúir",
+    "usage": null
+  },
+  {
+    "position": 156,
+    "county": "maigh-eo",
+    "headword": "camadán",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 157,
+    "county": "maigh-eo",
+    "headword": "cambaí",
+    "meaning_en": "crowd(s), host(s)",
+    "usage": "bhí cambaí ann (MC); na cambaí daoiní (a host of fairies) ar a' tsraith sin ar chúl a' droichidín (Wm)"
+  },
+  {
+    "position": 158,
+    "county": "maigh-eo",
+    "headword": "camóg",
+    "meaning_en": ".i. maide cam (AL), a \"crooky\" stick such as a walking stick.",
+    "usage": null
+  },
+  {
+    "position": 159,
+    "county": "maigh-eo",
+    "headword": "cámóg dheirg",
+    "meaning_en": "temporal artery",
+    "usage": null
+  },
+  {
+    "position": 160,
+    "county": "maigh-eo",
+    "headword": "cánóg",
+    "meaning_en": "name of sea-bird, perh. shearwater",
+    "usage": null
+  },
+  {
+    "position": 161,
+    "county": "maigh-eo",
+    "headword": "canúint",
+    "meaning_en": "I have heard canúin applied to the 'monotone' intonation that was peculiar to the North Island of Inishkea.",
+    "usage": "a cur canúint ar a gcaint, putting on an 'accent'"
+  },
+  {
+    "position": 162,
+    "county": "maigh-eo",
+    "headword": "caoch",
+    "meaning_en": null,
+    "usage": "bhí sí á dhalladh caoch le draoidheachta, she was beating him blind with magic."
+  },
+  {
+    "position": 163,
+    "county": "maigh-eo",
+    "headword": "caológ riabhach",
+    "meaning_en": "the little bird that follows the cuckoo",
+    "usage": null
+  },
+  {
+    "position": 164,
+    "county": "maigh-eo",
+    "headword": "capóg",
+    "meaning_en": "dock leaf",
+    "usage": null
+  },
+  {
+    "position": 165,
+    "county": "maigh-eo",
+    "headword": "caróg",
+    "meaning_en": "a small species of seagull, most likely the black-headed gull. There were big numbers of carógs on the island of Moyinnish (?) in Clew Bay where limestone was got to build Inishkea school",
+    "usage": null
+  },
+  {
+    "position": 166,
+    "county": "maigh-eo",
+    "headword": "carraighe",
+    "meaning_en": "rough scabby skin on legs of hens",
+    "usage": null
+  },
+  {
+    "position": 167,
+    "county": "maigh-eo",
+    "headword": "cársánach",
+    "meaning_en": "plant with short needly leaves and roots like ?-grass; having yellow flower in July; 'would make a mattress or line a collar'",
+    "usage": null
+  },
+  {
+    "position": 168,
+    "county": "maigh-eo",
+    "headword": "cead a'bhealaigh",
+    "meaning_en": "have nothing to do with him, let him alone, don't heed him",
+    "usage": null
+  },
+  {
+    "position": 169,
+    "county": "maigh-eo",
+    "headword": "ceann",
+    "meaning_en": null,
+    "usage": "i gceann cúnamh Dé is na Maighdine, with the help of God and the Virgin"
+  },
+  {
+    "position": 170,
+    "county": "maigh-eo",
+    "headword": "ceann ar slóg",
+    "meaning_en": "sea-pink; PsC cast doubt on this meaning",
+    "usage": null
+  },
+  {
+    "position": 171,
+    "county": "maigh-eo",
+    "headword": "ceannruán",
+    "meaning_en": "See Éigse vi, 37, for description. This I take to be the common goby; cf. Larousse: gobidés . . . osseux, de petite taille, avec une grosse téte, des yeux plus ou moins saillants, des nageoires pelviennes. Young lads in Tóin na hOltaí collect them in buckets to feed cats: íosaidh na cait iad.",
+    "usage": null
+  },
+  {
+    "position": 172,
+    "county": "maigh-eo",
+    "headword": "ceapim",
+    "meaning_en": "in Erris is confined to the meaning 'catch, stop, intercept'; has approximately the meaning of Latin capere; it is not used in the sense of 'think'.",
+    "usage": null
+  },
+  {
+    "position": 173,
+    "county": "maigh-eo",
+    "headword": "cearachaill",
+    "meaning_en": "maide rounáiltí ó bhalla go balla; hens roost on it.",
+    "usage": null
+  },
+  {
+    "position": 174,
+    "county": "maigh-eo",
+    "headword": "ceartharnach",
+    "meaning_en": "kern, mercenary (?)",
+    "usage": "heard only in the very common proverb 'is fada an saol ceatharnaigh bliain' (MCd); dá mbeitheá ag caint ar rud a dhéanamh, déarfaí leat é (MC); 'up today and down tomorrow', therefore do not say what you'll do in the future, you may not be able to do it, you may not be alive Cf. SFC, 2386"
+  },
+  {
+    "position": 175,
+    "county": "maigh-eo",
+    "headword": "ceathramha caorach",
+    "meaning_en": "lamb's quarter, common orache (D); slat a' fás ins na fataí, ar thalamh gainí; á bruith ar fheóil, it is boiled with meat (CN); called 'fat hen' in England (PsC).",
+    "usage": null
+  },
+  {
+    "position": 176,
+    "county": "maigh-eo",
+    "headword": "céim",
+    "meaning_en": "limp",
+    "usage": "bhí céim ann, bhí sé bacach; céim bhacaíl', a lame step"
+  },
+  {
+    "position": 177,
+    "county": "maigh-eo",
+    "headword": "ceirteóg",
+    "meaning_en": "rag tied on a cow's tail",
+    "usage": null
+  },
+  {
+    "position": 178,
+    "county": "maigh-eo",
+    "headword": "ceirthín",
+    "meaning_en": "a plaster: plástar a chuirfeá le cois tinn.",
+    "usage": null
+  },
+  {
+    "position": 179,
+    "county": "maigh-eo",
+    "headword": "céiseóg",
+    "meaning_en": "a young sow having first litter",
+    "usage": "banbh céiseóige ar a' gcéad ál, a piglet of a sow's first litter."
+  },
+  {
+    "position": 180,
+    "county": "maigh-eo",
+    "headword": "ceó bruithinn",
+    "meaning_en": "heat haze in fine weather",
+    "usage": null
+  },
+  {
+    "position": 181,
+    "county": "maigh-eo",
+    "headword": "chugad",
+    "meaning_en": "beware! look out!",
+    "usage": "chugad a' luaith! said by a woman when putting out ashes; chugad a' púc', beware of the pooka! common in the phr. níor úirt siad chugad a' púc' liom (I met them on the road) and they said not a word, spoke not a word to me"
+  },
+  {
+    "position": 182,
+    "county": "maigh-eo",
+    "headword": "cian",
+    "meaning_en": null,
+    "usage": "níor mhallaigh (mé) le fada na gcian, I haven't cursed for ages and ages"
+  },
+  {
+    "position": 183,
+    "county": "maigh-eo",
+    "headword": "cionn",
+    "meaning_en": null,
+    "usage": "goil ina chionn, to undertake it; le goil i gcionn na Gaeilge ceart, to go into, examine, or take up correct, proper Irish"
+  },
+  {
+    "position": 184,
+    "county": "maigh-eo",
+    "headword": "ciontaí",
+    "meaning_en": null,
+    "usage": "ní rabh ciontaí ar bith aige liom-s, he had no fault to find with me"
+  },
+  {
+    "position": 185,
+    "county": "maigh-eo",
+    "headword": "ciotach",
+    "meaning_en": null,
+    "usage": "dhá cheann chiotach, two left ones i. shoes"
+  },
+  {
+    "position": 186,
+    "county": "maigh-eo",
+    "headword": "ciotóg",
+    "meaning_en": null,
+    "usage": "ag oibriú na ciotóige, giving money as a bribe"
+  },
+  {
+    "position": 187,
+    "county": "maigh-eo",
+    "headword": "cipín",
+    "meaning_en": null,
+    "usage": "lá sa gcipín .i. lá sa mbaile, a wet day when one can't do any work"
+  },
+  {
+    "position": 188,
+    "county": "maigh-eo",
+    "headword": "clabhtaí",
+    "meaning_en": "clouds",
+    "usage": null
+  },
+  {
+    "position": 189,
+    "county": "maigh-eo",
+    "headword": "cláimín",
+    "meaning_en": "cane or light stick taken to children when bold",
+    "usage": "Around Balla the horns of cora bocs (i.e. mountain sheep) ar called cáimíns."
+  },
+  {
+    "position": 190,
+    "county": "maigh-eo",
+    "headword": "clamhán",
+    "meaning_en": "name of plant",
+    "usage": null
+  },
+  {
+    "position": 191,
+    "county": "maigh-eo",
+    "headword": "claoidhte",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 192,
+    "county": "maigh-eo",
+    "headword": "cleamáil",
+    "meaning_en": null,
+    "usage": "a' cleamáil gamhnaí, sqeezing calves, i. castrating with burdizzo."
+  },
+  {
+    "position": 193,
+    "county": "maigh-eo",
+    "headword": "cleas",
+    "meaning_en": null,
+    "usage": "ní rabh cor ná cleas as, (the boy) was very quiet and well conducted in a strange house"
+  },
+  {
+    "position": 194,
+    "county": "maigh-eo",
+    "headword": "cléat",
+    "meaning_en": null,
+    "usage": "a' tolladh cléat curaigh"
+  },
+  {
+    "position": 195,
+    "county": "maigh-eo",
+    "headword": "cleiteach",
+    "meaning_en": null,
+    "usage": "tá an garla cleiteach ar a' gcirc, the hen is in her pen-feathers"
+  },
+  {
+    "position": 196,
+    "county": "maigh-eo",
+    "headword": "climirt",
+    "meaning_en": "\"strippings\". This same form I heard at Cor Fhéilim near Ballyvary.",
+    "usage": null
+  },
+  {
+    "position": 197,
+    "county": "maigh-eo",
+    "headword": "cloch fhaobhair",
+    "meaning_en": "sharpening stone",
+    "usage": "c. aoil, lime-stone; c. ghlas, schist or quartz; c. bhreac, granite; c. gheal, white , metamorphosed rock, ach gan a ligean (isteach) i n-aon bhildáil (i ngeall ar) phisleógaí"
+  },
+  {
+    "position": 198,
+    "county": "maigh-eo",
+    "headword": "cloigíneacht",
+    "meaning_en": null,
+    "usage": "a' cloigíneacht orthaí"
+  },
+  {
+    "position": 199,
+    "county": "maigh-eo",
+    "headword": "clómhar",
+    "meaning_en": "clover",
+    "usage": null
+  },
+  {
+    "position": 200,
+    "county": "maigh-eo",
+    "headword": "cluaisín",
+    "meaning_en": "a kind of shell-fish: bia ionntú, mar eistirí",
+    "usage": null
+  },
+  {
+    "position": 201,
+    "county": "maigh-eo",
+    "headword": "cluanach",
+    "meaning_en": null,
+    "usage": "a' chluanach dhearg, knot-grass, red-legs, polygonum persicaria; a' chluanach bhán, pale-flowered knot-grass, polygonum lapathifolium: spot geal air. D. gives glúineach dhearg, persicaria, which seems to be taken from N. Colgan 'Gaelic Plant and Animal Names', in Section 1 of Clare Island Survey."
+  },
+  {
+    "position": 202,
+    "county": "maigh-eo",
+    "headword": "cluas",
+    "meaning_en": null,
+    "usage": "bain a' chluas duíom má thugann tú an lámh faoi'n talamh leat (ars an tAthair Mánus) (Sb). = 'mark my words'."
+  },
+  {
+    "position": 203,
+    "county": "maigh-eo",
+    "headword": "cluiche",
+    "meaning_en": "shoal",
+    "usage": "cluife gliomach i mbárr an uisce (agus an-torann á dhéanamh acú leis) na crúbaí"
+  },
+  {
+    "position": 204,
+    "county": "maigh-eo",
+    "headword": "clúmhach coilm",
+    "meaning_en": "pigeon's down, to sleep on it - ní chaillfí go deó thú",
+    "usage": null
+  },
+  {
+    "position": 205,
+    "county": "maigh-eo",
+    "headword": "cnádán",
+    "meaning_en": "burdock;",
+    "usage": null
+  },
+  {
+    "position": 206,
+    "county": "maigh-eo",
+    "headword": "cnádán",
+    "meaning_en": "also the generic name for 'thistle'.",
+    "usage": null
+  },
+  {
+    "position": 207,
+    "county": "maigh-eo",
+    "headword": "cnáimh do dhéid",
+    "meaning_en": "your jaw-bone",
+    "usage": null
+  },
+  {
+    "position": 208,
+    "county": "maigh-eo",
+    "headword": "cnáimhíní",
+    "meaning_en": "pin bones (in cow)",
+    "usage": "tá na cnáimhíní tití, the pins are down, she is ready for calving"
+  },
+  {
+    "position": 209,
+    "county": "maigh-eo",
+    "headword": "cnap",
+    "meaning_en": "shower; plur. in -aíl",
+    "usage": "go mbeidh crapaíl tráthnónaí agus toirní"
+  },
+  {
+    "position": 210,
+    "county": "maigh-eo",
+    "headword": "cnapan",
+    "meaning_en": "a heap",
+    "usage": null
+  },
+  {
+    "position": 211,
+    "county": "maigh-eo",
+    "headword": "cnuas",
+    "meaning_en": "a collection of scraps (of bread given to the hens)",
+    "usage": "fragments: an gáladh - rinne sé cruas gon gheat', and made bits of the gate"
+  },
+  {
+    "position": 212,
+    "county": "maigh-eo",
+    "headword": "cnuas",
+    "meaning_en": "a crowd (at hay-making)",
+    "usage": null
+  },
+  {
+    "position": 213,
+    "county": "maigh-eo",
+    "headword": "codal",
+    "meaning_en": "octopus (?): séidfe sé suas é héin a cho mór!",
+    "usage": "codal go dh'fhear .i. slíomadóir go dh'fhear, he is no good for any one"
+  },
+  {
+    "position": 214,
+    "county": "maigh-eo",
+    "headword": "codramanta",
+    "meaning_en": "dirty, \"clotty\"",
+    "usage": "c. le bainne, \"clotty\" with milk, not hygienic (ML); bróch salach, codramant' (Sb)."
+  },
+  {
+    "position": 215,
+    "county": "maigh-eo",
+    "headword": "coimsgear",
+    "meaning_en": null,
+    "usage": "cailín deas coimsgear, a neat and tidy girl (PsC); bláfar coimsgear, neat and tidy."
+  },
+  {
+    "position": 216,
+    "county": "maigh-eo",
+    "headword": "coinic",
+    "meaning_en": "current (in sea).",
+    "usage": null
+  },
+  {
+    "position": 217,
+    "county": "maigh-eo",
+    "headword": "coinín",
+    "meaning_en": null,
+    "usage": "coincí ar a' bpuíopa cailc' i. the little stem underneath for drainage on clay pipe"
+  },
+  {
+    "position": 218,
+    "county": "maigh-eo",
+    "headword": "coinín",
+    "meaning_en": null,
+    "usage": "coinín as poll, maide as coill, breac ar a' tuinn, (to take any one of these) níl aon pheacadh ionn"
+  },
+  {
+    "position": 219,
+    "county": "maigh-eo",
+    "headword": "cóir",
+    "meaning_en": null,
+    "usage": "níl éinne a fhanans le cóir nach bhfánn é (sean-ocal)"
+  },
+  {
+    "position": 220,
+    "county": "maigh-eo",
+    "headword": "coirbhthe",
+    "meaning_en": "cross, short-tempered",
+    "usage": "fear coirbthí, a cross man, would jump at you; tá sé coirbthí inniú, níl aon ghráinne tobac aige"
+  },
+  {
+    "position": 221,
+    "county": "maigh-eo",
+    "headword": "coirceóg",
+    "meaning_en": "a doubled stook of corn",
+    "usage": null
+  },
+  {
+    "position": 222,
+    "county": "maigh-eo",
+    "headword": "coirdín fidháin",
+    "meaning_en": "wild carrot: bláth a' mheachain air, bláth bán mar a' fuarán: an bonn (a' fréamh) go maith le n-ith",
+    "usage": null
+  },
+  {
+    "position": 223,
+    "county": "maigh-eo",
+    "headword": "coirín",
+    "meaning_en": "coirín a bhíof acú a' fiuchadh an uisc' before they had kettles and pots",
+    "usage": null
+  },
+  {
+    "position": 224,
+    "county": "maigh-eo",
+    "headword": "col sgartha",
+    "meaning_en": "divorce",
+    "usage": null
+  },
+  {
+    "position": 225,
+    "county": "maigh-eo",
+    "headword": "colg",
+    "meaning_en": null,
+    "usage": "'Tá colg air' adéarfaí faoi mhadadh a bheith ag goil a' troid, with the hair standing (ruffled) on him, ready for fight."
+  },
+  {
+    "position": 226,
+    "county": "maigh-eo",
+    "headword": "colpach",
+    "meaning_en": "heifer",
+    "usage": "bainne 'un a' laoigh agus féar 'un na colpaí´ (sean-ocal)"
+  },
+  {
+    "position": 227,
+    "county": "maigh-eo",
+    "headword": "comh-aois",
+    "meaning_en": null,
+    "usage": "comh-aois Mháire í, she is the same age as Máire"
+  },
+  {
+    "position": 228,
+    "county": "maigh-eo",
+    "headword": "comh-dheasach",
+    "meaning_en": "ambi-dexterous",
+    "usage": null
+  },
+  {
+    "position": 229,
+    "county": "maigh-eo",
+    "headword": "comhráidhteach",
+    "meaning_en": null,
+    "usage": "c. maith, a good conversationalist"
+  },
+  {
+    "position": 230,
+    "county": "maigh-eo",
+    "headword": "comhthrom",
+    "meaning_en": "fair, middling",
+    "usage": "what weight is this fish? tá meáchan cothrom ann, it is a fair weight; trí unsa (tobac) sa tseachtain, sin cathamh cothrom, that's fair smoking; cé' chaoi bhfuil na fataí agaibh? níl siad ach cothrom; sgoith fhataí cothroma, mixed middling potatoes, níl siad ionmholta ná ioncháinte annsin"
+  },
+  {
+    "position": 231,
+    "county": "maigh-eo",
+    "headword": "conacra",
+    "meaning_en": "conacre",
+    "usage": null
+  },
+  {
+    "position": 232,
+    "county": "maigh-eo",
+    "headword": "conascar",
+    "meaning_en": null,
+    "usage": "leis a gconascar, at nightfall"
+  },
+  {
+    "position": 233,
+    "county": "maigh-eo",
+    "headword": "conráiteach",
+    "meaning_en": null,
+    "usage": "tá sé conráiteach go maith, troublesome"
+  },
+  {
+    "position": 234,
+    "county": "maigh-eo",
+    "headword": "coscair",
+    "meaning_en": null,
+    "usage": "chascair me ag a' diabhal é deifir a dhéanamh, I shouted at him and heaped curses on him to hurry up."
+  },
+  {
+    "position": 235,
+    "county": "maigh-eo",
+    "headword": "coscair",
+    "meaning_en": null,
+    "usage": "ag imeacht i n-a gcosaí, going bare-footed; cf. Castlebar English 'in their feet', id. a cur dá cosaí, to kill her"
+  },
+  {
+    "position": 236,
+    "county": "maigh-eo",
+    "headword": "crainn siar",
+    "meaning_en": null,
+    "usage": "cuirfe muid crainn siar, we'll cast lots, using a long straw and a short one"
+  },
+  {
+    "position": 237,
+    "county": "maigh-eo",
+    "headword": "crann snadhmtha",
+    "meaning_en": "prob. the creeping willow, salix repens; its roots are boiled to cure the garla trua, a waisting disease in cattle; a mbruith sin - a' sú cho dubh le pórtar",
+    "usage": null
+  },
+  {
+    "position": 238,
+    "county": "maigh-eo",
+    "headword": "crapaim",
+    "meaning_en": null,
+    "usage": "(1) roll up (sleeves/clothes): bhí a chuid éadaigh crapthaí suas go dtI a chuid glúnaí (JL); (2) contract: fan go gcrapa sé na méaraí."
+  },
+  {
+    "position": 239,
+    "county": "maigh-eo",
+    "headword": "créatúireacht",
+    "meaning_en": "cheating",
+    "usage": "a déanamh c. mhór oram"
+  },
+  {
+    "position": 240,
+    "county": "maigh-eo",
+    "headword": "criogaire",
+    "meaning_en": "cricket (BS); she has the same pronunciation for 'cigire'.",
+    "usage": null
+  },
+  {
+    "position": 241,
+    "county": "maigh-eo",
+    "headword": "crios",
+    "meaning_en": "belt (on sheaf of corn), but a soldier's belt is beilt.",
+    "usage": null
+  },
+  {
+    "position": 242,
+    "county": "maigh-eo",
+    "headword": "cró críoch",
+    "meaning_en": "finishing touch (on work)",
+    "usage": "an cró críoch a chur air."
+  },
+  {
+    "position": 243,
+    "county": "maigh-eo",
+    "headword": "crosta",
+    "meaning_en": "bold, ill-mannered (of children)",
+    "usage": "bó chrost', a \"wicked\" cow."
+  },
+  {
+    "position": 244,
+    "county": "maigh-eo",
+    "headword": "cruach Pháraic",
+    "meaning_en": "broad-leaved plantain",
+    "usage": null
+  },
+  {
+    "position": 245,
+    "county": "maigh-eo",
+    "headword": "crúbach",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 246,
+    "county": "maigh-eo",
+    "headword": "crupaim",
+    "meaning_en": "shrink",
+    "usage": "crupaim is intransitive and is differentiated from crapaim above, which is transitive and means 'to contract, retract, withdraw': a' crupadh le aois, shrinkin with age; tá na nóiníní a' crupadh isteach leis a' driúchta, the daisies are closing up under the dew. The two participles are combined to form one of those 'twin' constructions which are so expressive and common in the dialect: crupthaí crapthaí, strangled and bent under weight of curach carrying it up on to the shingle beach"
+  },
+  {
+    "position": 247,
+    "county": "maigh-eo",
+    "headword": "cruthú",
+    "meaning_en": "act of arguing",
+    "usage": "beirt a' cruthú ar a chéilí, two trying to put each other down in argument"
+  },
+  {
+    "position": 248,
+    "county": "maigh-eo",
+    "headword": "cruthú",
+    "meaning_en": "rich feeding quality (in land)",
+    "usage": "tá árd-chruthú ann, there is great feeding in it; beidh a' cruthú sa bhfairsingeacht, there is always good return, good grazing, from a wide extensive scope of land"
+  },
+  {
+    "position": 249,
+    "county": "maigh-eo",
+    "headword": "cú",
+    "meaning_en": "greyhound",
+    "usage": null
+  },
+  {
+    "position": 250,
+    "county": "maigh-eo",
+    "headword": "cuaille bata",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 251,
+    "county": "maigh-eo",
+    "headword": "cuais",
+    "meaning_en": "at seashore, hole wherein crab is found",
+    "usage": null
+  },
+  {
+    "position": 252,
+    "county": "maigh-eo",
+    "headword": "cuaiseáin",
+    "meaning_en": "cavities in peat before it is cut",
+    "usage": "tá cuaiseáin ann"
+  },
+  {
+    "position": 253,
+    "county": "maigh-eo",
+    "headword": "cuan",
+    "meaning_en": "litter (of pups or kittens)",
+    "usage": "cuan pisíní"
+  },
+  {
+    "position": 254,
+    "county": "maigh-eo",
+    "headword": "cúb",
+    "meaning_en": null,
+    "usage": "tá cúb aicí, said of a pup lying between the forelegs of its mother."
+  },
+  {
+    "position": 255,
+    "county": "maigh-eo",
+    "headword": "cuiléar",
+    "meaning_en": "quarry",
+    "usage": null
+  },
+  {
+    "position": 256,
+    "county": "maigh-eo",
+    "headword": "cuileat muileat",
+    "meaning_en": "the knave of diamonds",
+    "usage": null
+  },
+  {
+    "position": 257,
+    "county": "maigh-eo",
+    "headword": "curach a' dá éadan fadó",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 258,
+    "county": "maigh-eo",
+    "headword": "cúrsaí",
+    "meaning_en": "as regards",
+    "usage": "ach cúrsaí airigead dó, bhí neart aige, but as for money, he had plenty of it."
+  },
+  {
+    "position": 259,
+    "county": "maigh-eo",
+    "headword": "cuthail",
+    "meaning_en": "shy, bashful",
+    "usage": null
+  },
+  {
+    "position": 260,
+    "county": "maigh-eo",
+    "headword": "dabhaidh",
+    "meaning_en": "holy well (St. Deirbhile's in Faulmore; lucht dabhch, people who come to make visits or do stations at the holy well, usually to seek cure of some eye ailment. In the old church in Faulmore there is a stone which holds some water: nigh do shúilí ann agus abair an phaidir seo: 'uisce cloch gan iarraidh, ní gad iarraidh thainic mé, ach thárlaigh gur casadh an bealach mé, is gad iarraidh atá mé anois'.",
+    "usage": "lucht dabhch"
+  },
+  {
+    "position": 261,
+    "county": "maigh-eo",
+    "headword": "dall caochán",
+    "meaning_en": "owl",
+    "usage": null
+  },
+  {
+    "position": 262,
+    "county": "maigh-eo",
+    "headword": "dath",
+    "meaning_en": null,
+    "usage": "a dhath, with neg. nothing, gan a dhath, free, gratis."
+  },
+  {
+    "position": 263,
+    "county": "maigh-eo",
+    "headword": "dath na gcloch",
+    "meaning_en": "a lichen-like scabby growth on stones used to dye wool",
+    "usage": "cuireann sé dath buí ar an olainn (stocaí)"
+  },
+  {
+    "position": 264,
+    "county": "maigh-eo",
+    "headword": "dé",
+    "meaning_en": "spark",
+    "usage": "níl dé ná deatach inntí, said of a bad, nearly dead, fire (MC). bhí an dé i bhfear acú, one of them still had life in him (when taken out of the water)."
+  },
+  {
+    "position": 265,
+    "county": "maigh-eo",
+    "headword": "deabhal",
+    "meaning_en": "devil",
+    "usage": "in the alliterative doublet deabhal ná deamhan / diún/"
+  },
+  {
+    "position": 266,
+    "county": "maigh-eo",
+    "headword": "deachmhaidh",
+    "meaning_en": null,
+    "usage": "airigead deachmhaidh, tithes money"
+  },
+  {
+    "position": 267,
+    "county": "maigh-eo",
+    "headword": "deannóid",
+    "meaning_en": "a cool sting in the air (especially in the evening with north wind)",
+    "usage": "tá deannóidín beag fuar ann"
+  },
+  {
+    "position": 268,
+    "county": "maigh-eo",
+    "headword": "deara",
+    "meaning_en": null,
+    "usage": "in phr. thug mé faoi ndeara, I noticed (MR). fá deara 'caused' does not seem to be used in Erris."
+  },
+  {
+    "position": 269,
+    "county": "maigh-eo",
+    "headword": "dearc",
+    "meaning_en": null,
+    "usage": "an, n. L. Ua(igh) na Deirc (thíos faoi tower Acl) is the mid-day mark for the people of Faulmore, i. when the sun is directly over it"
+  },
+  {
+    "position": 270,
+    "county": "maigh-eo",
+    "headword": "deascadh",
+    "meaning_en": "dregs, lees",
+    "usage": null
+  },
+  {
+    "position": 271,
+    "county": "maigh-eo",
+    "headword": "déin",
+    "meaning_en": null,
+    "usage": "in phr. faoi dhéin(t), for, to get, collect especially animals: faoi dhéin caorach, to collect sheep (on mt): faoi n-a ndéint (to go) for them, i. cows on hill. ar fháirnis, to get, is used in reference to eggs: be' mé ag goil suas ar fháirnis uibheachaí, to get some eggs (at a house)"
+  },
+  {
+    "position": 272,
+    "county": "maigh-eo",
+    "headword": "deireannach",
+    "meaning_en": "lately, of late",
+    "usage": "an ceann deireannach gon tSathairne, late Saturday evening"
+  },
+  {
+    "position": 273,
+    "county": "maigh-eo",
+    "headword": "deóiríneacht",
+    "meaning_en": null,
+    "usage": "i gcónaí a' deóiríneacht, always whining, whinging"
+  },
+  {
+    "position": 274,
+    "county": "maigh-eo",
+    "headword": "díon",
+    "meaning_en": null,
+    "usage": "níl díon deór sa teach, tá fearthainn anuas ann"
+  },
+  {
+    "position": 275,
+    "county": "maigh-eo",
+    "headword": "díth",
+    "meaning_en": null,
+    "usage": "gan díth ná dolaidh a dhéanamh go dhuine ar bith, to do no harm to anyone"
+  },
+  {
+    "position": 276,
+    "county": "maigh-eo",
+    "headword": "díth dóich",
+    "meaning_en": null,
+    "usage": "na préacháin a' déanamh dí dóich air ann, the crows doing destruction to his crops there (Sb); a' déanamh dí dóich ar do chómhars, wronging your neighbour, rash judging him (MMT); a' déanamh dí dóich air, éagóir (TmB); dí dóich, rud mí-chéart (AL). Cf. Béaloideas, xiii, 224: bhí siad a' dianamh dí-dóich thart i nÉirinn (.i. arm Shasanaí) in a story from Ballycroy, and glossed 'outrage, harm', by the sgéaluí."
+  },
+  {
+    "position": 277,
+    "county": "maigh-eo",
+    "headword": "do-chlaoidhte",
+    "meaning_en": "indefatigable",
+    "usage": "ní rabh sé láidir, ach bhí sé 'do-chlaoidht"
+  },
+  {
+    "position": 278,
+    "county": "maigh-eo",
+    "headword": "dochar",
+    "meaning_en": null,
+    "usage": "beag a' dochar dhuit náire a bheith ort, you should be ashamed of yourself"
+  },
+  {
+    "position": 279,
+    "county": "maigh-eo",
+    "headword": "docsa",
+    "meaning_en": "box",
+    "usage": "bhuail sé le docsa mé, he struck me a box on the ear"
+  },
+  {
+    "position": 280,
+    "county": "maigh-eo",
+    "headword": "dóghín",
+    "meaning_en": null,
+    "usage": "an dóghín, the little miserable two (of diamonds), dó + ín."
+  },
+  {
+    "position": 281,
+    "county": "maigh-eo",
+    "headword": "doigh buar",
+    "meaning_en": "scour",
+    "usage": null
+  },
+  {
+    "position": 282,
+    "county": "maigh-eo",
+    "headword": "dóighiúil",
+    "meaning_en": "pleasant, decent",
+    "usage": null
+  },
+  {
+    "position": 283,
+    "county": "maigh-eo",
+    "headword": "dolaidh",
+    "meaning_en": "harm, damage",
+    "usage": "said of weather: níl aon dolaidh air, it won't rain much"
+  },
+  {
+    "position": 284,
+    "county": "maigh-eo",
+    "headword": "dóráinín",
+    "meaning_en": null,
+    "usage": "is tú an dóráinín, tá tú iarrth', your are the silly little thing, you're daft"
+  },
+  {
+    "position": 285,
+    "county": "maigh-eo",
+    "headword": "dósta",
+    "meaning_en": null,
+    "usage": "lá dósta, lá sceataidh, lá a mbeith gaoth láidir is fearthainn chruaidh"
+  },
+  {
+    "position": 286,
+    "county": "maigh-eo",
+    "headword": "draid",
+    "meaning_en": null,
+    "usage": "draid mhaith fhiacla aige, a good set of teeth"
+  },
+  {
+    "position": 287,
+    "county": "maigh-eo",
+    "headword": "draoi",
+    "meaning_en": "an unlimited quantity (of drink)",
+    "usage": "d'ólfadh sé an draoi; cf. the Westmeath Engl. Idiom: he'd drink Loch Érin dry."
+  },
+  {
+    "position": 288,
+    "county": "maigh-eo",
+    "headword": "draoitheadóireacht",
+    "meaning_en": null,
+    "usage": "a' draoitheadóireacht, ag coinneál eagnaidheacht leat, arguing with you"
+  },
+  {
+    "position": 289,
+    "county": "maigh-eo",
+    "headword": "draoth",
+    "meaning_en": "stripping of teeth, snarl",
+    "usage": "féach an draoch atá air ag gáirí; chuir an madadh draoch air héin liom"
+  },
+  {
+    "position": 290,
+    "county": "maigh-eo",
+    "headword": "dreabháird",
+    "meaning_en": null,
+    "usage": "níl dreabháird ar bith ar a' bhfear sin, níl dul amú ar bith air, there is no stray on him, i. he is well able to look after himself (said of a young lad out late at night, when his parents might be worring about him) (MMt); tá an bhó ar dreabháird, níl sí le fáil."
+  },
+  {
+    "position": 291,
+    "county": "maigh-eo",
+    "headword": "drís",
+    "meaning_en": "bramble",
+    "usage": "talamh an dris, smior a' talaimh. An Sean-dall Glic always knew good land from the bramles or briars that were growing on it (MMt). (the best of land)."
+  },
+  {
+    "position": 292,
+    "county": "maigh-eo",
+    "headword": "droch-amharc",
+    "meaning_en": "the bad eye, evil eye",
+    "usage": "duine ar bith a ndéanfaí droch-amharc /aŋk/ dó, anyone who would be given the bad eye, looked on with evil eye"
+  },
+  {
+    "position": 293,
+    "county": "maigh-eo",
+    "headword": "drúchtín",
+    "meaning_en": "a cut between the toes from grass (féar eidir na méaraí)",
+    "usage": "in gearradh drúchtín"
+  },
+  {
+    "position": 294,
+    "county": "maigh-eo",
+    "headword": "duailín",
+    "meaning_en": "the portion of mane in front next horse's ears, or rather between horse's ears.",
+    "usage": null
+  },
+  {
+    "position": 295,
+    "county": "maigh-eo",
+    "headword": "dubh i dtalamh",
+    "meaning_en": "long dead and buried",
+    "usage": null
+  },
+  {
+    "position": 296,
+    "county": "maigh-eo",
+    "headword": "dubhlacht na bliana",
+    "meaning_en": "after Christmas",
+    "usage": null
+  },
+  {
+    "position": 297,
+    "county": "maigh-eo",
+    "headword": "dúchas",
+    "meaning_en": "nature, instinct",
+    "usage": "ritheann ann dúchas thruí chrúbaí an chait (sean-ocal), the cat's nature runs through its paws."
+  },
+  {
+    "position": 298,
+    "county": "maigh-eo",
+    "headword": "dul",
+    "meaning_en": null,
+    "usage": "ní féidir a dhul dóf ', it is impossible to be up to them, to get the better of them."
+  },
+  {
+    "position": 299,
+    "county": "maigh-eo",
+    "headword": "dúrtach",
+    "meaning_en": null,
+    "usage": "(tá mé) an-dúrtach duit .i. iomarcaí cion a bheith agam ort (Sb); le dúrtacht, with affection (Sb). I have heard this word only once, and have some doubt about it."
+  },
+  {
+    "position": 300,
+    "county": "maigh-eo",
+    "headword": "éadáil",
+    "meaning_en": null,
+    "usage": "is maith an éadáil í, i. the good weather, it's good to get it (JT); nach tú an droch-éadáil, said to a cross child (páiste cointinneach); plainc ná adhmad faoi thír, raic sin éadáil (TmB)."
+  },
+  {
+    "position": 301,
+    "county": "maigh-eo",
+    "headword": "éan corr",
+    "meaning_en": null,
+    "usage": "níl aon ál nach mbíonn éan corr orthaí, said in respect of one member of a highly respectable decent family who was not so, who turned out different"
+  },
+  {
+    "position": 302,
+    "county": "maigh-eo",
+    "headword": "easbhaidh",
+    "meaning_en": "some running sore on foot or leg",
+    "usage": null
+  },
+  {
+    "position": 303,
+    "county": "maigh-eo",
+    "headword": "éinín gé",
+    "meaning_en": "gosling",
+    "usage": null
+  },
+  {
+    "position": 304,
+    "county": "maigh-eo",
+    "headword": "eireóg",
+    "meaning_en": "a pullet",
+    "usage": null
+  },
+  {
+    "position": 305,
+    "county": "maigh-eo",
+    "headword": "éisteacht",
+    "meaning_en": null,
+    "usage": "bhfuil tú ag éisteacht liom, are you listening to me?"
+  },
+  {
+    "position": 306,
+    "county": "maigh-eo",
+    "headword": "éisteallach",
+    "meaning_en": null,
+    "usage": "duine éisteallach, fastidious person (Sb); in particular a horse that won't drink from a smelly bucket is said to be éisteallach, or a cow (MMt), (AL)."
+  },
+  {
+    "position": 307,
+    "county": "maigh-eo",
+    "headword": "eitigh",
+    "meaning_en": null,
+    "usage": "heitíof thú .i. ní ghlacfadh an ghearr-chaile a d'iarr tú thú."
+  },
+  {
+    "position": 308,
+    "county": "maigh-eo",
+    "headword": "fad-cheannach",
+    "meaning_en": "intellectual, ingenious (MáM); cf. Westmeath, long-headed.",
+    "usage": null
+  },
+  {
+    "position": 309,
+    "county": "maigh-eo",
+    "headword": "fágthaí",
+    "meaning_en": "slack, lacking full development",
+    "usage": "is déantaí an píosa go dh'fhear é sin, níl a dhath dhó sin fágthaí"
+  },
+  {
+    "position": 310,
+    "county": "maigh-eo",
+    "headword": "fáir",
+    "meaning_en": "reply",
+    "usage": "fáir ná freagradh ní bhfuair sé, he got no answer (from the ghost)"
+  },
+  {
+    "position": 311,
+    "county": "maigh-eo",
+    "headword": "fál",
+    "meaning_en": "field",
+    "usage": "is na fáltaí, in the fields; Bun na bhFál, n.l.; common in placenames, g. An Fál Fada, An Fál Garbh, Fál na gCréachtach."
+  },
+  {
+    "position": 312,
+    "county": "maigh-eo",
+    "headword": "falc",
+    "meaning_en": "a heavy shower",
+    "usage": "falcannaí fómhair, autumn showers"
+  },
+  {
+    "position": 313,
+    "county": "maigh-eo",
+    "headword": "faoi",
+    "meaning_en": "in",
+    "usage": "faoi do shúil, (something) in your eye; (páiste) faoi n-a broinn, in her womb"
+  },
+  {
+    "position": 314,
+    "county": "maigh-eo",
+    "headword": "faoile",
+    "meaning_en": "seagull",
+    "usage": "all the fore-going names are current in Erris, but are differentiated thus: an fhaoile mhór, great black-back, also in the proverb iasacht a' roilligh gon fhaoile; faoileann in the bird-name seabhac cac faoileann, and in n.l. Carraic na bhFaoileann in Faulmore, off Inishkea North; faoilleán is the usual name for 'sea-gull' in general, in lieu of which faoilhóg is the general word in Dú Chaocháin."
+  },
+  {
+    "position": 315,
+    "county": "maigh-eo",
+    "headword": "fealladh",
+    "meaning_en": "act of failing (in health)",
+    "usage": "tá sí a' fealladh, i. cow affected by the garla trua; tá an croí a' fealladh air, his heart is failing"
+  },
+  {
+    "position": 316,
+    "county": "maigh-eo",
+    "headword": "feamainn bhuí",
+    "meaning_en": null,
+    "usage": "A: bhí tú i Meiriceá? B: bhíos, .. go bhfaca mé an fheamainn bhuí, yes, but I stayed very short, just long enough to see the sea-weed"
+  },
+  {
+    "position": 317,
+    "county": "maigh-eo",
+    "headword": "fearb",
+    "meaning_en": null,
+    "usage": "in phr. m'fhearb, my word; 'seadh, m'fhearb, yes, indeed"
+  },
+  {
+    "position": 318,
+    "county": "maigh-eo",
+    "headword": "féasóg",
+    "meaning_en": "hair on face as before shaving, e.g. two days' beard;for a full flowing beard the term is 'cab'",
+    "usage": "for a full flowing beard the term is 'cab'."
+  },
+  {
+    "position": 319,
+    "county": "maigh-eo",
+    "headword": "féidhm",
+    "meaning_en": null,
+    "usage": "imthí ó fhéim, nach mbeith i n-ann dadaí a dhéanamh"
+  },
+  {
+    "position": 320,
+    "county": "maigh-eo",
+    "headword": "feistiú",
+    "meaning_en": null,
+    "usage": "chuir siad feistiú troda orthú héin, equipped themselves for fight, armed themselves with graips"
+  },
+  {
+    "position": 321,
+    "county": "maigh-eo",
+    "headword": "féith",
+    "meaning_en": "sinew",
+    "usage": "féitheachaí mart used in mixing mortar, sinews of cattle"
+  },
+  {
+    "position": 322,
+    "county": "maigh-eo",
+    "headword": "fiar",
+    "meaning_en": "a slant",
+    "usage": "fiar tugthaí dhó, it put on a slant; ar fiar, on a slant"
+  },
+  {
+    "position": 323,
+    "county": "maigh-eo",
+    "headword": "fiatalach",
+    "meaning_en": null,
+    "usage": "tá fiatalach air, it is going to be wild, rough, stormy (at sea); young lads liked to hear this: they would not have to go out fishing"
+  },
+  {
+    "position": 324,
+    "county": "maigh-eo",
+    "headword": "fídeáil",
+    "meaning_en": null,
+    "usage": "a' fídeáil cearc, feeding hens"
+  },
+  {
+    "position": 325,
+    "county": "maigh-eo",
+    "headword": "figh",
+    "meaning_en": "rush",
+    "usage": "cho díreach le figh, as straight as a rush (BS); trí feagha/feá/ní thúrfainn air, I wouldn't give three straws for it, it is worthless; (tá) bárr na bhfeágh dóití, the top of the rushes is burned because they are cursed, like a' raithneach agus a' chloch gheal (AL)."
+  },
+  {
+    "position": 326,
+    "county": "maigh-eo",
+    "headword": "fionn-chrotach",
+    "meaning_en": "prob. the whimbrel",
+    "usage": null
+  },
+  {
+    "position": 327,
+    "county": "maigh-eo",
+    "headword": "fíor-chapall",
+    "meaning_en": "a mare that would have eleven foals. This does not seem right; likely the word means a 'bred horse'.",
+    "usage": null
+  },
+  {
+    "position": 328,
+    "county": "maigh-eo",
+    "headword": "fírinn",
+    "meaning_en": "the first \"scribe\" ploughed (in a straight line) ) (Wm).",
+    "usage": null
+  },
+  {
+    "position": 329,
+    "county": "maigh-eo",
+    "headword": "flainín dearag",
+    "meaning_en": "red flannel (wrapped round the naomhóg (in Inishkea)",
+    "usage": null
+  },
+  {
+    "position": 330,
+    "county": "maigh-eo",
+    "headword": "fobha",
+    "meaning_en": null,
+    "usage": "a' tabhairt fobha duithe, a' ligean a' ghráin aicí, a' grán a ligean síos sa mbró (when grinding corn)"
+  },
+  {
+    "position": 331,
+    "county": "maigh-eo",
+    "headword": "fobhar",
+    "meaning_en": null,
+    "usage": "tá fobhar ar a' ngealaigh, the moon is on the wane, í ag goil siar"
+  },
+  {
+    "position": 332,
+    "county": "maigh-eo",
+    "headword": "fobhthaí",
+    "meaning_en": null,
+    "usage": "fofaí ag a chéilí, an t-olc istigh acú dá chéilí (TmB); cho fofaí le madadh, ready for fight."
+  },
+  {
+    "position": 333,
+    "county": "maigh-eo",
+    "headword": "fóidín meara",
+    "meaning_en": null,
+    "usage": "fuaidh a' fóidín meara ort, you went astray (MC); tá fóidín meara air, he is wrong in the head."
+  },
+  {
+    "position": 334,
+    "county": "maigh-eo",
+    "headword": "foiliucht",
+    "meaning_en": null,
+    "usage": "they were going to school till they were big boys and girls - bhí a fhoiliucht /el ´ǝxd/ orthú, bhí siad i n-a scoláirí maithe, sign's on them, they were good scholars (PR)."
+  },
+  {
+    "position": 335,
+    "county": "maigh-eo",
+    "headword": "folt",
+    "meaning_en": "hair (on animal)",
+    "usage": "tá folt mór ar a' mbó sin"
+  },
+  {
+    "position": 336,
+    "county": "maigh-eo",
+    "headword": "forach",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 337,
+    "county": "maigh-eo",
+    "headword": "forseamálaí",
+    "meaning_en": "an awkward woman about a house",
+    "usage": null
+  },
+  {
+    "position": 338,
+    "county": "maigh-eo",
+    "headword": "fraoisín",
+    "meaning_en": "the Friesian",
+    "usage": null
+  },
+  {
+    "position": 339,
+    "county": "maigh-eo",
+    "headword": "freagairt",
+    "meaning_en": null,
+    "usage": "tá mo dhruim a' freagairt, my back is paining me (especially with reference to a rheumatic pain; an áit a bhfuil a' phian a' freagairt, where you feel the pain (CN) and (PsC)."
+  },
+  {
+    "position": 340,
+    "county": "maigh-eo",
+    "headword": "freangach",
+    "meaning_en": "also called dallóg, lesser dog-fish; in English tanny fish (tonnies) and cat-fish (MR); these are viviparous .i. bruideáileann siad; the young are brógaí taidbhs' and are to be found ins a' leas (in the sea-weed).",
+    "usage": null
+  },
+  {
+    "position": 341,
+    "county": "maigh-eo",
+    "headword": "frionga",
+    "meaning_en": "spike",
+    "usage": "frionga go choróin na glóire; plur. friongaí .i. spící ar a' gcoróin spíona, spikes on the crown of thorns"
+  },
+  {
+    "position": 342,
+    "county": "maigh-eo",
+    "headword": "friotach",
+    "meaning_en": null,
+    "usage": "is friotach a' lá é .i. giobach, breezy with cold biting wind (CN); also of dog: madadh . . friotach, with hair standing on him (ready for fight)."
+  },
+  {
+    "position": 343,
+    "county": "maigh-eo",
+    "headword": "friotáiltí",
+    "meaning_en": null,
+    "usage": "uibh friotáiltí, fried egg"
+  },
+  {
+    "position": 344,
+    "county": "maigh-eo",
+    "headword": "fuarcán",
+    "meaning_en": "lump on animal (esp. on shin)",
+    "usage": null
+  },
+  {
+    "position": 345,
+    "county": "maigh-eo",
+    "headword": "fuarthas",
+    "meaning_en": null,
+    "usage": "nach mór a fuarthas thú, hadn't you the \"neck\", the \"cheek\""
+  },
+  {
+    "position": 346,
+    "county": "maigh-eo",
+    "headword": "fuath",
+    "meaning_en": null,
+    "usage": "tá tú a' tabhairt fua dúinn, deserting us, not visiting us of nights as you used to"
+  },
+  {
+    "position": 347,
+    "county": "maigh-eo",
+    "headword": "gábhadh",
+    "meaning_en": "danger, battle",
+    "usage": "níl gábh ar bith nach dtigeann duine as, there is no battle but somebody comes safe out of it (Sb); defect (of character); : ach bhí gábh ann - bheith a' caint oram-sa agus ort-sa; bhí sin go ghábh ionn, there was that fault in him, that little flaw in his character, to be talking about me and you (ML)."
+  },
+  {
+    "position": 348,
+    "county": "maigh-eo",
+    "headword": "gabháil",
+    "meaning_en": "beating",
+    "usage": "má mbeitheá a' goil go bhata ar a' ngaoith ní thóigfeá é, if you were to beat the wind with a stick (do your very utmost), you would not be able to lift it"
+  },
+  {
+    "position": 349,
+    "county": "maigh-eo",
+    "headword": "gabhlóg dhearag",
+    "meaning_en": null,
+    "usage": "2\" long with spread tail"
+  },
+  {
+    "position": 350,
+    "county": "maigh-eo",
+    "headword": "gaéthe",
+    "meaning_en": "cold sting, breeze",
+    "usage": "is fuar a' gaéthe é sin (TmB); tá gaéthe beag fuar a' tíocht aníos annsin."
+  },
+  {
+    "position": 351,
+    "county": "maigh-eo",
+    "headword": "gaimhiúil",
+    "meaning_en": null,
+    "usage": "(of weather) with a sting in it"
+  },
+  {
+    "position": 352,
+    "county": "maigh-eo",
+    "headword": "gainséal",
+    "meaning_en": null,
+    "usage": "tá gainséal airigid air .i. uireasaidh airigid (Wm); tá sé gearr i n-airigead (AL)"
+  },
+  {
+    "position": 353,
+    "county": "maigh-eo",
+    "headword": "gainséal",
+    "meaning_en": null,
+    "usage": "I have heard this latter meaning from nobody else"
+  },
+  {
+    "position": 354,
+    "county": "maigh-eo",
+    "headword": "gáiriúlacht",
+    "meaning_en": "style (in dress), show off of dress (from one informant only)",
+    "usage": null
+  },
+  {
+    "position": 355,
+    "county": "maigh-eo",
+    "headword": "galfach",
+    "meaning_en": null,
+    "usage": "cf. gorta, great hunger."
+  },
+  {
+    "position": 356,
+    "county": "maigh-eo",
+    "headword": "gálóg",
+    "meaning_en": null,
+    "usage": "a' cumadh gálógaí .i. bréaga"
+  },
+  {
+    "position": 357,
+    "county": "maigh-eo",
+    "headword": "gangar",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 358,
+    "county": "maigh-eo",
+    "headword": "gaoiséal",
+    "meaning_en": null,
+    "usage": "tarnneó mé na gaoiséil asad, I'll pull the wind-pipe out of you"
+  },
+  {
+    "position": 359,
+    "county": "maigh-eo",
+    "headword": "gaosán",
+    "meaning_en": "nose (but not quite as complimentary a name as srón)",
+    "usage": "(but not quite as complimentary a name as srón)."
+  },
+  {
+    "position": 360,
+    "county": "maigh-eo",
+    "headword": "garastainceam",
+    "meaning_en": null,
+    "usage": "bhí sé i n-a gharastainceam aige .i. bhí sé bun os cionn aige, nó i n-aimhréidh; ní thiocfadh leis a dhéanamh."
+  },
+  {
+    "position": 361,
+    "county": "maigh-eo",
+    "headword": "garrdha",
+    "meaning_en": null,
+    "usage": "tá gáraidh thart ar a' ngealaigh, there is a ring round the moon (a bad sign of weather)."
+  },
+  {
+    "position": 362,
+    "county": "maigh-eo",
+    "headword": "geal",
+    "meaning_en": "snow-white",
+    "usage": "madadh geal, bó gheal (as opposed to bán which means 'blonde' usually in reference to people)."
+  },
+  {
+    "position": 363,
+    "county": "maigh-eo",
+    "headword": "geam-chaoch",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 364,
+    "county": "maigh-eo",
+    "headword": "géarán",
+    "meaning_en": "eye-tooth: cláir-fhiaclaí go dté tú go dtí an géarán",
+    "usage": null
+  },
+  {
+    "position": 365,
+    "county": "maigh-eo",
+    "headword": "gearlachán",
+    "meaning_en": "collar-bone",
+    "usage": null
+  },
+  {
+    "position": 366,
+    "county": "maigh-eo",
+    "headword": "gearr",
+    "meaning_en": "persecute",
+    "usage": "ghearr Cromail a' Ghaeilge, chuir sé faoi chois í; gur gearradh í, gur gearradh anuas í, till it was forbidden, outlawed (Irish)"
+  },
+  {
+    "position": 367,
+    "county": "maigh-eo",
+    "headword": "geas",
+    "meaning_en": null,
+    "usage": "an raithneach faoi gheasaí - ní fhacthas aon phór ariamh air. Na feagha, a' raithneach, agus a' chloch gheal - chuir Naomh Páraic mallacht orthú (SBh). Ná bain le geis is ní bhainfidh geis leat (sean-ocal) (TMt), do not violate superstitious custom and superstition will not interfere with you."
+  },
+  {
+    "position": 368,
+    "county": "maigh-eo",
+    "headword": "geidimín",
+    "meaning_en": null,
+    "usage": "níl ann ach geidimín go dhuine, níl aon teacht 'un láithreach ann, an geidimín"
+  },
+  {
+    "position": 369,
+    "county": "maigh-eo",
+    "headword": "gein",
+    "meaning_en": null,
+    "usage": "níl gein ann, níl éinne ann"
+  },
+  {
+    "position": 370,
+    "county": "maigh-eo",
+    "headword": "gilín",
+    "meaning_en": "something big, huge",
+    "usage": "gilín .i. fata mór (MC); dhá ghilín in reference to two large poodles, ceann acú níos mó 'ná an ceann eile (PR)."
+  },
+  {
+    "position": 371,
+    "county": "maigh-eo",
+    "headword": "giobach",
+    "meaning_en": "harsh, with biting north wind",
+    "usage": "tá sé giobach."
+  },
+  {
+    "position": 372,
+    "county": "maigh-eo",
+    "headword": "giolla na himní",
+    "meaning_en": "the hare",
+    "usage": "eanbhruithe (eantraí) ghiolla na himní .i. súp a' ghiorraidh; bíonn imní ar a' ngiorraidh i gcónaí"
+  },
+  {
+    "position": 373,
+    "county": "maigh-eo",
+    "headword": "giorla",
+    "meaning_en": "a land measure, about a rood",
+    "usage": null
+  },
+  {
+    "position": 374,
+    "county": "maigh-eo",
+    "headword": "giorra anála",
+    "meaning_en": "asthma; dock seed is boiled as a relief for it",
+    "usage": null
+  },
+  {
+    "position": 375,
+    "county": "maigh-eo",
+    "headword": "giortaigh",
+    "meaning_en": null,
+    "usage": "giortaigh an bóthar, shorten the road; this is what the Gobán Saor's daughter-in-law told his son to do"
+  },
+  {
+    "position": 376,
+    "county": "maigh-eo",
+    "headword": "gíoscán",
+    "meaning_en": "F",
+    "usage": "5 million people to feed in London - is mór a' gíoscán é, they eat a lot, there is a lot of chewing on what they need in food"
+  },
+  {
+    "position": 377,
+    "county": "maigh-eo",
+    "headword": "girr-scéalach",
+    "meaning_en": null,
+    "usage": "bás girr-scéalach, sudden, unexpected death."
+  },
+  {
+    "position": 378,
+    "county": "maigh-eo",
+    "headword": "giúraí",
+    "meaning_en": "barnacles (on timber)",
+    "usage": "ar adhmad fhásas na giúraí; an chéad chót' - caonach, an dara cót' - giúraí, an tríhú cót' - má sheasann a' t-adhmad"
+  },
+  {
+    "position": 379,
+    "county": "maigh-eo",
+    "headword": "giúsach",
+    "meaning_en": null,
+    "usage": "crann giúsaí a fáitear sa bportach, bog deal."
+  },
+  {
+    "position": 380,
+    "county": "maigh-eo",
+    "headword": "glafar",
+    "meaning_en": null,
+    "usage": "chuirfeadh sé glafar as"
+  },
+  {
+    "position": 381,
+    "county": "maigh-eo",
+    "headword": "glamba",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 382,
+    "county": "maigh-eo",
+    "headword": "glas rua léana",
+    "meaning_en": null,
+    "usage": "glas rua léana a chuireas bás ar na géabhaí"
+  },
+  {
+    "position": 383,
+    "county": "maigh-eo",
+    "headword": "glasán",
+    "meaning_en": "ribbles",
+    "usage": "níos gile ná an mangach; níl siad cho mór leis a' mangach (Wm); black pollock (JT); in Dú Chaocháin they are called glassen in English"
+  },
+  {
+    "position": 384,
+    "county": "maigh-eo",
+    "headword": "glasóg",
+    "meaning_en": "the glasóg is a big fish",
+    "usage": "glasóg shé phunt, deich bpunt, ceann maith"
+  },
+  {
+    "position": 385,
+    "county": "maigh-eo",
+    "headword": "gnaoidhiúil",
+    "meaning_en": "handsome, good-looking:",
+    "usage": "níl sí beag gnaoidhiúil ná mór gránna, she is neither small and handsome nor big and plain, she has nothing attractive in her favour. Contrast the meaning 'pleasant, hospitable' in Cois Fhairrge, Co. Galway."
+  },
+  {
+    "position": 386,
+    "county": "maigh-eo",
+    "headword": "gné",
+    "meaning_en": null,
+    "usage": "ní fhaca sé a ghath ná a ghné, he saw nothing"
+  },
+  {
+    "position": 387,
+    "county": "maigh-eo",
+    "headword": "go leór",
+    "meaning_en": "with neg., much",
+    "usage": "ní hé go leór é, it isn't much."
+  },
+  {
+    "position": 388,
+    "county": "maigh-eo",
+    "headword": "goiriúint",
+    "meaning_en": "act of crowing",
+    "usage": "the cock is said to be a' goiriúint san oíche, but a' glaoch in the daytime (PsC); nuair a ghoirfeadh an coileach, when the cock would crow, early in the morning (MC)."
+  },
+  {
+    "position": 389,
+    "county": "maigh-eo",
+    "headword": "gorta",
+    "meaning_en": "great hunger",
+    "usage": "tá gorta oram, I am ravenous with hunger (PsC); cf. galfach /galfǝx"
+  },
+  {
+    "position": 390,
+    "county": "maigh-eo",
+    "headword": "grabhar",
+    "meaning_en": "droch-mhóin (éadrom, geal), often with heather growing from the sod; it goes in dust",
+    "usage": null
+  },
+  {
+    "position": 391,
+    "county": "maigh-eo",
+    "headword": "grágaíl",
+    "meaning_en": "act of cackling",
+    "usage": "gé a' grágaíl, or hen after laying;"
+  },
+  {
+    "position": 392,
+    "county": "maigh-eo",
+    "headword": "grágaíl",
+    "meaning_en": "also of an ass 'braying'.",
+    "usage": null
+  },
+  {
+    "position": 393,
+    "county": "maigh-eo",
+    "headword": "graifleach",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 394,
+    "county": "maigh-eo",
+    "headword": "gráig",
+    "meaning_en": "a bray",
+    "usage": "gráig an asail, (é) a' béiciúch"
+  },
+  {
+    "position": 395,
+    "county": "maigh-eo",
+    "headword": "grástúil",
+    "meaning_en": "merciful",
+    "usage": "má tá tú láidir, bí grástúil"
+  },
+  {
+    "position": 396,
+    "county": "maigh-eo",
+    "headword": "greallach",
+    "meaning_en": null,
+    "usage": "tá sé 'n-a ghreallach amháin"
+  },
+  {
+    "position": 397,
+    "county": "maigh-eo",
+    "headword": "greim gearr",
+    "meaning_en": "to get a place with the wife,",
+    "usage": "i. by marrying in, is to get it by the greim gearr."
+  },
+  {
+    "position": 398,
+    "county": "maigh-eo",
+    "headword": "gríobh",
+    "meaning_en": "outside building on turf stack",
+    "usage": null
+  },
+  {
+    "position": 399,
+    "county": "maigh-eo",
+    "headword": "gríscín",
+    "meaning_en": "heart and lungs go chirc",
+    "usage": null
+  },
+  {
+    "position": 400,
+    "county": "maigh-eo",
+    "headword": "griúil",
+    "meaning_en": null,
+    "usage": "tá griúil ar a' tsúp (hare's soup) le teann mathas, it is so rich and full of goodness"
+  },
+  {
+    "position": 401,
+    "county": "maigh-eo",
+    "headword": "gróigim",
+    "meaning_en": "I foot (turf),",
+    "usage": null
+  },
+  {
+    "position": 402,
+    "county": "maigh-eo",
+    "headword": "gróití",
+    "meaning_en": "won",
+    "usage": "tá an báire gróití agam ort"
+  },
+  {
+    "position": 403,
+    "county": "maigh-eo",
+    "headword": "gúiseóg",
+    "meaning_en": "gosling - bliain d'aois",
+    "usage": null
+  },
+  {
+    "position": 404,
+    "county": "maigh-eo",
+    "headword": "guth",
+    "meaning_en": null,
+    "usage": "níor airigh sé a ghuth ná a dhath, he heard nothing (AL); níl a ghuth ná a ghré ach go . . . there was nothing in it but . . ."
+  },
+  {
+    "position": 405,
+    "county": "maigh-eo",
+    "headword": "hata Acla agus naprún Chliara",
+    "meaning_en": null,
+    "usage": "ná déan hata Acla dó .i. den chasúr, don't treat it like hata Acla, that is to say make common property of it (MMt). There was only one hat in Achill and only one apron in Clare Island, and everybody wore it in turn according as he or she needed it. The same was said of brógaí Iorruis, there was only one pair which was used by everybody or so the saying goes."
+  },
+  {
+    "position": 406,
+    "county": "maigh-eo",
+    "headword": "hurrais",
+    "meaning_en": "call to pigs to food;",
+    "usage": null
+  },
+  {
+    "position": 407,
+    "county": "maigh-eo",
+    "headword": "iarraidh",
+    "meaning_en": "a turn in sickness",
+    "usage": null
+  },
+  {
+    "position": 408,
+    "county": "maigh-eo",
+    "headword": "iarrtas",
+    "meaning_en": "proposal for marriage",
+    "usage": "bhí iarrtas mrá aréir ann"
+  },
+  {
+    "position": 409,
+    "county": "maigh-eo",
+    "headword": "innis",
+    "meaning_en": null,
+    "usage": "is ait an innis í sin (Sb), that is a wonderful innis, i. excellent land."
+  },
+  {
+    "position": 410,
+    "county": "maigh-eo",
+    "headword": "iogallach",
+    "meaning_en": null,
+    "usage": "bhí iogallach ar a' bhfaraige (PR); iogallach nuair bhíos a' t-ionradh agus a' ghaoth i n-aghaidh a chéilí go do dhalladh sa gcurach (AL)."
+  },
+  {
+    "position": 411,
+    "county": "maigh-eo",
+    "headword": "ionad",
+    "meaning_en": null,
+    "usage": "in phr. i n-ionad, at the end of: bhí sé feadh bliana ag muintir na bruíne, agus annsin bhí a bhean le goil a' pósadh i n-ionad (n)a bliana, at the end of the year, when the year was up"
+  },
+  {
+    "position": 412,
+    "county": "maigh-eo",
+    "headword": "ith",
+    "meaning_en": "an allergic rash a thiocfadh amach i n-a scraith ort (CN); a certain man often got it on the arms and chest when he ate certain foods.",
+    "usage": null
+  },
+  {
+    "position": 413,
+    "county": "maigh-eo",
+    "headword": "iuchair",
+    "meaning_en": "roe, in female herring (hard and brown) as opposed to an leóbán, milt, in male (bog bán)",
+    "usage": null
+  },
+  {
+    "position": 414,
+    "county": "maigh-eo",
+    "headword": "lag-phortach",
+    "meaning_en": "worked-out part of bog, cutaway.",
+    "usage": null
+  },
+  {
+    "position": 415,
+    "county": "maigh-eo",
+    "headword": "láimhíneach",
+    "meaning_en": "angel-fish: claigeann mór millteach agus cluasa móra (air); 2ft long, edible, price a' sciata (skate)",
+    "usage": null
+  },
+  {
+    "position": 416,
+    "county": "maigh-eo",
+    "headword": "láir",
+    "meaning_en": null,
+    "usage": "gen. lárach occurs in searrach lárach, a filly foal."
+  },
+  {
+    "position": 417,
+    "county": "maigh-eo",
+    "headword": "lán",
+    "meaning_en": "amount",
+    "usage": "is mór a' lán é, it is a good deal, a good lot; nach maith a' lán ráibe atá ar na slataí sin, isn't there a good deal of seed on those docks?"
+  },
+  {
+    "position": 418,
+    "county": "maigh-eo",
+    "headword": "le teas foladh",
+    "meaning_en": "in a great rage, or in a great hurry",
+    "usage": null
+  },
+  {
+    "position": 419,
+    "county": "maigh-eo",
+    "headword": "leac a' bhladair",
+    "meaning_en": null,
+    "usage": "is tú leac a' bhladair (adéarfá) le páiste a bheith a' dúil le sweets"
+  },
+  {
+    "position": 420,
+    "county": "maigh-eo",
+    "headword": "leag air!",
+    "meaning_en": "go ahead! proceed! (with work or fight)",
+    "usage": null
+  },
+  {
+    "position": 421,
+    "county": "maigh-eo",
+    "headword": "Leám",
+    "meaning_en": null,
+    "usage": "n. pr. : cuimhnigh ar Leám (adéarfa) le fear a' bualadh asail. Bé' tú sách luath ag droch-mhargadh, Leám adúirt é sin leis a' bhfear a bhí a' bualadh an asail; bhí deifir mhór air a' goil 'un cogaidh"
+  },
+  {
+    "position": 422,
+    "county": "maigh-eo",
+    "headword": "leath-",
+    "meaning_en": "one of a pair, a single",
+    "usage": "leath-rat a léim amach as an mála eórna i nDoivleán, cailleadh í. Tá a leath beannuithe (half of Doivleán)."
+  },
+  {
+    "position": 423,
+    "county": "maigh-eo",
+    "headword": "léine",
+    "meaning_en": null,
+    "usage": "i n-a léinidh (ag obair), in his shirt-sleeves (ML); alb, surplice: is geal í do léinidh indiu agus is dubh í seachtain ó 'ndiu, your alb is white today but it will be black a week from today. This from the back was Brian Rua's answer to the priest who called his name from the altar (SBh)."
+  },
+  {
+    "position": 424,
+    "county": "maigh-eo",
+    "headword": "leóbán",
+    "meaning_en": "milt (in herring)",
+    "usage": null
+  },
+  {
+    "position": 425,
+    "county": "maigh-eo",
+    "headword": "liabrán",
+    "meaning_en": null,
+    "usage": "cloch liabráin, sharpening stone"
+  },
+  {
+    "position": 426,
+    "county": "maigh-eo",
+    "headword": "liaití",
+    "meaning_en": "grey hairs, greyness",
+    "usage": "go dtiocfadh na liaití go luath, that grey hairs would come early in life (this was part of Brian Rua's prophecy)"
+  },
+  {
+    "position": 427,
+    "county": "maigh-eo",
+    "headword": "líne",
+    "meaning_en": null,
+    "usage": "na líntí is na líntí, generations and generations"
+  },
+  {
+    "position": 428,
+    "county": "maigh-eo",
+    "headword": "liocaim",
+    "meaning_en": null,
+    "usage": "liocann sé an talamh, (tractor) tramps the ground, packs the soil (Wm); liocthaí: féar liocthaí / L´uki: /, hay stuck together after heating (AL)."
+  },
+  {
+    "position": 429,
+    "county": "maigh-eo",
+    "headword": "lóiste go dh'fhear",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 430,
+    "county": "maigh-eo",
+    "headword": "lorg",
+    "meaning_en": null,
+    "usage": "a lorg, nothing, following a dhath, finally - a dhath . . . a lorg (negatively)"
+  },
+  {
+    "position": 431,
+    "county": "maigh-eo",
+    "headword": "losad",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 432,
+    "county": "maigh-eo",
+    "headword": "lot",
+    "meaning_en": "cancer (inward)",
+    "usage": null
+  },
+  {
+    "position": 433,
+    "county": "maigh-eo",
+    "headword": "luachair gan tóin",
+    "meaning_en": "horsetail (equisetum)",
+    "usage": null
+  },
+  {
+    "position": 434,
+    "county": "maigh-eo",
+    "headword": "luas",
+    "meaning_en": null,
+    "usage": "ar a' dá luas, immediately"
+  },
+  {
+    "position": 435,
+    "county": "maigh-eo",
+    "headword": "luchóg",
+    "meaning_en": "mouse",
+    "usage": null
+  },
+  {
+    "position": 436,
+    "county": "maigh-eo",
+    "headword": "lugán",
+    "meaning_en": "part of potato left i n-éis na scoilteáin a bheith gearrthaí dhe",
+    "usage": null
+  },
+  {
+    "position": 437,
+    "county": "maigh-eo",
+    "headword": "lughar",
+    "meaning_en": null,
+    "usage": "níor lughar liom a' deabhal fheiceál 'ná thú, - a' tan nach mbeith aon tsuim agad ainntí, I wouldn't hate seeing the devil more than you - (said) when you wouldn't like her (Sb); ní lughar liom an t-éag 'ná é, I hate him more than death."
+  },
+  {
+    "position": 438,
+    "county": "maigh-eo",
+    "headword": "luibh a' chraip",
+    "meaning_en": "knapweed",
+    "usage": null
+  },
+  {
+    "position": 439,
+    "county": "maigh-eo",
+    "headword": "luifearnach",
+    "meaning_en": "weeds (collective)",
+    "usage": null
+  },
+  {
+    "position": 440,
+    "county": "maigh-eo",
+    "headword": "luimreóg",
+    "meaning_en": null,
+    "usage": "aliter luimneóg, a kind of crab (found out in the deep?): luimreógaí, portáiníní beaga glasa; bhéarfadh siad ort; nimhneach go maith"
+  },
+  {
+    "position": 441,
+    "county": "maigh-eo",
+    "headword": "luinsgeóracht",
+    "meaning_en": null,
+    "usage": "a' l., a' bogadaigh ar a' mbóthar, staggering from drink"
+  },
+  {
+    "position": 442,
+    "county": "maigh-eo",
+    "headword": "lútaí rón",
+    "meaning_en": "seal's flippers",
+    "usage": null
+  },
+  {
+    "position": 443,
+    "county": "maigh-eo",
+    "headword": "lúth",
+    "meaning_en": "lamb-bed",
+    "usage": "This is not a word I have heard in Erris, but it is common in the Hiberno-English of Westmeath-Longford: the ewe is putting out her loo, i. has prolapsed uterus; cf. Ó Cadhain, An Braon Broghach, notes, pp. 30, 32"
+  },
+  {
+    "position": 444,
+    "county": "maigh-eo",
+    "headword": "mac a' pheata",
+    "meaning_en": null,
+    "usage": "chuile mhac a' pheat' acú, every one of them, every mother's son of them"
+  },
+  {
+    "position": 445,
+    "county": "maigh-eo",
+    "headword": "mada ceatha",
+    "meaning_en": "rainbow (complete)",
+    "usage": null
+  },
+  {
+    "position": 446,
+    "county": "maigh-eo",
+    "headword": "magpies",
+    "meaning_en": "according to the number seen together at a time portend: 1, mí-á; 2, á; 3, socraoid; 4, pósadh",
+    "usage": null
+  },
+  {
+    "position": 447,
+    "county": "maigh-eo",
+    "headword": "maidir le",
+    "meaning_en": "as regards",
+    "usage": "maidir le cúrsaí truipéad dó, well, as for truipéad"
+  },
+  {
+    "position": 448,
+    "county": "maigh-eo",
+    "headword": "máirseál na fuiseóige",
+    "meaning_en": "the lark's song",
+    "usage": null
+  },
+  {
+    "position": 449,
+    "county": "maigh-eo",
+    "headword": "mar-thiompó",
+    "meaning_en": "tumbling (of horse)",
+    "usage": "ghá mar-thiompó héin (she was) tumbling"
+  },
+  {
+    "position": 450,
+    "county": "maigh-eo",
+    "headword": "marbh-fáisc",
+    "meaning_en": "curse",
+    "usage": "is iomaí mara fáisc a chuir Ned air, cursed him often, saying 'mara fáisc air'."
+  },
+  {
+    "position": 451,
+    "county": "maigh-eo",
+    "headword": "más",
+    "meaning_en": "áit a bhéas i n-a bharra mór,common in placenames and means a sandbar according to (Sb)",
+    "usage": "common in placenames and means a sandbar according to (Sb)"
+  },
+  {
+    "position": 452,
+    "county": "maigh-eo",
+    "headword": "méad",
+    "meaning_en": null,
+    "usage": "lé' mhéad a scanraigh Ifreann é, Hell frightened him so much"
+  },
+  {
+    "position": 453,
+    "county": "maigh-eo",
+    "headword": "meadar gan suathadh",
+    "meaning_en": "something not properly mixed, as for example a basin of dough",
+    "usage": null
+  },
+  {
+    "position": 454,
+    "county": "maigh-eo",
+    "headword": "meadhón",
+    "meaning_en": "power/ability",
+    "usage": "an tAthair síoraidh a' tabhairt meóin dom ar chuile shórt a dhéanamh"
+  },
+  {
+    "position": 455,
+    "county": "maigh-eo",
+    "headword": "méar",
+    "meaning_en": null,
+    "usage": "the fingers are in order - an ordóg, a' chorr-mhéar, a' mhéar fhada, a' mhéar fháinne (or méar an fháinne), a' laidhricín"
+  },
+  {
+    "position": 456,
+    "county": "maigh-eo",
+    "headword": "mí-fhiúntach",
+    "meaning_en": "improper, indecent",
+    "usage": "focal mí-fhiúntach"
+  },
+  {
+    "position": 457,
+    "county": "maigh-eo",
+    "headword": "mí-stáid",
+    "meaning_en": "badness",
+    "usage": "tá mí-stáid mhór ann, ní bheith aon abhail aige do chuid a mhilleadh; there's much badness in him, he'd have no scruple, no compunction, about destroying your property (TmB). aon abhail he explained as aon tsuim."
+  },
+  {
+    "position": 458,
+    "county": "maigh-eo",
+    "headword": "mí-thuiscint",
+    "meaning_en": "misunderstanding",
+    "usage": null
+  },
+  {
+    "position": 459,
+    "county": "maigh-eo",
+    "headword": "miodaracht",
+    "meaning_en": "recollection",
+    "usage": "sílim go bhfuil miodaracht agam gur mhoithi' mé é, I think I have some recollection of having heard it (TmB); bhfuil aon mhiodaracht agad orthaí? do you remember what she looked like? can you describe her (a heifer)? (PsC)"
+  },
+  {
+    "position": 460,
+    "county": "maigh-eo",
+    "headword": "mór",
+    "meaning_en": null,
+    "usage": "fear mór, very stout and broad; fear árd, a tall man."
+  },
+  {
+    "position": 461,
+    "county": "maigh-eo",
+    "headword": "mór",
+    "meaning_en": "nearly",
+    "usage": "is mór nár bháith sí a cho maith é, she nearly drowned him too"
+  },
+  {
+    "position": 462,
+    "county": "maigh-eo",
+    "headword": "muc",
+    "meaning_en": null,
+    "usage": "a' mhuc rua agus a' mhuc mhín: muca rua, scaly fish, bréams i mBéarla; dath silvery orthú: cho geal le scudán; same name in French (Wm) (perh. he had heard 'roussseau' from a French fisherman). a' mhuc mhín has no scales: níl aon lannach' orthú"
+  },
+  {
+    "position": 463,
+    "county": "maigh-eo",
+    "headword": "mún",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 464,
+    "county": "maigh-eo",
+    "headword": "mún",
+    "meaning_en": "urinating",
+    "usage": "airigead na caillighe is é á mhún faoi na ballaí"
+  },
+  {
+    "position": 465,
+    "county": "maigh-eo",
+    "headword": "múr",
+    "meaning_en": "shower",
+    "usage": null
+  },
+  {
+    "position": 466,
+    "county": "maigh-eo",
+    "headword": "nasc",
+    "meaning_en": null,
+    "usage": "i nasc, hemmed in, embraced,"
+  },
+  {
+    "position": 467,
+    "county": "maigh-eo",
+    "headword": "neartrach",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 468,
+    "county": "maigh-eo",
+    "headword": "nimheadóir",
+    "meaning_en": null,
+    "usage": "nimheadóir bradach, a sour fellow who won't take fun or a joke"
+  },
+  {
+    "position": 469,
+    "county": "maigh-eo",
+    "headword": "oilbhéasach",
+    "meaning_en": null,
+    "usage": "bochaill oilbhéasach, suas le géimeannaí, a ghoidfeadh giorrán a chomharsa is a bhainfeadh marcaíocht as"
+  },
+  {
+    "position": 470,
+    "county": "maigh-eo",
+    "headword": "oiread",
+    "meaning_en": null,
+    "usage": "ach orad leat héin, ní maith liom gleó (CN); no more than yourself, I don't like noise; ach orad leat héin, tá teangaidh mhath Ghaeilge aicí; ní rabh aon toirt ionntú ach orad le cuileógaí; ach orad le ceann cailleadh go hóg é, (cf. Hiberno-English) no more than another, he died young, i. like many another (PR)."
+  },
+  {
+    "position": 471,
+    "county": "maigh-eo",
+    "headword": "oirnis",
+    "meaning_en": "apparatus for weaving, all the gear connected with the loom",
+    "usage": null
+  },
+  {
+    "position": 472,
+    "county": "maigh-eo",
+    "headword": "oirthear",
+    "meaning_en": "laithe 'r n-a n-órthaí, next day but one.",
+    "usage": null
+  },
+  {
+    "position": 473,
+    "county": "maigh-eo",
+    "headword": "oirthí",
+    "meaning_en": null,
+    "usage": "an oirthí mhór /ǝN´ er´hi: wo:r/ agus an oirthí bheag seem to refer to two particular pieces of land, i. they are the names of two pieces of rich fertile land. Cf. the Erris adj. for fertile 'oireamhail' / ˡer´hu: l´/, D. Additions I, aireamhail."
+  },
+  {
+    "position": 474,
+    "county": "maigh-eo",
+    "headword": "paca",
+    "meaning_en": "wool packs, i.e. white clouds (a sign of rain)",
+    "usage": "pacaí /puki: / olainne"
+  },
+  {
+    "position": 475,
+    "county": "maigh-eo",
+    "headword": "páinéid",
+    "meaning_en": "climate",
+    "usage": "tá an phláinéid athruí, (our) climate has changed, we now get a different kind of weather"
+  },
+  {
+    "position": 476,
+    "county": "maigh-eo",
+    "headword": "palltóg",
+    "meaning_en": "a big potato",
+    "usage": null
+  },
+  {
+    "position": 477,
+    "county": "maigh-eo",
+    "headword": "panc an éisc",
+    "meaning_en": "the fishing bank",
+    "usage": "a' baint fataí ar phanc an éis (bréagach)"
+  },
+  {
+    "position": 478,
+    "county": "maigh-eo",
+    "headword": "paráiste",
+    "meaning_en": "applied also to a dispensary district to which a doctor is appointed",
+    "usage": null
+  },
+  {
+    "position": 479,
+    "county": "maigh-eo",
+    "headword": "péic",
+    "meaning_en": null,
+    "usage": "an phéic, fox's brush is recorded by C. Bairéad from the Achréidh in Béaloideas, xxvii, 125. Cf. i bpéic an mhadra alla in Dic Buiréad's Tarraingt na Mónadh, IE, t. 532."
+  },
+  {
+    "position": 480,
+    "county": "maigh-eo",
+    "headword": "péice g'fhear",
+    "meaning_en": "a half-fool of a man, a 'gom'",
+    "usage": null
+  },
+  {
+    "position": 481,
+    "county": "maigh-eo",
+    "headword": "péiste na murlus",
+    "meaning_en": null,
+    "usage": "bíonn sé a' raithe i n-éis na murlus."
+  },
+  {
+    "position": 482,
+    "county": "maigh-eo",
+    "headword": "piarsaí",
+    "meaning_en": null,
+    "usage": "ó d'anam go na piarsaín nach b'éard tá ann míol mór, your soul to the dickens isn't it a whal (POR). Ní droch-fhocal é (AL)."
+  },
+  {
+    "position": 483,
+    "county": "maigh-eo",
+    "headword": "pin! pin!",
+    "meaning_en": "call for turkeys (to food, etc.)",
+    "usage": null
+  },
+  {
+    "position": 484,
+    "county": "maigh-eo",
+    "headword": "píoblach",
+    "meaning_en": null,
+    "usage": "tá p. ar a' gcearc sin, that hen has the \"pick\", she is caught in the throat"
+  },
+  {
+    "position": 485,
+    "county": "maigh-eo",
+    "headword": "píoblach",
+    "meaning_en": "also 'hoarseness in a person wih a cold'",
+    "usage": null
+  },
+  {
+    "position": 486,
+    "county": "maigh-eo",
+    "headword": "piotóg",
+    "meaning_en": "some kind of primitive chimney, or chimney pot (outside)",
+    "usage": null
+  },
+  {
+    "position": 487,
+    "county": "maigh-eo",
+    "headword": "pisín áine",
+    "meaning_en": "(meadow) vetch",
+    "usage": null
+  },
+  {
+    "position": 488,
+    "county": "maigh-eo",
+    "headword": "piteóg",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 489,
+    "county": "maigh-eo",
+    "headword": "pláigh air",
+    "meaning_en": "a common curse",
+    "usage": null
+  },
+  {
+    "position": 490,
+    "county": "maigh-eo",
+    "headword": "plancadh",
+    "meaning_en": null,
+    "usage": "tá sí a' plancadh féir anois, of cow eating her hay with gusto, or ravenously (AL). mhoithigh mé plancadh ó mhaidin .i. loscadh gunnaí (TmB)."
+  },
+  {
+    "position": 491,
+    "county": "maigh-eo",
+    "headword": "pléata",
+    "meaning_en": null,
+    "usage": "níl ann ach pléata go dhuine"
+  },
+  {
+    "position": 492,
+    "county": "maigh-eo",
+    "headword": "pleib",
+    "meaning_en": "much the same meaning as pléata",
+    "usage": "níl ann ach pleib"
+  },
+  {
+    "position": 493,
+    "county": "maigh-eo",
+    "headword": "pluc",
+    "meaning_en": "cheek",
+    "usage": "nár mhór an ní . . . gan aon oideas gan aon léigheann i n-a pluic, wasn't it great for her who hadn't any education and hadn't a word of learning in her head"
+  },
+  {
+    "position": 494,
+    "county": "maigh-eo",
+    "headword": "pluc coise",
+    "meaning_en": "calf of leg",
+    "usage": null
+  },
+  {
+    "position": 495,
+    "county": "maigh-eo",
+    "headword": "pocán",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 496,
+    "county": "maigh-eo",
+    "headword": "pointeáiltí",
+    "meaning_en": "exact, tight in money matters, (even) mean",
+    "usage": null
+  },
+  {
+    "position": 497,
+    "county": "maigh-eo",
+    "headword": "poll",
+    "meaning_en": null,
+    "usage": "fua' sé síos go poll a dhá ascall, he sank to his oxters; roadstead"
+  },
+  {
+    "position": 498,
+    "county": "maigh-eo",
+    "headword": "portán iarainn",
+    "meaning_en": "a huge crab, spread all round",
+    "usage": null
+  },
+  {
+    "position": 499,
+    "county": "maigh-eo",
+    "headword": "pótaire",
+    "meaning_en": "toper, drunkard",
+    "usage": null
+  },
+  {
+    "position": 500,
+    "county": "maigh-eo",
+    "headword": "práinneach",
+    "meaning_en": null,
+    "usage": "práinneach asad féin, leitheadach; práinneach as a chlann, as rud ar bit a bheith aige, proud of, thinks a lot of (AL); bhí sé a cho práinneach as a gcat. he was so very fond of the cat (CN)."
+  },
+  {
+    "position": 501,
+    "county": "maigh-eo",
+    "headword": "preabaire na gcapall",
+    "meaning_en": "wasp",
+    "usage": null
+  },
+  {
+    "position": 502,
+    "county": "maigh-eo",
+    "headword": "preith",
+    "meaning_en": "word used to call a horse (in from field)",
+    "usage": null
+  },
+  {
+    "position": 503,
+    "county": "maigh-eo",
+    "headword": "prioscán",
+    "meaning_en": null,
+    "usage": "applied also to children; tá an prioscán a' teacht, the youngsters are coming"
+  },
+  {
+    "position": 504,
+    "county": "maigh-eo",
+    "headword": "pruigín",
+    "meaning_en": "word used to call a cow",
+    "usage": null
+  },
+  {
+    "position": 505,
+    "county": "maigh-eo",
+    "headword": "pruistéal",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 506,
+    "county": "maigh-eo",
+    "headword": "púirín",
+    "meaning_en": "channel under turf-rick in bog to let off water",
+    "usage": null
+  },
+  {
+    "position": 507,
+    "county": "maigh-eo",
+    "headword": "púirín",
+    "meaning_en": "hole under door for cat (MMt); hole left in the side of a peilic chochain for the hen to enter. The peilic cochain was a special nest made of straw for hens to lay in.",
+    "usage": null
+  },
+  {
+    "position": 508,
+    "county": "maigh-eo",
+    "headword": "rachtáil",
+    "meaning_en": "laughing loudly in outburst",
+    "usage": "a' rachtaíl gáirí"
+  },
+  {
+    "position": 509,
+    "county": "maigh-eo",
+    "headword": "ráib",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 510,
+    "county": "maigh-eo",
+    "headword": "ráig",
+    "meaning_en": "shower, one shower after another",
+    "usage": null
+  },
+  {
+    "position": 511,
+    "county": "maigh-eo",
+    "headword": "rálach",
+    "meaning_en": "an ugly offensive name for a woman",
+    "usage": null
+  },
+  {
+    "position": 512,
+    "county": "maigh-eo",
+    "headword": "rampaéraí",
+    "meaning_en": null,
+    "usage": "nach é an rampaéraí é! bochaill (nó bacach) ag imeacht chuile áit a mba mhaith leis"
+  },
+  {
+    "position": 513,
+    "county": "maigh-eo",
+    "headword": "réalta",
+    "meaning_en": null,
+    "usage": "ar an oíche ba dorcha thainic as réaltaí an aeir riamh"
+  },
+  {
+    "position": 514,
+    "county": "maigh-eo",
+    "headword": "réalta Bhárr na screag",
+    "meaning_en": "name of some star unidentified",
+    "usage": null
+  },
+  {
+    "position": 515,
+    "county": "maigh-eo",
+    "headword": "reamhar",
+    "meaning_en": null,
+    "usage": "ná tóig oram í .i. caint reamhar, rough speech, using curse-words, etc."
+  },
+  {
+    "position": 516,
+    "county": "maigh-eo",
+    "headword": "réidh an achair",
+    "meaning_en": "relief",
+    "usage": "bhain sé na brógaí dhe mar bhí siad ghá ghortú, b'in réidh an achair: fuair sé ré' an achair ón bpian .i. faoiseamh."
+  },
+  {
+    "position": 517,
+    "county": "maigh-eo",
+    "headword": "reimhe",
+    "meaning_en": null,
+    "usage": "is raimhe fuil 'ná uisce"
+  },
+  {
+    "position": 518,
+    "county": "maigh-eo",
+    "headword": "reithíneacht",
+    "meaning_en": null,
+    "usage": "tá an chaor' ar reithíneacht, the ewe is in season"
+  },
+  {
+    "position": 519,
+    "county": "maigh-eo",
+    "headword": "riabhach",
+    "meaning_en": null,
+    "usage": "lothantaí na riabhaí, last two days of March and first day of April"
+  },
+  {
+    "position": 520,
+    "county": "maigh-eo",
+    "headword": "ridire caorach",
+    "meaning_en": "had so many sheep he did not know how many he had",
+    "usage": null
+  },
+  {
+    "position": 521,
+    "county": "maigh-eo",
+    "headword": "ríllín cochain fúithe",
+    "meaning_en": ".i. faoi'n mbró (Sb); seems to mean a roll or plug of straw.",
+    "usage": null
+  },
+  {
+    "position": 522,
+    "county": "maigh-eo",
+    "headword": "riocht",
+    "meaning_en": null,
+    "usage": "níl sé i riocht a dhuil amach, (the weather) is not fit to go out (fishing)."
+  },
+  {
+    "position": 523,
+    "county": "maigh-eo",
+    "headword": "rógaire",
+    "meaning_en": "spill to light pipe, súgán cochain a' lasadh puíop'",
+    "usage": null
+  },
+  {
+    "position": 524,
+    "county": "maigh-eo",
+    "headword": "roilleadh",
+    "meaning_en": null,
+    "usage": "ghá roilleadh héin (ar a' mbóthar), rolling itself (horse)."
+  },
+  {
+    "position": 525,
+    "county": "maigh-eo",
+    "headword": "roilleóg",
+    "meaning_en": "bog myrtle",
+    "usage": null
+  },
+  {
+    "position": 526,
+    "county": "maigh-eo",
+    "headword": "roinn",
+    "meaning_en": null,
+    "usage": "an sagart agus a' póilí, tabhair a gcuid dóf' agus ná bíof aon roinn agad leóf, give them their due and have nothing more to do with them"
+  },
+  {
+    "position": 527,
+    "county": "maigh-eo",
+    "headword": "róisín",
+    "meaning_en": "resin",
+    "usage": null
+  },
+  {
+    "position": 528,
+    "county": "maigh-eo",
+    "headword": "rón",
+    "meaning_en": null,
+    "usage": "in phr. sínte siar i n-a rón, lying down in a lazy posture like a seal"
+  },
+  {
+    "position": 529,
+    "county": "maigh-eo",
+    "headword": "ruacan",
+    "meaning_en": "cockle",
+    "usage": "bia rí ruacan, agus bia bodach báirneach (sean-ocal)."
+  },
+  {
+    "position": 530,
+    "county": "maigh-eo",
+    "headword": "ruaibíní",
+    "meaning_en": null,
+    "usage": "(bhí) ruaibíní - mar adéarfá súilí do bhrógaí - is na curaigh seo - curaigh an dá éadan"
+  },
+  {
+    "position": 531,
+    "county": "maigh-eo",
+    "headword": "rúscadh",
+    "meaning_en": null,
+    "usage": "a' rúscadh le fataí, a' baint fataí (cf. a' plé le fataí i n-áiteanna eile); a' rúscadh leóf, playing with them (children)."
+  },
+  {
+    "position": 532,
+    "county": "maigh-eo",
+    "headword": "saighdiúaí",
+    "meaning_en": "seed-heads and stems of narrow-leaved plantain (slánlus)",
+    "usage": null
+  },
+  {
+    "position": 533,
+    "county": "maigh-eo",
+    "headword": "saighead",
+    "meaning_en": "stone from air flung by fairies. These are preserved in water which is used to cure sick cattle: uisce saghdannaí is the name of this water",
+    "usage": "uisce saighdannaí"
+  },
+  {
+    "position": 534,
+    "county": "maigh-eo",
+    "headword": "saighead (vb)",
+    "meaning_en": null,
+    "usage": "shaighead sé an madadh ionnam, he set the dog at me; a' saghdú madaidh, setting on, inciting a dog."
+  },
+  {
+    "position": 535,
+    "county": "maigh-eo",
+    "headword": "saighean",
+    "meaning_en": "a great sight, a great show entirely",
+    "usage": "ba mhór a' saighean é"
+  },
+  {
+    "position": 536,
+    "county": "maigh-eo",
+    "headword": "sail",
+    "meaning_en": "wax (in ear)",
+    "usage": "(má tá) sail bhuí i n-a cluais, beidh árd-im orthaí; if she has yellow wax in her ear, there will be greast butter on her milk"
+  },
+  {
+    "position": 537,
+    "county": "maigh-eo",
+    "headword": "sáilín ar éanachaí géadh",
+    "meaning_en": "back-toe on goslings",
+    "usage": "gearrfa muid a' sáilín gon ghé, we'll cut off the 'sáilín', for identification purposes"
+  },
+  {
+    "position": 538,
+    "county": "maigh-eo",
+    "headword": "sál-bhrú ar bhó",
+    "meaning_en": "a heel-bruise on a cow",
+    "usage": null
+  },
+  {
+    "position": 539,
+    "county": "maigh-eo",
+    "headword": "salann",
+    "meaning_en": null,
+    "usage": "'sé an salann soir é géadhaí Iorrais thíocht go hEacaill (MC), it is like coals to Newcastl (sean-ocal)."
+  },
+  {
+    "position": 540,
+    "county": "maigh-eo",
+    "headword": "samhlaigh",
+    "meaning_en": null,
+    "usage": "tá an intinn chéanna ag a' bhfear thoir agus ní shamhlóchá leis é, he has the same disposition (he'd take a knife to you) and you'd never think it of him"
+  },
+  {
+    "position": 541,
+    "county": "maigh-eo",
+    "headword": "Santa Bairbre",
+    "meaning_en": null,
+    "usage": "Santa Bairbre i n-aghaidh na dtoirní. shantie Bhairble i n-aghaidh na dtoirní (CN): prionsa a rabh teach iarainn aige chuir an toirní sa spéir é. Ní rabh ag Santa Bairble ach shantie agus ní dearnadh a dhath air (CN)."
+  },
+  {
+    "position": 542,
+    "county": "maigh-eo",
+    "headword": "saoghal Éabha",
+    "meaning_en": null,
+    "usage": "ní bhainfeadh an saoghal Éabha anuas mé, the whole world; an saoghal Ádhaimh is similarly used."
+  },
+  {
+    "position": 543,
+    "county": "maigh-eo",
+    "headword": "sáraigh",
+    "meaning_en": null,
+    "usage": "sháraigh siad mé (the calves) bested me, got the better of me, got away from me: used impersonally: sháraigh air aon bhean fháil, he failed to get any wife; a' sárú oram, contradicting me, arguing me down."
+  },
+  {
+    "position": 544,
+    "county": "maigh-eo",
+    "headword": "sás",
+    "meaning_en": null,
+    "usage": "is maith a' sás na cruic a tharraint, the hills are good to draw it (rain), they usually do"
+  },
+  {
+    "position": 545,
+    "county": "maigh-eo",
+    "headword": "scáirdeóg",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 546,
+    "county": "maigh-eo",
+    "headword": "scannail",
+    "meaning_en": null,
+    "usage": "is olc í an scannail sa gcóir ná san éagóir, g. to accuse someone of stealing something in the right or in the wrong (it gives scandal)"
+  },
+  {
+    "position": 547,
+    "county": "maigh-eo",
+    "headword": "scaobán",
+    "meaning_en": "a spit, shovelful, spadeful",
+    "usage": "scaobán a bhaint as an uaigh De Dónaigh, to dig one spit off the grave on Sunday, for grave digging on Monday is taboo."
+  },
+  {
+    "position": 548,
+    "county": "maigh-eo",
+    "headword": "scealb",
+    "meaning_en": null,
+    "usage": "scealab cloich' , píosa géar"
+  },
+  {
+    "position": 549,
+    "county": "maigh-eo",
+    "headword": "sceataí",
+    "meaning_en": null,
+    "usage": "lá sceataí .i. lá dósta, lá a mbeith gaoth láidir is fearthainn chruaidh"
+  },
+  {
+    "position": 550,
+    "county": "maigh-eo",
+    "headword": "sceinn",
+    "meaning_en": null,
+    "usage": "used transitively: go scinfadh sí an Curach .i. go nglanfadh sí é, that she would sweep the Curragh, i. Polly, a racing mare from Erris"
+  },
+  {
+    "position": 551,
+    "county": "maigh-eo",
+    "headword": "sciata",
+    "meaning_en": "skate",
+    "usage": "brógaí taibhse acú cho maith, they are vivi-parous also, i. they produce brógaí taibhse or young"
+  },
+  {
+    "position": 552,
+    "county": "maigh-eo",
+    "headword": "scib",
+    "meaning_en": "quickly, immediately, e.g. to learn a song by hearing it once",
+    "usage": null
+  },
+  {
+    "position": 553,
+    "county": "maigh-eo",
+    "headword": "scioll",
+    "meaning_en": null,
+    "usage": "go sciolla tú é .i. an fheóil a bhaint dhá chrámhaí"
+  },
+  {
+    "position": 554,
+    "county": "maigh-eo",
+    "headword": "scláiteóg",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 555,
+    "county": "maigh-eo",
+    "headword": "scoith",
+    "meaning_en": null,
+    "usage": "scoith muid thú, we passed you out (on the road) (CN); scoith sí iad, thóig sí an rás orthú, she won the race from them (Sb)."
+  },
+  {
+    "position": 556,
+    "county": "maigh-eo",
+    "headword": "scontaí",
+    "meaning_en": "won (pennies at tossing)",
+    "usage": null
+  },
+  {
+    "position": 557,
+    "county": "maigh-eo",
+    "headword": "scoradh",
+    "meaning_en": "shedding",
+    "usage": "tá an t-arbhar a' scoradh .i. an grán a' titim de"
+  },
+  {
+    "position": 558,
+    "county": "maigh-eo",
+    "headword": "scrachóg an mhadaidh uisc'",
+    "meaning_en": null,
+    "usage": "spaga a dhéanamh de, agus bé' do phócaí lán i gcónaí, the otter's bladder (?), make a purse of it and your pockets will be always full (of money)"
+  },
+  {
+    "position": 559,
+    "county": "maigh-eo",
+    "headword": "scrúd sé léithe",
+    "meaning_en": "he took pity on her, had compassion for her",
+    "usage": null
+  },
+  {
+    "position": 560,
+    "county": "maigh-eo",
+    "headword": "scuainí",
+    "meaning_en": "rays, like light from the air",
+    "usage": "is aisteach na scuainí iad sin, caithe sé go bhfuil toirneach a' bealach sin, these are strange rays, there must be thunder in that direction (TmB)."
+  },
+  {
+    "position": 561,
+    "county": "maigh-eo",
+    "headword": "scuata",
+    "meaning_en": "crowd",
+    "usage": "scuata mrá agus páistí."
+  },
+  {
+    "position": 562,
+    "county": "maigh-eo",
+    "headword": "seadú",
+    "meaning_en": "continuing, staying on",
+    "usage": "(tá) an ghaoth a' seadú, continuing, not settling or abating; (duine) a' seadú, ( a person) staying on in a house (instead of going home as he should"
+  },
+  {
+    "position": 563,
+    "county": "maigh-eo",
+    "headword": "seamair",
+    "meaning_en": null,
+    "usage": "a' tseamhair Mhuire, ceire dilleógaí orthaí (Sb), the four-leaved shamrock (AL)."
+  },
+  {
+    "position": 564,
+    "county": "maigh-eo",
+    "headword": "seamsóg",
+    "meaning_en": "wood-sorrel",
+    "usage": "seamsógaí, stories about ghosts (AL); go leór seamsógaí an bealach seo fadó, a lot of pisreógaí in this part of the country long ago (Sb)."
+  },
+  {
+    "position": 565,
+    "county": "maigh-eo",
+    "headword": "séan",
+    "meaning_en": "deny",
+    "usage": "(it was in the prophecy) go séanfá do bhó héin ar do dhoras héin, that you would deny your own cow at your own door (people may do this to qualify for state assistance)"
+  },
+  {
+    "position": 566,
+    "county": "maigh-eo",
+    "headword": "seánadh",
+    "meaning_en": "see taisbeánadh infra.",
+    "usage": null
+  },
+  {
+    "position": 567,
+    "county": "maigh-eo",
+    "headword": "searrach giorráin",
+    "meaning_en": "male foal",
+    "usage": "s. lárach, female"
+  },
+  {
+    "position": 568,
+    "county": "maigh-eo",
+    "headword": "seársadh",
+    "meaning_en": "charge",
+    "usage": "thug sé oram seársadh, he made a charge at me (dog)"
+  },
+  {
+    "position": 569,
+    "county": "maigh-eo",
+    "headword": "seid",
+    "meaning_en": "shed",
+    "usage": null
+  },
+  {
+    "position": 570,
+    "county": "maigh-eo",
+    "headword": "séin",
+    "meaning_en": "chain",
+    "usage": "bhí séin leis, he had a chain (the vet.) for pulling calf"
+  },
+  {
+    "position": 571,
+    "county": "maigh-eo",
+    "headword": "seisc",
+    "meaning_en": "dry",
+    "usage": "bearach sheisc, heifer not in calf (MMt); seisc-capall, a dry mare (Sb)."
+  },
+  {
+    "position": 572,
+    "county": "maigh-eo",
+    "headword": "seithe",
+    "meaning_en": "hide",
+    "usage": "brógaí seitheadh, shoes made of raw hide"
+  },
+  {
+    "position": 573,
+    "county": "maigh-eo",
+    "headword": "sídhtheamhail",
+    "meaning_en": "subject to sudden storms (in October)",
+    "usage": null
+  },
+  {
+    "position": 574,
+    "county": "maigh-eo",
+    "headword": "sinneán gaoithe",
+    "meaning_en": "blast of wind",
+    "usage": "níl ann ach a' sinneán sin, his bark is worse than his bite"
+  },
+  {
+    "position": 575,
+    "county": "maigh-eo",
+    "headword": "siod é",
+    "meaning_en": "look at it over there",
+    "usage": null
+  },
+  {
+    "position": 576,
+    "county": "maigh-eo",
+    "headword": "síofrógaí",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 577,
+    "county": "maigh-eo",
+    "headword": "siol!",
+    "meaning_en": "word used in chasing a hen out of cabbage plants (Breaffy); siola! siola! (Belcarra); siolaigí! to a number of geese (Keelogues) / ʃulǝg´ i: /.",
+    "usage": null
+  },
+  {
+    "position": 578,
+    "county": "maigh-eo",
+    "headword": "sionnachóir lae",
+    "meaning_en": "a pet day, i.e. one fine day during a spell of wet weather",
+    "usage": null
+  },
+  {
+    "position": 579,
+    "county": "maigh-eo",
+    "headword": "siorlaidh",
+    "meaning_en": "the Charolais",
+    "usage": null
+  },
+  {
+    "position": 580,
+    "county": "maigh-eo",
+    "headword": "sláimín",
+    "meaning_en": null,
+    "usage": "sláimín go bhean, a slovenly untidy \"clot\" of a woman; sláimín Saturday, a lazy bad housekeeper who leaves all her work, washing etc., over till Saturday."
+  },
+  {
+    "position": 581,
+    "county": "maigh-eo",
+    "headword": "slám",
+    "meaning_en": null,
+    "usage": "slám olainne, a roll of wool tuairim 's punt (TmB); slám ceó, a piece of fog or foggy cloud."
+  },
+  {
+    "position": 582,
+    "county": "maigh-eo",
+    "headword": "sleámóg",
+    "meaning_en": "a dark-brown seaweed which hangs in long snake-like strips like a skirt cut with scissors; sleámógaí were formerly used for kelp, and were put out as manure for potatoes (though they gave too much tops). In Conamara they are called stiallachaí according to MMt, and cabhrlleach according to MCd.",
+    "usage": null
+  },
+  {
+    "position": 583,
+    "county": "maigh-eo",
+    "headword": "slód",
+    "meaning_en": "tussock out of which sea-pink grows (Wm); PsC has doubts about this meaning. According to MCd the slód is where sea-birds build their nests.",
+    "usage": null
+  },
+  {
+    "position": 584,
+    "county": "maigh-eo",
+    "headword": "slubaire",
+    "meaning_en": null,
+    "usage": "slubaire bróch, a person slovenly in speech and messy generally."
+  },
+  {
+    "position": 585,
+    "county": "maigh-eo",
+    "headword": "slubar",
+    "meaning_en": "a mess of anything",
+    "usage": null
+  },
+  {
+    "position": 586,
+    "county": "maigh-eo",
+    "headword": "sméadhamh",
+    "meaning_en": null,
+    "usage": "níl s. ar bith sa tinidh agad, your fire is nearly dead"
+  },
+  {
+    "position": 587,
+    "county": "maigh-eo",
+    "headword": "sméarthacht",
+    "meaning_en": null,
+    "usage": "a' sméarthacht a cinn, rubbing her head, fingering her hair"
+  },
+  {
+    "position": 588,
+    "county": "maigh-eo",
+    "headword": "smúitiú",
+    "meaning_en": null,
+    "usage": "tá an ghealach faoi smúitiú, scamall thart orthaí"
+  },
+  {
+    "position": 589,
+    "county": "maigh-eo",
+    "headword": "smutú",
+    "meaning_en": null,
+    "usage": "ghá smutú, ghá mbriseadh (claidhmhtheachaí) (SOG); tá sí smutaí agad, you have it smashed (of spade that struck a stone) (MMt)."
+  },
+  {
+    "position": 590,
+    "county": "maigh-eo",
+    "headword": "snaidhm buaic",
+    "meaning_en": "binding of face of corpse",
+    "usage": null
+  },
+  {
+    "position": 591,
+    "county": "maigh-eo",
+    "headword": "snámhán",
+    "meaning_en": null,
+    "usage": "a' ghaoth a' snámhán thart, the wind going round to another point"
+  },
+  {
+    "position": 592,
+    "county": "maigh-eo",
+    "headword": "snámhtha",
+    "meaning_en": null,
+    "usage": "nach bhfuil sé snáfaí lé uisc' (an spéir thiar), the sky is full of rain on the way, coming"
+  },
+  {
+    "position": 593,
+    "county": "maigh-eo",
+    "headword": "snuada",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 594,
+    "county": "maigh-eo",
+    "headword": "so-chaideartha",
+    "meaning_en": null,
+    "usage": "duine so-chaideartha, a harmless fellow."
+  },
+  {
+    "position": 595,
+    "county": "maigh-eo",
+    "headword": "sompla",
+    "meaning_en": null,
+    "usage": "a' sumpla bróch, nach fearr a' fear mise ná é? the dirty wretch, amn't I a better man than him"
+  },
+  {
+    "position": 596,
+    "county": "maigh-eo",
+    "headword": "sónraidh",
+    "meaning_en": null,
+    "usage": "thóig mé sónraí dó, I observed it, took notice of it"
+  },
+  {
+    "position": 597,
+    "county": "maigh-eo",
+    "headword": "sónta",
+    "meaning_en": null,
+    "usage": "fear sónta, fear a chreidfeadh chuile shórt (TmB). duine sónt', a youngster too obedient to everybody, doing what they tell him (MMt)."
+  },
+  {
+    "position": 598,
+    "county": "maigh-eo",
+    "headword": "sóntaíl",
+    "meaning_en": null,
+    "usage": "an rud is measa bhí greamuithe go dhuine riamh a' tsóntaíl."
+  },
+  {
+    "position": 599,
+    "county": "maigh-eo",
+    "headword": "spallach",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 600,
+    "county": "maigh-eo",
+    "headword": "spáraid",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 601,
+    "county": "maigh-eo",
+    "headword": "spáraid",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 602,
+    "county": "maigh-eo",
+    "headword": "speinn",
+    "meaning_en": null,
+    "usage": "buailfidhear speinn air - na daoine maithe, he will become subject to, or under the spell of fairies (heard only once)."
+  },
+  {
+    "position": 603,
+    "county": "maigh-eo",
+    "headword": "spéir-ghealaí",
+    "meaning_en": null,
+    "usage": "oíche spéir-ghealaí"
+  },
+  {
+    "position": 604,
+    "county": "maigh-eo",
+    "headword": "spideóg",
+    "meaning_en": null,
+    "usage": "a' cathamh spideógaí"
+  },
+  {
+    "position": 605,
+    "county": "maigh-eo",
+    "headword": "spleic",
+    "meaning_en": "tilt",
+    "usage": "spleic ar a' tsíogán, lop-sided rick."
+  },
+  {
+    "position": 606,
+    "county": "maigh-eo",
+    "headword": "spot",
+    "meaning_en": "spot",
+    "usage": null
+  },
+  {
+    "position": 607,
+    "county": "maigh-eo",
+    "headword": "sraith",
+    "meaning_en": "level ground",
+    "usage": "sra' ghainí, light loamy soil with sand through it (TmB); ar a' tSra' riabhach, n.loc., on the top of Cnoc a' tearmainn, ó thuaidh ón 'look-out' (an áit ar mharaigh fear go Chathánach an rón) (PsC)."
+  },
+  {
+    "position": 608,
+    "county": "maigh-eo",
+    "headword": "stácadh",
+    "meaning_en": null,
+    "usage": "a' stácadh, ag ithe aibéil (AC); i n-amhrán:- Tá doiminic agus Seán ag goil stácadh dhá chathamh .i. dhá chathamh go dian (AOS)."
+  },
+  {
+    "position": 609,
+    "county": "maigh-eo",
+    "headword": "stagger",
+    "meaning_en": "te, (a' fás) is na biollaí, kills sheep, bruitheann sé iad (MCd)",
+    "usage": "bláth a' stagger, bláth buí; cailltear a' chaora; ar a' spot a gcaillfidhear í éiríonn sí bréan (Jn). Perh. the bulbous crowfoot is meant."
+  },
+  {
+    "position": 610,
+    "county": "maigh-eo",
+    "headword": "stanna",
+    "meaning_en": "the difference between a stanna and a baraille is a' stanna mar seo I I , a' baraille mar seo ( )",
+    "usage": null
+  },
+  {
+    "position": 611,
+    "county": "maigh-eo",
+    "headword": "staoin-leic",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 612,
+    "county": "maigh-eo",
+    "headword": "staoin-leic",
+    "meaning_en": "name of a sloping flag",
+    "usage": null
+  },
+  {
+    "position": 613,
+    "county": "maigh-eo",
+    "headword": "stealladh",
+    "meaning_en": "kicking, lashing, i.e. horse kicking with both hind legs",
+    "usage": null
+  },
+  {
+    "position": 614,
+    "county": "maigh-eo",
+    "headword": "stéig",
+    "meaning_en": "snaidhm ar stéig was formerly the name given to appendicitis",
+    "usage": "snaidhm ar stéig"
+  },
+  {
+    "position": 615,
+    "county": "maigh-eo",
+    "headword": "steig meig a dhéanamh de",
+    "meaning_en": "to lay him out (for the count) (SBh).",
+    "usage": null
+  },
+  {
+    "position": 616,
+    "county": "maigh-eo",
+    "headword": "stíoc",
+    "meaning_en": "chuck to hens, but stíoc when calling chickens is the proper word to use",
+    "usage": null
+  },
+  {
+    "position": 617,
+    "county": "maigh-eo",
+    "headword": "stiúir",
+    "meaning_en": null,
+    "usage": "bean gan chliú ná bád gan stiúir (sean-ocal); imeó' sí chuile áit, no control over her"
+  },
+  {
+    "position": 618,
+    "county": "maigh-eo",
+    "headword": "stocaire",
+    "meaning_en": "a cadger cadging for money or drink",
+    "usage": "níor tóigeadh ar stocaireacht (é)"
+  },
+  {
+    "position": 619,
+    "county": "maigh-eo",
+    "headword": "stocán láidir go ghasúr",
+    "meaning_en": "a strong sturdy stump of a lad",
+    "usage": null
+  },
+  {
+    "position": 620,
+    "county": "maigh-eo",
+    "headword": "stráiméad",
+    "meaning_en": "a big lazy fellow",
+    "usage": null
+  },
+  {
+    "position": 621,
+    "county": "maigh-eo",
+    "headword": "stupannaí",
+    "meaning_en": "pailing posts (?)",
+    "usage": null
+  },
+  {
+    "position": 622,
+    "county": "maigh-eo",
+    "headword": "suanaí",
+    "meaning_en": null,
+    "usage": "níl ann ach suanaí, (tá sé) ciúin gan suim i gcaint aige; gan bheith a' caint"
+  },
+  {
+    "position": 623,
+    "county": "maigh-eo",
+    "headword": "súgán",
+    "meaning_en": null,
+    "usage": "a shúgáin, addressing a young lad in depreciatory terms"
+  },
+  {
+    "position": 624,
+    "county": "maigh-eo",
+    "headword": "suicín! suicín!",
+    "meaning_en": "used to call a calf",
+    "usage": null
+  },
+  {
+    "position": 625,
+    "county": "maigh-eo",
+    "headword": "suimplí",
+    "meaning_en": "with s-leathan is the dialect form of the usual simplidhe.",
+    "usage": null
+  },
+  {
+    "position": 626,
+    "county": "maigh-eo",
+    "headword": "súithche",
+    "meaning_en": "soot",
+    "usage": null
+  },
+  {
+    "position": 627,
+    "county": "maigh-eo",
+    "headword": "súmaire",
+    "meaning_en": null,
+    "usage": "súmaire doracha go dhuine, a sile fellow with no word in him, who won't speak to you. Is deas a' rud píosa cainte, níor mhol éinne riamh a' súmaire"
+  },
+  {
+    "position": 628,
+    "county": "maigh-eo",
+    "headword": "súmaire",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 629,
+    "county": "maigh-eo",
+    "headword": "tabhairt",
+    "meaning_en": null,
+    "usage": "a' tabhairt dó, hard at it (hay-making (ML); tá an traghan a' tabhairt dó, the corncrake is hard at it, singing away good and loud (MC)."
+  },
+  {
+    "position": 630,
+    "county": "maigh-eo",
+    "headword": "taéradh",
+    "meaning_en": "salutation",
+    "usage": "chuir sé taéradh oram, he saluted me, spoke to me in passing (Wm); chuir sé taéradh cainte air (TmB)."
+  },
+  {
+    "position": 631,
+    "county": "maigh-eo",
+    "headword": "tais",
+    "meaning_en": "ghost (of living person), wraith: chonnaic A. an fear beag agus bhí sé ag iarraidh breith air. Chonnaic sé aríst é beó",
+    "usage": null
+  },
+  {
+    "position": 632,
+    "county": "maigh-eo",
+    "headword": "taisbeánadh",
+    "meaning_en": "revelation, sign.",
+    "usage": null
+  },
+  {
+    "position": 633,
+    "county": "maigh-eo",
+    "headword": "taithí",
+    "meaning_en": "act of frequenting",
+    "usage": "tá sé a' taithí sa teach seo go mór .i. a ghoil ar chuairt ann go minic; is teann é an madadh geárr san áit a mbíonn a thaithí (sean-ocal) (MMt). Cf. D. s. v. madadh."
+  },
+  {
+    "position": 634,
+    "county": "maigh-eo",
+    "headword": "tálach",
+    "meaning_en": "muscular pain in the wrist",
+    "usage": null
+  },
+  {
+    "position": 635,
+    "county": "maigh-eo",
+    "headword": "tanaidh",
+    "meaning_en": "the shallow water (ML); cf. amuich ar a' domhain, out on the deep",
+    "usage": null
+  },
+  {
+    "position": 636,
+    "county": "maigh-eo",
+    "headword": "tara",
+    "meaning_en": null,
+    "usage": "cho dubh leis a' tara"
+  },
+  {
+    "position": 637,
+    "county": "maigh-eo",
+    "headword": "tarraint",
+    "meaning_en": "stammer, impediment of speech",
+    "usage": null
+  },
+  {
+    "position": 638,
+    "county": "maigh-eo",
+    "headword": "te teann",
+    "meaning_en": null,
+    "usage": "rug siad ar a chéilí go te teann"
+  },
+  {
+    "position": 639,
+    "county": "maigh-eo",
+    "headword": "téad",
+    "meaning_en": null,
+    "usage": "tá téad ar an asal agam, I have the ass tied by rope to stake out in the field (Sb); gamhain ar téad ní dheachaidh riamh 'un cinn (sean-ocal) (MCd), a staked calf never throve"
+  },
+  {
+    "position": 640,
+    "county": "maigh-eo",
+    "headword": "teann",
+    "meaning_en": "force, pressure",
+    "usage": "le teann a' ghálaidh, with the force of the wind; le teann uilc, from sheer badness (Sb); le teann na foladh, from the pressure of the blood; fua' sí siar ar theann an uisc', she went back in the teems of rain, when the rain was at its heaviest (ML)."
+  },
+  {
+    "position": 641,
+    "county": "maigh-eo",
+    "headword": "teann fharaige",
+    "meaning_en": "The Old Sea' is used in English in Belmullet for this part of the sea, and it has been suggested to me that formerly the sea did not come past the line between Cleggan Head and Áird Mhór.",
+    "usage": null
+  },
+  {
+    "position": 642,
+    "county": "maigh-eo",
+    "headword": "teannta",
+    "meaning_en": null,
+    "usage": "a choinneál i n-a theannta, to keep it together (money), not to spend any of it"
+  },
+  {
+    "position": 643,
+    "county": "maigh-eo",
+    "headword": "téigle",
+    "meaning_en": null,
+    "usage": "(tá sé) i n-a chalam téigle, it is perfectly calm (said of the sea on a fine day); stoirim shamhraidh ná téigle gimhridh níl aon tseasamh orthaí (sean-ocal) (MMt), a summer storm or a winter calm will not last long."
+  },
+  {
+    "position": 644,
+    "county": "maigh-eo",
+    "headword": "thoir dtuaidh",
+    "meaning_en": "in the N. E.",
+    "usage": null
+  },
+  {
+    "position": 645,
+    "county": "maigh-eo",
+    "headword": "tinn ar ghamhain",
+    "meaning_en": "sick of calving",
+    "usage": null
+  },
+  {
+    "position": 646,
+    "county": "maigh-eo",
+    "headword": "tiogainní",
+    "meaning_en": "come on, I have heard teanamaí also used to address more than one person",
+    "usage": null
+  },
+  {
+    "position": 647,
+    "county": "maigh-eo",
+    "headword": "tionnscain",
+    "meaning_en": "begin, start",
+    "usage": "cé thionnscain é, who started it (fight)? (TmB); is tú a thionnscail a' troid (EOCn); v.n. a' tionnscaint."
+  },
+  {
+    "position": 648,
+    "county": "maigh-eo",
+    "headword": "tioscaire",
+    "meaning_en": null,
+    "usage": null
+  },
+  {
+    "position": 649,
+    "county": "maigh-eo",
+    "headword": "tioscaire",
+    "meaning_en": null,
+    "usage": "níl ainntí ach tioscaire, rud beag óg"
+  },
+  {
+    "position": 650,
+    "county": "maigh-eo",
+    "headword": "togha",
+    "meaning_en": "act of picking (potatoes)",
+    "usage": "á dtogha, picking them (TmB) /a: dǝuwǝ /."
+  },
+  {
+    "position": 651,
+    "county": "maigh-eo",
+    "headword": "toghadóir",
+    "meaning_en": "a picker (of potatoes)",
+    "usage": null
+  },
+  {
+    "position": 652,
+    "county": "maigh-eo",
+    "headword": "tóin",
+    "meaning_en": null,
+    "usage": "tifí as tóin a chéilí, houses built one at the end of another"
+  },
+  {
+    "position": 653,
+    "county": "maigh-eo",
+    "headword": "toirt gan tairbhe",
+    "meaning_en": "applied to a person getting in one's way; such a person is said to be an-amscaí",
+    "usage": null
+  },
+  {
+    "position": 654,
+    "county": "maigh-eo",
+    "headword": "toisigh",
+    "meaning_en": "half-soles (of shoes)",
+    "usage": null
+  },
+  {
+    "position": 655,
+    "county": "maigh-eo",
+    "headword": "tolladh",
+    "meaning_en": null,
+    "usage": "a' tolladh, butting with horns, \"pucking\" (of cattle)."
+  },
+  {
+    "position": 656,
+    "county": "maigh-eo",
+    "headword": "tom",
+    "meaning_en": null,
+    "usage": "tom a' t-éideadh as an uisce caisc (Sb), dip the scapular in the holy water."
+  },
+  {
+    "position": 657,
+    "county": "maigh-eo",
+    "headword": "tonnc",
+    "meaning_en": "a nudge, butt (from bull)",
+    "usage": null
+  },
+  {
+    "position": 658,
+    "county": "maigh-eo",
+    "headword": "torabord",
+    "meaning_en": "turbot, iasc mór leathan",
+    "usage": null
+  },
+  {
+    "position": 659,
+    "county": "maigh-eo",
+    "headword": "trathailte",
+    "meaning_en": "shivering wet",
+    "usage": "thainic sé isteach bog báite is é trathailtí."
+  },
+  {
+    "position": 660,
+    "county": "maigh-eo",
+    "headword": "tráthúil",
+    "meaning_en": null,
+    "usage": "duine tráthúil tíorthúil, fear cainteach fáiltiúil (TmB); ag innsean rudaí (go dhuine) a' dúil le go gcreidfeadh sé iad; bíonn níos mó ná an ceart ar siúl aige; ní chreidtear é a leath gon am (duine tráthúil) (bean AOS)."
+  },
+  {
+    "position": 661,
+    "county": "maigh-eo",
+    "headword": "treall",
+    "meaning_en": "a while of",
+    "usage": "treall cainte, treall gréine"
+  },
+  {
+    "position": 662,
+    "county": "maigh-eo",
+    "headword": "tréamánta",
+    "meaning_en": null,
+    "usage": "focal atá tréamánta sa gcaint"
+  },
+  {
+    "position": 663,
+    "county": "maigh-eo",
+    "headword": "tréamánta",
+    "meaning_en": null,
+    "usage": "duine tréamánta, a headstrong person"
+  },
+  {
+    "position": 664,
+    "county": "maigh-eo",
+    "headword": "treóir",
+    "meaning_en": null,
+    "usage": "go múinfe tú treóir dúinn, give us guidance, direction, nuair a bhethá amú ar a' gcroc"
+  },
+  {
+    "position": 665,
+    "county": "maigh-eo",
+    "headword": "trioll",
+    "meaning_en": null,
+    "usage": "in idiom thit a' trioll ar a' treall agam, I was completely non-plussed"
+  },
+  {
+    "position": 666,
+    "county": "maigh-eo",
+    "headword": "triomaigh",
+    "meaning_en": null,
+    "usage": "níor thriomaigh sé ar aon charraic ariamh (an foightheach), always in the water, never seen on land or on a rock (great northern diver)"
+  },
+  {
+    "position": 667,
+    "county": "maigh-eo",
+    "headword": "triúr",
+    "meaning_en": null,
+    "usage": "tá siad triúr Gallachúraí ann, there are three of those Gallaghers (EOM); muid triúr, the three of us (ML). Cf. libh-se ceathar, with the four of you (ML)."
+  },
+  {
+    "position": 668,
+    "county": "maigh-eo",
+    "headword": "troilithe",
+    "meaning_en": "spent, worn, senile",
+    "usage": "tá sé i n-a shean-fhear troilithe, he is a shaky old man."
+  },
+  {
+    "position": 669,
+    "county": "maigh-eo",
+    "headword": "troisc",
+    "meaning_en": "starve",
+    "usage": "throiscfeá .i. ní shaothróchá orad is thabharfadh biadh agus beatha duit."
+  },
+  {
+    "position": 670,
+    "county": "maigh-eo",
+    "headword": "trom-chúis",
+    "meaning_en": null,
+    "usage": "le trom-chúis adúirt sé é, for fun, humbugging (bean AOS); trom-chúis - grataí magaidh (AL). Contrast D."
+  },
+  {
+    "position": 671,
+    "county": "maigh-eo",
+    "headword": "truipéad",
+    "meaning_en": "an edible seaweed",
+    "usage": null
+  },
+  {
+    "position": 672,
+    "county": "maigh-eo",
+    "headword": "truisle",
+    "meaning_en": null,
+    "usage": "baineadh truisle as, he fell, stumbled"
+  },
+  {
+    "position": 673,
+    "county": "maigh-eo",
+    "headword": "trumpa",
+    "meaning_en": "a tramp; (rakish)",
+    "usage": null
+  },
+  {
+    "position": 674,
+    "county": "maigh-eo",
+    "headword": "tseof! tseof!",
+    "meaning_en": "call word used for sheep",
+    "usage": null
+  },
+  {
+    "position": 675,
+    "county": "maigh-eo",
+    "headword": "tuagh cheatha",
+    "meaning_en": "rainbow; an bun (Jn); i n-a lúbán (SBh).",
+    "usage": null
+  },
+  {
+    "position": 676,
+    "county": "maigh-eo",
+    "headword": "tuar",
+    "meaning_en": "causing",
+    "usage": "a' tuar aicíde, causing or generating disease (such as a rubbish dump)"
+  },
+  {
+    "position": 677,
+    "county": "maigh-eo",
+    "headword": "tuata",
+    "meaning_en": null,
+    "usage": "tuata a rinní é .i. fear gan cheird"
+  },
+  {
+    "position": 678,
+    "county": "maigh-eo",
+    "headword": "tuatach",
+    "meaning_en": null,
+    "usage": "ceárdaí tuatach, one who does not have his trade, a \"gobbawn\" tradesman."
+  },
+  {
+    "position": 679,
+    "county": "maigh-eo",
+    "headword": "tugthaí uam",
+    "meaning_en": "taken from me",
+    "usage": null
+  },
+  {
+    "position": 680,
+    "county": "maigh-eo",
+    "headword": "tuit",
+    "meaning_en": "settle",
+    "usage": "fan go dtite siad, wait till they settle down (before you go head them) - said of freshly made cocks of hay."
+  },
+  {
+    "position": 681,
+    "county": "maigh-eo",
+    "headword": "túnaois",
+    "meaning_en": null,
+    "usage": "thug sé túnaois dó, a small beating, black-eye, perhaps (TmB); cf. Béaloideas, xvii, 257 (six lines from bottom): bhuail siad túnaois mhaith orthú, from Pádraig Mac Meanaman, An Claigeann, in aice le Baile Chruaich."
+  },
+  {
+    "position": 682,
+    "county": "maigh-eo",
+    "headword": "tur",
+    "meaning_en": "dry, without condiment",
+    "usage": null
+  },
+  {
+    "position": 683,
+    "county": "maigh-eo",
+    "headword": "tur",
+    "meaning_en": null,
+    "usage": "fataí tura, gan bainne gan im gan uibheachaí"
+  },
+  {
+    "position": 684,
+    "county": "maigh-eo",
+    "headword": "turachán",
+    "meaning_en": null,
+    "usage": "níl ann ach turachán, páiste (ná colapach) nach mbeith aon fhás faoi"
+  },
+  {
+    "position": 685,
+    "county": "maigh-eo",
+    "headword": "turlainn",
+    "meaning_en": "rocky foreshore, stone beach",
+    "usage": "also applied to the loose stoes half-way up Croagh Patrick (ML); clocha turlainne, beach stones (PAG)."
+  },
+  {
+    "position": 686,
+    "county": "maigh-eo",
+    "headword": "turus tuaithbheal",
+    "meaning_en": null,
+    "usage": "turas a chuireas daoiní ar dhaoiní eile le spit"
+  },
+  {
+    "position": 687,
+    "county": "maigh-eo",
+    "headword": "tutáil",
+    "meaning_en": "impatience, fussiness (of guide on the Reek) (ML). Add to Éigse xi, 245.",
+    "usage": null
+  },
+  {
+    "position": 688,
+    "county": "maigh-eo",
+    "headword": "uaigneach",
+    "meaning_en": null,
+    "usage": "áit uaigneach, a place full of ghosts"
+  },
+  {
+    "position": 689,
+    "county": "maigh-eo",
+    "headword": "uain",
+    "meaning_en": null,
+    "usage": "tá lot ar uain a cinn, there is a wound on the back of her head."
+  },
+  {
+    "position": 690,
+    "county": "maigh-eo",
+    "headword": "uair",
+    "meaning_en": null,
+    "usage": "ar uair an dó dhéag, at twelve o' clock."
+  }
+]

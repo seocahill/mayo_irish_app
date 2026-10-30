@@ -1,0 +1,701 @@
+position,county,headword,has_detail,detail_path,manuscript_entry,entry,meaning_en,meaning_ga,usage,alternative_forms,pronunciation,grammar_forms,notes,county_name,district,collector,dialect,collection_title,year
+1,maigh-eo,a ro,true,/content/ro,a ro,a ro,,,"bhí tú ar an aonach, a Pheatsaí. (Freagra) bhí, a'ro, I was, yes; I was indeed.",,,,"This seems to suggest the early dano, dno > no > ro.",Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+2,maigh-eo,a' tárlú,true,/content/tárlú,a' tárlú,a' tárlú,happening,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+3,maigh-eo,ábalt,true,/content/ábalt,ábalt,ábalt,,,"Níl sé ar ábalt ' a sgríobh, he's not able to write it",,,,,Maigh Eo,"Fál Mór, Co. Mhuigheo",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+4,maigh-eo,acfuinneach,true,/content/acfuinneach,acfuinneach,acfuinneach,"strong, durable, hardy",,duine acfuinneach .i. duine urradhanta/urúnta/.,acúinneach,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+5,maigh-eo,adhlacadh,true,/content/adhlacadh,adhlacadh,adhlacadh,"'was buried', (occurs only in prayers.)",,,a hadhlacadh,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+6,maigh-eo,aduain,true,/content/aduain,aduain,aduain,"strange, unusual",,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+7,maigh-eo,aer,true,/content/aer,aer,aer,sky,,tá an ghealach ar an aer.,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+8,maigh-eo,aghaidh béil,true,/content/aghaidh-béil,aghaidh béil,aghaidh béil,"turn your lip on, give out (abusive language) to the priest.",,"aghaidh béil a thabhairt ar a' tsagart,",(perh. oighe),,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+9,maigh-eo,aghaidh chuimealt,true,/content/aghaidh-chuimealt,aghaidh chuimealt(a),aghaidh chuimealt,file (for sharpening),,,"(oighe) chuimealt(a), aghaidh chumalt(a)",,,,Maigh Eo,A' Cartúr (Jn) agus Gleann a' Ghead (MOCn),Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+10,maigh-eo,Aibreán,true,/content/aibreán,Aibreán,Aibreán,April,,"bog braonach agus Bealtaine béil-fhliuch /be:l´ux/, (sean-ocal) i. an ideal season for growth.",,/ebr´a:n/,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+11,maigh-eo,aidhbheirseoir,true,/content/aidhbheirseoir,aidhbheirseoir,aidhbheirseoir,devil,,,áiverseóir,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+12,maigh-eo,aifir,true,/content/aifir,aifir,aifir,avenge,,"nár aifridh Dia ort é, God forgive you; ní aifreó mé ort é, I'll forgive you for it (TmB)",,,"aifridh, aifreó, aifirt",,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+13,maigh-eo,aighneasúil,true,/content/aighneasúil,aighneasúil,aighneasúil,"chatty, talkative",,"na hAlbanaigh - na seandaoine is measa; an dream óg - tá siad níos aighneasúl' , more affable, more communicative, more sociable",,/ ˡǝin´ǝsu:l´/,níos aighneasúl',,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+14,maigh-eo,aimlí,true,/content/aimlí,aimlí,aimlí,"miserable, wet weather",,"cf. Máire Saoghal Corrach, 'iad a bheith aimlidhe i ndiaidh na troda'",,,"uair aimlí, aimlidhe",,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+15,maigh-eo,aimseógaí,true,/content/aimseógaí,aimseógaí,aimseógaí,fairies,,'siad na haimseógaí a chuir ann é,,,,,Maigh Eo,A' Cartúr (an Chlochair),Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+16,maigh-eo,aintiléad,true,/content/aintiléad,aintiléad,aintiléad,,,"cuirigí suas aintiléad, (said) when there is big wind, to keep the roof (thatch) from blowing.",,,,"I have some doubt about this word, and I have not recorded the name of my informant. The word may turn up elsewhere.",Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+17,maigh-eo,air,true,/content/air,air,air,he had got to do it (?),,bhí sé air aige,,/er´/,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+18,maigh-eo,airde,true,/content/airde,airde,airde,,,"ní rabh mé an airde sin, I wasn't that height, i. I was only a small child at the time (Sb). teach i n-airde cabhlach, side-wall high, or ready roofing (AOS).",i n-airde,/ord´ǝ/,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+19,maigh-eo,aireachtáil,true,/content/aireachtáil,aireachtáil,aireachtáil,,,"(tá mé) gam aireachtáil go maith, I am feeling well",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+20,maigh-eo,airicis,true,/content/airicis,airicis,airicis,,,"tine chnámh in ' airicis, to receive him, to welcome him home.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+21,maigh-eo,airigead beó,true,/content/airigead-beó,airigead beó,airigead beó,quick silver (behind mirror /sga: ha: n/ ),,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+22,maigh-eo,aisling,true,/content/aisling,aisling,aisling,a dream,,,aislinn,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+23,maigh-eo,aiteall,true,/content/aiteall,aiteall,aiteall,lull in the rain,,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+24,maigh-eo,áith,true,/content/áith,áith,áith,,,"'siad na mná a dhóigh an áith, 'twas the women burned the kiln (sean-ocal).",,/ a: ç /,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+25,maigh-eo,aith-dhéanamh,true,/content/aith-dhéanamh,aith-dhéanamh,aith-dhéanamh,"re-making cocks (of hay), i.e. putting little ones into big ones",,,this constitutes ath-obair (/ ˡahobǝr´/),/ ˡahje: nu: /,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+26,maigh-eo,aithinne dearg,true,/content/aithinne-dearg,aithinne dearg,aithinne dearg,"a live coal, as distinguished from sméarthóidí, cinders",,"Ní i gcoinní aithinne a thainic tusa, said to a casual visitor who is inclined to stay too long, as a hint that it is time to be going.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+27,maigh-eo,ala,true,/content/ala,ala,ala,,,"ar ala na huaire, immediately, without delay",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+28,maigh-eo,áladh,true,/content/áladh,áladh,áladh,,,"thug a' t-asal áladh ar a' bpáipéar, made a charge at, rush at the paper, to get it in its teeth",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+29,maigh-eo,alam 'paéir,true,/content/alam-paéir,alam 'paéir,alam 'paéir,,,"tá sé lán le alam 'paéir, full of devilment","See Ó Catháin (Séamus) agus O'Flanagan (Patr.) The Living Landscape, p. 81, 'le cineál alampaér dó féin', explained as 'le cineál grinn dó féin'.",,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+30,maigh-eo,alamais,true,/content/alamais,alamais,alamais,"gibberish, caint nach dtigféá",,"tá alamais mhór aige, níl aige ach alamais; alamais ag a' bpáiste beag, ní thigfeá é (AL); an alamais a bhí acú, i. Franncaigh (SBh).",,,,,Maigh Eo,A' Fál Mór (AL). Ní léir cárbh as do SBh.,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+31,maigh-eo,allagar,true,/content/allagar,allagar,allagar,,,"glór árd, ag a' rón, go fheithide beag",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+32,maigh-eo,alóg,true,/content/alóg,alóg,alóg,flake,,chomh geal le alóg sneachta.,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+33,maigh-eo,alt,true,/content/alt,alt,alt,cliff,,"thuit sé le alt, fell over the cliff into the sea.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+34,maigh-eo,am,true,/content/am,am,am,,,"i n-amanna, eidir amaí, occasionally, sometimes.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+35,maigh-eo,amhail,true,/content/amhail,amhail,amhail,,,"ní bheith aon amhail agad ann, you'd get used to it (after a while)",,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+36,maigh-eo,amháin,true,/content/amháin,amháin,amháin,,,"in phrase h-é amháin from ní h-é amháin, not to mention, even: d'ólfainn sláinte madadh as Éire, h-é amháin amadán as Éire; bhéarfainn punt dó h-é amháin sciling, I'd give him a pound not to mention a shilling. h-é amháin is often used finally at the end of an utterance meaning 'even'.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+37,maigh-eo,an cheist,true,/content/cheist,an cheist,an cheist,This is what you would ask a ghost. It has never been printed (ní rabh i bprionda riamh). Only two people (in Glosh) have the Ceist,,,,,,,Maigh Eo,A' Cartúr,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+38,maigh-eo,an chíonóg,true,/content/chíonóg,an chíonóg,an chíonóg,the five of trumps in the card game of twenty-five,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+39,maigh-eo,an mhuing mheara,true,/content/mhuing-mheara,an mhuing mheara,an mhuing mheara,"hemlock (Sb); this is exactly the same form as that used by Seaghán Mac Meanman in Ó Chamhaoir go Clap-sholus, p. 211; it seems to be due to popular etymology.",,,"a' finn bheara was the form used by SBh. Many variants are found: Scot. Gaelic has a' mhungach-mhear; N. Colgan has mín mhara in Clare Isl. Survey, Section 1, part 4, p. 13. For an early form (14th or 15th century) see Revue Celtique ix, p. 242 (bindmer).",,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+40,maigh-eo,anabaí,true,/content/anabaí,anabaí,anabaí,"huge, stout",,"fear anabaí, fear mór reamhar (CN); fear mór millteach.","This represents D's anbha (sic), spelled anba in Betha Coluim Chille.",,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+41,maigh-eo,anachain,true,/content/anachain,anachain,anachain,,,d'ordaigh Dia an anachainn a sheachaint (sean-ocal); used to warn a person to avoid a house in which people were down with 'flu.,an anachainn,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+42,maigh-eo,angar,true,/content/angar,angar,angar,,,.i. droch-seileadh bróch (MCd); seileadh agus angar .i. diachair (MMt),"an t-angar, droch-seileadh bróch, diachair",,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+43,maigh-eo,annadh,true,/content/annadh,annadh,annadh,,,"tá annadh air .i. uair mhaith; annadh na Samhna, fine weather to the end of October, Indian summer",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+44,maigh-eo,anróiteach,true,/content/anróiteach,anróiteach,anróiteach,,,"bhí an grá Dia ionntú, bhí siad bocht nocht anróiteach .i. na seandaoine fadó",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+45,maigh-eo,antráthach,true,/content/antráthach,antráthach,antráthach,,,"uair antráthach, a very late hour, well after midnight",,/ ˡaNtra: x /,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+46,maigh-eo,aoibhinn Dia,true,/content/aoibhinn-dia,aoibhinn Dia,aoibhinn Dia,,,"is aoibhinn Dia dhó, 'tis happy for him, well for him.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+47,maigh-eo,árach,true,/content/árach,árach,árach,,,"níl aon árach agam air, I cannot help it.",,,,"This in Erris is the usual word, where Munster uses níl aon leigheas agam air, and Ulster níl (aon) neart agam air. Stockman makes strange with the word in The Irish of Achill and writes níl aithreach (?) air, it can't be helped. Mc Cionnaith gives its. v. help. Cf. Scot Gaelic àrach, 'strength, power, authority'.",Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+48,maigh-eo,asarlaigheacht,true,/content/asarlaigheacht,asarlaigheacht,asarlaigheacht,magic power,,"bhí a. aicí, i. ag cailleach i sean-scéal.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+49,maigh-eo,ascaill sa bhfaraige,true,/content/ascaill-sa-bhfaraige,ascaill sa bhfaraige,ascaill sa bhfaraige,,,".i. lúbán isteach, tá fascadh ann.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+50,maigh-eo,átha,true,/content/átha,átha,átha,"in the sea a creek or channel between two rocks or between rock and cliff, cuinéal eidir carraic agus alt",,rithfe muid an átha.,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+51,maigh-eo,athchomair,true,/content/athchomair,athchomair,athchomair,,,"tá sí sin ag imeacht go hathchomair, travelling fast. This was quoted for me by PsC as a Donegallism, i. the word athchomair.",,/ ˡaxmir´/,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+52,maigh-eo,bachlóg,true,/content/bachlóg,bachlóg,bachlóg,,,"chuir siad bachlóg ar a theangaidh, after which he could not speak properly or at all.",,,,,Maigh Eo,A' gCartúr (an Chlochair),Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+53,maigh-eo,báchrán,true,/content/báchrán,báchrán,báchrán,bog bane,leigheas le haghaidh a' bhethí,,,,,,Maigh Eo,Gaoth Sáile,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+54,maigh-eo,bacóg,true,/content/bacóg,bacóg,bacóg,armful of turf,,"bacóg mhónadh ar leathláimh, brosna eidir a' dá láimh (TmB); thug sé leath na cruaiche leis g'ea(n)-bhacóg amháin.",g'ea(n)-bhacóg,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+55,maigh-eo,bail,true,/content/bail,bail,bail,,,"(fear) a chuirfeadh bail air héin, get married in time and set up a home for himself (MMt); go ngohadh droch-bhail orthaí, that she'd come to misfortune (a young pretty girl) at the hands of Arthur Nash (SBh)",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+56,maigh-eo,baint,true,/content/baint,bainte,baint,"set crazy, driven daft",,tá mé baintí as mo mheabhair,,,baintí,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+57,maigh-eo,balabhán,true,/content/balabhán,balabhán,balabhán,stammerer,,,,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+58,maigh-eo,balach,true,/content/balach,balach,balach,completely,,níor ghearr sé balach é,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+59,maigh-eo,balach,true,/content/balach-0,balach,balach,exactly,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+60,maigh-eo,baladh,true,/content/baladh,baladh,baladh,,,"madadh a' cur baladh, scenting, on the trail",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+61,maigh-eo,ball dóráin,true,/content/ball-dóráin,ball dóráin,ball dóráin,mole on skin,,also applied to the parting of hair on each side of neck ar fhíor-chapall; this is somewhat like the deisealán on a pig's rump.,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+62,maigh-eo,baltaí na bó,true,/content/baltaí-na-bó,baltaí na bó,baltaí na bó,cow's baren (note the first a is short),,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+63,maigh-eo,bánú,true,/content/bánú,bánú,bánú,,,"bhí an t-oileán le bánú .i. na daoine le n-a thréiscint, to be evacuated.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+64,maigh-eo,bárr,true,/content/bárr,bárr,barr,,,"tá bár míoltógaí ann, a lot of midges (out this evening), they would eat you.",bár,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+65,maigh-eo,bárr-phéist,true,/content/bárr-phéist,bárr-phéist,bárr-phéist,ringworm,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+66,maigh-eo,barrach,true,/content/barrach,barrach,barrach,,,"a cíoradh baraigh, combing flax",,,baraigh,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+67,maigh-eo,bascaéd,true,/content/bascaéd,bascaéd,bascaéd,"flasket basket, or round skib, used for 'teeming' potatoes",,,,/ basge: d /,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+68,maigh-eo,baslú,true,/content/baslú,baslú,baslú,,,a baslú fataí,"a' falach an aoiligh (TmB). There are three ways to sow potatoes according to ML: (1) baslú, (2) bíthú: I cannot find my record of the third.",,,,Maigh Eo,Ceathrú na gCloch (TmB) agus A' Fál Mór (ML),Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+69,maigh-eo,bead,true,/content/bead,bead!,bead,is the call word used when calling a single goose (to food),,,calling geese generally the call words used are beadaidh! beadaidh!,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+70,maigh-eo,beadaidhe,true,/content/beadaidhe,beadaidhe,beadaidhe,,.i. daoine a' cathamh go math leófa héin agus iad bocht,,(daoine) beadaidhe,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+71,maigh-eo,béal,true,/content/béal,béal,béal,,,"tá tú cailltí púnáiltí i mbéal síogáin lá gimhridh (SBh), said of a person who has not the comfort of a hayshed, and has to stand in the face of a rick getting out fodder on a wet windy winter's day.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+72,maigh-eo,bean-ghabhair,true,/content/bean-ghabhair,bean-ghabhair,bean-ghabhair,another name for the mionnán aerach or male snipe drumming in flight.,,,mionnán aerach,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+73,maigh-eo,beart,true,/content/beart,beart,beart,"A boy from Turlough near Castlebar once gave me the following description of a beart: When oats is cut and tied in sheaves it is then made into bearts to dry and season. The beart consists of 20 sheaves. Ten sheaves are first placed standing against each other five on each side. Then three sheaves are placed in openings left by the other sheaves, to strengthen it. Then four head-sheaves are tied on top of the others to keep the under sheaves dry. The beart is left in the field for a week or ten days to season. It may be left out for two or three weeks as no rain affects it.",,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+74,maigh-eo,beartín Mhuire,true,/content/beartín-mhuire,beartín Mhuire,beartín Mhuire,is another name for dréimire Muire (CN);,bláth cruinn i n-aice an talaimh; bláth air sa bhfómhar;. centaury.,"beart gon tsagart paráiste, stuca gon tséiplíneach, these were the proportionate amounts when paying tithes to the priest (Wm).","beart, dréimire Muire",,,,Maigh Eo,"A' Fál Mór (CN), ní fios cárbh as do Wm",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+75,maigh-eo,beathaighthe,true,/content/beathaighthe,beathaighthe,beathaighthe,"fat, plump",,,beaití,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+76,maigh-eo,beilt,true,/content/beilt,beilt,beilt,,"crios ar cheirtlín snátha, nó ar phurainn",beilt ar shaighdiúr; also applied to a dog's collar,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+77,maigh-eo,béinn,true,/content/béinn,béinn,béinn,,,"A. Tá É. a' teacht aríst. B. Béinn Dé ort, a' bhfuil? (ML), and confirmed by (BR); the meaning seems to be something like 'Go to God, do you tell me so?' expressing a mixture of wonder and delight.",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+78,maigh-eo,béinne,true,/content/béinne,béinne,béinne,,,"rinne siad béinne de (le buillí), they knocked him stiff",,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+79,maigh-eo,beir,true,/content/beir,beir,beir,,,"bhéarfadh sé scian ort, he would take a knife to you (ML); bheir sé air, the dog bit him (MC); bheir a' chearc, the hen laid (MR)",,,"bhéarfadh, bheir",,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+80,maigh-eo,bharamhail,true,/content/bharamhail,bharamhail (used as verb),bharamhail,,,,"cf. Seaghán Mac Meanman Ó Chamhaoir go Clap-sholus, p. 203; tá mé a' barúlach(t), I'm thinking, of the opinion (MBh). (ag baramhlach(t) )",,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+81,maigh-eo,bidhg,true,/content/bidhg,bidhg,bidhg,,,"bás bíg, sudden death.",bíg,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+82,maigh-eo,bileóg,true,/content/bileóg,bileóg,bileóg,"name of top of a local hill, site of the annual bonfire . . . See D. where one meaning is 'table leaf': this would describe the hill top exactly.",,thuas ar a' mbileóig.,thuas a' mbileóig,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+83,maigh-eo,bin! bin! bin!,true,/content/bin-bin-bin,bin! bin! bin!,bin! bin! bin!,call for turkeys (to food),,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+84,maigh-eo,bing,true,/content/bing,bing,bing,an upward limit or ceiling to be set to the number of cattle to be taken in from each tenant for grazing on commons land,,bing a bheith air,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+85,maigh-eo,blas do,true,/content/blas-do,blas do,blas do,taste,,"blas dó go bhfeicidh tú, taste it. Bainne na bó agus (a) ól ar a blas, i. undiluted by water added",,,"blas dó, a blas",,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+86,maigh-eo,blátháin,true,/content/blátháin,blátháin,blátháin,pollock fry,mangaigh bheaga,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+87,maigh-eo,bláthmhar,true,/content/bláthmhar,bláthmhar,bláthmhar,"of work well done, neat and tasty, e.g. cocks of hay neatly headed off with súgáns on them",,"bláfar cuimscear, neat and tidy (of dress); well off: (tá siad) i n-a suí go bláfar.",bláfar,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+88,maigh-eo,bleacht,true,/content/bleacht,bleacht,bleacht,,scathamh dorthaí,bó bhleacht ionnlaogh,,,,,Maigh Eo,Gaoth Sáile,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+89,maigh-eo,bliain chorr,true,/content/bliain-chorr,bliain chorr,bliain chorr,leap-year,,chaon cheathrú bliain a bhíons bliain chorr ann.,bliain bhisigh,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+90,maigh-eo,blocán a'bhuaidh,true,/content/blocán-abhuaidh,blocán (a' bhuaidh),blocán a'bhuaidh,block of cork on a buoy,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+91,maigh-eo,bloinic,true,/content/bloinic,bloinic,bloinic,"fat, grease",,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+92,maigh-eo,bó ghamhnaí,true,/content/bó-ghamhnaí,bó ghamhnaí,bó ghamhnaí,,(bó) bliain ná dhá bhliain gan a' dáir,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+93,maigh-eo,bó ghamhnaigh,true,/content/bó-ghamhnaigh,bó ghamhnaigh,bó ghamhnaigh,stripper cow,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+94,maigh-eo,bóbha,true,/content/bóbha,bóbha,bóbha,"call to an ass to stop, halt",,,,/ bo: wǝ /,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+95,maigh-eo,boc,true,/content/boc,boc,boc,"buck, lad (not complimentary)",,"'séard a bhí ann boc (AC); boc achrannach ar a mhisc, a contrary buck when drunk (HE).",,,,,Maigh Eo,"Inis Géighe, agus A' Fál Mór",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+96,maigh-eo,bocht,true,/content/bocht,bocht,bocht,"a common meaning is miserly, mean",,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+97,maigh-eo,bodail,true,/content/bodail,bodail,bodail,,"ar nós sceana mara iad, biadh ionntú; ar na tráigheannaí ar íochtar láin",,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+98,maigh-eo,bogach,true,/content/bogach,bogach,bogach,the usual word for peat bog,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+99,maigh-eo,boglus,true,/content/boglus,boglus,boglus,leaves of ragwort,dilleógaí a' bhuachalláin bhuí mar leigheas ar a' mbárr-phéist; a bhun a bhruith agus gáirleóg a chur thruíd,,duilleógaí a' bhuachalláin bhuí,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+100,maigh-eo,boilig an lae,true,/content/boilig-lae,boilig an lae,boilig an lae,mid-day and after (in summer),,ní cóir bheith ag obair bhoilig a' lae,bhoilig a' lae,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+101,maigh-eo,bolag uisce,true,/content/bolag-uisce,bolag uisce,bolag uisce,the water-bag from a cow about to calve,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+102,maigh-eo,bolagán béice,true,/content/bolagán-béice,bolagán béice,bolagán béice,fuzzball,,"tá mo cheann i n-a bholagán béice agad, you have me moithered with the noise you are causing. In Westmeath the fuzzball is called a 'sheep's fart'.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+103,maigh-eo,boráiste,true,/content/boráiste,boráiste,boráiste,"charlock, which in other parts of the country is called praiseach",,,bráiste,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+104,maigh-eo,botún,true,/content/botún,botún,botún,,"faoi ghé, cnáimh faoi n-a dhá cois",,,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+105,maigh-eo,bráca,true,/content/bráca,bráca,bráca,"hovels, bad houses",,,,,brácaí,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+106,maigh-eo,bradán,true,/content/bradán,bradán,bradán,frog in asses' hoof,,,,/bruda: n/,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+107,maigh-eo,bradhall,true,/content/bradhall,bradhall,bradhall,cormorant,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+108,maigh-eo,breacadh,true,/content/breacadh,breacadh,breacadh,roughening,,a' breacadh na bróine le bior iarainn,"a' cholbha na bróine, a' tan a bheith an bhró ro-shleamhain",,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+109,maigh-eo,breacadh,true,/content/breacadh-0,breacadh,breacadh,"streaks of different colour, markings",,"tá breacadh an scadáin ionntú, .i. tá do lorgain breac ag a' tinidh (Sb). Vb.: ní caoirigh iad go mbreaca siad, ní ba go ndubha siad, sheep are not mature or full grown until they brighten in colour, nor cows until they become fully black (when younger, black cattle are usually brownish in colour) (MMt).",,,go mbreaca siad,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+110,maigh-eo,bréag,true,/content/bréag,bréag,bréag,,,"níl mé a' cur bréige air, I'm not belying him",,,bréige,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+111,maigh-eo,bréan-lóib,true,/content/bréan-lóib,bréan-lóib,bréan-lóib,"black rotten bog matter under blown sand at sea-edge. The slip (céibh) should have been built on rocks, but instead it was built on the bréanlóib, consequently had no proper foundation and did not last.",,,bréanlóib,/|br´e: nlo: b´/,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+112,maigh-eo,bréan-lóib,true,/content/bréan-lóib-0,bréan-lóib,bréan-lóib,,"an-aibéil ar a cois a' déanamh obair, (nó) a' siúl","cailín breabhsach, cailín óg leitheadach, prancing and showing off (MMt); bean bhreabhsach, bean a mbíonn a cuid gruaige foscailte agus i n-aimhréidh (TmB).",,/ br´ǝusǝx/,,,Maigh Eo,"A' Fál Mór (AL), Ceathrú na gCloch (TmB). Ní léir cárbh as do MMt.",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+113,maigh-eo,Breathnach,true,/content/breathnach,Breathnach,Breathnach,,,"Riocard a' Bhreathnaigh, Riocard a' Tower, was a well known seanachai","The form is the usual one for Walsh and other surnames, e.g. Seán a' Bhaoilligh, John O'Boyle. This genetive form does not seem to be recorded in Woulfe.",,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+114,maigh-eo,bríce,true,/content/bríce,bríce,bríce,brick,,chomh díreach leis a' mbríce,,,leis a' mbríce,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+115,maigh-eo,brígh,true,/content/brígh,brígh,brígh,,,"faoi bhrí mo mhionna níl aon dath aige sin duithe ach orad liom-s', upon my oath he has none of it (sheep) more than I.",brí,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+116,maigh-eo,brionglán,true,/content/brionglán,brionglán,brionglán,barb (on wire),,,,,,,Maigh Eo,A' Cartúr,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+117,maigh-eo,broc,true,/content/broc,broc,broc,badger,,"chomh fallsa le broc, as lasy as a badger.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+118,maigh-eo,brocach,true,/content/brocach,brocach,brocach,"dirty, filthy",,tá d'éadan bróch brocach salach,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+119,maigh-eo,brochán,true,/content/brochán,brochán,brochán,limpets boiled with flour,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+120,maigh-eo,brochán lom,true,/content/brochán-lom,brochán lom,brochán lom,gruel,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+121,maigh-eo,bróg,true,/content/bróg,bród,bróg,,,"marbh le bród, very pleased, delighted.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+122,maigh-eo,brógaí taidhbhs',true,/content/brógaí-taidhbhs,brógaí taidhbhs',brógaí taidhbhs',"young of dogfish, also young of skate",,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+123,maigh-eo,broim,true,/content/broim,broim,broim,,,is fiúntáí broim ná brúcht (sean-ocal),,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+124,maigh-eo,broimíl,true,/content/broimíl,broimíl,broimíl,farting,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+125,maigh-eo,brúghadh,true,/content/brúghadh,brúghadh,brúghadh,pressing towards,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+126,maigh-eo,brúghadh,true,/content/brúghadh-0,brúghadh,brúghadh,,,"tilleadh uisce a' brú análl, more rain coming; coming near the book, i. age for old age pension. a' brú ar a' leabhar",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+127,maigh-eo,bruicheallán,true,/content/bruicheallán,bruicheallán,bruicheallán,"a kind of sea-weed: mar sleámógaí iad; bonn mór orthú, mar charraigín; ar nós fataí.",,Mí na mbruicheallán a tugtaí ar July; bhíodh deireadh na bhfataí cait,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+128,maigh-eo,bruídeáil,true,/content/bruídeáil,bruídeáil,bruídeáil,,,"bruídeáileann sé .i. anfíogach (Sb), meaning that the dogfish is viviparous, giving birth to its young alive and not by laying eggs.",,,bruídeáileann sé,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+129,maigh-eo,bruiméan,true,/content/bruiméan,bruiméan,bruiméan,some sea-bird,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+130,maigh-eo,bruíníneacht,true,/content/bruíníneacht,bruíníneacht,bruíníneacht,,,"vn. a' bruíníneacht, ag achrann, squabbling",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+131,maigh-eo,buacall,true,/content/buacall,buacall,buacall,"a creeping plant growing in sand, somewhat like scutch-grass; it is used a' ceangailt na mbaoití ins na potaí (gliomach).",,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+132,maigh-eo,buail,true,/content/buail,buail,buail,,,"in common phr. bhuail air, he started, commenced determinedly, got going at.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+133,maigh-eo,buarach,true,/content/buarach,buarach,buarach,rope tied round cow's neck in byre,,,,/ǝ wuǝrhǝx /,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+134,maigh-eo,Buile an Bhodaigh,true,/content/buile-bhodaigh,Buaile an Bhodaigh,Buile an Bhodaigh,"name of a constellation: thoir dtuaidh a bhíons sé, Lá'l Muire beag a bhíon sé le feiceál (Sb); this description would seem to indicate the Pleiades. See Pádraig Ó Moghráin in Béaloideas, xiii, pp. 166, 184. MCd described it as 3 réalt agus 4 réalt, while TmB mentioned seacht réalt, and added faoi fhéil Páraic tá sí thiar, faoi Nollaic ó dheas, which would indicate rather Oríon, perh. See also Celtica, xii, 182.",,,,"/ǝ Nuǝl ´ǝ wodǝx /, also /ǝn wolǝ wodǝx / (Sb)",,,Maigh Eo,Féach 'Foinse/Foinsí',Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+135,maigh-eo,builte ar,true,/content/builte-ar,buailte ar,builte ar,"beside, close to",,"bhí an caisleán buailte air, the castle was beside him, quite near him.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+136,maigh-eo,búirthín,true,/content/búirthín,búirthín,búirthín,spancel ar a' dá chos tosaigh,,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+137,maigh-eo,bun,true,/content/bun,bun,bun,,,"tá bun gon uair seo air, seasfa sí, it will stand, i. the weather will remain fine, Tá bun maith orthú, they are well off, well to do.",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+138,maigh-eo,bun a chúl,true,/content/bun-chúl,bun a chúl,bun a chúl,well off,,tá siad i n-a suí go bláfar bun a chúl .i. a dtastáil acú,"Cf. Béaloideas xvi, 68: Bhí siad bunachúil ann. Bhí ba agus caoirigh acú - bhí an áit mhaith ann (where bunachúil is glossed 'comfortable').",/ bun ǝ ˡxu: l /,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+139,maigh-eo,bun bárr,true,/content/bun-bárr,bun bárr,bun bárr,"entirely, totally",,,,/ ˡ bumba: r/,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+140,maigh-eo,bundún,true,/content/bundún,bundún,bundún,,go mhí-ádh nó go mhí-rath air,tá sé go bhundún air,,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+141,maigh-eo,búst,true,/content/búst,búst,búst,"a thick ill-mannered fellow, a surly boor",,,,,adj. bústúil,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+142,maigh-eo,ca fhad,true,/content/ca-fhad,ca fhad,ca fhad,,,cád a fuai' tú? go dtí tiompó ar ais,cád,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+143,maigh-eo,cábán,true,/content/cábán,cábán,cábán,"tent (to sell drink, etc.)",,na cábáin ag na rásaí,,,na cábáin,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+144,maigh-eo,cabhail,true,/content/cabhail,cabhail,cabhail,,,"bhí an teach i n-oirde cabhlach agam, sidewall high",,,cabhlach,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+145,maigh-eo,cábhóg,true,/content/cábhóg,cábhóg,cábhóg,chough,,,,,,,Maigh Eo,"A' Fál Mór (PsC), ní fios cárbh as do MCd",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+146,maigh-eo,cabhsae,true,/content/cabhsae,cabhsae,cabhsae,an old stony bare place,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+147,maigh-eo,caidir,true,/content/caidir,caidir,caidir,,mar bheith 'scoop' a' ceapadh bradán.,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+148,maigh-eo,cáilidheacht,true,/content/cáilidheacht,cáilidheacht,cáilidheacht,"character, nature",,"(chuile shórt) a' rith le na cháilidheacht héin, everything in nature follows its own instinct (Sb); rinne mé é do réir mo cháilidheacht, mar facthas dom go mba chóir a dhéanamh; 'tá cáilidheacht trom ort' adéarfaí le duine a bheith a' tuitim i n-a cholladh lá fliuch (TmB).",,,"mo cháilidheacht, le n-a cháilidheacht",,Maigh Eo,Ceathrú na gCloch (TmB) - ní fios cárbh as do Sb,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+149,maigh-eo,cailleach,true,/content/cailleach,cailleach,cailleach,a súgán rolled up,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+150,maigh-eo,caimbéal,true,/content/caimbéal,caimbéal,caimbéal,,,"bhí mé ag ithe an chaimbéal íochtair duíom héin faoi n-a dhéanamh, I regretted very much having done it",,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+151,maigh-eo,caindéal,false,,,,bottom of barrel (stanna),,,,,,,,,,,,
+152,maigh-eo,caipín a't-sonais,true,/content/caipín-sonais,caipín a' t-sonais,caipín a't-sonais,caul,,"an té a mbíonn a' caipín seo ar a cheann nuair a thigeann sé ar a' tsaol, ní féidir a bháthadh (Sb); ní bheith sé gearr i n-airigead (MMt).",I heard bearád a' tséin as name for the caul in North Meath.,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+153,maigh-eo,cáir,true,/content/cáir,cáir,cáir,grimace,,anc a' cáir atá air = draoch / dri: x/,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+154,maigh-eo,caislín,true,/content/caislín,caislín,caislín,"wheat-ear; considered to be one of the ""sleepers""",,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+155,maigh-eo,cáithleán,false,,,,a kind of sea-grass: a' fás ar a' milliúir,,,,,,,,,,,,
+156,maigh-eo,camadán,true,/content/camadán,camadán,camadán,,trosc-ceainnín beag; iasc dó héin a'camadán,,trosc-ceainnín,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+157,maigh-eo,cambaí,false,,,,"crowd(s), host(s)",,bhí cambaí ann (MC); na cambaí daoiní (a host of fairies) ar a' tsraith sin ar chúl a' droichidín (Wm),,,,,,,,,,
+158,maigh-eo,camóg,false,,,,".i. maide cam (AL), a ""crooky"" stick such as a walking stick.",,,,,,,,,,,,
+159,maigh-eo,cámóg dheirg,false,,,,temporal artery,,,,,,,,,,,,
+160,maigh-eo,cánóg,false,,,,"name of sea-bird, perh. shearwater",,,,,,,,,,,,
+161,maigh-eo,canúint,false,,,,I have heard canúin applied to the 'monotone' intonation that was peculiar to the North Island of Inishkea.,,"a cur canúint ar a gcaint, putting on an 'accent'",,,,,,,,,,
+162,maigh-eo,caoch,false,,,,,,"bhí sí á dhalladh caoch le draoidheachta, she was beating him blind with magic.",,,,,,,,,,
+163,maigh-eo,caológ riabhach,true,/content/caológ-riabhach,caológ riabhach,caológ riabhach,the little bird that follows the cuckoo,,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+164,maigh-eo,capóg,false,,,,dock leaf,,,,,,,,,,,,
+165,maigh-eo,caróg,true,/content/caróg,caróg,caróg,"a small species of seagull, most likely the black-headed gull. There were big numbers of carógs on the island of Moyinnish (?) in Clew Bay where limestone was got to build Inishkea school",,,,,,,Maigh Eo,Inis Géighe,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+166,maigh-eo,carraighe,true,/content/carraighe,carraighe,carraighe,rough scabby skin on legs of hens,"garla, ar chosaí na gcearc; bíonn siad bacach,",,,/ kari: /,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+167,maigh-eo,cársánach,true,/content/cársánach,cársánach,cársánach,plant with short needly leaves and roots like ?-grass; having yellow flower in July; 'would make a mattress or line a collar',,,,/ ˡ ka: rʃa: nǝ x/,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+168,maigh-eo,cead a'bhealaigh,false,,,,"have nothing to do with him, let him alone, don't heed him",,,,,,,,,,,,
+169,maigh-eo,ceann,false,,,,,,"i gceann cúnamh Dé is na Maighdine, with the help of God and the Virgin",,,,,,,,,,
+170,maigh-eo,ceann ar slóg,false,,,,sea-pink; PsC cast doubt on this meaning,,,,,,,,,,,,
+171,maigh-eo,ceannruán,false,,,,"See Éigse vi, 37, for description. This I take to be the common goby; cf. Larousse: gobidés . . . osseux, de petite taille, avec une grosse téte, des yeux plus ou moins saillants, des nageoires pelviennes. Young lads in Tóin na hOltaí collect them in buckets to feed cats: íosaidh na cait iad.",,,,,,,,,,,,
+172,maigh-eo,ceapim,false,,,,"in Erris is confined to the meaning 'catch, stop, intercept'; has approximately the meaning of Latin capere; it is not used in the sense of 'think'.",,,,,,,,,,,,
+173,maigh-eo,cearachaill,false,,,,maide rounáiltí ó bhalla go balla; hens roost on it.,,,,,,,,,,,,
+174,maigh-eo,ceartharnach,false,,,,"kern, mercenary (?)",,"heard only in the very common proverb 'is fada an saol ceatharnaigh bliain' (MCd); dá mbeitheá ag caint ar rud a dhéanamh, déarfaí leat é (MC); 'up today and down tomorrow', therefore do not say what you'll do in the future, you may not be able to do it, you may not be alive Cf. SFC, 2386",,,,,,,,,,
+175,maigh-eo,ceathramha caorach,false,,,,"lamb's quarter, common orache (D); slat a' fás ins na fataí, ar thalamh gainí; á bruith ar fheóil, it is boiled with meat (CN); called 'fat hen' in England (PsC).",,,,,,,,,,,,
+176,maigh-eo,céim,false,,,,limp,,"bhí céim ann, bhí sé bacach; céim bhacaíl', a lame step",,,,,,,,,,
+177,maigh-eo,ceirteóg,false,,,,rag tied on a cow's tail,,,,,,,,,,,,
+178,maigh-eo,ceirthín,false,,,,a plaster: plástar a chuirfeá le cois tinn.,,,,,,,,,,,,
+179,maigh-eo,céiseóg,false,,,,a young sow having first litter,,"banbh céiseóige ar a' gcéad ál, a piglet of a sow's first litter.",,,,,,,,,,
+180,maigh-eo,ceó bruithinn,false,,,,heat haze in fine weather,,,,,,,,,,,,
+181,maigh-eo,chugad,false,,,,beware! look out!,,"chugad a' luaith! said by a woman when putting out ashes; chugad a' púc', beware of the pooka! common in the phr. níor úirt siad chugad a' púc' liom (I met them on the road) and they said not a word, spoke not a word to me",,,,,,,,,,
+182,maigh-eo,cian,false,,,,,,"níor mhallaigh (mé) le fada na gcian, I haven't cursed for ages and ages",,,,,,,,,,
+183,maigh-eo,cionn,false,,,,,,"goil ina chionn, to undertake it; le goil i gcionn na Gaeilge ceart, to go into, examine, or take up correct, proper Irish",,,,,,,,,,
+184,maigh-eo,ciontaí,true,/content/ciontaí,ciontaí,ciontaí,,,"ní rabh ciontaí ar bith aige liom-s, he had no fault to find with me",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+185,maigh-eo,ciotach,false,,,,,,"dhá cheann chiotach, two left ones i. shoes",,,,,,,,,,
+186,maigh-eo,ciotóg,true,/content/ciotóg,ciotóg,ciotóg,,,"ag oibriú na ciotóige, giving money as a bribe",,,ciotóige,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+187,maigh-eo,cipín,true,/content/cipín,cipín,cipín,,,"lá sa gcipín .i. lá sa mbaile, a wet day when one can't do any work",,,sa gcipín,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+188,maigh-eo,clabhtaí,true,/content/clabhtaí,clabhtaí,clabhtaí,clouds,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+189,maigh-eo,cláimín,true,/content/cláimín,cáimín,cláimín,cane or light stick taken to children when bold,,Around Balla the horns of cora bocs (i.e. mountain sheep) ar called cáimíns.,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+190,maigh-eo,clamhán,false,,,,name of plant,,,,,,,,,,,,
+191,maigh-eo,claoidhte,false,,,,,,,,,,,,,,,,
+192,maigh-eo,cleamáil,false,,,,,,"a' cleamáil gamhnaí, sqeezing calves, i. castrating with burdizzo.",,,,,,,,,,
+193,maigh-eo,cleas,false,,,,,,"ní rabh cor ná cleas as, (the boy) was very quiet and well conducted in a strange house",,,,,,,,,,
+194,maigh-eo,cléat,true,/content/cléat,cléat,cléat,,,a' tolladh cléat curaigh,,/kl´é: t/,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+195,maigh-eo,cleiteach,false,,,,,,"tá an garla cleiteach ar a' gcirc, the hen is in her pen-feathers",,,,,,,,,,
+196,maigh-eo,climirt,false,,,,"""strippings"". This same form I heard at Cor Fhéilim near Ballyvary.",,,,,,,,,,,,
+197,maigh-eo,cloch fhaobhair,true,/content/cloch-fhaobhair,cloch fhaobhair,cloch fhaobhair,sharpening stone,,"c. aoil, lime-stone; c. ghlas, schist or quartz; c. bhreac, granite; c. gheal, white , metamorphosed rock, ach gan a ligean (isteach) i n-aon bhildáil (i ngeall ar) phisleógaí",,/i: wir´/ (fhaobhair),,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+198,maigh-eo,cloigíneacht,false,,,,,,a' cloigíneacht orthaí,,,,,,,,,,
+199,maigh-eo,clómhar,true,/content/clómhar,clómhar,clómhar,clover,,,,/klõ: wǝr/,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+200,maigh-eo,cluaisín,true,/content/cluaisín,cluaisín,cluaisín,"a kind of shell-fish: bia ionntú, mar eistirí",,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+201,maigh-eo,cluanach,false,,,,,,"a' chluanach dhearg, knot-grass, red-legs, polygonum persicaria; a' chluanach bhán, pale-flowered knot-grass, polygonum lapathifolium: spot geal air. D. gives glúineach dhearg, persicaria, which seems to be taken from N. Colgan 'Gaelic Plant and Animal Names', in Section 1 of Clare Island Survey.",,,,,,,,,,
+202,maigh-eo,cluas,true,/content/cluas,cluas,cluas,,,bain a' chluas duíom má thugann tú an lámh faoi'n talamh leat (ars an tAthair Mánus) (Sb). = 'mark my words'.,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+203,maigh-eo,cluiche,true,/content/cluiche,cluiche,cluiche,shoal,,cluife gliomach i mbárr an uisce (agus an-torann á dhéanamh acú leis) na crúbaí,cluife,/klif ´ǝ/,,,Maigh Eo,Inis Géighe,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+204,maigh-eo,clúmhach coilm,true,/content/clúmhach-coilm,clúmhach coilm,clúmhach coilm,"pigeon's down, to sleep on it - ní chaillfí go deó thú",,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+205,maigh-eo,cnádán,false,,,,burdock;,,,,,,,,,,,,
+206,maigh-eo,cnádán,true,/content/cnádán-0,cnádán,cnádán,also the generic name for 'thistle'.,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+207,maigh-eo,cnáimh do dhéid,false,,,,your jaw-bone,,,,,,,,,,,,
+208,maigh-eo,cnáimhíní,true,/content/cnáimhíní,cnáimhíní,cnáimhíní,pin bones (in cow),,"tá na cnáimhíní tití, the pins are down, she is ready for calving",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+209,maigh-eo,cnap,true,/content/cnap,cnap,cnap,shower; plur. in -aíl,,go mbeidh crapaíl tráthnónaí agus toirní,"crap, crapaíl",,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+210,maigh-eo,cnapan,false,,,,a heap,,,,,,,,,,,,
+211,maigh-eo,cnuas,true,/content/cnuas,cnuas,cnuas,a collection of scraps (of bread given to the hens),,"fragments: an gáladh - rinne sé cruas gon gheat', and made bits of the gate",cruas,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+212,maigh-eo,cnuas,true,/content/cnuas-0,cnuas,cnuas,a crowd (at hay-making),,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+213,maigh-eo,codal,true,/content/codal,codal,codal,octopus (?): séidfe sé suas é héin a cho mór!,,"codal go dh'fhear .i. slíomadóir go dh'fhear, he is no good for any one",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+214,maigh-eo,codramanta,true,/content/codramanta,codramanta,codramanta,"dirty, ""clotty""",,"c. le bainne, ""clotty"" with milk, not hygienic (ML); bróch salach, codramant' (Sb).",bróch salach,,,,Maigh Eo,"A' Fál Mór (ML), ní fios cárbh as do Sb",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+215,maigh-eo,coimsgear,true,/content/coimsgear,coimsgear,coimsgear,,,"cailín deas coimsgear, a neat and tidy girl (PsC); bláfar coimsgear, neat and tidy.",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+216,maigh-eo,coinic,true,/content/coinic,coinic,coinic,current (in sea).,,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+217,maigh-eo,coinín,true,/content/coinín,coincín,coinín,,,coincí ar a' bpuíopa cailc' i. the little stem underneath for drainage on clay pipe,,/kiŋk ´i:n ´/,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+218,maigh-eo,coinín,true,/content/coinín-0,coinín,coinín,,,"coinín as poll, maide as coill, breac ar a' tuinn, (to take any one of these) níl aon pheacadh ionn",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+219,maigh-eo,cóir,true,/content/cóir,cóir,cóir,,,níl éinne a fhanans le cóir nach bhfánn é (sean-ocal),,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+220,maigh-eo,coirbhthe,true,/content/coirbhthe,coirbthe,coirbhthe,"cross, short-tempered",,"fear coirbthí, a cross man, would jump at you; tá sé coirbthí inniú, níl aon ghráinne tobac aige","cointinneach, coirbthí",/ker´ip´i:/,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+221,maigh-eo,coirceóg,true,/content/coirceóg,coirceóg,coirceóg,a doubled stook of corn,,,coiriceóg,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+222,maigh-eo,coirdín fidháin,true,/content/coirdín-fidháin,coirdín fidháin,coirdín fidháin,"wild carrot: bláth a' mheachain air, bláth bán mar a' fuarán: an bonn (a' fréamh) go maith le n-ith","stuca dúbailtí (Sb), = fiche purann (Wm), = 15 punanna (MMt). deich bpunannaí an stuca, fiche punann a' beart",,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+223,maigh-eo,coirín,true,/content/coirín,coirín,coirín,coirín a bhíof acú a' fiuchadh an uisc' before they had kettles and pots,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+224,maigh-eo,col sgartha,true,/content/col-sgartha,col sgartha,col sgartha,divorce,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+225,maigh-eo,colg,true,/content/colg,colg,colg,,,"'Tá colg air' adéarfaí faoi mhadadh a bheith ag goil a' troid, with the hair standing (ruffled) on him, ready for fight.",,/kolǝg/,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+226,maigh-eo,colpach,true,/content/colpach,colpach,colpach,heifer,,bainne 'un a' laoigh agus féar 'un na colpaí´ (sean-ocal),,,,,Maigh Eo,Gaoth Sáile,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+227,maigh-eo,comh-aois,true,/content/comh-aois,comh-aois,comh-aois,,,"comh-aois Mháire í, she is the same age as Máire",,/ˡko: ˡi: ʃ/,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+228,maigh-eo,comh-dheasach,true,/content/comh-dheasach,comh-dheasach,comh-dheasach,ambi-dexterous,,,,/ ˡko: ˡjasǝx/,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+229,maigh-eo,comhráidhteach,true,/content/comhráidhteach,comhráidhteach,comhráidhteach,,,"c. maith, a good conversationalist",,/ ˡko: ra: t´ǝx/,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+230,maigh-eo,comhthrom,true,/content/comhthrom,comhthrom,comhthrom,"fair, middling",'níl siad ionmholta ná ioncháinte',"what weight is this fish? tá meáchan cothrom ann, it is a fair weight; trí unsa (tobac) sa tseachtain, sin cathamh cothrom, that's fair smoking; cé' chaoi bhfuil na fataí agaibh? níl siad ach cothrom; sgoith fhataí cothroma, mixed middling potatoes, níl siad ionmholta ná ioncháinte annsin","cothrom, cothroma",/kohrǝm/,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+231,maigh-eo,conacra,true,/content/conacra,conacra,conacra,conacre,,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+232,maigh-eo,conascar,true,/content/conascar,conascar,conascar,,,"leis a gconascar, at nightfall",,/ ˡkunǝsgǝr/,a gconascar,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+233,maigh-eo,conráiteach,true,/content/conráiteach,conráiteach,conráiteach,,,"tá sé conráiteach go maith, troublesome",,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+234,maigh-eo,coscair,true,/content/coscair,coscair,coscair,,,"chascair me ag a' diabhal é deifir a dhéanamh, I shouted at him and heaped curses on him to hurry up.",chascair me,/ kasgir´/,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+235,maigh-eo,coscair,true,/content/coscair-0,cos,coscair,,,"ag imeacht i n-a gcosaí, going bare-footed; cf. Castlebar English 'in their feet', id. a cur dá cosaí, to kill her",,,"a gcosaí, cosaí",,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+236,maigh-eo,crainn siar,true,/content/crainn-siar,crainn siar,crainn siar,,,"cuirfe muid crainn siar, we'll cast lots, using a long straw and a short one",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+237,maigh-eo,crann snadhmtha,true,/content/crann-snadhmtha,crann snadhmtha,crann snadhmtha,"prob. the creeping willow, salix repens; its roots are boiled to cure the garla trua, a waisting disease in cattle; a mbruith sin - a' sú cho dubh le pórtar",,,,/sNi:mhi: /,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+238,maigh-eo,crapaim,true,/content/crapaim,crapaim,crapaim,,,(1) roll up (sleeves/clothes): bhí a chuid éadaigh crapthaí suas go dtI a chuid glúnaí (JL); (2) contract: fan go gcrapa sé na méaraí.,,,"crapthaí, go gcrapa sé",,Maigh Eo,A' gCartúr (an Chlochair),Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+239,maigh-eo,créatúireacht,true,/content/créatúireacht,créatúireacht,créatúireacht,cheating,,a déanamh c. mhór oram,,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+240,maigh-eo,criogaire,true,/content/criogaire,criogaire,criogaire,cricket (BS); she has the same pronunciation for 'cigire'.,,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+241,maigh-eo,crios,true,/content/crios,crios,crios,"belt (on sheaf of corn), but a soldier's belt is beilt.",,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+242,maigh-eo,cró críoch,true,/content/cró-críoch,cró críoch,cró críoch,finishing touch (on work),,an cró críoch a chur air.,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+243,maigh-eo,crosta,true,/content/crosta,crosta,crosta,"bold, ill-mannered (of children)",,"bó chrost', a ""wicked"" cow.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+244,maigh-eo,cruach Pháraic,true,/content/cruach-pháraic,cruach Pháraic,cruach Pháraic,broad-leaved plantain,,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+245,maigh-eo,crúbach,true,/content/crúbach,crúbach,crúbach,,casúr crúbach a bhíos ag gabha.,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+246,maigh-eo,crupaim,true,/content/crupaim,crupaim,crupaim,shrink,,"crupaim is intransitive and is differentiated from crapaim above, which is transitive and means 'to contract, retract, withdraw': a' crupadh le aois, shrinkin with age; tá na nóiníní a' crupadh isteach leis a' driúchta, the daisies are closing up under the dew. The two participles are combined to form one of those 'twin' constructions which are so expressive and common in the dialect: crupthaí crapthaí, strangled and bent under weight of curach carrying it up on to the shingle beach",,,"crupadh, a'crupadh, crupthaí, crupthaí crapthaí",,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+247,maigh-eo,cruthú,true,/content/cruthú,cruthú,cruthú,act of arguing,,"beirt a' cruthú ar a chéilí, two trying to put each other down in argument",,/kruhu:/,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+248,maigh-eo,cruthú,true,/content/cruthú-0,cruthú,cruthú,rich feeding quality (in land),,"tá árd-chruthú ann, there is great feeding in it; beidh a' cruthú sa bhfairsingeacht, there is always good return, good grazing, from a wide extensive scope of land",,/kruhu:/,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+249,maigh-eo,cú,true,/content/cú,cú,cú,greyhound,,,,,the common plural form is cúití,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+250,maigh-eo,cuaille bata,true,/content/cuaille-bata,cuaille bata,cuaille bata,,ceann maith mór,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+251,maigh-eo,cuais,true,/content/cuais,cuais,cuais,"at seashore, hole wherein crab is found",poll a' phortáin,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+252,maigh-eo,cuaiseáin,true,/content/cuaiseáin,cuaiseáin,cuaiseáin,cavities in peat before it is cut,,tá cuaiseáin ann,D. has cuasán.,,,,Maigh Eo,,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+253,maigh-eo,cuan,true,/content/cuan,cuan,cuan,litter (of pups or kittens),,cuan pisíní,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+254,maigh-eo,cúb,true,/content/cúb,cúb,cúb,,,"tá cúb aicí, said of a pup lying between the forelegs of its mother.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+255,maigh-eo,cuiléar,true,/content/cuiléar,cuiléar,cuiléar,quarry,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+256,maigh-eo,cuileat muileat,true,/content/cuileat-muileat,cuileat muileat,cuileat muileat,the knave of diamonds,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+257,maigh-eo,curach a' dá éadan fadó,true,/content/curach-dá-éadan-fadó,curach a' dá éadan fadó,curach a' dá éadan fadó,,as Gaillimh a thainic an (cineál) atá anois ann,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+258,maigh-eo,cúrsaí,true,/content/cúrsaí,cúrsaí,cúrsaí,as regards,,"ach cúrsaí airigead dó, bhí neart aige, but as for money, he had plenty of it.",,,,Sometimes maidir le may be prefixed to cúrsaí,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+259,maigh-eo,cuthail,true,/content/cuthail,cuthail,cuthail,"shy, bashful",,,,"the true pronunciation is /kufǝl´/, pace D.",,,Maigh Eo,,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+260,maigh-eo,dabhaidh,true,/content/dabhaidh,dabhaidh,dabhaidh,"holy well (St. Deirbhile's in Faulmore; lucht dabhch, people who come to make visits or do stations at the holy well, usually to seek cure of some eye ailment. In the old church in Faulmore there is a stone which holds some water: nigh do shúilí ann agus abair an phaidir seo: 'uisce cloch gan iarraidh, ní gad iarraidh thainic mé, ach thárlaigh gur casadh an bealach mé, is gad iarraidh atá mé anois'.",,lucht dabhch,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+261,maigh-eo,dall caochán,true,/content/dall-caochán,dall caochán,dall caochán,owl,,,this is ulchabhchán having gone through a process of popular etymologizing,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+262,maigh-eo,dath,true,/content/dath,dath,dath,,,"a dhath, with neg. nothing, gan a dhath, free, gratis.",,,"a dhath, gan a dhath",,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+263,maigh-eo,dath na gcloch,true,/content/dath-na-gcloch,dath na gcloch,dath na gcloch,a lichen-like scabby growth on stones used to dye wool,,cuireann sé dath buí ar an olainn (stocaí),,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+264,maigh-eo,dé,true,/content/dé,dé,dé,spark,,"níl dé ná deatach inntí, said of a bad, nearly dead, fire (MC). bhí an dé i bhfear acú, one of them still had life in him (when taken out of the water).",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+265,maigh-eo,deabhal,true,/content/deabhal,deabhal,deabhal,devil,,in the alliterative doublet deabhal ná deamhan / diún/,"deamhan, diún",,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+266,maigh-eo,deachmhaidh,true,/content/deachmhaidh,deachmhaidh,deachmhaidh,,,"airigead deachmhaidh, tithes money",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+267,maigh-eo,deannóid,true,/content/deannóid,deannóid,deannóid,a cool sting in the air (especially in the evening with north wind),,tá deannóidín beag fuar ann,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+268,maigh-eo,deara,true,/content/deara,deara,deara,,,"in phr. thug mé faoi ndeara, I noticed (MR). fá deara 'caused' does not seem to be used in Erris.",,,faoi ndeara,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+269,maigh-eo,dearc,true,/content/dearc,dearc,dearc,,,"an, n. L. Ua(igh) na Deirc (thíos faoi tower Acl) is the mid-day mark for the people of Faulmore, i. when the sun is directly over it",,,Deirc,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+270,maigh-eo,deascadh,true,/content/deascadh,deascadh,deascadh,"dregs, lees",,,,,plur. deascrachaí,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+271,maigh-eo,déin,true,/content/déin,déin,déin,,,"in phr. faoi dhéin(t), for, to get, collect especially animals: faoi dhéin caorach, to collect sheep (on mt): faoi n-a ndéint (to go) for them, i. cows on hill. ar fháirnis, to get, is used in reference to eggs: be' mé ag goil suas ar fháirnis uibheachaí, to get some eggs (at a house)","faoi dhéin, faoi dhéint, faoi n-a ndéint, ar fháirnis",,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+272,maigh-eo,deireannach,false,,,,"lately, of late",,"an ceann deireannach gon tSathairne, late Saturday evening",,,,,,,,,,
+273,maigh-eo,deóiríneacht,false,,,,,,"i gcónaí a' deóiríneacht, always whining, whinging",,,,,,,,,,
+274,maigh-eo,díon,false,,,,,,"níl díon deór sa teach, tá fearthainn anuas ann",,,,,,,,,,
+275,maigh-eo,díth,false,,,,,,"gan díth ná dolaidh a dhéanamh go dhuine ar bith, to do no harm to anyone",,,,,,,,,,
+276,maigh-eo,díth dóich,false,,,,,,"na préacháin a' déanamh dí dóich air ann, the crows doing destruction to his crops there (Sb); a' déanamh dí dóich ar do chómhars, wronging your neighbour, rash judging him (MMT); a' déanamh dí dóich air, éagóir (TmB); dí dóich, rud mí-chéart (AL). Cf. Béaloideas, xiii, 224: bhí siad a' dianamh dí-dóich thart i nÉirinn (.i. arm Shasanaí) in a story from Ballycroy, and glossed 'outrage, harm', by the sgéaluí.",,,,,,,,,,
+277,maigh-eo,do-chlaoidhte,false,,,,indefatigable,,"ní rabh sé láidir, ach bhí sé 'do-chlaoidht",,,,,,,,,,
+278,maigh-eo,dochar,false,,,,,,"beag a' dochar dhuit náire a bheith ort, you should be ashamed of yourself",,,,,,,,,,
+279,maigh-eo,docsa,false,,,,box,,"bhuail sé le docsa mé, he struck me a box on the ear",,,,,,,,,,
+280,maigh-eo,dóghín,false,,,,,,"an dóghín, the little miserable two (of diamonds), dó + ín.",,,,,,,,,,
+281,maigh-eo,doigh buar,false,,,,scour,,,,,,,,,,,,
+282,maigh-eo,dóighiúil,false,,,,"pleasant, decent",,,,,,,,,,,,
+283,maigh-eo,dolaidh,false,,,,"harm, damage",,"said of weather: níl aon dolaidh air, it won't rain much",,,,,,,,,,
+284,maigh-eo,dóráinín,false,,,,,,"is tú an dóráinín, tá tú iarrth', your are the silly little thing, you're daft",,,,,,,,,,
+285,maigh-eo,dósta,false,,,,,,"lá dósta, lá sceataidh, lá a mbeith gaoth láidir is fearthainn chruaidh",,,,,,,,,,
+286,maigh-eo,draid,false,,,,,,"draid mhaith fhiacla aige, a good set of teeth",,,,,,,,,,
+287,maigh-eo,draoi,false,,,,an unlimited quantity (of drink),,d'ólfadh sé an draoi; cf. the Westmeath Engl. Idiom: he'd drink Loch Érin dry.,,,,,,,,,,
+288,maigh-eo,draoitheadóireacht,false,,,,,,"a' draoitheadóireacht, ag coinneál eagnaidheacht leat, arguing with you",,,,,,,,,,
+289,maigh-eo,draoth,true,/content/draoth,draoth,draoth,"stripping of teeth, snarl",,féach an draoch atá air ag gáirí; chuir an madadh draoch air héin liom,draoch. Cf. D. draothadh.,/dri: x/,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+290,maigh-eo,dreabháird,false,,,,,,"níl dreabháird ar bith ar a' bhfear sin, níl dul amú ar bith air, there is no stray on him, i. he is well able to look after himself (said of a young lad out late at night, when his parents might be worring about him) (MMt); tá an bhó ar dreabháird, níl sí le fáil.",,,,,,,,,,
+291,maigh-eo,drís,false,,,,bramble,,"talamh an dris, smior a' talaimh. An Sean-dall Glic always knew good land from the bramles or briars that were growing on it (MMt). (the best of land).",,,,,,,,,,
+292,maigh-eo,droch-amharc,false,,,,"the bad eye, evil eye",,"duine ar bith a ndéanfaí droch-amharc /aŋk/ dó, anyone who would be given the bad eye, looked on with evil eye",,,,,,,,,,
+293,maigh-eo,drúchtín,true,/content/drúchtín,drúchtín,drúchtín,a cut between the toes from grass (féar eidir na méaraí),,in gearradh drúchtín,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+294,maigh-eo,duailín,false,,,,"the portion of mane in front next horse's ears, or rather between horse's ears.",,,,,,,,,,,,
+295,maigh-eo,dubh i dtalamh,false,,,,long dead and buried,,,,,,,,,,,,
+296,maigh-eo,dubhlacht na bliana,true,/content/dubhlacht-na-bliana,dubhlacht na bliana,dubhlacht na bliana,after Christmas,,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+297,maigh-eo,dúchas,true,/content/dúchas,dúchas,dúchas,"nature, instinct",,"ritheann ann dúchas thruí chrúbaí an chait (sean-ocal), the cat's nature runs through its paws.",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+298,maigh-eo,dul,false,,,,,,"ní féidir a dhul dóf ', it is impossible to be up to them, to get the better of them.",,,,,,,,,,
+299,maigh-eo,dúrtach,false,,,,,,"(tá mé) an-dúrtach duit .i. iomarcaí cion a bheith agam ort (Sb); le dúrtacht, with affection (Sb). I have heard this word only once, and have some doubt about it.",,,,,,,,,,
+300,maigh-eo,éadáil,false,,,,,,"is maith an éadáil í, i. the good weather, it's good to get it (JT); nach tú an droch-éadáil, said to a cross child (páiste cointinneach); plainc ná adhmad faoi thír, raic sin éadáil (TmB).",,,,,,,,,,
+301,maigh-eo,éan corr,false,,,,,,"níl aon ál nach mbíonn éan corr orthaí, said in respect of one member of a highly respectable decent family who was not so, who turned out different",,,,,,,,,,
+302,maigh-eo,easbhaidh,true,/content/easbhaidh,easbhaidh,easbhaidh,some running sore on foot or leg,,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+303,maigh-eo,éinín gé,false,,,,gosling,,,,,,,,,,,,
+304,maigh-eo,eireóg,false,,,,a pullet,,,,,,,,,,,,
+305,maigh-eo,éisteacht,false,,,,,,"bhfuil tú ag éisteacht liom, are you listening to me?",,,,,,,,,,
+306,maigh-eo,éisteallach,false,,,,,,"duine éisteallach, fastidious person (Sb); in particular a horse that won't drink from a smelly bucket is said to be éisteallach, or a cow (MMt), (AL).",,,,,,,,,,
+307,maigh-eo,eitigh,false,,,,,,heitíof thú .i. ní ghlacfadh an ghearr-chaile a d'iarr tú thú.,,,,,,,,,,
+308,maigh-eo,fad-cheannach,true,/content/fad-cheannach,fad-cheannach,fad-cheannach,"intellectual, ingenious (MáM); cf. Westmeath, long-headed.",,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+309,maigh-eo,fágthaí,false,,,,"slack, lacking full development",,"is déantaí an píosa go dh'fhear é sin, níl a dhath dhó sin fágthaí",,,,,,,,,,
+310,maigh-eo,fáir,true,/content/fáir,fáir,fáir,reply,,"fáir ná freagradh ní bhfuair sé, he got no answer (from the ghost)",freagradh,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+311,maigh-eo,fál,false,,,,field,,"is na fáltaí, in the fields; Bun na bhFál, n.l.; common in placenames, g. An Fál Fada, An Fál Garbh, Fál na gCréachtach.",,,,,,,,,,
+312,maigh-eo,falc,true,/content/falc,falc,falc,a heavy shower,,"falcannaí fómhair, autumn showers",,,falcannaí,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+313,maigh-eo,faoi,false,,,,in,,"faoi do shúil, (something) in your eye; (páiste) faoi n-a broinn, in her womb",,,,,,,,,,
+314,maigh-eo,faoile,false,,,,seagull,,"all the fore-going names are current in Erris, but are differentiated thus: an fhaoile mhór, great black-back, also in the proverb iasacht a' roilligh gon fhaoile; faoileann in the bird-name seabhac cac faoileann, and in n.l. Carraic na bhFaoileann in Faulmore, off Inishkea North; faoilleán is the usual name for 'sea-gull' in general, in lieu of which faoilhóg is the general word in Dú Chaocháin.",,,,,,,,,,
+315,maigh-eo,fealladh,true,/content/fealladh,fealladh,fealladh,act of failing (in health),,"tá sí a' fealladh, i. cow affected by the garla trua; tá an croí a' fealladh air, his heart is failing",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+316,maigh-eo,feamainn bhuí,false,,,,,,"A: bhí tú i Meiriceá? B: bhíos, .. go bhfaca mé an fheamainn bhuí, yes, but I stayed very short, just long enough to see the sea-weed",,,,,,,,,,
+317,maigh-eo,fearb,false,,,,,,"in phr. m'fhearb, my word; 'seadh, m'fhearb, yes, indeed",,,,,,,,,,
+318,maigh-eo,féasóg,false,,,,"hair on face as before shaving, e.g. two days' beard;for a full flowing beard the term is 'cab'",,for a full flowing beard the term is 'cab'.,,,,,,,,,,
+319,maigh-eo,féidhm,true,/content/féidhm,féidhm,féidhm,,,"imthí ó fhéim, nach mbeith i n-ann dadaí a dhéanamh",féim,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+320,maigh-eo,feistiú,true,/content/feistiú,feistiú,feistiú,,,"chuir siad feistiú troda orthú héin, equipped themselves for fight, armed themselves with graips",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+321,maigh-eo,féith,false,,,,sinew,,"féitheachaí mart used in mixing mortar, sinews of cattle",,,,,,,,,,
+322,maigh-eo,fiar,false,,,,a slant,,"fiar tugthaí dhó, it put on a slant; ar fiar, on a slant",,,,,,,,,,
+323,maigh-eo,fiatalach,true,/content/fiatalach,fiatalach,fiatalach,,,"tá fiatalach air, it is going to be wild, rough, stormy (at sea); young lads liked to hear this: they would not have to go out fishing",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+324,maigh-eo,fídeáil,true,/content/fídeáil,fídeáil,fídeáil,,,"a' fídeáil cearc, feeding hens",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+325,maigh-eo,figh,true,/content/figh,figh,figh,rush,,"cho díreach le figh, as straight as a rush (BS); trí feagha/feá/ní thúrfainn air, I wouldn't give three straws for it, it is worthless; (tá) bárr na bhfeágh dóití, the top of the rushes is burned because they are cursed, like a' raithneach agus a' chloch gheal (AL).",,,"fí, fich, figh, feagha, feá, na bhfeágh",,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+326,maigh-eo,fionn-chrotach,true,/content/fionn-chrotach,fionn-chrotach,fionn-chrotach,prob. the whimbrel,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+327,maigh-eo,fíor-chapall,false,,,,a mare that would have eleven foals. This does not seem right; likely the word means a 'bred horse'.,,,,,,,,,,,,
+328,maigh-eo,fírinn,false,,,,"the first ""scribe"" ploughed (in a straight line) ) (Wm).",,,,,,,,,,,,
+329,maigh-eo,flainín dearag,false,,,,red flannel (wrapped round the naomhóg (in Inishkea),,,,,,,,,,,,
+330,maigh-eo,fobha,false,,,,,,"a' tabhairt fobha duithe, a' ligean a' ghráin aicí, a' grán a ligean síos sa mbró (when grinding corn)",,,,,,,,,,
+331,maigh-eo,fobhar,true,/content/fobhar,fobhar,fobhar,,,"tá fobhar ar a' ngealaigh, the moon is on the wane, í ag goil siar",,/fǝur/,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+332,maigh-eo,fobhthaí,false,,,,,,"fofaí ag a chéilí, an t-olc istigh acú dá chéilí (TmB); cho fofaí le madadh, ready for fight.",,,,,,,,,,
+333,maigh-eo,fóidín meara,true,/content/fóidín-meara,fóidín meara,fóidín meara,,,"fuaidh a' fóidín meara ort, you went astray (MC); tá fóidín meara air, he is wrong in the head.",,,"fuaidh a fóidín meara, fóidín meara air",,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+334,maigh-eo,foiliucht,true,/content/foiliucht,foiliucht,foiliucht,,,"they were going to school till they were big boys and girls - bhí a fhoiliucht /el ´ǝxd/ orthú, bhí siad i n-a scoláirí maithe, sign's on them, they were good scholars (PR).",,I have also heard /e: l ´ǝxd / (CN).,a fhoiliucht,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+335,maigh-eo,folt,false,,,,hair (on animal),,tá folt mór ar a' mbó sin,,,,,,,,,,
+336,maigh-eo,forach,false,,,,,,,,,,,,,,,,
+337,maigh-eo,forseamálaí,false,,,,an awkward woman about a house,,,,,,,,,,,,
+338,maigh-eo,fraoisín,true,/content/fraoisín,fraoisín,fraoisín,the Friesian,,,"fruísín, an f.",,,I might add that two names of Continental cattle breeds have recently been adopted and adapted by the dialect.,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+339,maigh-eo,freagairt,true,/content/freagairt,freagairt,freagairt,,,"tá mo dhruim a' freagairt, my back is paining me (especially with reference to a rheumatic pain; an áit a bhfuil a' phian a' freagairt, where you feel the pain (CN) and (PsC).",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+340,maigh-eo,freangach,true,/content/freangach,freangach,freangach,"also called dallóg, lesser dog-fish; in English tanny fish (tonnies) and cat-fish (MR); these are viviparous .i. bruideáileann siad; the young are brógaí taidbhs' and are to be found ins a' leas (in the sea-weed).",,,dallóg,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+341,maigh-eo,frionga,true,/content/frionga,frionga,frionga,spike,,"frionga go choróin na glóire; plur. friongaí .i. spící ar a' gcoróin spíona, spikes on the crown of thorns",spíce,,"friongaí, spící",,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+342,maigh-eo,friotach,true,/content/friotach,friotach,friotach,,,"is friotach a' lá é .i. giobach, breezy with cold biting wind (CN); also of dog: madadh . . friotach, with hair standing on him (ready for fight).",giobach,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+343,maigh-eo,friotáiltí,false,,,,,,"uibh friotáiltí, fried egg",,,,,,,,,,
+344,maigh-eo,fuarcán,true,/content/fuarcán,fuarcán,fuarcán,lump on animal (esp. on shin),,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+345,maigh-eo,fuarthas,false,,,,,,"nach mór a fuarthas thú, hadn't you the ""neck"", the ""cheek""",,,,,,,,,,
+346,maigh-eo,fuath,false,,,,,,"tá tú a' tabhairt fua dúinn, deserting us, not visiting us of nights as you used to",,,,,,,,,,
+347,maigh-eo,gábhadh,false,,,,"danger, battle",,"níl gábh ar bith nach dtigeann duine as, there is no battle but somebody comes safe out of it (Sb); defect (of character); : ach bhí gábh ann - bheith a' caint oram-sa agus ort-sa; bhí sin go ghábh ionn, there was that fault in him, that little flaw in his character, to be talking about me and you (ML).",,,,,,,,,,
+348,maigh-eo,gabháil,false,,,,beating,,"má mbeitheá a' goil go bhata ar a' ngaoith ní thóigfeá é, if you were to beat the wind with a stick (do your very utmost), you would not be able to lift it",,,,,,,,,,
+349,maigh-eo,gabhlóg dhearag,false,,,,,,"2"" long with spread tail",,,,,,,,,,
+350,maigh-eo,gaéthe,false,,,,"cold sting, breeze",,is fuar a' gaéthe é sin (TmB); tá gaéthe beag fuar a' tíocht aníos annsin.,,,,,,,,,,
+351,maigh-eo,gaimhiúil,false,,,,,,(of weather) with a sting in it,,,,,,,,,,
+352,maigh-eo,gainséal,false,,,,,,tá gainséal airigid air .i. uireasaidh airigid (Wm); tá sé gearr i n-airigead (AL),,,,,,,,,,
+353,maigh-eo,gainséal,true,/content/gainséal-0,gainséal,gainséal,,ceangal thimpeall ar mhuinéal na bó a chuirfeadh an sirriam orthaí,I have heard this latter meaning from nobody else,,,,,Maigh Eo,Gaoth Sáile,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+354,maigh-eo,gáiriúlacht,false,,,,"style (in dress), show off of dress (from one informant only)",,,,,,,,,,,,
+355,maigh-eo,galfach,false,,,,,,"cf. gorta, great hunger.",,,,,,,,,,
+356,maigh-eo,gálóg,true,/content/gálóg,gálóg,gálóg,,,a' cumadh gálógaí .i. bréaga,"bréag, gálógaí, bréaga",,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+357,maigh-eo,gangar,false,,,,,,,,,,,,,,,,
+358,maigh-eo,gaoiséal,false,,,,,,"tarnneó mé na gaoiséil asad, I'll pull the wind-pipe out of you",,,,,,,,,,
+359,maigh-eo,gaosán,false,,,,nose (but not quite as complimentary a name as srón),,(but not quite as complimentary a name as srón).,,,,,,,,,,
+360,maigh-eo,garastainceam,false,,,,,,"bhí sé i n-a gharastainceam aige .i. bhí sé bun os cionn aige, nó i n-aimhréidh; ní thiocfadh leis a dhéanamh.",,,,,,,,,,
+361,maigh-eo,garrdha,false,,,,,,"tá gáraidh thart ar a' ngealaigh, there is a ring round the moon (a bad sign of weather).",,,,,,,,,,
+362,maigh-eo,geal,false,,,,snow-white,,"madadh geal, bó gheal (as opposed to bán which means 'blonde' usually in reference to people).",,,,,,,,,,
+363,maigh-eo,geam-chaoch,false,,,,,,,,,,,,,,,,
+364,maigh-eo,géarán,false,,,,eye-tooth: cláir-fhiaclaí go dté tú go dtí an géarán,,,,,,,,,,,,
+365,maigh-eo,gearlachán,false,,,,collar-bone,,,,,,,,,,,,
+366,maigh-eo,gearr,false,,,,persecute,,"ghearr Cromail a' Ghaeilge, chuir sé faoi chois í; gur gearradh í, gur gearradh anuas í, till it was forbidden, outlawed (Irish)",,,,,,,,,,
+367,maigh-eo,geas,false,,,,,,"an raithneach faoi gheasaí - ní fhacthas aon phór ariamh air. Na feagha, a' raithneach, agus a' chloch gheal - chuir Naomh Páraic mallacht orthú (SBh). Ná bain le geis is ní bhainfidh geis leat (sean-ocal) (TMt), do not violate superstitious custom and superstition will not interfere with you.",,,,,,,,,,
+368,maigh-eo,geidimín,false,,,,,,"níl ann ach geidimín go dhuine, níl aon teacht 'un láithreach ann, an geidimín",,,,,,,,,,
+369,maigh-eo,gein,false,,,,,,"níl gein ann, níl éinne ann",,,,,,,,,,
+370,maigh-eo,gilín,false,,,,"something big, huge",,"gilín .i. fata mór (MC); dhá ghilín in reference to two large poodles, ceann acú níos mó 'ná an ceann eile (PR).",,,,,,,,,,
+371,maigh-eo,giobach,false,,,,"harsh, with biting north wind",,tá sé giobach.,,,,,,,,,,
+372,maigh-eo,giolla na himní,true,/content/giolla-na-himní,giolla na himní,giolla na himní,the hare,,eanbhruithe (eantraí) ghiolla na himní .i. súp a' ghiorraidh; bíonn imní ar a' ngiorraidh i gcónaí,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+373,maigh-eo,giorla,false,,,,"a land measure, about a rood",,,,,,,,,,,,
+374,maigh-eo,giorra anála,false,,,,asthma; dock seed is boiled as a relief for it,,,,,,,,,,,,
+375,maigh-eo,giortaigh,false,,,,,,"giortaigh an bóthar, shorten the road; this is what the Gobán Saor's daughter-in-law told his son to do",,,,,,,,,,
+376,maigh-eo,gíoscán,false,,,,F,,"5 million people to feed in London - is mór a' gíoscán é, they eat a lot, there is a lot of chewing on what they need in food",,,,,,,,,,
+377,maigh-eo,girr-scéalach,false,,,,,,"bás girr-scéalach, sudden, unexpected death.",,,,,,,,,,
+378,maigh-eo,giúraí,true,/content/giúraí,giúraí,giúraí,barnacles (on timber),,"ar adhmad fhásas na giúraí; an chéad chót' - caonach, an dara cót' - giúraí, an tríhú cót' - má sheasann a' t-adhmad",,,,,Maigh Eo,Inis Géighe,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+379,maigh-eo,giúsach,false,,,,,,"crann giúsaí a fáitear sa bportach, bog deal.",,,,,,,,,,
+380,maigh-eo,glafar,false,,,,,,chuirfeadh sé glafar as,,,,,,,,,,
+381,maigh-eo,glamba,false,,,,,,,,,,,,,,,,
+382,maigh-eo,glas rua léana,false,,,,,,glas rua léana a chuireas bás ar na géabhaí,,,,,,,,,,
+383,maigh-eo,glasán,false,,,,ribbles,,níos gile ná an mangach; níl siad cho mór leis a' mangach (Wm); black pollock (JT); in Dú Chaocháin they are called glassen in English,,,,,,,,,,
+384,maigh-eo,glasóg,false,,,,the glasóg is a big fish,,"glasóg shé phunt, deich bpunt, ceann maith",,,,,,,,,,
+385,maigh-eo,gnaoidhiúil,false,,,,"handsome, good-looking:",,"níl sí beag gnaoidhiúil ná mór gránna, she is neither small and handsome nor big and plain, she has nothing attractive in her favour. Contrast the meaning 'pleasant, hospitable' in Cois Fhairrge, Co. Galway.",,,,,,,,,,
+386,maigh-eo,gné,false,,,,,,"ní fhaca sé a ghath ná a ghné, he saw nothing",,,,,,,,,,
+387,maigh-eo,go leór,false,,,,"with neg., much",,"ní hé go leór é, it isn't much.",,,,,,,,,,
+388,maigh-eo,goiriúint,false,,,,act of crowing,,"the cock is said to be a' goiriúint san oíche, but a' glaoch in the daytime (PsC); nuair a ghoirfeadh an coileach, when the cock would crow, early in the morning (MC).",,,,,,,,,,
+389,maigh-eo,gorta,true,/content/gorta,gorta,gorta,great hunger,,"tá gorta oram, I am ravenous with hunger (PsC); cf. galfach /galfǝx",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+390,maigh-eo,grabhar,true,/content/grabhar,grabhar,grabhar,"droch-mhóin (éadrom, geal), often with heather growing from the sod; it goes in dust",,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+391,maigh-eo,grágaíl,false,,,,act of cackling,,"gé a' grágaíl, or hen after laying;",,,,,,,,,,
+392,maigh-eo,grágaíl,false,,,,also of an ass 'braying'.,,,,,,,,,,,,
+393,maigh-eo,graifleach,true,/content/graifleach,graifleach,graifleach,,fear mór láidir (fathach),,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+394,maigh-eo,gráig,true,/content/gráig,gráig,gráig,a bray,,"gráig an asail, (é) a' béiciúch",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+395,maigh-eo,grástúil,false,,,,merciful,,"má tá tú láidir, bí grástúil",,,,,,,,,,
+396,maigh-eo,greallach,false,,,,,,tá sé 'n-a ghreallach amháin,,,,,,,,,,
+397,maigh-eo,greim gearr,false,,,,"to get a place with the wife,",,"i. by marrying in, is to get it by the greim gearr.",,,,,,,,,,
+398,maigh-eo,gríobh,false,,,,outside building on turf stack,,,,,,,,,,,,
+399,maigh-eo,gríscín,false,,,,heart and lungs go chirc,,,,,,,,,,,,
+400,maigh-eo,griúil,true,/content/griúil,griúil,griúil,,,"tá griúil ar a' tsúp (hare's soup) le teann mathas, it is so rich and full of goodness",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+401,maigh-eo,gróigim,false,,,,"I foot (turf),",,,,,,,,,,,,
+402,maigh-eo,gróití,false,,,,won,,tá an báire gróití agam ort,,,,,,,,,,
+403,maigh-eo,gúiseóg,true,/content/gúiseóg,gúiseóg,gúiseóg,gosling - bliain d'aois,,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+404,maigh-eo,guth,false,,,,,,"níor airigh sé a ghuth ná a dhath, he heard nothing (AL); níl a ghuth ná a ghré ach go . . . there was nothing in it but . . .",,,,,,,,,,
+405,maigh-eo,hata Acla agus naprún Chliara,true,/content/hata-acla-agus-naprún-chliara,hata Acla agus naprún Chliara,hata Acla agus naprún Chliara,,,"ná déan hata Acla dó .i. den chasúr, don't treat it like hata Acla, that is to say make common property of it (MMt). There was only one hat in Achill and only one apron in Clare Island, and everybody wore it in turn according as he or she needed it. The same was said of brógaí Iorruis, there was only one pair which was used by everybody or so the saying goes.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+406,maigh-eo,hurrais,false,,,,call to pigs to food;,,,,,,,,,,,,
+407,maigh-eo,iarraidh,true,/content/iarraidh,iarraidh,iarraidh,a turn in sickness,,,,,,,Maigh Eo,Inis Géighe,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+408,maigh-eo,iarrtas,false,,,,proposal for marriage,,bhí iarrtas mrá aréir ann,,,,,,,,,,
+409,maigh-eo,innis,false,,,,,,"is ait an innis í sin (Sb), that is a wonderful innis, i. excellent land.",,,,,,,,,,
+410,maigh-eo,iogallach,true,/content/iogallach,iogallach,iogallach,,,bhí iogallach ar a' bhfaraige (PR); iogallach nuair bhíos a' t-ionradh agus a' ghaoth i n-aghaidh a chéilí go do dhalladh sa gcurach (AL).,,/ ugǝLǝx/,,"(Note - the spelling is tentative, perh. ugallach)",Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+411,maigh-eo,ionad,false,,,,,,"in phr. i n-ionad, at the end of: bhí sé feadh bliana ag muintir na bruíne, agus annsin bhí a bhean le goil a' pósadh i n-ionad (n)a bliana, at the end of the year, when the year was up",,,,,,,,,,
+412,maigh-eo,ith,true,/content/ith,íth,ith,an allergic rash a thiocfadh amach i n-a scraith ort (CN); a certain man often got it on the arms and chest when he ate certain foods.,,,,/ i: /,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+413,maigh-eo,iuchair,true,/content/iuchair,iuchair,iuchair,"roe, in female herring (hard and brown) as opposed to an leóbán, milt, in male (bog bán)",,,,/ oxir ´/,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+414,maigh-eo,lag-phortach,false,,,,"worked-out part of bog, cutaway.",,,,,,,,,,,,
+415,maigh-eo,láimhíneach,false,,,,"angel-fish: claigeann mór millteach agus cluasa móra (air); 2ft long, edible, price a' sciata (skate)",,,,,,,,,,,,
+416,maigh-eo,láir,false,,,,,,"gen. lárach occurs in searrach lárach, a filly foal.",,,,,,,,,,
+417,maigh-eo,lán,false,,,,amount,,"is mór a' lán é, it is a good deal, a good lot; nach maith a' lán ráibe atá ar na slataí sin, isn't there a good deal of seed on those docks?",,,,,,,,,,
+418,maigh-eo,le teas foladh,true,/content/le-teas-foladh,le teas foladh,le teas foladh,"in a great rage, or in a great hurry",,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+419,maigh-eo,leac a' bhladair,true,/content/leac-bhladair,leac a' bhladair,leac a' bhladair,,,is tú leac a' bhladair (adéarfá) le páiste a bheith a' dúil le sweets,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+420,maigh-eo,leag air!,false,,,,go ahead! proceed! (with work or fight),,,,,,,,,,,,
+421,maigh-eo,Leám,false,,,,,,"n. pr. : cuimhnigh ar Leám (adéarfa) le fear a' bualadh asail. Bé' tú sách luath ag droch-mhargadh, Leám adúirt é sin leis a' bhfear a bhí a' bualadh an asail; bhí deifir mhór air a' goil 'un cogaidh",,,,,,,,,,
+422,maigh-eo,leath-,false,,,,"one of a pair, a single",,"leath-rat a léim amach as an mála eórna i nDoivleán, cailleadh í. Tá a leath beannuithe (half of Doivleán).",,,,,,,,,,
+423,maigh-eo,léine,false,,,,,,"i n-a léinidh (ag obair), in his shirt-sleeves (ML); alb, surplice: is geal í do léinidh indiu agus is dubh í seachtain ó 'ndiu, your alb is white today but it will be black a week from today. This from the back was Brian Rua's answer to the priest who called his name from the altar (SBh).",,,,,,,,,,
+424,maigh-eo,leóbán,false,,,,milt (in herring),,,,,,,,,,,,
+425,maigh-eo,liabrán,false,,,,,,"cloch liabráin, sharpening stone",,,,,,,,,,
+426,maigh-eo,liaití,false,,,,"grey hairs, greyness",,"go dtiocfadh na liaití go luath, that grey hairs would come early in life (this was part of Brian Rua's prophecy)",,,,,,,,,,
+427,maigh-eo,líne,false,,,,,,"na líntí is na líntí, generations and generations",,,,,,,,,,
+428,maigh-eo,liocaim,false,,,,,,"liocann sé an talamh, (tractor) tramps the ground, packs the soil (Wm); liocthaí: féar liocthaí / L´uki: /, hay stuck together after heating (AL).",,,,,,,,,,
+429,maigh-eo,lóiste go dh'fhear,false,,,,,,,,,,,,,,,,
+430,maigh-eo,lorg,false,,,,,,"a lorg, nothing, following a dhath, finally - a dhath . . . a lorg (negatively)",,,,,,,,,,
+431,maigh-eo,losad,false,,,,,,,,,,,,,,,,
+432,maigh-eo,lot,false,,,,cancer (inward),,,,,,,,,,,,
+433,maigh-eo,luachair gan tóin,true,/content/luachair-gan-tóin,luachair gan tóin,luachair gan tóin,horsetail (equisetum),,,also called broimín gan tóin (Sb); the spore case at apex is named meach gan tóin (PsC).,,,,Maigh Eo,Feach 'Foinsí',Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+434,maigh-eo,luas,false,,,,,,"ar a' dá luas, immediately",,,,,,,,,,
+435,maigh-eo,luchóg,false,,,,mouse,,,,,,,,,,,,
+436,maigh-eo,lugán,false,,,,part of potato left i n-éis na scoilteáin a bheith gearrthaí dhe,,,,,,,,,,,,
+437,maigh-eo,lughar,false,,,,,,"níor lughar liom a' deabhal fheiceál 'ná thú, - a' tan nach mbeith aon tsuim agad ainntí, I wouldn't hate seeing the devil more than you - (said) when you wouldn't like her (Sb); ní lughar liom an t-éag 'ná é, I hate him more than death.",,,,,,,,,,
+438,maigh-eo,luibh a' chraip,false,,,,knapweed,,,,,,,,,,,,
+439,maigh-eo,luifearnach,false,,,,weeds (collective),,,,,,,,,,,,
+440,maigh-eo,luimreóg,false,,,,,,"aliter luimneóg, a kind of crab (found out in the deep?): luimreógaí, portáiníní beaga glasa; bhéarfadh siad ort; nimhneach go maith",,,,,,,,,,
+441,maigh-eo,luinsgeóracht,false,,,,,,"a' l., a' bogadaigh ar a' mbóthar, staggering from drink",,,,,,,,,,
+442,maigh-eo,lútaí rón,false,,,,seal's flippers,,,,,,,,,,,,
+443,maigh-eo,lúth,false,,,,lamb-bed,,"This is not a word I have heard in Erris, but it is common in the Hiberno-English of Westmeath-Longford: the ewe is putting out her loo, i. has prolapsed uterus; cf. Ó Cadhain, An Braon Broghach, notes, pp. 30, 32",,,,,,,,,,
+444,maigh-eo,mac a' pheata,false,,,,,,"chuile mhac a' pheat' acú, every one of them, every mother's son of them",,,,,,,,,,
+445,maigh-eo,mada ceatha,false,,,,rainbow (complete),,,,,,,,,,,,
+446,maigh-eo,magpies,false,,,,"according to the number seen together at a time portend: 1, mí-á; 2, á; 3, socraoid; 4, pósadh",,,,,,,,,,,,
+447,maigh-eo,maidir le,false,,,,as regards,,"maidir le cúrsaí truipéad dó, well, as for truipéad",,,,,,,,,,
+448,maigh-eo,máirseál na fuiseóige,false,,,,the lark's song,,,,,,,,,,,,
+449,maigh-eo,mar-thiompó,false,,,,tumbling (of horse),,ghá mar-thiompó héin (she was) tumbling,,,,,,,,,,
+450,maigh-eo,marbh-fáisc,false,,,,curse,,"is iomaí mara fáisc a chuir Ned air, cursed him often, saying 'mara fáisc air'.",,,,,,,,,,
+451,maigh-eo,más,false,,,,"áit a bhéas i n-a bharra mór,common in placenames and means a sandbar according to (Sb)",,common in placenames and means a sandbar according to (Sb),,,,,,,,,,
+452,maigh-eo,méad,false,,,,,,"lé' mhéad a scanraigh Ifreann é, Hell frightened him so much",,,,,,,,,,
+453,maigh-eo,meadar gan suathadh,false,,,,"something not properly mixed, as for example a basin of dough",,,,,,,,,,,,
+454,maigh-eo,meadhón,false,,,,power/ability,,an tAthair síoraidh a' tabhairt meóin dom ar chuile shórt a dhéanamh,,,,,,,,,,
+455,maigh-eo,méar,false,,,,,,"the fingers are in order - an ordóg, a' chorr-mhéar, a' mhéar fhada, a' mhéar fháinne (or méar an fháinne), a' laidhricín",,,,,,,,,,
+456,maigh-eo,mí-fhiúntach,false,,,,"improper, indecent",,focal mí-fhiúntach,,,,,,,,,,
+457,maigh-eo,mí-stáid,false,,,,badness,,"tá mí-stáid mhór ann, ní bheith aon abhail aige do chuid a mhilleadh; there's much badness in him, he'd have no scruple, no compunction, about destroying your property (TmB). aon abhail he explained as aon tsuim.",,,,,,,,,,
+458,maigh-eo,mí-thuiscint,false,,,,misunderstanding,,,,,,,,,,,,
+459,maigh-eo,miodaracht,false,,,,recollection,,"sílim go bhfuil miodaracht agam gur mhoithi' mé é, I think I have some recollection of having heard it (TmB); bhfuil aon mhiodaracht agad orthaí? do you remember what she looked like? can you describe her (a heifer)? (PsC)",,,,,,,,,,
+460,maigh-eo,mór,false,,,,,,"fear mór, very stout and broad; fear árd, a tall man.",,,,,,,,,,
+461,maigh-eo,mór,false,,,,nearly,,"is mór nár bháith sí a cho maith é, she nearly drowned him too",,,,,,,,,,
+462,maigh-eo,muc,false,,,,,,"a' mhuc rua agus a' mhuc mhín: muca rua, scaly fish, bréams i mBéarla; dath silvery orthú: cho geal le scudán; same name in French (Wm) (perh. he had heard 'roussseau' from a French fisherman). a' mhuc mhín has no scales: níl aon lannach' orthú",,,,,,,,,,
+463,maigh-eo,mún,false,,,,,,,,,,,,,,,,
+464,maigh-eo,mún,false,,,,urinating,,airigead na caillighe is é á mhún faoi na ballaí,,,,,,,,,,
+465,maigh-eo,múr,false,,,,shower,,,,,,,,,,,,
+466,maigh-eo,nasc,false,,,,,,"i nasc, hemmed in, embraced,",,,,,,,,,,
+467,maigh-eo,neartrach,false,,,,,,,,,,,,,,,,
+468,maigh-eo,nimheadóir,false,,,,,,"nimheadóir bradach, a sour fellow who won't take fun or a joke",,,,,,,,,,
+469,maigh-eo,oilbhéasach,false,,,,,,"bochaill oilbhéasach, suas le géimeannaí, a ghoidfeadh giorrán a chomharsa is a bhainfeadh marcaíocht as",,,,,,,,,,
+470,maigh-eo,oiread,true,/content/oiread,oiread,oiread,,,"ach orad leat héin, ní maith liom gleó (CN); no more than yourself, I don't like noise; ach orad leat héin, tá teangaidh mhath Ghaeilge aicí; ní rabh aon toirt ionntú ach orad le cuileógaí; ach orad le ceann cailleadh go hóg é, (cf. Hiberno-English) no more than another, he died young, i. like many another (PR).",orad,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+471,maigh-eo,oirnis,false,,,,"apparatus for weaving, all the gear connected with the loom",,,,,,,,,,,,
+472,maigh-eo,oirthear,false,,,,"laithe 'r n-a n-órthaí, next day but one.",,,,,,,,,,,,
+473,maigh-eo,oirthí,false,,,,,,"an oirthí mhór /ǝN´ er´hi: wo:r/ agus an oirthí bheag seem to refer to two particular pieces of land, i. they are the names of two pieces of rich fertile land. Cf. the Erris adj. for fertile 'oireamhail' / ˡer´hu: l´/, D. Additions I, aireamhail.",,,,,,,,,,
+474,maigh-eo,paca,false,,,,"wool packs, i.e. white clouds (a sign of rain)",,pacaí /puki: / olainne,,,,,,,,,,
+475,maigh-eo,páinéid,false,,,,climate,,"tá an phláinéid athruí, (our) climate has changed, we now get a different kind of weather",,,,,,,,,,
+476,maigh-eo,palltóg,true,/content/palltóg,palltóg,palltóg,a big potato,,,,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+477,maigh-eo,panc an éisc,false,,,,the fishing bank,,a' baint fataí ar phanc an éis (bréagach),,,,,,,,,,
+478,maigh-eo,paráiste,false,,,,applied also to a dispensary district to which a doctor is appointed,,,,,,,,,,,,
+479,maigh-eo,péic,false,,,,,,"an phéic, fox's brush is recorded by C. Bairéad from the Achréidh in Béaloideas, xxvii, 125. Cf. i bpéic an mhadra alla in Dic Buiréad's Tarraingt na Mónadh, IE, t. 532.",,,,,,,,,,
+480,maigh-eo,péice g'fhear,true,/content/péice-gfhear,péice g'fhear,péice g'fhear,"a half-fool of a man, a 'gom'",,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+481,maigh-eo,péiste na murlus,false,,,,,,bíonn sé a' raithe i n-éis na murlus.,,,,,,,,,,
+482,maigh-eo,piarsaí,false,,,,,,"ó d'anam go na piarsaín nach b'éard tá ann míol mór, your soul to the dickens isn't it a whal (POR). Ní droch-fhocal é (AL).",,,,,,,,,,
+483,maigh-eo,pin! pin!,true,/content/pin-pin,pin! pin!,pin! pin!,"call for turkeys (to food, etc.)",,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+484,maigh-eo,píoblach,false,,,,,,"tá p. ar a' gcearc sin, that hen has the ""pick"", she is caught in the throat",,,,,,,,,,
+485,maigh-eo,píoblach,false,,,,also 'hoarseness in a person wih a cold',,,,,,,,,,,,
+486,maigh-eo,piotóg,true,/content/piotóg,piotóg,piotóg,"some kind of primitive chimney, or chimney pot (outside)",,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+487,maigh-eo,pisín áine,true,/content/pisín-áine,pisín áine (also áinne),pisín áine,(meadow) vetch,,,pisín áinne,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+488,maigh-eo,piteóg,true,/content/piteóg,piteóg,piteóg,,mar bheith bean,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+489,maigh-eo,pláigh air,false,,,,a common curse,,,,,,,,,,,,
+490,maigh-eo,plancadh,false,,,,,,"tá sí a' plancadh féir anois, of cow eating her hay with gusto, or ravenously (AL). mhoithigh mé plancadh ó mhaidin .i. loscadh gunnaí (TmB).",,,,,,,,,,
+491,maigh-eo,pléata,false,,,,,,níl ann ach pléata go dhuine,,,,,,,,,,
+492,maigh-eo,pleib,false,,,,much the same meaning as pléata,,níl ann ach pleib,,,,,,,,,,
+493,maigh-eo,pluc,false,,,,cheek,,"nár mhór an ní . . . gan aon oideas gan aon léigheann i n-a pluic, wasn't it great for her who hadn't any education and hadn't a word of learning in her head",,,,,,,,,,
+494,maigh-eo,pluc coise,false,,,,calf of leg,,,,,,,,,,,,
+495,maigh-eo,pocán,false,,,,,,,,,,,,,,,,
+496,maigh-eo,pointeáiltí,true,/content/pointeáiltí,pointeáiltí,pointeáiltí,"exact, tight in money matters, (even) mean",,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+497,maigh-eo,poll,true,/content/poll,poll,poll,,,"fua' sé síos go poll a dhá ascall, he sank to his oxters; roadstead",,,,"ar pholl an Fhód duibh (TMt); cf. achar-pholl 'roadstead' in Mc Cionnaith from Dunquin (per Fr. P. Browne), and Scot. Gaelic acarsaid.",Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+498,maigh-eo,portán iarainn,true,/content/portán-iarainn,portán iarainn,portán iarainn,"a huge crab, spread all round",,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+499,maigh-eo,pótaire,false,,,,"toper, drunkard",,,,,,,,,,,,
+500,maigh-eo,práinneach,true,/content/práinneach,práinneach,práinneach,,,"práinneach asad féin, leitheadach; práinneach as a chlann, as rud ar bit a bheith aige, proud of, thinks a lot of (AL); bhí sé a cho práinneach as a gcat. he was so very fond of the cat (CN).",leitheadach,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+501,maigh-eo,preabaire na gcapall,true,/content/preabaire-na-gcapall,preabaire na gcapall,preabaire na gcapall,wasp,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+502,maigh-eo,preith,false,,,,word used to call a horse (in from field),,,,,,,,,,,,
+503,maigh-eo,prioscán,false,,,,,,"applied also to children; tá an prioscán a' teacht, the youngsters are coming",,,,,,,,,,
+504,maigh-eo,pruigín,false,,,,word used to call a cow,,,,,,,,,,,,
+505,maigh-eo,pruistéal,false,,,,,,,,,,,,,,,,
+506,maigh-eo,púirín,false,,,,channel under turf-rick in bog to let off water,,,,,,,,,,,,
+507,maigh-eo,púirín,false,,,,hole under door for cat (MMt); hole left in the side of a peilic chochain for the hen to enter. The peilic cochain was a special nest made of straw for hens to lay in.,,,,,,,,,,,,
+508,maigh-eo,rachtáil,false,,,,laughing loudly in outburst,,a' rachtaíl gáirí,,,,,,,,,,
+509,maigh-eo,ráib,false,,,,,,,,,,,,,,,,
+510,maigh-eo,ráig,false,,,,"shower, one shower after another",,,,,,,,,,,,
+511,maigh-eo,rálach,false,,,,an ugly offensive name for a woman,,,,,,,,,,,,
+512,maigh-eo,rampaéraí,false,,,,,,nach é an rampaéraí é! bochaill (nó bacach) ag imeacht chuile áit a mba mhaith leis,,,,,,,,,,
+513,maigh-eo,réalta,false,,,,,,ar an oíche ba dorcha thainic as réaltaí an aeir riamh,,,,,,,,,,
+514,maigh-eo,réalta Bhárr na screag,false,,,,name of some star unidentified,,,,,,,,,,,,
+515,maigh-eo,reamhar,false,,,,,,"ná tóig oram í .i. caint reamhar, rough speech, using curse-words, etc.",,,,,,,,,,
+516,maigh-eo,réidh an achair,false,,,,relief,,"bhain sé na brógaí dhe mar bhí siad ghá ghortú, b'in réidh an achair: fuair sé ré' an achair ón bpian .i. faoiseamh.",,,,,,,,,,
+517,maigh-eo,reimhe,false,,,,,,is raimhe fuil 'ná uisce,,,,,,,,,,
+518,maigh-eo,reithíneacht,false,,,,,,"tá an chaor' ar reithíneacht, the ewe is in season",,,,,,,,,,
+519,maigh-eo,riabhach,false,,,,,,"lothantaí na riabhaí, last two days of March and first day of April",,,,,,,,,,
+520,maigh-eo,ridire caorach,false,,,,had so many sheep he did not know how many he had,,,,,,,,,,,,
+521,maigh-eo,ríllín cochain fúithe,false,,,,.i. faoi'n mbró (Sb); seems to mean a roll or plug of straw.,,,,,,,,,,,,
+522,maigh-eo,riocht,false,,,,,,"níl sé i riocht a dhuil amach, (the weather) is not fit to go out (fishing).",,,,,,,,,,
+523,maigh-eo,rógaire,false,,,,"spill to light pipe, súgán cochain a' lasadh puíop'",,,,,,,,,,,,
+524,maigh-eo,roilleadh,false,,,,,,"ghá roilleadh héin (ar a' mbóthar), rolling itself (horse).",,,,,,,,,,
+525,maigh-eo,roilleóg,true,/content/roilleóg,roilleóg,roilleóg,bog myrtle,,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+526,maigh-eo,roinn,false,,,,,,"an sagart agus a' póilí, tabhair a gcuid dóf' agus ná bíof aon roinn agad leóf, give them their due and have nothing more to do with them",,,,,,,,,,
+527,maigh-eo,róisín,false,,,,resin,,,,,,,,,,,,
+528,maigh-eo,rón,false,,,,,,"in phr. sínte siar i n-a rón, lying down in a lazy posture like a seal",,,,,,,,,,
+529,maigh-eo,ruacan,false,,,,cockle,,"bia rí ruacan, agus bia bodach báirneach (sean-ocal).",,,,,,,,,,
+530,maigh-eo,ruaibíní,false,,,,,,(bhí) ruaibíní - mar adéarfá súilí do bhrógaí - is na curaigh seo - curaigh an dá éadan,,,,,,,,,,
+531,maigh-eo,rúscadh,false,,,,,,"a' rúscadh le fataí, a' baint fataí (cf. a' plé le fataí i n-áiteanna eile); a' rúscadh leóf, playing with them (children).",,,,,,,,,,
+532,maigh-eo,saighdiúaí,false,,,,seed-heads and stems of narrow-leaved plantain (slánlus),,,,,,,,,,,,
+533,maigh-eo,saighead,false,,,,stone from air flung by fairies. These are preserved in water which is used to cure sick cattle: uisce saghdannaí is the name of this water,,uisce saighdannaí,,,,,,,,,,
+534,maigh-eo,saighead (vb),false,,,,,,"shaighead sé an madadh ionnam, he set the dog at me; a' saghdú madaidh, setting on, inciting a dog.",,,,,,,,,,
+535,maigh-eo,saighean,false,,,,"a great sight, a great show entirely",,ba mhór a' saighean é,,,,,,,,,,
+536,maigh-eo,sail,false,,,,wax (in ear),,"(má tá) sail bhuí i n-a cluais, beidh árd-im orthaí; if she has yellow wax in her ear, there will be greast butter on her milk",,,,,,,,,,
+537,maigh-eo,sáilín ar éanachaí géadh,false,,,,back-toe on goslings,,"gearrfa muid a' sáilín gon ghé, we'll cut off the 'sáilín', for identification purposes",,,,,,,,,,
+538,maigh-eo,sál-bhrú ar bhó,false,,,,a heel-bruise on a cow,,,,,,,,,,,,
+539,maigh-eo,salann,false,,,,,,"'sé an salann soir é géadhaí Iorrais thíocht go hEacaill (MC), it is like coals to Newcastl (sean-ocal).",,,,,,,,,,
+540,maigh-eo,samhlaigh,false,,,,,,"tá an intinn chéanna ag a' bhfear thoir agus ní shamhlóchá leis é, he has the same disposition (he'd take a knife to you) and you'd never think it of him",,,,,,,,,,
+541,maigh-eo,Santa Bairbre,false,,,,,,Santa Bairbre i n-aghaidh na dtoirní. shantie Bhairble i n-aghaidh na dtoirní (CN): prionsa a rabh teach iarainn aige chuir an toirní sa spéir é. Ní rabh ag Santa Bairble ach shantie agus ní dearnadh a dhath air (CN).,,,,,,,,,,
+542,maigh-eo,saoghal Éabha,false,,,,,,"ní bhainfeadh an saoghal Éabha anuas mé, the whole world; an saoghal Ádhaimh is similarly used.",,,,,,,,,,
+543,maigh-eo,sáraigh,false,,,,,,"sháraigh siad mé (the calves) bested me, got the better of me, got away from me: used impersonally: sháraigh air aon bhean fháil, he failed to get any wife; a' sárú oram, contradicting me, arguing me down.",,,,,,,,,,
+544,maigh-eo,sás,false,,,,,,"is maith a' sás na cruic a tharraint, the hills are good to draw it (rain), they usually do",,,,,,,,,,
+545,maigh-eo,scáirdeóg,false,,,,,,,,,,,,,,,,
+546,maigh-eo,scannail,false,,,,,,"is olc í an scannail sa gcóir ná san éagóir, g. to accuse someone of stealing something in the right or in the wrong (it gives scandal)",,,,,,,,,,
+547,maigh-eo,scaobán,true,/content/scaobán,scaobán,scaobán,"a spit, shovelful, spadeful",,"scaobán a bhaint as an uaigh De Dónaigh, to dig one spit off the grave on Sunday, for grave digging on Monday is taboo.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+548,maigh-eo,scealb,false,,,,,,"scealab cloich' , píosa géar",,,,,,,,,,
+549,maigh-eo,sceataí,true,/content/sceataí,sceataí,sceataí,,,"lá sceataí .i. lá dósta, lá a mbeith gaoth láidir is fearthainn chruaidh","lá sceataí, lá dósta",,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+550,maigh-eo,sceinn,false,,,,,,"used transitively: go scinfadh sí an Curach .i. go nglanfadh sí é, that she would sweep the Curragh, i. Polly, a racing mare from Erris",,,,,,,,,,
+551,maigh-eo,sciata,false,,,,skate,,"brógaí taibhse acú cho maith, they are vivi-parous also, i. they produce brógaí taibhse or young",,,,,,,,,,
+552,maigh-eo,scib,false,,,,"quickly, immediately, e.g. to learn a song by hearing it once",,,,,,,,,,,,
+553,maigh-eo,scioll,false,,,,,,go sciolla tú é .i. an fheóil a bhaint dhá chrámhaí,,,,,,,,,,
+554,maigh-eo,scláiteóg,true,/content/scláiteóg,scláiteóg,scláiteóg,,braon beag óil,,,,,,Maigh Eo,Gaoth Sáile,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+555,maigh-eo,scoith,false,,,,,,"scoith muid thú, we passed you out (on the road) (CN); scoith sí iad, thóig sí an rás orthú, she won the race from them (Sb).",,,,,,,,,,
+556,maigh-eo,scontaí,false,,,,won (pennies at tossing),,,,,,,,,,,,
+557,maigh-eo,scoradh,false,,,,shedding,,tá an t-arbhar a' scoradh .i. an grán a' titim de,,,,,,,,,,
+558,maigh-eo,scrachóg an mhadaidh uisc',false,,,,,,"spaga a dhéanamh de, agus bé' do phócaí lán i gcónaí, the otter's bladder (?), make a purse of it and your pockets will be always full (of money)",,,,,,,,,,
+559,maigh-eo,scrúd sé léithe,false,,,,"he took pity on her, had compassion for her",,,,,,,,,,,,
+560,maigh-eo,scuainí,false,,,,"rays, like light from the air",,"is aisteach na scuainí iad sin, caithe sé go bhfuil toirneach a' bealach sin, these are strange rays, there must be thunder in that direction (TmB).",,,,,,,,,,
+561,maigh-eo,scuata,false,,,,crowd,,scuata mrá agus páistí.,,,,,,,,,,
+562,maigh-eo,seadú,false,,,,"continuing, staying on",,"(tá) an ghaoth a' seadú, continuing, not settling or abating; (duine) a' seadú, ( a person) staying on in a house (instead of going home as he should",,,,,,,,,,
+563,maigh-eo,seamair,false,,,,,,"a' tseamhair Mhuire, ceire dilleógaí orthaí (Sb), the four-leaved shamrock (AL).",,,,,,,,,,
+564,maigh-eo,seamsóg,true,/content/seamsóg,seamsóg,seamsóg,wood-sorrel,,"seamsógaí, stories about ghosts (AL); go leór seamsógaí an bealach seo fadó, a lot of pisreógaí in this part of the country long ago (Sb).",pisreógaí,,seamsógaí,,Maigh Eo,"A' Fál Mór (AL), ní fios cárbh as do Sb",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+565,maigh-eo,séan,false,,,,deny,,"(it was in the prophecy) go séanfá do bhó héin ar do dhoras héin, that you would deny your own cow at your own door (people may do this to qualify for state assistance)",,,,,,,,,,
+566,maigh-eo,seánadh,false,,,,see taisbeánadh infra.,,,,,,,,,,,,
+567,maigh-eo,searrach giorráin,false,,,,male foal,,"s. lárach, female",,,,,,,,,,
+568,maigh-eo,seársadh,true,/content/seársadh,seársadh,seársadh,charge,,"thug sé oram seársadh, he made a charge at me (dog)",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+569,maigh-eo,seid,false,,,,shed,,,,,,,,,,,,
+570,maigh-eo,séin,true,/content/séin,séin,séin,chain,,"bhí séin leis, he had a chain (the vet.) for pulling calf",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+571,maigh-eo,seisc,true,/content/seisc,seisc,seisc,dry,,"bearach sheisc, heifer not in calf (MMt); seisc-capall, a dry mare (Sb).",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+572,maigh-eo,seithe,false,,,,hide,,"brógaí seitheadh, shoes made of raw hide",,,,,,,,,,
+573,maigh-eo,sídhtheamhail,true,/content/sídhtheamhail,sídhtheamhail,sídhtheamhail,subject to sudden storms (in October),,,,/ʃi: hu: l´/,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+574,maigh-eo,sinneán gaoithe,false,,,,blast of wind,,"níl ann ach a' sinneán sin, his bark is worse than his bite",,,,,,,,,,
+575,maigh-eo,siod é,false,,,,look at it over there,,,,,,,,,,,,
+576,maigh-eo,síofrógaí,false,,,,,,,,,,,,,,,,
+577,maigh-eo,siol!,false,,,,word used in chasing a hen out of cabbage plants (Breaffy); siola! siola! (Belcarra); siolaigí! to a number of geese (Keelogues) / ʃulǝg´ i: /.,,,,,,,,,,,,
+578,maigh-eo,sionnachóir lae,false,,,,"a pet day, i.e. one fine day during a spell of wet weather",,,,,,,,,,,,
+579,maigh-eo,siorlaidh,true,/content/siorlaidh,siorlaidh,siorlaidh,the Charolais,,,,/ʃerli:/,,I might add that two names of Continental cattle breeds have recently been adopted and adapted by the dialect.,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+580,maigh-eo,sláimín,false,,,,,,"sláimín go bhean, a slovenly untidy ""clot"" of a woman; sláimín Saturday, a lazy bad housekeeper who leaves all her work, washing etc., over till Saturday.",,,,,,,,,,
+581,maigh-eo,slám,true,/content/slám,slám,slám,,,"slám olainne, a roll of wool tuairim 's punt (TmB); slám ceó, a piece of fog or foggy cloud.",,,"Note the plur. is slámaíl: tá slámaíl boglaigh air, there are blankets of cloud in the sky portending wet weather (MCd). In words meaning 'shower', e.g. crap, and 'rain-cloud', slám, -aíl < -ghail has the force of a plur. ending; cf. T. de Bhaldraithe in Éigse, vii, 153. Possibly we see the genesis of this development in such phrases as tonngal fola in Van Hamel, Compert Con Culainn, p. 117, line 9.",,Maigh Eo,"Ceathrú na gCloch (TmB), ní fios cárbh as do MCd",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+582,maigh-eo,sleámóg,false,,,,"a dark-brown seaweed which hangs in long snake-like strips like a skirt cut with scissors; sleámógaí were formerly used for kelp, and were put out as manure for potatoes (though they gave too much tops). In Conamara they are called stiallachaí according to MMt, and cabhrlleach according to MCd.",,,,,,,,,,,,
+583,maigh-eo,slód,true,/content/slód,slód,slód,tussock out of which sea-pink grows (Wm); PsC has doubts about this meaning. According to MCd the slód is where sea-birds build their nests.,,,,,plur. slóid,,Maigh Eo,"A' Fál Mór (PsC), ní fios cárbh as do Wm nó MCd",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+584,maigh-eo,slubaire,true,/content/slubaire,slubaire,slubaire,,,"slubaire bróch, a person slovenly in speech and messy generally.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+585,maigh-eo,slubar,false,,,,a mess of anything,,,,,,,,,,,,
+586,maigh-eo,sméadhamh,true,/content/sméadhamh,sméadhamh,sméadhamh,,,"níl s. ar bith sa tinidh agad, your fire is nearly dead",,,,,Maigh Eo,"Ceathrú na gCloch (TmB), ní fios cárbh as do MCd",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+587,maigh-eo,sméarthacht,false,,,,,,"a' sméarthacht a cinn, rubbing her head, fingering her hair",,,,,,,,,,
+588,maigh-eo,smúitiú,false,,,,,,"tá an ghealach faoi smúitiú, scamall thart orthaí",,,,,,,,,,
+589,maigh-eo,smutú,false,,,,,,"ghá smutú, ghá mbriseadh (claidhmhtheachaí) (SOG); tá sí smutaí agad, you have it smashed (of spade that struck a stone) (MMt).",,,,,,,,,,
+590,maigh-eo,snaidhm buaic,false,,,,binding of face of corpse,,,,,,,,,,,,
+591,maigh-eo,snámhán,false,,,,,,"a' ghaoth a' snámhán thart, the wind going round to another point",,,,,,,,,,
+592,maigh-eo,snámhtha,false,,,,,,"nach bhfuil sé snáfaí lé uisc' (an spéir thiar), the sky is full of rain on the way, coming",,,,,,,,,,
+593,maigh-eo,snuada,false,,,,,,,,,,,,,,,,
+594,maigh-eo,so-chaideartha,false,,,,,,"duine so-chaideartha, a harmless fellow.",,,,,,,,,,
+595,maigh-eo,sompla,true,/content/sompla,sompla,sompla,,,"a' sumpla bróch, nach fearr a' fear mise ná é? the dirty wretch, amn't I a better man than him","sumpla, a' sumpla bróch",,,,Maigh Eo,A' gCartúr (an Chlochair),Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+596,maigh-eo,sónraidh,true,/content/sónraidh,sónraidh,sónraidh,,,"thóig mé sónraí dó, I observed it, took notice of it",sónraí,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+597,maigh-eo,sónta,true,/content/sónta,sónta,sónta,,,"fear sónta, fear a chreidfeadh chuile shórt (TmB). duine sónt', a youngster too obedient to everybody, doing what they tell him (MMt).",,,,,Maigh Eo,"Ceathrú na gCloch (TmB), ní fios cárbh as do MMt",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+598,maigh-eo,sóntaíl,true,/content/sóntaíl,sóntaíl,sóntaíl,,,an rud is measa bhí greamuithe go dhuine riamh a' tsóntaíl.,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+599,maigh-eo,spallach,true,/content/spallach,spallach,spallach,,móin a mbainfí i mbliana is nach láimhseóchaí go haithbhliain í,,,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+600,maigh-eo,spáraid,true,/content/spáraid,spáraid,spáraid,,réiteach eidir daoiní a bheith a' titim amach;,,,,,,Maigh Eo,Gaoth Sáile,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+601,maigh-eo,spáraid,true,/content/spáraid-0,spáraid,spáraid,,daoine bochta a thógáil as annró,,,,,,Maigh Eo,Gaoth Sáile,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+602,maigh-eo,speinn,true,/content/speinn,speinn,speinn,,,"buailfidhear speinn air - na daoine maithe, he will become subject to, or under the spell of fairies (heard only once).",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+603,maigh-eo,spéir-ghealaí,true,/content/spéir-ghealaí,spéir-ghealaí,spéir-ghealaí,,smúid ar a' ngealaigh,oíche spéir-ghealaí,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+604,maigh-eo,spideóg,true,/content/spideóg,spideóg,spideóg,,,a' cathamh spideógaí,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+605,maigh-eo,spleic,true,/content/spleic,spleic,spleic,tilt,,"spleic ar a' tsíogán, lop-sided rick.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+606,maigh-eo,spot,true,/content/spot,spot,spot,spot,,,,,"sput, plur. spuit",,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+607,maigh-eo,sraith,false,,,,level ground,,"sra' ghainí, light loamy soil with sand through it (TmB); ar a' tSra' riabhach, n.loc., on the top of Cnoc a' tearmainn, ó thuaidh ón 'look-out' (an áit ar mharaigh fear go Chathánach an rón) (PsC).",,,,,,,,,,
+608,maigh-eo,stácadh,true,/content/stácadh,stácadh,stácadh,,,"a' stácadh, ag ithe aibéil (AC); i n-amhrán:- Tá doiminic agus Seán ag goil stácadh dhá chathamh .i. dhá chathamh go dian (AOS).",,,,,Maigh Eo,"Inis Géighe (AC), ní fios cárbh as d'AOS",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+609,maigh-eo,stagger,false,,,,"te, (a' fás) is na biollaí, kills sheep, bruitheann sé iad (MCd)",,"bláth a' stagger, bláth buí; cailltear a' chaora; ar a' spot a gcaillfidhear í éiríonn sí bréan (Jn). Perh. the bulbous crowfoot is meant.",,,,,,,,,,
+610,maigh-eo,stanna,false,,,,"the difference between a stanna and a baraille is a' stanna mar seo I I , a' baraille mar seo ( )",,,,,,,,,,,,
+611,maigh-eo,staoin-leic,false,,,,,,,,,,,,,,,,
+612,maigh-eo,staoin-leic,false,,,,name of a sloping flag,,,,,,,,,,,,
+613,maigh-eo,stealladh,false,,,,"kicking, lashing, i.e. horse kicking with both hind legs",,,,,,,,,,,,
+614,maigh-eo,stéig,false,,,,snaidhm ar stéig was formerly the name given to appendicitis,,snaidhm ar stéig,,,,,,,,,,
+615,maigh-eo,steig meig a dhéanamh de,false,,,,to lay him out (for the count) (SBh).,,,,,,,,,,,,
+616,maigh-eo,stíoc,true,/content/stíoc,stíoc,stíoc,"chuck to hens, but stíoc when calling chickens is the proper word to use",,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+617,maigh-eo,stiúir,false,,,,,,"bean gan chliú ná bád gan stiúir (sean-ocal); imeó' sí chuile áit, no control over her",,,,,,,,,,
+618,maigh-eo,stocaire,false,,,,a cadger cadging for money or drink,,níor tóigeadh ar stocaireacht (é),,,,,,,,,,
+619,maigh-eo,stocán láidir go ghasúr,false,,,,a strong sturdy stump of a lad,,,,,,,,,,,,
+620,maigh-eo,stráiméad,true,/content/stráiméad,stráiméad,stráiméad,a big lazy fellow,,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+621,maigh-eo,stupannaí,false,,,,pailing posts (?),,,,,,,,,,,,
+622,maigh-eo,suanaí,false,,,,,,"níl ann ach suanaí, (tá sé) ciúin gan suim i gcaint aige; gan bheith a' caint",,,,,,,,,,
+623,maigh-eo,súgán,true,/content/súgán,súgán,súgán,,,"a shúgáin, addressing a young lad in depreciatory terms",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+624,maigh-eo,suicín! suicín!,true,/content/suicín-suicín,suicín! suicín!,suicín! suicín!,used to call a calf,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+625,maigh-eo,suimplí,false,,,,with s-leathan is the dialect form of the usual simplidhe.,,,,,,,,,,,,
+626,maigh-eo,súithche,true,/content/súithche,súithche,súithche,soot,,,,/su: ç/,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+627,maigh-eo,súmaire,true,/content/súmaire,súmaire,súmaire,,,"súmaire doracha go dhuine, a sile fellow with no word in him, who won't speak to you. Is deas a' rud píosa cainte, níor mhol éinne riamh a' súmaire",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+628,maigh-eo,súmaire,true,/content/súmaire-0,súmaire,súmaire,,clais - foscladh sa mbruach,,,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+629,maigh-eo,tabhairt,true,/content/tabhairt,tabhairt,tabhairt,,,"a' tabhairt dó, hard at it (hay-making (ML); tá an traghan a' tabhairt dó, the corncrake is hard at it, singing away good and loud (MC).",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+630,maigh-eo,taéradh,false,,,,salutation,,"chuir sé taéradh oram, he saluted me, spoke to me in passing (Wm); chuir sé taéradh cainte air (TmB).",,,,,,,,,,
+631,maigh-eo,tais,true,/content/tais,tais,tais,"ghost (of living person), wraith: chonnaic A. an fear beag agus bhí sé ag iarraidh breith air. Chonnaic sé aríst é beó",,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+632,maigh-eo,taisbeánadh,true,/content/taisbeánadh,taisbeánadh,taisbeánadh,"revelation, sign.",,,,/ʃ a:nu:/ (i gcás an fhocail 'seánadh' atá faoin teideal 'Foirmeacha Eile').,,"the French word 'intersigne' as used by Anatole Le Braz in Páques d' Islande would seem to have the same meaning in Brittany. Cf. tiosbeánadh in Celtica xii, 180. The following examples are from Sb: clúmhach na circe ar éadan an fhir a mharaigh a' chearc ar a' dílleachtaidh - sin séanadh; feicfe mise séanadh ort-sa.",Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+633,maigh-eo,taithí,true,/content/taithí,taithí,taithí,act of frequenting,,tá sé a' taithí sa teach seo go mór .i. a ghoil ar chuairt ann go minic; is teann é an madadh geárr san áit a mbíonn a thaithí (sean-ocal) (MMt). Cf. D. s. v. madadh.,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+634,maigh-eo,tálach,true,/content/tálach,tálach,tálach,muscular pain in the wrist,,,D. s. v. tadhlach,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+635,maigh-eo,tanaidh,true,/content/tanaidh,tanaidh,tanaidh,"the shallow water (ML); cf. amuich ar a' domhain, out on the deep",,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+636,maigh-eo,tara,true,/content/tara,tara,tara,,,cho dubh leis a' tara,tar,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+637,maigh-eo,tarraint,true,/content/tarraint,tarraint,tarraint,"stammer, impediment of speech",,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+638,maigh-eo,te teann,true,/content/te-teann,te teann,te teann,,,rug siad ar a chéilí go te teann,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+639,maigh-eo,téad,true,/content/téad,téad,téad,,,"tá téad ar an asal agam, I have the ass tied by rope to stake out in the field (Sb); gamhain ar téad ní dheachaidh riamh 'un cinn (sean-ocal) (MCd), a staked calf never throve",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+640,maigh-eo,teann,true,/content/teann,teann,teann,"force, pressure",,"le teann a' ghálaidh, with the force of the wind; le teann uilc, from sheer badness (Sb); le teann na foladh, from the pressure of the blood; fua' sí siar ar theann an uisc', she went back in the teems of rain, when the rain was at its heaviest (ML).",,,,,Maigh Eo,"A' Fál Mór (ML), ní fios cárbh as do Sb",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+641,maigh-eo,teann fharaige,true,/content/teann-fharaige,teann fharaige,teann fharaige,"The Old Sea' is used in English in Belmullet for this part of the sea, and it has been suggested to me that formerly the sea did not come past the line between Cleggan Head and Áird Mhór.",,,,,"ag a' teann-fharaige, i.e. from Carraic na Seasaraí out; tá faraige mhín sa gcuan (Wm). Others such as Sb interpreted this as a' tsean-fharaige, gen. na sean-fharaige, the old sea.",,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+642,maigh-eo,teannta,true,/content/teannta,teannta,teannta,,,"a choinneál i n-a theannta, to keep it together (money), not to spend any of it",,,i n-a theannta,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+643,maigh-eo,téigle,true,/content/téigle,téigle,téigle,,,"(tá sé) i n-a chalam téigle, it is perfectly calm (said of the sea on a fine day); stoirim shamhraidh ná téigle gimhridh níl aon tseasamh orthaí (sean-ocal) (MMt), a summer storm or a winter calm will not last long.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+644,maigh-eo,thoir dtuaidh,false,,,,in the N. E.,,,,,,,,,,,,
+645,maigh-eo,tinn ar ghamhain,true,/content/tinn-ar-ghamhain,tinn ar ghamhain,tinn ar ghamhain,sick of calving,,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+646,maigh-eo,tiogainní,true,/content/tiogainní,tiogainní,tiogainní,"come on, I have heard teanamaí also used to address more than one person",,,teanamaí,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+647,maigh-eo,tionnscain,false,,,,"begin, start",,"cé thionnscain é, who started it (fight)? (TmB); is tú a thionnscail a' troid (EOCn); v.n. a' tionnscaint.",,,,,,,,,,
+648,maigh-eo,tioscaire,true,/content/tioscaire,tioscaire,tioscaire,,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+649,maigh-eo,tioscaire,true,/content/tioscaire-0,tioscaire,tioscaire,,,"níl ainntí ach tioscaire, rud beag óg",,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+650,maigh-eo,togha,true,/content/togha,togha,togha,act of picking (potatoes),,"á dtogha, picking them (TmB) /a: dǝuwǝ /.",,,á dtogha,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+651,maigh-eo,toghadóir,true,/content/toghadóir,toghadóir,toghadóir,a picker (of potatoes),,,,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+652,maigh-eo,tóin,true,/content/tóin,tóin,tóin,,,"tifí as tóin a chéilí, houses built one at the end of another",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+653,maigh-eo,toirt gan tairbhe,true,/content/toirt-gan-tairbhe,toirt gan tairbhe,toirt gan tairbhe,applied to a person getting in one's way; such a person is said to be an-amscaí,,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+654,maigh-eo,toisigh,true,/content/toisigh,toisigh,toisigh,half-soles (of shoes),,,,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+655,maigh-eo,tolladh,true,/content/tolladh,tolladh,tolladh,,,"a' tolladh, butting with horns, ""pucking"" (of cattle).",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+656,maigh-eo,tom,true,/content/tom,tom,tom,,,"tom a' t-éideadh as an uisce caisc (Sb), dip the scapular in the holy water.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+657,maigh-eo,tonnc,false,,,,"a nudge, butt (from bull)",,,,,,,,,,,,
+658,maigh-eo,torabord,true,/content/torabord,torabord,torabord,"turbot, iasc mór leathan",,,,/torǝbǝrd /,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+659,maigh-eo,trathailte,true,/content/trathailte,trathailte,trathailte,shivering wet,,thainic sé isteach bog báite is é trathailtí.,,,trathailtí,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+660,maigh-eo,tráthúil,false,,,,,,"duine tráthúil tíorthúil, fear cainteach fáiltiúil (TmB); ag innsean rudaí (go dhuine) a' dúil le go gcreidfeadh sé iad; bíonn níos mó ná an ceart ar siúl aige; ní chreidtear é a leath gon am (duine tráthúil) (bean AOS).",,,,,,,,,,
+661,maigh-eo,treall,true,/content/treall,treall,treall,a while of,,"treall cainte, treall gréine",,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+662,maigh-eo,tréamánta,true,/content/tréamánta,tréamánta,tréamánta,,,focal atá tréamánta sa gcaint,coitiannta,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+663,maigh-eo,tréamánta,true,/content/tréamánta-0,tréamánta,tréamánta,,,"duine tréamánta, a headstrong person",,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+664,maigh-eo,treóir,true,/content/treóir,treóir,treóir,,,"go múinfe tú treóir dúinn, give us guidance, direction, nuair a bhethá amú ar a' gcroc",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+665,maigh-eo,trioll,true,/content/trioll,trioll,trioll,,,"in idiom thit a' trioll ar a' treall agam, I was completely non-plussed",a' treall,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+666,maigh-eo,triomaigh,true,/content/triomaigh,triomaigh,triomaigh,,,"níor thriomaigh sé ar aon charraic ariamh (an foightheach), always in the water, never seen on land or on a rock (great northern diver)",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+667,maigh-eo,triúr,true,/content/triúr,triúr,triúr,,,"tá siad triúr Gallachúraí ann, there are three of those Gallaghers (EOM); muid triúr, the three of us (ML). Cf. libh-se ceathar, with the four of you (ML).",,,,,Maigh Eo,"A' Fál Mór (ML), ní fios cárbh as d'EOM",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+668,maigh-eo,troilithe,true,/content/troilithe,troilithe,troilithe,"spent, worn, senile",,"tá sé i n-a shean-fhear troilithe, he is a shaky old man.",See D. s.v. trochluighthe.,/tril´hi:/,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+669,maigh-eo,troisc,true,/content/troisc,troisc,troisc,starve,,throiscfeá .i. ní shaothróchá orad is thabharfadh biadh agus beatha duit.,,,throiscfeá,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+670,maigh-eo,trom-chúis,true,/content/trom-chúis,trom-chúis,trom-chúis,,,"le trom-chúis adúirt sé é, for fun, humbugging (bean AOS); trom-chúis - grataí magaidh (AL). Contrast D.",,,,,Maigh Eo,"A' Fál Mór (AL), ní fios cárbh as do bhean AOS",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+671,maigh-eo,truipéad,true,/content/truipéad,truipéad,truipéad,an edible seaweed,dúilicíní i bhfastó dó,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+672,maigh-eo,truisle,true,/content/truisle,truisle,truisle,,,"baineadh truisle as, he fell, stumbled",,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+673,maigh-eo,trumpa,false,,,,a tramp; (rakish),,,,,,,,,,,,
+674,maigh-eo,tseof! tseof!,true,/content/tseof-tseof,tseof! tseof!,tseof! tseof!,call word used for sheep,,,,/ tʃof /,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+675,maigh-eo,tuagh cheatha,true,/content/tuagh-cheatha,tuagh cheatha,tuagh cheatha,rainbow; an bun (Jn); i n-a lúbán (SBh).,,,,,,,Maigh Eo,"A' Cartúr (Jn), ní fios cárbh as do SBh",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+676,maigh-eo,tuar,true,/content/tuar,tuar,tuar,causing,,"a' tuar aicíde, causing or generating disease (such as a rubbish dump)",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+677,maigh-eo,tuata,true,/content/tuata,tuata,tuata,,,tuata a rinní é .i. fear gan cheird,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+678,maigh-eo,tuatach,false,,,,,,"ceárdaí tuatach, one who does not have his trade, a ""gobbawn"" tradesman.",,,,,,,,,,
+679,maigh-eo,tugthaí uam,false,,,,taken from me,,,,,,,,,,,,
+680,maigh-eo,tuit,true,/content/tuit,tuit,tuit,settle,,"fan go dtite siad, wait till they settle down (before you go head them) - said of freshly made cocks of hay.",,/ t´it´/,go dtite,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+681,maigh-eo,túnaois,false,,,,,,"thug sé túnaois dó, a small beating, black-eye, perhaps (TmB); cf. Béaloideas, xvii, 257 (six lines from bottom): bhuail siad túnaois mhaith orthú, from Pádraig Mac Meanaman, An Claigeann, in aice le Baile Chruaich.",,,,,,,,,,
+682,maigh-eo,tur,false,,,,"dry, without condiment",,,,,,,,,,,,
+683,maigh-eo,tur,true,/content/tur-0,tur,tur,,,"fataí tura, gan bainne gan im gan uibheachaí",,,tura,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+684,maigh-eo,turachán,true,/content/turachán,turachán,turachán,,,"níl ann ach turachán, páiste (ná colapach) nach mbeith aon fhás faoi",,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+685,maigh-eo,turlainn,true,/content/turlainn,turlainn,turlainn,"rocky foreshore, stone beach",,"also applied to the loose stoes half-way up Croagh Patrick (ML); clocha turlainne, beach stones (PAG).",,,turlainne,,Maigh Eo,"A' Fál Mór (ML), ní fios cárbh as do PAG",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+686,maigh-eo,turus tuaithbheal,true,/content/turus-tuaithbheal,turus tuaithbheal,turus tuaithbheal,,,turas a chuireas daoiní ar dhaoiní eile le spit,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+687,maigh-eo,tutáil,true,/content/tutáil,tutáil,tutáil,"impatience, fussiness (of guide on the Reek) (ML). Add to Éigse xi, 245.",,,,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+688,maigh-eo,uaigneach,true,/content/uaigneach,uaigneach,uaigneach,,,"áit uaigneach, a place full of ghosts",,,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+689,maigh-eo,uain,true,/content/uain,uain,uain,,,"tá lot ar uain a cinn, there is a wound on the back of her head.",D. uathan.,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+690,maigh-eo,uair,true,/content/uair,uair,uair,,,"ar uair an dó dhéag, at twelve o' clock.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+691,maigh-eo,uasal,true,/content/uasal,uasal,uasal,,,"áit uasal, a place frequented by fairies.",,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+692,maigh-eo,uathbhás,true,/content/uathbhás,uathbhás,uathbhás,,,"in phr. an t-uathbhás / ufa: s /, a great amount: an t-ufás airigid, a lot of money","an t-uathbhás, (an) (t-) ufás",/ ufa: s /,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+693,maigh-eo,ubh,true,/content/ubh,ubh,ubh,,,"tá na fataí sin cho beag le uibheachaí siongán agad, as small as pismires' eggs.",,,uibheachaí,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+694,maigh-eo,údaí,true,/content/údaí,údaí,údaí,,,"tháll údaí, yonder; thíos údaí, down there; an fear údaí tháll, the man over there","tháll údaí, thíos úsdaí, údaí tháll",,,,Maigh Eo,A' Fál Mór,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+695,maigh-eo,udhacht,true,/content/udhacht,udhacht,udhacht,,,"bhéarfainn m' udhachta go bhfaca mé é, I could swear I saw him",,,,,Maigh Eo,Ceathrú na gCloch,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+696,maigh-eo,ughaim,true,/content/ughaim,ughaim,ughaim,,,"an úim = srathar is párdógaí (TmB); an úim agus na mataí (on the ass) (AOS). an úim, the twine in the loom (S. Carey)","úim, an úim",,,,Maigh Eo,"Ceathrú na gCloch (TmB), níos fios cárbh as d'AOS",Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+697,maigh-eo,uisce na mallacht,true,/content/uisce-na-mallacht,uisce na mallacht,uisce na mallacht,,poitín nach lasfadh,,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+698,maigh-eo,ulthainn,true,/content/ulthainn,ulthainn,ulthainn,n. loc. in south Inishkea: like a graveyard,mar bheith roilic,,An U. See D. s.v. ulaidh (2).,,,,Maigh Eo,Inis Géighe,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+699,maigh-eo,únaéraí,true,/content/únaéraí,únaéraí,únaéraí,owner,,únaéraí a' bháid,,,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
+700,maigh-eo,urdubhán,true,/content/urdubhán,urdubhán,urdubhán,stormy petrel,,,"an t-urdubhán, urdubhán na hola (Sb). See Éigse xi, 244, s.v. fuinín feóchain. This word has not yet got into the dictionaries, though it is long attested. John O'Donovan found these birds nesting in Inis Gluaire, and writes (in Ordinance Survey Letters, Mayo I, p. 109 of typescript edition): ""The Island of Inis Gluaire is frequented by a curious kind of black birds called in Irish TORDUBHÁN's which do not appear any where else on these coasts. They are the Stormy Petrels of Ornithologists, and are said to be found no where in Ireland excepting on Inis Gluaire and Skelliig Mhithil in the County of Kerry. They build in the walls of the old churches on the Island, and I took the croaking of their young, for that of frogs, . ."" The spelling urdhubhán in Kennedy's Musaem List is wrong in so far as -dh- misrepresents the Erris pronunciation of the word.",,,,Maigh Eo,Ní fios,Éamon Mac an Fhailigh,Connacht,Liosta Focal as Iorras,1978
