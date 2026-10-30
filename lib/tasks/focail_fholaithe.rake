@@ -17,12 +17,21 @@ namespace :focail_fholaithe do
   FOCAIL_TITLE_PREFIX = "Focail Fholaithe:"
   FOCAIL_SOURCE_NOTE = <<~HTML
     <p>These are dialect words recorded from Mayo Irish for the <em>Focail Fholaithe</em> ("hidden words") project (Royal Irish Academy), made freely available for non-commercial use.</p>
-    <p>Spellings and English glosses are as the collectors gave them. No pronunciation is given in the source yet. Many of these are rare or local words, so expect some you won't hear outside Mayo.</p>
+    <p>Many of the entries were recorded by Éamon Mac an Fhailigh (<em>Liosta Focal as Iorras</em>, 1978). Spellings and English glosses are as the collectors gave them, and pronunciations are given only where the source has one. Many of these are rare or local words, so expect some you won't hear outside Mayo.</p>
   HTML
+  # [column, label] for what goes in a word's notes, in this order. A district of "Ní fios" means unknown.
+  FOCAIL_NOTE_FIELDS = [
+    ["alternative_forms", "Also"],
+    ["grammar_forms", "Grammar"],
+    ["meaning_ga", "In Irish"],
+    ["usage", "In use"],
+    ["notes", "Note"],
+    ["district", "District"]
+  ].freeze
 
   desc "Create unpublished vocabulary lessons from the curated Mayo Focail Fholaithe entries"
   task import: :environment do
-    entries = JSON.parse(File.read(FOCAIL_DIR.join("mayo_list_view.json"))).index_by { |e| e["position"] }
+    entries = JSON.parse(File.read(FOCAIL_DIR.join("mayo_entries.json"))).index_by { |e| e["position"] }
     plan = YAML.load_file(FOCAIL_DIR.join("mayo_lesson_plan.yml"))
 
     plan.each do |spec|
@@ -42,9 +51,16 @@ namespace :focail_fholaithe do
       words = spec["positions"].map { |position| entries.fetch(position) }.group_by { |e| e["headword"] }
       words.each_with_index do |(headword, rows), index|
         item = lesson.vocabulary_items.find_or_initialize_by(irish: headword)
+        notes = rows.flat_map do |row|
+          FOCAIL_NOTE_FIELDS.filter_map do |column, label|
+            value = row[column].presence
+            "#{label}: #{value}" if value && value != "Ní fios"
+          end
+        end
         item.assign_attributes(
           english: rows.filter_map { |r| r["meaning_en"] }.join("; "),
-          notes: rows.filter_map { |r| r["usage"] }.map { |usage| "In use: #{usage}" }.join("\n").presence,
+          phonetic: rows.filter_map { |r| r["pronunciation"].presence }.first,
+          notes: notes.join("\n").presence,
           gender: nil,
           position: index
         )
