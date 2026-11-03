@@ -585,6 +585,9 @@ en:
       intro_html: You can reset your password on %{link}.
       link_text: this password reset page
       subject: Reset your password
+  pwa:
+    description: Learn the Irish of Mayo, with lessons, recordings and a tutor.
+    short_name: Gaeilge
   quizzes:
     answer:
       correct: Correct
