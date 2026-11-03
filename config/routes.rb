@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :passwords, param: :token, only: %i[new create edit update]
 
   root "home#show"
+  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   resource :guide, only: :show
   resource :onboarding, only: %i[new create]
   get "search", to: "search#index", as: :search
