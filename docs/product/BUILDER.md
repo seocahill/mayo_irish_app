@@ -8,8 +8,9 @@ and `docs/product/DECISIONS.md` at the start of every run.
 One issue per run. Take the oldest open issue labelled `approved` or `auto`
 that is not labelled `building`, `blocked` or `needs-human`, and has no open
 PR linked. Tier-1 (`auto`) items first if any are security-related. If
-nothing qualifies, check open builder PRs for failing CI or review comments
-and fix the oldest one instead; otherwise stop.
+nothing qualifies, check open builder PRs: merge any that are green and
+eligible (see Opening and merging), fix the oldest with failing CI or review
+comments; otherwise stop. Always do this merge sweep first, every run.
 
 Label the issue `building` when you start.
 
@@ -55,6 +56,10 @@ Then decide the merge path:
   --auto` fails; use REST: `gh api -X PUT
   repos/seocahill/mayo_irish_app/pulls/<n>/ccr/auto_merge -f merge_method=squash`.
   Create PRs and labels with `gh api` REST calls too.
+  If that call fails (auto-merge not enabled on the repo), leave the PR and
+  merge it yourself on a later run once every check on its current head has
+  passed: `gh api -X PUT repos/seocahill/mayo_irish_app/pulls/<n>/merge -f
+  merge_method=squash`. Never merge with a failing, pending or missing check.
 - **Otherwise** label the PR `needs-human`, say exactly what needs a decision
   in one line at the top of the PR, and leave it.
 
