@@ -47,11 +47,14 @@ summary. Add the `preview` label for UI changes so a preview app deploys.
 
 Then decide the merge path:
 
-- **Enable auto-merge** (`gh pr merge --auto --squash`) when the issue is
+- **Enable auto-merge** when the issue is
   tier 1 or tier 2 approved AND the diff contains no migration that removes,
   renames or rewrites columns/tables/data, no change to auth/OAuth/MCP
   scopes, and no change to deploy or CI workflows. CI then merges it and
-  `main` deploys to Fly.
+  `main` deploys to Fly. In cloud sessions GraphQL is blocked, so `gh pr merge
+  --auto` fails; use REST: `gh api -X PUT
+  repos/seocahill/mayo_irish_app/pulls/<n>/ccr/auto_merge -f merge_method=squash`.
+  Create PRs and labels with `gh api` REST calls too.
 - **Otherwise** label the PR `needs-human`, say exactly what needs a decision
   in one line at the top of the PR, and leave it.
 
