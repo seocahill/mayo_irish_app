@@ -78,7 +78,7 @@ and cite it in proposals. Starting points, to be verified, not assumed:
    - the running app: https://mayo-irish-app.fly.dev (warm it first, Fly
      sleeps), at phone (390×844) and desktop sizes, light and dark, with
      screenshots; Lighthouse and axe where useful
-   - `bin/brakeman`, `bundle exec bundler-audit` (install if missing),
+   - `bundle exec brakeman`, `bundle exec bundler-audit` (install if missing),
      open Dependabot alerts
    - production signals if a connector or analytics is available
    - research from the web for the lens

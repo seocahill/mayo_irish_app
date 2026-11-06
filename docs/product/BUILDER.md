@@ -24,7 +24,7 @@ Label the issue `building` when you start.
    the only buildable feature is the foundations issue that installs it.)
 4. Write tests: model/controller tests for behaviour, a system or controller
    test for each flagged path both on and off. Run `bin/rails test` and
-   `bin/brakeman --no-pager` locally; both must pass.
+   `bundle exec brakeman --no-pager` locally; both must pass.
 5. For UI changes, take phone (390×844) and desktop screenshots, light and
    dark, flag on, and commit them to `docs/screenshots/pr-<n>/` or attach
    them to the PR.
