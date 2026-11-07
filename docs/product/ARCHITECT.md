@@ -61,6 +61,14 @@ and cite it in proposals. Starting points, to be verified, not assumed:
 
 ## 4. Each run
 
+0. **Read the owner's feedback first.** Read every comment on the most
+   recent digest issue and on open `proposal` issues since your last run,
+   plus any open issue labelled `owner-note`. The owner's words win: answers
+   to "Questions for you" are facts to use; a request like "focus on X next
+   week" overrides the lens rotation; feedback on what you're missing changes
+   how you research. Copy any lasting preference into the "Standing
+   preferences" section of `DECISIONS.md`, and in the new digest say in one
+   line how you acted on each piece of feedback.
 1. **Pick the lens.** Rotate weekly, in this order, and record which one you
    used in `ROADMAP.md`:
    1. Core learning loop and pedagogy
