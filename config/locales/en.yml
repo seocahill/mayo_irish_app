@@ -27,6 +27,29 @@ en:
   chat_message_flags:
     create:
       flagged: Thanks. An editor will check that reply.
+  course_questions:
+    create:
+      ai_notice: Written by AI from the lesson material, so it can be wrong. Check
+        it against the lesson, and ask a native speaker if you're unsure.
+      daily_limit: That's today's limit for questions. Come back tomorrow.
+      from_lessons: From these lessons
+      lesson: Lesson %{number} · %{title}
+      no_answer: Couldn't get an answer. Try again.
+      not_heard: Couldn't make out the recording. Try again, or type it.
+      nothing_asked: Type or record a question first.
+      too_fast: Slow down a little, then try again.
+      too_long: That recording is too long. Keep it short, or type it.
+      you_asked: You asked
+    new:
+      ask: Ask
+      eyebrow: Ask the course
+      intro: Ask in your own words, in English, and get the answer from the lessons.
+        Type it, or tap the microphone and say it.
+      placeholder: How do I count people past ten?
+      record: Record
+      record_hint: Tap the microphone to speak, and again to send.
+      thinking: Thinking…
+      title: What do you want to know?
   daily_path:
     answer_label: Listen · native speaker
     answer_title:
@@ -152,6 +175,7 @@ en:
       sending: Sending…
   layouts:
     application:
+      ask: Ask
       footer_html: Based on <em>Learning Irish</em> by Mícheál Ó Siadhail, adapted
         for Mayo Irish
       guide: How this course works

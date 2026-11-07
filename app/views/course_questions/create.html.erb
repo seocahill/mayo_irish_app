@@ -1,0 +1,25 @@
+<%= turbo_frame_tag "answer" do %>
+  <% if @failure %>
+    <p class="bg-red-50 border border-red-200 rounded-sm px-4 py-3 text-sm text-red-800" role="alert"><%= @failure %></p>
+  <% else %>
+    <section class="card px-4 sm:px-6 py-5 flex flex-col gap-4" aria-labelledby="answer-heading">
+      <div>
+        <h2 id="answer-heading" class="eyebrow text-muted mb-1"><%= t(".you_asked") %></h2>
+        <p class="text-ink"><%= @question %></p>
+      </div>
+      <div class="text-sm leading-relaxed"><%= simple_format(@answer.text) %></div>
+      <% if @answer.lessons.any? %>
+        <div class="border-t border-line pt-3">
+          <h3 class="eyebrow text-muted mb-2"><%= t(".from_lessons") %></h3>
+          <ul class="flex flex-wrap gap-2">
+            <% @answer.lessons.each do |lesson| %>
+              <li><%= link_to t(".lesson", number: lesson.number, title: lesson.title), lesson_path(lesson),
+                    class: "chip border-line text-ink hover:bg-canvas", data: { turbo_frame: "_top" } %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <p class="text-xs text-muted"><%= t(".ai_notice") %></p>
+    </section>
+  <% end %>
+<% end %>

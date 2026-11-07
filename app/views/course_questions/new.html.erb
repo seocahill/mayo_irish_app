@@ -1,0 +1,35 @@
+<div class="max-w-2xl mx-auto flex flex-col gap-6">
+  <header>
+    <p class="eyebrow text-foghlaim mb-1"><%= t(".eyebrow") %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
+    <p class="mt-2 text-muted text-sm"><%= t(".intro") %></p>
+  </header>
+
+  <div class="card px-4 sm:px-6 py-4">
+    <%= form_with url: course_questions_path, method: :post, multipart: true,
+          data: { turbo_frame: "answer", controller: "chat speech-input",
+                  action: "submit->speech-input#submit turbo:submit-start->speech-input#busy turbo:submit-end->speech-input#ready" } do |f| %>
+      <%= f.file_field :audio, accept: "audio/*", class: "hidden", tabindex: -1, "aria-hidden": true,
+            data: { speech_input_target: "audio" } %>
+      <div class="flex gap-2 items-end">
+        <%= f.text_area :question, rows: 2, maxlength: CourseQuestion::MAX_CHARACTERS, autofocus: true,
+              placeholder: t(".placeholder"), "aria-label": t(".placeholder"),
+              class: "flex-1 min-w-0 resize-none rounded-sm border border-line bg-surface px-3 py-2.5 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-ink",
+              data: { chat_target: "input", speech_input_target: "input", action: "keydown.enter->chat#submitOnEnter" } %>
+        <button type="button"
+                data-speech-input-target="micButton"
+                data-action="speech-input#toggle"
+                class="btn-outline shrink-0 px-3 data-[state=recording]:text-red-600 data-[state=recording]:border-red-600 data-[state=recording]:animate-pulse disabled:opacity-50"
+                title="<%= t(".record") %>" aria-label="<%= t(".record") %>">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+          </svg>
+        </button>
+        <%= f.button t(".ask"), class: "btn-solid shrink-0", data: { turbo_submits_with: t(".thinking") } %>
+      </div>
+      <p data-speech-input-target="status" class="text-xs text-muted mt-2 min-h-4" aria-live="polite"><%= t(".record_hint") %></p>
+    <% end %>
+  </div>
+
+  <%= turbo_frame_tag "answer" %>
+</div>

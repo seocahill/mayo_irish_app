@@ -34,6 +34,7 @@
           <% if authenticated? %>
             <a href="<%= root_path %>" class="hover:text-ink transition-colors py-1"><%= t(".today") %></a>
             <a href="<%= lessons_path %>" class="hover:text-ink transition-colors py-1"><%= t(".lessons") %></a>
+            <a href="<%= new_course_question_path %>" class="hover:text-ink transition-colors py-1"><%= t(".ask") %></a>
             <%= form_with url: search_path, method: :get, class: "relative", data: { turbo_frame: "_top" } do |f| %>
               <svg class="w-4 h-4 text-muted absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>

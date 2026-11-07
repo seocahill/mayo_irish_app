@@ -2,6 +2,7 @@ require "webmock/minitest"
 
 module OpenaiTestHelper
   CHAT_URL = "https://api.openai.com/v1/chat/completions".freeze
+  TRANSCRIPTION_URL = "https://api.openai.com/v1/audio/transcriptions".freeze
   S2S_URL = "https://abair.ie/api/s2s".freeze
 
   # A chat completion whose content is `content`, a string or (for the comhrá's
@@ -12,6 +13,26 @@ module OpenaiTestHelper
       status: status,
       headers: { "Content-Type" => "application/json" },
       body: { choices: [ { message: { role: "assistant", content: content } } ] }.to_json
+    )
+  end
+
+  # Chat completions that answer one call after another, in order: each of
+  # `contents` is a string or a hash sent as JSON, and the last one repeats.
+  def stub_openai_chats(*contents)
+    responses = contents.map do |content|
+      content = content.to_json unless content.is_a?(String)
+      { status: 200, headers: { "Content-Type" => "application/json" },
+        body: { choices: [ { message: { role: "assistant", content: content } } ] }.to_json }
+    end
+    stub_request(:post, CHAT_URL).to_return(*responses)
+  end
+
+  # The English a recording is transcribed as.
+  def stub_openai_transcription(text = "how do I count people", status: 200)
+    stub_request(:post, TRANSCRIPTION_URL).to_return(
+      status: status,
+      headers: { "Content-Type" => "application/json" },
+      body: { text: text }.to_json
     )
   end
 
