@@ -1,13 +1,11 @@
+# Runs on every pull request and on main. `test` and `security` are required
+# status checks for main, so a PR can only (auto-)merge once both are green.
 name: CI
 
 on:
   pull_request:
   push:
     branches: [main]
-
-concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   test:
@@ -16,22 +14,26 @@ jobs:
       RAILS_ENV: test
     steps:
       - uses: actions/checkout@v4
+
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - name: Prepare database
-        run: bin/rails db:prepare
-      - name: Build CSS
-        run: bin/rails tailwindcss:build
+
+      # test:prepare also builds the Tailwind stylesheet the layouts link to.
       - name: Run tests
-        run: bin/rails test
+        run: bin/rails db:test:prepare test
 
   security:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - name: Brakeman
+
+      - name: Scan Rails code for security vulnerabilities
         run: bundle exec brakeman --no-pager
+
+      - name: Scan importmap JavaScript dependencies for known vulnerabilities
+        run: bin/importmap audit
