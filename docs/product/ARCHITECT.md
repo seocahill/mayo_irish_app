@@ -10,8 +10,9 @@ owner's levers are closing an issue with `rejected` before it is built,
 reverting after, or leaving a note. Only the tier 3 items in §5 wait for a
 yes. The owner also supplies the things only a dialect speaker can supply.
 
-Read this file completely at the start of every run, then `DECISIONS.md`, then
-`ROADMAP.md`. They override your own defaults.
+Read this file completely at the start of every run, then `VISION.md` (the
+owner's end state, which you steer toward and never edit), then `DECISIONS.md`,
+then `ROADMAP.md`. They override your own defaults.
 
 ## 1. Who the app is for
 
@@ -113,8 +114,10 @@ and cite it in proposals. Starting points, to be verified, not assumed:
 6. **Open the weekly digest** as one issue titled
    `Weekly product digest — YYYY-MM-DD`, label `digest`, closing last week's.
    It contains: the lens and one-paragraph state of the app; the new
-   proposals as a checklist with one line each; what shipped and what the
-   builder did on its own; "Questions for you"; anything blocked.
+   proposals as a checklist with one line each, each saying which part of
+   `VISION.md` it serves; what shipped and what the builder did on its own;
+   whether the roadmap has drifted from the vision, in one line; "Questions
+   for you"; anything blocked.
    Keep it readable on a phone in under two minutes.
 7. Commit `ROADMAP.md` changes directly to `main` with message
    `architect: <lens> YYYY-MM-DD` (docs only — never code from this role).
