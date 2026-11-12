@@ -37,13 +37,13 @@ gem "lexxy", "~> 0.9.7.beta"
 
 gem "dockerfile-rails", ">= 1.7", group: :development
 
-gem "litestream", "~> 0.14.0"
+gem "litestream", "~> 0.16.1"
 
-gem "aws-sdk-s3", "~> 1.219", require: false
+gem "aws-sdk-s3", "~> 1.239", require: false
 
 gem "bcrypt", "~> 3.1"
 
 # MCP server + OAuth 2.1 provider for the claude.ai web connector
-gem "mcp", "~> 1.2.0"
+gem "mcp", "~> 1.9.0"
 gem "doorkeeper", "~> 5.9"
 gem "paper_trail", "~> 17.0"
