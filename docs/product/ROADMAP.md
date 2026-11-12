@@ -9,7 +9,7 @@ Maintained by the architect (see `ARCHITECT.md`). Owner edits welcome.
 
 ## Next (proposed, awaiting decision)
 
-1. #41 Feature flags (Flipper) with an admin-only flags page — foundation, tier 1
+1. ~~#41 Feature flags (Flipper)~~ dropped: no flags while the app is a private beta (owner, 2026-11-12)
 2. #42 A private Usage page for admins, from our own data — foundation
 3. #43 One daily review across all lessons, scheduled with FSRS
 4. #44 Say it cards: recall aloud, then hear the Mayo speaker

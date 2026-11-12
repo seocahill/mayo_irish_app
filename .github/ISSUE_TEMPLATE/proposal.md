@@ -1,6 +1,6 @@
 ---
 name: Proposal
-about: A change proposed by the architect (or anyone) for the owner to approve
+about: A change proposed by the architect (or anyone); tier 3 needs the owner's approval
 labels: proposal
 ---
 
@@ -14,16 +14,15 @@ references, research links).
 Plain-language description. What a learner/contributor would see.
 
 ### How we'll know it worked
-One measurable signal, checked ~2 weeks after the flag is turned on.
+One measurable signal, checked ~2 weeks after it ships.
 
 | | |
 |---|---|
 | Lens | |
 | Size | S / M / L |
 | Risk | low / medium / high — why |
-| Tier | 1 auto / 2 needs approval / 3 needs human at merge |
-| Flag | `f<issue>_<slug>` |
+| Tier | 1 auto / 2 auto, goes live on merge / 3 needs the owner's yes |
 
 ---
-**Owner:** add the `approved` label to build it, or close with `rejected`
-and a one-line reason.
+**Owner:** tier 1 and 2 are built without approval. Close with `rejected` and
+a one-line reason to stop it. Tier 3 waits for the `approved` label.
