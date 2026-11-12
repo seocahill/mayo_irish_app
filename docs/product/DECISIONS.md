@@ -19,6 +19,12 @@ directly to state standing preferences.
   are checked against the changelog and merged, major bumps get a PR from the
   builder with every change the upgrade needs, and wait for the owner's
   review.
+- Learner progress (owner, 2026-11-12): first-party tracking of each
+  learner's vocabulary, listening, speaking and grammar from what they do, for
+  the purposes in `VISION.md`, is approved in principle and counts as tier 2.
+  Analytics or tracking for any other purpose, anything shared with third
+  parties, and collecting anything beyond what helps learning still needs my
+  yes.
 - Autopilot (owner, 2026-11-12): the architect proposes, the builder builds
   and merges, and the owner only intervenes occasionally. Visible changes are
   built without approval. Only these wait for the owner's yes: new

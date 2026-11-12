@@ -112,3 +112,6 @@ in order:
   design the course well: data-driven suggestions (grouping, cross-references,
   matching recordings, duplicates), pointers to missing themes and gaps, and
   turning the Connemara skeleton into Mayo Irish.
+- **Build in small steps.** Both of the above are large. The architect breaks
+  them into a sequence of small issues that each ship on their own, not one
+  big build.
