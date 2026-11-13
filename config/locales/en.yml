@@ -709,7 +709,6 @@ en:
         active: Active learners
         answers: Quiz answers
         lessons: Lessons started
-        listened: Listened
         questions: Questions to native speakers
         returning: Came back
         spoken: Spoken
@@ -728,7 +727,7 @@ en:
         learners who were active again.
       title: How the course is used
       week_of: Week of %{date}
-      weeks: The last 12 weeks
+      weeks: The last %{count} weeks
   version_undos:
     create:
       failed: 'Couldn''t undo that change: %{reason}'

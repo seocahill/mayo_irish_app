@@ -8,10 +8,10 @@ class UsageReportTest < ActiveSupport::TestCase
 
   test "sums each week and works out who came back" do
     travel_to Time.zone.parse("2026-10-28 12:00") do
-      answer(users(:one), at: 1.week.ago, correct: true)
-      answer(users(:one), at: 1.hour.ago, correct: true)
-      answer(users(:two), at: 1.hour.ago, correct: false)
-      answer(users(:two), at: 2.hours.ago, correct: true)
+      answer(users(:two), at: 1.week.ago, correct: true)
+      answer(users(:two), at: 1.hour.ago, correct: true)
+      answer(users(:newcomer), at: 1.hour.ago, correct: false)
+      answer(users(:newcomer), at: 2.hours.ago, correct: true)
 
       weeks = UsageReport.new.weeks
       this_week = weeks.last
@@ -24,22 +24,30 @@ class UsageReportTest < ActiveSupport::TestCase
     end
   end
 
-  test "counts minutes listened and lessons started" do
+  test "leaves out admins" do
     travel_to Time.zone.parse("2026-10-28 12:00") do
-      LessonVisit.record(user: users(:one), lesson: lessons(:one))
+      answer(users(:admin), at: 1.hour.ago, correct: true)
+
+      assert_equal 0, UsageReport.new.weeks.last.answers
+    end
+  end
+
+  test "counts lessons started and lessons-only activity as active" do
+    travel_to Time.zone.parse("2026-10-28 12:00") do
+      LessonVisit.record(user: users(:two), lesson: lessons(:one))
 
       week = UsageReport.new.weeks.last
 
       assert_equal 1, week.lessons_started
-      assert_equal 0, week.minutes_listened
+      assert_equal 1, week.active
     end
   end
 
   test "shows how many opened each curriculum lesson and went on to its quiz" do
     lesson = lessons(:one)
     lesson.update!(lesson_type: "curriculum", published: true)
-    LessonVisit.record(user: users(:one), lesson: lesson)
     LessonVisit.record(user: users(:two), lesson: lesson)
+    LessonVisit.record(user: users(:newcomer), lesson: lesson)
     QuizReview.create!(user: users(:two), quiz_question: @question, box: 2, due_at: 1.day.from_now)
 
     stage = UsageReport.new.stages.find { |s| s.lesson == lesson }

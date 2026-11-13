@@ -17,7 +17,7 @@ class UsageControllerTest < ActionDispatch::IntegrationTest
 
     get usage_path
 
-    assert_response :redirect
+    assert_redirected_to root_path
   end
 
   test "signed-out visitors are sent to sign in" do
