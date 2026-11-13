@@ -9,7 +9,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # Pinned: ruby/setup-ruby has no prebuilt Ruby 3.4.2 on ubuntu-26.04 (latest)
     env:
       RAILS_ENV: test
     steps:
@@ -24,7 +24,7 @@ jobs:
         run: bin/rails db:test:prepare test
 
   security:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # Pinned: ruby/setup-ruby has no prebuilt Ruby 3.4.2 on ubuntu-26.04 (latest)
     steps:
       - uses: actions/checkout@v4
 

@@ -12,8 +12,25 @@ directly to state standing preferences.
 - Pace: steady, not hectic. A few good changes a week beats many.
 - Dialect content is the owner's domain; the app's job is to present it
   brilliantly.
-- Ship behind feature flags; merge on green CI; destructive data changes
-  always need the owner.
+- Merge on green CI; destructive data changes always need the owner. No
+  feature flags while the app is a private beta (owner, 2026-11-12): changes
+  go live on merge. Revisit when it opens to the public.
+- Dependencies (owner, 2026-11-12): patch bumps merge on green, minor bumps
+  are checked against the changelog and merged, major bumps get a PR from the
+  builder with every change the upgrade needs, and wait for the owner's
+  review.
+- Learner progress (owner, 2026-11-12): first-party tracking of each
+  learner's vocabulary, listening, speaking and grammar from what they do, for
+  the purposes in `VISION.md`, is approved in principle and counts as tier 2.
+  Analytics or tracking for any other purpose, anything shared with third
+  parties, and collecting anything beyond what helps learning still needs my
+  yes.
+- Autopilot (owner, 2026-11-12): the architect proposes, the builder builds
+  and merges, and the owner only intervenes occasionally. Visible changes are
+  built without approval. Only these wait for the owner's yes: new
+  third-party services, anything costing money, new data collection about
+  learners, auth and permissions, destructive data changes, changes to
+  content records, and anything needing the owner's answer.
 
 ## Log
 
