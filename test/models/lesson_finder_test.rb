@@ -52,7 +52,7 @@ class LessonFinderTest < ActiveSupport::TestCase
   end
 
   test "never offers more than the most lessons" do
-    lessons = (2..8).map { |n| Lesson.create!(number: n, title: "Lesson #{n}", position: n) }
+    lessons = (2..10).map { |n| Lesson.create!(number: n, title: "Lesson #{n}", position: n) }
     numbers = [ 1 ] + lessons.map(&:number)
 
     assert_equal LessonFinder::MAX_LESSONS, finder(picks(lesson_numbers: numbers)).find("anything").size

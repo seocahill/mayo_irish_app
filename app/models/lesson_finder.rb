@@ -7,13 +7,13 @@
 #   LessonFinder.new(Lesson.published).find("how do I count past ten")  # => [Lesson, …]
 class LessonFinder
   MODEL = "gpt-4o-mini".freeze
-  MAX_LESSONS = 4
+  MAX_LESSONS = 8
   MAX_KEYWORDS = 6
 
   INSTRUCTIONS = <<~PROMPT.freeze
     You help a learner of Mayo Irish find the right lessons in their course. Below is an outline
     of the course: each line is a lesson number, its title and the titles of its grammar rules.
-    From the learner's question, pick the lessons most likely to answer it, best first (at most
+    From the learner's question, pick every lesson that covers the topic, best first, not just the closest one (at most
     #{MAX_LESSONS}), and list up to #{MAX_KEYWORDS} short English keywords to look up in the
     lessons' vocabulary and grammar. Use only lesson numbers that appear in the outline.
 
@@ -62,7 +62,7 @@ class LessonFinder
       messages: [ { role: "system", content: "#{INSTRUCTIONS}\n#{outline}" }, { role: "user", content: question } ],
       response_format: RESPONSE_FORMAT,
       temperature: 0,
-      max_tokens: 200
+      max_tokens: 300
     })
     reply = JSON.parse(response.dig("choices", 0, "message", "content").to_s)
     { lesson_numbers: Array(reply["lesson_numbers"]), keywords: Array(reply["keywords"]).first(MAX_KEYWORDS) }
