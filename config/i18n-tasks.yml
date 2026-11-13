@@ -34,5 +34,6 @@ ignore_unused:
   - onboardings.doors.*
   - history.kinds.*
   - versions.index.events.*
+  - usage.show.figures.*
   - search.types.*
   - daily_path.*
