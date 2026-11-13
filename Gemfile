@@ -33,7 +33,7 @@ group :development do
   gem 'web-console'
 end
 
-gem "lexxy", "~> 0.9.7.beta"
+gem "lexxy", "~> 1.0.4"
 
 gem "dockerfile-rails", ">= 1.7", group: :development
 

@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    action_text-trix (2.1.18)
+    action_text-trix (2.1.19)
       railties
     actioncable (8.1.4.1)
       actionpack (= 8.1.4.1)
@@ -181,8 +181,8 @@ GEM
       regexp_parser (~> 2.0)
       simpleidn (~> 0.2)
     language_server-protocol (3.17.0.5)
-    lexxy (0.9.7.beta)
-      rails (>= 8.0.2)
+    lexxy (1.0.4)
+      railties (>= 8.0.2)
     lint_roller (1.1.0)
     litestream (0.16.1)
       actionpack (>= 7.0)
@@ -470,7 +470,7 @@ DEPENDENCIES
   image_processing (~> 2.2)
   importmap-rails
   jbuilder
-  lexxy (~> 0.9.7.beta)
+  lexxy (~> 1.0.4)
   litestream (~> 0.16.1)
   mcp (~> 1.9.0)
   paper_trail (~> 17.0)
@@ -490,7 +490,7 @@ DEPENDENCIES
   webmock
 
 CHECKSUMS
-  action_text-trix (2.1.18) sha256=3fdb83f8bff4145d098be283cdd47ac41caf5110bfa6df4695ed7127d7fb3642
+  action_text-trix (2.1.19) sha256=7012f59421009cf284aa651294896414d653a61a2417c9b8714c8476d2f74009
   actioncable (8.1.4.1) sha256=007670f7297973e94809e9f32a56624a7aa60b6e9d6696cd078064ce86d1c7fc
   actionmailbox (8.1.4.1) sha256=18b43dd842bf3a3e31b8e38b7917c21e48c128fc8b263c893481cc66ee1a8f78
   actionmailer (8.1.4.1) sha256=a7b71dedf744e48dd6751e97350634edce9a2f7beeceac332dcccb91729ad066
@@ -550,7 +550,7 @@ CHECKSUMS
   json (2.21.2) sha256=1f1d3b7cf2b3ba1a69beca0bb6db13d5438b80bff3cd54cdaaa620b9b07c1c6a
   json_schemer (2.5.0) sha256=2f01fb4cce721a4e08dd068fc2030cffd0702a7f333f1ea2be6e8991f00ae396
   language_server-protocol (3.17.0.5) sha256=fd1e39a51a28bf3eec959379985a72e296e9f9acfce46f6a79d31ca8760803cc
-  lexxy (0.9.7.beta) sha256=c810a6c182d26600d745d038b1d6f8fb6103d4d5e6f94664960337a822857319
+  lexxy (1.0.4) sha256=66f9453cf574095bab1e2020961e586821bf2861df0dac88e1c49b2f0efc939a
   lint_roller (1.1.0) sha256=2c0c845b632a7d172cb849cc90c1bce937a28c5c8ccccb50dfd46a485003cc87
   litestream (0.16.1) sha256=dd2185915815f879824a55c907065ea3a40c6912af97c282397077238ff28c2c
   litestream (0.16.1-aarch64-linux) sha256=83dc16c214dbacf7d190aad729b9c3a25d4053259ddf65b7920a94e9224aefc1
