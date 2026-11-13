@@ -215,6 +215,7 @@ en:
         for their weeks and lessons.
       this_week: This week
       title: Learners
+      usage: How the course is used
     show:
       answers: Answers
       back: "← All learners"
@@ -724,6 +725,33 @@ en:
     video:
       title: Lesson video
     words_known: Words known
+  usage:
+    show:
+      eyebrow: Admin
+      figures:
+        accuracy: Answers right
+        active: Active learners
+        answers: Quiz answers
+        lessons: Lessons started
+        questions: Questions to native speakers
+        returning: Came back
+        spoken: Spoken
+      learners: See each learner
+      minutes:
+        one: 1 min
+        other: "%{count} min"
+      none: "-"
+      percent: "%{count}%"
+      stage: "%{opened} opened, %{quizzed} answered its quiz"
+      stop: Where people stop
+      stop_summary: For each curriculum lesson, how many learners opened it and how
+        many went on to answer its quiz.
+      summary: Weekly figures from what learners already do in the course. Nothing
+        is sent to any other service. "Came back" is the share of last week's active
+        learners who were active again.
+      title: How the course is used
+      week_of: Week of %{date}
+      weeks: The last %{count} weeks
   version_undos:
     create:
       failed: 'Couldn''t undo that change: %{reason}'

@@ -1,0 +1,46 @@
+<div class="max-w-2xl mx-auto flex flex-col gap-8">
+  <header>
+    <p class="eyebrow"><%= t(".eyebrow") %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
+    <p class="text-muted mt-1 text-sm"><%= t(".summary") %></p>
+    <p class="mt-2"><%= link_to t(".learners"), learners_path, class: "text-sm underline" %></p>
+  </header>
+
+  <section aria-labelledby="weeks-heading" class="flex flex-col gap-3">
+    <h2 id="weeks-heading" class="lesson-section-heading"><%= t(".weeks", count: UsageReport::WEEKS) %></h2>
+    <ul class="flex flex-col gap-3">
+      <% @weeks.each do |week| %>
+        <li class="card px-4 py-3 flex flex-col gap-2 text-sm">
+          <p class="font-medium"><%= t(".week_of", date: l(week.starts_on, format: :long)) %></p>
+          <dl class="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-2">
+            <% [ [ :active, week.active ],
+                 [ :returning, week.retention ? t(".percent", count: week.retention) : t(".none") ],
+                 [ :answers, week.answers ],
+                 [ :accuracy, week.accuracy ? t(".percent", count: week.accuracy) : t(".none") ],
+                 [ :spoken, t(".minutes", count: week.minutes_spoken) ],
+                 [ :lessons, week.lessons_started ],
+                 [ :questions, week.questions ] ].each do |key, value| %>
+              <div>
+                <dt class="text-xs text-muted"><%= t(".figures.#{key}") %></dt>
+                <dd><%= value %></dd>
+              </div>
+            <% end %>
+          </dl>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+
+  <section aria-labelledby="stop-heading" class="flex flex-col gap-3">
+    <h2 id="stop-heading" class="lesson-section-heading"><%= t(".stop") %></h2>
+    <p class="text-sm text-muted"><%= t(".stop_summary") %></p>
+    <ul class="card divide-y divide-line">
+      <% @stages.each do |stage| %>
+        <li class="px-4 py-3 flex flex-wrap items-center justify-between gap-2 text-sm">
+          <%= link_to stage.lesson.display_title, lesson_path(stage.lesson), class: "font-medium" %>
+          <span class="text-xs text-muted"><%= t(".stage", opened: stage.opened, quizzed: stage.quizzed) %></span>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+</div>

@@ -15,10 +15,11 @@ directly to state standing preferences.
 - Merge on green CI; destructive data changes always need the owner. No
   feature flags while the app is a private beta (owner, 2026-11-12): changes
   go live on merge. Revisit when it opens to the public.
-- Dependencies (owner, 2026-11-12): patch bumps merge on green, minor bumps
-  are checked against the changelog and merged, major bumps get a PR from the
-  builder with every change the upgrade needs, and wait for the owner's
-  review.
+- Dependencies (owner, 2026-11-12): patch bumps merge on green, and minor
+  bumps are checked against the changelog and merged. Major bumps are prepared
+  by the builder with every change the upgrade needs and tests added where
+  missing; dev and test-only dependencies and GitHub Actions then merge if the
+  suite is green, and everything else waits for the owner's review.
 - Learner progress (owner, 2026-11-12): first-party tracking of each
   learner's vocabulary, listening, speaking and grammar from what they do, for
   the purposes in `VISION.md`, is approved in principle and counts as tier 2.
