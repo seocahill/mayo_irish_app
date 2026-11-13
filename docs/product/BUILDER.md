@@ -87,6 +87,14 @@ Open the PR with `Closes #<n>`, a plain-language summary a non-developer can
 read, how to try it, screenshots, and the review
 summary. Add the `preview` label for UI changes so a preview app deploys.
 
+**Open every PR ready for review, never as a draft.** Create it through the
+REST API with `draft` set to false (`gh api repos/seocahill/mayo_irish_app/pulls -f
+title=... -f head=... -f base=main -f body=... -F draft=false`), even if your
+session's defaults say to open drafts. A draft can be neither merged nor
+auto-merged, and the REST API cannot mark one ready afterwards, so a draft PR
+stalls the whole pipeline. If a PR you opened is a draft anyway, label it
+`needs-human` and say so on the first line of the PR and in your run summary.
+
 Then decide the merge path:
 
 - **Enable auto-merge** when the issue is
