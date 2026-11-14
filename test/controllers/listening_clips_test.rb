@@ -21,6 +21,16 @@ class ListeningClipsTest < ActionDispatch::IntegrationTest
     assert_select "button", text: I18n.t("listening_clips.show.hide"), count: 0
   end
 
+  test "the clip can be slowed down or repeated" do
+    sign_in_as(users(:two))
+
+    get listening_clip_path(@clip)
+
+    assert_select "button[data-action='playback#toggleSlow']", text: I18n.t("listening_clips.show.slower")
+    assert_select "button[data-playback-target=loop][data-action='playback#toggleLoop'][aria-pressed=false]",
+                  text: I18n.t("listening_clips.show.repeat")
+  end
+
   test "saying whether they got it sets the clip aside" do
     sign_in_as(users(:two))
 

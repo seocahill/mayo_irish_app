@@ -489,6 +489,7 @@ en:
       listen_for_html: A Mayo speaker, in a phrase from Abairt. Listen for %{word}
         (%{english}) and try to work out the rest. Play it as often as you like.
       not_yet: Not yet
+      repeat: Repeat
       show_words: Show the words
       slower: Slower
       title: What do you hear?
