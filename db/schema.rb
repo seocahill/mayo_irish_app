@@ -334,7 +334,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_14_090000) do
     t.index ["quiz_question_id"], name: "index_quiz_reviews_on_quiz_question_id"
     t.index ["user_id", "due_at"], name: "index_quiz_reviews_on_user_id_and_due_at"
     t.index ["user_id", "quiz_question_id"], name: "index_quiz_reviews_on_user_id_and_quiz_question_id", unique: true
-    t.index ["user_id", "stability"], name: "index_quiz_reviews_on_user_id_and_stability"
     t.index ["user_id"], name: "index_quiz_reviews_on_user_id"
   end
 

@@ -22,7 +22,9 @@ class ReviewsController < ApplicationController
       return render :empty
     end
 
-    @question = QuizQuestion.includes(:lesson).find(round["ids"][round["pos"]])
+    @question = QuizQuestion.includes(:lesson).find_by(id: round["ids"][round["pos"]])
+    return skip_unavailable(round) unless @question && still_wanted?(round)
+
     @position = round["pos"] + 1
     @count = round["ids"].size
   end
@@ -31,8 +33,8 @@ class ReviewsController < ApplicationController
     round = session[ROUND_KEY]
     return redirect_to review_path if round.nil?
 
-    @question = QuizQuestion.find(params[:question_id])
-    return redirect_to review_path if round["ids"][round["pos"]] != @question.id
+    @question = QuizQuestion.find_by(id: params[:question_id])
+    return redirect_to review_path if @question.nil? || round["ids"][round["pos"]] != @question.id
 
     @choice = params[:choice].to_s
     @correct = @choice.casecmp?(@question.answer)
@@ -52,6 +54,19 @@ class ReviewsController < ApplicationController
   end
 
   private
+
+  # A word the learner has answered elsewhere since the round began (for
+  # example in a lesson quiz) is skipped, so FSRS isn't run on it early.
+  def still_wanted?(round)
+    review = QuizReview.find_by(user: current_user, quiz_question_id: @question.id)
+    review.nil? || review.due_at.nil? || review.due_at <= Time.current
+  end
+
+  def skip_unavailable(round)
+    round["pos"] += 1
+    session[ROUND_KEY] = round
+    redirect_to review_path
+  end
 
   def start_round
     ids = build_queue

@@ -12,7 +12,7 @@ class QuizReview < ApplicationRecord
   REVIEW_STATE = Fsrs::State::REVIEW
   RATINGS = { again: Fsrs::Rating::AGAIN, hard: Fsrs::Rating::HARD,
               good: Fsrs::Rating::GOOD, easy: Fsrs::Rating::EASY }.freeze
-  SCHEDULER = Fsrs::Scheduler.new
+  SCHEDULER = Fsrs::Scheduler.new.tap { |s| s.p.request_retention = 0.9 }.freeze
 
   belongs_to :user
   belongs_to :quiz_question
@@ -26,14 +26,15 @@ class QuizReview < ApplicationRecord
     fsrs_state == REVIEW_STATE && stability >= KNOWN_STABILITY
   end
 
-  # Due dates for the next `days` days, used for the "Tomorrow / This week" forecast.
+  # Counts for the line under the review button: still to do today (including
+  # anything overdue), due tomorrow, and due in the following days.
   def self.forecast_for(user, now: Time.current)
-    tomorrow = now.end_of_day + 1.day
-    week = now.end_of_day + 6.days
     scope = where(user: user)
+    tomorrow = (now.to_date + 1).all_day
+    later = (now.to_date + 2).beginning_of_day..(now.to_date + 7).end_of_day
     { today: scope.due(now.end_of_day).count,
-      tomorrow: scope.where(due_at: (now.end_of_day + 1.second)..tomorrow).count,
-      week: scope.where(due_at: (now.end_of_day + 1.second)..week).count }
+      tomorrow: scope.where(due_at: tomorrow).count,
+      week: scope.where(due_at: tomorrow.begin..later.end).count }
   end
 
   # Apply an answer outcome (a rating of :again, :hard, :good or :easy, or just
@@ -76,9 +77,12 @@ class QuizReview < ApplicationRecord
     card.state = fsrs_state
     card.stability = stability
     card.difficulty = difficulty
+    # A row without a review time (never answered) is a new card.
     if last_reviewed_at
       card.last_review = last_reviewed_at.utc.to_datetime
       card.due = (due_at || last_reviewed_at).utc.to_datetime
+    else
+      card.state = Fsrs::State::NEW
     end
     card.reps = times_correct + times_wrong
     card.lapses = times_wrong

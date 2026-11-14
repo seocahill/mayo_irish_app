@@ -79,4 +79,26 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
     assert_nil session[ReviewsController::ROUND_KEY]
   end
+
+  test "answering a question outside the round redirects without recording" do
+    sign_in_as(@user)
+    get review_path
+    ids = session[ReviewsController::ROUND_KEY]["ids"]
+    outsider = @lesson.quiz_questions.where.not(id: ids).first
+    skip "no spare question" unless outsider
+    assert_no_difference -> { ReviewLog.count } do
+      post answer_review_path, params: { question_id: outsider.id, choice: outsider.answer }
+    end
+    assert_redirected_to review_path
+  end
+
+  test "a word answered elsewhere since the round began is skipped" do
+    sign_in_as(@user)
+    get review_path
+    id = session[ReviewsController::ROUND_KEY]["ids"].first
+    QuizReview.create!(user: @user, quiz_question_id: id, box: 2, fsrs_state: 2, stability: 1.0,
+                       difficulty: 5.0, last_reviewed_at: Time.current, due_at: 1.day.from_now)
+    get review_path
+    assert_equal 1, session[ReviewsController::ROUND_KEY]["pos"]
+  end
 end

@@ -102,4 +102,20 @@ class QuizReviewTest < ActiveSupport::TestCase
     assert_nil log.reload.quiz_question
     assert log.prompt.present?
   end
+
+  test "a row with no review time is treated as a new card" do
+    @review.update!(fsrs_state: 2, stability: 5.0, difficulty: 5.0, last_reviewed_at: nil)
+    assert_nothing_raised { @review.record_answer(correct: true) }
+  end
+
+  test "forecast ignores other users and counts tomorrow and the days after" do
+    other = QuizQuestion.where.not(id: @question.id).first
+    attrs = { box: 3, fsrs_state: 2, stability: 3.0, difficulty: 5.0 }
+    QuizReview.create!(user: @user, quiz_question: @question, due_at: Date.current.tomorrow.end_of_day, **attrs)
+    QuizReview.create!(user: @user, quiz_question: other, due_at: Date.current.tomorrow.tomorrow.beginning_of_day, **attrs)
+    QuizReview.create!(user: users(:admin), quiz_question: other, due_at: Date.current.tomorrow.beginning_of_day, **attrs)
+    forecast = QuizReview.forecast_for(@user)
+    assert_equal 1, forecast[:tomorrow]
+    assert_equal 2, forecast[:week] # tomorrow plus the days after
+  end
 end

@@ -37,6 +37,16 @@ class DailyPathTest < ActiveSupport::TestCase
     assert_equal "/review", review.path
   end
 
+  test "review count leaves out words in lessons the learner cannot see" do
+    hidden = Lesson.create!(number: 98, title: "Hidden", lesson_type: "curriculum", published: false)
+    hidden.vocabulary_items.create!(irish: "bó", english: "cow")
+    QuizQuestion.sync_for(hidden)
+    hidden.quiz_questions.each do |q|
+      QuizReview.create!(user: @user, quiz_question: q, box: 2, fsrs_state: 2, stability: 1.0, due_at: 1.hour.ago)
+    end
+    assert_equal 0, DailyPath.new(@user).due_count
+  end
+
   test "ignores reviews that are not due yet or belong to someone else" do
     question = @lesson.quiz_questions.first
     QuizReview.create!(user: @user, quiz_question: question, box: 3, fsrs_state: 2, stability: 7.0, due_at: 2.days.from_now)
