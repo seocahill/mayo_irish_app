@@ -24,3 +24,10 @@
     word changes, and get an answer drawn from the lessons. It's written by AI, so
     check it against the lesson.
   path: /ask/new
+- id: 3
+  date: 2026-11-14
+  title: Say it, then check
+  body: Words you've already got right once now come back as "Say it" cards. Say the
+    Irish aloud (or listen to the Mayo speaker and say what it means), tap Show, then
+    rate how it went. You can also hear the Mayo speaker on quiz questions and answers.
+  path: /review

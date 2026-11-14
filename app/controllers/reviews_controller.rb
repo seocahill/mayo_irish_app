@@ -27,6 +27,7 @@ class ReviewsController < ApplicationController
 
     @position = round["pos"] + 1
     @count = round["ids"].size
+    @say_it = QuizReview.say_it?(current_user, @question)
   end
 
   def answer
@@ -36,11 +37,18 @@ class ReviewsController < ApplicationController
     @question = QuizQuestion.find_by(id: params[:question_id])
     return redirect_to review_path if @question.nil? || round["ids"][round["pos"]] != @question.id
 
-    @choice = params[:choice].to_s
-    @correct = @choice.casecmp?(@question.answer)
-
     review = QuizReview.find_or_initialize_by(user: current_user, quiz_question: @question)
-    review.record_answer(correct: @correct)
+    rating = params[:rating].to_s.to_sym
+    if QuizReview::RATINGS.key?(rating) && QuizReview.say_it?(current_user, @question)
+      # A "Say it" card: the learner marks themselves, nothing is graded for them.
+      @self_rated = true
+      @correct = rating != :again
+      review.record_answer(correct: @correct, rating: rating)
+    else
+      @choice = params[:choice].to_s
+      @correct = @choice.casecmp?(@question.answer)
+      review.record_answer(correct: @correct)
+    end
 
     round["pos"] += 1
     round["correct"] += 1 if @correct
