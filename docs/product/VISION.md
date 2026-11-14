@@ -65,6 +65,7 @@ say where we fall short. In practice:
   speaker and place.
 - **The API and MCP** are products in their own right: complete, documented
   and stable.
+- **Language Specific** consider the unique feature of the irish language when designing. For instance the Irish genitive and plurals are less regular than english. It makes sense to learn these (and the gender) when learning a noun for example.
 
 ## Where it's going
 
