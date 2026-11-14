@@ -37,3 +37,9 @@
   body: On a listening clip, tap Repeat and the Mayo speaker's phrase plays over and
     over until you've caught it. Slower is still there too.
   path: /listens
+- id: 5
+  date: 2026-11-14
+  title: See what's coming
+  body: Under "So far" on Today you can now see how many reviews are due tomorrow and
+    over the coming week, so you can plan your time.
+  path: /

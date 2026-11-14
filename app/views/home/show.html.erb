@@ -52,6 +52,9 @@
         <%= t(".minutes_listened", count: @listening_minutes) %>
       </p>
     </div>
+    <% if @forecast[:week].positive? %>
+      <%= render "reviews/forecast", forecast: @forecast %>
+    <% end %>
     <%= link_to t(".your_listening"), listens_path, class: "text-sm text-muted underline underline-offset-2 hover:text-ink self-start" %>
   </section>
 

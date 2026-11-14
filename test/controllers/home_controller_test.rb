@@ -32,6 +32,25 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", OnboardingsHelper::GAELTACHT_1926_URL
   end
 
+  test "shows the review forecast once reviews are scheduled" do
+    sign_in_as(users(:two))
+    get root_path
+    assert_select "p", text: /Tomorrow:/, count: 0
+
+    QuizQuestion.sync_for(lessons(:one))
+    QuizReview.create!(user: users(:two), quiz_question: QuizQuestion.first, box: 2, due_at: Time.current.tomorrow.noon)
+    get root_path
+    assert_select "p", text: /Tomorrow: 1/
+
+    QuizReview.update_all(due_at: 4.days.from_now.noon)
+    get root_path
+    assert_select "p", text: /Tomorrow: 0 · This week: 1/
+
+    QuizReview.update_all(due_at: 30.days.from_now)
+    get root_path
+    assert_select "p", text: /Tomorrow:/, count: 0
+  end
+
   test "shows an empty state when there is nothing to do" do
     Lesson.update_all(published: false)
     sign_in_as(users(:two))
