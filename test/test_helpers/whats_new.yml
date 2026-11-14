@@ -1,0 +1,13 @@
+- id: 1
+  date: 2026-06-01
+  title: The first note
+  body: Something old.
+- id: 2
+  date: 2026-07-01
+  title: The second note
+  body: Something newer.
+  path: /review
+- id: 3
+  date: 2026-08-01
+  title: The third note
+  body: Something newest.

@@ -71,7 +71,7 @@ class WhatsNewTest < ActiveSupport::TestCase
 
     assert_empty WhatsNew.current.entries
   ensure
-    Rails.configuration.x.whats_new_path = Rails.root.join("test/fixtures/files/whats_new.yml")
+    Rails.configuration.x.whats_new_path = Rails.root.join("test/test_helpers/whats_new.yml")
     File.delete(path) if path && File.exist?(path)
   end
 

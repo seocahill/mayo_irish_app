@@ -24,5 +24,5 @@ Rails.application.configure do
   config.i18n.raise_on_missing_translations = true
 
   # Fixed "what's new" notes, so tests don't depend on what has shipped.
-  config.x.whats_new_path = Rails.root.join("test/fixtures/files/whats_new.yml")
+  config.x.whats_new_path = Rails.root.join("test/test_helpers/whats_new.yml")
 end

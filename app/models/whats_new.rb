@@ -23,8 +23,8 @@ class WhatsNew
       load(path).tap { |fresh| @loaded[path.to_s] = [ stamp, fresh ] }
     rescue Psych::Exception, KeyError, Errno::ENOENT => error
       # A broken notes file must never take Today down. CI checks the shipped
-      # file, so this only guards a bad deploy.
-      Rails.logger.error("WhatsNew: could not read #{path}: #{error.message}")
+      # file, so this only guards a bad deploy; the report reaches Sentry.
+      Rails.error.report(error, handled: true, context: { path: path.to_s })
       new([])
     end
 
