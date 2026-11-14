@@ -9,7 +9,8 @@ directly to state standing preferences.
 
 ## Standing preferences
 
-- Pace: steady, not hectic. A few good changes a week beats many.
+- Pace (owner, 2026-11-14): continuous. Keep building small steps toward
+  `VISION.md` without waiting; this replaces "steady, not hectic".
 - Dialect content is the owner's domain; the app's job is to present it
   brilliantly.
 - Merge on green CI; destructive data changes always need the owner. No
@@ -25,13 +26,19 @@ directly to state standing preferences.
   the purposes in `VISION.md`, is approved in principle and counts as tier 2.
   Analytics or tracking for any other purpose, anything shared with third
   parties, and collecting anything beyond what helps learning still needs my
-  yes.
-- Autopilot (owner, 2026-11-12): the architect proposes, the builder builds
-  and merges, and the owner only intervenes occasionally. Visible changes are
-  built without approval. Only these wait for the owner's yes: new
-  third-party services, anything costing money, new data collection about
-  learners, auth and permissions, destructive data changes, changes to
-  content records, and anything needing the owner's answer.
+  yes. (Since 2026-11-14 this is no longer a stop: see Autopilot below. The
+  `VISION.md` limits still apply: collect only what helps learning, share
+  nothing with third parties.)
+- Autopilot (owner, 2026-11-14, supersedes the 2026-11-12 list): the
+  architect proposes, the builder builds and merges and picks its own next
+  steps, and the owner only intervenes at two stops, both in `CADENCE.md`:
+  (1) a change that could mutate existing data (destroying or changing user
+  or course data; adding keys, relations, tables or columns does not count),
+  which is asked about first; (2) the agents are out of ideas or development
+  has reached its logical end for now, so they ask for new direction. New
+  third-party services, cost, auth/MCP permissions and similar no longer wait
+  for a yes. The limits in `VISION.md` (no invented Irish, no manipulation,
+  collect only what helps learning) still apply.
 
 ## Log
 
