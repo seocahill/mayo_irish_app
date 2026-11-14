@@ -178,12 +178,12 @@ speaker, not from the tool.
   applies the change through the normal versioned path, so it is undoable
   with `VersionUndo`. Retire means unpublish, never delete.
 - The agent never applies anything.
-- **Open decision (Stop 1, `CADENCE.md`):** applying edits on accept changes
-  existing data. The owner indicated 2026-11-14 that this is fine (to be
-  confirmed in `DECISIONS.md` before the build that does it). Until then,
-  accepted edits to existing content wait as "ready to apply".
-- Add a data-change issue per kind of apply (`needs-human`, `data-change`),
-  as `CADENCE.md` describes, when the build reaches it.
+- **Decided (owner, 2026-11-14):** accepting an edit to existing content
+  applies it straight away, versioned and undoable. Because applying changes
+  existing data (Stop 1, `CADENCE.md`), the owner's yes covers the approach,
+  not each build: open a `data-change` issue (`needs-human`) for each kind of
+  apply (revise, merge, retire, reorder) as the build reaches it, and merge
+  that PR only after the owner adds `approved`.
 
 ## 9. Phased plan (each step ships alone)
 
@@ -224,8 +224,7 @@ this has not been verified.
 
 ## 11. Open questions
 
-1. Confirm that accept-to-apply for edits to existing content is approved
-   (§8), so `DECISIONS.md` can record it.
+1. ~~Accept-to-apply for edits to existing content~~ decided (§8).
 2. Which chat app does Darren actually use, and what do its connectors
    require? (Verified before step 5.)
 3. How large should the caps be: pending proposals in his queue, and
