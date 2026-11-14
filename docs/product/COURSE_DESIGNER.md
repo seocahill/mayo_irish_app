@@ -209,6 +209,42 @@ Darren value. Before step 5, check ChatGPT's current requirements for custom
 remote MCP connectors (transport, OAuth and tool-confirmation behaviour), as
 this has not been verified.
 
+## 9a. Source intake and the extractor
+
+Today `extraction_queue.yml` is hand-written. Nothing records which files
+exist in `scans/`, which pages are covered or whether a file changed, so a
+newly dropped file is invisible to the nightly routine. The Tourmakeady files
+have never been processed: the queue's `tourmakeady-scoping` entry tells the
+routine to stop, and it has written a "needs scoping" report almost every
+night since August. Fix this in front of the extractor, not by merging
+everything into one process.
+
+- **Keep the extractor separate.** Its rules (create-only, draft-only, never
+  improvise scope) are what make it safe to run unattended. Nothing here
+  loosens them.
+- **Source manifest.** A generated `scans/MANIFEST.yml` lists each source
+  file with its hash, page count and status (`new`, `inventoried`, `scoped`,
+  `extracting`, `done`), plus page ranges covered and the lesson and record
+  ids created from them. A small script flags files that are new or whose hash
+  changed. The format is the builder's call, as long as it works.
+- **Scoper step (proposes only).** For a new or unscoped file the routine
+  inventories it instead of stopping: it rasterises pages, reads the printed
+  page numbers and contents, and writes proposed units to the queue with
+  `status: proposed`. A person approves them, and only then do they become
+  `pending`.
+- **The designer's front door.** The `extraction_request` proposal kind
+  (§4) is where approval happens. Darren sees "Tourmakeady pp. 3 to 9,
+  proposed as unit T1" in his queue and accepts it, and a queue entry
+  appears. Until the designer exists, approval is a manual edit of the queue.
+- **Quiet when idle.** With nothing pending or proposed, the routine writes
+  no report and makes no commit. At most it updates one open issue.
+- **Rule across the system:** agents propose, a person decides, and the
+  extractor only builds what was approved.
+
+First slice (needs no schema change): the manifest and its script, plus the
+quiet-when-idle change. It unblocks Tourmakeady without waiting for the
+designer.
+
 ## 10. Guardrails (from `VISION.md` and `CADENCE.md`)
 
 - Never invent, correct or normalise Irish or dialect forms. Dialect labels
