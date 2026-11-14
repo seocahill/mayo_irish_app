@@ -686,6 +686,9 @@ en:
       see_results: See results
       well_done: Well done!
       your_answer: 'Your answer:'
+    audio:
+      hear: Hear %{word}
+      recorded_by: Recorded by %{name}
     empty:
       all_done: All done
       back_home: Back home
@@ -694,10 +697,19 @@ en:
       nothing_due: Nothing is due for review right now
     forecast: 'Tomorrow: %{tomorrow} · This week: %{week}'
     show:
+      how_did_it_go: How did it go?
       how_to_say_in_irish: How do you say this in Irish?
       meaning_in_english: What does this mean in English?
       question_count: Question %{position}/%{count}
       quit: Quit
+      rating:
+        again: Again
+        easy: Easy
+        good: Good
+        hard: Hard
+      say_it_aloud: Say it aloud in Irish, then tap Show
+      say_it_listen: Listen, then say what it means
+      show: Show
     summary:
       back_home: Back home
       correct_this_round: correct this round

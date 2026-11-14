@@ -22,6 +22,12 @@ class QuizReview < ApplicationRecord
   scope :known, -> { where(fsrs_state: REVIEW_STATE, stability: KNOWN_STABILITY..) }
   scope :due,   ->(time = Time.current) { where(due_at: ..time) }
 
+  # Words the learner has already answered right by multiple choice move on to
+  # "Say it" cards: recall aloud, reveal, then rate themselves.
+  def self.say_it?(user, question)
+    where(user: user, quiz_question: question).where(times_correct: 1..).exists?
+  end
+
   def known?
     fsrs_state == REVIEW_STATE && stability >= KNOWN_STABILITY
   end

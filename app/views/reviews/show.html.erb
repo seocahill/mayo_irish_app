@@ -8,24 +8,60 @@
     <span class="eyebrow tabular-nums shrink-0"><%= t(".question_count", position: @position, count: @count) %></span>
   </div>
 
-  <div class="card p-6 sm:p-8">
-    <p class="eyebrow text-foghlaim mb-3">
-      <%= prompt_lang == "ga" ? t(".meaning_in_english") : t(".how_to_say_in_irish") %>
-    </p>
-    <p class="font-display text-3xl sm:text-4xl leading-tight mb-8 break-words">
-      <%= @question.prompt %>
-    </p>
-
-    <%= form_with url: answer_review_path, method: :post, class: "grid gap-2", data: { turbo: false } do |f| %>
-      <%= f.hidden_field :question_id, value: @question.id %>
-      <% @question.choices.each do |choice| %>
-        <button type="submit" name="choice" value="<%= choice %>"
-                class="text-left px-4 py-4 rounded-sm border border-line bg-surface hover:bg-canvas hover:border-ink focus-visible:outline-2 focus-visible:outline-ink transition-colors text-lg break-words cursor-pointer">
-          <%= choice %>
-        </button>
+  <% if @say_it %>
+    <% audio_html = render("reviews/audio", question: @question).strip %>
+    <% audio_first = prompt_lang == "ga" && audio_html.present? %>
+    <div class="card p-6 sm:p-8" data-controller="reveal">
+      <p class="eyebrow text-foghlaim mb-3">
+        <%= audio_first ? t(".say_it_listen") : (prompt_lang == "ga" ? t(".meaning_in_english") : t(".say_it_aloud")) %>
+      </p>
+      <% if audio_first %>
+        <div class="mb-6" data-testid="say-it-audio"><%= audio_html.html_safe %></div>
+        <p class="font-display text-3xl sm:text-4xl leading-tight mb-8 break-words italic" hidden data-reveal-target="hidden"><%= @question.prompt %></p>
+      <% else %>
+        <p class="font-display text-3xl sm:text-4xl leading-tight mb-8 break-words <%= "italic" if prompt_lang == "ga" %>"><%= @question.prompt %></p>
       <% end %>
-    <% end %>
-  </div>
+
+      <button type="button" data-reveal-target="button" data-action="reveal#show" class="btn-solid w-full sm:w-auto"><%= t(".show") %></button>
+
+      <div hidden data-reveal-target="hidden" class="grid gap-4">
+        <p class="text-lg pt-2 border-t border-line">
+          <span class="font-semibold <%= @question.answer_lang == "ga" ? "italic" : "" %>"><%= @question.answer %></span>
+          <% if !audio_first && prompt_lang == "en" %><span class="ml-2 align-middle"><%= audio_html.html_safe %></span><% end %>
+        </p>
+        <p class="eyebrow"><%= t(".how_did_it_go") %></p>
+        <%= form_with url: answer_review_path, method: :post, class: "grid grid-cols-2 sm:grid-cols-4 gap-2", data: { turbo: false } do |f| %>
+          <%= f.hidden_field :question_id, value: @question.id %>
+          <% { "again" => t(".rating.again"), "hard" => t(".rating.hard"), "good" => t(".rating.good"), "easy" => t(".rating.easy") }.each do |rating, label| %>
+            <button type="submit" name="rating" value="<%= rating %>"
+                    class="px-3 py-3 rounded-sm border border-line bg-surface hover:bg-canvas hover:border-ink focus-visible:outline-2 focus-visible:outline-ink transition-colors cursor-pointer">
+              <%= label %>
+            </button>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="card p-6 sm:p-8">
+      <p class="eyebrow text-foghlaim mb-3">
+        <%= prompt_lang == "ga" ? t(".meaning_in_english") : t(".how_to_say_in_irish") %>
+      </p>
+      <p class="font-display text-3xl sm:text-4xl leading-tight mb-8 break-words">
+        <%= @question.prompt %>
+        <% if prompt_lang == "ga" %><span class="ml-2 align-middle"><%= render "reviews/audio", question: @question %></span><% end %>
+      </p>
+
+      <%= form_with url: answer_review_path, method: :post, class: "grid gap-2", data: { turbo: false } do |f| %>
+        <%= f.hidden_field :question_id, value: @question.id %>
+        <% @question.choices.each do |choice| %>
+          <button type="submit" name="choice" value="<%= choice %>"
+                  class="text-left px-4 py-4 rounded-sm border border-line bg-surface hover:bg-canvas hover:border-ink focus-visible:outline-2 focus-visible:outline-ink transition-colors text-lg break-words cursor-pointer">
+            <%= choice %>
+          </button>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
 
   <div class="text-center">
     <%= button_to t(".quit"), reset_review_path, method: :delete,

@@ -101,4 +101,87 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     get review_path
     assert_equal 1, session[ReviewsController::ROUND_KEY]["pos"]
   end
+
+  def due_review(question, times_correct:)
+    QuizReview.create!(user: @user, quiz_question: question, box: 2, fsrs_state: 2, stability: 1.0,
+                       difficulty: 5.0, times_correct: times_correct, last_reviewed_at: 2.days.ago, due_at: 1.hour.ago)
+  end
+
+  test "a new word is multiple choice" do
+    sign_in_as(@user)
+    get review_path
+    assert_select "button[name=choice]"
+    assert_select "button[name=rating]", false
+  end
+
+  test "a word answered right before becomes a Say it card, in English to Irish" do
+    sign_in_as(@user)
+    question = @lesson.quiz_questions.find_by(direction: "en_ga")
+    due_review(question, times_correct: 1)
+    QuizReview.where(user: @user).where.not(quiz_question: question).delete_all
+
+    get review_path
+    assert_response :success
+    assert session[ReviewsController::ROUND_KEY]["ids"].first == question.id
+    assert_select "button[name=choice]", false
+    assert_select "button[name=rating]", 4
+    assert_select "[data-controller=reveal]"
+  end
+
+  test "Say it with Mayo audio hides the Irish until shown" do
+    sign_in_as(@user)
+    question = @lesson.quiz_questions.find_by(direction: "ga_en")
+    question.source.update!(audio_url: "https://example.com/a.mp3")
+    due_review(question, times_correct: 2)
+    get review_path
+    assert session[ReviewsController::ROUND_KEY]["ids"].first == question.id
+    assert_select "[data-testid=say-it-audio] audio[src='https://example.com/a.mp3']"
+    assert_select "p[hidden]", text: question.prompt
+  end
+
+  test "multiple choice Irish prompts have the Mayo audio" do
+    sign_in_as(@user)
+    question = @lesson.quiz_questions.find_by(direction: "ga_en")
+    question.source.update!(audio_url: "https://example.com/a.mp3")
+    QuizReview.where(user: @user).delete_all
+    due_review(question, times_correct: 0)
+    get review_path
+    assert session[ReviewsController::ROUND_KEY]["ids"].first == question.id
+    assert_select "audio[src='https://example.com/a.mp3']"
+  end
+
+  test "a self-rating schedules the word and Again counts as wrong" do
+    sign_in_as(@user)
+    get review_path
+    id = session[ReviewsController::ROUND_KEY]["ids"].first
+    question = QuizQuestion.find(id)
+
+    assert_difference -> { ReviewLog.count }, 1 do
+      post answer_review_path, params: { question_id: id, rating: "again" }
+    end
+    assert_response :success
+    review = QuizReview.find_by(user: @user, quiz_question: question)
+    assert_equal 1, review.times_wrong
+    assert_select "audio, .line-through", false
+  end
+
+  test "Easy is scheduled further out than Good" do
+    sign_in_as(@user)
+    due = {}
+    %w[good easy].each do |rating|
+      QuizReview.where(user: @user).delete_all
+      session_reset
+      get review_path
+      id = session[ReviewsController::ROUND_KEY]["ids"].first
+      post answer_review_path, params: { question_id: id, rating: rating }
+      due[rating] = QuizReview.find_by(user: @user, quiz_question_id: id).due_at
+    end
+    assert_operator due["easy"], :>=, due["good"]
+  end
+
+  private
+
+  def session_reset
+    delete reset_review_path
+  end
 end
