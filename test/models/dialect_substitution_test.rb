@@ -30,4 +30,17 @@ class DialectSubstitutionTest < ActiveSupport::TestCase
   test "prompt note names the Mayo form" do
     assert_match "deacair → doiligh", DialectSubstitution.prompt_note
   end
+
+  test "forms are trimmed and each other form is listed once" do
+    assert_equal "x", DialectSubstitution.create!(other_form: " x ", mayo_form: "y").other_form
+    assert_not DialectSubstitution.new(other_form: "DEACAIR", mayo_form: "z").valid?
+  end
+
+  test "finds the other form in grammar text" do
+    rule = @lesson.grammar_rules.create!(number: "9", title: "T", body: "Tá sé deacair.")
+    DialectSubstitution.create!(other_form: "tá sé deacair", mayo_form: "m")
+
+    assert(DialectSubstitution.hits_in(@lesson).any? { |h| h.place.include?("T") && h.substitution.other_form == "tá sé deacair" })
+    assert rule.persisted?
+  end
 end

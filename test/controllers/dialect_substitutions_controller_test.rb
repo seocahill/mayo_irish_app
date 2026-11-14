@@ -42,8 +42,18 @@ class DialectSubstitutionsControllerTest < ActionDispatch::IntegrationTest
     get dialect_substitutions_path
     assert_redirected_to new_session_path
 
+    assert_no_difference -> { DialectSubstitution.count } do
+      post dialect_substitutions_path, params: { dialect_substitution: { other_form: "a", mayo_form: "b" } }
+    end
+    assert_redirected_to new_session_path
+
     sign_in_as(users(:two))
     get dialect_substitutions_path
+    assert_redirected_to root_path
+    pair = DialectSubstitution.create!(other_form: "a", mayo_form: "b")
+    assert_no_difference -> { DialectSubstitution.count } do
+      delete dialect_substitution_path(pair)
+    end
     assert_redirected_to root_path
   end
 end

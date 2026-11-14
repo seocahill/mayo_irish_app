@@ -8,6 +8,6 @@ class CreateDialectSubstitutions < ActiveRecord::Migration[8.1]
       t.text :note
       t.timestamps
     end
-    add_index :dialect_substitutions, :other_form
+    add_index :dialect_substitutions, :other_form, unique: true
   end
 end

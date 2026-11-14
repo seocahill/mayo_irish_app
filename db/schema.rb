@@ -83,7 +83,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_14_120000) do
     t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["other_form"], name: "index_dialect_substitutions_on_other_form"
+    t.index ["other_form"], name: "index_dialect_substitutions_on_other_form", unique: true
   end
 
   create_table "exercises", force: :cascade do |t|
