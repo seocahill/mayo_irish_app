@@ -59,6 +59,8 @@ module Extraction
           entry["covers"] = prior["covers"] if prior["covers"]
           entry["notes"] = prior["notes"] if prior["notes"]
         elsif prior
+          entry["covers"] = prior["covers"] if prior["covers"]
+          entry["prior_status"] = prior["status"]
           entry["notes"] = "Changed since last manifest (was #{prior['sha256'].to_s[0, 12]}); check coverage again."
         end
         entry.compact
@@ -83,7 +85,7 @@ module Extraction
         found << "#{e['path']}: new or changed, not yet inventoried" if e["status"] == "new"
       end
 
-      queue = File.exist?(queue_path) ? (YAML.safe_load_file(queue_path, permitted_classes: [ Date, Time ])["units"] || []) : []
+      queue = File.exist?(queue_path) ? (queue_units) : []
       queue.each do |u|
         found << "queue unit #{u['id']}: unknown status #{u['status'].inspect}" unless QUEUE_STATUSES.include?(u["status"])
         next unless u["status"] == "done"
@@ -103,13 +105,17 @@ module Extraction
 
     # True when the nightly routine has nothing to do.
     def idle?
-      return true unless File.exist?(queue_path)
+      return build.none? { |e| e["status"] == "new" } unless File.exist?(queue_path)
 
-      units = YAML.safe_load_file(queue_path, permitted_classes: [ Date, Time ])["units"] || []
-      units.none? { |u| %w[pending proposed].include?(u["status"]) } && build.none? { |e| e["status"] == "new" }
+      units = queue_units
+      units.none? { |u| %w[pending proposed needs_scoping].include?(u["status"]) } && build.none? { |e| e["status"] == "new" }
     end
 
     private
+
+    def queue_units
+      (YAML.safe_load_file(queue_path, permitted_classes: [ Date, Time ]) || {})["units"] || []
+    end
 
     def page_count(path)
       return nil unless File.extname(path).casecmp(".pdf").zero?

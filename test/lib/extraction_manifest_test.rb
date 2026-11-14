@@ -45,6 +45,21 @@ class ExtractionManifestTest < ActiveSupport::TestCase
     entry = @manifest.build.first
     assert_equal "new", entry["status"]
     assert_match(/Changed since/, entry["notes"])
+    assert_equal "done", entry["prior_status"]
+  end
+
+  test "needs_scoping unit is not idle even with all files inventoried" do
+    @manifest.write!
+    data = YAML.load_file(@manifest.manifest_path)
+    data["files"].first["status"] = "inventoried"
+    File.write(@manifest.manifest_path, data.to_yaml)
+    write_queue([ { "id" => "s", "status" => "needs_scoping", "scans" => "scans/a/" } ])
+    assert_not @manifest.idle?
+  end
+
+  test "empty queue file does not raise" do
+    File.write(File.join(@dir, "extraction_queue.yml"), "")
+    assert_nothing_raised { @manifest.problems }
   end
 
   test "idle when nothing is new, pending or proposed" do

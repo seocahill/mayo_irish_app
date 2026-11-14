@@ -2,7 +2,7 @@ require_relative "../extraction/manifest"
 
 namespace :extraction do
   desc "Regenerate scans/MANIFEST.yml and report new or changed source files"
-  task :manifest do
+  task :manifest => :environment do
     manifest = Extraction::Manifest.new(root: Rails.root.to_s)
     entries = manifest.write!
     puts "scans/MANIFEST.yml: #{entries.size} files"
@@ -12,7 +12,7 @@ namespace :extraction do
   end
 
   desc "Exit non-zero if the manifest is out of date or inconsistent with the queue"
-  task :check do
+  task :check => :environment do
     manifest = Extraction::Manifest.new(root: Rails.root.to_s)
     entries = manifest.build
     stale = !File.exist?(manifest.manifest_path) || manifest.previous.values != entries

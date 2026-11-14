@@ -6,8 +6,8 @@ files:
   sha256: f9d754e5357e3819b819e830675ca2facdc4409592fb930bae1b6dcb642b1a7c
   bytes: 6313809
   pages: 41
-  status: inventoried
-  notes: No queue units yet; pp. 50-131 not scoped.
+  status: new
+  notes: No queue units yet; not scoped.
 - path: scans/erris_3/Irish_of_Erris__3.pdf
   sha256: 4483eb208b08967b99605607cd547686fe1125916f63f3215207dd8ecd96c35e
   bytes: 5029941
