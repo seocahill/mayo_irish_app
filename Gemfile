@@ -47,3 +47,5 @@ gem "bcrypt", "~> 3.1"
 gem "mcp", "~> 1.9.0"
 gem "doorkeeper", "~> 5.9"
 gem "paper_trail", "~> 17.0"
+
+gem "fsrs", "~> 0.9.2"

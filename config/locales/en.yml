@@ -68,7 +68,7 @@ en:
     recording_label: Listen · conversation
     recording_title: 'A few minutes of Mayo speakers talking: %{title}'
     review_label: Review · %{count} due
-    review_title: Review the words that are due
+    review_title: Review the words that are due, from every lesson
     start_label: Start here · Lesson %{number}
     theme_listen_title: "%{title}: hear the words said by Mayo speakers"
     tutor_label: Practise · text chat
@@ -676,6 +676,33 @@ en:
       message: Your account has been created. You will be told when an administrator
         approves it.
       title: Waiting for approval
+  reviews:
+    answer:
+      correct: Correct
+      incorrect: Incorrect
+      next: Next
+      not_quite: Not quite.
+      see_results: See results
+      well_done: Well done!
+      your_answer: 'Your answer:'
+    empty:
+      all_done: All done
+      back_home: Back home
+      come_back: Come back when more words are due. They return just before you would
+        forget them.
+      nothing_due: Nothing is due for review right now
+    forecast: 'Tomorrow: %{tomorrow} · This week: %{week}'
+    show:
+      how_to_say_in_irish: How do you say this in Irish?
+      meaning_in_english: What does this mean in English?
+      question_count: Question %{position}/%{count}
+      quit: Quit
+    summary:
+      back_home: Back home
+      correct_this_round: correct this round
+      keep_going: Keep going
+      round_complete: Round complete
+      score: "%{correct} of %{answered}"
   search:
     index:
       empty_query: Type something above to search the whole course.

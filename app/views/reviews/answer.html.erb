@@ -1,0 +1,22 @@
+<div class="max-w-xl mx-auto flex flex-col gap-6">
+  <div class="card p-6 sm:p-8 <%= @correct ? 'border-foghlaim' : 'border-red-700' %>">
+    <% if @correct %>
+      <p class="eyebrow text-foghlaim mb-2"><%= t(".correct") %></p>
+      <p class="font-display text-3xl mb-1"><%= t(".well_done") %></p>
+    <% else %>
+      <p class="eyebrow text-red-700 mb-2"><%= t(".incorrect") %></p>
+      <p class="font-display text-3xl mb-1"><%= t(".not_quite") %></p>
+      <p class="text-sm text-muted"><%= t(".your_answer") %> <span class="line-through"><%= @choice %></span></p>
+    <% end %>
+
+    <p class="mt-6 pt-6 border-t border-line text-lg">
+      <span class="text-muted <%= @question.prompt_lang == 'ga' ? 'italic' : '' %>"><%= @question.prompt %></span>
+      <span class="text-muted px-2">=</span>
+      <span class="font-semibold <%= @question.answer_lang == 'ga' ? 'italic' : '' %>"><%= @question.answer %></span>
+    </p>
+
+    <div class="mt-8">
+      <%= link_to (@last ? t(".see_results") : t(".next")), review_path, class: "btn-solid w-full sm:w-auto" %>
+    </div>
+  </div>
+</div>

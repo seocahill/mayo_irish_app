@@ -136,6 +136,8 @@ GEM
       multipart-post (~> 2.0)
     faraday-net_http (3.4.2)
       net-http (~> 0.5)
+    fsrs (0.9.2)
+      activesupport (>= 7.0, < 9.0)
     fugit (1.14.0)
       et-orbi (~> 1.4)
       raabro (~> 1.4)
@@ -466,6 +468,7 @@ DEPENDENCIES
   debug
   dockerfile-rails (>= 1.7)
   doorkeeper (~> 5.9)
+  fsrs (~> 0.9.2)
   i18n-tasks
   image_processing (~> 2.2)
   importmap-rails
@@ -534,6 +537,7 @@ CHECKSUMS
   faraday (2.15.1) sha256=8708154deda739c5e86cc42b74960e23e8491fce0eba9e11639a6a34b1ac288f
   faraday-multipart (1.2.0) sha256=7d89a949693714176f612323ca13746a2ded204031a6ba528adee788694ef757
   faraday-net_http (3.4.2) sha256=f147758260d3526939bf57ecf911682f94926a3666502e24c69992765875906c
+  fsrs (0.9.2) sha256=980b7718718eb60f0ca73798eab7724a132ea6d4f6e4872c89b09c5c8d811ccd
   fugit (1.14.0) sha256=e311a9cc85a54bb67649df45060e721282a1e2c8ebad40e41874a3a7d576f37e
   globalid (1.4.0) sha256=037f12fbf1d9d7a014d501c2d5c77356fd4ddd96d7a7991d6700bba96706f427
   hana (1.3.7) sha256=5425db42d651fea08859811c29d20446f16af196308162894db208cac5ce9b0d

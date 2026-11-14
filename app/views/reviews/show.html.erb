@@ -1,0 +1,34 @@
+<% prompt_lang = @question.prompt_lang %>
+<div class="max-w-xl mx-auto flex flex-col gap-6">
+  <div class="flex items-center justify-between gap-3">
+    <%= link_to lesson_path(@question.lesson), class: "min-w-0 text-sm text-muted hover:text-ink transition-colors inline-flex items-center gap-1" do %>
+      <span class="shrink-0">←</span>
+      <span class="truncate"><%= @question.lesson.display_title %></span>
+    <% end %>
+    <span class="eyebrow tabular-nums shrink-0"><%= t(".question_count", position: @position, count: @count) %></span>
+  </div>
+
+  <div class="card p-6 sm:p-8">
+    <p class="eyebrow text-foghlaim mb-3">
+      <%= prompt_lang == "ga" ? t(".meaning_in_english") : t(".how_to_say_in_irish") %>
+    </p>
+    <p class="font-display text-3xl sm:text-4xl leading-tight mb-8 break-words">
+      <%= @question.prompt %>
+    </p>
+
+    <%= form_with url: answer_review_path, method: :post, class: "grid gap-2", data: { turbo: false } do |f| %>
+      <%= f.hidden_field :question_id, value: @question.id %>
+      <% @question.choices.each do |choice| %>
+        <button type="submit" name="choice" value="<%= choice %>"
+                class="text-left px-4 py-4 rounded-sm border border-line bg-surface hover:bg-canvas hover:border-ink focus-visible:outline-2 focus-visible:outline-ink transition-colors text-lg break-words cursor-pointer">
+          <%= choice %>
+        </button>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="text-center">
+    <%= button_to t(".quit"), reset_review_path, method: :delete,
+          class: "text-sm text-muted hover:text-ink bg-transparent border-0 cursor-pointer" %>
+  </div>
+</div>

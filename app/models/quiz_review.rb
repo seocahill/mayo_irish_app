@@ -3,23 +3,54 @@ class QuizReview < ApplicationRecord
   # interval before it resurfaces); a wrong answer drops it back to box 1.
   INTERVALS = { 1 => 0, 2 => 1, 3 => 3, 4 => 7, 5 => 21 }.freeze
   MAX_BOX   = INTERVALS.keys.max
-  KNOWN_BOX = 2 # one correct answer (box 1 -> 2) means "known"; a lapse drops below this
+  KNOWN_BOX = 2 # legacy Leitner threshold, kept so the box column stays meaningful
+
+  # Scheduling is FSRS (target retention 90%): stability is the number of days
+  # until predicted recall falls to 90%. A word is "known" once it is in the
+  # review state and that is at least a week, so one lucky answer isn't enough.
+  KNOWN_STABILITY = 7.0
+  REVIEW_STATE = Fsrs::State::REVIEW
+  RATINGS = { again: Fsrs::Rating::AGAIN, hard: Fsrs::Rating::HARD,
+              good: Fsrs::Rating::GOOD, easy: Fsrs::Rating::EASY }.freeze
+  SCHEDULER = Fsrs::Scheduler.new
 
   belongs_to :user
   belongs_to :quiz_question
 
   validates :box, inclusion: { in: INTERVALS.keys }
 
-  scope :known, -> { where(box: KNOWN_BOX..) }
+  scope :known, -> { where(fsrs_state: REVIEW_STATE, stability: KNOWN_STABILITY..) }
   scope :due,   ->(time = Time.current) { where(due_at: ..time) }
 
   def known?
-    box >= KNOWN_BOX
+    fsrs_state == REVIEW_STATE && stability >= KNOWN_STABILITY
   end
 
-  # Apply an answer outcome, reschedule the next review, and log the answer.
-  def record_answer(correct:)
+  # Due dates for the next `days` days, used for the "Tomorrow / This week" forecast.
+  def self.forecast_for(user, now: Time.current)
+    tomorrow = now.end_of_day + 1.day
+    week = now.end_of_day + 6.days
+    scope = where(user: user)
+    { today: scope.due(now.end_of_day).count,
+      tomorrow: scope.where(due_at: (now.end_of_day + 1.second)..tomorrow).count,
+      week: scope.where(due_at: (now.end_of_day + 1.second)..week).count }
+  end
+
+  # Apply an answer outcome (a rating of :again, :hard, :good or :easy, or just
+  # correct/wrong from multiple choice), reschedule the next review with FSRS,
+  # and log the answer. The Leitner box is still updated alongside.
+  def record_answer(correct:, rating: nil)
+    rating ||= correct ? :good : :again
+    correct = rating != :again
     box_before = box
+    now = Time.current
+
+    info = SCHEDULER.repeat(fsrs_card, now.utc.to_datetime).fetch(RATINGS.fetch(rating))
+    card = info.card
+    self.stability = card.stability.to_f
+    self.difficulty = card.difficulty.to_f
+    self.fsrs_state = card.state
+    self.due_at = card.due.to_time
 
     if correct
       self.box = [ box + 1, MAX_BOX ].min
@@ -28,9 +59,7 @@ class QuizReview < ApplicationRecord
       self.box = 1
       self.times_wrong += 1
     end
-
-    self.last_reviewed_at = Time.current
-    self.due_at = Time.current + INTERVALS.fetch(box).days
+    self.last_reviewed_at = now
 
     transaction do
       save!
@@ -38,5 +67,21 @@ class QuizReview < ApplicationRecord
                         correct: correct, box_before: box_before, box_after: box,
                         answered_at: last_reviewed_at)
     end
+  end
+
+  private
+
+  def fsrs_card
+    card = Fsrs::Card.new
+    card.state = fsrs_state
+    card.stability = stability
+    card.difficulty = difficulty
+    if last_reviewed_at
+      card.last_review = last_reviewed_at.utc.to_datetime
+      card.due = (due_at || last_reviewed_at).utc.to_datetime
+    end
+    card.reps = times_correct + times_wrong
+    card.lapses = times_wrong
+    card
   end
 end

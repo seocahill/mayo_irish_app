@@ -8,34 +8,60 @@ class QuizReviewTest < ActiveSupport::TestCase
     @review = QuizReview.new(user: @user, quiz_question: @question)
   end
 
-  test "a correct answer promotes the box and counts as known" do
-    assert_not @review.known?
+  test "one correct answer is not enough to count as known" do
     @review.record_answer(correct: true)
     assert_equal 2, @review.box
-    assert @review.known?
+    assert_not @review.known?
     assert_equal 1, @review.times_correct
   end
 
-  test "consecutive correct answers climb to but cap at the top box" do
-    6.times { @review.record_answer(correct: true) }
+  test "repeated correct answers at growing gaps reach known and cap the box" do
+    6.times do
+      @review.record_answer(correct: true)
+      travel_to(@review.due_at + 1.minute)
+    end
     assert_equal QuizReview::MAX_BOX, @review.box
+    assert @review.known?
+    assert_operator @review.stability, :>=, QuizReview::KNOWN_STABILITY
+  ensure
+    travel_back
   end
 
-  test "a wrong answer drops the item back to box 1 and clears known status" do
-    3.times { @review.record_answer(correct: true) }
+  test "a wrong answer drops the box to 1 and clears known status" do
+    @review.update!(box: 4, fsrs_state: 2, stability: 20.0, difficulty: 5.0,
+                    last_reviewed_at: 20.days.ago, due_at: 1.day.ago)
     assert @review.known?
 
     @review.record_answer(correct: false)
     assert_equal 1, @review.box
     assert_not @review.known?
     assert_equal 1, @review.times_wrong
+    assert_operator @review.stability, :<, 20.0
   end
 
-  test "due_at is scheduled from the box interval" do
-    freeze_time do
-      @review.record_answer(correct: true) # box 2 -> 1 day
-      assert_in_delta 1.day.from_now, @review.due_at, 1.second
-    end
+  test "an easy rating schedules further out than good" do
+    good = QuizReview.new(user: @user, quiz_question: @question).tap { |r| r.record_answer(correct: true, rating: :good) }
+    easy = QuizReview.new(user: users(:admin), quiz_question: @question).tap { |r| r.record_answer(correct: true, rating: :easy) }
+    assert_operator easy.due_at, :>, good.due_at
+  end
+
+  test "legacy rows seeded from a box are scheduled from that stability" do
+    @review.update!(box: 5, fsrs_state: 2, stability: 21.0, difficulty: 5.0,
+                    last_reviewed_at: 21.days.ago, due_at: Time.current)
+    assert @review.known?
+    @review.record_answer(correct: true)
+    assert_operator @review.due_at, :>, 21.days.from_now
+  end
+
+  test "forecast counts what is due today, tomorrow and this week" do
+    @review.update!(box: 3, fsrs_state: 2, stability: 3.0, difficulty: 5.0, due_at: 1.hour.ago)
+    other = QuizQuestion.where.not(id: @question.id).first
+    QuizReview.create!(user: @user, quiz_question: other, box: 3, fsrs_state: 2, stability: 3.0,
+                       difficulty: 5.0, due_at: 1.day.from_now.change(hour: 12))
+    forecast = QuizReview.forecast_for(@user)
+    assert_equal 1, forecast[:today]
+    assert_equal 1, forecast[:tomorrow]
+    assert_equal 1, forecast[:week]
   end
 
   test "due scope returns reviews whose due_at has passed" do

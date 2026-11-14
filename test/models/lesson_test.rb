@@ -19,17 +19,17 @@ class LessonTest < ActiveSupport::TestCase
     assert_equal 2, questions.size
 
     # Only one direction known -> word not yet counted.
-    QuizReview.create!(user: @user, quiz_question: questions.first, box: 3)
+    QuizReview.create!(user: @user, quiz_question: questions.first, box: 3, fsrs_state: 2, stability: 7.0)
     assert_equal 0, @lesson.progress_for(@user).known
 
     # Both directions known -> word counts.
-    QuizReview.create!(user: @user, quiz_question: questions.last, box: 2)
+    QuizReview.create!(user: @user, quiz_question: questions.last, box: 2, fsrs_state: 2, stability: 7.0)
     assert_equal 1, @lesson.progress_for(@user).known
   end
 
   test "progress is complete when every word is known" do
     @lesson.quiz_questions.find_each do |q|
-      QuizReview.create!(user: @user, quiz_question: q, box: 5)
+      QuizReview.create!(user: @user, quiz_question: q, box: 5, fsrs_state: 2, stability: 21.0)
     end
     progress = @lesson.progress_for(@user)
     assert progress.complete?

@@ -27,27 +27,27 @@ class DailyPathTest < ActiveSupport::TestCase
 
   test "adds a review item with the due count and quiz link" do
     @lesson.quiz_questions.first(3).each do |question|
-      QuizReview.create!(user: @user, quiz_question: question, box: 2, due_at: 1.hour.ago)
+      QuizReview.create!(user: @user, quiz_question: question, box: 2, fsrs_state: 2, stability: 7.0, due_at: 1.hour.ago)
     end
 
     review = DailyPath.new(@user).items.first
 
     assert_equal :foghlaim, review.level
     assert_equal "Review · 3 due", review.label
-    assert_equal "/lessons/1/quiz", review.path
+    assert_equal "/review", review.path
   end
 
   test "ignores reviews that are not due yet or belong to someone else" do
     question = @lesson.quiz_questions.first
-    QuizReview.create!(user: @user, quiz_question: question, box: 3, due_at: 2.days.from_now)
-    QuizReview.create!(user: users(:admin), quiz_question: question, box: 2, due_at: 1.hour.ago)
+    QuizReview.create!(user: @user, quiz_question: question, box: 3, fsrs_state: 2, stability: 7.0, due_at: 2.days.from_now)
+    QuizReview.create!(user: users(:admin), quiz_question: question, box: 2, fsrs_state: 2, stability: 7.0, due_at: 1.hour.ago)
 
     assert_equal 0, DailyPath.new(@user).due_count
   end
 
   test "counts known words and moves on when a lesson is complete" do
     @lesson.quiz_questions.each do |question|
-      QuizReview.create!(user: @user, quiz_question: question, box: 3, due_at: 2.days.from_now)
+      QuizReview.create!(user: @user, quiz_question: question, box: 3, fsrs_state: 2, stability: 7.0, due_at: 2.days.from_now)
     end
     path = DailyPath.new(@user)
 
@@ -89,7 +89,7 @@ class DailyPathListeningTest < ActiveSupport::TestCase
   end
 
   def finish(lesson)
-    lesson.quiz_questions.each { |question| QuizReview.create!(user: @user, quiz_question: question, box: 3, due_at: 2.days.from_now) }
+    lesson.quiz_questions.each { |question| QuizReview.create!(user: @user, quiz_question: question, box: 3, fsrs_state: 2, stability: 7.0, due_at: 2.days.from_now) }
   end
 
   def clip_item = DailyPath.new(@user).items.find { |item| item.label == "Listen · real speech" }
