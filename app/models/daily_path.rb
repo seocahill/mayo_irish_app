@@ -37,14 +37,11 @@ class DailyPath
   attr_reader :user
 
   def review_item
-    lesson_id, count = due_by_lesson.max_by { |_, n| n }
-    return unless count&.positive?
-
-    lesson = Lesson.find_by(id: lesson_id)
-    return unless lesson
+    count = due_count
+    return unless count.positive?
 
     Item.new(level: :foghlaim, label: I18n.t("daily_path.review_label", count: count),
-             title: I18n.t("daily_path.review_title"), path: lesson_quiz_path(lesson))
+             title: I18n.t("daily_path.review_title"), path: review_path)
   end
 
   def lesson_item
@@ -161,6 +158,7 @@ class DailyPath
   def due_by_lesson
     @due_by_lesson ||= QuizReview.due.where(user: user)
                                  .joins(:quiz_question)
+                                 .where(quiz_questions: { lesson_id: Lesson.visible_to(user).select(:id) })
                                  .group("quiz_questions.lesson_id").count
   end
 

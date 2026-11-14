@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_29_234057) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_14_090000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -328,6 +328,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_29_234057) do
     t.integer "times_wrong", default: 0, null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
+    t.float "stability", default: 0.0, null: false
+    t.float "difficulty", default: 0.0, null: false
+    t.integer "fsrs_state", default: 0, null: false
     t.index ["quiz_question_id"], name: "index_quiz_reviews_on_quiz_question_id"
     t.index ["user_id", "due_at"], name: "index_quiz_reviews_on_user_id_and_due_at"
     t.index ["user_id", "quiz_question_id"], name: "index_quiz_reviews_on_user_id_and_quiz_question_id", unique: true

@@ -19,7 +19,7 @@ class QuizzesControllerTest < ActionDispatch::IntegrationTest
     assert_match(/name="question_id"/, response.body)
   end
 
-  test "a correct answer records a known review" do
+  test "a correct answer records a review that is not yet known" do
     sign_in_as(@user)
     get lesson_quiz_path(@lesson)
     question = current_question
@@ -30,7 +30,7 @@ class QuizzesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     review = QuizReview.find_by(user: @user, quiz_question: question)
-    assert review.known?
+    assert_not review.known?
     assert_equal 1, review.times_correct
   end
 
@@ -51,7 +51,7 @@ class QuizzesControllerTest < ActionDispatch::IntegrationTest
     # One-question lesson by leaving a single unanswered question due.
     QuizQuestion.sync_for(@lesson)
     @lesson.quiz_questions.offset(1).find_each do |q|
-      QuizReview.create!(user: @user, quiz_question: q, box: 5, due_at: 1.year.from_now)
+      QuizReview.create!(user: @user, quiz_question: q, box: 5, fsrs_state: 2, stability: 21.0, due_at: 1.year.from_now)
     end
 
     get lesson_quiz_path(@lesson)
@@ -66,7 +66,7 @@ class QuizzesControllerTest < ActionDispatch::IntegrationTest
     sign_in_as(@user)
     QuizQuestion.sync_for(@lesson)
     @lesson.quiz_questions.find_each do |q|
-      QuizReview.create!(user: @user, quiz_question: q, box: 5, due_at: 1.year.from_now)
+      QuizReview.create!(user: @user, quiz_question: q, box: 5, fsrs_state: 2, stability: 21.0, due_at: 1.year.from_now)
     end
 
     get lesson_quiz_path(@lesson)

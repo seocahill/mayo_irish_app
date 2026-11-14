@@ -72,5 +72,9 @@ Rails.application.routes.draw do
       delete :reset,  on: :member
     end
   end
+  resource :review, only: [:show] do
+    post   :answer, on: :member
+    delete :reset,  on: :member
+  end
   get "up" => "rails/health#show", as: :rails_health_check
 end
