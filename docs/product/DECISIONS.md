@@ -43,3 +43,4 @@ directly to state standing preferences.
 ## Log
 
 <!-- - YYYY-MM-DD #<issue> <title> — approved | rejected: <reason> -->
+- 2026-11-14 #71 Course designer: accepting an edit to existing lessons applies it straight away (versioned, undoable; retire = unpublish) — approved in principle. Each kind of apply still gets its own `data-change` issue before it is built (see `COURSE_DESIGNER.md` §8).

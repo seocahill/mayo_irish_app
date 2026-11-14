@@ -16,6 +16,7 @@ Maintained by the architect (see `ARCHITECT.md`). Owner edits welcome.
 
 ## Later (ideas not yet worth a proposal)
 
+- Course designer agent and a narrow MCP for Darren (proposals, his own ideas, Irish slots to fill later): design in `COURSE_DESIGNER.md`, owner-approved direction 2026-11-14; start with the foundations and the idea inbox.
 - Grammar and phrase items in the same review queue as vocabulary (after #43).
 - Slowed and looped playback on every Mayo recording (lens 3).
 - Offline lessons and audio in the PWA service worker (lens 4).
