@@ -12,6 +12,13 @@ database records. Accuracy and faithfulness to the source beat coverage.
 
 Steps, in order:
 
+0. Run `bin/rails extraction:manifest` (or, without Rails, read
+   scans/MANIFEST.yml and compare the files in scans/ by hand). If the
+   queue has no `pending` or `proposed` unit and the manifest shows no
+   `new` file, the run is IDLE: write no report, make no commit, push
+   nothing, and stop. At most add one comment to the single open
+   "Extraction: needs attention" issue, and only when something changed.
+
 1. Read EXTRACTION.md in this repo completely. It defines the content
    conventions, the app schema (including required fields and known
    gotchas), and the safety rules. It overrides anything you'd otherwise
@@ -23,8 +30,16 @@ Steps, in order:
    through any other path.
 
 3. Open extraction_queue.yml. Take the FIRST entry with status: pending.
-   If there is none, or the first non-done entry is status: needs_scoping,
-   write a report saying the queue needs human attention and stop.
+   `proposed` units are waiting for a person: never extract them.
+   If there is no `pending` entry but a file is `new` in the manifest (or a
+   `needs_scoping` entry names one), do the SCOPER step instead of
+   extracting: inventory that one file (rasterise pages, read printed page
+   numbers and contents), then append proposed units to the queue with
+   `status: proposed`, their pages and paragraphs, and set the file's
+   manifest status to `inventoried`. Never write `pending` yourself; a
+   person approves a unit by changing proposed to pending. Commit queue and
+   manifest (message "scoping: <file>") and stop. Otherwise, if there is
+   nothing to do, the run is idle (see step 0).
 
 4. Locate the unit's pages in the scans listed on the entry. Verify the
    printed page numbers on the images; if the estimate is off, adjust by up

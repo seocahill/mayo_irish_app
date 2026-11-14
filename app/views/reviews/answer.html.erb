@@ -6,13 +6,16 @@
     <% else %>
       <p class="eyebrow text-red-700 mb-2"><%= t(".incorrect") %></p>
       <p class="font-display text-3xl mb-1"><%= t(".not_quite") %></p>
-      <p class="text-sm text-muted"><%= t(".your_answer") %> <span class="line-through"><%= @choice %></span></p>
+      <% unless @self_rated %>
+        <p class="text-sm text-muted"><%= t(".your_answer") %> <span class="line-through"><%= @choice %></span></p>
+      <% end %>
     <% end %>
 
     <p class="mt-6 pt-6 border-t border-line text-lg">
       <span class="text-muted <%= @question.prompt_lang == 'ga' ? 'italic' : '' %>"><%= @question.prompt %></span>
       <span class="text-muted px-2">=</span>
       <span class="font-semibold <%= @question.answer_lang == 'ga' ? 'italic' : '' %>"><%= @question.answer %></span>
+      <span class="ml-2 align-middle"><%= render "reviews/audio", question: @question %></span>
     </p>
 
     <div class="mt-8">

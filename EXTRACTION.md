@@ -14,6 +14,8 @@ scans/erris_3/       pp. 132–189  from Irish_of_Erris__3.pdf
 scans/erris_4/       pp. 190+     from Irish_of_Erris__4.pdf
 scans/foxford/       full book    FoxfordNOTES_ON_A_MAYO_DIALECT.pdf
 scans/tourmakeady/   unscoped     tourmaceady_*.pdf, tourmaceady_201.docx
+scans/MANIFEST.yml   generated: every source file, hash, pages, status
+                     (`bin/rails extraction:manifest`; see §6a)
 extraction_queue.yml
 EXTRACTION.md        (this file)
 reports/             one report per run
@@ -46,7 +48,7 @@ One-time setup notes:
   there is no longer a gap at pp. 50–131. Still never invent content for
   any page you cannot see.
 - `tourmakeady` holds six files: `tourmaceady_1..4.pdf` (19/21/21/29 pp.),
-  `tourmaceady_part1.pdf` (8 pp.) and `tourmaceady_201.docx`. The docx is
+  `tourmaceady_part1.pdf` (11 pp.) and `tourmaceady_201.docx`. The docx is
   upstream's `tourmaceady%201.docx` (i.e. "tourmaceady 1.docx"); the name
   here keeps the spelling the queue already uses. Page coverage of these is
   still **unscoped** — see §6.
@@ -127,6 +129,18 @@ Structural mapping:
 Record: created lesson id + record id ranges per resource; §§ and pages
 covered; transcription uncertainties (`[?]` list); anything created in error
 (for human deletion); schema discoveries; suggested follow-ups for review.
+
+## 6a. Manifest and scoping
+
+`scans/MANIFEST.yml` lists every file in `scans/` with its hash, page count
+and a status: `new` | `inventoried` | `scoped` | `extracting` | `done`.
+Regenerate it with `bin/rails extraction:manifest`; `bin/rails
+extraction:check` fails if it is stale or disagrees with the queue. A new or
+changed file shows as `new`. The scoper step (ROUTINE_PROMPT.md step 3)
+inventories it and writes queue units with `status: proposed`; a person
+changes `proposed` to `pending` to approve. The extractor never touches
+`proposed` units. With nothing `pending` or `proposed` and no `new` file the
+routine is idle and writes no report and no commit.
 
 ## 6. Out of scope for the routine
 

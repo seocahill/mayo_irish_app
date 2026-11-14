@@ -1,0 +1,16 @@
+<%# The Mayo speaker for a question's word: an uploaded or approved recording, else the synthetic voice. Renders nothing when there is no audio. %>
+<% item = question.source %>
+<% if item.is_a?(VocabularyItem) %>
+  <% if item.audio.attached? %>
+    <audio controls src="<%= rails_blob_url(item.audio) %>" class="h-8 w-48 max-w-full" aria-label="<%= t("reviews.audio.hear", word: item.irish) %>"></audio>
+  <% elsif item.audio_url.present? %>
+    <span class="inline-flex flex-col gap-0.5">
+      <audio controls src="<%= item.audio_url %>" class="h-8 w-48 max-w-full" aria-label="<%= t("reviews.audio.hear", word: item.irish) %>"></audio>
+      <% if item.audio_credit.present? %>
+        <span class="text-[11px] text-muted"><%= t("reviews.audio.recorded_by", name: item.audio_credit) %></span>
+      <% end %>
+    </span>
+  <% elsif AbairClient.configured? %>
+    <%= render "shared/speak_button", src: vocabulary_item_pronunciation_path(item), label: t("reviews.audio.hear", word: item.irish) %>
+  <% end %>
+<% end %>
