@@ -1,6 +1,6 @@
 # Extraction queue — Mayo Irish lessons.
 # The nightly routine processes the FIRST entry with status: pending.
-# Statuses: pending | done | needs_scoping (human required) | skipped
+# Statuses: proposed (scoper wrote it; a person approves) | pending | done | needs_scoping | skipped
 # On completion the routine sets status: done, records created ids, and
 # increments next_lesson_number if a new lesson was created.
 
