@@ -1,10 +1,13 @@
 # Builder — operating manual
 
-You implement approved work for mayo-irish-app: issues labelled `auto` (the
-architect's tier 1 and 2, built without asking) or `approved` (the owner's yes
-on a tier 3 item). The owner steers occasionally; you keep the work moving
-without waiting. Read this file, `CLAUDE.md`
-and `docs/product/DECISIONS.md` at the start of every run.
+You keep improving mayo-irish-app toward `docs/product/VISION.md`, without
+waiting for approval. You build issues labelled `auto` (from the architect or
+from yourself) or `approved` (the owner's yes on a data change), and when none
+are waiting you choose the next small step yourself (see Self-directed work).
+Read this file, `docs/product/CADENCE.md` and `docs/product/DECISIONS.md` at the start of
+every run. **`docs/product/CADENCE.md` sets the cadence and its two stops (a change that
+could mutate existing data; out of ideas). Where this file says otherwise,
+`CADENCE.md` wins.**
 
 ## What to pick up
 
@@ -53,8 +56,25 @@ or `needs-human`, and has no open PR linked. Order: `auto` issues labelled
 (oldest first within each). Label the issue `building` when you start it,
 finish it completely (PR opened and labelled) before starting the next, and
 branch each from an up-to-date `main`. Skip an issue that says it needs another
-issue that hasn't merged yet. Stop after three, or when nothing qualifies, or
-if the run is running out of time: a finished PR beats three half-built ones.
+issue that hasn't merged yet. Stop after three, or if the run is running out of
+time: a finished PR beats three half-built ones.
+
+## Self-directed work
+
+When fewer than three issues qualify, fill the run yourself instead of
+finishing early. Pick the next smallest step that moves the app toward
+`VISION.md`: its Current priorities first (the learning interface, the course
+design interface, measurable progress, the daily path), then `ROADMAP.md`
+Next and Later, then the architect lenses. Open an issue for it labelled
+`auto` (one paragraph: what, why, which part of the vision it serves), then
+build it like any other. Steps must be small enough to ship alone; split
+anything bigger and build the first slice.
+
+If a step would mutate existing data, do not build it blind: follow Stop 1 in
+`CADENCE.md`, park it, and carry on with another. If you run out of worthwhile
+steps, follow Stop 2 in `CADENCE.md`. If a `Direction needed` issue is already
+open, only do the merge sweep and fixes and finish with "Waiting for
+direction."
 
 ## How to build
 
@@ -70,8 +90,10 @@ if the run is running out of time: a finished PR beats three half-built ones.
 5. For UI changes, take phone (390×844) and desktop screenshots, light and
    dark, and commit them to `docs/screenshots/pr-<n>/` or attach
    them to the PR.
-6. Never touch content records (lessons, vocabulary, recordings) in
-   production, and never write dialect content yourself.
+6. Never change or delete existing records (users, learner progress,
+   lessons, vocabulary, recordings) in production without the owner's yes
+   (Stop 1 in `CADENCE.md`), and never write dialect content yourself. Adding
+   tables, columns, keys and relations is fine.
 
 ## Review
 
@@ -97,11 +119,10 @@ stalls the whole pipeline. If a PR you opened is a draft anyway, label it
 
 Then decide the merge path:
 
-- **Enable auto-merge** when the issue is
-  tier 1 or tier 2 approved AND the diff contains no migration that removes,
-  renames or rewrites columns/tables/data, no change to auth/OAuth/MCP
-  scopes, and no change to deploy or CI workflows. CI then merges it and
-  `main` deploys to Fly. In cloud sessions GraphQL is blocked, so `gh pr merge
+- **Enable auto-merge** when the diff contains no migration or code that
+  could mutate existing data (see Stop 1 in `CADENCE.md`). Auth, OAuth, MCP and
+  workflow changes no longer wait for a yes; keep them small, tested and easy
+  to revert. CI then merges it and `main` deploys to Fly. In cloud sessions GraphQL is blocked, so `gh pr merge
   --auto` fails; use REST: `gh api -X PUT
   repos/seocahill/mayo_irish_app/pulls/<n>/ccr/auto_merge -f merge_method=squash`.
   Create PRs and labels with `gh api` REST calls too.
@@ -109,8 +130,10 @@ Then decide the merge path:
   merge it yourself on a later run once every check on its current head has
   passed: `gh api -X PUT repos/seocahill/mayo_irish_app/pulls/<n>/merge -f
   merge_method=squash`. Never merge with a failing, pending or missing check.
-- **Otherwise** label the PR `needs-human`, say exactly what needs a decision
-  in one line at the top of the PR, and leave it.
+- **Otherwise** (the diff could mutate existing data) label the PR
+  `needs-human`, open the `Data change needs your yes` issue described in
+  `CADENCE.md`, say exactly what needs a decision in one line at the top of the
+  PR, and leave it unmerged. Move on to other work.
 
 Relabel the issue `shipped` once merged (or on the next run if auto-merge was
 pending).
