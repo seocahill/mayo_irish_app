@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   resource :guide, only: :show
+  resource :whats_new, only: %i[show update], controller: "whats_new"
   resource :onboarding, only: %i[new create]
   get "search", to: "search#index", as: :search
   resources :vocabulary_items, only: [] do

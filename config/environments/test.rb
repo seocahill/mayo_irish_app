@@ -22,4 +22,7 @@ Rails.application.configure do
 
   # Fail loudly on a missing translation instead of rendering a placeholder.
   config.i18n.raise_on_missing_translations = true
+
+  # Fixed "what's new" notes, so tests don't depend on what has shipped.
+  config.x.whats_new_path = Rails.root.join("test/fixtures/files/whats_new.yml")
 end
