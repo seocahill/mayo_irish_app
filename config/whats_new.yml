@@ -1,0 +1,26 @@
+# What's new, shown to learners once each (see app/models/whats_new.rb).
+#
+# Add a note in the same change as the feature it describes, for anything a
+# learner can see or feel. Plain English, one or two sentences, no jargon.
+#
+#   id:    the next whole number; never reuse or reorder (a learner's "read up to"
+#          marker is the highest id they have seen)
+#   date:  the day it shipped. Learners who joined after this day never see it.
+#   title: a few words
+#   body:  what changed and why it helps them
+#   path:  optional, an app path to try it (must be a real route)
+#
+# Newest last is fine; they are shown newest first.
+- id: 1
+  date: 2026-11-14
+  title: One daily review across all your lessons
+  body: Your review now draws on every lesson you've studied and brings each word
+    back around when it's due, so you don't have to remember which lesson to revisit.
+  path: /review
+- id: 2
+  date: 2026-11-14
+  title: Ask the course a question
+  body: Type or say a question in plain English, like how to say a number or why a
+    word changes, and get an answer drawn from the lessons. It's written by AI, so
+    check it against the lesson.
+  path: /ask/new

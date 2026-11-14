@@ -1,0 +1,19 @@
+<%# Unread "what's new" notes on Today; entries is empty once they are read. %>
+<% if entries.any? %>
+  <section aria-labelledby="whats-new-heading" class="bg-surface border border-line rounded-sm px-4 py-4 flex flex-col gap-4">
+    <h2 id="whats-new-heading" class="font-mono text-xs uppercase tracking-wider text-foghlaim"><%= t(".heading") %></h2>
+    <ul class="flex flex-col gap-4">
+      <% entries.each do |entry| %>
+        <li class="flex flex-col gap-1">
+          <p class="font-semibold leading-snug"><%= entry.title %></p>
+          <p class="text-muted leading-snug"><%= entry.body %></p>
+          <% if entry.path %>
+            <%= link_to t(".try_it"), entry.path, class: "text-sm underline underline-offset-2 self-start py-1" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+    <%= button_to t(".got_it"), whats_new_path, method: :patch, params: { through: entries.map(&:id).max },
+          class: "btn-outline self-start" %>
+  </section>
+<% end %>

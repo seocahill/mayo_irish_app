@@ -6,6 +6,8 @@
     <%= link_to t(".how_it_works"), guide_path, class: "text-sm text-muted underline underline-offset-2 hover:text-ink" %>
   </header>
 
+  <%= render "whats_new/card", entries: @whats_new %>
+
   <section aria-labelledby="today-heading" class="flex flex-col gap-3">
     <h2 id="today-heading" class="font-mono text-xs uppercase tracking-wider text-muted"><%= t(".up_next") %></h2>
 

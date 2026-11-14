@@ -43,6 +43,18 @@ class User < ApplicationRecord
     approved
   end
 
+  # Notes from WhatsNew this learner hasn't read yet, newest first.
+  def whats_new_unseen
+    WhatsNew.current.unseen_for(self)
+  end
+
+  # Records that the learner has read the notes up to this id. It never moves
+  # back, so a stale page or a repeated tap can't bring a note back.
+  def mark_whats_new_seen(through)
+    through = through.to_i
+    update_column(:whats_new_seen_id, through) if through > whats_new_seen_id.to_i
+  end
+
   def approve!
     update!(approved: true)
   end

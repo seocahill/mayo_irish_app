@@ -185,6 +185,7 @@ en:
       sign_in: Sign in
       sign_out: Sign out
       today: Today
+      whats_new: What's new
   learner_approvals:
     create:
       approved: "%{email} can now sign in to the course."
@@ -818,3 +819,15 @@ en:
       reject: Reject
       rejected: Rejected
       unavailable: Abairt couldn't be reached. Try again later.
+  whats_new:
+    card:
+      got_it: Got it
+      heading: What's new
+      try_it: Try it
+    show:
+      back: Back to Today
+      intro: Changes to the course and the app, newest first.
+      new: New
+      nothing_yet: Nothing here yet.
+      title: What's new
+      try_it: Try it

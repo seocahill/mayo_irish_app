@@ -87,10 +87,14 @@ direction."
 4. Write tests: model/controller tests for behaviour, a system or controller
    test for each new path. Run `bin/rails test` and
    `bundle exec brakeman --no-pager` locally; both must pass.
-5. For UI changes, take phone (390×844) and desktop screenshots, light and
+5. For anything a learner can see or feel, add a note to `config/whats_new.yml`
+   in the same PR (next id, today's date, plain English, a `path` to try it).
+   Learners see it once on Today. Skip it for invisible work (deps, refactors,
+   CI, admin-only pages).
+6. For UI changes, take phone (390×844) and desktop screenshots, light and
    dark, and commit them to `docs/screenshots/pr-<n>/` or attach
    them to the PR.
-6. Never change or delete existing records (users, learner progress,
+7. Never change or delete existing records (users, learner progress,
    lessons, vocabulary, recordings) in production without the owner's yes
    (Stop 1 in `CADENCE.md`), and never write dialect content yourself. Adding
    tables, columns, keys and relations is fine.
