@@ -152,17 +152,17 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
 
   test "a self-rating schedules the word and Again counts as wrong" do
     sign_in_as(@user)
+    question = @lesson.quiz_questions.first
+    due_review(question, times_correct: 1)
+    QuizReview.where(user: @user).where.not(quiz_question: question).delete_all
     get review_path
-    id = session[ReviewsController::ROUND_KEY]["ids"].first
-    question = QuizQuestion.find(id)
 
     assert_difference -> { ReviewLog.count }, 1 do
-      post answer_review_path, params: { question_id: id, rating: "again" }
+      post answer_review_path, params: { question_id: question.id, rating: "again" }
     end
     assert_response :success
-    review = QuizReview.find_by(user: @user, quiz_question: question)
-    assert_equal 1, review.times_wrong
-    assert_select "audio, .line-through", false
+    assert_equal 1, QuizReview.find_by(user: @user, quiz_question: question).times_wrong
+    assert_select ".line-through", false
   end
 
   test "Easy is scheduled further out than Good" do
@@ -171,12 +171,33 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     %w[good easy].each do |rating|
       QuizReview.where(user: @user).delete_all
       session_reset
+      question = @lesson.quiz_questions.first
+      due_review(question, times_correct: 1)
       get review_path
       id = session[ReviewsController::ROUND_KEY]["ids"].first
       post answer_review_path, params: { question_id: id, rating: rating }
       due[rating] = QuizReview.find_by(user: @user, quiz_question_id: id).due_at
     end
-    assert_operator due["easy"], :>=, due["good"]
+    assert_operator due["easy"], :>, due["good"]
+  end
+
+  test "a rating is ignored for a word that is still multiple choice" do
+    sign_in_as(@user)
+    get review_path
+    id = session[ReviewsController::ROUND_KEY]["ids"].first
+    post answer_review_path, params: { question_id: id, rating: "easy", choice: "wrong" }
+    assert_equal 1, QuizReview.find_by(user: @user, quiz_question_id: id).times_wrong
+  end
+
+  test "Hard counts as remembered" do
+    sign_in_as(@user)
+    question = @lesson.quiz_questions.first
+    due_review(question, times_correct: 1)
+    QuizReview.where(user: @user).where.not(quiz_question: question).delete_all
+    get review_path
+    post answer_review_path, params: { question_id: session[ReviewsController::ROUND_KEY]["ids"].first, rating: "hard" }
+    assert_response :success
+    assert_equal 2, QuizReview.find_by(user: @user, quiz_question: question).times_correct
   end
 
   private

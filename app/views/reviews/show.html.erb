@@ -9,14 +9,14 @@
   </div>
 
   <% if @say_it %>
-    <% audio_html = render("reviews/audio", question: @question).strip %>
+    <% audio_html = render("reviews/audio", question: @question) %>
     <% audio_first = prompt_lang == "ga" && audio_html.present? %>
     <div class="card p-6 sm:p-8" data-controller="reveal">
       <p class="eyebrow text-foghlaim mb-3">
         <%= audio_first ? t(".say_it_listen") : (prompt_lang == "ga" ? t(".meaning_in_english") : t(".say_it_aloud")) %>
       </p>
       <% if audio_first %>
-        <div class="mb-6" data-testid="say-it-audio"><%= audio_html.html_safe %></div>
+        <div class="mb-6" data-testid="say-it-audio"><%= audio_html %></div>
         <p class="font-display text-3xl sm:text-4xl leading-tight mb-8 break-words italic" hidden data-reveal-target="hidden"><%= @question.prompt %></p>
       <% else %>
         <p class="font-display text-3xl sm:text-4xl leading-tight mb-8 break-words <%= "italic" if prompt_lang == "ga" %>"><%= @question.prompt %></p>
@@ -27,7 +27,7 @@
       <div hidden data-reveal-target="hidden" class="grid gap-4">
         <p class="text-lg pt-2 border-t border-line">
           <span class="font-semibold <%= @question.answer_lang == "ga" ? "italic" : "" %>"><%= @question.answer %></span>
-          <% if !audio_first && prompt_lang == "en" %><span class="ml-2 align-middle"><%= audio_html.html_safe %></span><% end %>
+          <% if !audio_first && prompt_lang == "en" %><span class="ml-2 align-middle"><%= audio_html %></span><% end %>
         </p>
         <p class="eyebrow"><%= t(".how_did_it_go") %></p>
         <%= form_with url: answer_review_path, method: :post, class: "grid grid-cols-2 sm:grid-cols-4 gap-2", data: { turbo: false } do |f| %>

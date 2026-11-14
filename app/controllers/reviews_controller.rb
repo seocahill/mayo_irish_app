@@ -39,7 +39,7 @@ class ReviewsController < ApplicationController
 
     review = QuizReview.find_or_initialize_by(user: current_user, quiz_question: @question)
     rating = params[:rating].to_s.to_sym
-    if QuizReview::RATINGS.key?(rating)
+    if QuizReview::RATINGS.key?(rating) && QuizReview.say_it?(current_user, @question)
       # A "Say it" card: the learner marks themselves, nothing is graded for them.
       @self_rated = true
       @correct = rating != :again
