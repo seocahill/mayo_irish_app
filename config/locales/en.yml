@@ -73,6 +73,48 @@ en:
     theme_listen_title: "%{title}: hear the words said by Mayo speakers"
     tutor_label: Practise · text chat
     tutor_title: Talk it through with the tutor
+  dialect_substitutions:
+    create:
+      created: Added.
+    destroy:
+      destroyed: Removed.
+    edit:
+      title: Edit a Mayo form
+    form:
+      back: "← Back to the list"
+      mayo_form: Mayo form
+      mayo_source: Where the Mayo form comes from
+      note: Note (optional)
+      other_form: Connemara (or other) form
+      other_source: Where the other form comes from
+      save: Save
+      source: Source (optional)
+    hits:
+      open: Open
+      summary: These forms from your list turn up in this lesson. They are proposals;
+        nothing has been changed.
+      title: Connemara forms to consider swapping
+    index:
+      add: Add a pair
+      confirm: Remove this pair?
+      delete: Remove
+      edit: Edit
+      empty: No pairs yet. Add one and lessons that use the other form will point
+        it out.
+      eyebrow: Admin
+      summary: Connemara forms from the skeleton and the Mayo forms to use instead.
+        Lesson editors flag where the other form appears, and the comhrá uses the
+        Mayo form.
+      title: Mayo forms
+    new:
+      title: Add a Mayo form
+    places:
+      grammar: Grammar
+      intro: Intro transcript
+      text: Text block
+      vocabulary: Vocabulary
+    update:
+      updated: Saved.
   errors:
     messages:
       unsupported_embed: isn't an Abairt page. Use an https://abairt.com link.
@@ -787,6 +829,7 @@ en:
       stop: Where people stop
       stop_summary: For each curriculum lesson, how many learners opened it and how
         many went on to answer its quiz.
+      substitutions: Mayo forms
       summary: Weekly figures from what learners already do in the course. Nothing
         is sent to any other service. "Came back" is the share of last week's active
         learners who were active again.

@@ -3,7 +3,7 @@
     <p class="eyebrow"><%= t(".eyebrow") %></p>
     <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
     <p class="text-muted mt-1 text-sm"><%= t(".summary") %></p>
-    <p class="mt-2"><%= link_to t(".learners"), learners_path, class: "text-sm underline" %></p>
+    <p class="mt-2"><%= link_to t(".learners"), learners_path, class: "text-sm underline" %> · <%= link_to t(".substitutions"), dialect_substitutions_path, class: "text-sm underline" %></p>
   </header>
 
   <section aria-labelledby="weeks-heading" class="flex flex-col gap-3">

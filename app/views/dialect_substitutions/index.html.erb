@@ -1,0 +1,30 @@
+<div class="max-w-2xl mx-auto flex flex-col gap-6">
+  <header>
+    <p class="eyebrow"><%= t(".eyebrow") %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
+    <p class="text-muted mt-1 text-sm"><%= t(".summary") %></p>
+    <p class="mt-3"><%= link_to t(".add"), new_dialect_substitution_path, class: "btn-solid !py-2" %></p>
+  </header>
+
+  <% if @substitutions.empty? %>
+    <p class="text-sm text-muted"><%= t(".empty") %></p>
+  <% else %>
+    <ul class="flex flex-col gap-3">
+      <% @substitutions.each do |s| %>
+        <li class="card px-4 py-3 flex flex-wrap items-center justify-between gap-2 text-sm">
+          <div>
+            <p><span lang="ga"><%= s.other_form %></span> → <strong lang="ga"><%= s.mayo_form %></strong></p>
+            <% if s.other_source.present? || s.mayo_source.present? %>
+              <p class="text-xs text-muted"><%= [ s.other_source, s.mayo_source ].compact_blank.join(" → ") %></p>
+            <% end %>
+            <% if s.note.present? %><p class="text-xs text-muted"><%= s.note %></p><% end %>
+          </div>
+          <div class="flex gap-3">
+            <%= link_to t(".edit"), edit_dialect_substitution_path(s), class: "underline" %>
+            <%= button_to t(".delete"), dialect_substitution_path(s), method: :delete, class: "underline text-muted", form: { data: { turbo_confirm: t(".confirm") } } %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
