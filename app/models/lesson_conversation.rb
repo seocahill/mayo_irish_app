@@ -116,7 +116,7 @@ class LessonConversation
   end
 
   def system_prompt
-    [ INSTRUCTIONS, LessonContext.new(@chat_session.lesson).brief.presence ].compact.join("\n\n")
+    [ INSTRUCTIONS, LessonContext.new(@chat_session.lesson).brief.presence, DialectSubstitution.prompt_note ].compact.join("\n\n")
   end
 
   def history(said)

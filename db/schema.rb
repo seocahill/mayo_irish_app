@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_14_100000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_14_120000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -73,6 +73,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_14_100000) do
     t.index ["lesson_id"], name: "index_chat_sessions_on_lesson_id"
     t.index ["user_id", "lesson_id", "kind"], name: "index_chat_sessions_on_user_id_and_lesson_id_and_kind"
     t.index ["user_id"], name: "index_chat_sessions_on_user_id"
+  end
+
+  create_table "dialect_substitutions", force: :cascade do |t|
+    t.string "other_form", null: false
+    t.string "mayo_form", null: false
+    t.string "other_source"
+    t.string "mayo_source"
+    t.text "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["other_form"], name: "index_dialect_substitutions_on_other_form"
   end
 
   create_table "exercises", force: :cascade do |t|

@@ -1,0 +1,24 @@
+<%= form_with model: substitution, class: "card px-5 py-5 flex flex-col gap-4" do |f| %>
+  <% if substitution.errors.any? %>
+    <div class="text-sm text-red-700" role="alert">
+      <% substitution.errors.full_messages.each do |message| %><p><%= message %></p><% end %>
+    </div>
+  <% end %>
+  <div class="grid sm:grid-cols-2 gap-4">
+    <div>
+      <%= f.label :other_form, t("dialect_substitutions.form.other_form"), class: "editor-label" %>
+      <%= f.text_field :other_form, class: "editor-input", lang: "ga" %>
+      <%= f.text_field :other_source, class: "editor-input mt-2", placeholder: t("dialect_substitutions.form.source"), "aria-label": t("dialect_substitutions.form.other_source") %>
+    </div>
+    <div>
+      <%= f.label :mayo_form, t("dialect_substitutions.form.mayo_form"), class: "editor-label" %>
+      <%= f.text_field :mayo_form, class: "editor-input", lang: "ga" %>
+      <%= f.text_field :mayo_source, class: "editor-input mt-2", placeholder: t("dialect_substitutions.form.source"), "aria-label": t("dialect_substitutions.form.mayo_source") %>
+    </div>
+  </div>
+  <div>
+    <%= f.label :note, t("dialect_substitutions.form.note"), class: "editor-label" %>
+    <%= f.text_area :note, rows: 2, class: "editor-input" %>
+  </div>
+  <div><%= f.submit t("dialect_substitutions.form.save"), class: "btn-solid" %></div>
+<% end %>
