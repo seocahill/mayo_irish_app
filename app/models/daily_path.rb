@@ -18,6 +18,12 @@ class DailyPath
     due_by_lesson.values.sum
   end
 
+  # Where a learner who has just finished onboarding should start: the first
+  # curriculum lesson they have not opened, or nil when there is none.
+  def first_lesson_path
+    (start_item || lesson_item)&.path
+  end
+
   def known_words
     known_by_lesson.values.sum
   end
