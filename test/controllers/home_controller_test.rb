@@ -32,6 +32,16 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", OnboardingsHelper::GAELTACHT_1926_URL
   end
 
+  test "shows where the learner has got to, and what is next" do
+    users(:two).listening_times.create!(abairt_recording_id: 1, seconds: 6 * 60)
+    sign_in_as(users(:two))
+    get root_path
+
+    assert_select "li", text: /Listened for 5 minutes to Mayo speakers.*next: 15 minutes/m
+    assert_select "li", text: /Your first words come from a lesson's quiz/
+    assert_select "li", text: /No spoken conversation yet/
+  end
+
   test "shows the review forecast once reviews are scheduled" do
     sign_in_as(users(:two))
     get root_path

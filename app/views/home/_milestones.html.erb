@@ -1,0 +1,15 @@
+<%# Where the learner has got to, in things they have done. The next step is shown plainly, with no streaks or points. %>
+<ul class="flex flex-col gap-1.5 text-sm">
+  <% strands.each do |strand| %>
+    <li class="text-muted">
+      <% if strand.reached %>
+        <span class="text-ink"><%= t("milestones.#{strand.key}.reached", count: strand.reached) %></span>
+      <% else %>
+        <%= t("milestones.#{strand.key}.not_yet") %>
+      <% end %>
+      <% if strand.next_step %>
+        <span>· <%= t("milestones.#{strand.key}.next", count: strand.next_step, remaining: strand.remaining) %></span>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

@@ -32,6 +32,7 @@ ignore_unused:
   - lesson_blocks.types.*
   - onboardings.regions.*
   - onboardings.doors.*
+  - milestones.*
   - history.kinds.*
   - versions.index.events.*
   - usage.show.figures.*

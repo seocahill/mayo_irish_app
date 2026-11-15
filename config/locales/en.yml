@@ -561,6 +561,21 @@ en:
       title: Your listening
       try_again: Try it again
       untitled: A recording from Abairt
+  milestones:
+    conversation:
+      next: 'next: %{count} in one go'
+      not_yet: No spoken conversation yet
+      reached:
+        one: Spoken for a minute in one conversation
+        other: Spoken for %{count} minutes in one conversation
+    listening:
+      next: 'next: %{count} minutes'
+      not_yet: Listening time starts with any Mayo recording
+      reached: Listened for %{count} minutes to Mayo speakers
+    words:
+      next: 'next: %{count}'
+      not_yet: Your first words come from a lesson's quiz
+      reached: "%{count} words known"
   native_questions:
     create:
       no_recording: Record your question first.

@@ -49,3 +49,10 @@
   body: In a recording, tap Repeat line while a line plays and the Mayo speaker says it
     over and over until you've caught it. Tap another line to move on.
   path: /listens
+- id: 7
+  date: 2026-11-15
+  title: See how far you've got
+  body: Under "So far" on Today you now see the words you know, the time you've spent
+    listening to Mayo speakers, and your longest conversation, with the next step for
+    each. It's just what you've done, with no points or streaks.
+  path: /

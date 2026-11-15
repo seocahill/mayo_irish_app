@@ -10,6 +10,7 @@ class HomeController < ApplicationController
     @forecast = QuizReview.forecast_for(current_user)
     @spoken_time = SpokenTime.new(current_user)
     @listening_minutes = ListeningTime.minutes_for(current_user)
+    @milestones = Milestones.new(current_user, known_words: @daily_path.known_words, listening_minutes: @listening_minutes)
   end
 
   private
