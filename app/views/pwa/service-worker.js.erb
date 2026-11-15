@@ -1,0 +1,39 @@
+// Offline support: keep the app shell (CSS, fonts, icon and the /offline page)
+// so a failed page load shows something friendly instead of the browser's
+// error page. Everything else goes straight to the network, so lessons and
+// audio are never served stale.
+<% shell_assets = %w[fonts.css tailwind.css application.css figtree-latin.woff2].map { |name| asset_path(name) } %>
+const CACHE = "gmh-shell-<%= Digest::SHA1.hexdigest(shell_assets.join) %>"
+const OFFLINE_URL = "/offline"
+const SHELL = <%= raw(([ "/offline", "/icon.png" ] + shell_assets).to_json) %>
+
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE).then((cache) => cache.addAll(SHELL)).then(() => self.skipWaiting())
+  )
+})
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys()
+      .then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key))))
+      .then(() => self.clients.claim())
+  )
+})
+
+self.addEventListener("fetch", (event) => {
+  const request = event.request
+  if (request.method !== "GET") return
+
+  if (request.mode === "navigate") {
+    event.respondWith(
+      fetch(request).catch(() => caches.match(OFFLINE_URL))
+    )
+    return
+  }
+
+  const url = new URL(request.url)
+  if (url.origin === self.location.origin && SHELL.includes(url.pathname)) {
+    event.respondWith(caches.match(request).then((hit) => hit || fetch(request)))
+  }
+})

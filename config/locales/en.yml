@@ -625,6 +625,12 @@ en:
       with_a_speaker: With a speaker. Their answer will appear here.
       your_question: Your question
       your_questions: Your questions
+  offlines:
+    show:
+      body: Your connection has dropped. Lessons and recordings need to be online,
+        so try again when you have signal.
+      retry: Try again
+      title: You're offline
   onboardings:
     create:
       start_here: 'Start here: this is your first lesson. Listen first, then try the
