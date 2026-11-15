@@ -33,28 +33,29 @@ export default class extends Controller {
   follow() {
     const now = this.audioTarget.currentTime
     this.count(now)
+    if (this.repeatLine(now)) return
     this.mark(now)
-    this.repeatLine(now)
   }
 
-  // With Repeat on, the line last tapped (or being said) plays over and over.
+  // With Repeat on, the line being said plays over and over.
   toggleRepeat() {
     const on = this.repeatToggleTarget.getAttribute("aria-pressed") !== "true"
-    this.repeating = on ? (this.chosen || this.current) : null
+    this.repeating = on ? this.current : null
+    if (on && !this.repeating) return
     this.repeatToggleTarget.setAttribute("aria-pressed", on)
   }
 
   repeatLine(now) {
-    if (!this.repeating || this.audioTarget.paused) return
-    if (now >= Number(this.repeating.dataset.end)) {
-      this.audioTarget.currentTime = Number(this.repeating.dataset.start)
-      this.lastTime = this.audioTarget.currentTime
-    }
+    if (!this.repeating || this.audioTarget.paused) return false
+    // timeupdate is coarse, so jump back a little early
+    if (now < Number(this.repeating.dataset.end) - 0.15) return false
+    this.audioTarget.currentTime = Number(this.repeating.dataset.start)
+    this.lastTime = this.audioTarget.currentTime
+    return true
   }
 
   seek(event) {
-    this.chosen = event.currentTarget
-    if (this.repeating) this.repeating = this.chosen
+    if (this.repeating) this.repeating = event.currentTarget
     this.audioTarget.currentTime = Number(event.currentTarget.dataset.start)
     this.lastTime = this.audioTarget.currentTime
     this.audioTarget.play()
