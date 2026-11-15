@@ -5,3 +5,8 @@ import "controllers"
 import "trix"
 import "@rails/actiontext"
 import "lexxy"
+
+// Lets the app show an offline page and load its shell without a connection.
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/service-worker").catch(() => {})
+}
