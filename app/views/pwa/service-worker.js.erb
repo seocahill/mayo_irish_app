@@ -2,21 +2,28 @@
 // so a failed page load shows something friendly instead of the browser's
 // error page. Everything else goes straight to the network, so lessons and
 // audio are never served stale.
-<% shell_assets = %w[fonts.css tailwind.css application.css figtree-latin.woff2].map { |name| asset_path(name) } %>
-const CACHE = "gmh-shell-<%= Digest::SHA1.hexdigest(shell_assets.join) %>"
+<% shell_assets = %w[fonts.css tailwind.css application.css figtree-latin.woff2 young-serif-400-latin.woff2].map { |name| asset_path(name) } %>
+const CACHE = "gmh-shell-<%= Digest::SHA1.hexdigest((shell_assets + [ Rails.root.join("app/views/offlines/show.html.erb"), Rails.root.join("app/views/layouts/offline.html.erb"), Rails.root.join("public/icon.png") ].map { |f| f.is_a?(Pathname) ? Digest::SHA1.file(f).hexdigest : f }).join) %>"
 const OFFLINE_URL = "/offline"
 const SHELL = <%= raw(([ "/offline", "/icon.png" ] + shell_assets).to_json) %>
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE).then((cache) => cache.addAll(SHELL)).then(() => self.skipWaiting())
+    caches.open(CACHE).then(async (cache) => {
+      // Fetch without cookies and keep only good responses.
+      for (const url of SHELL) {
+        const response = await fetch(new Request(url, { credentials: "omit", cache: "reload" }))
+        if (!response.ok || response.redirected) throw new Error(`Could not cache ${url}`)
+        await cache.put(url, response)
+      }
+    }).then(() => self.skipWaiting())
   )
 })
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key))))
+      .then((keys) => Promise.all(keys.filter((key) => key.startsWith("gmh-shell-") && key !== CACHE).map((key) => caches.delete(key))))
       .then(() => self.clients.claim())
   )
 })

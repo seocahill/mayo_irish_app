@@ -33,6 +33,15 @@ class PwaTest < ActionDispatch::IntegrationTest
     assert_select "h1", text: "You're offline"
   end
 
+  test "the offline page carries no navigation or CSRF token, even when signed in" do
+    sign_in_as users(:one) if respond_to?(:sign_in_as, true)
+    get offline_path
+
+    assert_select "meta[name=csrf-token]", false
+    assert_select "form", false
+    assert_select "nav", false
+  end
+
   test "the layout registers the service worker" do
     assert_includes File.read(Rails.root.join("app/javascript/application.js")), 'register("/service-worker")'
   end
