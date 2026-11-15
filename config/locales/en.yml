@@ -235,6 +235,12 @@ en:
       sign_out: Sign out
       today: Today
       whats_new: What's new
+    bottom_nav:
+      ask: Ask
+      label: Main
+      lessons: Lessons
+      search: Search
+      today: Today
   learner_approvals:
     create:
       approved: "%{email} can now sign in to the course."

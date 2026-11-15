@@ -2,7 +2,7 @@
 <html lang="<%= I18n.locale %>" class="h-full">
   <head>
     <title><%= t("app_name") %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <meta charset="utf-8">
     <meta name="robots" content="noindex, nofollow">
     <meta name="application-name" content="<%= t("app_name") %>">
@@ -25,13 +25,14 @@
     <%= tag.script json_escape(js_translations.to_json).html_safe, type: "application/json", id: "js-translations" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body class="h-full bg-canvas text-ink font-sans">
+  <body class="h-full bg-canvas text-ink font-sans<%= " pb-[calc(4rem+env(safe-area-inset-bottom))] sm:pb-0" if authenticated? %>">
 
     <header class="bg-surface border-b border-line">
       <div class="max-w-4xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
         <a href="<%= root_path %>" class="font-display text-xl leading-tight text-ink"><%= t("app_name") %></a>
         <nav class="text-sm text-muted flex items-center gap-4">
           <% if authenticated? %>
+            <div class="hidden sm:contents">
             <a href="<%= root_path %>" class="hover:text-ink transition-colors py-1"><%= t(".today") %></a>
             <a href="<%= lessons_path %>" class="hover:text-ink transition-colors py-1"><%= t(".lessons") %></a>
             <a href="<%= new_course_question_path %>" class="hover:text-ink transition-colors py-1"><%= t(".ask") %></a>
@@ -45,6 +46,7 @@
             <% end %>
             <%= button_to t(".sign_out"), session_path, method: :delete,
                   class: "text-muted hover:text-ink transition-colors bg-transparent border-0 p-0 cursor-pointer text-sm" %>
+            </div>
           <% else %>
             <%= link_to t(".sign_in"), new_session_path, class: "hover:text-ink transition-colors" %>
           <% end %>
@@ -76,8 +78,16 @@
             <%= link_to t(".whats_new"), whats_new_path, class: "underline underline-offset-2 hover:text-ink" %>
           <% end %>
         </p>
+        <% if authenticated? %>
+          <%= button_to t(".sign_out"), session_path, method: :delete, form: { class: "sm:hidden mt-3" },
+                class: "underline underline-offset-2 text-muted hover:text-ink bg-transparent border-0 p-2 cursor-pointer text-sm" %>
+        <% end %>
       </div>
     </footer>
+
+    <% if authenticated? %>
+      <%= render "layouts/bottom_nav" %>
+    <% end %>
 
   </body>
 </html>
