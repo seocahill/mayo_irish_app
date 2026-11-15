@@ -19,6 +19,19 @@ class DialectSubstitutionsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "the list shows which lessons still use the other form" do
+    sign_in_as(users(:admin))
+    lessons(:one).vocabulary_items.create!(irish: "deacair", english: "difficult", gender: "m")
+    DialectSubstitution.create!(other_form: "deacair", mayo_form: "doiligh")
+    DialectSubstitution.create!(other_form: "nonesuch", mayo_form: "x")
+
+    get dialect_substitutions_path
+
+    assert_response :success
+    assert_select "a[href=?]", edit_lesson_path(lessons(:one))
+    assert_match "Not found in any lesson", response.body
+  end
+
   test "a pair needs both forms" do
     sign_in_as(users(:admin))
 

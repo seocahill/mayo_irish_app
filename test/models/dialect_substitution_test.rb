@@ -20,6 +20,14 @@ class DialectSubstitutionTest < ActiveSupport::TestCase
     assert_equal 1, @lesson.vocabulary_items.where(irish: "deacair").count
   end
 
+  test "lists the lessons where each pair still turns up" do
+    other = DialectSubstitution.create!(other_form: "nonesuch", mayo_form: "x")
+    result = DialectSubstitution.lessons_by_pair
+
+    assert_includes result[@pair], @lesson
+    assert_empty result[other]
+  end
+
   test "no pairs, no hits" do
     DialectSubstitution.delete_all
 

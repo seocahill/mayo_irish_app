@@ -26,6 +26,18 @@ class DialectSubstitution < ApplicationRecord
     found
   end
 
+  # Across the whole course: for each pair, the lessons where the other form
+  # still turns up. Read-only; returns { substitution => [lesson, ...] }.
+  def self.lessons_by_pair
+    result = ordered.index_with { [] }
+    return result if result.empty?
+
+    Lesson.ordered.find_each do |lesson|
+      hits_in(lesson).map(&:substitution).uniq.each { |s| result[s] << lesson }
+    end
+    result
+  end
+
   def self.each_text(lesson)
     lesson.vocabulary_items.each do |v|
       yield "#{I18n.t('dialect_substitutions.places.vocabulary')}: #{v.irish}", [ v.irish, v.plural, v.genitive, v.notes ].compact.join(" "), nil

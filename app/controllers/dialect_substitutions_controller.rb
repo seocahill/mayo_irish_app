@@ -4,6 +4,7 @@ class DialectSubstitutionsController < ApplicationController
 
   def index
     @substitutions = DialectSubstitution.ordered
+    @lessons_by_pair = DialectSubstitution.lessons_by_pair
   end
 
   def new

@@ -12,12 +12,22 @@
     <ul class="flex flex-col gap-3">
       <% @substitutions.each do |s| %>
         <li class="card px-4 py-3 flex flex-wrap items-center justify-between gap-2 text-sm">
-          <div>
+          <div class="min-w-0">
             <p><span lang="ga"><%= s.other_form %></span> → <strong lang="ga"><%= s.mayo_form %></strong></p>
             <% if s.other_source.present? || s.mayo_source.present? %>
               <p class="text-xs text-muted"><%= [ s.other_source, s.mayo_source ].compact_blank.join(" → ") %></p>
             <% end %>
             <% if s.note.present? %><p class="text-xs text-muted"><%= s.note %></p><% end %>
+            <% lessons = @lessons_by_pair[s] || [] %>
+            <% if lessons.empty? %>
+              <p class="text-xs text-muted mt-1"><%= t(".not_found") %></p>
+            <% else %>
+              <p class="text-xs mt-1"><span class="text-muted"><%= t(".found_in", count: lessons.size) %></span>
+                <% lessons.each do |l| %>
+                  <%= link_to l.title, edit_lesson_path(l), class: "underline ml-1" %>
+                <% end %>
+              </p>
+            <% end %>
           </div>
           <div class="flex gap-3">
             <%= link_to t(".edit"), edit_dialect_substitution_path(s), class: "underline" %>
