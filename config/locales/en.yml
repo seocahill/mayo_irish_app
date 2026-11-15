@@ -103,6 +103,10 @@ en:
       empty: No pairs yet. Add one and lessons that use the other form will point
         it out.
       eyebrow: Admin
+      found_in:
+        one: 'Still in 1 lesson:'
+        other: 'Still in %{count} lessons:'
+      not_found: Not found in any lesson.
       summary: Connemara forms from the skeleton and the Mayo forms to use instead.
         Lesson editors flag where the other form appears, and the comhrá uses the
         Mayo form.
