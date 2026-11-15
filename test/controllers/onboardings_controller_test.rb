@@ -38,13 +38,13 @@ class OnboardingsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
-  test "saves the answers and goes home" do
+  test "saves the answers and sends a new learner to their first lesson" do
     user = users(:newcomer)
     sign_in_as(user)
 
     post onboarding_path, params: { user: { place: "Belmullet", dialect_region: "erris", door: "school_irish" } }
 
-    assert_response :redirect
+    assert_redirected_to lesson_path(Lesson.visible_to(user).curriculum.ordered.first)
     user.reload
     assert user.onboarded?
     assert_equal "Belmullet", user.place

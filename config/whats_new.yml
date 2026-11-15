@@ -75,9 +75,3 @@
   body: Today, Lessons, Ask and Search now sit in a bar at the bottom of the screen
     on a phone, easy to reach with your thumb. Sign out is at the foot of the page.
   path: /lessons
-- id: 11
-  date: 2026-11-15
-  title: Straight into your first lesson
-  body: After you answer the three starting questions, you now land on your first
-    lesson, so you can start listening straight away.
-  path: /lessons

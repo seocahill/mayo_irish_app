@@ -19,7 +19,7 @@ class DailyPath
   end
 
   # Where a learner who has just finished onboarding should start: the first
-  # curriculum lesson they have not opened, or nil when there is none.
+  # curriculum lesson to work on (an unopened one first), or nil when there is none.
   def first_lesson_path
     (start_item || lesson_item)&.path
   end
