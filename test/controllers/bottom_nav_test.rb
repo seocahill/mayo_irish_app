@@ -26,4 +26,15 @@ class BottomNavTest < ActionDispatch::IntegrationTest
 
     assert_select "nav[aria-label='Main']", 0
   end
+
+  test "Ask and Search tabs are marked current on their pages, and Sign out is in the footer" do
+    sign_in_as(users(:two))
+
+    get new_course_question_path
+    assert_select "nav[aria-label='Main'] a[href='#{new_course_question_path}'][aria-current='page']", 1
+    assert_select "footer form[action='#{session_path}']", 1
+
+    get search_path
+    assert_select "nav[aria-label='Main'] a[href='#{search_path}'][aria-current='page']", 1
+  end
 end
