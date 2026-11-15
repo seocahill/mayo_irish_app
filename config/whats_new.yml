@@ -69,3 +69,9 @@
   body: Audio inside a lesson now has Slower and Repeat buttons, the same as on
     the Listen pages, so you can work out fast speech at your own pace.
   path: /lessons
+- id: 10
+  date: 2026-11-15
+  title: Tabs at the bottom on your phone
+  body: Today, Lessons, Ask and Search now sit in a bar at the bottom of the screen
+    on a phone, easy to reach with your thumb. Sign out is at the foot of the page.
+  path: /lessons

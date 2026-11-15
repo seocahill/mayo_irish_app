@@ -1,0 +1,19 @@
+<%# Phone-only tab bar for the main places; the top header carries them from sm up. %>
+<% tabs = [
+  [ t(".today"), root_path, root_path, "M3 12l9-9 9 9M5 10v10h5v-6h4v6h5V10" ],
+  [ t(".lessons"), lessons_path, lessons_path, "M4 5a2 2 0 012-2h12v16H6a2 2 0 00-2 2V5zm2 14h12" ],
+  [ t(".ask"), new_course_question_path, new_course_question_path.delete_suffix("/new"), "M8 10h8M8 14h5M21 12a9 9 0 01-13.4 7.8L3 21l1.3-4.4A9 9 0 1121 12z" ],
+  [ t(".search"), search_path, search_path, "M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" ]
+] %>
+<nav aria-label="<%= t(".label") %>" class="sm:hidden fixed bottom-0 inset-x-0 z-40 bg-surface border-t border-line pb-[env(safe-area-inset-bottom)]">
+  <div class="grid grid-cols-4">
+    <% tabs.each do |label, href, match, icon| %>
+      <% current = href == root_path ? current_page?(root_path) : request.path.start_with?(match) %>
+        <%= link_to href, "aria-current": (current ? "page" : nil),
+              class: "flex flex-col items-center justify-center gap-0.5 min-h-[56px] text-xs focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ink #{current ? "text-ink font-semibold" : "text-muted"}" do %>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="<%= current ? 2.4 : 1.8 %>" d="<%= icon %>"/></svg>
+          <%= label %>
+        <% end %>
+    <% end %>
+  </div>
+</nav>
