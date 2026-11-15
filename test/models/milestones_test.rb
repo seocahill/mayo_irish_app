@@ -43,13 +43,27 @@ class MilestonesTest < ActiveSupport::TestCase
 
   test "conversation uses the longest single conversation, not the total" do
     other = @user.chat_sessions.create!(lesson: lessons(:one), kind: :conversation)
-    7.times { @chat.chat_messages.create!(role: "user", content: "a", spoken_seconds: 30) }
+    8.times { @chat.chat_messages.create!(role: "user", content: "a", spoken_seconds: 30) }
     4.times { other.chat_messages.create!(role: "user", content: "b", spoken_seconds: 30) }
-    4.times { other.chat_messages.create!(role: "user", content: "c", spoken_seconds: 30) }
+    @chat.chat_messages.create!(role: "user", content: "typed")
 
     conversation = Milestones.new(@user, known_words: 0).strands.third
 
     assert_equal 3, conversation.reached
     assert_equal 5, conversation.next_step
+  end
+
+  test "other learners' conversations are not counted" do
+    chat = users(:admin).chat_sessions.create!(lesson: lessons(:one), kind: :conversation)
+    10.times { chat.chat_messages.create!(role: "user", content: "x", spoken_seconds: 30) }
+
+    assert_nil Milestones.new(@user, known_words: 0).strands.third.reached
+  end
+
+  test "a value just under a step has not reached it" do
+    ListeningTime.create!(user: @user, abairt_recording_id: 1, seconds: 4 * 60)
+
+    assert_nil Milestones.new(@user, known_words: 9).strands.first.reached
+    assert_nil Milestones.new(@user).strands.second.reached
   end
 end

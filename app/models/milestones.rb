@@ -13,14 +13,15 @@ class Milestones
     def remaining = next_step && (next_step - value)
   end
 
-  def initialize(user, known_words: nil)
+  def initialize(user, known_words: nil, listening_minutes: nil)
     @user = user
     @known_words = known_words
+    @listening_minutes = listening_minutes
   end
 
   def strands
     [ strand(:words, known_words, WORD_STEPS),
-      strand(:listening, ListeningTime.minutes_for(@user), LISTENING_MINUTE_STEPS),
+      strand(:listening, @listening_minutes || ListeningTime.minutes_for(@user), LISTENING_MINUTE_STEPS),
       strand(:conversation, longest_conversation_minutes, CONVERSATION_MINUTE_STEPS) ]
   end
 
@@ -35,6 +36,6 @@ class Milestones
 
   def longest_conversation_minutes
     seconds = ChatMessage.spoken_by(@user).group("chat_messages.chat_session_id").sum(:spoken_seconds).values.max.to_i
-    seconds / 60
+    seconds.fdiv(60).round
   end
 end
