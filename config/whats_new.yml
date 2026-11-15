@@ -56,3 +56,10 @@
     listening to Mayo speakers, and your longest conversation, with the next step for
     each. It's just what you've done, with no points or streaks.
   path: /
+- id: 8
+  date: 2026-11-15
+  title: Genitive beside the plural
+  body: Vocabulary lists now have a Genitive column next to the plural, so you can
+    learn the gender, genitive and plural together with each noun. It fills in as the
+    course designers add the forms.
+  path: /lessons

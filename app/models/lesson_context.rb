@@ -66,6 +66,7 @@ class LessonContext
     items.each do |v|
       gender = (v.gender == "m") ? "masc." : "fem."
       parts = [ "#{v.irish} (#{gender})" ]
+      parts << "gen. #{v.genitive}" if v.genitive.present?
       parts << "pl. #{v.plural}" if v.plural.present?
       parts << "— #{v.english}" if v.english.present?
       lines << parts.join(" ")

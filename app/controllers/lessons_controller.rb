@@ -100,7 +100,7 @@ class LessonsController < ApplicationController
       :intro_video_url,
       :intro_video_transcript,
       vocabulary_items_attributes: [
-        :id, :irish, :phonetic, :plural, :gender, :english, :notes, :position, :_destroy
+        :id, :irish, :phonetic, :plural, :genitive, :gender, :english, :notes, :position, :_destroy
       ]
     )
   end
