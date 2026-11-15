@@ -30,8 +30,14 @@ class VocabularyGenitiveTest < ActionDispatch::IntegrationTest
     assert_includes LessonContext.new(@lesson).send(:vocabulary_text, [ @item ]), "gen. GEN-TEST"
   end
 
-  test "existing items without one are untouched and search still works" do
+  test "items without a genitive read as before" do
     assert_nil @item.genitive
     refute_includes LessonContext.new(@lesson).send(:vocabulary_text, [ @item ]), "gen."
+  end
+
+  test "the new-row template includes the genitive" do
+    sign_in_as(users(:admin))
+    get edit_lesson_path(@lesson)
+    assert_match "[NEW_INDEX][genitive]", @response.body
   end
 end
