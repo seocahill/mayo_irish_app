@@ -110,8 +110,10 @@ en:
     new:
       title: Add a Mayo form
     places:
+      exercise: Exercise
       grammar: Grammar
       intro: Intro transcript
+      phrase: Phrase
       text: Text block
       vocabulary: Vocabulary
     update:

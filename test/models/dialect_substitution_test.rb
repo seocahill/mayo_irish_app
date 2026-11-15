@@ -43,4 +43,14 @@ class DialectSubstitutionTest < ActiveSupport::TestCase
     assert(DialectSubstitution.hits_in(@lesson).any? { |h| h.place.include?("T") && h.substitution.other_form == "tá sé deacair" })
     assert rule.persisted?
   end
+
+  test "finds the other form in exercises and phrases" do
+    @lesson.exercises.create!(number: 1, prompt: "Is deacair an rud é", answer: nil)
+    @lesson.phrases.create!(irish: "Tá sé deacair", english: "It is hard", notes: nil)
+
+    places = DialectSubstitution.hits_in(@lesson).map(&:place)
+
+    assert places.any? { |p| p.start_with?("Exercise") }
+    assert places.any? { |p| p.start_with?("Phrase") }
+  end
 end

@@ -12,7 +12,7 @@ class DialectSubstitution < ApplicationRecord
   Hit = Struct.new(:substitution, :place, :text, :path, keyword_init: true)
 
   # Where the other forms appear in a lesson: its vocabulary, grammar rules,
-  # text blocks and intro transcript. Proposals only; nothing is changed.
+  # text blocks, exercises, phrases and intro transcript. Proposals only; nothing is changed.
   def self.hits_in(lesson)
     substitutions = ordered.to_a
     return [] if substitutions.empty?
@@ -35,6 +35,12 @@ class DialectSubstitution < ApplicationRecord
     end
     lesson.lesson_blocks.where(block_type: "text").with_rich_text_body.each do |block|
       yield "#{I18n.t('dialect_substitutions.places.text')}: #{block.caption.presence || block.id}", block.body.to_plain_text, Rails.application.routes.url_helpers.edit_lesson_block_path(block)
+    end
+    lesson.exercises.each do |e|
+      yield "#{I18n.t('dialect_substitutions.places.exercise')}: #{e.number}", [ e.prompt, e.answer ].compact.join(" "), nil
+    end
+    lesson.phrases.each do |ph|
+      yield "#{I18n.t('dialect_substitutions.places.phrase')}: #{ph.irish.to_s.truncate(40)}", [ ph.irish, ph.notes ].compact.join(" "), nil
     end
     yield I18n.t("dialect_substitutions.places.intro"), lesson.intro_video_transcript.to_s, nil
   end
