@@ -52,6 +52,12 @@ class PwaTest < ActionDispatch::IntegrationTest
     assert_not_equal icons.first["src"], maskable["src"]
   end
 
+  test "the install prompt is captured at app level, not only where the card is" do
+    js = File.read(Rails.root.join("app/javascript/application.js"))
+    assert_includes js, "beforeinstallprompt"
+    assert_includes js, "deferredInstallPrompt"
+  end
+
   test "the layout registers the service worker" do
     assert_includes File.read(Rails.root.join("app/javascript/application.js")), 'register("/service-worker")'
   end

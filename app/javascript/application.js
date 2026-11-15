@@ -10,3 +10,10 @@ import "lexxy"
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/service-worker").catch(() => {})
 }
+
+// Keep Chrome's install prompt for the card on Today (it fires once per load).
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault()
+  window.deferredInstallPrompt = event
+  window.dispatchEvent(new Event("install-prompt-ready"))
+})
