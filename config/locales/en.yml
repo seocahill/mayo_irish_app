@@ -305,6 +305,9 @@ en:
       no_image: No image attached yet.
       no_pdf: No PDF attached yet.
       no_video: No video URL yet.
+    show_block:
+      repeat: Repeat
+      slower: Slower
     types:
       audio: Audio
       embed: Abairt page

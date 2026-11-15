@@ -63,3 +63,9 @@
     learn the gender, genitive and plural together with each noun. It fills in as the
     course designers add the forms.
   path: /lessons
+- id: 9
+  date: 2026-11-15
+  title: Slower and repeat on lesson audio
+  body: Audio inside a lesson now has Slower and Repeat buttons, the same as on
+    the Listen pages, so you can work out fast speech at your own pace.
+  path: /lessons
