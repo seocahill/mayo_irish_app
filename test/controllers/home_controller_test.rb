@@ -18,6 +18,17 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_onboarding_path
   end
 
+  test "Today carries a hidden install card for the browser to reveal" do
+    sign_in_as(users(:two))
+    get root_path
+
+    assert_select "section[data-controller=install][hidden]" do
+      assert_select "[data-install-target=ios]"
+      assert_select "[data-install-target=android]"
+      assert_select "button[data-action='install#dismiss']"
+    end
+  end
+
   test "shows today's items and the learner's place" do
     sign_in_as(users(:two))
     get root_path
