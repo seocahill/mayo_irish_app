@@ -8,7 +8,7 @@ const REPORT_EVERY = 30
 const HOLD = 3
 
 export default class extends Controller {
-  static targets = ["audio", "line", "english", "englishToggle"]
+  static targets = ["audio", "line", "english", "englishToggle", "repeatToggle"]
   static values = { start: Number, reportUrl: String }
 
   connect() {
@@ -34,9 +34,27 @@ export default class extends Controller {
     const now = this.audioTarget.currentTime
     this.count(now)
     this.mark(now)
+    this.repeatLine(now)
+  }
+
+  // With Repeat on, the line last tapped (or being said) plays over and over.
+  toggleRepeat() {
+    const on = this.repeatToggleTarget.getAttribute("aria-pressed") !== "true"
+    this.repeating = on ? (this.chosen || this.current) : null
+    this.repeatToggleTarget.setAttribute("aria-pressed", on)
+  }
+
+  repeatLine(now) {
+    if (!this.repeating || this.audioTarget.paused) return
+    if (now >= Number(this.repeating.dataset.end)) {
+      this.audioTarget.currentTime = Number(this.repeating.dataset.start)
+      this.lastTime = this.audioTarget.currentTime
+    }
   }
 
   seek(event) {
+    this.chosen = event.currentTarget
+    if (this.repeating) this.repeating = this.chosen
     this.audioTarget.currentTime = Number(event.currentTarget.dataset.start)
     this.lastTime = this.audioTarget.currentTime
     this.audioTarget.play()
