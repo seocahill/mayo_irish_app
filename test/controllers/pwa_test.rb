@@ -42,6 +42,22 @@ class PwaTest < ActionDispatch::IntegrationTest
     assert_select "nav", false
   end
 
+  test "the manifest has a separate maskable icon" do
+    get pwa_manifest_path(format: :json)
+
+    icons = response.parsed_body["icons"]
+    maskable = icons.find { |i| i["purpose"] == "maskable" }
+    assert_equal "/icon-maskable.png", maskable["src"]
+    assert File.exist?(Rails.root.join("public/icon-maskable.png"))
+    assert_not_equal icons.first["src"], maskable["src"]
+  end
+
+  test "the install prompt is captured at app level, not only where the card is" do
+    js = File.read(Rails.root.join("app/javascript/application.js"))
+    assert_includes js, "beforeinstallprompt"
+    assert_includes js, "deferredInstallPrompt"
+  end
+
   test "the layout registers the service worker" do
     assert_includes File.read(Rails.root.join("app/javascript/application.js")), 'register("/service-worker")'
   end

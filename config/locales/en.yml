@@ -172,6 +172,12 @@ en:
       lesson_block: Block
       vocabulary_item: Word
   home:
+    install_card:
+      body: Keep Gaeilge Mhaigh Eo on your home screen for a quick daily session.
+      heading: Add to your home screen
+      install: Add to home screen
+      ios: In Safari, tap the Share button, then Add to Home Screen.
+      not_now: No thanks
     show:
       change: Change
       classed_1926: How was this area classed in 1926?
