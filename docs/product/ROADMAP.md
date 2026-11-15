@@ -2,29 +2,34 @@
 
 Maintained by the architect (see `ARCHITECT.md`). Owner edits welcome.
 
-## Now (approved / building)
+## Now (building; the builder picks its own steps every three hours)
 
-- #40 Dependency security updates (auto, **blocked**: builder sandbox can't reach rubygems.org; Dependabot #35–#37 green and waiting to merge)
-- #39 Ask the course a question in plain English (open PR, not behind a flag)
+- #78 Mayo forms substitution: first slices shipped (#80, #89, #91); owner to add pairs.
+- Course designer agent and narrow MCP for Darren: design in `COURSE_DESIGNER.md`; foundations first.
 
-## Next (proposed, awaiting decision)
+## Next (proposed, all `auto`)
 
-1. ~~#41 Feature flags (Flipper)~~ dropped: no flags while the app is a private beta (owner, 2026-11-12)
-2. #42 A private Usage page for admins, from our own data — foundation
-3. #43 One daily review across all lessons, scheduled with FSRS
-4. #44 Say it cards: recall aloud, then hear the Mayo speaker
+1. #95 Phone bottom tab bar, 48px tap targets
+2. #99 First lesson straight after onboarding
+3. #98 Service worker: offline page and app shell
+4. #97 Install prompt and maskable icon
+5. #96 Self-host the three web fonts
+
+## Shipped since the last roadmap
+
+#42 Usage page, #43 FSRS daily review, #44 Say it cards, #39 ask the course, #70 What's new, #76/#83/#93 repeat and slower audio, #81 review forecast, #85 milestones, #87 genitive on nouns, #79/#89/#91 Mayo forms.
 
 ## Later (ideas not yet worth a proposal)
 
-- Course designer agent and a narrow MCP for Darren (proposals, his own ideas, Irish slots to fill later): design in `COURSE_DESIGNER.md`, owner-approved direction 2026-11-14; start with the foundations and the idea inbox.
-- Grammar and phrase items in the same review queue as vocabulary (after #43).
-- Slowed and looped playback on every Mayo recording (lens 3).
-- Offline lessons and audio in the PWA service worker (lens 4).
-- Review forecast and "can now do" milestones on the home screen (lens 8).
-- Audit the live app at phone/desktop, light/dark, with Lighthouse and axe once it is reachable from the architect's sandbox.
+- Grammar and phrase items in the same review queue as vocabulary.
+- Full offline lessons and audio (after #98) (lens 4).
+- Pronunciation record-and-compare against the native speaker (lens 3).
+- Gentle reminders (web push) once installed (lens 8, after #97).
+- Audit the live app at phone/desktop, light/dark, with Lighthouse and axe once reachable from the architect's sandbox.
 
 ## Lens log
 
 | Week of | Lens | Proposals |
 |---|---|---|
-| 2026-11-08 | 1. Core learning loop and pedagogy (+ week-one foundations) | #41, #42, #43, #44 |
+| 2026-11-08 | 1. Core learning loop and pedagogy (+ foundations) | #41, #42, #43, #44 |
+| 2026-11-15 | 2. Mobile UX and onboarding | #95, #96, #97, #98, #99 |

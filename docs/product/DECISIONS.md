@@ -44,3 +44,7 @@ directly to state standing preferences.
 
 <!-- - YYYY-MM-DD #<issue> <title> — approved | rejected: <reason> -->
 - 2026-11-14 #71 Course designer: accepting an edit to existing lessons applies it straight away (versioned, undoable; retire = unpublish) — approved in principle. Each kind of apply still gets its own `data-change` issue before it is built (see `COURSE_DESIGNER.md` §8).
+- 2026-11-12 #41 Feature flags (Flipper) — rejected: no flags while the app is a private beta (only the owner and one tester use it).
+- 2026-11-12 #42 A private Usage page for admins — approved
+- 2026-11-12 #43 One daily review across all lessons, scheduled with FSRS — approved
+- 2026-11-12 #44 Say it cards: recall aloud, then hear the Mayo speaker — approved
