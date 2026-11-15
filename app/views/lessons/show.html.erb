@@ -95,6 +95,7 @@
             <tr class="border-b border-line eyebrow">
               <th class="text-left px-4 py-3 font-normal"><%= t(".irish") %></th>
               <th class="text-left px-4 py-3 font-normal hidden sm:table-cell"><%= t(".pronunciation") %></th>
+              <th class="text-left px-4 py-3 font-normal hidden md:table-cell"><%= t(".genitive") %></th>
               <th class="text-left px-4 py-3 font-normal hidden md:table-cell"><%= t(".plural") %></th>
               <th class="text-left px-4 py-3 font-normal"><%= t(".english") %></th>
               <th class="px-4 py-3"></th>
@@ -112,6 +113,7 @@
                 <td class="px-4 py-3 text-muted font-mono text-xs hidden sm:table-cell">
                   <% if item.phonetic.present? %>/<%= item.phonetic %>/<% end %>
                 </td>
+                <td class="px-4 py-3 text-ink hidden md:table-cell"><%= item.genitive %></td>
                 <td class="px-4 py-3 text-ink hidden md:table-cell"><%= item.plural %></td>
                 <td class="px-4 py-3 text-ink"><%= item.english %></td>
                 <td class="px-2 sm:px-4 py-3">

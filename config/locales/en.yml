@@ -19,6 +19,7 @@ en:
       vocabulary_item:
         english: English
         gender: Gender
+        genitive: Genitive
         irish: Irish
         notes: Notes
         phonetic: Phonetic
@@ -394,6 +395,8 @@ en:
       editing: Editing · Lesson %{number}
       english: English
       gender: Gender
+      genitive: Genitive
+      genitive_placeholder: genitive
       grammar: Grammar
       history: History
       intro_description: A short video that opens the lesson
@@ -490,6 +493,7 @@ en:
       english: English
       exit_preview: Exit preview
       feminine: f.
+      genitive: Genitive
       grammar: Grammar
       hear_selection: Hear it
       hear_word: Hear %{word}
@@ -516,6 +520,7 @@ en:
       dias_material: Field recordings
       thematic_vocab: Vocabulary
     vocabulary_item_row:
+      genitive: genitive
       meaning: meaning
       plural: plural
       pronunciation: "/pronunciation/"

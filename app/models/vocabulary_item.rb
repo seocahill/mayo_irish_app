@@ -15,7 +15,7 @@ class VocabularyItem < ApplicationRecord
   validates :english, presence: true
 
   searchable title: ->(v) { "#{v.irish} — #{v.english}" },
-             body: ->(v) { [v.irish, v.english, v.phonetic, v.plural, v.notes] },
+             body: ->(v) { [v.irish, v.english, v.phonetic, v.plural, v.genitive, v.notes] },
              lesson_number: ->(v) { v.lesson&.number }
 
   GENDERS = { 'm' => 'Masc.', 'f' => 'Fem.' }.freeze

@@ -13,7 +13,7 @@ module Mcp
     WRITABLE = {
       "lessons" => %w[title number position lesson_type grammar texts exercises
                       vocabulary_notes vocabulary_notes_content tutor_prompt],
-      "vocabulary_items" => %w[lesson_id irish english phonetic plural gender notes position audio_url],
+      "vocabulary_items" => %w[lesson_id irish english phonetic plural genitive gender notes position audio_url],
       "grammar_rules" => %w[lesson_id number position title body],
       "grammar_sections" => %w[grammar_rule_id label position body],
       "text_passages" => %w[lesson_id title position body],

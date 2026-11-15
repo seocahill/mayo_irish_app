@@ -28,7 +28,7 @@ class DialectSubstitution < ApplicationRecord
 
   def self.each_text(lesson)
     lesson.vocabulary_items.each do |v|
-      yield "#{I18n.t('dialect_substitutions.places.vocabulary')}: #{v.irish}", [ v.irish, v.plural, v.notes ].compact.join(" "), nil
+      yield "#{I18n.t('dialect_substitutions.places.vocabulary')}: #{v.irish}", [ v.irish, v.plural, v.genitive, v.notes ].compact.join(" "), nil
     end
     lesson.grammar_rules.with_rich_text_body.includes(grammar_sections: :rich_text_body).each do |rule|
       yield "#{I18n.t('dialect_substitutions.places.grammar')}: #{rule.title}", [ rule.body.to_plain_text, *rule.grammar_sections.map { |s| s.body.to_plain_text } ].join(" "), Rails.application.routes.url_helpers.edit_grammar_rule_path(rule)

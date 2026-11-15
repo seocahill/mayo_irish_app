@@ -86,7 +86,8 @@
               <tr class="bg-canvas border-b border-line text-muted text-xs uppercase tracking-wide">
                 <th class="text-left px-3 py-2 font-medium w-[22%]"><%= t(".irish") %></th>
                 <th class="text-left px-3 py-2 font-medium w-[18%]"><%= t(".pronunciation") %></th>
-                <th class="text-left px-3 py-2 font-medium w-[16%]"><%= t(".plural") %></th>
+                <th class="text-left px-3 py-2 font-medium w-[12%]"><%= t(".genitive") %></th>
+                <th class="text-left px-3 py-2 font-medium w-[12%]"><%= t(".plural") %></th>
                 <th class="text-left px-3 py-2 font-medium w-[8%]"><%= t(".gender") %></th>
                 <th class="text-left px-3 py-2 font-medium"><%= t(".english") %></th>
                 <th class="px-3 py-2 w-8"></th>
@@ -294,6 +295,7 @@
   <tr class="border-b border-line hover:bg-canvas vocab-row">
     <td class="px-2 py-1.5"><input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][irish]" class="vocab-cell-input" placeholder="<%= t(".word_placeholder") %>"></td>
     <td class="px-2 py-1.5"><input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][phonetic]" class="vocab-cell-input font-mono text-xs" placeholder="<%= t(".pronunciation_placeholder") %>"></td>
+    <td class="px-2 py-1.5"><input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][genitive]" class="vocab-cell-input" placeholder="<%= t(".genitive_placeholder") %>"></td>
     <td class="px-2 py-1.5"><input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][plural]" class="vocab-cell-input" placeholder="<%= t(".plural_placeholder") %>"></td>
     <td class="px-2 py-1.5">
       <select name="lesson[vocabulary_items_attributes][NEW_INDEX][gender]" class="vocab-cell-input">
