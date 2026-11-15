@@ -29,7 +29,7 @@ class DialectSubstitutionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "a[href=?]", edit_lesson_path(lessons(:one))
-    assert_match "Not found in any lesson", response.body
+    assert_match I18n.t("dialect_substitutions.index.not_found"), response.body
   end
 
   test "a pair needs both forms" do

@@ -13,8 +13,7 @@ class DialectSubstitution < ApplicationRecord
 
   # Where the other forms appear in a lesson: its vocabulary, grammar rules,
   # text blocks, exercises, phrases and intro transcript. Proposals only; nothing is changed.
-  def self.hits_in(lesson)
-    substitutions = ordered.to_a
+  def self.hits_in(lesson, substitutions = ordered.to_a)
     return [] if substitutions.empty?
 
     found = []
@@ -29,11 +28,12 @@ class DialectSubstitution < ApplicationRecord
   # Across the whole course: for each pair, the lessons where the other form
   # still turns up. Read-only; returns { substitution => [lesson, ...] }.
   def self.lessons_by_pair
-    result = ordered.index_with { [] }
+    substitutions = ordered.to_a
+    result = substitutions.index_with { [] }
     return result if result.empty?
 
-    Lesson.ordered.find_each do |lesson|
-      hits_in(lesson).map(&:substitution).uniq.each { |s| result[s] << lesson }
+    Lesson.ordered.includes(:vocabulary_items, :exercises, :phrases).each do |lesson|
+      hits_in(lesson, substitutions).map(&:substitution).uniq.each { |s| result[s] << lesson }
     end
     result
   end

@@ -18,7 +18,7 @@
               <p class="text-xs text-muted"><%= [ s.other_source, s.mayo_source ].compact_blank.join(" → ") %></p>
             <% end %>
             <% if s.note.present? %><p class="text-xs text-muted"><%= s.note %></p><% end %>
-            <% lessons = @lessons_by_pair[s] || [] %>
+            <% lessons = @lessons_by_pair[s] %>
             <% if lessons.empty? %>
               <p class="text-xs text-muted mt-1"><%= t(".not_found") %></p>
             <% else %>
