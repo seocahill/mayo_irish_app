@@ -17,13 +17,34 @@ class OnboardingsControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[type=radio][name='user[door]']", User.doors.size
   end
 
-  test "saves the answers and goes home" do
+  test "a brand-new learner lands on their first lesson with a start-here note" do
+    sign_in_as(users(:newcomer))
+    lesson = Lesson.visible_to(users(:newcomer)).curriculum.ordered.first
+    assert lesson, "fixtures need a curriculum lesson"
+
+    post onboarding_path, params: { user: { place: "Belmullet", dialect_region: "erris", door: "beginner" } }
+
+    assert_redirected_to lesson_path(lesson)
+    assert_match "Start here", flash[:notice]
+  end
+
+  test "a new learner who has already opened a lesson goes to Today" do
+    user = users(:newcomer)
+    sign_in_as(user)
+    user.lesson_visits.create!(lesson: lessons(:one))
+
+    post onboarding_path, params: { user: { place: "Belmullet", dialect_region: "erris", door: "beginner" } }
+
+    assert_redirected_to root_path
+  end
+
+  test "saves the answers and sends a new learner to their first lesson" do
     user = users(:newcomer)
     sign_in_as(user)
 
     post onboarding_path, params: { user: { place: "Belmullet", dialect_region: "erris", door: "school_irish" } }
 
-    assert_redirected_to root_path
+    assert_redirected_to lesson_path(Lesson.visible_to(user).curriculum.ordered.first)
     user.reload
     assert user.onboarded?
     assert_equal "Belmullet", user.place

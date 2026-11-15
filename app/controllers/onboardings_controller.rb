@@ -7,8 +7,14 @@ class OnboardingsController < ApplicationController
 
   def create
     @user = current_user
+    first_time = !@user.onboarded?
     if @user.complete_onboarding(onboarding_params)
-      redirect_to root_path
+      first_lesson = DailyPath.new(@user).first_lesson_path
+      if first_time && first_lesson && @user.lesson_visits.none?
+        redirect_to first_lesson, notice: t(".start_here")
+      else
+        redirect_to root_path
+      end
     else
       render :new, status: :unprocessable_entity
     end

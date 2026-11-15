@@ -626,6 +626,9 @@ en:
       your_question: Your question
       your_questions: Your questions
   onboardings:
+    create:
+      start_here: 'Start here: this is your first lesson. Listen first, then try the
+        words.'
     doors:
       beginner:
         name: New to Irish
