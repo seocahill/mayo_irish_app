@@ -29,6 +29,15 @@ class RecordingsTest < ActionDispatch::IntegrationTest
     assert_select "button[data-start='12.0'] span[lang=ga]", text: "one madra two"
   end
 
+  test "a line of the conversation can be repeated" do
+    stub_recording
+
+    with_abairt_token { get recording_path(15) }
+
+    assert_select "button[data-transcript-target=repeatToggle][data-action='transcript#toggleRepeat'][aria-pressed=false]",
+                  text: I18n.t("recordings.show.repeat")
+  end
+
   test "the clip page leads to the whole conversation" do
     get listening_clip_path(@clip)
 

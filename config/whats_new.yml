@@ -43,3 +43,9 @@
   body: Under "So far" on Today you can now see how many reviews are due tomorrow and
     over the coming week, so you can plan your time.
   path: /
+- id: 6
+  date: 2026-11-15
+  title: Repeat a line in a conversation
+  body: In a recording, tap Repeat line while a line plays and the Mayo speaker says it
+    over and over until you've caught it. Tap another line to move on.
+  path: /listens
