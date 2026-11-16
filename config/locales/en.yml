@@ -919,6 +919,10 @@ en:
         plural: plural
         recording: recording
       lacks: needs
+      repeats_empty: No word is taught in more than one lesson.
+      repeats_summary: Words spelled the same that appear in more than one lesson.
+        A repeat can be deliberate, so this is a prompt, not a fault list.
+      repeats_title: Words in more than one lesson
       summary: Words that still have no genitive, plural or speaker recording, lesson
         by lesson. Not every word has a plural, so treat this as a prompt, not a fault
         list.
