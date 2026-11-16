@@ -16,7 +16,7 @@ class DailyPath
   end
 
   def items
-    [ start_item, answer_item, listen_item, clip_item, recording_item, review_item, lesson_item, tutor_item, conversation_item ].compact
+    @items ||= [ start_item, answer_item, listen_item, clip_item, recording_item, review_item, lesson_item, tutor_item, conversation_item ].compact
   end
 
   # The steps that fit in the given minutes, in order. The first step is always
