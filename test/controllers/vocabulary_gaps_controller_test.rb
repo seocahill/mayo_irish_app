@@ -25,6 +25,17 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#silent-lessons a", text: /#{Regexp.escape(item.lesson.display_title)}/
   end
 
+  test "a lesson with a recorded word is not listed as silent, and learners can't see the page" do
+    VocabularyItem.delete_all
+    item = VocabularyItem.create!(lesson: Lesson.first, irish: "x", english: "y", audio_url: "https://example.com/a.mp3")
+    sign_in_as(users(:admin))
+    get vocabulary_gaps_path
+    assert_select "#silent-lessons a", count: 0
+    delete session_path
+    get vocabulary_gaps_path
+    assert_select "#silent-lessons", count: 0
+  end
+
   test "admins see thin themes" do
     VocabularyItem.delete_all
     sign_in_as(users(:admin))
