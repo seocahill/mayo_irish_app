@@ -870,6 +870,7 @@ en:
         questions: Questions to native speakers
         returning: Came back
         spoken: Spoken
+      gaps: Vocabulary gaps
       learners: See each learner
       minutes:
         one: 1 min
@@ -906,6 +907,24 @@ en:
       title: History of %{title}
       undo: Undo
       undo_confirm: Undo this change?
+  vocabulary_gaps:
+    show:
+      count:
+        one: 1 word
+        other: "%{count} words"
+      empty: Every word has a genitive, a plural and a recording.
+      eyebrow: Admin
+      kinds:
+        genitive: genitive
+        plural: plural
+        recording: recording
+      lacks: needs
+      summary: Words that still have no genitive, plural or speaker recording, lesson
+        by lesson. Not every word has a plural, so treat this as a prompt, not a fault
+        list.
+      title: Vocabulary gaps
+      totals: "%{genitive} without a genitive · %{plural} without a plural · %{recording}
+        without a recording"
   vocabulary_item_listening_clips:
     index:
       hidden: Hidden
