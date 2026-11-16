@@ -14,4 +14,30 @@ class VocabularyGapsTest < ActiveSupport::TestCase
     totals = VocabularyGaps.new.totals
     assert_equal VocabularyItem.where(genitive: [ nil, "" ]).count, totals[:genitive]
   end
+
+  test "whole words match, plurals count, substrings do not" do
+    VocabularyItem.delete_all
+    lesson = Lesson.first
+    VocabularyItem.create!(lesson: lesson, irish: "a", english: "tired")
+    VocabularyItem.create!(lesson: lesson, irish: "b", english: "Reds")
+    colours = VocabularyGaps.new.thin_themes.find { |t| t.name == "Colours" }
+    assert_equal 1, colours.count
+  end
+
+  test "a theme with three words drops off, two stay, thinnest first" do
+    VocabularyItem.delete_all
+    lesson = Lesson.first
+    %w[red green].each_with_index { |c, i| VocabularyItem.create!(lesson: lesson, irish: "x#{i}", english: c) }
+    themes = VocabularyGaps.new.thin_themes
+    assert_equal 2, themes.find { |t| t.name == "Colours" }.count
+    assert_equal themes.map(&:count), themes.map(&:count).sort
+    VocabularyItem.create!(lesson: lesson, irish: "x9", english: "blue")
+    assert_nil VocabularyGaps.new.thin_themes.find { |t| t.name == "Colours" }
+  end
+
+  test "themes file is well formed" do
+    raw = YAML.safe_load_file(VocabularyGaps::THEMES_FILE)
+    assert raw.all? { |t| t["name"].present? && t["keywords"].present? && t["keywords"].all?(String) }
+    assert_equal raw.size, raw.map { |t| t["name"] }.uniq.size
+  end
 end

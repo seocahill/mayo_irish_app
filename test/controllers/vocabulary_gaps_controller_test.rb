@@ -15,6 +15,14 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#gap-item-#{vocabulary_items(:house).id}", text: /genitive, plural, and recording|genitive, plural and recording/
   end
 
+  test "admins see thin themes" do
+    VocabularyItem.delete_all
+    sign_in_as(users(:admin))
+    get vocabulary_gaps_path
+    assert_select "#thin-themes h2"
+    assert_select "#thin-themes li", text: /Colours/
+  end
+
   test "the report is read-only" do
     sign_in_as(users(:admin))
     assert_no_difference -> { VocabularyItem.count } do
