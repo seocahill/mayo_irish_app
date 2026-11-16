@@ -88,3 +88,9 @@
   body: Under "So far" on Today you now also see how many lessons' grammar you've
     used in conversation with the tutor, with the next step. Still no points or streaks.
   path: /
+- id: 13
+  date: 2026-11-16
+  title: Pick the time you have
+  body: Each step on Today now says roughly how long it takes, and you can choose
+    5, 10 or 20 minutes to see just the steps that fit.
+  path: /

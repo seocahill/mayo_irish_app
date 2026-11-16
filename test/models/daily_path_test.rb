@@ -173,4 +173,13 @@ class DailyPathListeningTest < ActiveSupport::TestCase
 
     assert_equal "/recordings/16", recording_item.path
   end
+
+  test "every step has a time estimate and a time limit trims the list but keeps the first step" do
+    path = DailyPath.new(@user)
+
+    assert path.items.all? { |item| item.minutes.positive? }
+    assert_equal path.items, path.items_within(nil)
+    assert_equal [ path.items.first ], path.items_within(1)
+    assert_operator path.items_within(5).sum(&:minutes), :<=, [ 5, path.items.first.minutes ].max
+  end
 end

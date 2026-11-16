@@ -13,8 +13,19 @@
     <h2 id="today-heading" class="font-mono text-xs uppercase tracking-wider text-muted"><%= t(".up_next") %></h2>
 
     <% if @daily_path.items.any? %>
+      <nav aria-label="<%= t(".time_label") %>" class="flex flex-wrap items-center gap-2 text-sm">
+        <span class="text-muted"><%= t(".time_label") %></span>
+        <% DailyPath::TIME_CHOICES.each do |choice| %>
+          <%= link_to t(".time_choice", count: choice), root_path(minutes: choice),
+                "aria-current": (@minutes == choice ? "true" : nil),
+                class: "min-h-12 inline-flex items-center px-4 border rounded-sm #{@minutes == choice ? 'border-ink bg-ink text-canvas' : 'border-line bg-surface hover:bg-canvas'}" %>
+        <% end %>
+        <% if @minutes %>
+          <%= link_to t(".time_all"), root_path, class: "min-h-12 inline-flex items-center px-2 text-muted underline underline-offset-2" %>
+        <% end %>
+      </nav>
       <ul class="bg-surface border border-line rounded-sm divide-y divide-line">
-        <% @daily_path.items.each do |item| %>
+        <% @daily_path.items_within(@minutes).each do |item| %>
           <% level = level_classes(item.level) %>
           <li>
             <a href="<%= item.path %>" class="grid grid-cols-[6px_1fr] gap-4 px-4 py-4 hover:bg-canvas transition-colors">
@@ -22,6 +33,7 @@
               <span class="flex flex-col gap-0.5">
                 <span class="font-mono text-[11px] uppercase tracking-wider <%= level[:text] %>"><%= item.label %></span>
                 <span class="leading-snug"><%= item.title %></span>
+                <span class="text-xs text-muted"><%= t(".about_minutes", count: item.minutes) %></span>
               </span>
             </a>
           </li>

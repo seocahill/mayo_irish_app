@@ -179,6 +179,9 @@ en:
       ios: In Safari, tap the Share button, then Add to Home Screen.
       not_now: No thanks
     show:
+      about_minutes:
+        one: about 1 minute
+        other: about %{count} minutes
       change: Change
       classed_1926: How was this area classed in 1926?
       how_it_works: How this course works
@@ -192,6 +195,9 @@ en:
       pick_a_lesson: Pick a lesson
       so_far: So far
       this_week: "%{count} this week"
+      time_all: Show everything
+      time_choice: "%{count} min"
+      time_label: Time today?
       title: Your day
       up_next: Up next
       welcome_back: Welcome back

@@ -29,6 +29,30 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "Today shows a time per step and trims the list to the minutes chosen" do
+    sign_in_as(users(:two))
+    get root_path
+
+    assert_select "a[href=?]", root_path(minutes: 10)
+    assert_match "about", response.body
+    assert_select "a[href=?]", lesson_conversation_path(lessons(:one))
+
+    get root_path(minutes: 5)
+
+    assert_select "a[aria-current=true]", text: "5 min"
+    assert_select "a[href=?]", lesson_conversation_path(lessons(:one)), count: 0
+    assert_select "a[href=?]", lesson_path(lessons(:one))
+  end
+
+  test "an unknown minutes value is ignored" do
+    sign_in_as(users(:two))
+    get root_path(minutes: 7)
+
+    assert_response :success
+    assert_select "a[aria-current=true]", count: 0
+    assert_select "a[href=?]", lesson_conversation_path(lessons(:one))
+  end
+
   test "shows today's items and the learner's place" do
     sign_in_as(users(:two))
     get root_path
