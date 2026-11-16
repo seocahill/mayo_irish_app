@@ -1,0 +1,19 @@
+# Everyday themes the course should cover. English labels and English keywords
+# only: they are matched against the English glosses of vocabulary items to show
+# designers where the course is thin. No Irish lives here.
+- { name: Family, keywords: [mother, father, son, daughter, brother, sister, wife, husband, child, grandfather, grandmother, family] }
+- { name: Weather, keywords: [rain, wind, storm, cold, sun, snow, fog, weather, frost, cloud] }
+- { name: Food and drink, keywords: [bread, milk, tea, butter, meat, egg, potato, fish, food, drink, water, beer] }
+- { name: Farm and animals, keywords: [cow, sheep, horse, pig, dog, cat, calf, field, hay, turf, farm, bog] }
+- { name: The sea and fishing, keywords: [sea, boat, fish, net, wave, shore, tide, island, harbour] }
+- { name: House and home, keywords: [house, door, window, fire, kitchen, bed, room, table, chair, roof] }
+- { name: Body and health, keywords: [head, hand, foot, eye, heart, sick, doctor, pain, back, leg] }
+- { name: Time and calendar, keywords: [day, night, week, month, year, morning, evening, today, tomorrow, monday, sunday] }
+- { name: Numbers, keywords: [one, two, three, four, five, ten, hundred, number] }
+- { name: Clothes, keywords: [coat, shoe, hat, shirt, dress, sock, cap, clothes] }
+- { name: Work and trades, keywords: [work, job, teacher, shop, money, price, buy, sell, farmer, fisherman] }
+- { name: Church and community, keywords: [church, priest, mass, school, neighbour, wake, funeral, wedding, village] }
+- { name: Travel and places, keywords: [road, bus, car, town, village, mountain, lake, bridge, train, way] }
+- { name: Feelings and character, keywords: [happy, sad, angry, afraid, tired, lazy, kind, glad, love, hungry] }
+- { name: Colours, keywords: [red, green, blue, black, white, yellow, grey, brown, colour] }
+- { name: Greetings and manners, keywords: [hello, goodbye, please, thanks, welcome, sorry, "yes", "no", good morning] }

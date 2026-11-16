@@ -39,7 +39,27 @@ class VocabularyGaps
     @repeats ||= build_repeats
   end
 
+  THEMES_FILE = Rails.root.join("config/course_themes.yml")
+  THIN = 3
+
+  Theme = Struct.new(:name, :count, :examples, keyword_init: true)
+
+  # Everyday themes with few vocabulary items (matched by whole English word
+  # against each item's gloss), thinnest first. Read-only prompt for designers.
+  def thin_themes
+    @thin_themes ||= build_themes.select { |t| t.count < THIN }.sort_by { |t| [ t.count, t.name ] }
+  end
+
   private
+
+  def build_themes
+    glosses = VocabularyItem.pluck(:english, :irish).map { |en, ga| [ en.to_s.downcase.scan(/[a-z']+/), ga ] }
+    YAML.load_file(THEMES_FILE).map do |theme|
+      words = theme["keywords"].map(&:downcase)
+      hits = glosses.select { |tokens, _| (tokens & words).any? }
+      Theme.new(name: theme["name"], count: hits.size, examples: hits.first(THIN).map(&:last))
+    end
+  end
 
   def build_repeats
     groups = VocabularyItem.includes(:lesson).group_by { |i| i.irish.to_s.strip.unicode_normalize.downcase }

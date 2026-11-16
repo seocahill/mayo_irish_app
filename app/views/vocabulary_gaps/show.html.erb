@@ -46,4 +46,22 @@
       </ul>
     <% end %>
   </section>
+
+  <section id="thin-themes" class="flex flex-col gap-3">
+    <h2 class="font-display text-2xl"><%= t(".themes_title") %></h2>
+    <p class="text-muted text-sm"><%= t(".themes_summary", count: VocabularyGaps::THIN) %></p>
+    <% if @thin_themes.empty? %>
+      <p class="text-sm text-muted"><%= t(".themes_empty") %></p>
+    <% else %>
+      <ul class="flex flex-col gap-2">
+        <% @thin_themes.each do |theme| %>
+          <li class="card px-4 py-3 text-sm">
+            <span class="font-medium"><%= theme.name %></span>
+            <span class="text-muted">· <%= t(".theme_count", count: theme.count) %><% if theme.examples.any? %>:
+              <% theme.examples.each_with_index do |ga, i| %><%= ", " if i.positive? %><span lang="ga"><%= ga %></span><% end %><% end %></span>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
 </div>

@@ -14,4 +14,20 @@ class VocabularyGapsTest < ActiveSupport::TestCase
     totals = VocabularyGaps.new.totals
     assert_equal VocabularyItem.where(genitive: [ nil, "" ]).count, totals[:genitive]
   end
+
+  test "themes with fewer than three matching words are listed, thinnest first" do
+    themes = VocabularyGaps.new.thin_themes
+    assert themes.all? { |t| t.count < VocabularyGaps::THIN }
+    assert_equal themes.map(&:count), themes.map(&:count).sort
+    colours = themes.find { |t| t.name == "Colours" }
+    assert_equal 0, colours.count if VocabularyItem.where("lower(english) LIKE '%red%'").none?
+  end
+
+  test "a theme with enough matching words drops off the list" do
+    lesson = Lesson.first
+    %w[red green blue].each_with_index do |c, i|
+      VocabularyItem.create!(lesson: lesson, irish: "x#{i}", english: c)
+    end
+    assert_nil VocabularyGaps.new.thin_themes.find { |t| t.name == "Colours" }
+  end
 end
