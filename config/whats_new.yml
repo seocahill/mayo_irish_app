@@ -82,3 +82,9 @@
     alongside the words, so you practise whole bits of speech and not only single
     words.
   path: /review
+- id: 12
+  date: 2026-11-16
+  title: Grammar in your progress
+  body: Under "So far" on Today you now also see how many lessons' grammar you've
+    used in conversation with the tutor, with the next step. Still no points or streaks.
+  path: /

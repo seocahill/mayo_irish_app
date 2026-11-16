@@ -594,6 +594,12 @@ en:
       reached:
         one: Spoken for a minute in one conversation
         other: Spoken for %{count} minutes in one conversation
+    grammar:
+      next: 'next: %{count} lessons'
+      not_yet: Grammar shows here once you've used a lesson's grammar in conversation
+      reached:
+        one: Used the grammar of 1 lesson in conversation
+        other: Used the grammar of %{count} lessons in conversation
     listening:
       next: 'next: %{count} minutes'
       not_yet: Listening time starts with any Mayo recording
