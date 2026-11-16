@@ -51,4 +51,26 @@ class QuizQuestionTest < ActiveSupport::TestCase
     assert_equal item.irish, q.prompt
     assert_equal item.english, q.answer
   end
+
+  test "sync_for adds short phrases, skips long ones, and prunes removed ones" do
+    QuizQuestion.sync_for(@lesson)
+    base = @lesson.quiz_questions.count
+    short = @lesson.phrases.create!(irish: "Dia duit", english: "Hello", position: 1)
+    @lesson.phrases.create!(irish: "A" * 90, english: "Too long", position: 2)
+    @lesson.phrases.create!(irish: "Gan Bhéarla", english: nil, position: 3)
+
+    QuizQuestion.sync_for(@lesson)
+    assert_equal base + 2, @lesson.quiz_questions.count
+    q = @lesson.quiz_questions.find_by(source: short, direction: "ga_en")
+    assert_equal "Hello", q.answer
+    assert_not_includes q.distractors, "Hello"
+
+    short.update!(english: nil)
+    @lesson.reload
+    QuizQuestion.sync_for(@lesson)
+    assert_equal base + 2, @lesson.quiz_questions.count, "an edit never prunes learner history"
+
+    short.destroy
+    assert_equal base, @lesson.reload.quiz_questions.count
+  end
 end

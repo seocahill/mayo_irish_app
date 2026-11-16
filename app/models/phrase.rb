@@ -3,6 +3,7 @@ class Phrase < ApplicationRecord
 
   belongs_to :lesson
   belongs_to :source, polymorphic: true, optional: true
+  has_many :quiz_questions, as: :source, dependent: :destroy
 
   validates :irish, presence: true
 

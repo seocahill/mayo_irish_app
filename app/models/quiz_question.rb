@@ -45,11 +45,55 @@ class QuizQuestion < ApplicationRecord
       end
     end
 
+    keep_ids += sync_phrases(lesson)
+
+    # Only vocabulary questions are pruned here. A phrase that becomes
+    # ineligible (edited long, English removed) keeps its questions so learners'
+    # review history is never wiped by an edit; deleting the phrase removes them.
     where(source_type: "VocabularyItem", lesson_id: lesson.id)
       .where.not(id: keep_ids)
       .destroy_all
 
     keep_ids.size
+  end
+
+  # Short whole phrases join the same bank, so they come back in the daily
+  # review. Long sentences are left out: they make poor multiple-choice cards.
+  MAX_PHRASE_LENGTH = 80
+
+  def self.sync_phrases(lesson)
+    phrases = lesson.phrases.to_a.select do |ph|
+      ph.irish.present? && ph.english.present? &&
+        ph.irish.length <= MAX_PHRASE_LENGTH && ph.english.length <= MAX_PHRASE_LENGTH
+    end
+    keep_ids = []
+
+    phrases.each do |phrase|
+      DIRECTIONS.each do |direction|
+        prompt = direction == "ga_en" ? phrase.irish : phrase.english
+        answer = direction == "ga_en" ? phrase.english : phrase.irish
+
+        question = find_or_initialize_by(source: phrase, direction: direction)
+        question.lesson = lesson
+        question.prompt = prompt
+        question.answer = answer
+        if question.new_record? || Array(question.distractors).size < DISTRACTOR_COUNT
+          attr = direction == "ga_en" ? :english : :irish
+          pool = phrases.reject { |o| o.id == phrase.id }.map { |o| o.public_send(attr) }
+          pool = pool.compact.uniq.reject { |v| v.casecmp?(answer) }
+          if pool.size < DISTRACTOR_COUNT
+            extra = Phrase.where.not(id: phrase.id).where.not(lesson_id: lesson.id)
+                          .where("length(#{attr}) <= ?", MAX_PHRASE_LENGTH).order(Arel.sql("RANDOM()")).limit(200).pluck(attr)
+            pool = (pool + extra.compact_blank).uniq.reject { |v| v.casecmp?(answer) }
+          end
+          question.distractors = pool.sample(DISTRACTOR_COUNT)
+        end
+        question.save!
+        keep_ids << question.id
+      end
+    end
+
+    keep_ids
   end
 
   # Pick up to DISTRACTOR_COUNT wrong answers from sibling vocab (same lesson first,
