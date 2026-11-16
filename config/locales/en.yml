@@ -595,7 +595,7 @@ en:
         one: Spoken for a minute in one conversation
         other: Spoken for %{count} minutes in one conversation
     grammar:
-      next: 'next: %{count}'
+      next: 'next: %{count} lessons'
       not_yet: Grammar shows here once you've used a lesson's grammar in conversation
       reached:
         one: Used the grammar of 1 lesson in conversation

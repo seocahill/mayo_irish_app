@@ -79,4 +79,14 @@ class MilestonesTest < ActiveSupport::TestCase
     assert_equal 1, grammar.reached
     assert_equal 3, grammar.next_step
   end
+
+  test "grammar starts at nothing and ignores unfinished sections" do
+    SectionProgress.create!(user: @user, lesson: lessons(:one), section_type: "grammar")
+
+    grammar = Milestones.new(@user, known_words: 0).strands.find { |s| s.key == :grammar }
+
+    assert_equal 0, grammar.value
+    assert_nil grammar.reached
+    assert_equal 1, grammar.next_step
+  end
 end
