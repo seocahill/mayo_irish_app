@@ -4,14 +4,31 @@
 class DailyPath
   include Rails.application.routes.url_helpers
 
-  Item = Data.define(:level, :label, :title, :path)
+  Item = Data.define(:level, :label, :title, :path, :minutes)
+
+  # Rough minutes each kind of step takes; reviews scale with how many are due.
+  MINUTES = { answer: 2, listen: 3, clip: 2, recording: 5, lesson: 10, tutor: 5, conversation: 5, start: 5 }.freeze
+  REVIEW_SECONDS_PER_CARD = 15
+  TIME_CHOICES = [ 5, 10, 20 ].freeze
 
   def initialize(user)
     @user = user
   end
 
   def items
-    [ start_item, answer_item, listen_item, clip_item, recording_item, review_item, lesson_item, tutor_item, conversation_item ].compact
+    @items ||= [ start_item, answer_item, listen_item, clip_item, recording_item, review_item, lesson_item, tutor_item, conversation_item ].compact
+  end
+
+  # The steps that fit in the given minutes, in order. The first step is always
+  # kept, so there is something to do even in a short session.
+  def items_within(minutes)
+    return items unless minutes
+
+    total = 0
+    items.each_with_index.select do |item, index|
+      total += item.minutes
+      index.zero? || total <= minutes
+    end.map(&:first)
   end
 
   def due_count
@@ -42,11 +59,15 @@ class DailyPath
 
   attr_reader :user
 
+  def review_minutes
+    (due_count * REVIEW_SECONDS_PER_CARD / 60.0).ceil.clamp(1, 10)
+  end
+
   def review_item
     count = due_count
     return unless count.positive?
 
-    Item.new(level: :foghlaim, label: I18n.t("daily_path.review_label", count: count),
+    Item.new(minutes: review_minutes, level: :foghlaim, label: I18n.t("daily_path.review_label", count: count),
              title: I18n.t("daily_path.review_title"), path: review_path)
   end
 
@@ -54,7 +75,7 @@ class DailyPath
     return unless current_lesson
 
     progress = current_lesson.progress_for(user)
-    Item.new(level: :foghlaim, label: I18n.t("daily_path.lesson_label", number: current_lesson.number),
+    Item.new(minutes: MINUTES[:lesson], level: :foghlaim, label: I18n.t("daily_path.lesson_label", number: current_lesson.number),
              title: I18n.t("daily_path.lesson_title", title: current_lesson.title,
                            known: progress.known, total: progress.total),
              path: lesson_path(current_lesson))
@@ -63,7 +84,7 @@ class DailyPath
   def tutor_item
     return unless current_lesson
 
-    Item.new(level: :cleacht, label: I18n.t("daily_path.tutor_label"),
+    Item.new(minutes: MINUTES[:tutor], level: :cleacht, label: I18n.t("daily_path.tutor_label"),
              title: I18n.t("daily_path.tutor_title"), path: lesson_chat_path(current_lesson))
   end
 
@@ -71,7 +92,7 @@ class DailyPath
   def conversation_item
     return unless current_lesson
 
-    Item.new(level: :labhair, label: I18n.t("daily_path.conversation_label"),
+    Item.new(minutes: MINUTES[:conversation], level: :labhair, label: I18n.t("daily_path.conversation_label"),
              title: I18n.t("daily_path.conversation_title", number: current_lesson.number),
              path: lesson_conversation_path(current_lesson))
   end
@@ -83,7 +104,7 @@ class DailyPath
                                .find { |l| words_in(l).zero? && !visited?(l) }
     return unless lesson
 
-    Item.new(level: :foghlaim, label: I18n.t("daily_path.start_label", number: lesson.number),
+    Item.new(minutes: MINUTES[:start], level: :foghlaim, label: I18n.t("daily_path.start_label", number: lesson.number),
              title: lesson.title, path: lesson_path(lesson))
   end
 
@@ -94,7 +115,7 @@ class DailyPath
     count = current_lesson&.vocabulary_items&.with_recording&.count.to_i
     return theme_listen_item unless count.positive?
 
-    Item.new(level: :eist, label: I18n.t("daily_path.listen_label"),
+    Item.new(minutes: MINUTES[:listen], level: :eist, label: I18n.t("daily_path.listen_label"),
              title: I18n.t("daily_path.listen_title", count: count, number: current_lesson.number),
              path: lesson_path(current_lesson, anchor: "vocabulary"))
   end
@@ -103,7 +124,7 @@ class DailyPath
     theme = next_theme
     return unless theme
 
-    Item.new(level: :eist, label: I18n.t("daily_path.listen_label"),
+    Item.new(minutes: MINUTES[:listen], level: :eist, label: I18n.t("daily_path.listen_label"),
              title: I18n.t("daily_path.theme_listen_title", title: theme.title),
              path: lesson_path(theme, anchor: "vocabulary"))
   end
@@ -116,7 +137,7 @@ class DailyPath
     clip = ListeningClip.next_for(user, lessons: finished_lessons)
     return unless clip
 
-    Item.new(level: :eist, label: I18n.t("daily_path.clip_label"),
+    Item.new(minutes: MINUTES[:clip], level: :eist, label: I18n.t("daily_path.clip_label"),
              title: I18n.t("daily_path.clip_title", word: clip.vocabulary_item.irish), path: listening_clip_path(clip))
   end
 
@@ -125,7 +146,7 @@ class DailyPath
     count = user.native_questions.unseen_answers.count
     return unless count.positive?
 
-    Item.new(level: :eist, label: I18n.t("daily_path.answer_label"),
+    Item.new(minutes: MINUTES[:answer], level: :eist, label: I18n.t("daily_path.answer_label"),
              title: I18n.t("daily_path.answer_title", count: count), path: native_questions_path)
   end
 
@@ -137,7 +158,7 @@ class DailyPath
     clip = ListeningClip.next_recording_for(user)
     return unless clip
 
-    Item.new(level: :eist, label: I18n.t("daily_path.recording_label"),
+    Item.new(minutes: MINUTES[:recording], level: :eist, label: I18n.t("daily_path.recording_label"),
              title: I18n.t("daily_path.recording_title", title: clip.abairt_recording_title),
              path: recording_path(clip.abairt_recording_id))
   end

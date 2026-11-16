@@ -7,6 +7,7 @@ class HomeController < ApplicationController
 
     @whats_new = current_user.whats_new_unseen
     @daily_path = DailyPath.new(current_user)
+    @minutes = params[:minutes].to_i.presence_in(DailyPath::TIME_CHOICES)
     @forecast = QuizReview.forecast_for(current_user)
     @spoken_time = SpokenTime.new(current_user)
     @listening_minutes = ListeningTime.minutes_for(current_user)
