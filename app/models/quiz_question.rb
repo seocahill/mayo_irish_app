@@ -47,7 +47,10 @@ class QuizQuestion < ApplicationRecord
 
     keep_ids += sync_phrases(lesson)
 
-    where(source_type: %w[VocabularyItem Phrase], lesson_id: lesson.id)
+    # Only vocabulary questions are pruned here. A phrase that becomes
+    # ineligible (edited long, English removed) keeps its questions so learners'
+    # review history is never wiped by an edit; deleting the phrase removes them.
+    where(source_type: "VocabularyItem", lesson_id: lesson.id)
       .where.not(id: keep_ids)
       .destroy_all
 
@@ -80,8 +83,8 @@ class QuizQuestion < ApplicationRecord
           pool = pool.compact.uniq.reject { |v| v.casecmp?(answer) }
           if pool.size < DISTRACTOR_COUNT
             extra = Phrase.where.not(id: phrase.id).where.not(lesson_id: lesson.id)
-                          .where("length(#{attr}) <= ?", MAX_PHRASE_LENGTH).limit(200).pluck(attr)
-            pool = (pool + extra.compact).uniq.reject { |v| v.casecmp?(answer) }
+                          .where("length(#{attr}) <= ?", MAX_PHRASE_LENGTH).order(Arel.sql("RANDOM()")).limit(200).pluck(attr)
+            pool = (pool + extra.compact_blank).uniq.reject { |v| v.casecmp?(answer) }
           end
           question.distractors = pool.sample(DISTRACTOR_COUNT)
         end

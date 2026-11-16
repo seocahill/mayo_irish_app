@@ -65,9 +65,12 @@ class QuizQuestionTest < ActiveSupport::TestCase
     assert_equal "Hello", q.answer
     assert_not_includes q.distractors, "Hello"
 
-    short.destroy
+    short.update!(english: nil)
     @lesson.reload
     QuizQuestion.sync_for(@lesson)
-    assert_equal base, @lesson.quiz_questions.count
+    assert_equal base + 2, @lesson.quiz_questions.count, "an edit never prunes learner history"
+
+    short.destroy
+    assert_equal base, @lesson.reload.quiz_questions.count
   end
 end
