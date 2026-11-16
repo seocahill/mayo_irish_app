@@ -33,4 +33,17 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
     get vocabulary_gaps_path
     assert_redirected_to new_session_path
   end
+
+  test "lists words taught in more than one lesson" do
+    other = Lesson.create!(number: 99, title: "Other", position: 99)
+    other.vocabulary_items.create!(irish: "Madra", english: "dog again", position: 1)
+    other.vocabulary_items.create!(irish: "Madra", english: "dog thrice", position: 2)
+
+    sign_in_as(users(:admin))
+    get vocabulary_gaps_path
+
+    assert_response :success
+    assert_select "#repeated-words li", text: /madra/i
+    assert_select "#repeated-words li", count: 1
+  end
 end

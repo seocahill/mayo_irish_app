@@ -27,4 +27,23 @@
       <% end %>
     </ul>
   <% end %>
+
+  <section id="repeated-words" class="flex flex-col gap-3">
+    <h2 class="font-display text-2xl"><%= t(".repeats_title") %></h2>
+    <p class="text-muted text-sm"><%= t(".repeats_summary") %></p>
+    <% if @repeats.empty? %>
+      <p class="text-sm text-muted"><%= t(".repeats_empty") %></p>
+    <% else %>
+      <ul class="flex flex-col gap-2">
+        <% @repeats.each do |repeat| %>
+          <li class="card px-4 py-3 text-sm">
+            <span lang="ga" class="font-medium"><%= repeat.irish %></span>
+            <span class="text-muted">·
+              <% repeat.items.each_with_index do |item, i| %><%= ", " if i.positive? %><%= link_to item.lesson.display_title, edit_lesson_path(item.lesson), class: "underline" %> (<%= item.english %>)<% end %>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
 </div>
