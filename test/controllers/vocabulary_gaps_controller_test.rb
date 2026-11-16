@@ -15,6 +15,16 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#gap-item-#{vocabulary_items(:house).id}", text: /genitive, plural, and recording|genitive, plural and recording/
   end
 
+  test "admins see lessons with no recordings" do
+    VocabularyItem.delete_all
+    item = VocabularyItem.create!(lesson: Lesson.first, irish: "x", english: "y")
+    sign_in_as(users(:admin))
+    get vocabulary_gaps_path
+
+    assert_response :success
+    assert_select "#silent-lessons a", text: /#{Regexp.escape(item.lesson.display_title)}/
+  end
+
   test "admins see thin themes" do
     VocabularyItem.delete_all
     sign_in_as(users(:admin))

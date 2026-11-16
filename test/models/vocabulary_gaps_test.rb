@@ -40,4 +40,14 @@ class VocabularyGapsTest < ActiveSupport::TestCase
     assert raw.all? { |t| t["name"].present? && t["keywords"].present? && t["keywords"].all?(String) }
     assert_equal raw.size, raw.map { |t| t["name"] }.uniq.size
   end
+
+  test "a lesson is silent only when none of its words has a recording" do
+    VocabularyItem.delete_all
+    lesson = Lesson.first
+    a = VocabularyItem.create!(lesson: lesson, irish: "a", english: "one", audio_url: "")
+    VocabularyItem.create!(lesson: lesson, irish: "b", english: "two")
+    assert_equal [ [ lesson, 2 ] ], VocabularyGaps.new.silent_lessons.map { |s| [ s.lesson, s.count ] }
+    a.update!(audio_url: "https://example.com/a.mp3")
+    assert_empty VocabularyGaps.new.silent_lessons
+  end
 end

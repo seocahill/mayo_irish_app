@@ -50,6 +50,19 @@ class VocabularyGaps
     @thin_themes ||= build_themes.select { |t| t.count < THIN }.sort_by { |t| [ t.count, t.name ] }
   end
 
+  Silent = Struct.new(:lesson, :count, keyword_init: true)
+
+  # Lessons with vocabulary where not one word has a speaker recording, so
+  # designers can see where native audio is wholly missing. Read-only.
+  def silent_lessons
+    @silent_lessons ||= Lesson.includes(vocabulary_items: { audio_attachment: :blob }).order(:position, :number).filter_map do |lesson|
+      items = lesson.vocabulary_items.to_a
+      next if items.empty? || items.any? { |i| !self.class.missing_for(i).include?(:recording) }
+
+      Silent.new(lesson: lesson, count: items.size)
+    end
+  end
+
   private
 
   def self.stem(word)
