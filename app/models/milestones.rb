@@ -6,6 +6,8 @@ class Milestones
   LISTENING_MINUTE_STEPS = [ 5, 15, 30, 60, 180, 600 ].freeze
   # The longest single conversation, in minutes of the learner's own speech.
   CONVERSATION_MINUTE_STEPS = [ 1, 3, 5, 10, 20 ].freeze
+  # Lessons whose grammar the learner has shown they can use in conversation with the tutor.
+  GRAMMAR_LESSON_STEPS = [ 1, 3, 5, 10, 20, 40 ].freeze
 
   Strand = Data.define(:key, :value, :reached, :next_step) do
     def started? = reached.present? || value.positive?
@@ -22,7 +24,8 @@ class Milestones
   def strands
     [ strand(:words, known_words, WORD_STEPS),
       strand(:listening, @listening_minutes || ListeningTime.minutes_for(@user), LISTENING_MINUTE_STEPS),
-      strand(:conversation, longest_conversation_minutes, CONVERSATION_MINUTE_STEPS) ]
+      strand(:conversation, longest_conversation_minutes, CONVERSATION_MINUTE_STEPS),
+      strand(:grammar, grammar_lessons, GRAMMAR_LESSON_STEPS) ]
   end
 
   private
@@ -32,6 +35,10 @@ class Milestones
   def strand(key, value, steps)
     Strand.new(key: key, value: value, reached: steps.select { |step| step <= value }.max,
                next_step: steps.find { |step| step > value })
+  end
+
+  def grammar_lessons
+    @user.section_progresses.completed.where(section_type: "grammar").count
   end
 
   def longest_conversation_minutes

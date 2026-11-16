@@ -66,4 +66,17 @@ class MilestonesTest < ActiveSupport::TestCase
     assert_nil Milestones.new(@user, known_words: 9).strands.first.reached
     assert_nil Milestones.new(@user).strands.second.reached
   end
+
+  test "grammar counts lessons whose grammar the learner has used in conversation" do
+    SectionProgress.mark_complete(user: @user, lesson: lessons(:one), section_type: "grammar")
+    SectionProgress.mark_complete(user: @user, lesson: lessons(:one), section_type: "texts")
+    SectionProgress.mark_complete(user: users(:admin), lesson: lessons(:one), section_type: "grammar")
+
+    grammar = Milestones.new(@user, known_words: 0).strands.fourth
+
+    assert_equal :grammar, grammar.key
+    assert_equal 1, grammar.value
+    assert_equal 1, grammar.reached
+    assert_equal 3, grammar.next_step
+  end
 end
