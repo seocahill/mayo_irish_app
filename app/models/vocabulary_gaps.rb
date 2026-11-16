@@ -1,6 +1,11 @@
 # Read-only report for course designers: per lesson, which vocabulary items
 # still lack a genitive, a plural or a speaker recording.
 class VocabularyGaps
+  THEMES_FILE = Rails.root.join("config/course_themes.yml")
+  THIN = 3
+
+  Theme = Struct.new(:name, :count, :examples, keyword_init: true)
+
   Row = Struct.new(:lesson, :items, keyword_init: true) do
     def missing(item)
       VocabularyGaps.missing_for(item)
@@ -39,11 +44,6 @@ class VocabularyGaps
     @repeats ||= build_repeats
   end
 
-  THEMES_FILE = Rails.root.join("config/course_themes.yml")
-  THIN = 3
-
-  Theme = Struct.new(:name, :count, :examples, keyword_init: true)
-
   # Everyday themes with few vocabulary items (matched by whole English word
   # against each item's gloss), thinnest first. Read-only prompt for designers.
   def thin_themes
@@ -52,12 +52,24 @@ class VocabularyGaps
 
   private
 
+  def self.stem(word)
+    word.delete_suffix("'s").sub(/(?<=[a-z])(es|s)\z/, "")
+  end
+
+  def self.themes_config
+    @themes_config ||= Array(YAML.safe_load_file(THEMES_FILE)).filter_map do |t|
+      words = Array(t["keywords"]).map { |k| stem(k.to_s.downcase) }.reject(&:blank?)
+      { name: t["name"].to_s, words: words.to_set } if t.is_a?(Hash) && t["name"].present?
+    end
+  end
+
   def build_themes
-    glosses = VocabularyItem.pluck(:english, :irish).map { |en, ga| [ en.to_s.downcase.scan(/[a-z']+/), ga ] }
-    YAML.load_file(THEMES_FILE).map do |theme|
-      words = theme["keywords"].map(&:downcase)
-      hits = glosses.select { |tokens, _| (tokens & words).any? }
-      Theme.new(name: theme["name"], count: hits.size, examples: hits.first(THIN).map(&:last))
+    glosses = VocabularyItem.order(:id).pluck(:english, :irish).map do |en, ga|
+      [ en.to_s.downcase.scan(/[a-z]+/).map { |w| self.class.stem(w) }.to_set, ga ]
+    end
+    self.class.themes_config.map do |theme|
+      hits = glosses.select { |tokens, _| tokens.intersect?(theme[:words]) }
+      Theme.new(name: theme[:name], count: hits.size, examples: hits.first(THIN).map(&:last).uniq)
     end
   end
 

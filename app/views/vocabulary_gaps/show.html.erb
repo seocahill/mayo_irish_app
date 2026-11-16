@@ -49,7 +49,7 @@
 
   <section id="thin-themes" class="flex flex-col gap-3">
     <h2 class="font-display text-2xl"><%= t(".themes_title") %></h2>
-    <p class="text-muted text-sm"><%= t(".themes_summary", count: VocabularyGaps::THIN) %></p>
+    <p class="text-muted text-sm"><%= t(".themes_summary", limit: VocabularyGaps::THIN) %></p>
     <% if @thin_themes.empty? %>
       <p class="text-sm text-muted"><%= t(".themes_empty") %></p>
     <% else %>

@@ -16,6 +16,7 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "admins see thin themes" do
+    VocabularyItem.delete_all
     sign_in_as(users(:admin))
     get vocabulary_gaps_path
     assert_select "#thin-themes h2"

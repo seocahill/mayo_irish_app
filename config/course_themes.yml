@@ -16,4 +16,4 @@
 - { name: Travel and places, keywords: [road, bus, car, town, village, mountain, lake, bridge, train, way] }
 - { name: Feelings and character, keywords: [happy, sad, angry, afraid, tired, lazy, kind, glad, love, hungry] }
 - { name: Colours, keywords: [red, green, blue, black, white, yellow, grey, brown, colour] }
-- { name: Greetings and manners, keywords: [hello, goodbye, please, thanks, welcome, sorry, "yes", "no", good morning] }
+- { name: Greetings and manners, keywords: [hello, goodbye, please, thanks, welcome, sorry, "yes", "no"] }

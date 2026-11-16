@@ -931,7 +931,7 @@ en:
         other: "%{count} words so far"
         zero: no words yet
       themes_empty: Every theme on the list has enough words.
-      themes_summary: Everyday themes with fewer than %{count} words in the course
+      themes_summary: Everyday themes with fewer than %{limit} words in the course
         (matched on the English). A prompt for what to add from your own Mayo Irish.
       themes_title: Themes with few or no words
       title: Vocabulary gaps
