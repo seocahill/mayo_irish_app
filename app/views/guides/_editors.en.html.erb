@@ -49,6 +49,31 @@
     <li><strong>New lesson</strong> is at the top of the Lessons page.</li>
   </ul>
 
+  <h3 id="course-tools" class="font-semibold text-lg mt-2 scroll-mt-4">Tools for designing the course</h3>
+  <p>
+    All of these are linked from <strong>Course tools</strong>, a button at the top of the Lessons page. They show you where the course is thin; they are prompts, not lists of faults.
+  </p>
+  <ul class="list-disc pl-5 flex flex-col gap-2">
+    <li>
+      <strong>Vocabulary gaps</strong> lists words with no genitive, no plural or no recording of their own, words taught in more than one lesson,
+      everyday themes with few or no words, and lessons with no recordings. Open a lesson from any line and fix it there.
+      Not every word can take a genitive or plural, so use your judgement. The themes it checks come from <code>config/course_themes.yml</code>; ask Seosamh to change them.
+    </li>
+    <li>
+      <strong>Mayo forms</strong> is a list of pairs: a Connemara (or other) form and the Mayo form that should be used instead, each with where it comes from.
+      Use <strong>Add a pair</strong> to add one. The list then shows which lessons still use the other form, with a link to each. Nothing is swapped automatically; you change the lesson yourself.
+    </li>
+    <li>
+      <strong>Usage</strong> shows week by week how many learners are active, how many come back, how many answers they give and how accurate they are.
+    </li>
+    <li>
+      <strong>Learners</strong> is where new sign-ups are approved and where you can see how each learner is getting on.
+    </li>
+    <li>
+      <strong>Flagged replies</strong> is described below.
+    </li>
+  </ul>
+
   <h3 class="font-semibold text-lg mt-2">Recordings for words</h3>
   <p>
     <strong>Abairt recordings</strong>, on each lesson, lists the words that have no recording of their own and finds Mayo recordings of them on Abairt, a word at a time as you scroll.
@@ -70,7 +95,7 @@
 
   <h3 class="font-semibold text-lg mt-2">Flagged conversation replies</h3>
   <p>
-    When a learner flags an AI reply in a conversation, a <strong>flagged replies</strong> button appears at the top of the Lessons page.
+    When a learner flags an AI reply in a conversation, a <strong>flagged replies</strong> button appears at the top of the Lessons page (and it's in Course tools).
     Each flag shows what the learner said and the reply, and whether ABAIR or OpenAI wrote it.
     Check the Irish, then <strong>Dismiss</strong> it. If the reply really was wrong, note what was wrong and pass it on to Seosamh:
     replies can't be edited, but a pattern of mistakes tells us what to change in how the conversation is set up.

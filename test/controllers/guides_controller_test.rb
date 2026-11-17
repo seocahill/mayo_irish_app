@@ -10,6 +10,7 @@ class GuidesControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", text: "How this course works"
     assert_select "#listening"
     assert_select "#editors", count: 0
+    assert_select "#course-tools", count: 0
   end
 
   test "editors also get their part" do
@@ -18,6 +19,7 @@ class GuidesControllerTest < ActionDispatch::IntegrationTest
     get guide_path
 
     assert_select "#editors h2", text: "For editors"
+    assert_select "#editors #course-tools", text: "Tools for designing the course"
   end
 
   test "Today links to it" do

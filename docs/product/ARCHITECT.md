@@ -109,6 +109,8 @@ and cite it in proposals. Starting points, to be verified, not assumed:
    steps); say so in the digest instead. Never re-propose
    something in `DECISIONS.md` as rejected unless the evidence has materially
    changed, and say what changed.
+   Any proposal that adds or changes an admin-facing page or process must
+   include updating the editors' guide (`app/views/guides/_editors.en.html.erb`).
 4. **Follow up on shipped work.** For issues labelled `shipped`, check the
    result against its "how we'll know it worked" signal (and Sentry for new
    errors), and propose a fix or removal if it missed.
