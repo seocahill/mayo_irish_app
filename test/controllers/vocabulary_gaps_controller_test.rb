@@ -155,4 +155,18 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
     get vocabulary_gaps_path
     assert_select "#unpractised-lessons a", text: /#{Regexp.escape(lesson.display_title)}/
   end
+
+  test "a lesson with a phrase is not listed as unpractised, and learners can't see the section" do
+    VocabularyItem.delete_all
+    Phrase.delete_all
+    lesson = Lesson.first
+    VocabularyItem.create!(lesson: lesson, irish: "a", english: "one")
+    Phrase.create!(lesson: lesson, irish: "x", english: "y")
+    sign_in_as(users(:admin))
+    get vocabulary_gaps_path
+    assert_select "#unpractised-lessons a", count: 0
+    delete session_path
+    get vocabulary_gaps_path
+    assert_select "#unpractised-lessons", count: 0
+  end
 end
