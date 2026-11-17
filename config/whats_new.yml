@@ -94,3 +94,9 @@
   body: Each step on Today now says roughly how long it takes, and you can choose
     5, 10 or 20 minutes to see just the steps that fit.
   path: /
+- id: 14
+  date: 2026-11-17
+  title: Next steps are links
+  body: Under "So far" on Today, the "next" step on each line now takes you straight
+    to where you can reach it, whether that is your review, your listening or the lessons.
+  path: /
