@@ -12,6 +12,13 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "main a[href=?]", new_registration_path, count: 0
   end
 
+  test "every page starts with a skip link to the main content" do
+    get root_path
+
+    assert_select "a[href='#main']", text: "Skip to main content"
+    assert_select "main#main"
+  end
+
   test "learners who have not onboarded are sent to onboarding" do
     sign_in_as(users(:newcomer))
     get root_path
