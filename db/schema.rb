@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_17_005519) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_17_090000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -96,6 +96,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_17_005519) do
     t.datetime "updated_at", null: false
     t.index ["lesson_id", "position"], name: "index_exercises_on_lesson_id_and_position"
     t.index ["lesson_id"], name: "index_exercises_on_lesson_id"
+  end
+
+  create_table "form_suggestion_dismissals", force: :cascade do |t|
+    t.integer "vocabulary_item_id", null: false
+    t.string "kind", null: false
+    t.string "form", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["vocabulary_item_id", "kind", "form"], name: "index_form_dismissals_uniqueness", unique: true
+    t.index ["vocabulary_item_id"], name: "index_form_suggestion_dismissals_on_vocabulary_item_id"
   end
 
   create_table "grammar_rules", force: :cascade do |t|
@@ -459,6 +469,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_17_005519) do
     t.datetime "updated_at", null: false
     t.string "genitive"
     t.string "part_of_speech"
+    t.integer "plural_source_entry_id"
+    t.integer "genitive_source_entry_id"
     t.index ["lesson_id", "position"], name: "index_vocabulary_items_on_lesson_id_and_position"
     t.index ["lesson_id"], name: "index_vocabulary_items_on_lesson_id"
   end
@@ -469,6 +481,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_17_005519) do
   add_foreign_key "chat_sessions", "lessons"
   add_foreign_key "chat_sessions", "users"
   add_foreign_key "exercises", "lessons"
+  add_foreign_key "form_suggestion_dismissals", "vocabulary_items"
   add_foreign_key "grammar_rules", "lessons"
   add_foreign_key "grammar_sections", "grammar_rules"
   add_foreign_key "invitations", "users", column: "inviter_id"

@@ -46,6 +46,9 @@ Rails.application.routes.draw do
   resource :vocabulary_gaps, only: :show
   resources :vocabulary_items, only: [] do
     resource :part_of_speech, only: :update, controller: "vocabulary_item_parts_of_speech"
+    resources :form_suggestions, only: :index, controller: "vocabulary_item_form_suggestions"
+    resource :form_acceptance, only: :create, controller: "vocabulary_item_form_acceptances"
+    resource :form_dismissal, only: :create, controller: "vocabulary_item_form_dismissals"
   end
   resource :course_tools, only: :show
   resource :usage, only: :show, controller: "usage"

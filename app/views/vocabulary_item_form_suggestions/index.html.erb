@@ -1,0 +1,34 @@
+<%= turbo_frame_tag dom_id(@item, :form_suggestions) do %>
+  <div class="card px-3 py-2 mt-2 flex flex-col gap-3">
+    <% if @error %>
+      <p class="text-sm text-red-600"><%= @error %></p>
+    <% elsif @candidates.empty? %>
+      <p class="text-sm text-muted"><%= t(".none_found") %></p>
+    <% else %>
+      <p class="text-xs text-muted"><%= t(".note") %></p>
+      <ul class="flex flex-col divide-y divide-line">
+        <% @candidates.each do |c| %>
+          <li class="py-3 first:pt-0 last:pb-0 flex flex-col gap-2 text-sm">
+            <div>
+              <p lang="ga" class="break-words"><%= c.irish %></p>
+              <% if c.english.present? %><p class="text-muted"><%= c.english %></p><% end %>
+              <p class="text-xs text-muted mt-0.5"><%= [ c.speaker, c.dialect&.humanize ].compact.join(" · ") %></p>
+              <p class="text-xs <%= c.confirmed ? "text-foghlaim" : "text-labhair" %>"><%= c.confirmed ? t(".confirmed") : t(".unconfirmed") %> · <%= t(".places", count: c.places) %></p>
+            </div>
+            <audio controls preload="none" src="<%= c.audio_url %>" class="h-8 w-full max-w-xs"></audio>
+            <% c.forms.each do |form| %>
+              <% @kinds.each do |kind| %>
+                <% next if @dismissed.include?([ kind.to_s, form ]) %>
+                <div class="flex flex-wrap items-center gap-2">
+                  <span lang="ga" class="font-medium"><%= form %></span>
+                  <%= button_to t(".accept_as", kind: t("vocabulary_gaps.show.kinds.#{kind}")), vocabulary_item_form_acceptance_path(@item), params: { kind: kind, form: form, entry_id: c.entry_id }, class: "btn-solid text-xs min-h-12", form: { data: { turbo_frame: "_top" } } %>
+                  <%= button_to t(".dismiss"), vocabulary_item_form_dismissal_path(@item), params: { kind: kind, form: form }, class: "btn-outline text-xs min-h-12", form: { data: { turbo_frame: "_top" } } %>
+                </div>
+              <% end %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+<% end %>

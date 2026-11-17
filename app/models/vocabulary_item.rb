@@ -10,6 +10,7 @@ class VocabularyItem < ApplicationRecord
   has_many :quiz_questions, as: :source, dependent: :destroy
   has_many :recording_suggestions, dependent: :destroy
   has_many :listening_clips, dependent: :destroy
+  has_many :form_suggestion_dismissals, dependent: :destroy
 
   validates :irish, presence: true
   validates :english, presence: true

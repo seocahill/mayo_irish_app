@@ -964,6 +964,7 @@ en:
         plural: plural
         recording: recording
       lacks: needs
+      look_up: Look up in Abairt
       next: Next →
       not_noun: Not a noun
       noun: Noun
@@ -1002,6 +1003,30 @@ en:
         one: 1 word still to classify
         other: "%{count} words still to classify"
         zero: Every word is classified
+  vocabulary_item_form_acceptances:
+    create:
+      not_saved: Not saved. The field already has a value, or the form wasn't a single
+        word.
+      saved: Saved “%{form}” for %{word}. See the lesson's History to undo.
+  vocabulary_item_form_dismissals:
+    create:
+      dismissed: Won't suggest “%{form}” for that word again.
+      not_saved: Couldn't dismiss that.
+  vocabulary_item_form_suggestions:
+    index:
+      accept_as: Accept as %{kind}
+      confirmed: Confirmed on Abairt
+      dismiss: Dismiss
+      none_found: No match in Abairt yet. Fill it in from your own knowledge or the
+        monographs.
+      note: These are words from what Mayo speakers said, not rules. Check each one
+        is really the plural or genitive of this word before accepting.
+      places:
+        one: said by 1 speaker
+        other: said by %{count} speakers
+      rate_limited: Abairt's hourly limit is used up. Try again later.
+      unavailable: Abairt couldn't be reached. Try again later.
+      unconfirmed: Not yet confirmed (speech-recogniser text, unchecked)
   vocabulary_item_listening_clips:
     index:
       hidden: Hidden
