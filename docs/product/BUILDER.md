@@ -90,11 +90,14 @@ direction."
 5. For anything a learner can see or feel, add a note to `config/whats_new.yml`
    in the same PR (next id, today's date, plain English, a `path` to try it).
    Learners see it once on Today. Skip it for invisible work (deps, refactors,
-   CI, admin-only pages).
-6. For UI changes, take phone (390×844) and desktop screenshots, light and
+   CI). Admin-only pages skip the learner note, not the guide (step 6).
+6. Any PR that adds or changes an admin-facing page or process updates the
+   editors' guide (`app/views/guides/_editors.en.html.erb`) in the same PR, and
+   says in the PR body that it did, or why not.
+7. For UI changes, take phone (390×844) and desktop screenshots, light and
    dark, and commit them to `docs/screenshots/pr-<n>/` or attach
    them to the PR.
-7. Never change or delete existing records (users, learner progress,
+8. Never change or delete existing records (users, learner progress,
    lessons, vocabulary, recordings) in production without the owner's yes
    (Stop 1 in `CADENCE.md`), and never write dialect content yourself. Adding
    tables, columns, keys and relations is fine.
