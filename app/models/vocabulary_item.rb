@@ -18,8 +18,13 @@ class VocabularyItem < ApplicationRecord
              body: ->(v) { [v.irish, v.english, v.phonetic, v.plural, v.genitive, v.notes] },
              lesson_number: ->(v) { v.lesson&.number }
 
+  PARTS_OF_SPEECH = %w[noun verb adjective adverb other].freeze
+  normalizes :part_of_speech, with: ->(v) { v.presence }
+  validates :part_of_speech, inclusion: { in: PARTS_OF_SPEECH }, allow_nil: true
+
   GENDERS = { 'm' => 'Masc.', 'f' => 'Fem.' }.freeze
 
+  scope :unclassified, -> { where(part_of_speech: nil) }
   scope :ordered, -> { order(:position) }
   # Said by a speaker: an uploaded recording or an approved one from Abairt.
   scope :with_recording, -> { left_joins(:audio_attachment).where("vocabulary_items.audio_url <> '' OR active_storage_attachments.id IS NOT NULL") }

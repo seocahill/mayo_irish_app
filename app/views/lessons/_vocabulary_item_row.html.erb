@@ -20,6 +20,12 @@
           class: "vocab-cell-input" %>
   </td>
   <td class="px-2 py-1.5">
+    <%= f.select :part_of_speech,
+          VocabularyItem::PARTS_OF_SPEECH.map { |k| [t("lessons.parts_of_speech.#{k}"), k] },
+          { include_blank: t("lessons.parts_of_speech.unset") },
+          class: "vocab-cell-input" %>
+  </td>
+  <td class="px-2 py-1.5">
     <%= f.text_field :english, class: "vocab-cell-input", placeholder: t(".meaning") %>
   </td>
   <td class="px-2 py-1.5 text-center">

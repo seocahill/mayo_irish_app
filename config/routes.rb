@@ -44,6 +44,9 @@ Rails.application.routes.draw do
   resources :invitations, only: %i[create destroy]
   resources :dialect_substitutions, except: :show
   resource :vocabulary_gaps, only: :show
+  resources :vocabulary_items, only: [] do
+    resource :part_of_speech, only: :update, controller: "vocabulary_item_parts_of_speech"
+  end
   resource :course_tools, only: :show
   resource :usage, only: :show, controller: "usage"
   resources :learners, only: %i[index show] do

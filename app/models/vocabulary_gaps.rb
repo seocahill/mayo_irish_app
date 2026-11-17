@@ -14,8 +14,10 @@ class VocabularyGaps
 
   def self.missing_for(item)
     missing = []
-    missing << :genitive if item.genitive.blank?
-    missing << :plural if item.plural.blank?
+    if item.part_of_speech == "noun"
+      missing << :genitive if item.genitive.blank?
+      missing << :plural if item.plural.blank?
+    end
     missing << :recording unless item.audio_url.present? || item.audio.attached?
     missing
   end
@@ -34,6 +36,19 @@ class VocabularyGaps
   def totals
     all = rows.flat_map(&:items)
     %i[genitive plural recording].index_with { |k| all.count { |i| self.class.missing_for(i).include?(k) } }
+  end
+
+  UNCLASSIFIED_PER_PAGE = 50
+
+  # Words an editor hasn't yet marked as a noun, verb and so on. Gaps for
+  # genitive and plural are only counted once a word is marked as a noun.
+  def unclassified_count
+    @unclassified_count ||= VocabularyItem.unclassified.count
+  end
+
+  def unclassified(page: 1)
+    VocabularyItem.unclassified.includes(:lesson).order(:lesson_id, :position, :id)
+                  .offset((page.to_i.clamp(1, 10_000) - 1) * UNCLASSIFIED_PER_PAGE).limit(UNCLASSIFIED_PER_PAGE)
   end
 
   Repeat = Struct.new(:irish, :items, keyword_init: true)

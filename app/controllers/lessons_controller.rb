@@ -85,7 +85,15 @@ class LessonsController < ApplicationController
     end
   end
 
+  # A blank Type in the word list never clears a classification made elsewhere
+  # (for example from the gaps report while this form was open).
   def lesson_params
+    permitted = permitted_lesson_params
+    permitted[:vocabulary_items_attributes]&.each_value { |attrs| attrs.delete(:part_of_speech) if attrs[:part_of_speech].blank? }
+    permitted
+  end
+
+  def permitted_lesson_params
     params.require(:lesson).permit(
       :title,
       :number,
@@ -100,7 +108,7 @@ class LessonsController < ApplicationController
       :intro_video_url,
       :intro_video_transcript,
       vocabulary_items_attributes: [
-        :id, :irish, :phonetic, :plural, :genitive, :gender, :english, :notes, :position, :_destroy
+        :id, :irish, :phonetic, :plural, :genitive, :gender, :part_of_speech, :english, :notes, :position, :_destroy
       ]
     )
   end

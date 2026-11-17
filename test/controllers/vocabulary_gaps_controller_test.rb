@@ -3,7 +3,8 @@ require "test_helper"
 class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
   test "admins see words that lack a genitive, plural or recording" do
     item = vocabulary_items(:dog)
-    item.update!(genitive: "madra", plural: "madraí", audio_url: "https://example.com/a.mp3")
+    item.update!(part_of_speech: "noun", genitive: "madra", plural: "madraí", audio_url: "https://example.com/a.mp3")
+    vocabulary_items(:house).update!(part_of_speech: "noun")
 
     sign_in_as(users(:admin))
     get vocabulary_gaps_path
@@ -74,5 +75,73 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#repeated-words li", text: /madra/i
     assert_select "#repeated-words li", count: 1
+  end
+
+  test "unclassified words are listed separately and not counted as gaps" do
+    vocabulary_items(:house).update!(audio_url: "https://example.com/h.mp3")
+    sign_in_as(users(:admin))
+    get vocabulary_gaps_path
+
+    assert_select "#unclassified h2", text: /still to classify/
+    assert_select "#unclassified-item-#{vocabulary_items(:house).id}"
+    assert_select "#gap-item-#{vocabulary_items(:house).id}", count: 0
+  end
+
+  test "an editor classifies a word in one tap, and it is recorded in history" do
+    item = vocabulary_items(:house)
+    sign_in_as(users(:admin))
+
+    assert_difference -> { PaperTrail::Version.count }, 1 do
+      patch vocabulary_item_part_of_speech_path(item), params: { part_of_speech: "noun" }
+    end
+
+    assert_equal "noun", item.reload.part_of_speech
+    assert_redirected_to vocabulary_gaps_path(page: 1, anchor: "unclassified")
+  end
+
+  test "an invalid type is refused" do
+    item = vocabulary_items(:house)
+    sign_in_as(users(:admin))
+    patch vocabulary_item_part_of_speech_path(item), params: { part_of_speech: "pronoun" }
+    assert_nil item.reload.part_of_speech
+  end
+
+  test "learners cannot classify words" do
+    item = vocabulary_items(:house)
+    sign_in_as(users(:two))
+    patch vocabulary_item_part_of_speech_path(item), params: { part_of_speech: "noun" }
+    assert_redirected_to root_path
+    assert_nil item.reload.part_of_speech
+  end
+
+  test "the lesson editor offers the type of each word" do
+    sign_in_as(users(:admin))
+    get edit_lesson_path(vocabulary_items(:house).lesson)
+    assert_select "select[name$='[part_of_speech]']"
+  end
+
+  test "a missing type does not clear a classification" do
+    item = vocabulary_items(:house)
+    item.update!(part_of_speech: "noun")
+    sign_in_as(users(:admin))
+    patch vocabulary_item_part_of_speech_path(item), params: { part_of_speech: "" }
+    assert_equal "noun", item.reload.part_of_speech
+  end
+
+  test "a page beyond the last is clamped" do
+    sign_in_as(users(:admin))
+    get vocabulary_gaps_path(page: 999)
+    assert_response :success
+    assert_select "#unclassified-item-#{vocabulary_items(:house).id}"
+  end
+
+  test "saving the word list with a blank type keeps an existing one; a chosen type is saved" do
+    item = vocabulary_items(:house)
+    item.update!(part_of_speech: "noun")
+    sign_in_as(users(:admin))
+    patch lesson_path(item.lesson), params: { lesson: { vocabulary_items_attributes: { "0" => { id: item.id, part_of_speech: "" } } } }
+    assert_equal "noun", item.reload.part_of_speech
+    patch lesson_path(item.lesson), params: { lesson: { vocabulary_items_attributes: { "0" => { id: item.id, part_of_speech: "verb" } } } }
+    assert_equal "verb", item.reload.part_of_speech
   end
 end
