@@ -17,6 +17,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "a[href='#main']", text: "Skip to main content"
     assert_select "main#main"
+    assert_operator response.body.index('href="#main"'), :<, response.body.index("<header")
   end
 
   test "learners who have not onboarded are sent to onboarding" do

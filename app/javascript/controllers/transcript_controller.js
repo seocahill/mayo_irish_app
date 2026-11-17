@@ -88,7 +88,7 @@ export default class extends Controller {
 
     this.current?.removeAttribute("aria-current")
     current?.setAttribute("aria-current", "true")
-    current?.scrollIntoView({ block: "center", behavior: "smooth" })
+    current?.scrollIntoView({ block: "center", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" })
     this.current = current
   }
 
