@@ -12,7 +12,32 @@ class VocabularyGapsTest < ActiveSupport::TestCase
 
   test "totals count each kind of gap" do
     totals = VocabularyGaps.new.totals
-    assert_equal VocabularyItem.where(genitive: [ nil, "" ]).count, totals[:genitive]
+    assert_equal 0, totals[:genitive], "unclassified words are not counted as genitive gaps"
+    vocabulary_items(:house).update!(part_of_speech: "noun")
+    totals = VocabularyGaps.new.totals
+    assert_equal 1, totals[:genitive]
+    assert_equal 1, totals[:plural]
+  end
+
+  test "only nouns can lack a genitive or plural" do
+    item = vocabulary_items(:dog)
+    item.update!(audio_url: "https://example.com/a.mp3", genitive: "", plural: "")
+    assert_empty VocabularyGaps.missing_for(item)
+    %w[verb adjective adverb other].each do |kind|
+      item.update!(part_of_speech: kind)
+      assert_empty VocabularyGaps.missing_for(item)
+    end
+    item.update!(part_of_speech: "noun")
+    assert_equal [ :genitive, :plural ], VocabularyGaps.missing_for(item)
+  end
+
+  test "part of speech validates and blank stays empty" do
+    item = vocabulary_items(:dog)
+    item.part_of_speech = "pronoun"
+    assert_not item.valid?
+    item.part_of_speech = ""
+    assert item.valid?
+    assert_nil item.tap(&:save!).reload.part_of_speech
   end
 
   test "whole words match, plurals count, substrings do not" do

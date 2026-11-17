@@ -28,6 +28,40 @@
     </ul>
   <% end %>
 
+  <section id="unclassified" class="flex flex-col gap-3">
+    <h2 class="font-display text-2xl"><%= t(".unclassified_title", count: @unclassified_count) %></h2>
+    <p class="text-muted text-sm"><%= t(".unclassified_summary") %></p>
+    <% if @unclassified_count.positive? %>
+      <details class="card px-4 py-3 text-sm" <%= "open" if params[:page].present? %>>
+        <summary class="cursor-pointer min-h-12 flex items-center"><%= t(".unclassified_show", count: @unclassified_count) %></summary>
+        <ul class="flex flex-col gap-3 mt-2">
+          <% @unclassified.each do |item| %>
+            <li id="unclassified-item-<%= item.id %>" class="flex flex-col gap-1">
+              <span><span lang="ga"><%= item.irish %></span> <span class="text-muted">· <%= item.english %> · <%= link_to item.lesson.display_title, edit_lesson_path(item.lesson), class: "underline" %></span></span>
+              <span class="flex flex-wrap gap-2">
+                <% { "noun" => t(".noun"), "other" => t(".not_noun") }.each do |value, label| %>
+                  <%= button_to label, vocabulary_item_part_of_speech_path(item), method: :patch, params: { part_of_speech: value, page: @page }, class: "btn-outline min-h-12" %>
+                <% end %>
+                <%= form_with url: vocabulary_item_part_of_speech_path(item), method: :patch, class: "flex gap-2" do |f| %>
+                  <%= hidden_field_tag :page, @page %>
+                  <%= select_tag :part_of_speech, options_for_select((VocabularyItem::PARTS_OF_SPEECH - %w[noun other]).map { |k| [t("lessons.parts_of_speech.#{k}"), k] }), class: "vocab-cell-input min-h-12", "aria-label": t(".other_type") %>
+                  <%= f.submit t(".set"), class: "btn-outline min-h-12" %>
+                <% end %>
+              </span>
+            </li>
+          <% end %>
+        </ul>
+        <% if @pages > 1 %>
+          <nav class="flex gap-4 mt-3" aria-label="<%= t(".pages") %>">
+            <%= link_to t(".previous"), vocabulary_gaps_path(page: @page - 1, anchor: "unclassified"), class: "underline" if @page > 1 %>
+            <span class="text-muted"><%= t(".page_of", page: @page, pages: @pages) %></span>
+            <%= link_to t(".next"), vocabulary_gaps_path(page: @page + 1, anchor: "unclassified"), class: "underline" if @page < @pages %>
+          </nav>
+        <% end %>
+      </details>
+    <% end %>
+  </section>
+
   <section id="repeated-words" class="flex flex-col gap-3">
     <h2 class="font-display text-2xl"><%= t(".repeats_title") %></h2>
     <p class="text-muted text-sm"><%= t(".repeats_summary") %></p>

@@ -37,5 +37,6 @@ ignore_unused:
   - versions.index.events.*
   - usage.show.figures.*
   - course_tools.show.tools.*
+  - lessons.parts_of_speech.*
   - search.types.*
   - daily_path.*

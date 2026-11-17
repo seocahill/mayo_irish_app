@@ -464,6 +464,7 @@ en:
       new_word: "+ New word"
       not_reviewed: Not reviewed yet.
       open_chat: Open chat
+      part_of_speech: Type
       plural: Plural
       plural_placeholder: plural
       position: Position
@@ -535,6 +536,13 @@ en:
       position: Position
       title: Add a lesson
       title_placeholder: e.g. Lesson title
+    parts_of_speech:
+      adjective: adjective
+      adverb: adverb
+      noun: noun
+      other: other
+      unset: "?"
+      verb: verb
     section_badge:
       known: Known
     show:
@@ -956,17 +964,25 @@ en:
         plural: plural
         recording: recording
       lacks: needs
+      next: Next →
+      not_noun: Not a noun
+      noun: Noun
+      other_type: Another type
+      page_of: Page %{page} of %{pages}
+      pages: Pages of unclassified words
+      previous: "← Previous"
       repeats_empty: No word is taught in more than one lesson.
       repeats_summary: Words spelled the same that appear in more than one lesson.
         A repeat can be deliberate, so this is a prompt, not a fault list.
       repeats_title: Words in more than one lesson
+      set: Set
       silent_empty: Every lesson with vocabulary has at least one recorded word.
       silent_summary: Lessons with vocabulary where no word has a speaker recording
         yet. A prompt for where native audio is most needed.
       silent_title: Lessons with no recordings
-      summary: Words that still have no genitive, plural or speaker recording, lesson
-        by lesson. Not every word has a plural, so treat this as a prompt, not a fault
-        list.
+      summary: Words that still have no speaker recording, and nouns that still have
+        no genitive or plural, lesson by lesson. Only words marked as nouns are counted
+        for genitive and plural. Treat this as a prompt, not a fault list.
       theme_count:
         one: 1 word so far
         other: "%{count} words so far"
@@ -978,6 +994,14 @@ en:
       title: Vocabulary gaps
       totals: "%{genitive} without a genitive · %{plural} without a plural · %{recording}
         without a recording"
+      unclassified_show: Show the words to classify
+      unclassified_summary: Genitive and plural gaps are only counted for words marked
+        as nouns. Mark each word below, one tap at a time; you can undo it in the
+        lesson's History.
+      unclassified_title:
+        one: 1 word still to classify
+        other: "%{count} words still to classify"
+        zero: Every word is classified
   vocabulary_item_listening_clips:
     index:
       hidden: Hidden
@@ -986,6 +1010,10 @@ en:
       none_found: No suitable phrases on Abairt yet.
       rate_limited: Abairt’s hourly limit is used up. Try again later.
       unavailable: Abairt couldn’t be reached. Try again later.
+  vocabulary_item_parts_of_speech:
+    update:
+      invalid: That type isn't allowed.
+      saved: Saved “%{word}”.
   vocabulary_item_recording_suggestions:
     index:
       approve: Approve

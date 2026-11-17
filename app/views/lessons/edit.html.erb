@@ -89,6 +89,7 @@
                 <th class="text-left px-3 py-2 font-medium w-[12%]"><%= t(".genitive") %></th>
                 <th class="text-left px-3 py-2 font-medium w-[12%]"><%= t(".plural") %></th>
                 <th class="text-left px-3 py-2 font-medium w-[8%]"><%= t(".gender") %></th>
+                <th class="text-left px-3 py-2 font-medium w-[10%]"><%= t(".part_of_speech") %></th>
                 <th class="text-left px-3 py-2 font-medium"><%= t(".english") %></th>
                 <th class="px-3 py-2 w-8"></th>
               </tr>
@@ -301,6 +302,12 @@
       <select name="lesson[vocabulary_items_attributes][NEW_INDEX][gender]" class="vocab-cell-input">
         <option value="m"><%= t("lessons.genders.masculine") %></option>
         <option value="f"><%= t("lessons.genders.feminine") %></option>
+      </select>
+    </td>
+    <td class="px-2 py-1.5">
+      <select name="lesson[vocabulary_items_attributes][NEW_INDEX][part_of_speech]" class="vocab-cell-input">
+        <option value=""><%= t("lessons.parts_of_speech.unset") %></option>
+        <% VocabularyItem::PARTS_OF_SPEECH.each do |k| %><option value="<%= k %>"><%= t("lessons.parts_of_speech.#{k}") %></option><% end %>
       </select>
     </td>
     <td class="px-2 py-1.5"><input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][english]" class="vocab-cell-input" placeholder="<%= t(".meaning_placeholder") %>"></td>
