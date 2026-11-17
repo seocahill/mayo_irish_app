@@ -7,6 +7,7 @@ class VocabularyGapsController < ApplicationController
     @totals = report.totals
     @repeats = report.repeats
     @silent_lessons = report.silent_lessons
+    @unpractised_lessons = report.unpractised_lessons
     @thin_themes = report.thin_themes
     @unclassified_count = report.unclassified_count
     @pages = (@unclassified_count.to_f / VocabularyGaps::UNCLASSIFIED_PER_PAGE).ceil

@@ -75,4 +75,15 @@ class VocabularyGapsTest < ActiveSupport::TestCase
     a.update!(audio_url: "https://example.com/a.mp3")
     assert_empty VocabularyGaps.new.silent_lessons
   end
+
+  test "a lesson is unpractised only when it has words but no exercises or phrases" do
+    VocabularyItem.delete_all
+    Exercise.delete_all
+    Phrase.delete_all
+    lesson = Lesson.first
+    VocabularyItem.create!(lesson: lesson, irish: "a", english: "one")
+    assert_equal [ [ lesson, 1 ] ], VocabularyGaps.new.unpractised_lessons.map { |u| [ u.lesson, u.count ] }
+    Phrase.create!(lesson: lesson, irish: "x", english: "y")
+    assert_empty VocabularyGaps.new.unpractised_lessons
+  end
 end
