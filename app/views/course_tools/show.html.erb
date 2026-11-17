@@ -1,0 +1,18 @@
+<div class="max-w-2xl mx-auto flex flex-col gap-8">
+  <header>
+    <p class="eyebrow"><%= t(".eyebrow") %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
+    <p class="text-muted mt-1 text-sm"><%= t(".summary") %></p>
+  </header>
+
+  <ul class="flex flex-col gap-3" id="course-tools">
+    <% @tools.each do |key, path| %>
+      <li>
+        <%= link_to send(path), class: "card px-4 py-3 flex flex-col gap-1 min-h-12 hover:border-ink" do %>
+          <span class="font-medium"><%= t(".tools.#{key}.name") %></span>
+          <span class="text-sm text-muted"><%= t(".tools.#{key}.description") %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
