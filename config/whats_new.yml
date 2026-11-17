@@ -100,3 +100,10 @@
   body: Under "So far" on Today, the "next" step on each line now takes you straight
     to where you can reach it, whether that is your review, your listening or the lessons.
   path: /
+- id: 15
+  date: 2026-11-17
+  title: Where a form comes from
+  body: When a plural or genitive in a lesson's word list was taken from native speech
+    recorded on Abairt, it now carries a small "Abairt" marker, so you can see it
+    is attested and not guessed.
+  path: /lessons

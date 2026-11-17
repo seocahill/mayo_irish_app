@@ -547,9 +547,11 @@ en:
     section_badge:
       known: Known
     show:
+      abairt: Abairt
       abairt_recordings: Abairt recordings
       all_lessons: All lessons
       ask_native_speaker: Ask a native speaker
+      attested_in_abairt: Attested in native speech recorded on Abairt
       conversation: Conversation
       english: English
       exit_preview: Exit preview
