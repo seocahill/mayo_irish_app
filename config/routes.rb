@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   resources :invitations, only: %i[create destroy]
   resources :dialect_substitutions, except: :show
   resource :vocabulary_gaps, only: :show
+  resource :course_tools, only: :show
   resource :usage, only: :show, controller: "usage"
   resources :learners, only: %i[index show] do
     resource :approval, only: :create, controller: "learner_approvals"

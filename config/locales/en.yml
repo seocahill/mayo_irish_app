@@ -51,6 +51,30 @@ en:
       record_hint: Tap the microphone to speak, and again to send.
       thinking: Thinking…
       title: What do you want to know?
+  course_tools:
+    show:
+      eyebrow: Admin
+      summary: Everything for designing and looking after the course, in one place.
+      title: Course tools
+      tools:
+        flagged_replies:
+          description: Tutor replies that learners flagged as wrong, to review and
+            clear.
+          name: Flagged replies
+        gaps:
+          description: Words missing a plural, genitive or recording, words taught
+            twice, thin themes and lessons with no recordings.
+          name: Vocabulary gaps
+        learners:
+          description: Approve new learners and see how each one is getting on.
+          name: Learners
+        substitutions:
+          description: Words to swap for the Mayo form, and which lessons still use
+            the other one.
+          name: Mayo forms
+        usage:
+          description: How the course is being used, week by week.
+          name: Usage
   daily_path:
     answer_label: Listen · native speaker
     answer_title:
@@ -475,6 +499,7 @@ en:
     index:
       complete: Complete
       course: Course
+      course_tools: Course tools
       draft: Draft
       flagged_replies:
         one: 1 flagged reply
