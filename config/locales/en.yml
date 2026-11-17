@@ -557,6 +557,7 @@ en:
       exit_preview: Exit preview
       feminine: f.
       genitive: Genitive
+      genitive_short: gen.
       grammar: Grammar
       hear_selection: Hear it
       hear_word: Hear %{word}
@@ -567,6 +568,7 @@ en:
       listening_clips: Listening clips
       play_recording: Play your recording
       plural: Plural
+      plural_short: pl.
       practice: Practice
       preview_banner: Previewing this lesson as a learner sees it.
       pronunciation: Pronunciation
