@@ -84,6 +84,16 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "li", text: /No spoken conversation yet/
   end
 
+  test "each next step links to where the learner can reach it" do
+    sign_in_as(users(:two))
+    get root_path
+
+    assert_select "li a[href=?]", review_path, text: /next: 10/
+    assert_select "li a[href=?]", listens_path, text: /next: 5 minutes/
+    assert_select "li a[href=?]", lessons_path, text: /in one go/
+    assert_select "li a[href=?]", lessons_path, text: /lessons/
+  end
+
   test "shows the review forecast once reviews are scheduled" do
     sign_in_as(users(:two))
     get root_path

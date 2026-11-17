@@ -8,7 +8,9 @@
         <%= t("milestones.#{strand.key}.not_yet") %>
       <% end %>
       <% if strand.next_step %>
-        <span>· <%= t("milestones.#{strand.key}.next", count: strand.next_step, remaining: strand.remaining) %></span>
+        <span>· <%= link_to t("milestones.#{strand.key}.next", count: strand.next_step, remaining: strand.remaining),
+                            { words: review_path, listening: listens_path }.fetch(strand.key, lessons_path),
+                            class: "underline underline-offset-2 hover:text-ink focus-visible:outline focus-visible:outline-2 inline-block py-3 -my-2" %></span>
       <% end %>
     </li>
   <% end %>
