@@ -113,8 +113,18 @@
                 <td class="px-4 py-3 text-muted font-mono text-xs hidden sm:table-cell">
                   <% if item.phonetic.present? %>/<%= item.phonetic %>/<% end %>
                 </td>
-                <td class="px-4 py-3 text-ink hidden md:table-cell"><%= item.genitive %></td>
-                <td class="px-4 py-3 text-ink hidden md:table-cell"><%= item.plural %></td>
+                <td class="px-4 py-3 text-ink hidden md:table-cell">
+                  <%= item.genitive %>
+                  <% if item.genitive.present? && item.genitive_source_entry_id.present? %>
+                    <span class="chip text-[10px] ml-1" title="<%= t(".attested_in_abairt") %>"><%= t(".abairt") %></span>
+                  <% end %>
+                </td>
+                <td class="px-4 py-3 text-ink hidden md:table-cell">
+                  <%= item.plural %>
+                  <% if item.plural.present? && item.plural_source_entry_id.present? %>
+                    <span class="chip text-[10px] ml-1" title="<%= t(".attested_in_abairt") %>"><%= t(".abairt") %></span>
+                  <% end %>
+                </td>
                 <td class="px-4 py-3 text-ink"><%= item.english %></td>
                 <td class="px-2 sm:px-4 py-3">
                   <div class="flex items-center gap-2 sm:gap-3 justify-end">
