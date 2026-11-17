@@ -20,7 +20,13 @@
           <ul class="mt-2 flex flex-col gap-1">
             <% row.items.each do |item| %>
               <li id="gap-item-<%= item.id %>"><span lang="ga"><%= item.irish %></span> <span class="text-muted">· <%= item.english %></span>
-                <span class="text-xs text-muted">— <%= t(".lacks") %> <%= row.missing(item).map { |m| t(".kinds.#{m}") }.to_sentence %></span></li>
+                <span class="text-xs text-muted">— <%= t(".lacks") %> <%= row.missing(item).map { |m| t(".kinds.#{m}") }.to_sentence %></span>
+                <% if AbairtClient.configured? && (row.missing(item) & %i[plural genitive]).any? %>
+                  <%= turbo_frame_tag dom_id(item, :form_suggestions) do %>
+                    <%= link_to t(".look_up"), vocabulary_item_form_suggestions_path(item), class: "underline text-xs min-h-12 inline-flex items-center" %>
+                  <% end %>
+                <% end %>
+              </li>
             <% end %>
           </ul>
         </li>
