@@ -109,6 +109,13 @@
                   <% if item.gender == 'f' %>
                     <span class="text-xs text-muted font-normal ml-1"><%= t(".feminine") %></span>
                   <% end %>
+                  <% if item.genitive.present? || item.plural.present? %>
+                    <div class="md:hidden text-xs text-muted font-normal mt-0.5" data-test="forms-inline">
+                      <% if item.genitive.present? %><abbr title="<%= t(".genitive") %>"><%= t(".genitive_short") %></abbr> <span class="text-ink"><%= item.genitive %></span><% if item.genitive_source_entry_id.present? %> <span class="chip text-[10px]" title="<%= t(".attested_in_abairt") %>"><%= t(".abairt") %></span><% end %><% end %>
+                      <% if item.genitive.present? && item.plural.present? %><span aria-hidden="true"> · </span><% end %>
+                      <% if item.plural.present? %><abbr title="<%= t(".plural") %>"><%= t(".plural_short") %></abbr> <span class="text-ink"><%= item.plural %></span><% if item.plural_source_entry_id.present? %> <span class="chip text-[10px]" title="<%= t(".attested_in_abairt") %>"><%= t(".abairt") %></span><% end %><% end %>
+                    </div>
+                  <% end %>
                 </td>
                 <td class="px-4 py-3 text-muted font-mono text-xs hidden sm:table-cell">
                   <% if item.phonetic.present? %>/<%= item.phonetic %>/<% end %>

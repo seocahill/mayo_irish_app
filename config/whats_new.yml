@@ -107,3 +107,9 @@
     recorded on Abairt, it now carries a small "Abairt" marker, so you can see it
     is attested and not guessed.
   path: /lessons
+- id: 16
+  date: 2026-11-17
+  title: Plurals and genitives on your phone
+  body: In a lesson's word list, the genitive and plural of each noun now show under
+    the word on a phone, where before they only appeared on wider screens.
+  path: /lessons
