@@ -6,6 +6,8 @@ class VocabularyItemFormSuggestionsController < ApplicationController
   def index
     @item = VocabularyItem.find(params[:vocabulary_item_id])
     @kinds = VocabularyGaps.missing_for(@item) & %i[plural genitive]
+    return @candidates = [] if @kinds.empty? || !AbairtClient.configured?
+
     @dismissed = @item.form_suggestion_dismissals.pluck(:kind, :form).to_set
     @candidates = FormSuggester.new(@item).call.select { |c| c.forms.any? { |f| @kinds.any? { |k| !@dismissed.include?([ k.to_s, f ]) } } }
   rescue AbairtClient::RateLimited

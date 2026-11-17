@@ -25,6 +25,12 @@ class VocabularyItem < ApplicationRecord
 
   GENDERS = { 'm' => 'Masc.', 'f' => 'Fem.' }.freeze
 
+  # An editor changing an accepted form by hand means it no longer comes from that entry.
+  before_save do
+    self.plural_source_entry_id = nil if plural_changed? && !plural_source_entry_id_changed?
+    self.genitive_source_entry_id = nil if genitive_changed? && !genitive_source_entry_id_changed?
+  end
+
   scope :unclassified, -> { where(part_of_speech: nil) }
   scope :ordered, -> { order(:position) }
   # Said by a speaker: an uploaded recording or an approved one from Abairt.

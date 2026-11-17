@@ -18,13 +18,15 @@ class FormSuggester
   end
 
   # Nouns only change at the end, so look up the start of the word.
-  def stem = IrishText.words(@item.irish).first.to_s.then { |w| w[0, [ w.length - 2, 3 ].max] }
+  def stem = singular[0, prefix_length]
 
   private
 
-  def singular = IrishText.words(@item.irish).first.to_s
+  ARTICLES = %w[an na].freeze
 
-  def prefix_length = [ singular.length - 3, 3 ].max
+  def singular = (IrishText.words(@item.irish) - ARTICLES).first.to_s
+
+  def prefix_length = [ singular.length - 2, 3 ].max
 
   def related?(word)
     word != singular && word.length > 2 && word.start_with?(singular[0, prefix_length])

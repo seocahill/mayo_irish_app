@@ -54,8 +54,9 @@ class FormSuggestionsTest < ActionDispatch::IntegrationTest
   end
 
   test "accepting fills a blank plural with its source and is recorded in History" do
+    stub_abairt(entry(2, "Chonaic mé madraí"))
     assert_difference -> { PaperTrail::Version.where(item: @item).count }, 1 do
-      post vocabulary_item_form_acceptance_path(@item), params: { kind: "plural", form: "madraí", entry_id: 2 }
+      with_abairt_token { post vocabulary_item_form_acceptance_path(@item), params: { kind: "plural", form: "madraí", entry_id: 2 } }
     end
     @item.reload
     assert_equal "madraí", @item.plural
@@ -65,16 +66,42 @@ class FormSuggestionsTest < ActionDispatch::IntegrationTest
 
   test "accepting never overwrites a value" do
     @item.update!(plural: "madraí")
-    post vocabulary_item_form_acceptance_path(@item), params: { kind: "plural", form: "madradh", entry_id: 3 }
+    stub_abairt(entry(3, "Tá madradh ann"))
+    with_abairt_token { post vocabulary_item_form_acceptance_path(@item), params: { kind: "plural", form: "madradh", entry_id: 3 } }
     assert_equal "madraí", @item.reload.plural
     assert_nil @item.plural_source_entry_id
   end
 
   test "rejects anything that isn't one word" do
-    post vocabulary_item_form_acceptance_path(@item), params: { kind: "genitive", form: "<b>x</b>" }
-    assert_nil @item.reload.genitive
-    post vocabulary_item_form_acceptance_path(@item), params: { kind: "name", form: "madra" }
-    assert_response :redirect
+    stub_abairt(entry(2, "Chonaic mé madraí"))
+    with_abairt_token do
+      post vocabulary_item_form_acceptance_path(@item), params: { kind: "genitive", form: "<b>x</b>", entry_id: 2 }
+      assert_nil @item.reload.genitive
+      post vocabulary_item_form_acceptance_path(@item), params: { kind: "name", form: "madraí", entry_id: 2 }
+      assert_equal [ nil, nil ], [ @item.reload.plural, @item.genitive ]
+    end
+  end
+
+  test "refuses a form Abairt didn't offer, or an entry it didn't come from" do
+    stub_abairt(entry(2, "Chonaic mé madraí"))
+    with_abairt_token do
+      post vocabulary_item_form_acceptance_path(@item), params: { kind: "plural", form: "madraithe", entry_id: 2 }
+      post vocabulary_item_form_acceptance_path(@item), params: { kind: "plural", form: "madraí", entry_id: 99 }
+      post vocabulary_item_form_acceptance_path(@item), params: { kind: "plural", form: "madraí", entry_id: "abc" }
+      post vocabulary_item_form_acceptance_path(@item), params: { kind: "plural", form: "madraí" }
+    end
+    assert_nil @item.reload.plural
+  end
+
+  test "editing an accepted form by hand clears its source" do
+    @item.update!(plural: "madraí", plural_source_entry_id: 2)
+    @item.update!(plural: "madraí eile")
+    assert_nil @item.reload.plural_source_entry_id
+  end
+
+  test "the lookup is hidden without an Abairt token" do
+    get vocabulary_gaps_path
+    assert_select "#gap-item-#{@item.id} a[href=?]", vocabulary_item_form_suggestions_path(@item), count: 0
   end
 
   test "a dismissed form isn't suggested again, once" do
@@ -92,12 +119,14 @@ class FormSuggestionsTest < ActionDispatch::IntegrationTest
     sign_in_as(users(:two))
     get vocabulary_item_form_suggestions_path(@item)
     assert_redirected_to root_path
+    post vocabulary_item_form_dismissal_path(@item), params: { kind: "plural", form: "madraí" }
+    assert_equal 0, @item.form_suggestion_dismissals.count
     post vocabulary_item_form_acceptance_path(@item), params: { kind: "plural", form: "madraí" }
     assert_nil @item.reload.plural
   end
 
   test "the gaps report links to the lookup for nouns missing a form" do
-    get vocabulary_gaps_path
+    with_abairt_token { get vocabulary_gaps_path }
     assert_select "#gap-item-#{@item.id} a[href=?]", vocabulary_item_form_suggestions_path(@item)
   end
 end

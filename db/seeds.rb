@@ -3,6 +3,7 @@
 
 # Clear existing data
 ActionText::RichText.delete_all
+FormSuggestionDismissal.delete_all
 VocabularyItem.delete_all
 Exercise.delete_all
 TextPassage.delete_all
