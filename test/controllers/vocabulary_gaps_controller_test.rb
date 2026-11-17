@@ -144,4 +144,15 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
     patch lesson_path(item.lesson), params: { lesson: { vocabulary_items_attributes: { "0" => { id: item.id, part_of_speech: "verb" } } } }
     assert_equal "verb", item.reload.part_of_speech
   end
+
+  test "admins see lessons with no exercises or phrases" do
+    VocabularyItem.delete_all
+    Exercise.delete_all
+    Phrase.delete_all
+    lesson = Lesson.first
+    VocabularyItem.create!(lesson: lesson, irish: "a", english: "one")
+    sign_in_as(users(:admin))
+    get vocabulary_gaps_path
+    assert_select "#unpractised-lessons a", text: /#{Regexp.escape(lesson.display_title)}/
+  end
 end

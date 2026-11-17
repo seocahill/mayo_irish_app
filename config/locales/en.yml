@@ -1006,6 +1006,10 @@ en:
         one: 1 word still to classify
         other: "%{count} words still to classify"
         zero: Every word is classified
+      unpractised_empty: Every lesson with vocabulary has an exercise or a phrase.
+      unpractised_summary: Lessons that teach words but have no exercises and no phrases
+        yet. A prompt for where learners have nothing to practise on.
+      unpractised_title: Lessons with no exercises or phrases
   vocabulary_item_form_acceptances:
     create:
       not_saved: Not saved. The field already has a value, or the form wasn't a single

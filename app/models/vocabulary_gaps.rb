@@ -78,6 +78,18 @@ class VocabularyGaps
     end
   end
 
+  Unpractised = Struct.new(:lesson, :count, keyword_init: true)
+
+  # Lessons with vocabulary but no exercises and no phrases, so designers can
+  # see where there is nothing to practise the words on. Read-only.
+  def unpractised_lessons
+    @unpractised_lessons ||= Lesson.includes(:vocabulary_items, :exercises, :phrases).order(:position, :number).filter_map do |lesson|
+      next if lesson.vocabulary_items.empty? || lesson.exercises.any? || lesson.phrases.any?
+
+      Unpractised.new(lesson: lesson, count: lesson.vocabulary_items.size)
+    end
+  end
+
   private
 
   def self.stem(word)
