@@ -29,15 +29,24 @@ en:
     create:
       flagged: Thanks. An editor will check that reply.
   course_proposals:
+    create:
+      blank: Write the idea first.
+      saved: Idea saved, in your words.
+      too_long: That idea is too long. Keep it under 2,000 characters.
     index:
       empty: No proposals yet. They will appear here when the designer or a contributor
         adds one.
       eyebrow: Admin
+      idea_label: Your idea, in your own words
+      idea_placeholder: For example, a lesson on weather, or a word you think is missing
+      idea_save: Save idea
+      idea_title: Capture an idea
       kinds:
         cross_reference: Cross-reference
         dialect_question: Question about a form
         extraction_request: Extraction request
         gap: Gap
+        idea: Idea
         merge: Merge lessons
         new_lesson: New lesson
         recording_match: Recording match

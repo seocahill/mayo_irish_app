@@ -51,7 +51,7 @@ Rails.application.routes.draw do
     resource :form_dismissal, only: :create, controller: "vocabulary_item_form_dismissals"
   end
   resource :course_tools, only: :show
-  resources :course_proposals, only: :index
+  resources :course_proposals, only: %i[index create]
   resource :usage, only: :show, controller: "usage"
   resources :learners, only: %i[index show] do
     resource :approval, only: :create, controller: "learner_approvals"

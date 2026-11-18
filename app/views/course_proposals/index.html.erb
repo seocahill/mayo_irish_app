@@ -5,6 +5,16 @@
     <p class="text-muted mt-1 text-sm"><%= t(".summary") %></p>
   </header>
 
+  <section class="card px-4 py-4 flex flex-col gap-2">
+    <h2 class="font-medium"><%= t(".idea_title") %></h2>
+    <%= form_with url: course_proposals_path, method: :post, class: "flex flex-col gap-2" do |f| %>
+      <%= f.label :raw_text, t(".idea_label"), class: "text-sm text-muted" %>
+      <%= f.text_area :raw_text, rows: 3, maxlength: 2000, placeholder: t(".idea_placeholder"),
+            class: "rounded-sm border border-line bg-surface px-3 py-2.5 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-ink" %>
+      <%= f.button t(".idea_save"), class: "btn-solid self-start" %>
+    <% end %>
+  </section>
+
   <% if @proposals.empty? %>
     <p class="text-sm text-muted" id="no-proposals"><%= t(".empty") %></p>
   <% else %>
@@ -13,6 +23,7 @@
         <li class="card px-4 py-3 flex flex-col gap-1 text-sm">
           <p class="font-medium"><%= p.title %></p>
           <p class="text-xs text-muted"><%= t(".kinds.#{p.kind}") %> · <%= t(".statuses.#{p.status}") %> · <%= t(".origin", origin: p.origin) %></p>
+          <% if p.raw_text.present? && p.raw_text != p.title %><p class="whitespace-pre-line"><%= p.raw_text %></p><% end %>
           <% if p.rationale.present? %><p><%= p.rationale %></p><% end %>
         </li>
       <% end %>
