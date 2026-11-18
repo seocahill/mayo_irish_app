@@ -23,6 +23,15 @@ class Mcp::WhereIsTaughtTest < ActiveSupport::TestCase
     assert_equal [ 1 ], data["used_in_phrases"].map { |l| l["number"] }
   end
 
+  test "reports recordings, clips and exercise matches" do
+    item = vocabulary_items(:dog)
+    assert_not call("madra").last["matches"].first["has_recording"]
+    item.update!(audio_url: "https://example.org/a.mp3")
+    assert call("madra").last["matches"].first["has_recording"]
+    Exercise.create!(lesson: item.lesson, number: 99, prompt: "Translate madra", answer: "dog")
+    assert_equal [ 1 ], call("madra").last["used_in_exercises"].map { |l| l["number"] }
+  end
+
   test "rejects blank input and treats wildcards literally" do
     assert call("").first.error?
     _, data = call("%%")
