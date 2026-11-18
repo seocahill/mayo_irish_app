@@ -1,4 +1,4 @@
-<%# i18n-tasks-use t(".decisions.discuss") t(".decisions.defer") t(".decisions.dismiss") t(".decisions.reopen") %>
+<%# i18n-tasks-use t(".decisions.discuss") t(".decisions.defer") t(".decisions.dismiss") t(".decisions.reopen") t(".comment_by") t(".comment_label") t(".comment_save") %>
 <div class="max-w-2xl mx-auto flex flex-col gap-6">
   <header>
     <p class="eyebrow"><%= t(".eyebrow") %></p>
@@ -21,7 +21,7 @@
   <% else %>
     <ul class="flex flex-col gap-3" id="proposals">
       <% @proposals.each do |p| %>
-        <li class="card px-4 py-3 flex flex-col gap-1 text-sm">
+        <li id="proposal-<%= p.id %>" class="card px-4 py-3 flex flex-col gap-1 text-sm">
           <p class="font-medium"><%= p.title %></p>
           <p class="text-xs text-muted"><%= t(".kinds.#{p.kind}") %> · <%= t(".statuses.#{p.status}") %> · <%= t(".origin", origin: p.origin) %></p>
           <% if p.raw_text.present? && p.raw_text != p.title %><p class="whitespace-pre-line"><%= p.raw_text %></p><% end %>
@@ -33,6 +33,22 @@
                     class: "btn-outline min-h-12 px-4 text-sm" %>
             <% end %>
           </div>
+          <% if p.proposal_comments.any? %>
+            <ul class="flex flex-col gap-2 pt-2 border-t border-line" id="comments-<%= p.id %>">
+              <% p.proposal_comments.each do |c| %>
+                <li>
+                  <p class="text-xs text-muted"><%= t(".comment_by", author: c.author, date: l(c.created_at.to_date, format: :long)) %></p>
+                  <p class="whitespace-pre-line"><%= c.body %></p>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+          <%= form_with url: course_proposal_comments_path(p), method: :post, class: "flex flex-col gap-2 pt-2" do |f| %>
+            <%= f.label :body, t(".comment_label"), for: "comment-body-#{p.id}", class: "text-xs text-muted" %>
+            <%= f.text_area :body, id: "comment-body-#{p.id}", rows: 2, maxlength: 2000,
+                  class: "rounded-sm border border-line bg-surface px-3 py-2.5 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-ink" %>
+            <%= f.button t(".comment_save"), class: "btn-outline min-h-12 px-4 text-sm self-start" %>
+          <% end %>
         </li>
       <% end %>
     </ul>

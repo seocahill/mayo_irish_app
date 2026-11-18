@@ -93,7 +93,7 @@ class CourseProposalsControllerTest < ActionDispatch::IntegrationTest
     patch course_proposal_path(proposal), params: { decision: "dismiss" }
     assert_equal "applied", proposal.reload.status
     get course_proposals_path
-    assert_select "#proposals form", 0
+    assert_select "#proposals input[name=decision]", 0
   end
 
   test "deciding never changes the idea's own words" do
@@ -117,5 +117,42 @@ class CourseProposalsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as(users(:two))
     patch course_proposal_path(proposal), params: { decision: "dismiss" }
     assert_equal "proposed", proposal.reload.status
+  end
+
+  test "an admin adds a comment and it shows under the proposal, oldest first" do
+    proposal = CourseProposal.create!(kind: "gap", title: "Weather")
+    sign_in_as(users(:admin))
+    assert_difference -> { proposal.proposal_comments.count }, 1 do
+      post course_proposal_comments_path(proposal), params: { body: "Erris has a word for this." }
+    end
+    follow_redirect!
+    assert_select "#comments-#{proposal.id} li", /Erris has a word/
+    assert proposal.proposal_comments.last.author.present?
+  end
+
+  test "a blank or over-long comment is refused" do
+    proposal = CourseProposal.create!(kind: "gap", title: "Weather")
+    sign_in_as(users(:admin))
+    assert_no_difference -> { ProposalComment.count } do
+      post course_proposal_comments_path(proposal), params: { body: "  " }
+      post course_proposal_comments_path(proposal), params: { body: "a" * 2001 }
+    end
+    assert_equal I18n.t("proposal_comments.create.invalid"), flash[:alert]
+  end
+
+  test "learners cannot comment" do
+    proposal = CourseProposal.create!(kind: "gap", title: "Weather")
+    sign_in_as(users(:two))
+    assert_no_difference -> { ProposalComment.count } do
+      post course_proposal_comments_path(proposal), params: { body: "hi" }
+    end
+  end
+
+  test "commenting leaves the proposal's status and words alone" do
+    idea = CourseProposal.capture("Wind in Erris", origin: "darren").tap(&:save!)
+    sign_in_as(users(:admin))
+    post course_proposal_comments_path(idea), params: { body: "Good one" }
+    assert_equal "captured", idea.reload.status
+    assert_equal "Wind in Erris", idea.raw_text
   end
 end
