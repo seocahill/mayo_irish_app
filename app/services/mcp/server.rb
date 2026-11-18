@@ -11,7 +11,8 @@ module Mcp
       Tools::CaptureIdea,
       Tools::ListIdeas,
       Tools::GetProposal,
-      Tools::CommentOnProposal
+      Tools::CommentOnProposal,
+      Tools::WhereIsTaught
     ].freeze
 
     def self.build(user)
