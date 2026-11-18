@@ -40,7 +40,7 @@ class McpControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     body = JSON.parse(@response.body)
     names = body.dig("result", "tools").map { |t| t["name"] }
-    assert_equal %w[create_record get_record list_records update_record], names.sort
+    assert_equal %w[capture_idea create_record get_record list_ideas list_records update_record], names.sort
   end
 
   test "create_record makes a lesson as an unpublished draft" do

@@ -7,7 +7,9 @@ module Mcp
       Tools::ListRecords,
       Tools::GetRecord,
       Tools::CreateRecord,
-      Tools::UpdateRecord
+      Tools::UpdateRecord,
+      Tools::CaptureIdea,
+      Tools::ListIdeas
     ].freeze
 
     def self.build(user)
