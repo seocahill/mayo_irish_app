@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_17_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_18_005313) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -73,6 +73,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_17_090000) do
     t.index ["lesson_id"], name: "index_chat_sessions_on_lesson_id"
     t.index ["user_id", "lesson_id", "kind"], name: "index_chat_sessions_on_user_id_and_lesson_id_and_kind"
     t.index ["user_id"], name: "index_chat_sessions_on_user_id"
+  end
+
+  create_table "course_proposals", force: :cascade do |t|
+    t.string "origin", default: "designer", null: false
+    t.string "kind", null: false
+    t.string "status", default: "proposed", null: false
+    t.string "title", null: false
+    t.text "rationale"
+    t.text "outline"
+    t.text "raw_text"
+    t.integer "priority", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["status"], name: "index_course_proposals_on_status"
   end
 
   create_table "dialect_substitutions", force: :cascade do |t|
