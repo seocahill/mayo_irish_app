@@ -23,6 +23,16 @@ class CourseProposal < ApplicationRecord
         title: text.squish.truncate(TITLE_LENGTH, separator: " "))
   end
 
+  # What a person can do with a proposal from the list. Each only changes the
+  # proposal's own status; nothing here touches a lesson.
+  DECISIONS = { "discuss" => "discussing", "defer" => "deferred", "dismiss" => "dismissed",
+                "reopen" => "proposed" }.freeze
+
+  def decide!(decision, by:)
+    status = DECISIONS.fetch(decision)
+    update!(status: status, decided_by: by, decided_at: Time.current)
+  end
+
   scope :pending, -> { where(status: OPEN_STATUSES) }
   scope :ordered, -> { order(priority: :desc, created_at: :desc) }
 end
