@@ -28,7 +28,7 @@
           <% if p.rationale.present? %><p><%= p.rationale %></p><% end %>
           <% if p.decided_by.present? %><p class="text-xs text-muted"><%= t(".decided", by: p.decided_by, date: l(p.decided_at.to_date, format: :long)) %></p><% end %>
           <div class="flex flex-wrap gap-2 pt-1">
-            <% (p.status.in?(%w[dismissed deferred]) ? %w[reopen] : %w[discuss defer dismiss]).each do |d| %>
+            <% p.decisions.each do |d| %>
               <%= button_to t(".decisions.#{d}"), course_proposal_path(p), method: :patch, params: { decision: d },
                     class: "btn-outline min-h-12 px-4 text-sm" %>
             <% end %>

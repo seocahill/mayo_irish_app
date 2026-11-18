@@ -82,7 +82,18 @@ class CourseProposalsControllerTest < ActionDispatch::IntegrationTest
     assert proposal.decided_by.present?
     assert proposal.decided_at.present?
     patch course_proposal_path(proposal), params: { decision: "reopen" }
-    assert_equal "proposed", proposal.reload.status
+    proposal.reload
+    assert_equal "proposed", proposal.status
+    assert_nil proposal.decided_at
+  end
+
+  test "an applied proposal cannot be dismissed" do
+    proposal = CourseProposal.create!(kind: "gap", title: "Done", status: "applied")
+    sign_in_as(users(:admin))
+    patch course_proposal_path(proposal), params: { decision: "dismiss" }
+    assert_equal "applied", proposal.reload.status
+    get course_proposals_path
+    assert_select "#proposals form", 0
   end
 
   test "deciding never changes the idea's own words" do

@@ -9,8 +9,11 @@ class CourseProposalsController < ApplicationController
   def update
     proposal = CourseProposal.find(params[:id])
     if CourseProposal::DECISIONS.key?(params[:decision])
-      proposal.decide!(params[:decision], by: current_user.email_address.split("@").first)
-      redirect_to course_proposals_path, notice: t(".#{params[:decision]}")
+      if proposal.decide!(params[:decision], by: current_user.email_address.split("@").first)
+        redirect_to course_proposals_path, notice: t(".#{params[:decision]}")
+      else
+        redirect_to course_proposals_path, alert: t(".unknown")
+      end
     else
       redirect_to course_proposals_path, alert: t(".unknown")
     end
