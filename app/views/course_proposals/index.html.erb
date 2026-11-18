@@ -1,0 +1,21 @@
+<div class="max-w-2xl mx-auto flex flex-col gap-6">
+  <header>
+    <p class="eyebrow"><%= t(".eyebrow") %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
+    <p class="text-muted mt-1 text-sm"><%= t(".summary") %></p>
+  </header>
+
+  <% if @proposals.empty? %>
+    <p class="text-sm text-muted" id="no-proposals"><%= t(".empty") %></p>
+  <% else %>
+    <ul class="flex flex-col gap-3" id="proposals">
+      <% @proposals.each do |p| %>
+        <li class="card px-4 py-3 flex flex-col gap-1 text-sm">
+          <p class="font-medium"><%= p.title %></p>
+          <p class="text-xs text-muted"><%= t(".kinds.#{p.kind}") %> · <%= t(".statuses.#{p.status}") %> · <%= t(".origin", origin: p.origin) %></p>
+          <% if p.rationale.present? %><p><%= p.rationale %></p><% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

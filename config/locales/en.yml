@@ -28,6 +28,36 @@ en:
   chat_message_flags:
     create:
       flagged: Thanks. An editor will check that reply.
+  course_proposals:
+    index:
+      empty: No proposals yet. They will appear here when the designer or a contributor
+        adds one.
+      eyebrow: Admin
+      kinds:
+        cross_reference: Cross-reference
+        dialect_question: Question about a form
+        extraction_request: Extraction request
+        gap: Gap
+        merge: Merge lessons
+        new_lesson: New lesson
+        recording_match: Recording match
+        reorder: Reorder
+        retire: Retire
+        revise_lesson: Revise a lesson
+      origin: from %{origin}
+      statuses:
+        accepted: Accepted
+        applied: Applied
+        captured: Captured
+        deferred: Deferred
+        discussing: Discussing
+        dismissed: Dismissed
+        edited: Edited
+        grounded: Grounded
+        proposed: Proposed
+      summary: Suggestions for the course. Nothing here changes a lesson until a person
+        decides.
+      title: Proposals
   course_questions:
     create:
       ai_notice: Written by AI from the lesson material, so it can be wrong. Check
@@ -68,6 +98,10 @@ en:
         learners:
           description: Approve new learners and see how each one is getting on.
           name: Learners
+        proposals:
+          description: Suggestions for the course from the designer and contributors,
+            waiting for a decision.
+          name: Proposals
         substitutions:
           description: Words to swap for the Mayo form, and which lessons still use
             the other one.
