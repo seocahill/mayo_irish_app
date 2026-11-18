@@ -53,6 +53,21 @@ class McpControllerTest < ActionDispatch::IntegrationTest
     assert_equal "A lesson on turf cutting", CourseProposal.order(:id).last.raw_text
   end
 
+  test "get_proposal and comment_on_proposal work through the endpoint" do
+    prop = CourseProposal.capture("An idea", origin: "x").tap(&:save!)
+    assert_difference -> { ProposalComment.count }, 1 do
+      post mcp_path, headers: auth_headers, params: rpc("tools/call", {
+        name: "comment_on_proposal", arguments: { id: prop.id, text: "Yes please" }
+      }).to_json
+    end
+    assert_response :success
+    post mcp_path, headers: auth_headers, params: rpc("tools/call", {
+      name: "get_proposal", arguments: { id: prop.id }
+    }).to_json
+    assert_includes @response.body, "Yes please"
+    assert_includes @response.body, "An idea"
+  end
+
   test "create_record makes a lesson as an unpublished draft" do
     post mcp_path, headers: auth_headers, params: rpc("tools/call", {
       name: "create_record",

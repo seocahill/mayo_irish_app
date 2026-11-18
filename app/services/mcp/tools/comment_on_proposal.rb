@@ -20,11 +20,11 @@ module Mcp
       )
 
       def self.call(id:, text:, server_context:)
-        p = CourseProposal.find_by(id: id)
-        return error("No proposal with id #{id}") unless p
+        proposal = CourseProposal.find_by(id: id)
+        return error("No proposal with id #{id}") unless proposal
         author = server_context[:user]&.email_address.to_s.split("@").first.presence || "mcp"
-        c = p.proposal_comments.build(author: author, body: text.to_s.strip)
-        c.save ? json_response(id: c.id, proposal_id: p.id) : error(c.errors.full_messages.join(", "))
+        c = proposal.proposal_comments.build(author: author, body: text.to_s.strip)
+        c.save ? json_response(id: c.id, proposal_id: proposal.id) : error(c.errors.full_messages.join(", "))
       end
     end
   end
