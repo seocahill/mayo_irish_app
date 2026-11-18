@@ -3,14 +3,25 @@
 # docs/product/COURSE_DESIGNER.md.
 class CourseProposal < ApplicationRecord
   KINDS = %w[new_lesson revise_lesson merge retire cross_reference recording_match
-             reorder gap dialect_question extraction_request].freeze
+             reorder gap dialect_question extraction_request idea].freeze
   STATUSES = %w[captured grounded proposed discussing accepted applied edited dismissed deferred].freeze
   OPEN_STATUSES = %w[captured grounded proposed discussing].freeze
 
   validates :title, presence: true
+  validates :raw_text, length: { maximum: 2000 }
   validates :origin, presence: true
   validates :kind, inclusion: { in: KINDS }
   validates :status, inclusion: { in: STATUSES }
+
+  TITLE_LENGTH = 80
+
+  # An idea captured in someone's own words. The words are kept verbatim in
+  # raw_text; the title is only a short label made from them.
+  def self.capture(text, origin:)
+    text = text.to_s
+    new(kind: "idea", status: "captured", origin: origin, raw_text: text,
+        title: text.squish.truncate(TITLE_LENGTH, separator: " "))
+  end
 
   scope :pending, -> { where(status: OPEN_STATUSES) }
   scope :ordered, -> { order(priority: :desc, created_at: :desc) }

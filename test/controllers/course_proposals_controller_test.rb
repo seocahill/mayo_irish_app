@@ -27,4 +27,48 @@ class CourseProposalsControllerTest < ActionDispatch::IntegrationTest
     get course_proposals_path
     assert_response :redirect
   end
+
+  test "admins capture an idea, kept verbatim" do
+    sign_in_as(users(:admin))
+    text = "A lesson on the weather,\nespecially the wind in Erris."
+    assert_difference -> { CourseProposal.count }, 1 do
+      post course_proposals_path, params: { raw_text: text }
+    end
+    assert_redirected_to course_proposals_path
+    idea = CourseProposal.last
+    assert_equal text, idea.raw_text
+    assert_equal "idea", idea.kind
+    assert_equal "captured", idea.status
+  end
+
+  test "a blank idea is not saved" do
+    sign_in_as(users(:admin))
+    assert_no_difference -> { CourseProposal.count } do
+      post course_proposals_path, params: { raw_text: "   " }
+    end
+    assert_redirected_to course_proposals_path
+  end
+
+  test "learners cannot capture ideas" do
+    sign_in_as(users(:two))
+    assert_no_difference -> { CourseProposal.count } do
+      post course_proposals_path, params: { raw_text: "hello" }
+    end
+  end
+
+  test "an over-long idea is rejected" do
+    sign_in_as(users(:admin))
+    assert_no_difference -> { CourseProposal.count } do
+      post course_proposals_path, params: { raw_text: "a" * 2001 }
+    end
+    assert_equal I18n.t("course_proposals.create.too_long"), flash[:alert]
+  end
+
+  test "the idea box and a saved idea's words show on the list" do
+    sign_in_as(users(:admin))
+    post course_proposals_path, params: { raw_text: "Weather.\nWind in Erris." }
+    follow_redirect!
+    assert_select "form textarea[name=raw_text]"
+    assert_select "#proposals li", /Wind in Erris/
+  end
 end
