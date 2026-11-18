@@ -15,7 +15,7 @@ module Mcp
         open_world_hint: false
       )
       input_schema(
-        properties: { text: { type: "string", description: "The idea, in the person's own words" } },
+        properties: { text: { type: "string", maxLength: 2000, description: "The idea, in the person's own words" } },
         required: [ "text" ]
       )
 

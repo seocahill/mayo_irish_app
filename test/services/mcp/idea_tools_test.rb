@@ -24,7 +24,7 @@ class Mcp::IdeaToolsTest < ActiveSupport::TestCase
   end
 
   test "list_ideas shows open ideas only" do
-    open = CourseProposal.capture("open one", origin: "x"); open.save!
+    CourseProposal.capture("open one", origin: "x").save!
     gone = CourseProposal.capture("dismissed one", origin: "x"); gone.status = "dismissed"; gone.save!
     body = Mcp::Tools::ListIdeas.call(server_context: {}).content.first[:text]
     assert_includes body, "open one"
@@ -34,5 +34,10 @@ class Mcp::IdeaToolsTest < ActiveSupport::TestCase
   test "server exposes both tools" do
     assert_includes Mcp::Server::TOOLS, Mcp::Tools::CaptureIdea
     assert_includes Mcp::Server::TOOLS, Mcp::Tools::ListIdeas
+  end
+
+  test "capture_idea falls back to origin mcp without a user" do
+    Mcp::Tools::CaptureIdea.call(text: "hello", server_context: { user: nil })
+    assert_equal "mcp", CourseProposal.order(:id).last.origin
   end
 end
