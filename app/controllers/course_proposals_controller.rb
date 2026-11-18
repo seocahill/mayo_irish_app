@@ -3,7 +3,7 @@ class CourseProposalsController < ApplicationController
   before_action :require_admin
 
   def index
-    @proposals = CourseProposal.ordered
+    @proposals = CourseProposal.ordered.includes(:proposal_comments)
   end
 
   def update

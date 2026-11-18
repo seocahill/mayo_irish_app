@@ -34,6 +34,9 @@ en:
       saved: Idea saved, in your words.
       too_long: That idea is too long. Keep it under 2,000 characters.
     index:
+      comment_by: "%{author} wrote on %{date}"
+      comment_label: Add to the discussion
+      comment_save: Add comment
       decided: "%{by} decided on %{date}"
       decisions:
         defer: Not now
@@ -809,6 +812,10 @@ en:
       intro_html: You can reset your password on %{link}.
       link_text: this password reset page
       subject: Reset your password
+  proposal_comments:
+    create:
+      invalid: Write something first (up to 2,000 characters).
+      saved: Comment added.
   pwa:
     description: Learn the Irish of Mayo, with lessons, recordings and a tutor.
     short_name: Gaeilge
