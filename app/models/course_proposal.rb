@@ -12,6 +12,6 @@ class CourseProposal < ApplicationRecord
   validates :kind, inclusion: { in: KINDS }
   validates :status, inclusion: { in: STATUSES }
 
-  scope :open, -> { where(status: OPEN_STATUSES) }
+  scope :pending, -> { where(status: OPEN_STATUSES) }
   scope :ordered, -> { order(priority: :desc, created_at: :desc) }
 end

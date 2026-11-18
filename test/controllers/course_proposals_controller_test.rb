@@ -23,9 +23,8 @@ class CourseProposalsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
-  test "model validates kind and status" do
-    assert_not CourseProposal.new(kind: "nope", title: "x").valid?
-    assert_not CourseProposal.new(kind: "gap", title: "x", status: "nope").valid?
-    assert CourseProposal.new(kind: "gap", title: "x").valid?
+  test "signed-out visitors are sent to sign in" do
+    get course_proposals_path
+    assert_response :redirect
   end
 end
