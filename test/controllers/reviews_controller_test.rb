@@ -79,7 +79,7 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     end
     get review_path
     assert_match(/To look at again/, response.body)
-    assert_includes response.body, wrong.source.irish
+    assert_includes response.body, ERB::Util.h(wrong.source.irish)
   end
 
   test "a perfect round lists nothing to look at again" do

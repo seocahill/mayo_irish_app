@@ -71,6 +71,7 @@ class ReviewsController < ApplicationController
     return [] if ids.empty?
 
     QuizQuestion.where(id: ids).includes(:source).sort_by { |q| ids.index(q.id) }
+                .uniq { |q| [ q.source_type, q.source_id ] }
   end
 
   # A word the learner has answered elsewhere since the round began (for
