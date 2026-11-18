@@ -9,7 +9,9 @@ module Mcp
       Tools::CreateRecord,
       Tools::UpdateRecord,
       Tools::CaptureIdea,
-      Tools::ListIdeas
+      Tools::ListIdeas,
+      Tools::GetProposal,
+      Tools::CommentOnProposal
     ].freeze
 
     def self.build(user)

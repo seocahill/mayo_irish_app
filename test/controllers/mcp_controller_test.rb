@@ -40,7 +40,7 @@ class McpControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     body = JSON.parse(@response.body)
     names = body.dig("result", "tools").map { |t| t["name"] }
-    assert_equal %w[capture_idea create_record get_record list_ideas list_records update_record], names.sort
+    assert_equal %w[capture_idea comment_on_proposal create_record get_proposal get_record list_ideas list_records update_record], names.sort
   end
 
   test "capture_idea saves an idea through the endpoint" do
@@ -51,6 +51,21 @@ class McpControllerTest < ActionDispatch::IntegrationTest
     end
     assert_response :success
     assert_equal "A lesson on turf cutting", CourseProposal.order(:id).last.raw_text
+  end
+
+  test "get_proposal and comment_on_proposal work through the endpoint" do
+    prop = CourseProposal.capture("An idea", origin: "x").tap(&:save!)
+    assert_difference -> { ProposalComment.count }, 1 do
+      post mcp_path, headers: auth_headers, params: rpc("tools/call", {
+        name: "comment_on_proposal", arguments: { id: prop.id, text: "Yes please" }
+      }).to_json
+    end
+    assert_response :success
+    post mcp_path, headers: auth_headers, params: rpc("tools/call", {
+      name: "get_proposal", arguments: { id: prop.id }
+    }).to_json
+    assert_includes @response.body, "Yes please"
+    assert_includes @response.body, "An idea"
   end
 
   test "create_record makes a lesson as an unpublished draft" do
