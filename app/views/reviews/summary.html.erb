@@ -5,6 +5,21 @@
       <h1 class="font-display text-4xl leading-tight"><%= t(".score", correct: @correct, answered: @answered) %></h1>
       <p class="text-muted mt-1"><%= t(".correct_this_round") %></p>
     </div>
+    <% if @missed.present? %>
+      <section aria-labelledby="missed-heading">
+        <h2 id="missed-heading" class="eyebrow mb-2"><%= t(".missed") %></h2>
+        <ul class="flex flex-col divide-y divide-line">
+          <% @missed.each do |question| %>
+            <li class="py-3 flex flex-col gap-1">
+              <% source = question.source %>
+              <span class="font-display text-xl"><%= source.irish %></span>
+              <span class="text-muted"><%= source.english %></span>
+              <%= render "audio", question: question %>
+            </li>
+          <% end %>
+        </ul>
+      </section>
+    <% end %>
     <%= render "forecast", forecast: @forecast %>
     <div class="flex flex-col sm:flex-row gap-2">
       <%= link_to t(".keep_going"), review_path, class: "btn-solid" %>

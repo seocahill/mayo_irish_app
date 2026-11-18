@@ -13,6 +13,7 @@ class ReviewsController < ApplicationController
       @answered = round["ids"].size
       session.delete(ROUND_KEY)
       @forecast = QuizReview.forecast_for(current_user)
+      @missed = missed_questions(round)
       return render :summary
     end
 
@@ -52,6 +53,7 @@ class ReviewsController < ApplicationController
 
     round["pos"] += 1
     round["correct"] += 1 if @correct
+    (round["missed"] ||= []) << @question.id unless @correct
     session[ROUND_KEY] = round
     @last = round["pos"] >= round["ids"].size
   end
@@ -62,6 +64,15 @@ class ReviewsController < ApplicationController
   end
 
   private
+
+  # The questions answered wrongly this round, in the order they came up.
+  def missed_questions(round)
+    ids = Array(round["missed"]).uniq
+    return [] if ids.empty?
+
+    QuizQuestion.where(id: ids).includes(:source).sort_by { |q| ids.index(q.id) }
+                .uniq { |q| [ q.source_type, q.source_id ] }
+  end
 
   # A word the learner has answered elsewhere since the round began (for
   # example in a lesson quiz) is skipped, so FSRS isn't run on it early.

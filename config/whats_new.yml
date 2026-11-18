@@ -113,3 +113,9 @@
   body: In a lesson's word list, the genitive and plural of each noun now show under
     the word on a phone, where before they only appeared on wider screens.
   path: /lessons
+- id: 17
+  date: 2026-11-18
+  title: Words to look at again
+  body: At the end of a review round you now see the words you missed, with their
+    meaning and a recording to listen to, before you carry on.
+  path: /review
