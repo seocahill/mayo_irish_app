@@ -6,6 +6,19 @@ class CourseProposalsController < ApplicationController
     @proposals = CourseProposal.ordered
   end
 
+  def update
+    proposal = CourseProposal.find(params[:id])
+    if CourseProposal::DECISIONS.key?(params[:decision])
+      if proposal.decide!(params[:decision], by: current_user.email_address.split("@").first)
+        redirect_to course_proposals_path, notice: t(".#{params[:decision]}")
+      else
+        redirect_to course_proposals_path, alert: t(".unknown")
+      end
+    else
+      redirect_to course_proposals_path, alert: t(".unknown")
+    end
+  end
+
   def create
     proposal = CourseProposal.capture(params[:raw_text], origin: current_user.email_address.split("@").first)
     if proposal.save

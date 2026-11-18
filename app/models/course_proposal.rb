@@ -23,6 +23,31 @@ class CourseProposal < ApplicationRecord
         title: text.squish.truncate(TITLE_LENGTH, separator: " "))
   end
 
+  # What a person can do with a proposal from the list. Each only changes the
+  # proposal's own status; nothing here touches a lesson.
+  DECISIONS = { "discuss" => "discussing", "defer" => "deferred", "dismiss" => "dismissed",
+                "reopen" => "proposed" }.freeze
+
+  PARKED_STATUSES = %w[dismissed deferred].freeze
+
+  # Decisions allowed now: open ones can be discussed, deferred or dismissed,
+  # parked ones reopened. Accepted, applied and edited ones are left alone.
+  def decisions
+    if status.in?(OPEN_STATUSES) then %w[discuss defer dismiss]
+    elsif status.in?(PARKED_STATUSES) then %w[reopen]
+    else []
+    end
+  end
+
+  def decide!(decision, by:)
+    return false unless decisions.include?(decision)
+    if decision == "reopen"
+      update!(status: DECISIONS.fetch(decision), decided_by: nil, decided_at: nil)
+    else
+      update!(status: DECISIONS.fetch(decision), decided_by: by, decided_at: Time.current)
+    end
+  end
+
   scope :pending, -> { where(status: OPEN_STATUSES) }
   scope :ordered, -> { order(priority: :desc, created_at: :desc) }
 end

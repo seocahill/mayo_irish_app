@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_18_005313) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_18_070000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -86,6 +86,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_18_005313) do
     t.integer "priority", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "decided_by"
+    t.datetime "decided_at"
     t.index ["status"], name: "index_course_proposals_on_status"
   end
 

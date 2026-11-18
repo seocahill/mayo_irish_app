@@ -1,3 +1,4 @@
+<%# i18n-tasks-use t(".decisions.discuss") t(".decisions.defer") t(".decisions.dismiss") t(".decisions.reopen") %>
 <div class="max-w-2xl mx-auto flex flex-col gap-6">
   <header>
     <p class="eyebrow"><%= t(".eyebrow") %></p>
@@ -25,6 +26,13 @@
           <p class="text-xs text-muted"><%= t(".kinds.#{p.kind}") %> · <%= t(".statuses.#{p.status}") %> · <%= t(".origin", origin: p.origin) %></p>
           <% if p.raw_text.present? && p.raw_text != p.title %><p class="whitespace-pre-line"><%= p.raw_text %></p><% end %>
           <% if p.rationale.present? %><p><%= p.rationale %></p><% end %>
+          <% if p.decided_by.present? %><p class="text-xs text-muted"><%= t(".decided", by: p.decided_by, date: l(p.decided_at.to_date, format: :long)) %></p><% end %>
+          <div class="flex flex-wrap gap-2 pt-1">
+            <% p.decisions.each do |d| %>
+              <%= button_to t(".decisions.#{d}"), course_proposal_path(p), method: :patch, params: { decision: d },
+                    class: "btn-outline min-h-12 px-4 text-sm" %>
+            <% end %>
+          </div>
         </li>
       <% end %>
     </ul>

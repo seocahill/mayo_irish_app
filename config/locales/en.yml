@@ -34,6 +34,12 @@ en:
       saved: Idea saved, in your words.
       too_long: That idea is too long. Keep it under 2,000 characters.
     index:
+      decided: "%{by} decided on %{date}"
+      decisions:
+        defer: Not now
+        discuss: Discuss
+        dismiss: Dismiss
+        reopen: Reopen
       empty: No proposals yet. They will appear here when the designer or a contributor
         adds one.
       eyebrow: Admin
@@ -67,6 +73,12 @@ en:
       summary: Suggestions for the course. Nothing here changes a lesson until a person
         decides.
       title: Proposals
+    update:
+      defer: Put aside for later.
+      discuss: Marked for discussion.
+      dismiss: Dismissed. It stays in the list and can be reopened.
+      reopen: Reopened.
+      unknown: That isn't something you can do with a proposal.
   course_questions:
     create:
       ai_notice: Written by AI from the lesson material, so it can be wrong. Check

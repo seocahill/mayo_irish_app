@@ -71,4 +71,51 @@ class CourseProposalsControllerTest < ActionDispatch::IntegrationTest
     assert_select "form textarea[name=raw_text]"
     assert_select "#proposals li", /Wind in Erris/
   end
+
+  test "an admin can dismiss, then reopen, a proposal, and it is recorded who decided" do
+    proposal = CourseProposal.create!(kind: "gap", title: "Weather")
+    sign_in_as(users(:admin))
+    patch course_proposal_path(proposal), params: { decision: "dismiss" }
+    assert_redirected_to course_proposals_path
+    proposal.reload
+    assert_equal "dismissed", proposal.status
+    assert proposal.decided_by.present?
+    assert proposal.decided_at.present?
+    patch course_proposal_path(proposal), params: { decision: "reopen" }
+    proposal.reload
+    assert_equal "proposed", proposal.status
+    assert_nil proposal.decided_at
+  end
+
+  test "an applied proposal cannot be dismissed" do
+    proposal = CourseProposal.create!(kind: "gap", title: "Done", status: "applied")
+    sign_in_as(users(:admin))
+    patch course_proposal_path(proposal), params: { decision: "dismiss" }
+    assert_equal "applied", proposal.reload.status
+    get course_proposals_path
+    assert_select "#proposals form", 0
+  end
+
+  test "deciding never changes the idea's own words" do
+    idea = CourseProposal.capture("Wind in Erris", origin: "darren").tap(&:save!)
+    sign_in_as(users(:admin))
+    patch course_proposal_path(idea), params: { decision: "defer" }
+    assert_equal "deferred", idea.reload.status
+    assert_equal "Wind in Erris", idea.raw_text
+  end
+
+  test "an unknown decision is refused" do
+    proposal = CourseProposal.create!(kind: "gap", title: "Weather")
+    sign_in_as(users(:admin))
+    patch course_proposal_path(proposal), params: { decision: "apply" }
+    assert_equal I18n.t("course_proposals.update.unknown"), flash[:alert]
+    assert_equal "proposed", proposal.reload.status
+  end
+
+  test "learners cannot decide on proposals" do
+    proposal = CourseProposal.create!(kind: "gap", title: "Weather")
+    sign_in_as(users(:two))
+    patch course_proposal_path(proposal), params: { decision: "dismiss" }
+    assert_equal "proposed", proposal.reload.status
+  end
 end
