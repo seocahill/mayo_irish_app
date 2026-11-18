@@ -920,6 +920,7 @@ en:
       back_home: Back home
       correct_this_round: correct this round
       keep_going: Keep going
+      missed: To look at again
       round_complete: Round complete
       score: "%{correct} of %{answered}"
   search:
