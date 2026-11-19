@@ -115,6 +115,12 @@ class VocabularyGaps
     end
   end
 
+  # Lessons with no vocabulary at all, so designers can see which lessons are
+  # still empty shells. Read-only.
+  def empty_lessons
+    @empty_lessons ||= Lesson.where.not(id: VocabularyItem.select(:lesson_id)).order(:position, :number).to_a
+  end
+
   private
 
   def self.stem(word)

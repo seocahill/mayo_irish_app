@@ -199,4 +199,18 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
     get vocabulary_gaps_path
     assert_select "#unlistened-lessons", count: 0
   end
+
+  test "admins see lessons with no words; a lesson with a word is not listed" do
+    VocabularyItem.delete_all
+    a = Lesson.first
+    b = Lesson.create!(number: 98, title: "Lesson Empty", position: 98)
+    VocabularyItem.create!(lesson: a, irish: "a", english: "one")
+    sign_in_as(users(:admin))
+    get vocabulary_gaps_path
+    assert_select "#empty-lessons a", text: /#{Regexp.escape(b.display_title)}/
+    assert_select "#empty-lessons a", text: /#{Regexp.escape(a.display_title)}/, count: 0
+    delete session_path
+    get vocabulary_gaps_path
+    assert_select "#empty-lessons", count: 0
+  end
 end
