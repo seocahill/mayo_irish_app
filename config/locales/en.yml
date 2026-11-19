@@ -564,8 +564,8 @@ en:
       course_tools: Course tools
       draft: Draft
       due:
-        one: "%{count} to review"
-        other: "%{count} to review"
+        one: "%{count} card due"
+        other: "%{count} cards due"
       flagged_replies:
         one: 1 flagged reply
         other: "%{count} flagged replies"

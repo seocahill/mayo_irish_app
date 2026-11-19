@@ -32,6 +32,13 @@ class QuizReview < ApplicationRecord
     fsrs_state == REVIEW_STATE && stability >= KNOWN_STABILITY
   end
 
+  # Cards due now, per lesson, for the given lessons (ids or a subquery).
+  def self.due_counts_by_lesson(user, lesson_ids)
+    due.where(user: user).joins(:quiz_question)
+       .where(quiz_questions: { lesson_id: lesson_ids })
+       .group("quiz_questions.lesson_id").count
+  end
+
   # Counts for the line under the review button: still to do today (including
   # anything overdue), due tomorrow, and due in the following days.
   def self.forecast_for(user, now: Time.current)
