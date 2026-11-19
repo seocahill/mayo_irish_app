@@ -90,6 +90,18 @@ class VocabularyGaps
     end
   end
 
+  Ungrammared = Struct.new(:lesson, :count, keyword_init: true)
+
+  # Lessons with vocabulary but no grammar rules, so designers can see where no
+  # grammar point is taught yet. Read-only.
+  def ungrammared_lessons
+    @ungrammared_lessons ||= Lesson.includes(:vocabulary_items, :grammar_rules).order(:position, :number).filter_map do |lesson|
+      next if lesson.vocabulary_items.empty? || lesson.grammar_rules.any?
+
+      Ungrammared.new(lesson: lesson, count: lesson.vocabulary_items.size)
+    end
+  end
+
   private
 
   def self.stem(word)
