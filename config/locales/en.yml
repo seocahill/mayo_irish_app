@@ -921,6 +921,7 @@ en:
     summary:
       back_home: Back home
       correct_this_round: correct this round
+      in_lesson: In %{lesson}
       keep_going: Keep going
       missed: To look at again
       round_complete: Round complete

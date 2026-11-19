@@ -70,7 +70,7 @@ class ReviewsController < ApplicationController
     ids = Array(round["missed"]).uniq
     return [] if ids.empty?
 
-    QuizQuestion.where(id: ids).includes(:source).sort_by { |q| ids.index(q.id) }
+    QuizQuestion.where(id: ids).includes(:source, :lesson).sort_by { |q| ids.index(q.id) }
                 .uniq { |q| [ q.source_type, q.source_id ] }
   end
 

@@ -80,6 +80,7 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     get review_path
     assert_match(/To look at again/, response.body)
     assert_includes response.body, ERB::Util.h(wrong.source.irish)
+    assert_select "a[href=?]", lesson_path(wrong.lesson)
   end
 
   test "a perfect round lists nothing to look at again" do
