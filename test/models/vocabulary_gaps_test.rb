@@ -86,4 +86,14 @@ class VocabularyGapsTest < ActiveSupport::TestCase
     Phrase.create!(lesson: lesson, irish: "x", english: "y")
     assert_empty VocabularyGaps.new.unpractised_lessons
   end
+
+  test "a lesson is listed as having no grammar only when it has words and no grammar rules" do
+    VocabularyItem.delete_all
+    GrammarRule.destroy_all
+    lesson = Lesson.first
+    VocabularyItem.create!(lesson: lesson, irish: "a", english: "one")
+    assert_equal [ [ lesson, 1 ] ], VocabularyGaps.new.ungrammared_lessons.map { |u| [ u.lesson, u.count ] }
+    GrammarRule.create!(lesson: lesson, number: 1, title: "Rule")
+    assert_empty VocabularyGaps.new.ungrammared_lessons
+  end
 end

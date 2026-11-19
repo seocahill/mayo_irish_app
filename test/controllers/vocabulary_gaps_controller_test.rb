@@ -169,4 +169,17 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
     get vocabulary_gaps_path
     assert_select "#unpractised-lessons", count: 0
   end
+
+  test "admins see lessons with no grammar notes, learners don't" do
+    VocabularyItem.delete_all
+    GrammarRule.destroy_all
+    lesson = Lesson.first
+    VocabularyItem.create!(lesson: lesson, irish: "a", english: "one")
+    sign_in_as(users(:admin))
+    get vocabulary_gaps_path
+    assert_select "#ungrammared-lessons a", text: /#{Regexp.escape(lesson.display_title)}/
+    delete session_path
+    get vocabulary_gaps_path
+    assert_select "#ungrammared-lessons", count: 0
+  end
 end
