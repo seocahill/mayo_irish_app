@@ -80,6 +80,23 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     get review_path
     assert_match(/To look at again/, response.body)
     assert_includes response.body, ERB::Util.h(wrong.source.irish)
+    assert_select "a[href=?]", lesson_path(wrong.lesson)
+  end
+
+  test "a missed word from an unpublished lesson shows no lesson link to a learner" do
+    sign_in_as(@user)
+    get review_path
+    ids = session[ReviewsController::ROUND_KEY]["ids"]
+    wrong = QuizQuestion.find(ids.first)
+    post answer_review_path, params: { question_id: wrong.id, choice: "definitely not it" }
+    (ids.size - 1).times do
+      get review_path
+      q = QuizQuestion.find(session[ReviewsController::ROUND_KEY]["ids"][session[ReviewsController::ROUND_KEY]["pos"]])
+      post answer_review_path, params: { question_id: q.id, choice: q.answer }
+    end
+    wrong.lesson.update_columns(published: false)
+    get review_path
+    assert_select "a[href=?]", lesson_path(wrong.lesson), count: 0
   end
 
   test "a perfect round lists nothing to look at again" do
