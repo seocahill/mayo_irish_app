@@ -115,6 +115,17 @@ class VocabularyGaps
     end
   end
 
+  Uncredited = Struct.new(:lesson, :count, keyword_init: true)
+
+  # Lessons where some words have a recording but no named speaker, so
+  # designers can credit the people who recorded them. Read-only.
+  def uncredited_lessons
+    @uncredited_lessons ||= Lesson.includes(vocabulary_items: { audio_attachment: :blob }).order(:position, :number).filter_map do |lesson|
+      count = lesson.vocabulary_items.count { |i| (i.audio_url.present? || i.audio.attached?) && i.audio_credit.blank? }
+      Uncredited.new(lesson: lesson, count: count) if count.positive?
+    end
+  end
+
   # Lessons with no vocabulary at all, so designers can see which lessons are
   # still empty shells. Read-only.
   def empty_lessons
