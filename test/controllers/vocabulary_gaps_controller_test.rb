@@ -213,4 +213,14 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
     get vocabulary_gaps_path
     assert_select "#empty-lessons", count: 0
   end
+
+  test "admins see lessons with recordings that have no speaker credit" do
+    VocabularyItem.delete_all
+    lesson = Lesson.first
+    VocabularyItem.create!(lesson: lesson, irish: "a", english: "one", audio_url: "https://example.com/a.mp3")
+    sign_in_as(users(:admin))
+    get vocabulary_gaps_path
+    assert_select "#uncredited-lessons a", text: /#{Regexp.escape(lesson.display_title)}/
+    assert_select "#uncredited-lessons", text: /1 recording with no speaker named/
+  end
 end

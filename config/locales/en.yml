@@ -1081,6 +1081,13 @@ en:
         one: 1 word still to classify
         other: "%{count} words still to classify"
         zero: Every word is classified
+      uncredited_count:
+        one: 1 recording with no speaker named
+        other: "%{count} recordings with no speaker named"
+      uncredited_empty: Every recording is credited to a speaker.
+      uncredited_summary: Lessons where some words have a recording but no named speaker.
+        Speakers should be credited for what they recorded.
+      uncredited_title: Recordings with no speaker credit
       ungrammared_empty: Every lesson with vocabulary has at least one grammar note.
       ungrammared_summary: Lessons that teach words but have no grammar notes yet.
         A prompt for where gender, plurals, the genitive or a verb form could be taught.

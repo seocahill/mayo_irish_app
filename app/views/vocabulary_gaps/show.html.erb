@@ -155,6 +155,23 @@
     <% end %>
   </section>
 
+  <section id="uncredited-lessons" class="flex flex-col gap-3">
+    <h2 class="font-display text-2xl"><%= t(".uncredited_title") %></h2>
+    <p class="text-muted text-sm"><%= t(".uncredited_summary") %></p>
+    <% if @uncredited_lessons.empty? %>
+      <p class="text-sm text-muted"><%= t(".uncredited_empty") %></p>
+    <% else %>
+      <ul class="flex flex-col gap-2">
+        <% @uncredited_lessons.each do |row| %>
+          <li class="card px-4 py-3 text-sm">
+            <%= link_to row.lesson.display_title, edit_lesson_path(row.lesson), class: "underline font-medium" %>
+            <span class="text-muted">· <%= t(".uncredited_count", count: row.count) %></span>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
+
   <section id="empty-lessons" class="flex flex-col gap-3">
     <h2 class="font-display text-2xl"><%= t(".empty_lessons_title") %></h2>
     <p class="text-muted text-sm"><%= t(".empty_lessons_summary") %></p>

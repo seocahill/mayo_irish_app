@@ -109,4 +109,15 @@ class VocabularyGapsTest < ActiveSupport::TestCase
     clip.listed!
     assert_empty VocabularyGaps.new.unlistened_lessons
   end
+
+  test "a lesson is listed as uncredited when a recorded word has no named speaker" do
+    VocabularyItem.delete_all
+    lesson = Lesson.first
+    VocabularyItem.create!(lesson: lesson, irish: "a", english: "one")
+    assert_empty VocabularyGaps.new.uncredited_lessons
+    recorded = VocabularyItem.create!(lesson: lesson, irish: "b", english: "two", audio_url: "https://example.com/b.mp3")
+    assert_equal [ [ lesson, 1 ] ], VocabularyGaps.new.uncredited_lessons.map { |u| [ u.lesson, u.count ] }
+    recorded.update!(audio_credit: "Máire")
+    assert_empty VocabularyGaps.new.uncredited_lessons
+  end
 end
