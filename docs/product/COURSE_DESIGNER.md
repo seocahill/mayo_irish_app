@@ -124,6 +124,7 @@ read-only; no tool deletes anything.
 | `fill_queue` | open slots, one job at a time, with candidates |
 | `fill_slot` | pick a candidate, attach a recording or enter typed Irish |
 | `where_is_taught` | where a word or rule is taught, heard and reviewed |
+| `mayo_forms` | Mayo forms pairs and where the other form still appears |
 | `search_corpus` | search lessons, Abairt, monograph reports |
 
 The server's own MCP `instructions` field tells the chat app how to behave:

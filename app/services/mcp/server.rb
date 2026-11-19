@@ -12,7 +12,8 @@ module Mcp
       Tools::ListIdeas,
       Tools::GetProposal,
       Tools::CommentOnProposal,
-      Tools::WhereIsTaught
+      Tools::WhereIsTaught,
+      Tools::MayoForms
     ].freeze
 
     def self.build(user)
