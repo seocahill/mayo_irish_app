@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_18_100000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_19_090000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -349,6 +349,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_18_100000) do
     t.index ["course_proposal_id"], name: "index_proposal_comments_on_course_proposal_id"
   end
 
+  create_table "proposal_evidence", force: :cascade do |t|
+    t.integer "course_proposal_id", null: false
+    t.string "source", null: false
+    t.text "quote"
+    t.string "audio_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_proposal_id"], name: "index_proposal_evidence_on_course_proposal_id"
+  end
+
   create_table "quiz_questions", force: :cascade do |t|
     t.string "answer", null: false
     t.datetime "created_at", null: false
@@ -529,6 +539,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_18_100000) do
   add_foreign_key "oauth_access_tokens", "users", column: "resource_owner_id"
   add_foreign_key "phrases", "lessons"
   add_foreign_key "proposal_comments", "course_proposals"
+  add_foreign_key "proposal_evidence", "course_proposals"
   add_foreign_key "quiz_questions", "lessons"
   add_foreign_key "quiz_reviews", "quiz_questions"
   add_foreign_key "quiz_reviews", "users"

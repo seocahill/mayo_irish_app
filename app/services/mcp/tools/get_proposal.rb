@@ -4,7 +4,7 @@ module Mcp
     class GetProposal < Base
       tool_name "get_proposal"
       description "Open one course proposal or idea by id: title, status, the original words " \
-                  "(verbatim) and the discussion so far."
+                  "(verbatim), the evidence behind it (sources, quotes, audio) and the discussion so far."
       annotations(
         title: "Get proposal",
         read_only_hint: true,
@@ -21,6 +21,7 @@ module Mcp
         json_response(
           id: proposal.id, kind: proposal.kind, status: proposal.status, origin: proposal.origin, title: proposal.title,
           rationale: proposal.rationale, raw_text: proposal.raw_text,
+          evidence: proposal.proposal_evidence.map { |e| { id: e.id, source: e.source, quote: e.quote, audio_url: e.audio_url } },
           comments: proposal.proposal_comments.map { |c| { author: c.author, body: c.body, at: c.created_at.iso8601 } }
         )
       end
