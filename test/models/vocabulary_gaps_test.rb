@@ -120,4 +120,12 @@ class VocabularyGapsTest < ActiveSupport::TestCase
     recorded.update!(audio_credit: "Máire")
     assert_empty VocabularyGaps.new.uncredited_lessons
   end
+
+  test "an uploaded recording with no speaker credit is listed as uncredited" do
+    VocabularyItem.delete_all
+    lesson = Lesson.first
+    item = VocabularyItem.create!(lesson: lesson, irish: "c", english: "three")
+    item.audio.attach(io: StringIO.new("x"), filename: "c.mp3", content_type: "audio/mpeg")
+    assert_equal [ [ lesson, 1 ] ], VocabularyGaps.new.uncredited_lessons.map { |u| [ u.lesson, u.count ] }
+  end
 end
