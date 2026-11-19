@@ -15,7 +15,9 @@
               <span class="font-display text-xl"><%= source.irish %></span>
               <span class="text-muted"><%= source.english %></span>
               <%= render "audio", question: question %>
-              <%= link_to t(".in_lesson", lesson: question.lesson.display_title), lesson_path(question.lesson), class: "text-sm underline text-muted" %>
+              <% if question.lesson.published? || current_user&.admin? %>
+                <%= link_to t(".in_lesson", lesson: question.lesson.display_title), lesson_path(question.lesson), class: "text-sm underline text-muted" %>
+              <% end %>
             </li>
           <% end %>
         </ul>
