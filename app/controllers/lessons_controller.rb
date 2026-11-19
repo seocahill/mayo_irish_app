@@ -6,7 +6,11 @@ class LessonsController < ApplicationController
     @lessons = Lesson.visible_to(current_user).ordered
     @flagged_count = ChatMessage.flagged.count if current_user&.admin?
     @quiz_progress = {}
+    @due_by_lesson = {}
     if current_user
+      @due_by_lesson = QuizReview.due.where(user: current_user).joins(:quiz_question)
+                                 .where(quiz_questions: { lesson_id: @lessons.map(&:id) })
+                                 .group("quiz_questions.lesson_id").count
       totals = VocabularyItem.group(:lesson_id).count
       known = Lesson.known_word_counts_for(current_user)
       @quiz_progress = @lessons.each_with_object({}) do |lesson, h|

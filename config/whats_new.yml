@@ -125,3 +125,9 @@
   body: The words you missed at the end of a review round now link to the lesson that
     teaches them, so you can see them in context.
   path: /review
+- id: 19
+  date: 2026-11-19
+  title: See which lessons have words to review
+  body: The course list now shows, under each lesson, how many of its words are due
+    for review today.
+  path: /lessons

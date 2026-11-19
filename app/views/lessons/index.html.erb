@@ -49,7 +49,7 @@
                   <% end %>
                 </span>
                 <span class="block font-mono text-[11px] uppercase tracking-wider text-muted mt-0.5">
-                  <%= t(".word_count", count: lesson.vocabulary_items.size) %><% if lesson.grammar.present? %> · <%= t(".grammar") %><% end %>
+                  <%= t(".word_count", count: lesson.vocabulary_items.size) %><% if lesson.grammar.present? %> · <%= t(".grammar") %><% end %><% if (due = @due_by_lesson&.fetch(lesson.id, 0).to_i).positive? %> · <span class="text-foghlaim"><%= t(".due", count: due) %></span><% end %>
                 </span>
               </span>
               <% if lp&.started? %>
