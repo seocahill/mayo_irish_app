@@ -1081,6 +1081,10 @@ en:
       ungrammared_summary: Lessons that teach words but have no grammar notes yet.
         A prompt for where gender, plurals, the genitive or a verb form could be taught.
       ungrammared_title: Lessons with no grammar notes
+      unlistened_empty: Every lesson with vocabulary has at least one listening clip.
+      unlistened_summary: Lessons that teach words but have no Abairt listening clip
+        for learners to work out yet.
+      unlistened_title: Lessons with no listening clips
       unpractised_empty: Every lesson with vocabulary has an exercise or a phrase.
       unpractised_summary: Lessons that teach words but have no exercises and no phrases
         yet. A prompt for where learners have nothing to practise on.
