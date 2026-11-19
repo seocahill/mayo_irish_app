@@ -155,6 +155,22 @@
     <% end %>
   </section>
 
+  <section id="empty-lessons" class="flex flex-col gap-3">
+    <h2 class="font-display text-2xl"><%= t(".empty_lessons_title") %></h2>
+    <p class="text-muted text-sm"><%= t(".empty_lessons_summary") %></p>
+    <% if @empty_lessons.empty? %>
+      <p class="text-sm text-muted"><%= t(".empty_lessons_empty") %></p>
+    <% else %>
+      <ul class="flex flex-col gap-2">
+        <% @empty_lessons.each do |lesson| %>
+          <li class="card px-4 py-3 text-sm">
+            <%= link_to lesson.display_title, edit_lesson_path(lesson), class: "underline font-medium" %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
+
   <section id="thin-themes" class="flex flex-col gap-3">
     <h2 class="font-display text-2xl"><%= t(".themes_title") %></h2>
     <p class="text-muted text-sm"><%= t(".themes_summary", limit: VocabularyGaps::THIN) %></p>

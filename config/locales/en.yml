@@ -1032,6 +1032,10 @@ en:
         one: 1 word
         other: "%{count} words"
       empty: Every word has a genitive, a plural and a recording.
+      empty_lessons_empty: Every lesson has at least one word.
+      empty_lessons_summary: Lessons with no vocabulary at all yet. A prompt for where
+        a lesson still needs its words.
+      empty_lessons_title: Lessons with no words
       eyebrow: Admin
       kinds:
         genitive: genitive
