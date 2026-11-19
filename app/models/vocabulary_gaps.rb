@@ -102,6 +102,19 @@ class VocabularyGaps
     end
   end
 
+  Unlistened = Struct.new(:lesson, :count, keyword_init: true)
+
+  # Lessons with vocabulary where no word has a listed listening clip, so
+  # designers can see where learners have no native phrase to work out. Read-only.
+  def unlistened_lessons
+    @unlistened_lessons ||= begin
+      with_clips = VocabularyItem.where(id: ListeningClip.listed.select(:vocabulary_item_id)).distinct.pluck(:lesson_id)
+      Lesson.includes(:vocabulary_items).where.not(id: with_clips).order(:position, :number).filter_map do |lesson|
+        Unlistened.new(lesson: lesson, count: lesson.vocabulary_items.size) if lesson.vocabulary_items.any?
+      end
+    end
+  end
+
   private
 
   def self.stem(word)

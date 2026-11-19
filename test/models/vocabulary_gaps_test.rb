@@ -96,4 +96,17 @@ class VocabularyGapsTest < ActiveSupport::TestCase
     GrammarRule.create!(lesson: lesson, number: 1, title: "Rule")
     assert_empty VocabularyGaps.new.ungrammared_lessons
   end
+
+  test "a lesson is listed as having no listening clips unless a word has a listed clip" do
+    ListeningClip.delete_all
+    VocabularyItem.delete_all
+    lesson = Lesson.first
+    assert_empty VocabularyGaps.new.unlistened_lessons
+    item = VocabularyItem.create!(lesson: lesson, irish: "a", english: "one")
+    assert_equal [ [ lesson, 1 ] ], VocabularyGaps.new.unlistened_lessons.map { |u| [ u.lesson, u.count ] }
+    clip = ListeningClip.create!(vocabulary_item: item, abairt_entry_id: 1, irish: "x y z", english: "x y z", audio_url: "https://example.com/a.mp3", word_count: 3, status: "hidden")
+    assert_equal 1, VocabularyGaps.new.unlistened_lessons.size
+    clip.listed!
+    assert_empty VocabularyGaps.new.unlistened_lessons
+  end
 end

@@ -182,4 +182,21 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
     get vocabulary_gaps_path
     assert_select "#ungrammared-lessons", count: 0
   end
+
+  test "admins see lessons with no listening clips; a lesson with a listed clip is not listed" do
+    ListeningClip.delete_all
+    VocabularyItem.delete_all
+    a = Lesson.first
+    b = Lesson.create!(number: 99, title: "Lesson Two", position: 99)
+    VocabularyItem.create!(lesson: a, irish: "a", english: "one")
+    item = VocabularyItem.create!(lesson: b, irish: "b", english: "two")
+    ListeningClip.create!(vocabulary_item: item, abairt_entry_id: 1, irish: "x y z", english: "x y z", audio_url: "https://example.com/a.mp3", word_count: 3)
+    sign_in_as(users(:admin))
+    get vocabulary_gaps_path
+    assert_select "#unlistened-lessons a", text: /#{Regexp.escape(a.display_title)}/
+    assert_select "#unlistened-lessons a", text: /#{Regexp.escape(b.display_title)}/, count: 0
+    delete session_path
+    get vocabulary_gaps_path
+    assert_select "#unlistened-lessons", count: 0
+  end
 end
