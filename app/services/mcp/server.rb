@@ -12,6 +12,7 @@ module Mcp
       Tools::ListIdeas,
       Tools::GetProposal,
       Tools::CommentOnProposal,
+      Tools::AddProposalEvidence,
       Tools::WhereIsTaught,
       Tools::MayoForms
     ].freeze

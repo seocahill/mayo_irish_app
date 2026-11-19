@@ -35,4 +35,24 @@ class Mcp::ProposalToolsTest < ActiveSupport::TestCase
       assert Mcp::Tools::CommentOnProposal.call(id: 0, text: "hi", server_context: ctx).error?
     end
   end
+
+  test "add_proposal_evidence stores the quote verbatim and get_proposal returns it" do
+    assert_difference -> { ProposalEvidence.count }, 1 do
+      res = Mcp::Tools::AddProposalEvidence.call(id: @p.id, source: "Erris p. 40", quote: " Tá sé fliuch ",
+                                                 audio_url: "https://abairt.ie/a.mp3", server_context: {})
+      assert_not res.error?
+    end
+    body = Mcp::Tools::GetProposal.call(id: @p.id, server_context: {}).content.first[:text]
+    assert_includes body, "Erris p. 40"
+    assert_includes body, " Tá sé fliuch "
+    assert_equal "captured", @p.reload.status
+  end
+
+  test "add_proposal_evidence rejects blank source, bad link and unknown proposal" do
+    assert_no_difference -> { ProposalEvidence.count } do
+      assert Mcp::Tools::AddProposalEvidence.call(id: @p.id, source: " ", server_context: {}).error?
+      assert Mcp::Tools::AddProposalEvidence.call(id: @p.id, source: "x", audio_url: "ftp://x", server_context: {}).error?
+      assert Mcp::Tools::AddProposalEvidence.call(id: 0, source: "x", server_context: {}).error?
+    end
+  end
 end

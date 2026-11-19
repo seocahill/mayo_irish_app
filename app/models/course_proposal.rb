@@ -8,6 +8,7 @@ class CourseProposal < ApplicationRecord
   OPEN_STATUSES = %w[captured grounded proposed discussing].freeze
 
   has_many :proposal_comments, -> { order(:created_at, :id) }, dependent: :destroy
+  has_many :proposal_evidence, -> { order(:created_at, :id) }, class_name: "ProposalEvidence", dependent: :destroy
 
   validates :title, presence: true
   validates :raw_text, length: { maximum: 2000 }

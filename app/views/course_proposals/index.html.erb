@@ -1,4 +1,4 @@
-<%# i18n-tasks-use t(".decisions.discuss") t(".decisions.defer") t(".decisions.dismiss") t(".decisions.reopen") t(".comment_by") t(".comment_label") t(".comment_save") %>
+<%# i18n-tasks-use t(".decisions.discuss") t(".decisions.defer") t(".decisions.dismiss") t(".decisions.reopen") t(".comment_by") t(".comment_label") t(".comment_save") t(".evidence_heading") t(".evidence_audio") %>
 <div class="max-w-2xl mx-auto flex flex-col gap-6">
   <header>
     <p class="eyebrow"><%= t(".eyebrow") %></p>
@@ -27,6 +27,20 @@
           <% if p.raw_text.present? && p.raw_text != p.title %><p class="whitespace-pre-line"><%= p.raw_text %></p><% end %>
           <% if p.rationale.present? %><p><%= p.rationale %></p><% end %>
           <% if p.decided_by.present? %><p class="text-xs text-muted"><%= t(".decided", by: p.decided_by, date: l(p.decided_at.to_date, format: :long)) %></p><% end %>
+          <% if p.proposal_evidence.any? %>
+            <div class="flex flex-col gap-2 pt-1" id="evidence-<%= p.id %>">
+              <p class="text-xs text-muted"><%= t(".evidence_heading") %></p>
+              <ul class="flex flex-col gap-2">
+                <% p.proposal_evidence.each do |e| %>
+                  <li class="border-l-2 border-line pl-3">
+                    <p class="text-xs text-muted"><%= e.source %></p>
+                    <% if e.quote.present? %><blockquote class="whitespace-pre-line"><%= e.quote %></blockquote><% end %>
+                    <% if e.audio_url.present? %><a href="<%= e.audio_url %>" class="text-xs underline" target="_blank" rel="noopener"><%= t(".evidence_audio") %></a><% end %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
           <div class="flex flex-wrap gap-2 pt-1">
             <% p.decisions.each do |d| %>
               <%= button_to t(".decisions.#{d}"), course_proposal_path(p), method: :patch, params: { decision: d },

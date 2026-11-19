@@ -17,6 +17,16 @@ class CourseProposalsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#proposals li:first-child", /Weather lesson/
   end
 
+  test "evidence shows under the proposal with source, quote and audio" do
+    pr = CourseProposal.create!(kind: "gap", title: "Weather lesson")
+    pr.proposal_evidence.create!(source: "Erris p. 40", quote: "Tá sé fliuch", audio_url: "https://abairt.ie/a.mp3")
+    sign_in_as(users(:admin))
+    get course_proposals_path
+    assert_select "#evidence-#{pr.id}", /Erris p\. 40/
+    assert_select "#evidence-#{pr.id} blockquote", "Tá sé fliuch"
+    assert_select "#evidence-#{pr.id} a[href='https://abairt.ie/a.mp3']"
+  end
+
   test "learners cannot open it" do
     sign_in_as(users(:two))
     get course_proposals_path

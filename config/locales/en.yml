@@ -45,6 +45,8 @@ en:
         reopen: Reopen
       empty: No proposals yet. They will appear here when the designer or a contributor
         adds one.
+      evidence_audio: Listen
+      evidence_heading: Evidence
       eyebrow: Admin
       idea_label: Your idea, in your own words
       idea_placeholder: For example, a lesson on weather, or a word you think is missing
