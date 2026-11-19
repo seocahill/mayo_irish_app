@@ -563,6 +563,9 @@ en:
       course: Course
       course_tools: Course tools
       draft: Draft
+      due:
+        one: "%{count} card due"
+        other: "%{count} cards due"
       flagged_replies:
         one: 1 flagged reply
         other: "%{count} flagged replies"

@@ -183,10 +183,7 @@ class DailyPath
   def visits = @visits ||= user.lesson_visits.pluck(:lesson_id, :created_at).to_h
 
   def due_by_lesson
-    @due_by_lesson ||= QuizReview.due.where(user: user)
-                                 .joins(:quiz_question)
-                                 .where(quiz_questions: { lesson_id: Lesson.visible_to(user).select(:id) })
-                                 .group("quiz_questions.lesson_id").count
+    @due_by_lesson ||= QuizReview.due_counts_by_lesson(user, Lesson.visible_to(user).select(:id))
   end
 
   def known_by_lesson

@@ -46,4 +46,35 @@ class LessonsVisibilityTest < ActionDispatch::IntegrationTest
     patch lesson_path(@draft), params: { lesson: { published: true } }
     assert @draft.reload.published?
   end
+
+  test "index shows how many words are due for review in each lesson" do
+    sign_in_as(@learner)
+    lesson = lessons(:one)
+    item = lesson.vocabulary_items.first || lesson.vocabulary_items.create!(irish: "bó", english: "cow")
+    QuizQuestion.sync_for(lesson)
+    question = QuizQuestion.where(lesson: lesson).first
+    QuizReview.create!(user: @learner, quiz_question: question, due_at: 1.hour.ago)
+
+    get lessons_path
+    assert_response :success
+    assert_match "1 card due", @response.body
+  end
+
+  test "index shows no due note when nothing is due" do
+    sign_in_as(@learner)
+    get lessons_path
+    assert_no_match "card due", @response.body
+  end
+
+  test "future-due and other learners' reviews are not counted" do
+    sign_in_as(@learner)
+    lesson = lessons(:one)
+    lesson.vocabulary_items.first || lesson.vocabulary_items.create!(irish: "bó", english: "cow")
+    QuizQuestion.sync_for(lesson)
+    q = QuizQuestion.where(lesson: lesson).first
+    QuizReview.create!(user: @learner, quiz_question: q, due_at: 2.days.from_now)
+    QuizReview.create!(user: @admin, quiz_question: q, due_at: 1.hour.ago)
+    get lessons_path
+    assert_no_match "card due", @response.body
+  end
 end
