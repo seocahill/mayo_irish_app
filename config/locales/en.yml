@@ -1101,6 +1101,10 @@ en:
       unpractised_summary: Lessons that teach words but have no exercises and no phrases
         yet. A prompt for where learners have nothing to practise on.
       unpractised_title: Lessons with no exercises or phrases
+      unread_empty: Every lesson with vocabulary has a reading text.
+      unread_summary: Lessons that teach words but have no reading text yet. A prompt
+        for where a short passage could be added to read and hear.
+      unread_title: Lessons with no reading text
       unreviewed_count:
         one: 1 word, not yet reviewed
         other: "%{count} words, not yet reviewed"
