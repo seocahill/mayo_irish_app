@@ -907,6 +907,7 @@ en:
         forget them.
       nothing_due: Nothing is due for review right now
     forecast: 'Tomorrow: %{tomorrow} · This week: %{week}'
+    next_up: Up next
     show:
       how_did_it_go: How did it go?
       how_to_say_in_irish: How do you say this in Irish?

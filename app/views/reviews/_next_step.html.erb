@@ -1,0 +1,7 @@
+    <% if @next_step %>
+      <%= link_to @next_step.path, class: "block border border-line rounded-sm px-4 py-3 hover:bg-canvas" do %>
+        <span class="eyebrow block mb-1"><%= t("reviews.next_up") %></span>
+        <span class="block"><%= @next_step.title %></span>
+        <span class="block text-xs text-muted"><%= @next_step.label %> · <%= t("home.show.about_minutes", count: @next_step.minutes) %></span>
+      <% end %>
+    <% end %>

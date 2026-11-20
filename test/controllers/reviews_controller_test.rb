@@ -66,6 +66,22 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     assert_match(/Tomorrow: \d+ · This week: \d+/, response.body)
   end
 
+  test "the round summary points to the next step on the daily path" do
+    sign_in_as(@user)
+    get review_path
+    ids = session[ReviewsController::ROUND_KEY]["ids"]
+    ids.size.times do
+      get review_path
+      q = QuizQuestion.find(session[ReviewsController::ROUND_KEY]["ids"][session[ReviewsController::ROUND_KEY]["pos"]])
+      post answer_review_path, params: { question_id: q.id, choice: q.answer }
+    end
+    next_step = DailyPath.new(@user).next_step_after_review
+    get review_path
+    assert_match(/Round complete/, response.body)
+    assert_not_nil next_step
+    assert_select "a[href=?]", next_step.path, text: /Up next/
+  end
+
   test "the round summary lists the words answered wrongly" do
     sign_in_as(@user)
     get review_path

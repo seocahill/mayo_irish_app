@@ -201,4 +201,10 @@ class DailyPathListeningTest < ActiveSupport::TestCase
     assert_equal [ first ], path.items_within([ limit, 1 ].max).first(1)
     assert_not_includes path.items_within(first.minutes), second
   end
+
+  test "the step after review is never the review itself" do
+    path = DailyPath.new(users(:two))
+    assert_not_equal Rails.application.routes.url_helpers.review_path, path.next_step_after_review&.path
+    assert_equal path.items.reject { |i| i.path == Rails.application.routes.url_helpers.review_path }.first, path.next_step_after_review
+  end
 end
