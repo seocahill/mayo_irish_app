@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_19_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_20_150000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -240,6 +240,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_19_090000) do
     t.index ["abairt_recording_id"], name: "index_listening_clips_on_abairt_recording_id"
     t.index ["reviewed_by_id"], name: "index_listening_clips_on_reviewed_by_id"
     t.index ["vocabulary_item_id"], name: "index_listening_clips_on_vocabulary_item_id"
+  end
+
+  create_table "listening_days", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.date "day", null: false
+    t.integer "seconds", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "day"], name: "index_listening_days_on_user_id_and_day", unique: true
+    t.index ["user_id"], name: "index_listening_days_on_user_id"
   end
 
   create_table "listening_times", force: :cascade do |t|
@@ -528,6 +538,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_19_090000) do
   add_foreign_key "lessons", "users", column: "reviewed_by_id"
   add_foreign_key "listening_clips", "users", column: "reviewed_by_id"
   add_foreign_key "listening_clips", "vocabulary_items"
+  add_foreign_key "listening_days", "users"
   add_foreign_key "listening_times", "users"
   add_foreign_key "listens", "listening_clips"
   add_foreign_key "listens", "users"

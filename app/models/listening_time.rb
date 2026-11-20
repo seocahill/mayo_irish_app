@@ -13,5 +13,9 @@ class ListeningTime < ApplicationRecord
 
   def self.minutes_for(user) = where(user: user).sum(:seconds).fdiv(60).round
 
-  def add(seconds) = increment!(:seconds, seconds.to_i.clamp(0, MAX_REPORT))
+  def add(seconds)
+    seconds = seconds.to_i.clamp(0, MAX_REPORT)
+    increment!(:seconds, seconds)
+    ListeningDay.add(user, seconds)
+  end
 end
