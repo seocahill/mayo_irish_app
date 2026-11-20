@@ -131,3 +131,9 @@
   body: The course list now shows, under each lesson, how many review cards are
     due.
   path: /lessons
+- id: 20
+  date: 2026-11-20
+  title: What to do after a review
+  body: When a review round ends, or when nothing is due, you now see the next step
+    on your daily path right there.
+  path: /review

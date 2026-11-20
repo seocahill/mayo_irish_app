@@ -14,12 +14,14 @@ class ReviewsController < ApplicationController
       session.delete(ROUND_KEY)
       @forecast = QuizReview.forecast_for(current_user)
       @missed = missed_questions(round)
+      @next_step = DailyPath.new(current_user).next_step_after_review
       return render :summary
     end
 
     round ||= start_round
     if round.nil?
       @forecast = QuizReview.forecast_for(current_user)
+      @next_step = DailyPath.new(current_user).next_step_after_review
       return render :empty
     end
 

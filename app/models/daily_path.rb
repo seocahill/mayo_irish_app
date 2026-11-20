@@ -31,6 +31,11 @@ class DailyPath
     end.map(&:first)
   end
 
+  # The first step that isn't the review itself, for the end of a review round.
+  def next_step_after_review
+    items.find { |item| item.path != review_path }
+  end
+
   def due_count
     due_by_lesson.values.sum
   end
