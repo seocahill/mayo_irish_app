@@ -154,3 +154,8 @@
   title: Reviews this week
   body: Under So far, you now see how many review answers you have given this week.
   path: /
+- id: 24
+  date: 2026-11-20
+  title: How many you got right
+  body: Next to your review answers this week, you now see how many of them you got right.
+  path: /

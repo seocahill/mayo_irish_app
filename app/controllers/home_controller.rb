@@ -12,7 +12,9 @@ class HomeController < ApplicationController
     @spoken_time = SpokenTime.new(current_user)
     @listening_minutes = ListeningTime.minutes_for(current_user)
     @listening_minutes_this_week = ListeningDay.minutes_this_week(current_user)
-    @answers_this_week = current_user.review_logs.where(answered_at: Time.current.beginning_of_week..).count
+    week_logs = current_user.review_logs.where(answered_at: Time.current.beginning_of_week..)
+    @answers_this_week = week_logs.count
+    @correct_this_week = week_logs.where(correct: true).count
     @course_words = @daily_path.course_words
     @milestones = Milestones.new(current_user, known_words: @daily_path.known_words, listening_minutes: @listening_minutes)
   end

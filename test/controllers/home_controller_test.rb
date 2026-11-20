@@ -61,9 +61,10 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "p", text: /review answers? this week/, count: 0
 
     2.times { user.review_logs.create!(prompt: "p", correct: true, box_before: 1, box_after: 2, answered_at: Time.current) }
+    user.review_logs.create!(prompt: "miss", correct: false, box_before: 2, box_after: 1, answered_at: Time.current)
     user.review_logs.create!(prompt: "old", correct: true, box_before: 1, box_after: 2, answered_at: 3.weeks.ago)
     get root_path
-    assert_select "p", text: /2\s+review answers this week/
+    assert_select "p", text: /3\s+review answers this week\s+·\s+2 right/
   end
 
   test "Today shows a time per step and trims the list to the minutes chosen" do
