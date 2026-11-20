@@ -50,9 +50,11 @@ class DailyPath
     known_by_lesson.values.sum
   end
 
-  # How many words the learner's course holds in all, to put known_words in proportion.
+  # How many words can be known in all: the same words known_words counts over
+  # (those with quiz questions), in the lessons this learner can see.
   def course_words
-    Lesson.visible_to(user).pluck(:id).sum { |id| (@words_by_lesson ||= VocabularyItem.group(:lesson_id).count).fetch(id, 0) }
+    QuizQuestion.where(source_type: "VocabularyItem", lesson_id: Lesson.visible_to(user).select(:id))
+                .group(:lesson_id, :source_id).count.size
   end
 
   # The first curriculum lesson with vocabulary that isn't fully known yet.

@@ -55,9 +55,16 @@ class DailyPathTest < ActiveSupport::TestCase
     assert_equal 0, DailyPath.new(@user).due_count
   end
 
-  test "course_words counts the words in every lesson the learner can see" do
-    assert_equal Lesson.visible_to(@user).sum { |l| l.vocabulary_items.count }, DailyPath.new(@user).course_words
-    assert_operator DailyPath.new(@user).course_words, :>=, @lesson.vocabulary_items.count
+  test "course_words counts quiz-able words in visible lessons only" do
+    expected = QuizQuestion.where(source_type: "VocabularyItem", lesson_id: @lesson.id).group(:lesson_id, :source_id).count.size
+    assert_operator expected, :>, 0
+    assert_operator DailyPath.new(@user).course_words, :>=, expected
+    assert_equal DailyPath.new(@user).known_words, 0
+    @lesson.quiz_questions.each do |q|
+      QuizReview.create!(user: @user, quiz_question: q, box: 3, fsrs_state: 2, stability: 7.0, due_at: 2.days.from_now)
+    end
+    path = DailyPath.new(@user)
+    assert_operator path.known_words, :<=, path.course_words
   end
 
   test "counts known words and moves on when a lesson is complete" do
