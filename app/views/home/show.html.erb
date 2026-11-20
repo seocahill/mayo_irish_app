@@ -53,6 +53,12 @@
         <span class="font-display text-3xl text-ink"><%= @daily_path.known_words %></span>
         <%= t(".words_known", count: @daily_path.known_words) %>
       </p>
+      <% if @answers_this_week.positive? %>
+        <p class="text-muted">
+          <span class="font-display text-3xl text-ink"><%= @answers_this_week %></span>
+          <%= t(".answers_this_week", count: @answers_this_week) %>
+        </p>
+      <% end %>
       <p class="text-muted">
         <span class="font-display text-3xl text-ink"><%= @spoken_time.minutes %></span>
         <%= t(".minutes_spoken", count: @spoken_time.minutes) %>
