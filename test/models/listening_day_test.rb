@@ -14,6 +14,14 @@ class ListeningDayTest < ActiveSupport::TestCase
     end
   end
 
+  test "the week starts on Monday" do
+    ListeningDay.add(@user, 60, on: Date.new(2026, 11, 15))
+    ListeningDay.add(@user, 120, on: Date.new(2026, 11, 16))
+    travel_to Time.zone.parse("2026-11-20 12:00") do
+      assert_equal 2, ListeningDay.minutes_this_week(@user)
+    end
+  end
+
   test "ignores nothing-to-add" do
     ListeningDay.add(@user, 0)
     assert_empty @user.listening_days

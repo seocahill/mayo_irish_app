@@ -15,7 +15,9 @@ class ListeningTime < ApplicationRecord
 
   def add(seconds)
     seconds = seconds.to_i.clamp(0, MAX_REPORT)
-    increment!(:seconds, seconds)
-    ListeningDay.add(user, seconds)
+    transaction do
+      increment!(:seconds, seconds)
+      ListeningDay.add(user, seconds)
+    end
   end
 end

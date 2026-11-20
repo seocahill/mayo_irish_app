@@ -1,7 +1,7 @@
-class CreateListeningDays < ActiveRecord::Migration[8.0]
+class CreateListeningDays < ActiveRecord::Migration[8.1]
   def change
     create_table :listening_days do |t|
-      t.references :user, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true, index: false
       t.date :day, null: false
       t.integer :seconds, null: false, default: 0
       t.timestamps

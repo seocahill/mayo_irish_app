@@ -249,7 +249,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_150000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "day"], name: "index_listening_days_on_user_id_and_day", unique: true
-    t.index ["user_id"], name: "index_listening_days_on_user_id"
   end
 
   create_table "listening_times", force: :cascade do |t|
