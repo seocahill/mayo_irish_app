@@ -714,6 +714,7 @@ en:
     words:
       next: 'next: %{count}'
       not_yet: Your first words come from a lesson's quiz
+      of_course: "%{known} of %{total} in the course"
       reached: "%{count} words known"
   native_questions:
     create:

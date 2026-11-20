@@ -65,7 +65,7 @@
         <%= t(".minutes_listened", count: @listening_minutes) %>
       </p>
     </div>
-    <%= render "home/milestones", strands: @milestones.strands %>
+    <%= render "home/milestones", strands: @milestones.strands, course_words: @course_words %>
     <% if @forecast[:week].positive? %>
       <%= render "reviews/forecast", forecast: @forecast %>
     <% end %>

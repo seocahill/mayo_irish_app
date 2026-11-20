@@ -7,6 +7,9 @@
       <% else %>
         <%= t("milestones.#{strand.key}.not_yet") %>
       <% end %>
+      <% if strand.key == :words && course_words.to_i.positive? && strand.value.positive? %>
+        <span>· <%= t("milestones.words.of_course", known: strand.value, total: course_words) %></span>
+      <% end %>
       <% if strand.next_step %>
         <span>· <%= link_to t("milestones.#{strand.key}.next", count: strand.next_step, remaining: strand.remaining),
                             { words: review_path, listening: listens_path }.fetch(strand.key, lessons_path),

@@ -37,6 +37,22 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "Today puts known words in proportion to the words in the course" do
+    user = users(:two)
+    lesson = lessons(:one)
+    QuizQuestion.sync_for(lesson)
+    lesson.quiz_questions.each do |q|
+      QuizReview.create!(user: user, quiz_question: q, box: 3, fsrs_state: 2, stability: 7.0, due_at: 2.days.from_now)
+    end
+    sign_in_as(user)
+    get root_path
+
+    total = DailyPath.new(user).course_words
+    assert_operator DailyPath.new(user).known_words, :>, 0
+    assert_select "li", text: /of #{total} in the course/
+    assert_response :success
+  end
+
   test "Today shows a time per step and trims the list to the minutes chosen" do
     sign_in_as(users(:two))
     get root_path

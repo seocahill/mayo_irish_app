@@ -50,6 +50,13 @@ class DailyPath
     known_by_lesson.values.sum
   end
 
+  # How many words can be known in all: the same words known_words counts over
+  # (those with quiz questions), in the lessons this learner can see.
+  def course_words
+    QuizQuestion.where(source_type: "VocabularyItem", lesson_id: Lesson.visible_to(user).select(:id))
+                .group(:lesson_id, :source_id).count.size
+  end
+
   # The first curriculum lesson with vocabulary that isn't fully known yet.
   def current_lesson
     return @current_lesson if defined?(@current_lesson)
