@@ -266,6 +266,9 @@ en:
       about_minutes:
         one: about 1 minute
         other: about %{count} minutes
+      answers_this_week:
+        one: review answer this week
+        other: review answers this week
       change: Change
       classed_1926: How was this area classed in 1926?
       how_it_works: How this course works
