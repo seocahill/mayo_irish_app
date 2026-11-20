@@ -172,6 +172,23 @@
     <% end %>
   </section>
 
+  <section id="unread-lessons" class="flex flex-col gap-3">
+    <h2 class="font-display text-2xl"><%= t(".unread_title") %></h2>
+    <p class="text-muted text-sm"><%= t(".unread_summary") %></p>
+    <% if @unread_lessons.empty? %>
+      <p class="text-sm text-muted"><%= t(".unread_empty") %></p>
+    <% else %>
+      <ul class="flex flex-col gap-2">
+        <% @unread_lessons.each do |row| %>
+          <li class="card px-4 py-3 text-sm">
+            <%= link_to row.lesson.display_title, edit_lesson_path(row.lesson), class: "underline font-medium" %>
+            <span class="text-muted">· <%= t(".count", count: row.count) %></span>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
+
   <section id="unreviewed-lessons" class="flex flex-col gap-3">
     <h2 class="font-display text-2xl"><%= t(".unreviewed_title") %></h2>
     <p class="text-muted text-sm"><%= t(".unreviewed_summary") %></p>

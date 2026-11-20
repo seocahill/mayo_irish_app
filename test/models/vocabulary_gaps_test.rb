@@ -138,4 +138,15 @@ class VocabularyGapsTest < ActiveSupport::TestCase
     lesson.mark_reviewed(by: users(:admin))
     assert_not_includes VocabularyGaps.new.unreviewed_lessons.map(&:lesson), lesson
   end
+
+  test "a lesson with words but no reading text is listed as unread" do
+    VocabularyItem.delete_all
+    lesson = Lesson.first
+    lesson.update_columns(texts: nil)
+    assert_empty VocabularyGaps.new.unread_lessons
+    VocabularyItem.create!(lesson: lesson, irish: "a", english: "one")
+    assert_equal [ [ lesson, 1 ] ], VocabularyGaps.new.unread_lessons.map { |u| [ u.lesson, u.count ] }
+    lesson.update_columns(texts: "A short text")
+    assert_empty VocabularyGaps.new.unread_lessons
+  end
 end
