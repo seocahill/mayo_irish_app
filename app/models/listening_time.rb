@@ -13,5 +13,9 @@ class ListeningTime < ApplicationRecord
 
   def self.minutes_for(user) = where(user: user).sum(:seconds).fdiv(60).round
 
+  # Minutes in recordings the learner listened to in the last week (the row's
+  # last update is its latest listening), so a recording heard again counts in full.
+  def self.minutes_this_week_for(user) = where(user: user).recent.sum(:seconds).fdiv(60).round
+
   def add(seconds) = increment!(:seconds, seconds.to_i.clamp(0, MAX_REPORT))
 end
