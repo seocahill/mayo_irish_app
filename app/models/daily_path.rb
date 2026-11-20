@@ -50,6 +50,11 @@ class DailyPath
     known_by_lesson.values.sum
   end
 
+  # How many words the learner's course holds in all, to put known_words in proportion.
+  def course_words
+    Lesson.visible_to(user).pluck(:id).sum { |id| (@words_by_lesson ||= VocabularyItem.group(:lesson_id).count).fetch(id, 0) }
+  end
+
   # The first curriculum lesson with vocabulary that isn't fully known yet.
   def current_lesson
     return @current_lesson if defined?(@current_lesson)

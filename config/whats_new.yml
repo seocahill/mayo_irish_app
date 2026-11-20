@@ -137,3 +137,9 @@
   body: When a review round ends, or when nothing is due, you now see the next step
     on your daily path right there.
   path: /review
+- id: 21
+  date: 2026-11-20
+  title: Your words, out of the whole course
+  body: Under So far, the words you know are now shown against all the words in the
+    course, so you can see how far along you are.
+  path: /

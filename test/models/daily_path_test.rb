@@ -55,6 +55,11 @@ class DailyPathTest < ActiveSupport::TestCase
     assert_equal 0, DailyPath.new(@user).due_count
   end
 
+  test "course_words counts the words in every lesson the learner can see" do
+    assert_equal Lesson.visible_to(@user).sum { |l| l.vocabulary_items.count }, DailyPath.new(@user).course_words
+    assert_operator DailyPath.new(@user).course_words, :>=, @lesson.vocabulary_items.count
+  end
+
   test "counts known words and moves on when a lesson is complete" do
     @lesson.quiz_questions.each do |question|
       QuizReview.create!(user: @user, quiz_question: question, box: 3, fsrs_state: 2, stability: 7.0, due_at: 2.days.from_now)
