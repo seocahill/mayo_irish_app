@@ -148,5 +148,8 @@ class VocabularyGapsTest < ActiveSupport::TestCase
     assert_equal [ [ lesson, 1 ] ], VocabularyGaps.new.unread_lessons.map { |u| [ u.lesson, u.count ] }
     lesson.update_columns(texts: "A short text")
     assert_empty VocabularyGaps.new.unread_lessons
+    lesson.update_columns(texts: nil)
+    lesson.text_passages.create!(title: "Passage")
+    assert_empty VocabularyGaps.new.unread_lessons
   end
 end

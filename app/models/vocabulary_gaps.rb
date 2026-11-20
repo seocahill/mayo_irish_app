@@ -131,8 +131,8 @@ class VocabularyGaps
   # Lessons with vocabulary but no reading text, so designers can see where
   # there is no passage to read and hear. Read-only.
   def unread_lessons
-    @unread_lessons ||= Lesson.includes(:vocabulary_items).order(:position, :number).filter_map do |lesson|
-      next if lesson.vocabulary_items.empty? || lesson.read_attribute(:texts).present?
+    @unread_lessons ||= Lesson.includes(:vocabulary_items, :text_passages).order(:position, :number).filter_map do |lesson|
+      next if lesson.vocabulary_items.empty? || lesson.text_passages.any? || lesson.read_attribute(:texts).present?
 
       Unread.new(lesson: lesson, count: lesson.vocabulary_items.size)
     end
