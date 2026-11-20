@@ -126,6 +126,16 @@ class VocabularyGaps
     end
   end
 
+  Unreviewed = Struct.new(:lesson, :count, keyword_init: true)
+
+  # Lessons with vocabulary that no editor has marked reviewed, so designers can
+  # see which lessons still need a native-speaker check. Read-only.
+  def unreviewed_lessons
+    @unreviewed_lessons ||= Lesson.includes(:vocabulary_items).where(reviewed_at: nil).order(:position, :number).filter_map do |lesson|
+      Unreviewed.new(lesson: lesson, count: lesson.vocabulary_items.size) if lesson.vocabulary_items.any?
+    end
+  end
+
   # Lessons with no vocabulary at all, so designers can see which lessons are
   # still empty shells. Read-only.
   def empty_lessons

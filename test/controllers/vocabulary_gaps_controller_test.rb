@@ -223,4 +223,16 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#uncredited-lessons a", text: /#{Regexp.escape(lesson.display_title)}/
     assert_select "#uncredited-lessons", text: /1 recording with no speaker named/
   end
+
+  test "admins see lessons with words that are not yet reviewed" do
+    VocabularyItem.delete_all
+    lesson = Lesson.first
+    VocabularyItem.create!(lesson: lesson, irish: "a", english: "one")
+    sign_in_as(users(:admin))
+    get vocabulary_gaps_path
+    assert_select "#unreviewed-lessons a", text: /#{Regexp.escape(lesson.display_title)}/
+    lesson.mark_reviewed(by: users(:admin))
+    get vocabulary_gaps_path
+    assert_select "#unreviewed-lessons a", text: /#{Regexp.escape(lesson.display_title)}/, count: 0
+  end
 end

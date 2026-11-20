@@ -1100,6 +1100,13 @@ en:
       unpractised_summary: Lessons that teach words but have no exercises and no phrases
         yet. A prompt for where learners have nothing to practise on.
       unpractised_title: Lessons with no exercises or phrases
+      unreviewed_count:
+        one: 1 word, not yet reviewed
+        other: "%{count} words, not yet reviewed"
+      unreviewed_empty: Every lesson with vocabulary has been marked reviewed.
+      unreviewed_summary: Lessons with words that no editor has marked reviewed yet.
+        Open one and mark it reviewed once a speaker has checked it.
+      unreviewed_title: Lessons not yet reviewed
   vocabulary_item_form_acceptances:
     create:
       not_saved: Not saved. The field already has a value, or the form wasn't a single
