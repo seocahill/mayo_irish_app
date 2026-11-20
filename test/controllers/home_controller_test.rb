@@ -108,6 +108,14 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "li", text: /No spoken conversation yet/
   end
 
+  test "shows minutes listened this week" do
+    ListeningDay.add(users(:two), 150)
+    sign_in_as(users(:two))
+    get root_path
+
+    assert_select "p", text: /minutes listened.*3 this week/m
+  end
+
   test "each next step links to where the learner can reach it" do
     sign_in_as(users(:two))
     get root_path

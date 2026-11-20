@@ -143,3 +143,9 @@
   body: Under So far, the words you know are now shown against all the words in the
     course, so you can see how far along you are.
   path: /
+- id: 22
+  date: 2026-11-20
+  title: Listening this week
+  body: Under So far, the minutes you have listened now show how many were this week,
+    like your speaking does.
+  path: /
