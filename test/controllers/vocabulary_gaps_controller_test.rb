@@ -239,6 +239,7 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
   test "admins see lessons with words but no reading text" do
     VocabularyItem.delete_all
     lesson = Lesson.first
+    lesson.text_passages.destroy_all
     lesson.update_columns(texts: nil)
     VocabularyItem.create!(lesson: lesson, irish: "a", english: "one")
     sign_in_as(users(:admin))
