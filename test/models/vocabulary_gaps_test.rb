@@ -128,4 +128,14 @@ class VocabularyGapsTest < ActiveSupport::TestCase
     item.audio.attach(io: StringIO.new("x"), filename: "c.mp3", content_type: "audio/mpeg")
     assert_equal [ [ lesson, 1 ] ], VocabularyGaps.new.uncredited_lessons.map { |u| [ u.lesson, u.count ] }
   end
+
+  test "a lesson with words is listed as unreviewed until it is marked reviewed" do
+    VocabularyItem.delete_all
+    lesson = Lesson.first
+    assert_empty VocabularyGaps.new.unreviewed_lessons.select { |u| u.lesson == lesson }
+    VocabularyItem.create!(lesson: lesson, irish: "a", english: "one")
+    assert_includes VocabularyGaps.new.unreviewed_lessons.map(&:lesson), lesson
+    lesson.mark_reviewed(by: users(:admin))
+    assert_not_includes VocabularyGaps.new.unreviewed_lessons.map(&:lesson), lesson
+  end
 end
