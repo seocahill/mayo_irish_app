@@ -280,6 +280,7 @@ en:
         other: minutes spoken
       nothing_due_html: Nothing is due today. %{link} to get started.
       pick_a_lesson: Pick a lesson
+      right_this_week: "%{right} right"
       so_far: So far
       this_week: "%{count} this week"
       time_all: Show everything
