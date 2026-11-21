@@ -39,7 +39,7 @@ gem "dockerfile-rails", ">= 1.7", group: :development
 
 gem "litestream", "~> 0.16.1"
 
-gem "aws-sdk-s3", "~> 1.241", require: false
+gem "aws-sdk-s3", "~> 1.244", require: false
 
 gem "bcrypt", "~> 3.1"
 
