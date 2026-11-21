@@ -8,7 +8,7 @@
           <span class="font-display text-xl"><%= question.source.irish %></span>
           <span class="text-muted"><%= question.source.english %></span>
           <% if question.lesson.published? || current_user&.admin? %>
-            <%= link_to t("reviews.summary.in_lesson", lesson: question.lesson.display_title), lesson_path(question.lesson), class: "text-sm underline text-muted" %>
+            <%= link_to t("reviews.tricky.in_lesson", lesson: question.lesson.display_title), lesson_path(question.lesson), class: "text-sm underline text-muted" %>
           <% end %>
         </li>
       <% end %>

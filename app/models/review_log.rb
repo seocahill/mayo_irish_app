@@ -11,17 +11,22 @@ class ReviewLog < ApplicationRecord
   TRICKY_MISSES = 3
   TRICKY_LIMIT = 5
 
-  # The vocabulary words this learner has answered wrongly several times lately,
-  # most missed first. Read-only: it only reads the learner's own answers.
-  def self.tricky_words_for(user)
-    ids = where(user: user, correct: false, answered_at: TRICKY_DAYS.days.ago..)
-          .where.not(quiz_question_id: nil)
-          .group(:quiz_question_id).having("COUNT(*) >= ?", TRICKY_MISSES)
-          .order(Arel.sql("COUNT(*) DESC"), :quiz_question_id).pluck(:quiz_question_id)
+  # The vocabulary words this learner has answered wrongly several times lately
+  # (either direction counts toward the same word), most missed first.
+  # Read-only: it only reads the learner's own answers.
+  def self.tricky_words_for(user, except: [])
+    visible = Lesson.visible_to(user).select(:id)
+    counts = joins(:quiz_question)
+             .where(user: user, correct: false, answered_at: TRICKY_DAYS.days.ago..,
+                    quiz_questions: { source_type: "VocabularyItem", lesson_id: visible })
+             .group("quiz_questions.source_id").having("COUNT(*) >= ?", TRICKY_MISSES)
+             .order(Arel.sql("COUNT(*) DESC"), "quiz_questions.source_id").count
+    ids = counts.keys - Array(except)
     return [] if ids.empty?
 
-    visible = Lesson.visible_to(user).select(:id)
-    QuizQuestion.where(id: ids, source_type: "VocabularyItem", lesson_id: visible).includes(:source, :lesson)
-                .sort_by { |q| ids.index(q.id) }.uniq { |q| q.source_id }.first(TRICKY_LIMIT)
+    ids = ids.first(TRICKY_LIMIT)
+    questions = QuizQuestion.where(source_type: "VocabularyItem", source_id: ids).includes(:source, :lesson)
+                            .group_by(&:source_id)
+    ids.filter_map { |id| questions[id]&.min_by(&:id) }
   end
 end
