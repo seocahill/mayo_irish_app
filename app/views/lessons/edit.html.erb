@@ -299,20 +299,20 @@
     <td class="px-2 py-1.5"><input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][genitive]" class="vocab-cell-input" placeholder="<%= t(".genitive_placeholder") %>"></td>
     <td class="px-2 py-1.5"><input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][plural]" class="vocab-cell-input" placeholder="<%= t(".plural_placeholder") %>"></td>
     <td class="px-2 py-1.5">
-      <select name="lesson[vocabulary_items_attributes][NEW_INDEX][gender]" class="vocab-cell-input">
+      <select name="lesson[vocabulary_items_attributes][NEW_INDEX][gender]" class="vocab-cell-input" aria-label="<%= t(".gender_label") %>">
         <option value="m"><%= t("lessons.genders.masculine") %></option>
         <option value="f"><%= t("lessons.genders.feminine") %></option>
       </select>
     </td>
     <td class="px-2 py-1.5">
-      <select name="lesson[vocabulary_items_attributes][NEW_INDEX][part_of_speech]" class="vocab-cell-input">
+      <select name="lesson[vocabulary_items_attributes][NEW_INDEX][part_of_speech]" class="vocab-cell-input" aria-label="<%= t(".part_of_speech_label") %>">
         <option value=""><%= t("lessons.parts_of_speech.unset") %></option>
         <% VocabularyItem::PARTS_OF_SPEECH.each do |k| %><option value="<%= k %>"><%= t("lessons.parts_of_speech.#{k}") %></option><% end %>
       </select>
     </td>
     <td class="px-2 py-1.5"><input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][english]" class="vocab-cell-input" placeholder="<%= t(".meaning_placeholder") %>"><input type="text" name="lesson[vocabulary_items_attributes][NEW_INDEX][source]" class="vocab-cell-input text-xs mt-1" maxlength="200" placeholder="<%= t(".source_placeholder") %>" aria-label="<%= t(".source_label") %>"></td>
     <td class="px-2 py-1.5 text-center">
-      <button type="button" data-action="click->vocab-editor#removeRow" class="text-muted hover:text-red-500 transition-colors text-lg leading-none" title="<%= t("shared.delete") %>">×</button>
+      <button type="button" data-action="click->vocab-editor#removeRow" class="text-muted hover:text-red-500 transition-colors text-lg leading-none" title="<%= t("shared.delete") %>" aria-label="<%= t("shared.delete") %>">×</button>
     </td>
   </tr>
 </template>

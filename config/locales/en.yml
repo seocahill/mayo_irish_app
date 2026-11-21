@@ -512,6 +512,7 @@ en:
       editing: Editing · Lesson %{number}
       english: English
       gender: Gender
+      gender_label: Gender
       genitive: Genitive
       genitive_placeholder: genitive
       grammar: Grammar
@@ -531,6 +532,7 @@ en:
       not_reviewed: Not reviewed yet.
       open_chat: Open chat
       part_of_speech: Type
+      part_of_speech_label: Part of speech
       plural: Plural
       plural_placeholder: plural
       position: Position
@@ -656,8 +658,10 @@ en:
       dias_material: Field recordings
       thematic_vocab: Vocabulary
     vocabulary_item_row:
+      gender: Gender
       genitive: genitive
       meaning: meaning
+      part_of_speech: Part of speech
       plural: plural
       pronunciation: "/pronunciation/"
       source: 'source: book and page, or speaker and place'
