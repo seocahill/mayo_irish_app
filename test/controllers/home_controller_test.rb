@@ -179,4 +179,13 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_match "minutes spoken", response.body
     assert_match "2 this week", response.body
   end
+
+  test "every navigation landmark has its own label" do
+    sign_in_as(users(:two))
+    get root_path
+
+    labels = css_select("nav").map { |n| n["aria-label"] }
+    assert labels.size >= 2
+    assert_equal labels.compact.uniq.size, labels.size, "navs need distinct labels: #{labels.inspect}"
+  end
 end
