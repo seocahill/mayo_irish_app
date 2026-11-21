@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_20_150000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_21_090000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -515,6 +515,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_150000) do
     t.string "part_of_speech"
     t.integer "plural_source_entry_id"
     t.integer "genitive_source_entry_id"
+    t.string "source"
     t.index ["lesson_id", "position"], name: "index_vocabulary_items_on_lesson_id_and_position"
     t.index ["lesson_id"], name: "index_vocabulary_items_on_lesson_id"
   end

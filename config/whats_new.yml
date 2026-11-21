@@ -159,3 +159,8 @@
   title: How many you got right
   body: Next to your review answers this week, you now see how many of them you got right.
   path: /
+- id: 25
+  date: 2026-11-21
+  title: Where a word comes from
+  body: Some words in a lesson now show a small note on where they come from, such as the book and page or the speaker.
+  path: /lessons

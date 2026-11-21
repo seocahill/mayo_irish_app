@@ -27,6 +27,7 @@
   </td>
   <td class="px-2 py-1.5">
     <%= f.text_field :english, class: "vocab-cell-input", placeholder: t(".meaning") %>
+    <%= f.text_field :source, class: "vocab-cell-input text-xs mt-1", placeholder: t(".source"), "aria-label": t(".source_label"), maxlength: 200 %>
   </td>
   <td class="px-2 py-1.5 text-center">
     <button type="button" data-action="click->vocab-editor#removeRow"

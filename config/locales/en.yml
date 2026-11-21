@@ -542,6 +542,8 @@ en:
       rich_content: Rich content
       rich_content_description: Free text, videos, images and PDFs, in any order
       someone: someone
+      source_label: Source of this word
+      source_placeholder: 'source: book and page, or speaker and place'
       transcript_help: Shown to learners under the video, and used by the tutor.
       transcript_label: Transcript (optional)
       tutor_description: Guide the AI chat. Leave empty to use the general default.
@@ -643,6 +645,7 @@ en:
       record: Record
       record_yourself: Record yourself
       recorded_by: Recorded by %{name}
+      source: 'Source: %{source}'
       transcript: Transcript
       view_as_learner: View as learner
       vocabulary: Vocabulary
@@ -656,6 +659,8 @@ en:
       meaning: meaning
       plural: plural
       pronunciation: "/pronunciation/"
+      source: 'source: book and page, or speaker and place'
+      source_label: Source of this word
       word: word
   listening_clips:
     show:

@@ -22,6 +22,8 @@ class VocabularyItem < ApplicationRecord
   PARTS_OF_SPEECH = %w[noun verb adjective adverb other].freeze
   normalizes :part_of_speech, with: ->(v) { v.presence }
   validates :part_of_speech, inclusion: { in: PARTS_OF_SPEECH }, allow_nil: true
+  normalizes :source, with: ->(v) { v.to_s.strip.presence }
+  validates :source, length: { maximum: 200 }
 
   GENDERS = { 'm' => 'Masc.', 'f' => 'Fem.' }.freeze
 
