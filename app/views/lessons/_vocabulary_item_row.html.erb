@@ -17,13 +17,13 @@
     <%= f.select :gender,
           [[t("lessons.genders.masculine"), "m"], [t("lessons.genders.feminine"), "f"]],
           {},
-          class: "vocab-cell-input" %>
+          class: "vocab-cell-input", "aria-label": t(".gender") %>
   </td>
   <td class="px-2 py-1.5">
     <%= f.select :part_of_speech,
           VocabularyItem::PARTS_OF_SPEECH.map { |k| [t("lessons.parts_of_speech.#{k}"), k] },
           { include_blank: t("lessons.parts_of_speech.unset") },
-          class: "vocab-cell-input" %>
+          class: "vocab-cell-input", "aria-label": t(".part_of_speech") %>
   </td>
   <td class="px-2 py-1.5">
     <%= f.text_field :english, class: "vocab-cell-input", placeholder: t(".meaning") %>
@@ -32,6 +32,6 @@
   <td class="px-2 py-1.5 text-center">
     <button type="button" data-action="click->vocab-editor#removeRow"
             class="text-stone-300 hover:text-red-500 transition-colors text-lg leading-none"
-            title="<%= t("shared.delete") %>">×</button>
+            title="<%= t("shared.delete") %>" aria-label="<%= t("shared.delete") %>">×</button>
   </td>
 </tr>
