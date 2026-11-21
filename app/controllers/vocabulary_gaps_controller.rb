@@ -13,6 +13,7 @@ class VocabularyGapsController < ApplicationController
     @uncredited_lessons = report.uncredited_lessons
     @unreviewed_lessons = report.unreviewed_lessons
     @unread_lessons = report.unread_lessons
+    @unsourced_lessons = report.unsourced_lessons
     @empty_lessons = report.empty_lessons
     @thin_themes = report.thin_themes
     @unclassified_count = report.unclassified_count

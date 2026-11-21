@@ -154,4 +154,14 @@ class VocabularyGapsTest < ActiveSupport::TestCase
     lesson.text_passages.create!(title: "Passage")
     assert_empty VocabularyGaps.new.unread_lessons
   end
+
+  test "a lesson with words lacking a source note is listed as unsourced" do
+    VocabularyItem.delete_all
+    lesson = Lesson.first
+    item = VocabularyItem.create!(lesson: lesson, irish: "a", english: "one")
+    VocabularyItem.create!(lesson: lesson, irish: "b", english: "two", source: "Erris p. 4")
+    assert_equal [ [ lesson, 1 ] ], VocabularyGaps.new.unsourced_lessons.map { |u| [ u.lesson, u.count ] }
+    item.update!(source: "Tourmakeady p. 9")
+    assert_empty VocabularyGaps.new.unsourced_lessons
+  end
 end

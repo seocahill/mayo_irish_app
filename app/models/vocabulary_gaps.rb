@@ -148,6 +148,17 @@ class VocabularyGaps
     end
   end
 
+  Unsourced = Struct.new(:lesson, :count, keyword_init: true)
+
+  # Lessons with words that have no source note, so designers can see where
+  # provenance (book and page, or speaker) still needs recording. Read-only.
+  def unsourced_lessons
+    @unsourced_lessons ||= Lesson.includes(:vocabulary_items).order(:position, :number).filter_map do |lesson|
+      missing = lesson.vocabulary_items.count { |item| item.source.blank? }
+      Unsourced.new(lesson: lesson, count: missing) if missing.positive?
+    end
+  end
+
   # Lessons with no vocabulary at all, so designers can see which lessons are
   # still empty shells. Read-only.
   def empty_lessons
