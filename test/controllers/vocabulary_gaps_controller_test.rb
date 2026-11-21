@@ -254,5 +254,8 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as(users(:admin))
     get vocabulary_gaps_path
     assert_select "#unsourced-lessons a", text: /#{Regexp.escape(lesson.display_title)}/
+    VocabularyItem.update_all(source: "Erris p. 4")
+    get vocabulary_gaps_path
+    assert_select "#unsourced-lessons a", count: 0
   end
 end
