@@ -262,7 +262,33 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 2, QuizReview.find_by(user: @user, quiz_question: question).times_correct
   end
 
+  test "the empty page lists words missed three times lately" do
+    sign_in_as(@user)
+    question = @lesson.quiz_questions.find_by(source_type: "VocabularyItem")
+    3.times { log_answer(question, correct: false) }
+    @lesson.quiz_questions.each do |q|
+      QuizReview.create!(user: @user, quiz_question: q, box: 2, fsrs_state: 2, stability: 1.0, difficulty: 5.0, due_at: 3.days.from_now)
+    end
+    get review_path
+    assert_select "#tricky-heading", text: "Words to watch"
+    assert_match question.source.irish, response.body
+  end
+
+  test "words missed fewer than three times, or long ago, are not listed" do
+    sign_in_as(@user)
+    question = @lesson.quiz_questions.find_by(source_type: "VocabularyItem")
+    2.times { log_answer(question, correct: false) }
+    3.times { log_answer(question, correct: false, at: 45.days.ago) }
+    log_answer(question, correct: true)
+    assert_empty ReviewLog.tricky_words_for(@user)
+  end
+
   private
+
+  def log_answer(question, correct:, at: Time.current)
+    ReviewLog.create!(user: @user, quiz_question: question, prompt: question.prompt, correct: correct,
+                      answered_at: at, box_before: 1, box_after: 1)
+  end
 
   def session_reset
     delete reset_review_path

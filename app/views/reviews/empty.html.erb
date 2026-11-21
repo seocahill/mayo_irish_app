@@ -5,6 +5,7 @@
       <h1 class="font-display text-3xl leading-tight"><%= t(".nothing_due") %></h1>
       <p class="text-muted mt-2"><%= t(".come_back") %></p>
     </div>
+    <%= render "tricky", words: @tricky %>
     <%= render "forecast", forecast: @forecast %>
     <%= render "next_step" %>
     <%= link_to t(".back_home"), root_path, class: "btn-solid self-start" %>
