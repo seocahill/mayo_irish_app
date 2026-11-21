@@ -20,5 +20,14 @@ class Mcp::VocabularySourceTest < ActiveSupport::TestCase
       server_context: {}
     )
     assert res.error?
+    assert_nil VocabularyItem.find_by(irish: "tástáil")
+  end
+
+  test "update_record sets and clears a source note" do
+    item = vocabulary_items(:dog)
+    Mcp::Tools::UpdateRecord.call(resource: "vocabulary_items", id: item.id, attributes: { "source" => "Tourmakeady p. 9" }, server_context: {})
+    assert_equal "Tourmakeady p. 9", item.reload.source
+    Mcp::Tools::UpdateRecord.call(resource: "vocabulary_items", id: item.id, attributes: { "source" => " " }, server_context: {})
+    assert_nil item.reload.source
   end
 end
