@@ -1123,6 +1123,13 @@ en:
       unreviewed_summary: Lessons with words that no editor has marked reviewed yet.
         Open one and mark it reviewed once a speaker has checked it.
       unreviewed_title: Lessons not yet reviewed
+      unsourced_count:
+        one: 1 word with no source note
+        other: "%{count} words with no source note"
+      unsourced_empty: Every word has a source note.
+      unsourced_summary: Lessons with words that have no note on where they come from
+        (book and page, or speaker) yet.
+      unsourced_title: Words with no source note
   vocabulary_item_form_acceptances:
     create:
       not_saved: Not saved. The field already has a value, or the form wasn't a single

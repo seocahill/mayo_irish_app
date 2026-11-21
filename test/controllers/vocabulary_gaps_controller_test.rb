@@ -246,4 +246,16 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
     get vocabulary_gaps_path
     assert_select "#unread-lessons a", text: /#{Regexp.escape(lesson.display_title)}/
   end
+
+  test "admins see lessons with words that have no source note" do
+    VocabularyItem.delete_all
+    lesson = Lesson.first
+    VocabularyItem.create!(lesson: lesson, irish: "a", english: "one")
+    sign_in_as(users(:admin))
+    get vocabulary_gaps_path
+    assert_select "#unsourced-lessons a", text: /#{Regexp.escape(lesson.display_title)}/
+    VocabularyItem.update_all(source: "Erris p. 4")
+    get vocabulary_gaps_path
+    assert_select "#unsourced-lessons a", count: 0
+  end
 end
