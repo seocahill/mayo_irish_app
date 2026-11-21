@@ -941,6 +941,10 @@ en:
       missed: To look at again
       round_complete: Round complete
       score: "%{correct} of %{answered}"
+    tricky:
+      heading: Words to watch
+      hint: You have missed these a few times in the last month. Open the lesson and
+        listen to them again.
   search:
     index:
       empty_query: Type something above to search the whole course.

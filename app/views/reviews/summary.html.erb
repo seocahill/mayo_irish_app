@@ -23,6 +23,7 @@
         </ul>
       </section>
     <% end %>
+    <%= render "tricky", words: @tricky %>
     <%= render "forecast", forecast: @forecast %>
     <%= render "next_step" %>
     <div class="flex flex-col sm:flex-row gap-2">

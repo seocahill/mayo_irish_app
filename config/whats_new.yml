@@ -164,3 +164,8 @@
   title: Where a word comes from
   body: Some words in a lesson now show a small note on where they come from, such as the book and page or the speaker.
   path: /lessons
+- id: 26
+  date: 2026-11-21
+  title: Words to watch
+  body: When you keep missing the same words in review, they now appear at the end of a round, with a link back to the lesson.
+  path: /review
