@@ -169,3 +169,8 @@
   title: Words to watch
   body: When you keep missing the same words in review, they now appear at the end of a round, with a link back to the lesson.
   path: /review
+- id: 27
+  date: 2026-11-22
+  title: A word's forms in review
+  body: After you answer a review card for a noun, you now see whether it is masculine or feminine, and its genitive and plural where the course has them.
+  path: /review

@@ -17,6 +17,7 @@
       <span class="font-semibold <%= @question.answer_lang == 'ga' ? 'italic' : '' %>"><%= @question.answer %></span>
       <span class="ml-2 align-middle"><%= render "reviews/audio", question: @question %></span>
     </p>
+    <%= render "reviews/noun_forms", question: @question %>
 
     <div class="mt-8">
       <%= link_to (@last ? t(".see_results") : t(".next")), review_path, class: "btn-solid w-full sm:w-auto" %>
