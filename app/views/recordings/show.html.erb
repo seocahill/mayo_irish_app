@@ -12,12 +12,17 @@
     <p class="card px-4 py-6 text-center text-muted text-sm"><%= @error %></p>
   <% else %>
     <div class="flex flex-col gap-4"
-         data-controller="playback transcript"
+         data-controller="playback transcript media-session"
+         data-action="media-session:skipped->transcript#skipped"
+         data-media-session-title-value="<%= @recording.title.presence || t(".untitled") %>"
+         data-media-session-artist-value="<%= @recording.speakers.to_sentence.presence || t(".speaker_unknown") %>"
+         data-media-session-album-value="<%= t("app_name") %>"
+         data-media-session-artwork-value="/icon.png"
          data-transcript-start-value="<%= @start %>"
          data-transcript-report-url-value="<%= recording_listening_time_path(@recording.id) %>">
       <div class="card px-4 py-4 flex flex-col gap-3 sticky top-0 z-10">
         <audio controls preload="metadata" src="<%= @recording.audio_url %>" class="w-full"
-               data-playback-target="audio" data-transcript-target="audio"
+               data-playback-target="audio" data-transcript-target="audio" data-media-session-target="audio"
                data-action="timeupdate->transcript#follow play->transcript#started pause->transcript#report ended->transcript#report"></audio>
         <div class="flex flex-wrap gap-2">
           <button type="button" class="btn-outline text-sm aria-pressed:border-eist aria-pressed:text-eist" aria-pressed="false"
@@ -40,7 +45,7 @@
             <% turn.each do |line| %>
               <li>
                 <button type="button" class="w-full text-left rounded-sm px-2 py-1.5 border-l-2 border-transparent hover:bg-canvas aria-[current=true]:border-eist aria-[current=true]:bg-surface"
-                        data-transcript-target="line" data-start="<%= line.start %>" data-end="<%= line.end %>"
+                        data-transcript-target="line" data-media-session-target="line" data-start="<%= line.start %>" data-end="<%= line.end %>"
                         data-action="transcript#seek">
                   <span lang="ga" class="block"><%= line.irish %></span>
                   <% if line.english %>

@@ -38,6 +38,34 @@ class RecordingsTest < ActionDispatch::IntegrationTest
                   text: I18n.t("recordings.show.repeat")
   end
 
+  test "the lock screen gets the recording's title, speakers and the transcript lines" do
+    stub_recording
+
+    with_abairt_token { get recording_path(15) }
+
+    assert_select "[data-controller~=media-session]" do |wrapper|
+      assert_equal "A Story", wrapper.first["data-media-session-title-value"]
+      assert_equal "A Speaker", wrapper.first["data-media-session-artist-value"]
+      assert_equal I18n.t("app_name"), wrapper.first["data-media-session-album-value"]
+      assert_equal "/icon.png", wrapper.first["data-media-session-artwork-value"]
+    end
+    assert_select "[data-action~='media-session:skipped->transcript#skipped']"
+    assert_select "audio[data-media-session-target=audio]"
+    assert_select "button[data-media-session-target=line][data-start='12.0']"
+  end
+
+  test "a recording with no named speaker and no title still has lock-screen words" do
+    stub_request(:get, RECORDING).to_return(status: 200, body: {
+      id: 15, title: "", audio_url: "https://abairt.test/story.mp3", lines: []
+    }.to_json)
+
+    with_abairt_token { get recording_path(15) }
+
+    assert_select "[data-media-session-title-value=?][data-media-session-artist-value=?]",
+                  I18n.t("recordings.show.untitled"), I18n.t("recordings.show.speaker_unknown")
+    assert_select "[data-media-session-target=line]", false
+  end
+
   test "the clip page leads to the whole conversation" do
     get listening_clip_path(@clip)
 
