@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_21_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_22_200000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -458,6 +458,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_21_090000) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "speaking_days", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.date "day", null: false
+    t.integer "seconds", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "day"], name: "index_speaking_days_on_user_id_and_day", unique: true
+  end
+
   create_table "text_passages", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "lesson_id", null: false
@@ -561,6 +570,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_21_090000) do
   add_foreign_key "section_progresses", "lessons"
   add_foreign_key "section_progresses", "users"
   add_foreign_key "sessions", "users"
+  add_foreign_key "speaking_days", "users"
   add_foreign_key "text_passages", "lessons"
   add_foreign_key "vocabulary_items", "lessons"
 

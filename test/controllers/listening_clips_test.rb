@@ -46,6 +46,8 @@ class ListeningClipsTest < ActionDispatch::IntegrationTest
 
     get listening_clip_path(@clip)
 
+    assert_select "details [data-testid=record-yourself-note]", text: I18n.t("shared.record_yourself.note")
+    assert_select "details [data-testid=clip-recorder][data-recorder-report-url-value=?]", speaking_time_path
     assert_select "details [data-testid=clip-recorder][data-controller=recorder][role=group][aria-labelledby=clip-shadow]" do
       assert_select "button[data-action='recorder#toggle'][aria-label=?]", I18n.t("shared.record_yourself.record")
       assert_select "button[data-action='recorder#play'][disabled][aria-label=?]", I18n.t("shared.record_yourself.play_recording")

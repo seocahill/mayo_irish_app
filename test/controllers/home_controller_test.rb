@@ -180,6 +180,17 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_match "2 this week", response.body
   end
 
+  test "minutes spoken on Today include recording yourself, with no conversation" do
+    user = users(:two)
+    4.times { SpeakingDay.add(user, 30) }
+    sign_in_as(user)
+
+    get root_path
+
+    assert_match "minutes spoken", response.body
+    assert_match "2 this week", response.body
+  end
+
   test "every navigation landmark has its own label" do
     sign_in_as(users(:two))
     get root_path

@@ -2,9 +2,12 @@ import { Controller } from "@hotwired/stimulus"
 import { t } from "translations"
 
 // Lets the learner record their own pronunciation and play it back
-// straight away to compare against the native speaker audio.
+// straight away to compare against the native speaker audio. The recording
+// stays in the browser; only its length is reported, so it counts towards
+// minutes spoken.
 export default class extends Controller {
   static targets = ["recordButton", "playButton", "status"]
+  static values = { reportUrl: String }
 
   connect() {
     this.mediaRecorder = null
@@ -54,9 +57,11 @@ export default class extends Controller {
       if (this.hasPlayButtonTarget) this.playButtonTarget.disabled = false
       this.setStatus(t("js.recorder.ready"))
       this.stopStream()
+      this.report((performance.now() - this.startedAt) / 1000)
     })
 
     this.mediaRecorder.start()
+    this.startedAt = performance.now()
     this.recording = true
     this.recordButtonTarget.classList.add("text-red-600", "animate-pulse")
     this.setStatus(t("js.recorder.recording"))
@@ -81,6 +86,21 @@ export default class extends Controller {
   // pick it up and the learner's recording doesn't play over it.
   pausePageAudio() {
     document.querySelectorAll("audio").forEach((audio) => audio.pause())
+  }
+
+  // The server caps each recording, so one left running counts as half a minute at most.
+  report(seconds) {
+    seconds = Math.round(seconds)
+    if (seconds < 1 || !this.hasReportUrlValue) return
+
+    const body = new FormData()
+    body.append("seconds", seconds)
+    fetch(this.reportUrlValue, {
+      method: "POST",
+      body,
+      keepalive: true,
+      headers: { "X-CSRF-Token": document.querySelector("meta[name=csrf-token]")?.content }
+    }).catch(() => {})
   }
 
   stopStream() {

@@ -1046,6 +1046,8 @@ en:
       complete: Complete
       default_label: Progress
     record_yourself:
+      note: Counts towards your minutes spoken. Your recording stays on this phone
+        or computer.
       play_recording: Play your recording
       record: Record
       title: Record yourself
