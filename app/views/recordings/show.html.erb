@@ -36,13 +36,18 @@
                   data-transcript-target="repeatToggle" data-action="transcript#toggleRepeat"><%= t(".repeat") %></button>
           <button type="button" class="btn-outline text-sm aria-pressed:border-eist aria-pressed:text-eist" aria-pressed="false"
                   data-transcript-target="englishToggle" data-action="transcript#toggleEnglish"><%= t(".show_english") %></button>
+          <% if @recording.lines.any? %>
+            <button type="button" class="btn-outline text-sm aria-pressed:border-eist aria-pressed:text-eist" aria-pressed="false"
+                    data-transcript-target="wordsToggle" data-action="transcript#toggleWords"><%= t(".hide_words") %></button>
+          <% end %>
         </div>
       </div>
 
       <% if @recording.lines.empty? %>
         <p class="text-sm text-muted"><%= t(".no_transcript") %></p>
       <% else %>
-        <ol class="flex flex-col">
+        <%# With the words hidden, each Irish line is a blank bar: the timing, highlight, tap-to-play and Repeat line still work. %>
+        <ol class="group flex flex-col" data-transcript-target="lines">
           <% @recording.turns.each do |turn| %>
             <% if turn.first.speaker %>
               <li><p class="eyebrow mt-3 mb-1"><%= turn.first.speaker %></p></li>
@@ -52,7 +57,9 @@
                 <button type="button" class="w-full text-left rounded-sm px-2 py-1.5 border-l-2 border-transparent hover:bg-canvas aria-[current=true]:border-eist aria-[current=true]:bg-surface"
                         data-transcript-target="line" data-media-session-target="line" data-start="<%= line.start %>" data-end="<%= line.end %>"
                         data-action="transcript#seek">
-                  <span lang="ga" class="block"><%= line.irish %></span>
+                  <span lang="ga" class="block group-data-words-hidden:text-transparent group-data-words-hidden:bg-line group-data-words-hidden:rounded-sm group-data-words-hidden:select-none"
+                        data-transcript-target="irish"><%= line.irish %></span>
+                  <span class="sr-only" hidden data-transcript-target="hiddenLine"><%= t(".hidden_line") %></span>
                   <% if line.english %>
                     <span class="block text-sm text-muted" hidden data-transcript-target="english"><%= line.english %></span>
                   <% end %>
