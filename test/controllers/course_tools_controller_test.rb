@@ -7,7 +7,7 @@ class CourseToolsControllerTest < ActionDispatch::IntegrationTest
     get course_tools_path
 
     assert_response :success
-    [ vocabulary_gaps_path, course_proposals_path, dialect_substitutions_path, usage_path, learners_path, flagged_replies_path ].each do |path|
+    [ vocabulary_gaps_path, where_taught_path, course_proposals_path, dialect_substitutions_path, usage_path, learners_path, flagged_replies_path ].each do |path|
       assert_select "#course-tools a[href='#{path}']"
     end
   end

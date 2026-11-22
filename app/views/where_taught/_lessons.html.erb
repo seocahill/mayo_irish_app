@@ -1,0 +1,9 @@
+<% if lessons.empty? %>
+  <p class="text-sm text-muted" id="<%= id %>"><%= t("where_taught.show.no_lessons") %></p>
+<% else %>
+  <ul class="card divide-y divide-line text-sm" id="<%= id %>">
+    <% lessons.each do |lesson| %>
+      <li><%= link_to lesson.display_title, lesson_path(lesson), class: "flex items-center min-h-12 px-4 underline hover:bg-canvas" %></li>
+    <% end %>
+  </ul>
+<% end %>

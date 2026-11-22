@@ -4,6 +4,7 @@ class CourseToolsController < ApplicationController
 
   TOOLS = {
     gaps: :vocabulary_gaps_path,
+    where_taught: :where_taught_path,
     proposals: :course_proposals_path,
     substitutions: :dialect_substitutions_path,
     usage: :usage_path,
