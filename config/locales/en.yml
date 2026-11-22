@@ -121,6 +121,10 @@ en:
           description: Words missing a plural, genitive or recording, words taught
             twice, thin themes and lessons with no recordings.
           name: Vocabulary gaps
+        hard_words:
+          description: The words learners get wrong most often in review, hardest
+            first.
+          name: Words learners miss
         learners:
           description: Approve new learners and see how each one is getting on.
           name: Learners
@@ -252,6 +256,23 @@ en:
         an invitation link, open it to register.
       more: How the course works
       title: A course in the Irish of Mayo
+  hard_words:
+    show:
+      eyebrow: Course tools
+      learners: Learners who missed
+      lesson: Lesson
+      missed: Missed
+      missed_value: "%{misses} of %{answers} (%{percent}%)"
+      none: No word has been missed often enough yet to show here.
+      summary:
+        one: Words learners answered wrongly in review over the last %{days} days,
+          hardest first. Only words answered at least once are shown. It only looks;
+          nothing changes.
+        other: Words learners answered wrongly in review over the last %{days} days,
+          hardest first. Only words answered at least %{count} times are shown. It
+          only looks; nothing changes.
+      title: Words learners miss
+      where_taught: Where is it taught
   history:
     kinds:
       action_text_rich_text: Text

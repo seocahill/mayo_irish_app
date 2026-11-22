@@ -1,0 +1,35 @@
+<div class="max-w-2xl mx-auto flex flex-col gap-6">
+  <header>
+    <p class="eyebrow"><%= link_to t(".eyebrow"), course_tools_path, class: "hover:underline" %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
+    <p class="text-muted mt-1 text-sm"><%= t(".summary", days: HardWords::DAYS, count: HardWords::MIN_ANSWERS) %></p>
+  </header>
+
+  <% if @rows.empty? %>
+    <p class="card px-4 py-3 text-sm text-muted" id="hard-words-none"><%= t(".none") %></p>
+  <% else %>
+    <ol class="flex flex-col gap-3" id="hard-words">
+      <% @rows.each do |row| %>
+        <% item = row.item %>
+        <li class="card px-4 py-3 text-sm" id="hard-word-<%= item.id %>">
+          <p><span lang="ga" class="font-semibold"><%= item.irish %></span> <span class="text-muted">· <%= item.english %></span></p>
+          <dl class="mt-2 grid grid-cols-3 gap-x-4 gap-y-1">
+            <div>
+              <dt class="text-xs text-muted"><%= t(".missed") %></dt>
+              <dd class="tabular-nums"><%= t(".missed_value", misses: row.misses, answers: row.answers, percent: row.miss_percent) %></dd>
+            </div>
+            <div>
+              <dt class="text-xs text-muted"><%= t(".learners") %></dt>
+              <dd class="tabular-nums"><%= row.learners %></dd>
+            </div>
+            <div>
+              <dt class="text-xs text-muted"><%= t(".lesson") %></dt>
+              <dd><%= link_to item.lesson.display_title, lesson_path(item.lesson), class: "underline" %></dd>
+            </div>
+          </dl>
+          <p class="mt-1 text-xs"><%= link_to t(".where_taught"), where_taught_path(q: item.irish), class: "underline inline-flex items-center min-h-12 sm:min-h-0" %></p>
+        </li>
+      <% end %>
+    </ol>
+  <% end %>
+</div>
