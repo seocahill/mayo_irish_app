@@ -15,7 +15,8 @@ module Mcp
       Tools::AddProposalEvidence,
       Tools::WhereIsTaught,
       Tools::MayoForms,
-      Tools::WhatChanged
+      Tools::WhatChanged,
+      Tools::SearchCourse
     ].freeze
 
     def self.build(user)
