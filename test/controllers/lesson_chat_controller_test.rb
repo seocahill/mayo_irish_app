@@ -45,4 +45,14 @@ class LessonChatControllerTest < ActionDispatch::IntegrationTest
     assert_equal 1, users(:two).chat_sessions.tutor.count
     assert_empty users(:two).chat_sessions.conversation.last.chat_messages
   end
+
+  test "the tutor chat says its replies are written by AI and marks each one" do
+    stub_openai_chat("What is the word for dog?")
+    post message_lesson_chat_path(@lesson), params: { message: "start" }
+
+    follow_redirect!
+
+    assert_select "[role=note]", text: /written by AI/
+    assert_select "#chat-messages .chip", text: "AI-generated", count: 1
+  end
 end

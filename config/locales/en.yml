@@ -341,7 +341,7 @@ en:
       ready: Ready
       recording: Recording…
     speakable:
-      hear: Hear
+      hear: Hear in a synthetic voice
     speech_input:
       no_permission: Allow the microphone to speak.
       not_supported: This browser can't record.
@@ -452,6 +452,10 @@ en:
       video: Video
   lesson_chat:
     show:
+      ai_generated: AI-generated
+      ai_notice: The tutor's replies are written by AI. It is told to quote Irish
+        only from this lesson, but it can be wrong, so check anything surprising against
+        the lesson or ask a native speaker.
       back_to_lesson: "← Back to the lesson"
       empty_state: Type "start" or anything to begin the lesson.
       placeholder: Write your answer...
@@ -658,7 +662,7 @@ en:
       genitive: Genitive
       genitive_short: gen.
       grammar: Grammar
-      hear_selection: Hear it
+      hear_selection: Hear it (synthetic)
       hear_word: Hear %{word}
       intro_video: Lesson introduction
       irish: Irish
@@ -674,6 +678,8 @@ en:
       quiz: Quiz
       recorded_by: Recorded by %{name}
       source: 'Source: %{source}'
+      synthetic_note: Speaker buttons in the lesson text play ABAIR's synthetic voice,
+        not a Mayo speaker.
       transcript: Transcript
       view_as_learner: View as learner
       vocabulary: Vocabulary
@@ -1038,6 +1044,8 @@ en:
       title: Record yourself
     save: Save
     speak_button:
+      label: "%{label} (synthetic voice)"
+      tag: Synthetic
       title: Synthetic voice from ABAIR, not a recording of a speaker
     video:
       title: Lesson video

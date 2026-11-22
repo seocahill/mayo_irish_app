@@ -10,6 +10,10 @@
     </a>
   </div>
 
+  <p class="mb-4 bg-eist/10 border border-eist/30 rounded-sm px-4 py-3 text-sm text-ink" role="note">
+    <%= t(".ai_notice") %>
+  </p>
+
   <%# Chat window %>
   <div class="card flex flex-col" style="height: 70vh;">
 
@@ -29,8 +33,9 @@
             </div>
           <% else %>
             <div class="flex justify-start">
-              <div class="bg-cleacht/10 border border-line text-ink rounded-2xl rounded-tl-sm px-4 py-2.5 max-w-[80%] text-sm whitespace-pre-wrap">
-                <%= msg.content %>
+              <div class="bg-cleacht/10 border border-line text-ink rounded-2xl rounded-tl-sm px-4 py-2.5 max-w-[80%] text-sm flex flex-col items-start gap-2">
+                <p class="whitespace-pre-wrap break-words"><%= msg.content %></p>
+                <span class="chip border-line text-muted"><%= t(".ai_generated") %></span>
               </div>
             </div>
           <% end %>
