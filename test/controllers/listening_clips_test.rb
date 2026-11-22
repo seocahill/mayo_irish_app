@@ -41,6 +41,7 @@ class ListeningClipsTest < ActionDispatch::IntegrationTest
       assert_select "button[data-action='recorder#play'][disabled][aria-label=?]", I18n.t("shared.record_yourself.play_recording")
     end
     assert_select "details #clip-shadow", text: I18n.t("listening_clips.show.say_it_after")
+    assert_select "[data-controller=playback] [data-controller=recorder]", count: 0
   end
 
   test "saying whether they got it sets the clip aside" do
