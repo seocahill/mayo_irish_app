@@ -17,7 +17,8 @@ module Mcp
       Tools::MayoForms,
       Tools::WhatChanged,
       Tools::SearchCourse,
-      Tools::ReviewQueue
+      Tools::ReviewQueue,
+      Tools::CourseGaps
     ].freeze
 
     def self.build(user)
