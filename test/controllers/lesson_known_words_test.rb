@@ -27,6 +27,18 @@ class LessonKnownWordsTest < ActionDispatch::IntegrationTest
     assert_select "td", text: /madra\s+You know this word/
   end
 
+  test "a word with a recording has the record yourself control" do
+    @word.update!(audio_url: "https://example.com/madra.mp3")
+    sign_in_as(@user)
+
+    get lesson_path(@lesson)
+
+    assert_select "[data-controller=recorder]" do
+      assert_select "button[data-action='recorder#toggle'][aria-label=?]", I18n.t("shared.record_yourself.record")
+      assert_select "button[data-action='recorder#play'][disabled]"
+    end
+  end
+
   test "the ticks match the words known count on the progress bar" do
     know(@word)
     know(vocabulary_items(:house))
