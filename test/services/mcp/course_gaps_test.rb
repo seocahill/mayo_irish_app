@@ -89,6 +89,54 @@ class Mcp::CourseGapsTest < ActiveSupport::TestCase
     assert_empty data["also_taught_elsewhere"]
   end
 
+  test "the whole course lists words used before they're taught" do
+    @one.update_columns(texts: "Feicim an capall.")
+    VocabularyItem.create!(lesson: @empty, irish: "capall", english: "horse", position: 1)
+
+    _, data = call
+
+    assert_equal({ "count" => 1, "words" => [ { "id" => VocabularyItem.find_by(irish: "capall").id, "irish" => "capall", "english" => "horse",
+                                                 "first_used_in_lesson" => 1, "taught_in_lesson" => 2 } ] },
+                 data["used_before_taught"])
+  end
+
+  test "the course list of words used early stops at fifty but counts them all" do
+    words = Array.new(52) { |i| "focal#{('a'.ord + i / 26).chr}#{('a'.ord + i % 26).chr}" }
+    @one.update_columns(texts: words.join(" "))
+    words.each_with_index { |w, i| VocabularyItem.create!(lesson: @empty, irish: w, english: "word", position: i) }
+
+    _, data = call
+
+    assert_equal 52, data["used_before_taught"]["count"]
+    assert_equal Mcp::Tools::CourseGaps::EARLY_WORDS_LISTED, data["used_before_taught"]["words"].size
+  end
+
+  test "one lesson: the words it uses before they're taught, and the words it teaches that were used earlier" do
+    @one.update_columns(texts: "Feicim an capall.")
+    VocabularyItem.create!(lesson: @empty, irish: "capall", english: "horse", position: 1)
+    horse = VocabularyItem.find_by(irish: "capall")
+    entry = { "id" => horse.id, "irish" => "capall", "english" => "horse", "first_used_in_lesson" => 1, "taught_in_lesson" => 2 }
+
+    _, first = call(lesson: 1)
+    _, second = call(lesson: 2)
+
+    assert_equal [ entry ], first["used_before_taught"]
+    assert_empty first["taught_after_used"]
+    assert_empty second["used_before_taught"]
+    assert_equal [ entry ], second["taught_after_used"]
+  end
+
+  test "a lesson outside the curriculum has empty lists for words used before they're taught" do
+    @one.update_columns(texts: "Feicim an capall.")
+    theme = Lesson.create!(number: 3, title: "Animals", position: 3, lesson_type: "thematic_vocab")
+    VocabularyItem.create!(lesson: theme, irish: "capall", english: "horse", position: 1)
+
+    _, data = call(lesson: 3)
+
+    assert_empty data["used_before_taught"]
+    assert_empty data["taught_after_used"]
+  end
+
   test "an unknown lesson number is an error" do
     res, = call(lesson: 999)
 
