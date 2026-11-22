@@ -45,6 +45,17 @@ export default class extends Controller {
     this.repeatToggleTarget.setAttribute("aria-pressed", on)
   }
 
+  // A skip from the lock screen or headphones that leaves the repeated line
+  // turns Repeat off, rather than bouncing straight back to it.
+  skipped({ detail: { time } }) {
+    this.lastTime = time
+    if (!this.repeating) return
+    if (Number(this.repeating.dataset.start) <= time && time < Number(this.repeating.dataset.end)) return
+
+    this.repeating = null
+    this.repeatToggleTarget.setAttribute("aria-pressed", false)
+  }
+
   repeatLine(now) {
     if (!this.repeating || this.audioTarget.paused) return false
     // timeupdate is coarse, so jump back a little early

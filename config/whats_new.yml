@@ -199,3 +199,8 @@
   title: Lessons that open without signal
   body: The last ten lessons you opened are kept on this device, so they still open when your connection drops. Recordings and practice still need a connection. Signing out clears them.
   path: /lessons
+- id: 33
+  date: 2026-11-22
+  title: Listen with the screen locked
+  body: A whole conversation now shows its title and speakers on your lock screen. The lock-screen and headphone buttons skip back or forward ten seconds, and when the conversation has a transcript, previous and next (where your phone or headphones have them) jump to the line before or after, so you can catch a line again without unlocking your phone.
+  path: /listens

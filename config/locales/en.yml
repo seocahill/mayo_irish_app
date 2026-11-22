@@ -908,6 +908,7 @@ en:
       repeat: Repeat line
       show_english: English
       slower: Slower
+      speaker_unknown: Abairt
       unavailable: The recording couldn't be loaded from Abairt. Try again later.
       untitled: A recording from Abairt
   registrations:
