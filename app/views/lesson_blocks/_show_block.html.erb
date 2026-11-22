@@ -45,10 +45,12 @@
 <% elsif block.audio? && block.file.attached? %>
   <figure class="bg-surface rounded-sm border border-line px-5 py-4" data-controller="playback">
     <audio controls src="<%= rails_blob_url(block.file) %>" class="w-full" data-playback-target="audio"></audio>
-    <div class="flex gap-2 mt-3">
+    <div class="flex flex-wrap gap-2 mt-3">
+      <%= render "shared/playback_back" %>
       <button type="button" class="btn-outline text-sm aria-pressed:border-eist aria-pressed:text-eist" aria-pressed="false" data-playback-target="toggle" data-action="playback#toggleSlow"><%= t("lesson_blocks.show_block.slower") %></button>
       <button type="button" class="btn-outline text-sm aria-pressed:border-eist aria-pressed:text-eist" aria-pressed="false" data-playback-target="loop" data-action="playback#toggleLoop"><%= t("lesson_blocks.show_block.repeat") %></button>
     </div>
+    <% unless @playback_keys_shown %><div class="mt-2"><%= render "shared/playback_keys" %></div><% end %>
     <% if block.caption.present? %>
       <figcaption class="text-sm text-muted mt-2"><%= block.caption %></figcaption>
     <% end %>

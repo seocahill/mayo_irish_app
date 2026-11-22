@@ -13,7 +13,7 @@
   <% else %>
     <div class="flex flex-col gap-4"
          data-controller="playback transcript media-session listening-place"
-         data-action="media-session:skipped->transcript#skipped listening-place:skipped->transcript#skipped"
+         data-action="media-session:skipped->transcript#skipped listening-place:skipped->transcript#skipped playback:skipped->transcript#skipped"
          data-media-session-title-value="<%= @recording.title.presence || t(".untitled") %>"
          data-media-session-artist-value="<%= @recording.speakers.to_sentence.presence || t(".speaker_unknown") %>"
          data-media-session-album-value="<%= t("app_name") %>"
@@ -30,6 +30,7 @@
         <button type="button" class="btn-solid text-sm self-start" hidden
                 data-listening-place-target="carryOn" data-action="listening-place#carryOn"><%= t(".carry_on_fallback") %></button>
         <div class="flex flex-wrap gap-2">
+          <%= render "shared/playback_back" %>
           <button type="button" class="btn-outline text-sm aria-pressed:border-eist aria-pressed:text-eist" aria-pressed="false"
                   data-playback-target="toggle" data-action="playback#toggleSlow"><%= t(".slower") %></button>
           <button type="button" class="btn-outline text-sm aria-pressed:border-eist aria-pressed:text-eist" aria-pressed="false"
@@ -41,6 +42,7 @@
                     data-transcript-target="wordsToggle" data-action="transcript#toggleWords"><%= t(".hide_words") %></button>
           <% end %>
         </div>
+        <%= render "shared/playback_keys" %>
       </div>
 
       <% if @recording.lines.empty? %>

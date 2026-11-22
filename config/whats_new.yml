@@ -218,4 +218,8 @@
   date: 2026-11-22
   title: Listen first, then read
   body: On a whole conversation you can now tap "Hide Irish" to listen with the Irish words hidden. Each line stays as a blank bar you can still tap to hear again, and tapping it again brings the words back. This phone or computer remembers your choice.
+- id: 37
+  date: 2026-11-22
+  title: Back 5 seconds
+  body: Every player now has a "Back 5 s" button, so catching a word you missed takes one tap. On a computer, Space plays or pauses, and the left and right arrow keys go back or forward five seconds.
   path: /listens

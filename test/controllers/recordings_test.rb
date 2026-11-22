@@ -159,4 +159,15 @@ class RecordingsTest < ActionDispatch::IntegrationTest
 
     assert_select "[data-transcript-target=wordsToggle]", count: 0
   end
+
+  test "a whole recording has Back 5 s, and a skip lets go of a repeated line" do
+    stub_recording
+
+    with_abairt_token { get recording_path(15) }
+
+    assert_select "[data-controller~=playback][data-action~='playback:skipped->transcript#skipped']" do
+      assert_select "button[data-action='playback#back']", text: I18n.t("shared.playback_back.text")
+      assert_select "[data-playback-keys]"
+    end
+  end
 end
