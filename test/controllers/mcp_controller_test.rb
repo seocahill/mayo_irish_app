@@ -40,7 +40,7 @@ class McpControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     body = JSON.parse(@response.body)
     names = body.dig("result", "tools").map { |t| t["name"] }
-    assert_equal %w[add_proposal_evidence capture_idea comment_on_proposal create_record get_proposal get_record list_ideas list_records mayo_forms search_course update_record what_changed where_is_taught], names.sort
+    assert_equal %w[add_proposal_evidence capture_idea comment_on_proposal create_record get_proposal get_record list_ideas list_records mayo_forms review_queue search_course update_record what_changed where_is_taught], names.sort
   end
 
   test "capture_idea saves an idea through the endpoint" do
@@ -73,6 +73,16 @@ class McpControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_includes @response.body, "A turf lesson"
     assert_equal "captured", prop.reload.status
+  end
+
+  test "review_queue works through the endpoint" do
+    CourseProposal.capture("A turf lesson", origin: "darren").tap(&:save!)
+    post mcp_path, headers: auth_headers, params: rpc("tools/call", {
+      name: "review_queue", arguments: { limit: 3 }
+    }).to_json
+    assert_response :success
+    assert_includes @response.body, "A turf lesson"
+    assert_includes @response.body, "open_in_all"
   end
 
   test "get_proposal and comment_on_proposal work through the endpoint" do
