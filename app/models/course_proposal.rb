@@ -17,6 +17,9 @@ class CourseProposal < ApplicationRecord
   validates :status, inclusion: { in: STATUSES }
 
   TITLE_LENGTH = 80
+  SUMMARY_LENGTH = 160
+  # The designer agent's own proposals; any other origin is a person.
+  AGENT_ORIGIN = "designer"
 
   # An idea captured in someone's own words. The words are kept verbatim in
   # raw_text; the title is only a short label made from them.
@@ -53,4 +56,20 @@ class CourseProposal < ApplicationRecord
 
   scope :pending, -> { where(status: OPEN_STATUSES) }
   scope :ordered, -> { order(priority: :desc, created_at: :desc) }
+
+  # Open proposals in the order a person should decide them: people's own ideas
+  # before the agent's (COURSE_DESIGNER.md §7), then higher priority, then the
+  # one that has waited longest.
+  scope :review_order, -> {
+    pending.order(Arel::Nodes::Case.new(arel_table[:origin]).when(AGENT_ORIGIN).then(1).else(0))
+           .order(priority: :desc, created_at: :asc, id: :asc)
+  }
+
+  # One line saying what the proposal is about: the reasoning, the outline or
+  # the original words, squeezed onto a line. Nil when it would only repeat the
+  # title (a captured idea's title is made from its words).
+  def summary
+    line = [ rationale, outline, raw_text ].find(&:present?).to_s.squish.truncate(SUMMARY_LENGTH, separator: " ")
+    line.presence unless line == title.to_s.squish
+  end
 end
