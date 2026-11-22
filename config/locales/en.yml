@@ -938,6 +938,7 @@ en:
       masculine: Masculine
       plural: 'Plural:'
     show:
+      compare: 'Record yourself, then play it back to compare:'
       how_did_it_go: How did it go?
       how_to_say_in_irish: How do you say this in Irish?
       meaning_in_english: What does this mean in English?
