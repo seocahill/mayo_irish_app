@@ -6,9 +6,11 @@ import { Controller } from "@hotwired/stimulus"
 const REPORT_EVERY = 30
 // How long a line stays marked after it ends, through a speaker's pause.
 const HOLD = 3
+// Whether the learner listens with the Irish words hidden, kept on this device only.
+const WORDS_HIDDEN = "transcript:words-hidden"
 
 export default class extends Controller {
-  static targets = ["audio", "line", "english", "englishToggle", "repeatToggle"]
+  static targets = ["audio", "line", "english", "englishToggle", "repeatToggle", "lines", "irish", "hiddenLine", "wordsToggle"]
   static values = { start: Number, reportUrl: String }
 
   connect() {
@@ -19,6 +21,7 @@ export default class extends Controller {
     }, { once: true })
     this.flush = () => this.report()
     window.addEventListener("pagehide", this.flush)
+    if (this.hasWordsToggleTarget) this.hideWords(this.wordsHiddenSaved())
   }
 
   disconnect() {
@@ -76,6 +79,27 @@ export default class extends Controller {
     const show = this.englishToggleTarget.getAttribute("aria-pressed") !== "true"
     this.englishTargets.forEach((line) => { line.hidden = !show })
     this.englishToggleTarget.setAttribute("aria-pressed", show)
+  }
+
+  // Listen first with the Irish hidden, then show it. Hidden lines stay in
+  // place as blank bars, so tapping one still plays it.
+  toggleWords() {
+    const hidden = this.wordsToggleTarget.getAttribute("aria-pressed") !== "true"
+    this.hideWords(hidden)
+    try {
+      hidden ? localStorage.setItem(WORDS_HIDDEN, "1") : localStorage.removeItem(WORDS_HIDDEN)
+    } catch { /* storage blocked: the choice lasts for this page only */ }
+  }
+
+  hideWords(hidden) {
+    this.linesTarget.toggleAttribute("data-words-hidden", hidden)
+    this.irishTargets.forEach((irish) => hidden ? irish.setAttribute("aria-hidden", "true") : irish.removeAttribute("aria-hidden"))
+    this.hiddenLineTargets.forEach((label) => { label.hidden = !hidden })
+    this.wordsToggleTarget.setAttribute("aria-pressed", hidden)
+  }
+
+  wordsHiddenSaved() {
+    try { return localStorage.getItem(WORDS_HIDDEN) === "1" } catch { return false }
   }
 
   // Only time spent playing counts; a jump (seeking) doesn't.

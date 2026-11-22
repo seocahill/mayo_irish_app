@@ -910,6 +910,8 @@ en:
       eyebrow: Listen · conversation
       from_abairt: Recorded and transcribed on Abairt. Only checked lines are shown,
         so there are some gaps.
+      hidden_line: Line hidden, %{time}. Play from here
+      hide_words: Hide Irish
       how_to_listen: Don't try to catch every word. Listen for the rhythm of the talk
         and for words you know, and tap a line to hear it again.
       no_transcript: This recording hasn't been transcribed yet. Listen anyway.
