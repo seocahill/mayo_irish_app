@@ -290,7 +290,6 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
                       answered_at: at, box_before: 1, box_after: 1)
   end
 
-
   test "the answer shows a noun's gender, genitive and plural" do
     sign_in_as(@user)
     question = @lesson.quiz_questions.find_by(direction: "ga_en")
@@ -318,6 +317,38 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     get review_path
 
     post answer_review_path, params: { question_id: question.id, choice: "wrong" }
+    assert_response :success
+    assert_select "[data-test=noun-forms]", false
+  end
+
+  test "a masculine noun shows Masculine, on a Say it answer too" do
+    sign_in_as(@user)
+    question = @lesson.quiz_questions.find_by(direction: "en_ga")
+    question.source.update!(gender: "m", genitive: "an mhadra", genitive_source_entry_id: 3, plural: nil)
+    QuizReview.where(user: @user).delete_all
+    due_review(question, times_correct: 1)
+    get review_path
+    assert_equal question.id, session[ReviewsController::ROUND_KEY]["ids"].first
+
+    post answer_review_path, params: { question_id: question.id, rating: "good" }
+    assert_select "[data-test=noun-forms]" do
+      assert_select "span", text: "Masculine"
+      assert_select "span[lang=ga]", text: "an mhadra"
+      assert_select ".chip", count: 1, text: "Abairt"
+    end
+  end
+
+  test "a phrase answer shows no forms line" do
+    sign_in_as(@user)
+    phrase = @lesson.phrases.create!(irish: "Dia dhuit", english: "hello")
+    QuizQuestion.sync_for(@lesson)
+    question = QuizQuestion.find_by!(source: phrase, direction: "ga_en")
+    QuizReview.where(user: @user).delete_all
+    due_review(question, times_correct: 0)
+    get review_path
+    assert_equal question.id, session[ReviewsController::ROUND_KEY]["ids"].first
+
+    post answer_review_path, params: { question_id: question.id, choice: question.answer }
     assert_response :success
     assert_select "[data-test=noun-forms]", false
   end
