@@ -299,6 +299,7 @@ en:
         other: words known
       your_listening: Your listening
       your_place: Your place
+      your_weeks: Your weeks
     welcome:
       how_it_works: How the course works
       invite_only: A course in the Irish of Mayo. Invite only until it's ready.
@@ -1200,6 +1201,31 @@ en:
       reject: Reject
       rejected: Rejected
       unavailable: Abairt couldn't be reached. Try again later.
+  weeks:
+    show:
+      answers:
+        one: review answer
+        other: review answers
+      back: "← Today"
+      clips:
+        one: 1 listening clip heard
+        other: "%{count} listening clips heard"
+      eyebrow: Progress
+      minutes_listened:
+        one: minute listened
+        other: minutes listened
+      minutes_spoken:
+        one: minute spoken
+        other: minutes spoken
+      quiet: Nothing this week.
+      right:
+        one: 1 right
+        other: "%{count} right"
+      summary: What you've done in each of the last eight weeks, newest first. Time
+        spent with the language adds up, even in short sessions.
+      this_week: This week
+      title: Your weeks
+      week_of: Week of %{date}
   whats_new:
     card:
       got_it: Got it

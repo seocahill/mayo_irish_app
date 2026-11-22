@@ -1,6 +1,9 @@
-# One learner's activity week by week, newest first, for their admin page.
+# One learner's activity week by week, newest first: for their admin page, and
+# for the learner's own Your weeks page.
 class LearnerWeeks
-  Week = Data.define(:starts_on, :answers, :correct, :clips, :minutes_spoken)
+  Week = Data.define(:starts_on, :answers, :correct, :clips, :minutes_spoken, :minutes_listened) do
+    def quiet? = answers.zero? && clips.zero? && minutes_spoken.zero? && minutes_listened.zero?
+  end
 
   def initialize(user, weeks: 8)
     @user = user
@@ -16,7 +19,8 @@ class LearnerWeeks
   def week_starting(starts_on)
     answered = answers.fetch(starts_on, [])
     Week.new(starts_on: starts_on, answers: answered.size, correct: answered.count(true),
-             clips: clips.fetch(starts_on, 0), minutes_spoken: seconds_spoken[starts_on].fdiv(60).round)
+             clips: clips.fetch(starts_on, 0), minutes_spoken: seconds_spoken[starts_on].fdiv(60).round,
+             minutes_listened: seconds_listened[starts_on].fdiv(60).round)
   end
 
   def range = (@starts.last.beginning_of_day..)
@@ -33,6 +37,11 @@ class LearnerWeeks
   def seconds_spoken
     @seconds_spoken ||= ChatMessage.spoken_by(user).where(created_at: range).pluck(:created_at, :spoken_seconds)
                                    .each_with_object(Hash.new(0)) { |(at, seconds), sums| sums[week_of(at)] += seconds }
+  end
+
+  def seconds_listened
+    @seconds_listened ||= user.listening_days.where(day: @starts.last..).pluck(:day, :seconds)
+                              .each_with_object(Hash.new(0)) { |(day, seconds), sums| sums[week_of(day)] += seconds }
   end
 
   def week_of(time) = time.to_date.beginning_of_week

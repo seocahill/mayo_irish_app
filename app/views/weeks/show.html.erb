@@ -1,0 +1,42 @@
+<div class="max-w-xl mx-auto flex flex-col gap-8">
+  <header class="flex flex-col gap-2">
+    <%= link_to t(".back"), root_path, class: "text-sm text-muted underline underline-offset-2 hover:text-ink self-start" %>
+    <p class="eyebrow"><%= t(".eyebrow") %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
+    <p class="text-muted text-sm"><%= t(".summary") %></p>
+  </header>
+
+  <ol class="bg-surface border border-line rounded-sm divide-y divide-line" aria-label="<%= t(".title") %>">
+    <% @weeks.each_with_index do |week, index| %>
+      <li class="px-4 py-4 flex flex-col gap-2">
+        <h2 class="font-mono text-xs uppercase tracking-wider text-muted">
+          <%= index.zero? ? t(".this_week") : t(".week_of", date: l(week.starts_on, format: :short)) %>
+        </h2>
+        <% if week.quiet? %>
+          <p class="text-sm text-muted"><%= t(".quiet") %></p>
+        <% else %>
+          <dl class="grid grid-cols-3 gap-2">
+            <div class="flex flex-col">
+              <dd class="font-display text-2xl text-ink order-1"><%= week.answers %></dd>
+              <dt class="text-xs text-muted leading-tight order-2">
+                <%= t(".answers", count: week.answers) %>
+                <% if week.answers.positive? %><span class="block"><%= t(".right", count: week.correct) %></span><% end %>
+              </dt>
+            </div>
+            <div class="flex flex-col">
+              <dd class="font-display text-2xl text-ink order-1"><%= week.minutes_listened %></dd>
+              <dt class="text-xs text-muted leading-tight order-2"><%= t(".minutes_listened", count: week.minutes_listened) %></dt>
+            </div>
+            <div class="flex flex-col">
+              <dd class="font-display text-2xl text-ink order-1"><%= week.minutes_spoken %></dd>
+              <dt class="text-xs text-muted leading-tight order-2"><%= t(".minutes_spoken", count: week.minutes_spoken) %></dt>
+            </div>
+          </dl>
+          <% if week.clips.positive? %>
+            <p class="text-xs text-muted"><%= t(".clips", count: week.clips) %></p>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  </ol>
+</div>
