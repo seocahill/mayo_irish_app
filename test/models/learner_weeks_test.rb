@@ -31,6 +31,19 @@ class LearnerWeeksTest < ActiveSupport::TestCase
     end
   end
 
+  test "minutes spoken include recording yourself" do
+    travel_to Time.zone.parse("2026-10-28 12:00") do
+      2.times { SpeakingDay.add(@learner, 30) }
+      SpeakingDay.add(@learner, 30, on: Date.new(2026, 10, 26))
+      SpeakingDay.add(@learner, 60, on: Date.new(2026, 10, 25))
+
+      this_week, last_week = LearnerWeeks.new(@learner).weeks
+
+      assert_equal [ 2, 1 ], [ this_week.minutes_spoken, last_week.minutes_spoken ]
+      assert_not this_week.quiet?
+    end
+  end
+
   test "covers eight weeks, quiet ones included" do
     weeks = LearnerWeeks.new(@learner).weeks
 

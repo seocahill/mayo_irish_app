@@ -34,9 +34,11 @@ class LearnerWeeks
     @clips ||= user.listens.where(created_at: range).pluck(:created_at).map { |at| week_of(at) }.tally
   end
 
+  # Comhrá turns and recording yourself together.
   def seconds_spoken
-    @seconds_spoken ||= ChatMessage.spoken_by(user).where(created_at: range).pluck(:created_at, :spoken_seconds)
-                                   .each_with_object(Hash.new(0)) { |(at, seconds), sums| sums[week_of(at)] += seconds }
+    @seconds_spoken ||= (ChatMessage.spoken_by(user).where(created_at: range).pluck(:created_at, :spoken_seconds) +
+                         user.speaking_days.where(day: @starts.last..).pluck(:day, :seconds))
+                        .each_with_object(Hash.new(0)) { |(at, seconds), sums| sums[week_of(at)] += seconds }
   end
 
   def seconds_listened

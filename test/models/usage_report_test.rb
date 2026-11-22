@@ -24,6 +24,17 @@ class UsageReportTest < ActiveSupport::TestCase
     end
   end
 
+  test "minutes spoken include recording yourself, and it counts as active" do
+    travel_to Time.zone.parse("2026-10-28 12:00") do
+      2.times { SpeakingDay.add(users(:two), 30) }
+      SpeakingDay.add(users(:admin), 30)
+
+      week = UsageReport.new.weeks.last
+
+      assert_equal [ 1, 1 ], [ week.minutes_spoken, week.active ]
+    end
+  end
+
   test "leaves out admins" do
     travel_to Time.zone.parse("2026-10-28 12:00") do
       answer(users(:admin), at: 1.hour.ago, correct: true)

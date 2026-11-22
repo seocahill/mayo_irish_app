@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :listens, dependent: :destroy
   has_many :listening_times, dependent: :destroy
   has_many :listening_days, dependent: :destroy
+  has_many :speaking_days, dependent: :destroy
   has_many :section_progresses, dependent: :destroy
   has_many :quiz_reviews, dependent: :destroy
   has_many :review_logs, dependent: :destroy

@@ -1,7 +1,7 @@
-<%# Record yourself and play it back, to compare with the Mayo speaker. The recording stays in the browser (recorder_controller.js); nothing is uploaded. %>
+<%# Record yourself and play it back, to compare with the Mayo speaker. The recording stays in the browser (recorder_controller.js); only its length is sent, to count towards minutes spoken. Pass note: true to say so under the recorder. %>
 <% button_class = local_assigns.fetch(:button_class, "") %>
 <% show_status = local_assigns.fetch(:show_status, "hidden sm:inline") %>
-<div data-controller="recorder" class="flex items-center gap-1.5"<% if local_assigns[:labelledby] %> role="group" aria-labelledby="<%= labelledby %>"<% end %> title="<%= t("shared.record_yourself.title") %>"<% if local_assigns[:testid] %> data-testid="<%= testid %>"<% end %>>
+<div data-controller="recorder"<% if authenticated? %> data-recorder-report-url-value="<%= speaking_time_path %>"<% end %> class="flex items-center gap-1.5"<% if local_assigns[:labelledby] %> role="group" aria-labelledby="<%= labelledby %>"<% end %> title="<%= t("shared.record_yourself.title") %>"<% if local_assigns[:testid] %> data-testid="<%= testid %>"<% end %>>
   <button type="button"
           data-recorder-target="recordButton"
           data-action="recorder#toggle"
@@ -24,3 +24,6 @@
   </button>
   <span data-recorder-target="status" aria-live="polite" class="text-xs text-muted <%= show_status %>"></span>
 </div>
+<% if local_assigns[:note] %>
+  <p class="basis-full text-xs text-muted" data-testid="record-yourself-note"><%= t("shared.record_yourself.note") %></p>
+<% end %>

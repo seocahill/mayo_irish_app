@@ -29,8 +29,10 @@ class LearnerActivity
 
   def clips = @clips ||= Listen.where(created_at: @since..).group(:user_id).count
 
+  # Comhrá turns and recording yourself together.
   def seconds_spoken
     @seconds_spoken ||= spoken_turns.where(created_at: @since..).group("chat_sessions.user_id").sum(:spoken_seconds)
+                                    .merge(SpeakingDay.where(day: @since.to_date..).group(:user_id).sum(:seconds)) { |_, a, b| a + b }
   end
 
   def lessons_started
@@ -44,7 +46,8 @@ class LearnerActivity
       ReviewLog.group(:user_id).maximum(:answered_at),
       Listen.group(:user_id).maximum(:created_at),
       ListeningTime.group(:user_id).maximum(:updated_at),
-      spoken_turns.group("chat_sessions.user_id").maximum(:created_at)
+      spoken_turns.group("chat_sessions.user_id").maximum(:created_at),
+      SpeakingDay.group(:user_id).maximum(:updated_at)
     ].reduce { |latest, times| latest.merge(times) { |_, a, b| [ a, b ].max } }
   end
 
