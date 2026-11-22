@@ -1217,7 +1217,7 @@ en:
       minutes_spoken:
         one: minute spoken
         other: minutes spoken
-      quiet: Nothing this week.
+      quiet: A quiet week.
       right:
         one: 1 right
         other: "%{count} right"

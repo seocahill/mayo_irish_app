@@ -17,7 +17,7 @@ class LearnerWeeksTest < ActiveSupport::TestCase
       chat = @learner.chat_sessions.create!(lesson: lessons(:one), kind: :conversation)
       2.times { chat.chat_messages.create!(role: "user", content: "spoken", spoken_seconds: 30) }
       ListeningDay.add(@learner, 150, on: Date.new(2026, 10, 27))
-      ListeningDay.add(@learner, 90, on: Date.new(2026, 10, 28))
+      ListeningDay.add(@learner, 90, on: Date.new(2026, 10, 26))
       ListeningDay.add(@learner, 600, on: Date.new(2026, 10, 25))
       ListeningDay.add(@learner, 6000, on: Date.new(2026, 6, 1))
 
