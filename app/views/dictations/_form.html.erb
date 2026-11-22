@@ -1,0 +1,9 @@
+<%# "Type what you hear" for a listening clip (see DictationsController). Rendered in the dictation frame, before and after a check. %>
+<%= form_with url: listening_clip_dictation_path(clip), class: "flex flex-col gap-2" do |f| %>
+  <%= f.label :heard, t("dictations.form.label"), class: "font-medium" %>
+  <%= f.text_area :heard, value: heard, rows: 2, maxlength: Dictation::MAX_LENGTH, lang: "ga",
+                  autocomplete: "off", autocapitalize: "off", autocorrect: "off", spellcheck: false,
+                  class: "field text-base resize-none", aria: { describedby: "dictation-hint" } %>
+  <p id="dictation-hint" class="text-xs text-muted"><%= t("dictations.form.hint") %></p>
+  <%= f.submit t("dictations.form.check"), class: "btn-outline self-start" %>
+<% end %>

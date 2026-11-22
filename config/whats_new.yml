@@ -233,3 +233,8 @@
   title: Recording yourself counts as speaking
   body: When you record yourself on a Say it card, after a listening clip or on a lesson's word list, that time now counts towards your minutes spoken on Today and on Your weeks. Only the length is counted. The recording itself never leaves your phone or computer.
   path: /weeks
+- id: 40
+  date: 2026-11-22
+  title: Type what you hear
+  body: On a listening clip you can now type what you think the speaker said and tap Check. You'll see the speaker's words with the ones you heard, heard differently or missed marked, and the English. Missing fadas don't count against you. It's optional, and you still say how it went yourself.
+  path: /listens
