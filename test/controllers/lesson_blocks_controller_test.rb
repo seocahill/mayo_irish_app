@@ -53,5 +53,7 @@ class LessonBlocksControllerTest < ActionDispatch::IntegrationTest
     assert_select "figure[data-controller='playback'] audio[data-playback-target='audio']"
     assert_select "figure button[data-action='playback#toggleSlow']", text: I18n.t("lesson_blocks.show_block.slower")
     assert_select "figure button[data-action='playback#toggleLoop']", text: I18n.t("lesson_blocks.show_block.repeat")
+    assert_select "figure button[data-action='playback#back']", text: I18n.t("shared.playback_back.text")
+    assert_select "figure [data-playback-keys]"
   end
 end

@@ -31,6 +31,16 @@ class ListeningClipsTest < ActionDispatch::IntegrationTest
                   text: I18n.t("listening_clips.show.repeat")
   end
 
+  test "the clip has a Back 5 s button, and the keys are shown for keyboards" do
+    sign_in_as(users(:two))
+
+    get listening_clip_path(@clip)
+
+    assert_select "[data-controller=playback] button[data-action='playback#back'][aria-label=?]", I18n.t("shared.playback_back.label"),
+                  text: I18n.t("shared.playback_back.text")
+    assert_select "[data-controller=playback] [data-playback-keys]", text: I18n.t("shared.playback_keys.hint")
+  end
+
   test "behind the reveal, the learner can say the phrase after the speaker and play it back" do
     sign_in_as(users(:two))
 

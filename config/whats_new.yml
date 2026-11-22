@@ -214,3 +214,8 @@
   title: Machine voice or Mayo speaker, at a glance
   body: Wherever a word is read by ABAIR's synthetic voice rather than a recording of a speaker, it now says so on the page, with a "Synthetic" tag beside each word's button and a note above the lesson text, so you can always tell the two apart on a phone. The tutor chat (Practise) now marks each reply as AI-generated, like the conversation does.
   path: /lessons
+- id: 37
+  date: 2026-11-22
+  title: Back 5 seconds
+  body: Every player now has a "Back 5 s" button, so catching a word you missed takes one tap. On a computer, Space plays or pauses, and the left and right arrow keys go back or forward five seconds.
+  path: /listens
