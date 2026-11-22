@@ -208,11 +208,23 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     due_review(question, times_correct: 1)
     QuizReview.where(user: @user).where.not(quiz_question: question).delete_all
     get review_path
-    assert session[ReviewsController::ROUND_KEY]["ids"].first == question.id
+    assert_equal question.id, session[ReviewsController::ROUND_KEY]["ids"].first
     assert_select "[data-reveal-target=hidden] [data-testid=say-it-recorder][data-controller=recorder]" do
-      assert_select "button[data-action='recorder#toggle'][aria-label=?]", I18n.t("lessons.show.record")
+      assert_select "button[data-action='recorder#toggle'][aria-label=?]", I18n.t("shared.record_yourself.record")
       assert_select "button[data-action='recorder#play'][disabled]"
     end
+  end
+
+  test "Say it with an Irish audio prompt offers record yourself after Show" do
+    sign_in_as(@user)
+    question = @lesson.quiz_questions.find_by(direction: "ga_en")
+    question.source.update!(audio_url: "https://example.com/a.mp3")
+    due_review(question, times_correct: 2)
+    get review_path
+    assert_equal question.id, session[ReviewsController::ROUND_KEY]["ids"].first
+    assert_select "[data-testid=say-it-audio] audio"
+    assert_select "[data-reveal-target=hidden] [data-testid=say-it-recorder][role=group][aria-labelledby=say-it-compare]"
+    assert_select "#say-it-compare", text: I18n.t("reviews.show.compare")
   end
 
   test "Say it without any audio has no record yourself" do

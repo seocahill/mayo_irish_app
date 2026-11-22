@@ -31,9 +31,9 @@
         </p>
         <% if audio_html.present? %>
           <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">
-            <span><%= t(".compare") %></span>
+            <span id="say-it-compare"><%= t(".compare") %></span>
             <%= render "shared/record_yourself", button_class: "inline-flex items-center justify-center min-w-12 min-h-12",
-                                                 show_status: "", testid: "say-it-recorder" %>
+                                                 show_status: "", testid: "say-it-recorder", labelledby: "say-it-compare" %>
           </div>
         <% end %>
         <p class="eyebrow"><%= t(".how_did_it_go") %></p>
