@@ -189,3 +189,8 @@
   title: Hear yourself on Say it cards
   body: After you tap Show on a Say it card, you can record yourself and play it back next to the Mayo speaker. The recording stays on your phone and is never uploaded.
   path: /review
+- id: 31
+  date: 2026-11-22
+  title: Say it after the speaker
+  body: On a listening clip, open Show the words and you can now record yourself saying the phrase, then play it back to compare with the Mayo speaker. The recording stays on your phone and is never uploaded.
+  path: /

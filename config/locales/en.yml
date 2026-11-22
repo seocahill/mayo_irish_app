@@ -683,6 +683,7 @@ en:
         (%{english}) and try to work out the rest. Play it as often as you like.
       not_yet: Not yet
       repeat: Repeat
+      say_it_after: 'Say it after the speaker, then play it back to compare:'
       show_words: Show the words
       slower: Slower
       title: What do you hear?
