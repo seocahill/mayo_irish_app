@@ -5,7 +5,7 @@
     <%= link_to t(".exit_preview"), lesson_path(@lesson), class: "underline underline-offset-2 shrink-0" %>
   </div>
 <% end %>
-<header class="flex flex-col gap-5 mb-8">
+<header class="flex flex-col gap-5 mb-8"<% unless @preview %> data-controller="lesson-offline" data-lesson-offline-path-value="<%= lesson_path(@lesson) %>"<% end %>>
   <div class="min-w-0">
     <p class="eyebrow <%= level[:text] %>"><%= t(".lesson_label", number: @lesson.number, type: @lesson.type_label) %></p>
     <h1 class="text-3xl sm:text-4xl font-display text-ink leading-tight break-words mt-1"><%= @lesson.title %></h1>

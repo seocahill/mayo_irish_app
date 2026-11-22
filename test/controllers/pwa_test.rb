@@ -68,6 +68,7 @@ class PwaTest < ActionDispatch::IntegrationTest
     assert_select "link[rel=manifest][href=?]", pwa_manifest_path(format: :json)
     assert_select "link[rel=apple-touch-icon][href='/icon.png']"
   end
+
   test "the service worker keeps recent lessons network-first and clears them on sign in or out" do
     get pwa_service_worker_path(format: :js)
     js = response.body
@@ -75,15 +76,21 @@ class PwaTest < ActionDispatch::IntegrationTest
     assert_includes js, 'const PAGES = "gmh-pages"'
     assert_includes js, "const MAX_PAGES = 10"
     # Lessons are fetched from the network first; the saved copy is only the fallback.
-    assert_match(/async function lessonPage[\s\S]*await fetch\(request\)[\s\S]*catch/, js)
+    assert_match(/async function lessonPage[\s\S]*const network = fetch\(request\)[\s\S]*catch/, js)
     assert_includes js, "!response.redirected"
-    # Any POST to /session (sign in, or the sign-out form) forgets saved lessons.
-    assert_includes js, 'url.pathname === "/session"'
+    # Signing in, signing up, signing out, resetting a password or landing on
+    # the sign-in page (an expired session) all forget saved lessons.
+    assert_includes js, "const FORGET_POSTS = [ /^\\/session$/, /^\\/registration$/, /^\\/passwords(\\/.*)?$/ ]"
+    assert_includes js, 'const SIGN_IN_PATH = "/session/new"'
     assert_includes js, "caches.delete(PAGES)"
+    # A save started before a sign-out is dropped, and saves run one at a time.
+    assert_includes js, "if (started !== generation) return"
+    # A barely-working connection falls back to the saved copy.
+    assert_includes js, "Promise.race([ network, timeout ])"
     # Turbo frame loads and prefetches are not saved.
     assert_includes js, 'h.get("Turbo-Frame")'
-    # Saved lessons and assets are not wiped by the shell cache cleanup on deploy.
-    assert_includes js, 'key.startsWith("gmh-shell-")'
+    # Shell assets also go in the long-lived asset cache, so saved lessons keep their styles after a deploy.
+    assert_includes js, "await assets.put(url, response.clone())"
   end
 
   test "the lesson path pattern matches lesson pages only" do
@@ -113,6 +120,7 @@ class PwaTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "[data-controller=connection][hidden][role=status]", text: /You're offline/
     assert_select "h1", text: "Lesson One"
+    # The lesson tells the worker it was opened, even when Turbo used a prefetch.
+    assert_select "[data-controller=lesson-offline][data-lesson-offline-path-value=?]", lesson_path(lessons(:one))
   end
-
 end
