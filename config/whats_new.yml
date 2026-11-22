@@ -204,3 +204,8 @@
   title: Listen with the screen locked
   body: A whole conversation now shows its title and speakers on your lock screen. The lock-screen and headphone buttons skip back or forward ten seconds, and when the conversation has a transcript, previous and next (where your phone or headphones have them) jump to the line before or after, so you can catch a line again without unlocking your phone.
   path: /listens
+- id: 34
+  date: 2026-11-22
+  title: Carry on where you stopped
+  body: If you leave a whole conversation part way through, it now offers to carry on from where you stopped the next time you open it. Your place is kept only on this phone or computer, and signing out forgets it.
+  path: /listens
