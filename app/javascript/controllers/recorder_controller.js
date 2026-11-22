@@ -27,6 +27,7 @@ export default class extends Controller {
   }
 
   async start() {
+    this.pausePageAudio()
     if (!navigator.mediaDevices?.getUserMedia) {
       this.setStatus(t("js.recorder.not_supported"), true)
       return
@@ -71,8 +72,15 @@ export default class extends Controller {
 
   play() {
     if (!this.audioUrl) return
+    this.pausePageAudio()
     const audio = new Audio(this.audioUrl)
     audio.play()
+  }
+
+  // Stop the speaker's audio (even a clip set to repeat) so the mic doesn't
+  // pick it up and the learner's recording doesn't play over it.
+  pausePageAudio() {
+    document.querySelectorAll("audio").forEach((audio) => audio.pause())
   }
 
   stopStream() {

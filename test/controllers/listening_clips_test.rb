@@ -31,6 +31,19 @@ class ListeningClipsTest < ActionDispatch::IntegrationTest
                   text: I18n.t("listening_clips.show.repeat")
   end
 
+  test "behind the reveal, the learner can say the phrase after the speaker and play it back" do
+    sign_in_as(users(:two))
+
+    get listening_clip_path(@clip)
+
+    assert_select "details [data-testid=clip-recorder][data-controller=recorder][role=group][aria-labelledby=clip-shadow]" do
+      assert_select "button[data-action='recorder#toggle'][aria-label=?]", I18n.t("shared.record_yourself.record")
+      assert_select "button[data-action='recorder#play'][disabled][aria-label=?]", I18n.t("shared.record_yourself.play_recording")
+    end
+    assert_select "details #clip-shadow", text: I18n.t("listening_clips.show.say_it_after")
+    assert_select "[data-controller=playback] [data-controller=recorder]", count: 0
+  end
+
   test "saying whether they got it sets the clip aside" do
     sign_in_as(users(:two))
 
