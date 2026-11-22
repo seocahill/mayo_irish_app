@@ -30,6 +30,15 @@ class Mcp::SearchCourseTest < ActiveSupport::TestCase
     _, body = run_tool(query: "boatman", limit: 2)
     assert_equal 2, body["results"].size
     assert_equal 3, body["total"]
+    assert_equal false, body["truncated"]
+  end
+
+  test "says when the search stopped at its cap" do
+    (Search::MAX_RESULTS + 1).times { |i| lessons(:one).vocabulary_items.create!(irish: "currach#{i}", english: "currach boat #{i}", position: 200 + i) }
+    _, body = run_tool(query: "currach")
+    assert_equal Search::MAX_RESULTS, body["total"]
+    assert_equal true, body["truncated"]
+    assert_equal Mcp::Tools::SearchCourse::DEFAULT_LIMIT, body["results"].size
   end
 
   test "drafts are found for admins only" do

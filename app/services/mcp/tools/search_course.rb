@@ -9,7 +9,8 @@ module Mcp
       description "Search the whole course (lessons, vocabulary, phrases, grammar rules and sections, " \
                   "lesson text) for Irish or English words, fadas optional, partial words match. " \
                   "Returns each match's type, lesson number, title and a short snippet with the " \
-                  "matched words in **bold**, best first, and total (counted up to #{Search::MAX_RESULTS}). Draft lessons are included for admins. " \
+                  "matched words in **bold**, best first, and total (counted up to #{Search::MAX_RESULTS}; truncated " \
+                  "is true when there may be more). Draft lessons are included for admins. " \
                   "Returns the course's own text only; Abairt and the monographs are not searched. Read-only."
       annotations(
         title: "Search the course",
@@ -36,6 +37,8 @@ module Mcp
         json_response(
           query: query.to_s,
           total: results.size,
+          # The search stops at MAX_RESULTS; say so rather than let total look exact.
+          truncated: results.size >= Search::MAX_RESULTS,
           results: results.first(count).map do |r|
             { type: r.record_type, id: r.record_id, lesson_number: r.lesson_number,
               title: r.title, snippet: bold(r.snippet) }

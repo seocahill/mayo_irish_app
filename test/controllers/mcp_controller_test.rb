@@ -53,6 +53,16 @@ class McpControllerTest < ActionDispatch::IntegrationTest
     assert_equal "A lesson on turf cutting", CourseProposal.order(:id).last.raw_text
   end
 
+  test "search_course works through the endpoint" do
+    SearchIndex.rebuild!
+    post mcp_path, headers: auth_headers, params: rpc("tools/call", {
+      name: "search_course", arguments: { query: "madra" }
+    }).to_json
+    assert_response :success
+    assert_includes @response.body, "madra"
+    assert_includes @response.body, "truncated"
+  end
+
   test "what_changed works through the endpoint and changes nothing" do
     prop = CourseProposal.capture("A turf lesson", origin: "x").tap(&:save!)
     assert_no_difference -> { CourseProposal.count + ProposalComment.count + ProposalEvidence.count } do
