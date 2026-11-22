@@ -40,7 +40,7 @@ class McpControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     body = JSON.parse(@response.body)
     names = body.dig("result", "tools").map { |t| t["name"] }
-    assert_equal %w[add_proposal_evidence capture_idea comment_on_proposal create_record get_proposal get_record list_ideas list_records mayo_forms review_queue search_course update_record what_changed where_is_taught], names.sort
+    assert_equal %w[add_proposal_evidence capture_idea comment_on_proposal course_gaps create_record get_proposal get_record list_ideas list_records mayo_forms review_queue search_course update_record what_changed where_is_taught], names.sort
   end
 
   test "capture_idea saves an idea through the endpoint" do
@@ -73,6 +73,20 @@ class McpControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_includes @response.body, "A turf lesson"
     assert_equal "captured", prop.reload.status
+  end
+
+  test "course_gaps works through the endpoint" do
+    post mcp_path, headers: auth_headers, params: rpc("tools/call", {
+      name: "course_gaps", arguments: { lesson: 1 }
+    }).to_json
+    assert_response :success
+    assert_includes @response.body, "Lesson One"
+    assert_includes @response.body, "words_missing"
+
+    post mcp_path, headers: auth_headers, params: rpc("tools/call", {
+      name: "course_gaps", arguments: { lesson: "one" }
+    }).to_json
+    assert_includes @response.body, "Invalid arguments"
   end
 
   test "review_queue works through the endpoint" do
