@@ -899,6 +899,8 @@ en:
       score: "%{correct} of %{answered}"
   recordings:
     show:
+      carry_on: Carry on from %{time}
+      carry_on_fallback: Carry on where you stopped
       eyebrow: Listen · conversation
       from_abairt: Recorded and transcribed on Abairt. Only checked lines are shown,
         so there are some gaps.

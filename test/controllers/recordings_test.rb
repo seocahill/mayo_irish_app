@@ -29,6 +29,31 @@ class RecordingsTest < ActionDispatch::IntegrationTest
     assert_select "button[data-start='12.0'] span[lang=ga]", text: "one madra two"
   end
 
+  test "offers to carry on from the learner's own saved place, kept on the device" do
+    stub_recording
+
+    with_abairt_token { get recording_path(15) }
+
+    assert_select "[data-controller~=listening-place]" do |wrapper|
+      assert_equal "#{users(:two).id}:15", wrapper.first["data-listening-place-key-value"]
+      assert_equal "true", wrapper.first["data-listening-place-offer-value"]
+      assert_equal I18n.t("recordings.show.carry_on", time: "__TIME__"), wrapper.first["data-listening-place-label-value"]
+    end
+    assert_select "audio[data-listening-place-target=audio][data-action~='timeupdate->listening-place#track']"
+    assert_select "audio[data-action~='pause->listening-place#save'][data-action~='ended->listening-place#clear']"
+    assert_select "[data-action~='listening-place:skipped->transcript#skipped']"
+    assert_select "button[hidden][data-listening-place-target=carryOn][data-action='listening-place#carryOn']",
+                  text: I18n.t("recordings.show.carry_on_fallback")
+  end
+
+  test "opened at a clip's phrase, it starts there and doesn't offer the saved place" do
+    stub_recording
+
+    with_abairt_token { get recording_path(15, t: 12.0) }
+
+    assert_select "[data-controller~=listening-place][data-listening-place-offer-value=false]"
+  end
+
   test "a line of the conversation can be repeated" do
     stub_recording
 

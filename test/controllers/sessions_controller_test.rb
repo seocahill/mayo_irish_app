@@ -8,6 +8,12 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "the sign-in page forgets places saved in whole recordings on this device" do
+    get new_session_path
+
+    assert_select "[data-controller=listening-place][data-listening-place-forget-value=true]"
+  end
+
   test "create with valid credentials" do
     post session_path, params: { email_address: @user.email_address, password: "password" }
 
