@@ -50,7 +50,7 @@
       <button type="button" class="btn-outline text-sm aria-pressed:border-eist aria-pressed:text-eist" aria-pressed="false" data-playback-target="toggle" data-action="playback#toggleSlow"><%= t("lesson_blocks.show_block.slower") %></button>
       <button type="button" class="btn-outline text-sm aria-pressed:border-eist aria-pressed:text-eist" aria-pressed="false" data-playback-target="loop" data-action="playback#toggleLoop"><%= t("lesson_blocks.show_block.repeat") %></button>
     </div>
-    <div class="mt-2"><%= render "shared/playback_keys" %></div>
+    <% unless @playback_keys_shown %><div class="mt-2"><%= render "shared/playback_keys" %></div><% end %>
     <% if block.caption.present? %>
       <figcaption class="text-sm text-muted mt-2"><%= block.caption %></figcaption>
     <% end %>

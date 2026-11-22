@@ -1,2 +1,5 @@
-<%# The keyboard keys the playback controller answers to, shown on wide screens only. %>
-<p class="hidden sm:block text-xs text-muted" data-playback-keys><%= t("shared.playback_keys.hint") %></p>
+<%# The keyboard keys the playback controller answers to, shown on wide screens only, and once a page however many players it has. %>
+<% unless @playback_keys_shown %>
+  <% @playback_keys_shown = true %>
+  <p class="hidden sm:block text-xs text-muted" data-playback-keys><%= t("shared.playback_keys.hint") %></p>
+<% end %>

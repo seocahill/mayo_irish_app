@@ -1036,7 +1036,7 @@ en:
     embed:
       title: A page from Abairt
     playback_back:
-      label: Back five seconds
+      label: Back 5 seconds
       text: Back 5 s
     playback_keys:
       hint: 'Keys: Space plays or pauses, ← and → go back or forward 5 seconds.'

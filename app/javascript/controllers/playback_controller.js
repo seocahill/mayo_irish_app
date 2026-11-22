@@ -4,8 +4,8 @@ import { Controller } from "@hotwired/stimulus"
 // working out fast speech. "Back 5 s" catches the word just missed. On a
 // keyboard, Space plays or pauses, and the left and right arrows go back or
 // forward five seconds, unless the learner is typing or on another control.
-// With several players on a page, the keys work the one played last, else the
-// first.
+// The keys work the player played last, else the first one in view; with
+// none in view they do nothing, so Space still scrolls the page.
 const SKIP = 5
 const players = []
 let lastPlayed = null
@@ -15,14 +15,16 @@ export default class extends Controller {
 
   connect() {
     players.push(this)
+    // Kept, so disconnect can still reach it once the page has gone.
+    this.audio = this.audioTarget
     this.onPlay = () => { lastPlayed = this }
-    this.audioTarget.addEventListener("play", this.onPlay)
+    this.audio.addEventListener("play", this.onPlay)
     if (players.length === 1) window.addEventListener("keydown", keydown)
   }
 
   disconnect() {
     players.splice(players.indexOf(this), 1)
-    this.audioTarget.removeEventListener("play", this.onPlay)
+    this.audio.removeEventListener("play", this.onPlay)
     if (lastPlayed === this) lastPlayed = null
     if (players.length === 0) window.removeEventListener("keydown", keydown)
   }
@@ -68,12 +70,19 @@ const TYPING = "input, textarea, select, audio, video, [contenteditable], [role=
 function keydown(event) {
   const action = KEYS[event.key]
   if (!action || event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return
+  // Holding Space down would flip between play and pause.
+  if (event.key === " " && event.repeat) return
   if (event.target.closest?.(TYPING)) return
   // Space presses a focused button or link; the arrows mean nothing to those, so they still skip.
   if (event.key === " " && event.target.closest?.("button, a, summary")) return
 
-  const player = players.includes(lastPlayed) ? lastPlayed : players[0]
+  const player = players.includes(lastPlayed) ? lastPlayed : players.find(inView)
   if (!player) return
   event.preventDefault()
   player[action]()
+}
+
+function inView(player) {
+  const box = player.element.getBoundingClientRect()
+  return box.bottom > 0 && box.top < window.innerHeight
 }

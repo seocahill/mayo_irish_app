@@ -56,4 +56,17 @@ class LessonBlocksControllerTest < ActionDispatch::IntegrationTest
     assert_select "figure button[data-action='playback#back']", text: I18n.t("shared.playback_back.text")
     assert_select "figure [data-playback-keys]"
   end
+
+  test "with two audio blocks, each has Back 5 s and the keys are explained once" do
+    @block.update!(block_type: "audio")
+    @block.file.attach(io: StringIO.new("x"), filename: "a.mp3", content_type: "audio/mpeg")
+    second = @block.lesson.lesson_blocks.create!(block_type: "audio", position: 2)
+    second.file.attach(io: StringIO.new("y"), filename: "b.mp3", content_type: "audio/mpeg")
+    sign_in_as(@user)
+
+    get lesson_path(@block.lesson)
+
+    assert_select "figure button[data-action='playback#back'][aria-label=?]", I18n.t("shared.playback_back.label"), count: 2
+    assert_select "[data-playback-keys]", count: 1
+  end
 end
