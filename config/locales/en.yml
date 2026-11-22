@@ -258,19 +258,17 @@ en:
       title: A course in the Irish of Mayo
   hard_words:
     show:
+      draft: Draft
+      edit: Edit lesson
       eyebrow: Course tools
       learners: Learners who missed
       lesson: Lesson
       missed: Missed
       missed_value: "%{misses} of %{answers} (%{percent}%)"
       none: No word has been missed often enough yet to show here.
-      summary:
-        one: Words learners answered wrongly in review over the last %{days} days,
-          hardest first. Only words answered at least once are shown. It only looks;
-          nothing changes.
-        other: Words learners answered wrongly in review over the last %{days} days,
-          hardest first. Only words answered at least %{count} times are shown. It
-          only looks; nothing changes.
+      summary: Words learners answered wrongly in review over the last %{days} days,
+        hardest first. Only words answered at least %{min} times are shown. It only
+        looks; nothing changes.
       title: Words learners miss
       where_taught: Where is it taught
   history:

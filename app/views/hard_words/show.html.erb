@@ -2,7 +2,7 @@
   <header>
     <p class="eyebrow"><%= link_to t(".eyebrow"), course_tools_path, class: "hover:underline" %></p>
     <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
-    <p class="text-muted mt-1 text-sm"><%= t(".summary", days: HardWords::DAYS, count: HardWords::MIN_ANSWERS) %></p>
+    <p class="text-muted mt-1 text-sm"><%= t(".summary", days: HardWords::DAYS, min: HardWords::MIN_ANSWERS) %></p>
   </header>
 
   <% if @rows.empty? %>
@@ -24,10 +24,15 @@
             </div>
             <div>
               <dt class="text-xs text-muted"><%= t(".lesson") %></dt>
-              <dd><%= link_to item.lesson.display_title, lesson_path(item.lesson), class: "underline" %></dd>
+              <dd><%= link_to item.lesson.display_title, lesson_path(item.lesson), class: "underline" %><% unless item.lesson.published? %> <span class="chip text-[10px]"><%= t(".draft") %></span><% end %></dd>
             </div>
           </dl>
-          <p class="mt-1 text-xs"><%= link_to t(".where_taught"), where_taught_path(q: item.irish), class: "underline inline-flex items-center min-h-12 sm:min-h-0" %></p>
+          <p class="mt-1 text-xs flex flex-wrap gap-x-4">
+            <% if item.irish.to_s.strip.length >= WordLocator::MIN_LENGTH %>
+              <%= link_to where_taught_path(q: item.irish), class: "underline inline-flex items-center min-h-12 sm:min-h-0" do %><%= t(".where_taught") %><span class="sr-only"> <%= item.irish %></span><% end %>
+            <% end %>
+            <%= link_to edit_lesson_path(item.lesson), class: "underline inline-flex items-center min-h-12 sm:min-h-0" do %><%= t(".edit") %><span class="sr-only"> <%= item.lesson.display_title %></span><% end %>
+          </p>
         </li>
       <% end %>
     </ol>

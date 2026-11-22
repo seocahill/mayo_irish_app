@@ -10,8 +10,9 @@ class HardWords
     def miss_percent = (misses * 100.0 / answers).round
   end
 
-  def initialize(now: Time.current)
+  def initialize(now: Time.current, limit: LIMIT)
     @since = now - DAYS.days
+    @limit = limit
   end
 
   def rows
@@ -29,9 +30,11 @@ class HardWords
     items = VocabularyItem.where(id: stats.map(&:first)).includes(:lesson).index_by(&:id)
     stats.filter_map { |id, answers, misses, learners| items[id] && Row.new(item: items[id], answers:, misses:, learners:) }
          .sort_by { |row| [ -row.misses.fdiv(row.answers), -row.misses, row.item.irish.downcase ] }
-         .first(LIMIT)
+         .first(@limit)
   end
 
+  # Answers whose question has since been pruned (its word deleted, or one
+  # direction dropped) lose their question and are left out by the join.
   def logs
     ReviewLog.joins(:quiz_question)
              .where(user_id: User.where(approved: true, admin: false).select(:id), answered_at: @since..,

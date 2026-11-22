@@ -48,4 +48,33 @@ class HardWordsTest < ActiveSupport::TestCase
 
     assert_empty HardWords.new.rows
   end
+
+  test "a word with exactly the minimum answers is shown; ties go to more misses" do
+    dog = vocabulary_items(:dog)
+    house = vocabulary_items(:house)
+    [ false, true, true ].each { |correct| answer(@learner, dog, correct: correct) }
+    [ false, false, true, true, true, true ].each { |correct| answer(@learner, house, correct: correct) }
+
+    rows = HardWords.new.rows
+
+    assert_equal [ house, dog ], rows.map(&:item)
+    assert_equal 3, rows.second.answers
+  end
+
+  test "a word deleted after it was answered gives no row" do
+    dog = vocabulary_items(:dog)
+    3.times { answer(@learner, dog, correct: false) }
+    dog.destroy!
+
+    assert_empty HardWords.new.rows
+  end
+
+  test "shows at most the limit, hardest first" do
+    dog = vocabulary_items(:dog)
+    house = vocabulary_items(:house)
+    3.times { answer(@learner, dog, correct: false) }
+    [ false, true, true ].each { |correct| answer(@learner, house, correct: correct) }
+
+    assert_equal [ dog ], HardWords.new(limit: 1).rows.map(&:item)
+  end
 end
