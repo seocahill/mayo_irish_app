@@ -40,7 +40,7 @@ class McpControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     body = JSON.parse(@response.body)
     names = body.dig("result", "tools").map { |t| t["name"] }
-    assert_equal %w[add_proposal_evidence capture_idea comment_on_proposal create_record get_proposal get_record list_ideas list_records mayo_forms update_record what_changed where_is_taught], names.sort
+    assert_equal %w[add_proposal_evidence capture_idea comment_on_proposal create_record get_proposal get_record list_ideas list_records mayo_forms search_course update_record what_changed where_is_taught], names.sort
   end
 
   test "capture_idea saves an idea through the endpoint" do
