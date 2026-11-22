@@ -135,6 +135,11 @@ en:
         usage:
           description: How the course is being used, week by week.
           name: Usage
+        where_taught:
+          description: Type a word to see the lessons that teach it, its recording,
+            listening clips and review questions, and where it turns up in phrases
+            and exercises.
+          name: Where is it taught
   daily_path:
     answer_label: Listen · native speaker
     answer_title:
@@ -1206,3 +1211,33 @@ en:
       nothing_yet: Nothing here yet.
       title: What's new
       try_it: Try it
+  where_taught:
+    show:
+      clips:
+        one: 1 listening clip
+        other: "%{count} listening clips"
+        zero: No listening clips
+      draft: Draft
+      edit: Edit lesson
+      exercises_heading: In exercises
+      eyebrow: Course tools
+      first_lessons_only: Showing the first %{count} lessons.
+      first_only: Showing the first %{count} matches. Type more of the word to narrow
+        it down.
+      label: Word to look up
+      look_up: Look up
+      no_lessons: None.
+      no_words: No word in the course lists matches “%{query}”.
+      not_recorded: No recording
+      phrases_heading: In phrases
+      placeholder: An Irish or English word
+      questions:
+        one: 1 review question
+        other: "%{count} review questions"
+        zero: No review questions yet
+      recorded: Recorded
+      summary: Where a word is taught, heard and practised across the course. Matches
+        part of a word, in Irish or English.
+      title: Where is it taught
+      too_short: Type at least %{count} letters.
+      words_heading: In lesson word lists
