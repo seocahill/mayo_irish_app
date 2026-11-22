@@ -923,6 +923,14 @@ en:
       nothing_due: Nothing is due for review right now
     forecast: 'Tomorrow: %{tomorrow} · This week: %{week}'
     next_up: Up next
+    noun_forms:
+      abairt: Abairt
+      attested_in_abairt: Attested in native speech recorded on Abairt
+      feminine: Feminine
+      genitive: 'Genitive:'
+      label: 'Forms of %{word}:'
+      masculine: Masculine
+      plural: 'Plural:'
     show:
       how_did_it_go: How did it go?
       how_to_say_in_irish: How do you say this in Irish?

@@ -290,6 +290,38 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
                       answered_at: at, box_before: 1, box_after: 1)
   end
 
+
+  test "the answer shows a noun's gender, genitive and plural" do
+    sign_in_as(@user)
+    question = @lesson.quiz_questions.find_by(direction: "ga_en")
+    question.source.update!(gender: "f", genitive: "na fuinneoige", plural: "fuinneogaí", plural_source_entry_id: 7)
+    QuizReview.where(user: @user).delete_all
+    due_review(question, times_correct: 0)
+    get review_path
+    assert_equal question.id, session[ReviewsController::ROUND_KEY]["ids"].first
+
+    post answer_review_path, params: { question_id: question.id, choice: question.answer }
+    assert_select "[data-test=noun-forms]" do
+      assert_select "span", text: "Feminine"
+      assert_select "span[lang=ga]", text: "na fuinneoige"
+      assert_select "span[lang=ga]", text: "fuinneogaí"
+      assert_select ".chip", count: 1, text: "Abairt"
+    end
+  end
+
+  test "the answer shows no forms line for a word with none" do
+    sign_in_as(@user)
+    question = @lesson.quiz_questions.find_by(direction: "ga_en")
+    question.source.update!(gender: nil, genitive: nil, plural: nil)
+    QuizReview.where(user: @user).delete_all
+    due_review(question, times_correct: 0)
+    get review_path
+
+    post answer_review_path, params: { question_id: question.id, choice: "wrong" }
+    assert_response :success
+    assert_select "[data-test=noun-forms]", false
+  end
+
   def session_reset
     delete reset_review_path
   end
