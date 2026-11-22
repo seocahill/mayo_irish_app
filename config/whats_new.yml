@@ -194,3 +194,8 @@
   title: Say it after the speaker
   body: On a listening clip, open Show the words and you can now record yourself saying the phrase, then play it back to compare with the Mayo speaker. The recording stays on your phone and is never uploaded.
   path: /listens
+- id: 32
+  date: 2026-11-22
+  title: Lessons that open without signal
+  body: The last ten lessons you opened are kept on this device, so they still open when your connection drops. Recordings and practice still need a connection. Signing out clears them.
+  path: /lessons

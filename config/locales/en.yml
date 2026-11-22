@@ -355,6 +355,8 @@ en:
       guide: How this course works
       header_nav: Site
       lessons: Lessons
+      offline_bar: You're offline. Lessons you opened recently still work; recordings
+        and practice need a connection.
       search_label: Search
       search_placeholder: Search…
       sign_in: Sign in
@@ -785,9 +787,11 @@ en:
       your_questions: Your questions
   offlines:
     show:
-      body: Your connection has dropped. Lessons and recordings need to be online,
+      body: Your connection has dropped. Recordings and practice need to be online,
         so try again when you have signal.
       retry: Try again
+      saved_heading: Saved on this device
+      saved_note: The lessons you opened most recently still open without a connection.
       title: You're offline
   onboardings:
     create:
