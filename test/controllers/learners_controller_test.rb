@@ -34,6 +34,17 @@ class LearnersControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", lesson_path(lessons(:one))
   end
 
+  test "each total on a learner's page names its figure before the number, for screen readers" do
+    sign_in_as(users(:admin))
+
+    get learner_path(users(:two))
+
+    figures = css_select("dl > div")
+    assert_equal 3, figures.size
+    figures.each { |figure| assert_equal %w[dt dd], figure.element_children.map(&:name) }
+    assert_select "dl > div > dt", "Words known"
+  end
+
   test "learners can't see the page or approve anyone" do
     sign_in_as(users(:two))
 
