@@ -164,4 +164,42 @@ class VocabularyGapsTest < ActiveSupport::TestCase
     item.update!(source: "Tourmakeady p. 9")
     assert_empty VocabularyGaps.new.unsourced_lessons
   end
+  test "a word taught later that already turns up in an earlier lesson's text, phrases or exercises is listed" do
+    one = lessons(:one)
+    one.text_passages.destroy_all
+    one.update_columns(texts: "Tá BAD mór sa pháirc.")
+    one.phrases.create!(irish: "ar an gcnoc", english: "on the hill")
+    one.exercises.create!(number: 2, prompt: "Cuir Gaeilge air", answer: "fear an tí", position: 2)
+    two = Lesson.create!(number: 2, title: "Lesson Two", position: 2)
+    VocabularyItem.create!(lesson: two, irish: "bád", english: "boat", position: 1)
+    VocabularyItem.create!(lesson: two, irish: "cnoc", english: "hill", position: 2)
+    VocabularyItem.create!(lesson: two, irish: "fear an tí", english: "man of the house", position: 3)
+    VocabularyItem.create!(lesson: two, irish: "an", english: "the", position: 4)
+    VocabularyItem.create!(lesson: two, irish: "páirc", english: "field", position: 5)
+
+    early = VocabularyGaps.new.early_words
+
+    assert_equal [ "bád", "fear an tí" ], early.map { |e| e.item.irish }, "accents and case aside; two-letter words and mutated forms are not matched"
+    assert early.all? { |e| e.used_in == one && e.taught_in == two }
+  end
+
+  test "a word taught in an earlier lesson too, or only used later, is not listed" do
+    one = lessons(:one)
+    two = Lesson.create!(number: 2, title: "Lesson Two", position: 2)
+    two.update_columns(texts: "madra mór agus capall")
+    VocabularyItem.create!(lesson: two, irish: "capall", english: "horse", position: 1)
+    three = Lesson.create!(number: 3, title: "Lesson Three", position: 3)
+    VocabularyItem.create!(lesson: three, irish: "madra", english: "dog", position: 1)
+    one.update_columns(texts: "Níl aon rud anseo.")
+
+    assert_empty VocabularyGaps.new.early_words, "madra is first taught in lesson one; capall is used where it's taught"
+  end
+
+  test "only curriculum lessons count" do
+    lessons(:one).update_columns(texts: "Feicim an capall.", lesson_type: "thematic_vocab")
+    two = Lesson.create!(number: 2, title: "Lesson Two", position: 2)
+    VocabularyItem.create!(lesson: two, irish: "capall", english: "horse", position: 1)
+
+    assert_empty VocabularyGaps.new.early_words
+  end
 end

@@ -87,6 +87,27 @@
     <% end %>
   </section>
 
+  <section id="early-words" class="flex flex-col gap-3">
+    <h2 class="font-display text-2xl"><%= t(".early_title") %></h2>
+    <p class="text-muted text-sm"><%= t(".early_summary") %></p>
+    <% if @early_words.empty? %>
+      <p class="text-sm text-muted"><%= t(".early_empty") %></p>
+    <% else %>
+      <p class="text-sm text-muted"><%= t(".early_count", count: @early_words.size) %></p>
+      <ul class="flex flex-col gap-2">
+        <% @early_words.each do |early| %>
+          <li class="card px-4 py-3 text-sm">
+            <span lang="ga" class="font-medium"><%= early.item.irish %></span>
+            <span class="text-muted"><%= early.item.english.to_s.match?(/\A\(.*\)\z/) ? early.item.english : "(#{early.item.english})" %> ·
+              <%= t(".early_used_in") %> <%= link_to early.used_in.display_title, edit_lesson_path(early.used_in), class: "underline" %>,
+              <%= t(".early_taught_in") %> <%= link_to early.taught_in.display_title, edit_lesson_path(early.taught_in), class: "underline" %>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
+
   <section id="silent-lessons" class="flex flex-col gap-3">
     <h2 class="font-display text-2xl"><%= t(".silent_title") %></h2>
     <p class="text-muted text-sm"><%= t(".silent_summary") %></p>

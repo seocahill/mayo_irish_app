@@ -6,6 +6,7 @@ class VocabularyGapsController < ApplicationController
     @rows = report.rows
     @totals = report.totals
     @repeats = report.repeats
+    @early_words = report.early_words
     @silent_lessons = report.silent_lessons
     @unpractised_lessons = report.unpractised_lessons
     @ungrammared_lessons = report.ungrammared_lessons

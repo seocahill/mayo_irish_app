@@ -159,6 +159,17 @@ class VocabularyGaps
     end
   end
 
+  Early = Struct.new(:item, :used_in, :taught_in, keyword_init: true)
+  EARLY_MIN_LETTERS = 3
+
+  # Words a curriculum lesson teaches that already turn up in an earlier
+  # curriculum lesson's reading text, phrases or exercises: a prompt to move the
+  # word earlier, gloss it where it first appears, or leave it. Whole words,
+  # case and accents aside; mutated forms are not matched. Read-only.
+  def early_words
+    @early_words ||= build_early_words
+  end
+
   # Lessons with no vocabulary at all, so designers can see which lessons are
   # still empty shells. Read-only.
   def empty_lessons
@@ -186,6 +197,38 @@ class VocabularyGaps
       hits = glosses.select { |tokens, _| tokens.intersect?(theme[:words]) }
       Theme.new(name: theme[:name], count: hits.size, examples: hits.first(THIN).map(&:last).uniq)
     end
+  end
+
+  def build_early_words
+    lessons = Lesson.curriculum.order(:position, :number)
+                    .includes(:vocabulary_items, :exercises, :phrases, text_passages: :rich_text_body).to_a
+    # Each lesson's words once, as a set for single words and as one padded
+    # string for phrases, so each check is a lookup rather than a scan.
+    words = lessons.map { |lesson| IrishText.words(used_text(lesson)) }
+    sets = words.map(&:to_set)
+    joined = words.map { |list| " #{list.join(' ')} " }
+
+    first_taught = {}
+    lessons.each_with_index do |lesson, index|
+      lesson.vocabulary_items.each do |item|
+        key = IrishText.words(item.irish)
+        first_taught[key] ||= [ index, item ] if key.join.length >= EARLY_MIN_LETTERS
+      end
+    end
+
+    first_taught.filter_map do |key, (index, item)|
+      used = (0...index).find do |earlier|
+        key.one? ? sets[earlier].include?(key.first) : joined[earlier].include?(" #{key.join(' ')} ")
+      end
+      Early.new(item: item, used_in: lessons[used], taught_in: lessons[index]) if used
+    end.sort_by { |e| [ e.used_in.position, e.used_in.number, e.item.irish.downcase ] }
+  end
+
+  # The Irish a learner meets in a lesson without it being taught there.
+  def used_text(lesson)
+    [ *lesson.text_passages.map { |passage| passage.body&.to_plain_text }, lesson.read_attribute(:texts),
+      *lesson.phrases.map(&:irish), *lesson.exercises.flat_map { |exercise| [ exercise.prompt, exercise.answer ] } ]
+      .compact.join("\n")
   end
 
   def build_repeats

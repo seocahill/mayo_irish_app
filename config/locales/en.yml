@@ -1095,6 +1095,18 @@ en:
       count:
         one: 1 word
         other: "%{count} words"
+      early_count:
+        one: 1 word is used before it's taught.
+        other: "%{count} words are used before they're taught."
+      early_empty: No word turns up in a reading, phrase or exercise before the lesson
+        that teaches it.
+      early_summary: Words a curriculum lesson teaches that already appear in an earlier
+        lesson's reading text, phrases or exercises. Move the word earlier, gloss
+        it where it first appears, or leave it. Only exact forms are matched (case
+        and fadas aside), so mutated forms such as a séimhiú or urú are not found.
+      early_taught_in: taught in
+      early_title: Used before it's taught
+      early_used_in: first used in
       empty: Every word has a genitive, a plural and a recording.
       empty_lessons_empty: Every lesson has at least one word.
       empty_lessons_summary: Lessons with no vocabulary at all yet. A prompt for where

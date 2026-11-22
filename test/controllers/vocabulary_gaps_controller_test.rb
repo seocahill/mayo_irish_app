@@ -77,6 +77,28 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#repeated-words li", count: 1
   end
 
+  test "lists words used in an earlier lesson before the lesson that teaches them" do
+    lessons(:one).update_columns(texts: "Feicim an capall.")
+    two = Lesson.create!(number: 2, title: "Lesson Two", position: 2)
+    VocabularyItem.create!(lesson: two, irish: "capall", english: "horse", position: 1)
+
+    sign_in_as(users(:admin))
+    get vocabulary_gaps_path
+
+    assert_response :success
+    assert_select "#early-words li", count: 1
+    assert_select "#early-words li span[lang=ga]", text: "capall"
+    assert_select "#early-words li a[href=?]", edit_lesson_path(lessons(:one))
+    assert_select "#early-words li a[href=?]", edit_lesson_path(two)
+  end
+
+  test "says so when no word is used before it's taught" do
+    sign_in_as(users(:admin))
+    get vocabulary_gaps_path
+
+    assert_select "#early-words", text: /#{Regexp.escape(I18n.t("vocabulary_gaps.show.early_empty"))}/
+  end
+
   test "unclassified words are listed separately and not counted as gaps" do
     vocabulary_items(:house).update!(audio_url: "https://example.com/h.mp3")
     sign_in_as(users(:admin))
