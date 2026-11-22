@@ -44,8 +44,8 @@ class LessonsController < ApplicationController
       redirect_to(root_path, alert: t("lessons.flash.not_found")) and return
     end
 
-    @quiz_progress = @lesson.progress_for(current_user)
     @known_word_ids = @lesson.known_word_ids(current_user)
+    @quiz_progress = @lesson.progress_for(current_user, known_ids: @known_word_ids)
     # Admins can see the page as a learner would, without the admin controls.
     @preview = current_user&.admin? && params[:preview].present?
 

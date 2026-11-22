@@ -115,10 +115,6 @@ class Lesson < ApplicationRecord
     Lesson.where("position < ?", position).order(position: :desc).first
   end
 
-  # Quiz-based progress for a given user, counted in vocabulary words: a word
-  # is "known" once every one of its quiz questions (both directions) is known
-  # (Leitner box >= KNOWN_BOX). Total is the word count, so the bar is meaningful
-  # even before any questions have been generated.
   # The ids of this lesson's words the user knows: every question on the word
   # is known (FSRS review state, stability of a week or more).
   def known_word_ids(user)
@@ -134,17 +130,18 @@ class Lesson < ApplicationRecord
     questions_per_word.filter_map { |source_id, n| source_id if n.positive? && known_per_word[source_id].to_i >= n }.to_set
   end
 
-  def progress_for(user)
+  # Quiz-based progress for a given user, counted in vocabulary words: a word
+  # is "known" once every one of its quiz questions (both directions) is known
+  # (see known_word_ids). Total is the word count, so the bar is meaningful
+  # even before any questions have been generated. Pass known_ids when the
+  # caller already has them, to skip the lookup.
+  def progress_for(user, known_ids: nil)
     total = vocabulary_items.count
-    known = user && total.positive? ? known_word_count(user) : 0
+    known = user && total.positive? ? (known_ids || known_word_ids(user)).size : 0
     LessonProgress.new(known: known, total: total)
   end
 
   private
-
-  def known_word_count(user)
-    known_word_ids(user).size
-  end
 
   def intro_video_must_be_embeddable
     return if intro_video_url.blank? || intro_video

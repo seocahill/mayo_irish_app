@@ -177,5 +177,5 @@
 - id: 28
   date: 2026-11-22
   title: See which words you know
-  body: In a lesson's word list, a small green tick now marks each word you already know, so you can see what is left to learn.
+  body: In a lesson's word list, a small tick now marks each word you already know, so you can see what is left to learn.
   path: /lessons

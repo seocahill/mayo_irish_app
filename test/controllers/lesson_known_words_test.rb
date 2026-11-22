@@ -27,6 +27,18 @@ class LessonKnownWordsTest < ActionDispatch::IntegrationTest
     assert_select "td", text: /madra\s+You know this word/
   end
 
+  test "the ticks match the words known count on the progress bar" do
+    know(@word)
+    know(vocabulary_items(:house))
+    sign_in_as(@user)
+
+    get lesson_path(@lesson)
+
+    assert_select "[data-test=known-word]", 2
+    assert_equal 2, @lesson.progress_for(@user).known
+    assert_match "2/#{@lesson.vocabulary_items.count}", response.body
+  end
+
   test "a word still being learned is not marked" do
     know(@word, stability: 2.0)
     sign_in_as(@user)
