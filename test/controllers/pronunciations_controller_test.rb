@@ -64,5 +64,6 @@ class PronunciationsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_select "[data-synthetic-note]", text: /synthetic voice/
     assert_select "template[data-speakable-target=inline] [data-synthetic-tag]", count: 0
+    assert_select "template[data-speakable-target=inline] button[aria-label='']"
   end
 end
