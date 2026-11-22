@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   end
   resource :course_tools, only: :show
   resource :where_taught, only: :show, controller: "where_taught"
+  resource :hard_words, only: :show
   resources :course_proposals, only: %i[index create update] do
     resources :comments, only: :create, controller: "proposal_comments"
   end
