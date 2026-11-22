@@ -1,14 +1,18 @@
-<%# Plays synthetic speech from `src` (see the pronounce Stimulus controller). Pass autoplay: true to play it once on load, and compact: true for a smaller button that sits in a line of text. %>
+<%# Plays synthetic speech from `src` (see the pronounce Stimulus controller). Pass autoplay: true to play it once on load, and compact: true for a smaller button that sits in a line of text, and show_tag: false where the page already says the voice is synthetic.
+    A visible "Synthetic" tag sits beside the full-size button so it is never mistaken for a Mayo speaker (tooltips don't show on phones). The compact one is too small for a tag, so pages that use it say so once (see lessons/show). %>
 <span data-controller="pronounce" data-pronounce-src-value="<%= src %>" <%= "data-pronounce-autoplay-value=true" if local_assigns[:autoplay] %> class="inline-flex items-center gap-1.5 <%= "align-text-bottom" if local_assigns[:compact] %>">
   <button type="button"
           data-pronounce-target="button"
           data-action="pronounce#play"
           class="text-muted hover:text-ink transition-colors data-[state=loading]:animate-pulse data-[state=error]:text-red-600"
-          title="<%= t("shared.speak_button.title") %>"
-          aria-label="<%= label %>">
+          <%= tag.attributes(title: (t("shared.speak_button.title") if local_assigns[:compact])) %>
+          aria-label="<%= label.present? ? t("shared.speak_button.label", label: label) : label %>">
     <svg class="<%= local_assigns[:compact] ? "w-4 h-4" : "w-5 h-5" %>" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M11 5L6 9H2v6h4l5 4V5z"/>
     </svg>
   </button>
+  <% unless local_assigns[:compact] || local_assigns[:show_tag] == false %>
+    <span class="chip border-line text-muted" title="<%= t("shared.speak_button.title") %>" aria-hidden="true" data-synthetic-tag><%= t("shared.speak_button.tag") %></span>
+  <% end %>
   <span data-pronounce-target="status" class="sr-only" aria-live="polite"></span>
 </span>

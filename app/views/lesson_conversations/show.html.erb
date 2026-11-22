@@ -35,7 +35,7 @@
                 <p lang="ga" class="text-base leading-snug flex-1 break-words"><%= message.content %></p>
                 <% if @speech %>
                   <%= render "shared/speak_button", src: chat_message_pronunciation_path(message),
-                        label: t(".listen"), autoplay: flash[:play] == message.id %>
+                        label: t(".listen"), autoplay: flash[:play] == message.id, show_tag: false %>
                 <% end %>
               </div>
               <% if message.english.present? %>

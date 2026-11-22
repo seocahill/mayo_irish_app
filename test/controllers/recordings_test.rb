@@ -147,7 +147,7 @@ class RecordingsTest < ActionDispatch::IntegrationTest
     assert_select "ol.group[data-transcript-target=lines]" do
       assert_select "button[data-start='12.0'][data-action='transcript#seek']" do
         assert_select "span[lang=ga][data-transcript-target=irish]", text: "one madra two"
-        assert_select "span.sr-only[hidden][data-transcript-target=hiddenLine]", text: I18n.t("recordings.show.hidden_line")
+        assert_select "span.sr-only[hidden][data-transcript-target=hiddenLine]", text: I18n.t("recordings.show.hidden_line", time: "0:12")
       end
     end
   end

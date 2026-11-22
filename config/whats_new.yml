@@ -209,8 +209,13 @@
   title: Carry on where you stopped
   body: If you leave a whole conversation part way through, it now offers to carry on from where you stopped the next time you open it. Your place is kept only on this phone or computer, and signing out forgets it.
   path: /listens
+- id: 35
+  date: 2026-11-22
+  title: Machine voice or Mayo speaker, at a glance
+  body: Wherever a word is read by ABAIR's synthetic voice rather than a recording of a speaker, it now says so on the page, with a "Synthetic" tag beside each word's button and a note above the lesson text, so you can always tell the two apart on a phone. The tutor chat (Practise) now marks each reply as AI-generated, like the conversation does.
+  path: /lessons
 - id: 36
   date: 2026-11-22
   title: Listen first, then read
-  body: On a whole conversation you can now tap "Hide words" to listen with the Irish hidden. Each line stays as a blank bar you can still tap to hear again, and "Hide words" once more brings the words back. This phone or computer remembers your choice.
+  body: On a whole conversation you can now tap "Hide Irish" to listen with the Irish words hidden. Each line stays as a blank bar you can still tap to hear again, and tapping it again brings the words back. This phone or computer remembers your choice.
   path: /listens

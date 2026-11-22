@@ -54,4 +54,16 @@ class PronunciationsControllerTest < ActionDispatch::IntegrationTest
     with_abair_key("") { get lesson_path(@word.lesson) }
     assert_select "[data-controller=pronounce]", count: 0
   end
+
+  test "the synthetic voice says so on the page, not only in a tooltip" do
+    with_abair_key { get lesson_path(@word.lesson) }
+
+    assert_select "[data-controller=pronounce][data-pronounce-src-value=?]", vocabulary_item_pronunciation_path(@word) do
+      assert_select "[data-synthetic-tag]", text: "Synthetic"
+      assert_select "button[aria-label$=?]", "(synthetic voice)"
+    end
+    assert_select "[data-synthetic-note]", text: /synthetic voice/
+    assert_select "template[data-speakable-target=inline] [data-synthetic-tag]", count: 0
+    assert_select "template[data-speakable-target=inline] button[aria-label='']"
+  end
 end

@@ -46,7 +46,8 @@
       <% if @recording.lines.empty? %>
         <p class="text-sm text-muted"><%= t(".no_transcript") %></p>
       <% else %>
-        <%# With the words hidden, each Irish line is a blank bar: the timing, highlight, tap-to-play and Repeat line still work. %>
+        <%# With the words hidden, each Irish line is a blank bar: the timing, highlight, tap-to-play and Repeat line still work.
+            The text is only made transparent, so find-in-page can still reveal it; fine for a learning aid. %>
         <ol class="group flex flex-col" data-transcript-target="lines">
           <% @recording.turns.each do |turn| %>
             <% if turn.first.speaker %>
@@ -59,7 +60,7 @@
                         data-action="transcript#seek">
                   <span lang="ga" class="block group-data-words-hidden:text-transparent group-data-words-hidden:bg-line group-data-words-hidden:rounded-sm group-data-words-hidden:select-none"
                         data-transcript-target="irish"><%= line.irish %></span>
-                  <span class="sr-only" hidden data-transcript-target="hiddenLine"><%= t(".hidden_line") %></span>
+                  <span class="sr-only" hidden data-transcript-target="hiddenLine"><%= t(".hidden_line", time: "%d:%02d" % line.start.to_i.divmod(60)) %></span>
                   <% if line.english %>
                     <span class="block text-sm text-muted" hidden data-transcript-target="english"><%= line.english %></span>
                   <% end %>
