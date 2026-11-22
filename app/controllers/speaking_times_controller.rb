@@ -5,7 +5,7 @@ class SpeakingTimesController < ApplicationController
   rate_limit to: 30, within: 1.minute, by: -> { current_user.id }, with: -> { head :too_many_requests }
 
   def create
-    SpeakingDay.add(current_user, params[:seconds])
+    SpeakingDay.add(current_user, params[:seconds].to_s)
     head :no_content
   end
 end

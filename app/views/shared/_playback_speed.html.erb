@@ -1,0 +1,6 @@
+<%# The speed button for a player wrapped in the playback controller: 1× → 0.9× → 0.75×, remembered on this device (see playback_speed.js). The JS writes the label the same way. %>
+<button type="button" class="btn-outline text-sm min-h-12 data-slowed:border-eist data-slowed:text-eist"
+        data-playback-target="speed" data-action="playback#cycleSpeed" data-testid="playback-speed">
+  <%= t("shared.playback_speed.text") %> <span data-playback-target="speedLabel">1×</span>
+</button>
+<span class="sr-only" aria-live="polite" data-playback-target="speedStatus"></span>

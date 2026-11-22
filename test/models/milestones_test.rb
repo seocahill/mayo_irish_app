@@ -53,6 +53,12 @@ class MilestonesTest < ActiveSupport::TestCase
     assert_equal 5, conversation.next_step
   end
 
+  test "recording yourself does not count towards the conversation milestone" do
+    20.times { SpeakingDay.add(@user, 30, on: Date.new(2026, 11, 1) + it) }
+
+    assert_equal 0, Milestones.new(@user, known_words: 0).strands.third.value
+  end
+
   test "other learners' conversations are not counted" do
     chat = users(:admin).chat_sessions.create!(lesson: lessons(:one), kind: :conversation)
     10.times { chat.chat_messages.create!(role: "user", content: "x", spoken_seconds: 30) }

@@ -33,6 +33,8 @@ class LessonKnownWordsTest < ActionDispatch::IntegrationTest
 
     get lesson_path(@lesson)
 
+    assert_select "[data-controller=recorder][data-recorder-report-url-value=?]", speaking_time_path
+    assert_select "#vocabulary [data-testid=record-yourself-note]", text: I18n.t("shared.record_yourself.note"), count: 1
     assert_select "[data-controller=recorder]" do
       assert_select "button[data-action='recorder#toggle'][aria-label=?]", I18n.t("shared.record_yourself.record")
       assert_select "button[data-action='recorder#play'][disabled]"

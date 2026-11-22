@@ -24,7 +24,7 @@ class LearnerActivityTest < ActiveSupport::TestCase
 
   test "minutes spoken this week include recording yourself" do
     travel_to Time.zone.parse("2026-10-28 12:00") do
-      spoke(30)
+      spoke(30, at: 1.day.ago)
       SpeakingDay.add(@learner, 30)
       SpeakingDay.add(@learner, 30, on: Date.new(2026, 10, 20))
 

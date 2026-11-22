@@ -32,6 +32,7 @@ class RecordingSuggestionsTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "audio[src=?]", "https://clips.test/7"
+    assert_select "audio[data-saved-speed]", count: 0, message: "an editor hears a submission at its real speed"
     assert_select "p", text: I18n.t("vocabulary_item_recording_suggestions.index.check_passed")
     assert @item.recording_suggestions.sole.check_passed
   end

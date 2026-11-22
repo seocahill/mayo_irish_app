@@ -197,7 +197,7 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     due_review(question, times_correct: 2)
     get review_path
     assert session[ReviewsController::ROUND_KEY]["ids"].first == question.id
-    assert_select "[data-testid=say-it-audio] audio[src='https://example.com/a.mp3']"
+    assert_select "[data-testid=say-it-audio] audio[src='https://example.com/a.mp3'][data-saved-speed]"
     assert_select "p[hidden]", text: question.prompt
   end
 

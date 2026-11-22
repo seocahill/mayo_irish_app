@@ -11,12 +11,24 @@ export default class extends Controller {
 
   connect() {
     this.mediaRecorder = null
-    this.chunks = []
+    this.take = null
     this.audioUrl = null
     this.recording = false
+    // One recorder at a time (the word list has one per word), so time isn't counted twice.
+    this.onOtherStarted = (event) => { if (event.detail !== this && this.recording) this.stop() }
+    // Leaving mid-recording still counts what was said.
+    this.onPageHide = () => { if (this.recording) this.reportTake(this.take) }
+    window.addEventListener("recorder:started", this.onOtherStarted)
+    window.addEventListener("pagehide", this.onPageHide)
   }
 
   disconnect() {
+    window.removeEventListener("recorder:started", this.onOtherStarted)
+    window.removeEventListener("pagehide", this.onPageHide)
+    if (this.recording) {
+      this.reportTake(this.take)
+      this.stop()
+    }
     this.stopStream()
     if (this.audioUrl) URL.revokeObjectURL(this.audioUrl)
   }
@@ -43,25 +55,32 @@ export default class extends Controller {
       return
     }
 
-    this.chunks = []
-    this.mediaRecorder = new MediaRecorder(this.stream)
+    // Kept per recording, so a late stop event can't touch the next one.
+    const stream = this.stream
+    const chunks = []
+    const recorder = new MediaRecorder(stream)
+    const take = { startedAt: performance.now(), reported: false }
+    this.mediaRecorder = recorder
+    this.take = take
 
-    this.mediaRecorder.addEventListener("dataavailable", (event) => {
-      if (event.data.size > 0) this.chunks.push(event.data)
+    recorder.addEventListener("dataavailable", (event) => {
+      if (event.data.size > 0) chunks.push(event.data)
     })
 
-    this.mediaRecorder.addEventListener("stop", () => {
+    recorder.addEventListener("stop", () => {
       if (this.audioUrl) URL.revokeObjectURL(this.audioUrl)
-      const blob = new Blob(this.chunks, { type: this.mediaRecorder.mimeType })
+      const blob = new Blob(chunks, { type: recorder.mimeType })
       this.audioUrl = URL.createObjectURL(blob)
       if (this.hasPlayButtonTarget) this.playButtonTarget.disabled = false
       this.setStatus(t("js.recorder.ready"))
-      this.stopStream()
-      this.report((performance.now() - this.startedAt) / 1000)
+      stream.getTracks().forEach((track) => track.stop())
+      if (this.stream === stream) this.stream = null
+      this.reportTake(take)
     })
 
-    this.mediaRecorder.start()
-    this.startedAt = performance.now()
+    recorder.start()
+    take.startedAt = performance.now()
+    window.dispatchEvent(new CustomEvent("recorder:started", { detail: this }))
     this.recording = true
     this.recordButtonTarget.classList.add("text-red-600", "animate-pulse")
     this.setStatus(t("js.recorder.recording"))
@@ -86,6 +105,12 @@ export default class extends Controller {
   // pick it up and the learner's recording doesn't play over it.
   pausePageAudio() {
     document.querySelectorAll("audio").forEach((audio) => audio.pause())
+  }
+
+  reportTake(take) {
+    if (!take || take.reported) return
+    take.reported = true
+    this.report((performance.now() - take.startedAt) / 1000)
   }
 
   // The server caps each recording, so one left running counts as half a minute at most.

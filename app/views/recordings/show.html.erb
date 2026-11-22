@@ -31,8 +31,7 @@
                 data-listening-place-target="carryOn" data-action="listening-place#carryOn"><%= t(".carry_on_fallback") %></button>
         <div class="flex flex-wrap gap-2">
           <%= render "shared/playback_back" %>
-          <button type="button" class="btn-outline text-sm aria-pressed:border-eist aria-pressed:text-eist" aria-pressed="false"
-                  data-playback-target="toggle" data-action="playback#toggleSlow"><%= t(".slower") %></button>
+          <%= render "shared/playback_speed" %>
           <button type="button" class="btn-outline text-sm aria-pressed:border-eist aria-pressed:text-eist" aria-pressed="false"
                   data-transcript-target="repeatToggle" data-action="transcript#toggleRepeat"><%= t(".repeat") %></button>
           <button type="button" class="btn-outline text-sm aria-pressed:border-eist aria-pressed:text-eist" aria-pressed="false"
