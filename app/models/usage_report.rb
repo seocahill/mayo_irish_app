@@ -55,9 +55,11 @@ class UsageReport
                                   .transform_values { |logs| [ logs.count { |l| l[2] }, logs.size ] }
   end
 
+  # Comhrá turns and days of recording yourself, as [user, when, seconds].
   def spoken_rows
     @spoken_rows ||= ChatMessage.where(role: "user").where.not(spoken_seconds: nil).joins(:chat_session)
-                                .where(chat_sessions: { user_id: @learners }, created_at: @first..).pluck("chat_sessions.user_id", :created_at, :spoken_seconds)
+                                .where(chat_sessions: { user_id: @learners }, created_at: @first..).pluck("chat_sessions.user_id", :created_at, :spoken_seconds) +
+                     SpeakingDay.where(user_id: @learners, day: @first.to_date..).pluck(:user_id, :day, :seconds)
   end
 
   def spoken_seconds

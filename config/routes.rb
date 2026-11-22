@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     resource :dictation, only: :create
   end
   resources :listens, only: :index
+  resource :speaking_time, only: :create
   resource :weeks, only: :show
   resources :recordings, only: :show do
     resource :listening_time, only: :update

@@ -29,6 +29,20 @@ class SpokenTimeTest < ActiveSupport::TestCase
     assert_equal 1, SpokenTime.new(@user).minutes
   end
 
+  test "time spent recording yourself counts too" do
+    travel_to Time.zone.parse("2026-10-28 12:00") do
+      said(30)
+      SpeakingDay.add(@user, 30)
+      SpeakingDay.add(@user, 30, on: Date.new(2026, 10, 20))
+      SpeakingDay.add(users(:admin), 30)
+
+      time = SpokenTime.new(@user)
+
+      assert_equal 2, time.minutes
+      assert_equal 1, time.minutes_this_week
+    end
+  end
+
   private
 
   def said(seconds, at: Time.current)

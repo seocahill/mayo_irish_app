@@ -209,6 +209,8 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     QuizReview.where(user: @user).where.not(quiz_question: question).delete_all
     get review_path
     assert_equal question.id, session[ReviewsController::ROUND_KEY]["ids"].first
+    assert_select "[data-reveal-target=hidden] [data-testid=record-yourself-note]", text: I18n.t("shared.record_yourself.note")
+    assert_select "[data-reveal-target=hidden] [data-testid=say-it-recorder][data-recorder-report-url-value=?]", speaking_time_path
     assert_select "[data-reveal-target=hidden] [data-testid=say-it-recorder][data-controller=recorder]" do
       assert_select "button[data-action='recorder#toggle'][aria-label=?]", I18n.t("shared.record_yourself.record")
       assert_select "button[data-action='recorder#play'][disabled]"

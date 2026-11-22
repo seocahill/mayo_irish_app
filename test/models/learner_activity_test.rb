@@ -22,6 +22,17 @@ class LearnerActivityTest < ActiveSupport::TestCase
     end
   end
 
+  test "minutes spoken this week include recording yourself" do
+    travel_to Time.zone.parse("2026-10-28 12:00") do
+      spoke(30, at: 1.day.ago)
+      SpeakingDay.add(@learner, 30)
+      SpeakingDay.add(@learner, 30, on: Date.new(2026, 10, 20))
+
+      assert_equal 1, activity_for(@learner).minutes_spoken
+      assert_equal Time.current, activity_for(@learner).last_active_at
+    end
+  end
+
   test "last active is the latest thing the learner did" do
     travel_to Time.zone.parse("2026-10-28 12:00") do
       @learner.sessions.create!(created_at: 3.days.ago)
