@@ -43,7 +43,7 @@ class LessonBlocksControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[name='lesson_block[url]']"
   end
 
-  test "audio blocks in a lesson have slower and repeat buttons" do
+  test "audio blocks in a lesson have speed and repeat buttons" do
     @block.update!(block_type: "audio")
     @block.file.attach(io: StringIO.new("x"), filename: "a.mp3", content_type: "audio/mpeg")
     sign_in_as(@user)
@@ -51,7 +51,8 @@ class LessonBlocksControllerTest < ActionDispatch::IntegrationTest
     get lesson_path(@block.lesson)
 
     assert_select "figure[data-controller='playback'] audio[data-playback-target='audio']"
-    assert_select "figure button[data-action='playback#toggleSlow']", text: I18n.t("lesson_blocks.show_block.slower")
+    assert_select "figure button[data-action='playback#cycleSpeed'] [data-playback-target=speedLabel]", text: "1×"
+    assert_select "figure [data-playback-target=speedStatus][aria-live=polite]"
     assert_select "figure button[data-action='playback#toggleLoop']", text: I18n.t("lesson_blocks.show_block.repeat")
     assert_select "figure button[data-action='playback#back']", text: I18n.t("shared.playback_back.text")
     assert_select "figure [data-playback-keys]"

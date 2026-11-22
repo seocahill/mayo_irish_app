@@ -1,7 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
+import { t } from "translations"
+import { savedSpeed, saveSpeed, nextSpeed, applySpeed } from "playback_speed"
 
-// Plays a clip at three-quarter speed, and back again, and can repeat it, for
-// working out fast speech. "Back 5 s" catches the word just missed. On a
+// Plays a clip at 1×, 0.9× or 0.75× (remembered on this device, and the same
+// on every player), and can repeat it, for working out fast speech. "Back 5 s" catches the word just missed. On a
 // keyboard, Space plays or pauses, and the left and right arrows go back or
 // forward five seconds, unless the learner is typing or on another control.
 // The keys work the player played last, else the first one in view; with
@@ -11,7 +13,7 @@ const players = []
 let lastPlayed = null
 
 export default class extends Controller {
-  static targets = ["audio", "toggle", "loop"]
+  static targets = ["audio", "speed", "speedLabel", "speedStatus", "loop"]
 
   connect() {
     players.push(this)
@@ -20,19 +22,31 @@ export default class extends Controller {
     this.onPlay = () => { lastPlayed = this }
     this.audio.addEventListener("play", this.onPlay)
     if (players.length === 1) window.addEventListener("keydown", keydown)
+    this.onSpeedChanged = (event) => this.showSpeed(event.detail.speed)
+    window.addEventListener("playback-speed:changed", this.onSpeedChanged)
+    this.showSpeed(savedSpeed())
   }
 
   disconnect() {
     players.splice(players.indexOf(this), 1)
     this.audio.removeEventListener("play", this.onPlay)
+    window.removeEventListener("playback-speed:changed", this.onSpeedChanged)
     if (lastPlayed === this) lastPlayed = null
     if (players.length === 0) window.removeEventListener("keydown", keydown)
   }
 
-  toggleSlow() {
-    const slow = this.audioTarget.playbackRate === 1
-    this.audioTarget.playbackRate = slow ? 0.75 : 1
-    this.toggleTarget.setAttribute("aria-pressed", slow)
+  // 1× → 0.9× → 0.75× → 1×, on every player on the page, and kept for next time.
+  cycleSpeed() {
+    const speed = nextSpeed(savedSpeed())
+    saveSpeed(speed)
+    players.forEach((player) => player.showSpeed(speed))
+    if (this.hasSpeedStatusTarget) this.speedStatusTarget.textContent = t("js.playback.speed_now").replace("%{speed}", speedText(speed))
+  }
+
+  showSpeed(speed) {
+    applySpeed(this.audio, speed)
+    if (this.hasSpeedLabelTarget) this.speedLabelTarget.textContent = speedText(speed)
+    if (this.hasSpeedTarget) this.speedTarget.toggleAttribute("data-slowed", speed !== 1)
   }
 
   toggleLoop() {
@@ -61,6 +75,10 @@ export default class extends Controller {
     audio.currentTime = Math.min(Math.max(audio.currentTime + seconds, 0), end)
     this.dispatch("skipped", { detail: { time: audio.currentTime } })
   }
+}
+
+function speedText(speed) {
+  return `${speed}×`
 }
 
 const KEYS = { " ": "playPause", ArrowLeft: "back", ArrowRight: "forward" }

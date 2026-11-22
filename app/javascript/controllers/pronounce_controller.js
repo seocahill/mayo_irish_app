@@ -1,9 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
 import { t } from "translations"
+import { applySpeed } from "playback_speed"
 
 // Plays synthetic speech from a URL. The first play fetches it (and the browser
 // keeps it), so the button shows a busy state while it loads. With autoplay it
 // plays once on its own; if the browser won't allow that, the button still works.
+// It plays at the learner's saved listening speed (see playback_speed.js).
 export default class extends Controller {
   static targets = ["button", "status"]
   static values = { src: String, autoplay: Boolean }
@@ -27,6 +29,7 @@ export default class extends Controller {
 
   async play() {
     this.audio ??= this.buildAudio()
+    applySpeed(this.audio)
     this.audio.currentTime = 0
     this.setState("loading")
 
@@ -39,6 +42,7 @@ export default class extends Controller {
 
   buildAudio() {
     const audio = new Audio(this.srcValue)
+    applySpeed(audio)
     audio.addEventListener("playing", () => this.setState(null))
     audio.addEventListener("ended", () => this.setState(null))
     audio.addEventListener("error", () => this.fail())

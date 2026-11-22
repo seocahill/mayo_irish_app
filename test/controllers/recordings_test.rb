@@ -168,6 +168,8 @@ class RecordingsTest < ActionDispatch::IntegrationTest
     assert_select "[data-controller~=playback][data-action~='playback:skipped->transcript#skipped']" do
       assert_select "button[data-action='playback#back']", text: I18n.t("shared.playback_back.text")
       assert_select "[data-playback-keys]"
+      assert_select "button[data-action='playback#cycleSpeed'] [data-playback-target=speedLabel]", text: "1×"
+      assert_select "[data-playback-target=speedStatus][aria-live=polite]"
     end
   end
 end
