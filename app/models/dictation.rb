@@ -2,28 +2,41 @@
 # against the clip's own transcript (the speaker's words; nothing is generated
 # or corrected). Case, punctuation and missing fadas are ignored: a word typed
 # without its fada counts as heard, and is shown so the learner sees the fada.
+# Text is put in composed (NFC) form first, so a fada typed or stored as a
+# separate accent mark is still a fada; the words look the same either way.
 class Dictation
   MAX_LENGTH = 500
+  # Spaces of any kind (a phone or Mac can type a non-breaking one), and dashes.
+  SEPARATORS = /[[:space:]–—]+/
+  # Letters, accent marks and digits; anything else at a word's edge is punctuation.
+  EDGES = /\A[^\p{L}\p{M}\p{N}]+|[^\p{L}\p{M}\p{N}]+\z/
 
   # status is :heard, :missed or :different; typed is what the learner wrote
-  # in its place (for :different, or :heard without the fada).
+  # in its place.
   Word = Data.define(:text, :status, :typed) do
     def heard? = status == :heard
     # The speaker's word has a fada the learner left out (an extra fada isn't flagged).
     def fada_missing? = heard? && Dictation.bare(text) != Dictation.key(text) && Dictation.bare(typed) != Dictation.bare(text)
   end
 
-  def self.tokens(text) = text.to_s.split(/[\s–—]+/).filter_map { |w| w.gsub(/\A[^\p{L}\p{N}]+|[^\p{L}\p{N}]+\z/, "").presence }
+  def self.tokens(text)
+    text.to_s.unicode_normalize(:nfc).split(SEPARATORS).filter_map { |word| word.gsub(EDGES, "").presence }
+  end
 
-  # Lower case, no punctuation: the word as written, fadas kept.
-  def self.bare(word) = word.to_s.downcase.gsub(/[^\p{L}\p{N}]/, "")
+  # Lower case, no punctuation (apostrophes of any kind included): the word as
+  # written, fadas kept.
+  def self.bare(word) = word.to_s.unicode_normalize(:nfc).downcase.delete("ʼ").gsub(/[^\p{L}\p{M}\p{N}]/, "")
 
   # The same with fadas folded away, for matching.
   def self.key(word) = bare(word).unicode_normalize(:nfd).gsub(/\p{Mn}/, "")
 
+  # What the learner typed, as far as it is read.
+  attr_reader :heard
+
   def initialize(transcript, typed)
     @expected = self.class.tokens(transcript)
-    @typed = self.class.tokens(typed.to_s.first(MAX_LENGTH))
+    @heard = typed.to_s.first(MAX_LENGTH)
+    @typed = self.class.tokens(@heard)
   end
 
   def words = @words ||= align
@@ -52,7 +65,6 @@ class Dictation
     result = []
     gap_expected = []
     gap_typed = []
-    i = j = 0
     flush = lambda do
       gap_expected.each_with_index do |e, n|
         t = gap_typed[n]
@@ -62,6 +74,7 @@ class Dictation
       gap_typed.clear
     end
 
+    i = j = 0
     while i < exp.size && j < typ.size
       if exp[i] == typ[j]
         flush.call

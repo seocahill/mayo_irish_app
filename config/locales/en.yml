@@ -216,23 +216,25 @@ en:
     update:
       updated: Saved.
   dictations:
-    create:
+    form:
+      check: Check
+      hint: Type the Irish as you hear it. Fadas don't count against you. To type
+        one, hold down the vowel on a phone keyboard, or add the Irish (Gaeilge) keyboard
+        in your settings.
+      label: What did the speaker say?
+    frame:
       all_heard: You heard every word.
-      fada: typed without its fada
+      fada: fada left out
       fada_mark: fada
       heard: You heard %{count} of the %{total} words.
       legend: 'Plain: heard. Wavy line: heard differently (what you typed is in brackets).
-        Dotted and grey: missed. Fadas don''t count against you.'
+        Dotted and grey: missed. FADA: heard, but you left out its fada, which doesn''t
+        count against you.'
       missed: missed
       then_all: If that matches how it went, tap I got it below.
       then_some: Play it again and listen for the marked words, then say how it went
         below.
-      you_typed: you typed %{typed}
-    form:
-      check: Check
-      hint: Type the Irish as you hear it. Fadas don't count against you, so leave
-        them out if your keyboard has none.
-      label: What did the speaker say?
+      you_typed: you typed
   errors:
     messages:
       unsupported_embed: isn't an Abairt page. Use an https://abairt.com link.

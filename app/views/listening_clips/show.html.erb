@@ -21,9 +21,7 @@
 
   <section class="card px-4 py-4" aria-labelledby="dictation-heading">
     <h2 id="dictation-heading" class="eyebrow mb-3"><%= t(".type_what_you_hear") %></h2>
-    <%= turbo_frame_tag "dictation" do %>
-      <%= render "dictations/form", clip: @clip, heard: nil %>
-    <% end %>
+    <%= render "dictations/frame", clip: @clip, dictation: @dictation %>
   </section>
 
   <details class="card px-4 py-4">

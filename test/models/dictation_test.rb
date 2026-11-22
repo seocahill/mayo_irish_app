@@ -53,8 +53,31 @@ class DictationTest < ActiveSupport::TestCase
   end
 
   test "a very long answer is cut short" do
-    dictation = Dictation.new("Tá", "tá " + ("x " * 1000))
+    dictation = Dictation.new("Tá madra", "tá " + ("x " * 300) + "madra")
 
-    assert dictation.all_heard?
+    assert_equal %i[heard different], dictation.words.map(&:status), "madra, past the cap, is never read"
+    assert_equal Dictation::MAX_LENGTH, dictation.heard.length
+  end
+
+  test "fadas stored or typed as separate accent marks are still fadas, and shown as written" do
+    nfd = "Tá sé fuar".unicode_normalize(:nfd)
+
+    stored = Dictation.new(nfd, "ta se fuar")
+    assert_equal [ "Tá", "sé", "fuar" ], stored.words.map(&:text)
+    assert stored.all_heard?
+    assert stored.words.first.fada_missing?
+
+    typed = Dictation.new("Tá sé fuar", nfd)
+    assert typed.all_heard?
+    assert_not typed.words.any?(&:fada_missing?)
+  end
+
+  test "a non-breaking space separates words" do
+    assert Dictation.new("Tá sé", "tá\u00A0sé").all_heard?
+  end
+
+  test "curly and straight apostrophes match" do
+    assert Dictation.new("d’ól", "d'ol").all_heard?
+    assert Dictation.new("d'ól", "dʼól").all_heard?
   end
 end
