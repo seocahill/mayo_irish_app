@@ -159,6 +159,17 @@ class VocabularyGaps
     end
   end
 
+  Early = Struct.new(:item, :used_in, :taught_in, keyword_init: true)
+  EARLY_MIN_LETTERS = 3
+
+  # Words a curriculum lesson teaches that already turn up in an earlier
+  # curriculum lesson's reading text, phrases or exercises: a prompt to move the
+  # word earlier, gloss it where it first appears, or leave it. Whole words,
+  # case and accents aside; mutated forms are not matched. Read-only.
+  def early_words
+    @early_words ||= build_early_words
+  end
+
   # Lessons with no vocabulary at all, so designers can see which lessons are
   # still empty shells. Read-only.
   def empty_lessons
@@ -186,6 +197,70 @@ class VocabularyGaps
       hits = glosses.select { |tokens, _| tokens.intersect?(theme[:words]) }
       Theme.new(name: theme[:name], count: hits.size, examples: hits.first(THIN).map(&:last).uniq)
     end
+  end
+
+  def build_early_words
+    lessons = Lesson.curriculum.order(:position, :number)
+                    .includes(:vocabulary_items, :exercises, :phrases, text_passages: :rich_text_body).to_a
+    # Each lesson's words once, as a set for single words and as one padded
+    # string for phrases, so each check is a lookup rather than a scan.
+    # Exercise prompts are often English ("too much water"), so there the
+    # fadas must match too, or "much" would count as múch.
+    folded = lessons.map { |lesson| early_words_in(used_text(lesson)) }
+    accented = lessons.map { |lesson| early_words_in(exercise_text(lesson), fold: false) }
+    lookups = folded.zip(accented).map { |f, a| [ f.to_set, " #{f.join(' ')} ", a.to_set, " #{a.join(' ')} " ] }
+
+    first_taught = {}
+    lessons.each_with_index do |lesson, index|
+      lesson.vocabulary_items.each do |item|
+        early_forms(item.irish).each do |form|
+          key = early_words_in(form)
+          next if key.join.delete("'").length < EARLY_MIN_LETTERS
+
+          first_taught[key] ||= [ index, item, early_words_in(form, fold: false) ]
+        end
+      end
+    end
+
+    found = first_taught.filter_map do |key, (index, item, accented_key)|
+      used = (0...index).find do |earlier|
+        set, text, accented_set, accented_text = lookups[earlier]
+        early_match?(key, set, text) || early_match?(accented_key, accented_set, accented_text)
+      end
+      Early.new(item: item, used_in: lessons[used], taught_in: lessons[index]) if used
+    end
+    # One row per item, at its earliest use, even when two of its forms match.
+    found.group_by(&:item).values.map { |rows| rows.min_by { |e| [ e.used_in.position, e.used_in.number ] } }
+         .sort_by { |e| [ e.used_in.position, e.used_in.number, e.item.irish.downcase ] }
+  end
+
+  # The forms an entry teaches: notes in brackets dropped, alternatives split,
+  # so "mar (go/nach)" is "mar" and "mé, mise" is "mé" and "mise".
+  def early_forms(irish)
+    irish.to_s.gsub(/\([^)]*\)/, " ").split(%r{[,/;]}).map(&:strip).reject(&:empty?)
+  end
+
+  # Words as IrishText splits them, with quote marks around speech taken off
+  # ('Tá ... beag') while elisions such as b' stay.
+  def early_words_in(text, fold: true)
+    words = fold ? IrishText.words(text) : text.to_s.unicode_normalize(:nfc).downcase.tr("’", "'").scan(/[\p{L}']+/)
+    words.map { |word| word.length > 2 ? word.gsub(/\A'+|'+\z/, "") : word }.reject(&:empty?)
+  end
+
+  def early_match?(key, set, text)
+    return false if key.empty?
+
+    key.one? ? set.include?(key.first) : text.include?(" #{key.join(' ')} ")
+  end
+
+  # The Irish a learner meets in a lesson without it being taught there.
+  def used_text(lesson)
+    [ *lesson.text_passages.map { |passage| passage.body&.to_plain_text }, lesson.read_attribute(:texts),
+      *lesson.phrases.map(&:irish) ].compact.join("\n")
+  end
+
+  def exercise_text(lesson)
+    lesson.exercises.flat_map { |exercise| [ exercise.prompt, exercise.answer ] }.compact.join("\n")
   end
 
   def build_repeats
