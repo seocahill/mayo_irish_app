@@ -1,11 +1,25 @@
-// Offline support: keep the app shell (CSS, fonts, icon and the /offline page)
-// so a failed page load shows something friendly instead of the browser's
-// error page. Everything else goes straight to the network, so lessons and
-// audio are never served stale.
+// Offline support.
+// - The app shell (CSS, fonts, icon and the /offline page) is cached on install
+//   so a failed page load shows something friendly, not the browser's error.
+// - Lesson pages go to the network first, so they are never stale while online.
+//   A copy of the last few a learner opened is kept, and shown only when the
+//   network fails. Signing in or out clears them, so the next person on the
+//   device never sees them.
+// - Fingerprinted assets (/assets/name-digest.ext) never change, so they are
+//   kept as they are fetched and a saved lesson still looks right offline.
+// Audio, practice and every other page still need the network.
 <% shell_assets = %w[fonts.css tailwind.css application.css figtree-latin.woff2 young-serif-400-latin.woff2].map { |name| asset_path(name) } %>
 const CACHE = "gmh-shell-<%= Digest::SHA1.hexdigest((shell_assets + [ Rails.root.join("app/views/offlines/show.html.erb"), Rails.root.join("app/views/layouts/offline.html.erb"), Rails.root.join("public/icon.png") ].map { |f| f.is_a?(Pathname) ? Digest::SHA1.file(f).hexdigest : f }).join) %>"
 const OFFLINE_URL = "/offline"
 const SHELL = <%= raw(([ "/offline", "/icon.png" ] + shell_assets).to_json) %>
+// Not versioned: saved lessons and assets outlive a deploy.
+const PAGES = "gmh-pages"
+const ASSETS = "gmh-assets"
+const INDEX_URL = "/__saved-lessons"
+const MAX_PAGES = 10
+const MAX_ASSETS = 80
+const LESSON_PATH = /^\/lessons\/\d+$/
+const ASSET_PATH = /^\/assets\/.+-[0-9a-f]{7,}\.[a-z0-9]+$/
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -30,7 +44,21 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   const request = event.request
+  const url = new URL(request.url)
+  const sameOrigin = url.origin === self.location.origin
+
+  // Signing in or out (POST /session, including the DELETE form) forgets the
+  // saved lessons. The request itself goes on to the network untouched.
+  if (request.method === "POST" && sameOrigin && url.pathname === "/session") {
+    event.waitUntil(caches.delete(PAGES))
+    return
+  }
   if (request.method !== "GET") return
+
+  if (sameOrigin && LESSON_PATH.test(url.pathname) && !url.search && isPageRequest(request)) {
+    event.respondWith(lessonPage(event, request))
+    return
+  }
 
   if (request.mode === "navigate") {
     event.respondWith(
@@ -39,8 +67,78 @@ self.addEventListener("fetch", (event) => {
     return
   }
 
-  const url = new URL(request.url)
-  if (url.origin === self.location.origin && SHELL.includes(url.pathname)) {
+  if (sameOrigin && SHELL.includes(url.pathname)) {
     event.respondWith(caches.match(request).then((hit) => hit || fetch(request)))
+    return
+  }
+
+  if (sameOrigin && ASSET_PATH.test(url.pathname)) {
+    event.respondWith(asset(event, request))
   }
 })
+
+// A full page load, or a Turbo visit (a fetch asking for HTML). Turbo frame
+// loads and hover prefetches are left alone, so only lessons opened are kept.
+function isPageRequest(request) {
+  if (request.mode === "navigate") return true
+  const h = request.headers
+  return (h.get("Accept") || "").includes("text/html") && !h.get("Turbo-Frame") &&
+    h.get("X-Sec-Purpose") !== "prefetch" && h.get("Sec-Purpose") !== "prefetch"
+}
+
+async function lessonPage(event, request) {
+  const path = new URL(request.url).pathname
+  try {
+    const response = await fetch(request)
+    const type = response.headers.get("Content-Type") || ""
+    // Only a real lesson page: not a redirect to sign in, not an error.
+    if (response.ok && !response.redirected && type.includes("text/html")) {
+      event.waitUntil(savePage(path, response.clone()))
+    }
+    return response
+  } catch (error) {
+    const saved = await (await caches.open(PAGES)).match(path, { ignoreVary: true })
+    return saved || (await caches.match(OFFLINE_URL)) || Response.error()
+  }
+}
+
+async function savePage(path, response) {
+  const html = await response.clone().text()
+  const cache = await caches.open(PAGES)
+  await cache.put(path, response)
+  const index = (await readIndex(cache)).filter((entry) => entry.path !== path)
+  index.unshift({ path, title: lessonTitle(html), saved_at: new Date().toISOString() })
+  for (const old of index.splice(MAX_PAGES)) await cache.delete(old.path)
+  await cache.put(INDEX_URL, new Response(JSON.stringify(index), { headers: { "Content-Type": "application/json" } }))
+}
+
+async function readIndex(cache) {
+  const hit = await cache.match(INDEX_URL)
+  if (!hit) return []
+  try { return await hit.json() } catch (error) { return [] }
+}
+
+// The lesson's heading, as plain text. The offline page shows it with
+// textContent, never as HTML.
+function lessonTitle(html) {
+  const match = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)
+  if (!match) return ""
+  return match[1].replace(/<[^>]*>/g, "")
+    .replace(/&#39;|&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&")
+    .replace(/\s+/g, " ").trim().slice(0, 120)
+}
+
+async function asset(event, request) {
+  const cache = await caches.open(ASSETS)
+  const hit = await cache.match(request)
+  if (hit) return hit
+  const response = await fetch(request)
+  if (response.ok && response.type === "basic") event.waitUntil(saveAsset(cache, request, response.clone()))
+  return response
+}
+
+async function saveAsset(cache, request, response) {
+  await cache.put(request, response)
+  const keys = await cache.keys()
+  for (const old of keys.slice(0, Math.max(0, keys.length - MAX_ASSETS))) await cache.delete(old)
+}

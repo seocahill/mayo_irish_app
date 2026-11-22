@@ -55,6 +55,10 @@
       </div>
     </header>
 
+    <div hidden data-controller="connection" role="status" class="bg-surface border-b border-line text-muted text-sm text-center py-2 px-4">
+      <%= t(".offline_bar") %>
+    </div>
+
     <% if notice %>
       <div class="bg-foghlaim/10 border-b border-foghlaim/30 text-ink text-sm text-center py-2 px-4">
         <%= notice %>

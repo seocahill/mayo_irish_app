@@ -68,4 +68,51 @@ class PwaTest < ActionDispatch::IntegrationTest
     assert_select "link[rel=manifest][href=?]", pwa_manifest_path(format: :json)
     assert_select "link[rel=apple-touch-icon][href='/icon.png']"
   end
+  test "the service worker keeps recent lessons network-first and clears them on sign in or out" do
+    get pwa_service_worker_path(format: :js)
+    js = response.body
+
+    assert_includes js, 'const PAGES = "gmh-pages"'
+    assert_includes js, "const MAX_PAGES = 10"
+    # Lessons are fetched from the network first; the saved copy is only the fallback.
+    assert_match(/async function lessonPage[\s\S]*await fetch\(request\)[\s\S]*catch/, js)
+    assert_includes js, "!response.redirected"
+    # Any POST to /session (sign in, or the sign-out form) forgets saved lessons.
+    assert_includes js, 'url.pathname === "/session"'
+    assert_includes js, "caches.delete(PAGES)"
+    # Turbo frame loads and prefetches are not saved.
+    assert_includes js, 'h.get("Turbo-Frame")'
+    # Saved lessons and assets are not wiped by the shell cache cleanup on deploy.
+    assert_includes js, 'key.startsWith("gmh-shell-")'
+  end
+
+  test "the lesson path pattern matches lesson pages only" do
+    get pwa_service_worker_path(format: :js)
+    pattern = response.body[%r{const LESSON_PATH = /(.+)/$}, 1]
+    regex = Regexp.new(pattern.gsub("\\/", "/"))
+
+    assert_match regex, "/lessons/12"
+    assert_no_match regex, "/lessons/12/edit"
+    assert_no_match regex, "/lessons"
+    assert_no_match regex, "/lessons/new"
+    assert_match regex, lesson_path(lessons(:one))
+  end
+
+  test "the offline page has a hidden place for saved lessons" do
+    get offline_path
+
+    assert_select "section#saved-lessons[hidden]"
+    assert_select "h2", text: "Saved on this device"
+    assert_select "a", text: "Try again"
+  end
+
+  test "lesson pages carry a hidden offline bar" do
+    sign_in_as users(:two)
+    get lesson_path(lessons(:one))
+
+    assert_response :success
+    assert_select "[data-controller=connection][hidden][role=status]", text: /You're offline/
+    assert_select "h1", text: "Lesson One"
+  end
+
 end
