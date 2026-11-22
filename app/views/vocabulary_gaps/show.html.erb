@@ -98,7 +98,7 @@
         <% @early_words.each do |early| %>
           <li class="card px-4 py-3 text-sm">
             <span lang="ga" class="font-medium"><%= early.item.irish %></span>
-            <span class="text-muted"><%= early.item.english.to_s.match?(/\A\(.*\)\z/) ? early.item.english : "(#{early.item.english})" %> ·
+            <span class="text-muted"><% if early.item.english.present? %>· <%= early.item.english %><% end %> ·
               <%= t(".early_used_in") %> <%= link_to early.used_in.display_title, edit_lesson_path(early.used_in), class: "underline" %>,
               <%= t(".early_taught_in") %> <%= link_to early.taught_in.display_title, edit_lesson_path(early.taught_in), class: "underline" %>
             </span>

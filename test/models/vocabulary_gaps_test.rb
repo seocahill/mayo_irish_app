@@ -202,4 +202,48 @@ class VocabularyGapsTest < ActiveSupport::TestCase
 
     assert_empty VocabularyGaps.new.early_words
   end
+  test "a reading passage counts, and quote marks around speech don't hide its first and last words" do
+    one = lessons(:one)
+    one.text_passages.create!(title: "Scéal", body: "<p>'Tá an capall tuirseach,' a dúirt sé.</p>")
+    two = Lesson.create!(number: 2, title: "Lesson Two", position: 2)
+    VocabularyItem.create!(lesson: two, irish: "tuirseach", english: "tired", position: 1)
+    VocabularyItem.create!(lesson: two, irish: "dúirt", english: "said", position: 2)
+
+    assert_equal [ "dúirt", "tuirseach" ], VocabularyGaps.new.early_words.map { |e| e.item.irish }
+  end
+
+  test "notes in brackets are dropped and alternatives are each matched, once per word" do
+    lessons(:one).update_columns(texts: "Bhí súil agam leis. Mise agus tusa.")
+    two = Lesson.create!(number: 2, title: "Lesson Two", position: 2)
+    VocabularyItem.create!(lesson: two, irish: "súil (le)", english: "hope", position: 1)
+    VocabularyItem.create!(lesson: two, irish: "mé, mise", english: "me", position: 2)
+    VocabularyItem.create!(lesson: two, irish: "tusa/tú", english: "you", position: 3)
+
+    assert_equal [ "mé, mise", "súil (le)", "tusa/tú" ], VocabularyGaps.new.early_words.map { |e| e.item.irish }
+  end
+
+  test "in exercises, often written in English, the fadas must match" do
+    lessons(:one).exercises.create!(number: 2, prompt: "Translate: there is too much water. Múch an solas.", position: 2)
+    two = Lesson.create!(number: 2, title: "Lesson Two", position: 2)
+    VocabularyItem.create!(lesson: two, irish: "múch", english: "extinguish", position: 1)
+    VocabularyItem.create!(lesson: two, irish: "solas", english: "light", position: 2)
+    VocabularyItem.create!(lesson: two, irish: "too", english: "not Irish", position: 3)
+
+    early = VocabularyGaps.new.early_words.map { |e| e.item.irish }
+    assert_equal [ "múch", "solas", "too" ], early
+    lessons(:one).exercises.last.update!(prompt: "Translate: there is too much water.")
+    assert_equal [ "too" ], VocabularyGaps.new.early_words.map { |e| e.item.irish }, "much is not múch"
+  end
+
+  test "a word taught in lessons one and three and used in two is not listed; lessons sharing a position go by number" do
+    lessons(:one).update_columns(position: 5)
+    two = Lesson.create!(number: 2, title: "Lesson Two", position: 5, texts: "Tá madra agus cathaoir anseo.")
+    three = Lesson.create!(number: 3, title: "Lesson Three", position: 6)
+    VocabularyItem.create!(lesson: three, irish: "madra", english: "dog", position: 1)
+    VocabularyItem.create!(lesson: three, irish: "cathaoir", english: "chair", position: 2)
+
+    early = VocabularyGaps.new.early_words
+    assert_equal [ "cathaoir" ], early.map { |e| e.item.irish }, "madra is first taught in lesson one"
+    assert_equal two, early.first.used_in
+  end
 end
