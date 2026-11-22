@@ -136,4 +136,27 @@ class RecordingsTest < ActionDispatch::IntegrationTest
 
     assert_select "p", text: /3\s+minutes listened/
   end
+
+  test "the Irish words can be hidden to listen first, with each line still there to tap" do
+    stub_recording
+
+    with_abairt_token { get recording_path(15) }
+
+    assert_select "button[data-transcript-target=wordsToggle][data-action='transcript#toggleWords'][aria-pressed=false]",
+                  text: I18n.t("recordings.show.hide_words")
+    assert_select "ol.group[data-transcript-target=lines]" do
+      assert_select "button[data-start='12.0'][data-action='transcript#seek']" do
+        assert_select "span[lang=ga][data-transcript-target=irish]", text: "one madra two"
+        assert_select "span.sr-only[hidden][data-transcript-target=hiddenLine]", text: I18n.t("recordings.show.hidden_line", time: "0:12")
+      end
+    end
+  end
+
+  test "a recording with no transcript has no words to hide" do
+    stub_request(:get, RECORDING).to_return(status: 200, body: { id: 15, title: "A Story", audio_url: "https://abairt.test/story.mp3", lines: [] }.to_json)
+
+    with_abairt_token { get recording_path(15) }
+
+    assert_select "[data-transcript-target=wordsToggle]", count: 0
+  end
 end
