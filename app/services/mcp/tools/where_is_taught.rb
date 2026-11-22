@@ -8,7 +8,7 @@ module Mcp
       description "Find where a word is taught, heard and reviewed. Give an Irish or English word; " \
                   "returns each matching vocabulary item with its lesson, whether it has a recording, " \
                   "how many Abairt listening clips and quiz questions use it, and which lessons " \
-                  "use it in a phrase or exercise. Shows up to 10 matches (substring, case-insensitive for plain letters). Returns the course's own text only."
+                  "use it in a phrase or exercise. Shows up to #{LIMIT} matches (substring, case-insensitive for plain letters). Returns the course's own text only."
       annotations(
         title: "Where is it taught",
         read_only_hint: true,

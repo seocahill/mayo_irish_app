@@ -1210,9 +1210,11 @@ en:
         one: 1 listening clip
         other: "%{count} listening clips"
         zero: No listening clips
+      draft: Draft
       edit: Edit lesson
       exercises_heading: In exercises
       eyebrow: Course tools
+      first_lessons_only: Showing the first %{count} lessons.
       first_only: Showing the first %{count} matches. Type more of the word to narrow
         it down.
       label: Word to look up

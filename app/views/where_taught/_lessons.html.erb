@@ -3,7 +3,13 @@
 <% else %>
   <ul class="card divide-y divide-line text-sm" id="<%= id %>">
     <% lessons.each do |lesson| %>
-      <li><%= link_to lesson.display_title, lesson_path(lesson), class: "flex items-center min-h-12 px-4 underline hover:bg-canvas" %></li>
+      <li class="flex items-center gap-2 min-h-12 px-4">
+        <%= link_to lesson.display_title, lesson_path(lesson), class: "underline" %>
+        <% unless lesson.published? %><span class="chip text-[10px]"><%= t("where_taught.show.draft") %></span><% end %>
+      </li>
     <% end %>
   </ul>
+  <% if more %>
+    <p class="text-xs text-muted mt-2" id="<%= id %>-more"><%= t("where_taught.show.first_lessons_only", count: WordLocator::LIMIT) %></p>
+  <% end %>
 <% end %>

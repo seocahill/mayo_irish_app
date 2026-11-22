@@ -12,6 +12,10 @@ class WordLocatorTest < ActiveSupport::TestCase
     assert_not match.has_recording
   end
 
+  test "matches part of an Irish word" do
+    assert_equal [ vocabulary_items(:dog) ], WordLocator.new("adr").matches.map(&:item)
+  end
+
   test "a term shorter than two letters finds nothing" do
     locator = WordLocator.new("m")
     assert_not locator.valid?

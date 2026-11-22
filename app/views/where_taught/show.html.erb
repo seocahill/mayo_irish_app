@@ -25,7 +25,7 @@
             <% item = match.item %>
             <li class="card px-4 py-3 text-sm" id="where-taught-item-<%= item.id %>">
               <p><span lang="ga" class="font-semibold"><%= item.irish %></span> <span class="text-muted">· <%= item.english %></span></p>
-              <p class="mt-1"><%= link_to item.lesson.display_title, lesson_path(item.lesson), class: "underline" %>
+              <p class="mt-1"><%= link_to item.lesson.display_title, lesson_path(item.lesson), class: "underline" %><% unless item.lesson.published? %> <span class="chip text-[10px]"><%= t(".draft") %></span><% end %>
                 <span class="text-muted">· <%= link_to t(".edit"), edit_lesson_path(item.lesson), class: "underline" %></span></p>
               <p class="mt-1 text-xs text-muted flex flex-wrap gap-x-3 gap-y-1">
                 <span><%= match.has_recording ? t(".recorded") : t(".not_recorded") %></span>
@@ -35,20 +35,20 @@
             </li>
           <% end %>
         </ul>
-        <% if @locator.matches.size >= WordLocator::LIMIT %>
-          <p class="text-xs text-muted mt-2"><%= t(".first_only", count: WordLocator::LIMIT) %></p>
+        <% if @locator.more_matches? %>
+          <p class="text-xs text-muted mt-2" id="where-taught-more-words"><%= t(".first_only", count: WordLocator::LIMIT) %></p>
         <% end %>
       <% end %>
     </section>
 
     <section aria-labelledby="where-taught-phrases">
       <h2 id="where-taught-phrases" class="eyebrow mb-3"><%= t(".phrases_heading") %></h2>
-      <%= render "where_taught/lessons", lessons: @locator.phrase_lessons, id: "where-taught-phrase-lessons" %>
+      <%= render "where_taught/lessons", lessons: @locator.phrase_lessons, more: @locator.more_phrase_lessons?, id: "where-taught-phrase-lessons" %>
     </section>
 
     <section aria-labelledby="where-taught-exercises">
       <h2 id="where-taught-exercises" class="eyebrow mb-3"><%= t(".exercises_heading") %></h2>
-      <%= render "where_taught/lessons", lessons: @locator.exercise_lessons, id: "where-taught-exercise-lessons" %>
+      <%= render "where_taught/lessons", lessons: @locator.exercise_lessons, more: @locator.more_exercise_lessons?, id: "where-taught-exercise-lessons" %>
     </section>
   <% end %>
 </div>
