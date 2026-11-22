@@ -45,6 +45,7 @@ class LessonsController < ApplicationController
     end
 
     @quiz_progress = @lesson.progress_for(current_user)
+    @known_word_ids = @lesson.known_word_ids(current_user)
     # Admins can see the page as a learner would, without the admin controls.
     @preview = current_user&.admin? && params[:preview].present?
 

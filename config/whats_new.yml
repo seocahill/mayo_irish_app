@@ -174,3 +174,8 @@
   title: A word's forms in review
   body: After you answer a review card for a noun, you now see whether it is masculine or feminine, and its genitive and plural where the course has them.
   path: /review
+- id: 28
+  date: 2026-11-22
+  title: See which words you know
+  body: In a lesson's word list, a small green tick now marks each word you already know, so you can see what is left to learn.
+  path: /lessons

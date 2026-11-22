@@ -635,6 +635,7 @@ en:
       hear_word: Hear %{word}
       intro_video: Lesson introduction
       irish: Irish
+      known_word: You know this word
       lesson_label: Lesson %{number} · %{type}
       lesson_number: Lesson %{number}
       listening_clips: Listening clips
