@@ -228,3 +228,8 @@
   title: Choose your listening speed
   body: The "Slower" button is now a speed button. Tap it to go from 1× to 0.9× to 0.75× and back. This phone or computer remembers your speed and uses it on every recording, clip and word you play, until you change it again. The voice keeps its pitch.
   path: /listens
+- id: 40
+  date: 2026-11-22
+  title: Type what you hear
+  body: On a listening clip you can now type what you think the speaker said and tap Check. You'll see the speaker's words with the ones you heard, heard differently or missed marked, and the English. Missing fadas don't count against you. It's optional, and you still say how it went yourself.
+  path: /listens

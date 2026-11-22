@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :recording_suggestions, only: :update
   resources :listening_clips, only: %i[show update] do
     resource :listen, only: :create
+    resource :dictation, only: :create
   end
   resources :listens, only: :index
   resource :weeks, only: :show
