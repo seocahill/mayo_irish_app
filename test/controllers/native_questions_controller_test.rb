@@ -51,6 +51,7 @@ class NativeQuestionsControllerTest < ActionDispatch::IntegrationTest
     with_abairt_token { get native_questions_path }
 
     assert_select "audio[src=?]", "https://abairt.test/a7"
+    assert_select "audio[data-saved-speed]", count: 0
     assert_select ".chip", text: I18n.t("native_questions.index.new_answer")
     assert question.reload.answer_seen_at
   end

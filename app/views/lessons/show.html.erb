@@ -146,10 +146,10 @@
                 <td class="px-2 sm:px-4 py-3">
                   <div class="flex items-center gap-2 sm:gap-3 justify-end">
                     <% if item.audio.attached? %>
-                      <audio controls src="<%= rails_blob_url(item.audio) %>" class="h-8 w-28 sm:w-40"></audio>
+                      <audio controls data-saved-speed src="<%= rails_blob_url(item.audio) %>" class="h-8 w-28 sm:w-40"></audio>
                     <% elsif item.audio_url.present? %>
                       <span class="inline-flex flex-col items-end gap-0.5">
-                        <audio controls src="<%= item.audio_url %>" class="h-8 w-28 sm:w-40"></audio>
+                        <audio controls data-saved-speed src="<%= item.audio_url %>" class="h-8 w-28 sm:w-40"></audio>
                         <% if item.audio_credit.present? %>
                           <span class="text-[11px] text-muted"><%= t(".recorded_by", name: item.audio_credit) %></span>
                         <% end %>

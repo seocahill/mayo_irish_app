@@ -26,7 +26,11 @@ class ListeningClipsTest < ActionDispatch::IntegrationTest
 
     get listening_clip_path(@clip)
 
-    assert_select "button[data-action='playback#toggleSlow']", text: I18n.t("listening_clips.show.slower")
+    assert_select "[data-controller=playback] button[data-playback-target=speed][data-action='playback#cycleSpeed']",
+                  text: "#{I18n.t("shared.playback_speed.text")} 1×" do
+      assert_select "[data-playback-target=speedLabel]", text: "1×"
+    end
+    assert_select "[data-controller=playback] [data-playback-target=speedStatus][aria-live=polite]"
     assert_select "button[data-playback-target=loop][data-action='playback#toggleLoop'][aria-pressed=false]",
                   text: I18n.t("listening_clips.show.repeat")
   end

@@ -11,9 +11,7 @@
     <audio controls preload="auto" src="<%= @clip.audio_url %>" class="w-full" data-playback-target="audio"></audio>
     <div class="flex flex-wrap justify-center gap-2">
       <%= render "shared/playback_back" %>
-      <button type="button" class="btn-outline text-sm aria-pressed:border-eist aria-pressed:text-eist" aria-pressed="false" data-playback-target="toggle" data-action="playback#toggleSlow">
-        <%= t(".slower") %>
-      </button>
+      <%= render "shared/playback_speed" %>
       <button type="button" class="btn-outline text-sm aria-pressed:border-eist aria-pressed:text-eist" aria-pressed="false" data-playback-target="loop" data-action="playback#toggleLoop">
         <%= t(".repeat") %>
       </button>

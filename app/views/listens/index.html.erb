@@ -43,7 +43,7 @@
                 <%= listen.understood? ? t(".got_it") : t(".not_yet") %>
               </span>
             </div>
-            <audio controls preload="none" src="<%= clip.audio_url %>" class="h-8 w-full max-w-xs"></audio>
+            <audio controls data-saved-speed preload="none" src="<%= clip.audio_url %>" class="h-8 w-full max-w-xs"></audio>
             <%= link_to t(".try_again"), listening_clip_path(clip), class: "text-muted underline underline-offset-2 hover:text-ink self-start" %>
           </li>
         <% end %>

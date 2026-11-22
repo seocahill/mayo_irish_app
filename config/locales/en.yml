@@ -329,6 +329,8 @@ en:
     destroy:
       revoked: Invitation taken back. The link no longer works.
   js:
+    playback:
+      speed_now: Speed %{speed}
     pronounce:
       failed: Couldn't load the audio.
     question_recorder:
@@ -442,7 +444,6 @@ en:
       no_video: No video URL yet.
     show_block:
       repeat: Repeat
-      slower: Slower
     types:
       audio: Audio
       embed: Abairt page
@@ -712,7 +713,6 @@ en:
       repeat: Repeat
       say_it_after: 'Say it after the speaker, then play it back to compare:'
       show_words: Show the words
-      slower: Slower
       title: What do you hear?
       understood: I got it
       untitled: an Abairt recording
@@ -917,7 +917,6 @@ en:
       no_transcript: This recording hasn't been transcribed yet. Listen anyway.
       repeat: Repeat line
       show_english: English
-      slower: Slower
       speaker_unknown: Abairt
       unavailable: The recording couldn't be loaded from Abairt. Try again later.
       untitled: A recording from Abairt
@@ -1042,6 +1041,8 @@ en:
       text: Back 5 s
     playback_keys:
       hint: 'Keys: Space plays or pauses, ← and → go back or forward 5 seconds.'
+    playback_speed:
+      text: Speed
     progress_bar:
       complete: Complete
       default_label: Progress
