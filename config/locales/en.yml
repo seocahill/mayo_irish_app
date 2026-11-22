@@ -645,15 +645,12 @@ en:
       lesson_label: Lesson %{number} · %{type}
       lesson_number: Lesson %{number}
       listening_clips: Listening clips
-      play_recording: Play your recording
       plural: Plural
       plural_short: pl.
       practice: Practice
       preview_banner: Previewing this lesson as a learner sees it.
       pronunciation: Pronunciation
       quiz: Quiz
-      record: Record
-      record_yourself: Record yourself
       recorded_by: Recorded by %{name}
       source: 'Source: %{source}'
       transcript: Transcript
@@ -938,6 +935,7 @@ en:
       masculine: Masculine
       plural: 'Plural:'
     show:
+      compare: 'Record yourself, then play it back to compare:'
       how_did_it_go: How did it go?
       how_to_say_in_irish: How do you say this in Irish?
       meaning_in_english: What does this mean in English?
@@ -1007,6 +1005,10 @@ en:
     progress_bar:
       complete: Complete
       default_label: Progress
+    record_yourself:
+      play_recording: Play your recording
+      record: Record
+      title: Record yourself
     save: Save
     speak_button:
       title: Synthetic voice from ABAIR, not a recording of a speaker

@@ -184,3 +184,8 @@
   title: Your weeks
   body: Under So far on Today, Your weeks shows what you did in each of the last eight weeks, so you can look back and see how it adds up.
   path: /weeks
+- id: 30
+  date: 2026-11-22
+  title: Hear yourself on Say it cards
+  body: After you tap Show on a Say it card, you can record yourself and play it back next to the Mayo speaker. The recording stays on your phone and is never uploaded.
+  path: /review
