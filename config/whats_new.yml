@@ -179,3 +179,8 @@
   title: See which words you know
   body: In a lesson's word list, a small tick now marks each word you already know, so you can see what is left to learn.
   path: /lessons
+- id: 29
+  date: 2026-11-22
+  title: Your weeks
+  body: Under So far on Today, Your weeks shows what you did in each of the last eight weeks, so you can look back and see how it adds up.
+  path: /weeks

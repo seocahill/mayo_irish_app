@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     resource :listen, only: :create
   end
   resources :listens, only: :index
+  resource :weeks, only: :show
   resources :recordings, only: :show do
     resource :listening_time, only: :update
   end

@@ -16,11 +16,18 @@ class LearnerWeeksTest < ActiveSupport::TestCase
       @learner.listens.create!(listening_clip: clip, understood: true, created_at: 1.week.ago)
       chat = @learner.chat_sessions.create!(lesson: lessons(:one), kind: :conversation)
       2.times { chat.chat_messages.create!(role: "user", content: "spoken", spoken_seconds: 30) }
+      ListeningDay.add(@learner, 150, on: Date.new(2026, 10, 27))
+      ListeningDay.add(@learner, 90, on: Date.new(2026, 10, 26))
+      ListeningDay.add(@learner, 600, on: Date.new(2026, 10, 25))
+      ListeningDay.add(@learner, 6000, on: Date.new(2026, 6, 1))
 
       this_week, last_week = LearnerWeeks.new(@learner).weeks
 
-      assert_equal [ Date.new(2026, 10, 26), 2, 1, 0, 1 ], this_week.to_h.values_at(:starts_on, :answers, :correct, :clips, :minutes_spoken)
-      assert_equal [ Date.new(2026, 10, 19), 1, 1, 1, 0 ], last_week.to_h.values_at(:starts_on, :answers, :correct, :clips, :minutes_spoken)
+      assert_equal [ Date.new(2026, 10, 26), 2, 1, 0, 1, 4 ],
+                   this_week.to_h.values_at(:starts_on, :answers, :correct, :clips, :minutes_spoken, :minutes_listened)
+      assert_equal [ Date.new(2026, 10, 19), 1, 1, 1, 0, 10 ],
+                   last_week.to_h.values_at(:starts_on, :answers, :correct, :clips, :minutes_spoken, :minutes_listened)
+      assert_not this_week.quiet?
     end
   end
 
@@ -28,6 +35,7 @@ class LearnerWeeksTest < ActiveSupport::TestCase
     weeks = LearnerWeeks.new(@learner).weeks
 
     assert_equal [ 0 ] * 8, weeks.map(&:answers)
+    assert weeks.all?(&:quiet?)
   end
 
   private
