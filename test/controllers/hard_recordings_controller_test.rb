@@ -21,6 +21,19 @@ class HardRecordingsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "a conversation reached only from a draft lesson is marked Draft" do
+    draft = Lesson.create!(number: 98, title: "Draft lesson", published: false)
+    item = draft.vocabulary_items.create!(irish: "focal", english: "word")
+    ListeningClip.create!(vocabulary_item: item, abairt_entry_id: 2, irish: "one madra two", english: "a phrase",
+                          audio_url: "https://clips.test/2", word_count: 3, abairt_recording_id: 16)
+    users(:two).listening_times.create!(abairt_recording_id: 16, seconds: 60, followed: false)
+    sign_in_as(users(:admin))
+
+    get hard_recordings_path
+
+    assert_select "#hard-recording-16 .chip", text: "Draft"
+  end
+
   test "course tools links to it" do
     sign_in_as(users(:admin))
 

@@ -24,7 +24,7 @@ class HardRecordingsTest < ActiveSupport::TestCase
     answer(@other, 15, true)
     answer(@learner, 16, false)
     answer(@learner, 17, true)
-    answer(@other, 18, nil)
+    answer(@other, 16, nil) # listened, never answered: not counted
     RecordingQuestion.create!(abairt_recording_id: 16, question: "Who is speaking?", answer: "A neighbour")
 
     rows = HardRecordings.new.rows
@@ -56,5 +56,24 @@ class HardRecordingsTest < ActiveSupport::TestCase
     answer(@learner, 99, false)
 
     assert_empty HardRecordings.new.rows
+  end
+
+  test "a learner's latest answer is the one that counts" do
+    clip(1, 15)
+    time = answer(@learner, 15, false)
+    assert_equal [ 15 ], HardRecordings.new.rows.map(&:recording_id)
+
+    time.update!(followed: true)
+    assert_empty HardRecordings.new.rows
+  end
+
+  test "the list is capped, and ties go to the earlier lesson" do
+    late = Lesson.create!(number: 99, title: "Later", position: lessons(:one).position.to_i + 50)
+    clip(1, 15, item: late.vocabulary_items.create!(irish: "focal", english: "word"))
+    clip(2, 16)
+    answer(@learner, 15, false)
+    answer(@learner, 16, false)
+
+    assert_equal [ 16 ], HardRecordings.new(limit: 1).rows.map(&:recording_id)
   end
 end
