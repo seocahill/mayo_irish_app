@@ -122,6 +122,20 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "li", text: /No spoken conversation yet/
   end
 
+  test "shows the phrases from Mayo speakers the learner made out, and links to their listening" do
+    5.times do |i|
+      clip = ListeningClip.create!(vocabulary_item: vocabulary_items(:dog), abairt_entry_id: 200 + i, irish: "one madra two",
+                                   english: "a phrase", audio_url: "https://clips.test/#{i}", word_count: 3)
+      users(:two).listens.create!(listening_clip: clip, understood: true)
+    end
+    sign_in_as(users(:two))
+    get root_path
+
+    assert_select "li", text: /You made out 5 phrases from Mayo speakers.*next: 10/m do
+      assert_select "a[href=?]", listens_path
+    end
+  end
+
   test "shows minutes listened this week" do
     ListeningDay.add(users(:two), 150)
     sign_in_as(users(:two))
@@ -137,7 +151,8 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "li a[href=?]", review_path, text: /next: 10/
     assert_select "li a[href=?]", listens_path, text: /next: 5 minutes/
     assert_select "li a[href=?]", lessons_path, text: /in one go/
-    assert_select "li a[href=?]", lessons_path, text: /lessons/
+    assert_select "li a[href=?]", lessons_path, text: "next: 1 lesson"
+    assert_select "li a[href=?]", listens_path, text: "next: 5", count: 1
   end
 
   test "shows the review forecast once reviews are scheduled" do

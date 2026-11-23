@@ -268,3 +268,8 @@
   title: Hear the Irish in the tutor chat
   body: In a lesson's Practise chat, select any Irish, in the tutor's replies or your own answers, and tap "Hear it" to hear it read aloud. It's ABAIR's synthetic voice, not a Mayo speaker, so use it to get a feel for the sounds and check against the lesson's recordings.
   path: /lessons
+- id: 47
+  date: 2026-11-23
+  title: Phrases you made out
+  body: Today's "So far" now counts the phrases from Mayo speakers you made out. Each listening clip where you tapped "I got it" counts once. It's your own word, not a test, so it's a record of what you can follow, not a score.
+  path: /

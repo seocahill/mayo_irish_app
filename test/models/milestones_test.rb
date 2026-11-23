@@ -7,12 +7,14 @@ class MilestonesTest < ActiveSupport::TestCase
   end
 
   test "a new learner has reached nothing and the first steps are next" do
-    words, listening, conversation = Milestones.new(@user, known_words: 0).strands
+    words, listening, understood, conversation = Milestones.new(@user, known_words: 0).strands
 
     assert_nil words.reached
     assert_equal 10, words.next_step
     assert_equal 10, words.remaining
     assert_nil listening.reached
+    assert_nil understood.reached
+    assert_equal 5, understood.next_step
     assert_nil conversation.reached
     assert_not words.started?
   end
@@ -47,7 +49,7 @@ class MilestonesTest < ActiveSupport::TestCase
     4.times { other.chat_messages.create!(role: "user", content: "b", spoken_seconds: 30) }
     @chat.chat_messages.create!(role: "user", content: "typed")
 
-    conversation = Milestones.new(@user, known_words: 0).strands.third
+    conversation = Milestones.new(@user, known_words: 0).strands.find { |s| s.key == :conversation }
 
     assert_equal 3, conversation.reached
     assert_equal 5, conversation.next_step
@@ -56,14 +58,14 @@ class MilestonesTest < ActiveSupport::TestCase
   test "recording yourself does not count towards the conversation milestone" do
     20.times { SpeakingDay.add(@user, 30, on: Date.new(2026, 11, 1) + it) }
 
-    assert_equal 0, Milestones.new(@user, known_words: 0).strands.third.value
+    assert_equal 0, Milestones.new(@user, known_words: 0).strands.find { |s| s.key == :conversation }.value
   end
 
   test "other learners' conversations are not counted" do
     chat = users(:admin).chat_sessions.create!(lesson: lessons(:one), kind: :conversation)
     10.times { chat.chat_messages.create!(role: "user", content: "x", spoken_seconds: 30) }
 
-    assert_nil Milestones.new(@user, known_words: 0).strands.third.reached
+    assert_nil Milestones.new(@user, known_words: 0).strands.find { |s| s.key == :conversation }.reached
   end
 
   test "a value just under a step has not reached it" do
@@ -78,7 +80,7 @@ class MilestonesTest < ActiveSupport::TestCase
     SectionProgress.mark_complete(user: @user, lesson: lessons(:one), section_type: "texts")
     SectionProgress.mark_complete(user: users(:admin), lesson: lessons(:one), section_type: "grammar")
 
-    grammar = Milestones.new(@user, known_words: 0).strands.fourth
+    grammar = Milestones.new(@user, known_words: 0).strands.find { |s| s.key == :grammar }
 
     assert_equal :grammar, grammar.key
     assert_equal 1, grammar.value
@@ -94,5 +96,32 @@ class MilestonesTest < ActiveSupport::TestCase
     assert_equal 0, grammar.value
     assert_nil grammar.reached
     assert_equal 1, grammar.next_step
+  end
+
+  test "phrases made out count the clips the learner said they made out, once each" do
+    clips = 7.times.map do |i|
+      ListeningClip.create!(vocabulary_item: vocabulary_items(:dog), abairt_entry_id: 100 + i, irish: "one madra two",
+                            english: "a phrase", audio_url: "https://clips.test/#{i}", word_count: 3)
+    end
+    clips.first(6).each { |clip| @user.listens.create!(listening_clip: clip, understood: true) }
+    @user.listens.create!(listening_clip: clips.last, understood: false)
+    users(:one).listens.create!(listening_clip: clips.last, understood: true)
+
+    understood = Milestones.new(@user, known_words: 0).strands.find { |s| s.key == :understood }
+
+    assert_equal 6, understood.value
+    assert_equal 5, understood.reached
+    assert_equal 10, understood.next_step
+  end
+
+  test "a clip an editor hides stops counting as made out, as on the listening page" do
+    clip = ListeningClip.create!(vocabulary_item: vocabulary_items(:dog), abairt_entry_id: 300, irish: "one madra two",
+                                 english: "a phrase", audio_url: "https://clips.test/300", word_count: 3)
+    @user.listens.create!(listening_clip: clip, understood: true)
+    understood = -> { Milestones.new(@user, known_words: 0).strands.find { |s| s.key == :understood }.value }
+
+    assert_equal 1, understood.call
+    clip.update!(status: "hidden")
+    assert_equal 0, understood.call
   end
 end
