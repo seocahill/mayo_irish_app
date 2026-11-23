@@ -243,3 +243,8 @@
   title: Listening clips count as listening
   body: Time you spend playing a listening clip, over and over with Repeat too, now counts towards your minutes listened on Today, So far and Your weeks, like whole conversations do. Only time the clip is actually playing counts.
   path: /weeks
+- id: 42
+  date: 2026-11-23
+  title: Lesson audio counts as listening
+  body: Listening to the audio on a lesson's page, with Repeat too, now counts towards your minutes listened on Today, So far and Your weeks, like listening clips and whole conversations. Only time the audio is actually playing counts.
+  path: /lessons

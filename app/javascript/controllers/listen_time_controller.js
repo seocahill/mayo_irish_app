@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Counts how long a short clip has been playing, Repeat included, and reports
+// Counts how long a listening clip or a lesson's audio has been playing, Repeat included, and reports
 // it to the course about every half minute, and when the learner pauses or
 // leaves, so it counts towards minutes listened. Only time spent playing
 // counts; a jump (seeking, Back 5 s) doesn't.
