@@ -75,6 +75,9 @@
             <% else %>
               <p class="text-muted"><%= t(".waiting") %></p>
             <% end %>
+            <% if (use = question.course_use) %>
+              <p class="text-sm border-l-2 border-eist pl-3" data-course-use="<%= use %>"><%= { used: t(".course_use.used"), accepted: t(".course_use.accepted"), saved: t(".course_use.saved") }.fetch(use) %></p>
+            <% end %>
           </li>
         <% end %>
       </ul>
