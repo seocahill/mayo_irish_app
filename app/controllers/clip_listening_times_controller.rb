@@ -7,7 +7,7 @@ class ClipListeningTimesController < ApplicationController
 
   def update
     ListeningClip.visible_to(current_user).find(params[:listening_clip_id])
-    ListeningDay.add_clip(current_user, params[:seconds])
+    ListeningDay.add_clip(current_user, params[:seconds].to_s)
     head :no_content
   end
 end

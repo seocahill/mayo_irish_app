@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Counts how long a short clip has been playing, Repeat included, and reports
 // it to the course about every half minute, and when the learner pauses or
 // leaves, so it counts towards minutes listened. Only time spent playing
-// counts; a jump (seeking, Back 5 s, Repeat starting over) doesn't.
+// counts; a jump (seeking, Back 5 s) doesn't.
 const REPORT_EVERY = 30
 
 export default class extends Controller {
@@ -30,7 +30,11 @@ export default class extends Controller {
     const audio = this.audioTarget
     if (audio.paused || this.lastTime === null) return
     const now = audio.currentTime
-    const step = now - this.lastTime
+    let step = now - this.lastTime
+    // With Repeat on, the clip wraps to the start: count the bit up to the end too.
+    if (step < 0 && audio.loop && Number.isFinite(audio.duration) && this.lastTime > audio.duration - 1.5) {
+      step = audio.duration - this.lastTime + now
+    }
     this.lastTime = now
     if (step <= 0 || step > 1.5) return
 

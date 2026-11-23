@@ -33,6 +33,14 @@ class LearnerActivityTest < ActiveSupport::TestCase
     end
   end
 
+  test "playing a listening clip counts as being active" do
+    travel_to Time.zone.parse("2026-10-28 12:00") do
+      ListeningDay.add_clip(@learner, 30)
+
+      assert_equal Time.current, activity_for(@learner).last_active_at
+    end
+  end
+
   test "last active is the latest thing the learner did" do
     travel_to Time.zone.parse("2026-10-28 12:00") do
       @learner.sessions.create!(created_at: 3.days.ago)

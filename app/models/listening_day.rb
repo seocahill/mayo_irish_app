@@ -23,7 +23,7 @@ class ListeningDay < ApplicationRecord
 
   # Time spent playing a listening clip, as reported by its page.
   def self.add_clip(user, seconds)
-    add(user, seconds.to_i.clamp(0, ListeningTime::MAX_REPORT), clip: true)
+    add(user, seconds.to_s.to_i.clamp(0, ListeningTime::MAX_REPORT), clip: true)
   end
 
   def self.minutes_this_week(user)

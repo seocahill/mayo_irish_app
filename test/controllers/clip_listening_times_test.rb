@@ -39,6 +39,8 @@ class ClipListeningTimesTest < ActionDispatch::IntegrationTest
     patch listening_clip_listening_time_path(@clip), params: { seconds: 5000 }
     patch listening_clip_listening_time_path(@clip), params: { seconds: -20 }
     patch listening_clip_listening_time_path(@clip), params: { seconds: "abc" }
+    patch listening_clip_listening_time_path(@clip), params: { seconds: [ 30 ] }
+    patch listening_clip_listening_time_path(@clip), params: { seconds: { a: 1 } }
 
     assert_equal ListeningTime::MAX_REPORT, @learner.listening_days.sole.clip_seconds
   end
@@ -57,6 +59,7 @@ class ClipListeningTimesTest < ActionDispatch::IntegrationTest
 
     patch listening_clip_listening_time_path(@clip), params: { seconds: 30 }
 
+    assert_redirected_to new_session_path
     assert_empty @learner.listening_days
   end
 end

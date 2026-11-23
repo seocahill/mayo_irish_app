@@ -83,6 +83,7 @@ class UsageReport
       answer_logs.each { |user, at, _| seen[bucket(at)] << user }
       Listen.where(user_id: @learners, created_at: @first..).pluck(:user_id, :created_at).each { |user, at| seen[bucket(at)] << user }
       ListeningTime.where(user_id: @learners, updated_at: @first..).pluck(:user_id, :updated_at).each { |user, at| seen[bucket(at)] << user }
+      ListeningDay.where(user_id: @learners, updated_at: @first..).pluck(:user_id, :updated_at).each { |user, at| seen[bucket(at)] << user }
       spoken_rows.each { |user, at, _| seen[bucket(at)] << user }
       LessonVisit.where(user_id: @learners, created_at: @first..).pluck(:user_id, :created_at).each { |user, at| seen[bucket(at)] << user }
       NativeQuestion.where(user_id: @learners, created_at: @first..).pluck(:user_id, :created_at).each { |user, at| seen[bucket(at)] << user }
