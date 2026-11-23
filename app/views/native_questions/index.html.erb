@@ -75,6 +75,9 @@
             <% else %>
               <p class="text-muted"><%= t(".waiting") %></p>
             <% end %>
+            <% if (use = question.course_use) %>
+              <p class="text-sm border-l-2 border-eist pl-3" data-course-use="<%= use %>"><%= use == :used ? t(".course_use.used") : t(".course_use.saved") %></p>
+            <% end %>
           </li>
         <% end %>
       </ul>

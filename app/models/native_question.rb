@@ -59,6 +59,18 @@ class NativeQuestion < ApplicationRecord
 
   def ideas = proposal_evidence.map(&:course_proposal).uniq
 
+  # Statuses meaning a designer took an idea into the course.
+  USED_STATUSES = %w[accepted applied edited].freeze
+
+  # What came of the question in the course, for the learner who asked it:
+  # :used once an idea saved from it was taken into the course, :saved while a
+  # designer has it as an idea, nil otherwise. Nothing about the idea itself
+  # (its words, who saved it) goes back to the learner.
+  def course_use
+    return if ideas.empty?
+    ideas.any? { |idea| idea.status.in?(USED_STATUSES) } ? :used : :saved
+  end
+
   private
 
   def evidence_source
