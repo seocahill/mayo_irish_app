@@ -87,6 +87,21 @@ class VocabularyGapsTest < ActiveSupport::TestCase
     assert_empty VocabularyGaps.new.unpractised_lessons
   end
 
+  test "lessons with unanswered exercises are listed with how many, until every one has an answer" do
+    Exercise.delete_all
+    lesson = Lesson.first
+    first = lesson.exercises.create!(number: 1, prompt: "One", position: 1)
+    lesson.exercises.create!(number: 2, prompt: "Two", position: 2, answer: "An answer")
+    second = lesson.exercises.create!(number: 3, prompt: "Three", position: 3)
+    second.update_column(:answer, "  ")
+
+    assert_equal [ [ lesson, 2 ] ], VocabularyGaps.new.unanswered_lessons.map { |u| [ u.lesson, u.count ] }
+
+    first.update!(answer: "An answer")
+    second.update!(answer: "An answer")
+    assert_empty VocabularyGaps.new.unanswered_lessons
+  end
+
   test "a lesson is listed as having no grammar only when it has words and no grammar rules" do
     VocabularyItem.delete_all
     GrammarRule.destroy_all

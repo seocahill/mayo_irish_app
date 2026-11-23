@@ -76,6 +76,21 @@ class Mcp::CourseGapsTest < ActiveSupport::TestCase
     assert_not_includes call(lesson: 1).last["fails"], "conversations_without_questions"
   end
 
+  test "lessons with exercises that have no answer are counted per lesson" do
+    exercises(:one).update!(answer: nil)
+    lessons(:one).exercises.create!(number: 2, prompt: "Two", position: 2, answer: "An answer")
+
+    _, data = call
+    assert_equal [ { "number" => 1, "title" => "Lesson One", "words" => 1 } ], data["checks"]["exercises_without_answers"]["lessons"]
+
+    _, data = call(lesson: 1)
+    assert_includes data["fails"], "exercises_without_answers"
+
+    exercises(:one).update!(answer: "An answer")
+    _, data = call
+    assert_equal 0, data["checks"]["exercises_without_answers"]["count"]
+  end
+
   test "draft lessons are included and say so" do
     draft = Lesson.create!(number: 7, title: "Draft", position: 7, published: false)
 

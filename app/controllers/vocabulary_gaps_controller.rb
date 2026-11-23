@@ -9,6 +9,7 @@ class VocabularyGapsController < ApplicationController
     @early_words = report.early_words
     @silent_lessons = report.silent_lessons
     @unpractised_lessons = report.unpractised_lessons
+    @unanswered_lessons = report.unanswered_lessons
     @ungrammared_lessons = report.ungrammared_lessons
     @unlistened_lessons = report.unlistened_lessons
     @unquestioned_lessons = report.unquestioned_lessons

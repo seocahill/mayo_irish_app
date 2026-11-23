@@ -142,6 +142,23 @@
     <% end %>
   </section>
 
+  <section id="unanswered-lessons" class="flex flex-col gap-3">
+    <h2 class="font-display text-2xl"><%= t(".unanswered_title") %></h2>
+    <p class="text-muted text-sm"><%= t(".unanswered_summary") %></p>
+    <% if @unanswered_lessons.empty? %>
+      <p class="text-sm text-muted"><%= t(".unanswered_empty") %></p>
+    <% else %>
+      <ul class="flex flex-col gap-2">
+        <% @unanswered_lessons.each do |row| %>
+          <li class="card px-4 py-3 text-sm">
+            <%= link_to row.lesson.display_title, edit_lesson_path(row.lesson, anchor: "exercises"), class: "underline font-medium" %>
+            <span class="text-muted">· <%= t(".unanswered_count", count: row.count) %></span>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
+
   <section id="ungrammared-lessons" class="flex flex-col gap-3">
     <h2 class="font-display text-2xl"><%= t(".ungrammared_title") %></h2>
     <p class="text-muted text-sm"><%= t(".ungrammared_summary") %></p>
