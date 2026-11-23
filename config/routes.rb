@@ -39,7 +39,9 @@ Rails.application.routes.draw do
   resource :weeks, only: :show
   resources :recordings, only: :show do
     resource :listening_time, only: :update
+    resources :questions, only: :create, controller: "recording_questions"
   end
+  resources :recording_questions, only: :destroy
   resources :chat_messages, only: [] do
     resource :pronunciation, only: :show, controller: "chat_message_pronunciations"
     resource :flag, only: :create, controller: "chat_message_flags"

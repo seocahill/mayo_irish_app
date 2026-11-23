@@ -8,6 +8,7 @@ class RecordingsController < ApplicationController
     raise ActiveRecord::RecordNotFound unless ListeningClip.recording_offered?(params[:id], to: current_user)
 
     @start = (params[:t].to_f - LEAD_IN).clamp(0..)
+    @questions = RecordingQuestion.for_recording(params[:id].to_i)
     @recording = AbairtRecording.find(params[:id])
   rescue AbairtClient::Error
     @error = t(".unavailable")

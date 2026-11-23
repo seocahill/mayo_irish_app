@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_23_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_23_120000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -403,6 +403,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_23_090000) do
     t.index ["user_id"], name: "index_quiz_reviews_on_user_id"
   end
 
+  create_table "recording_questions", force: :cascade do |t|
+    t.integer "abairt_recording_id", null: false
+    t.text "question", null: false
+    t.text "answer", null: false
+    t.integer "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["abairt_recording_id"], name: "index_recording_questions_on_abairt_recording_id"
+    t.index ["author_id"], name: "index_recording_questions_on_author_id"
+  end
+
   create_table "recording_suggestions", force: :cascade do |t|
     t.integer "abairt_entry_id", null: false
     t.string "audio_url", null: false
@@ -564,6 +575,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_23_090000) do
   add_foreign_key "quiz_questions", "lessons"
   add_foreign_key "quiz_reviews", "quiz_questions"
   add_foreign_key "quiz_reviews", "users"
+  add_foreign_key "recording_questions", "users", column: "author_id", on_delete: :nullify
   add_foreign_key "recording_suggestions", "users", column: "reviewed_by_id"
   add_foreign_key "recording_suggestions", "vocabulary_items"
   add_foreign_key "review_logs", "quiz_questions", on_delete: :nullify

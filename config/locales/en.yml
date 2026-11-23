@@ -927,6 +927,25 @@ en:
       keep_going: Keep going
       round_complete: Round complete
       score: "%{correct} of %{answered}"
+  recording_questions:
+    create:
+      saved: Question added. Learners see it above the player.
+    destroy:
+      removed: Question removed.
+    section:
+      add: Add question
+      answer: Answer
+      editor_note: Write a question learners can answer by listening, and its answer.
+        Learners see the question first and tap to see the answer. Nothing here is
+        generated.
+      heading: Listen for
+      how_to_use: Read these before you play, then listen for the answers. Tap to
+        check.
+      question: Question
+      remove: Remove
+      remove_confirm: Remove this question?
+      show_answer: Show the answer
+      to_question: " to question %{n}"
   recordings:
     show:
       carry_on: Carry on from %{time}
