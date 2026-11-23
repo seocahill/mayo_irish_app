@@ -260,6 +260,7 @@ en:
       back: "← Back to the lesson"
     form:
       compare: Compare
+      hint: Fadas, capitals and punctuation don't count against you.
       label: Your Irish
     frame:
       all_match: Every word matches the answer.

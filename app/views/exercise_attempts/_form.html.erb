@@ -4,6 +4,8 @@
   <%= f.text_area :attempt, value: attempt, rows: 2, maxlength: Dictation::MAX_LENGTH, lang: "ga",
                   id: dom_id(exercise, :attempt_field),
                   autocomplete: "off", autocapitalize: "off", autocorrect: "off", spellcheck: false,
-                  class: "field text-base resize-none" %>
-  <%= f.submit t("exercise_attempts.form.compare"), class: "btn-outline self-start" %>
+                  class: "field text-base resize-none",
+                  aria: { describedby: "#{dom_id(exercise, :prompt)} #{dom_id(exercise, :hint)}" } %>
+  <p id="<%= dom_id(exercise, :hint) %>" class="text-xs text-muted"><%= t("exercise_attempts.form.hint") %></p>
+  <%= f.submit t("exercise_attempts.form.compare"), class: "btn-outline self-start", aria: { describedby: dom_id(exercise, :prompt) } %>
 <% end %>

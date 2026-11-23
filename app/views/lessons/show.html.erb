@@ -212,12 +212,15 @@
   <% answered_exercises = @lesson.exercises.answered.to_a %>
   <% if answered_exercises.any? %>
     <section id="exercises" class="mb-10 scroll-mt-4" aria-labelledby="exercises-heading">
-      <h2 id="exercises-heading" class="lesson-section-heading"><%= t(".exercises") %></h2>
+      <h2 id="exercises-heading" class="lesson-section-heading flex items-center gap-2">
+        <%= t(".exercises") %>
+        <%= render "section_badge", section: "exercises", progress: @section_progress %>
+      </h2>
       <p class="text-sm text-muted mb-4"><%= t(".exercises_intro") %></p>
       <ol class="space-y-4">
         <% answered_exercises.each do |exercise| %>
           <li class="card px-5 py-4">
-            <p class="mb-3"><span class="font-mono text-sm text-muted tabular-nums"><%= exercise.number %>.</span> <%= exercise.prompt %></p>
+            <p id="<%= dom_id(exercise, :prompt) %>" class="mb-3"><span class="font-mono text-sm text-muted tabular-nums"><%= exercise.number %>.</span> <%= exercise.prompt %></p>
             <%= render "exercise_attempts/frame", exercise: exercise, comparison: nil %>
           </li>
         <% end %>

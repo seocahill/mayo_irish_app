@@ -104,4 +104,41 @@ class ExerciseAttemptsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to new_session_path
   end
+
+  test "admins can compare on a draft lesson" do
+    draft = Lesson.create!(number: 9301, title: "Draft", position: 9301, published: false)
+    exercise = draft.exercises.create!(number: 1, prompt: "Hidden", answer: "Dia dhuit", position: 1)
+    sign_in_as(users(:admin))
+
+    post exercise_attempt_path(exercise), params: { attempt: "Dia dhuit" }
+
+    assert_response :success
+  end
+
+  test "with several exercises, each form has its own field, label and prompt" do
+    other = @lesson.exercises.create!(number: 2, prompt: "Second prompt", answer: "Dia dhuit", position: 2)
+    sign_in_as(@learner)
+
+    get lesson_path(@lesson)
+
+    ids = css_select("#exercises textarea[name=attempt]").map { |t| t["id"] }
+    assert_equal 2, ids.uniq.size
+    ids.each { |id| assert_select "#exercises label[for=?]", id, 1 }
+    [ @exercise, other ].each do |exercise|
+      prompt = ActionView::RecordIdentifier.dom_id(exercise, :prompt)
+      assert_select "##{prompt}", 1
+      assert_select "textarea[aria-describedby~=?]", prompt, 1
+    end
+  end
+
+  test "a comparison only answers for the exercise it was posted for" do
+    @lesson.exercises.create!(number: 2, prompt: "Second prompt", answer: "Slán abhaile", position: 2)
+    sign_in_as(@learner)
+
+    post exercise_attempt_path(@exercise), params: { attempt: "Tá" }, headers: frame_headers
+
+    assert_select "turbo-frame", 1
+    assert_select "turbo-frame[id=?]", ActionView::RecordIdentifier.dom_id(@exercise, :attempt)
+    assert_no_match "Slán", response.body
+  end
 end
