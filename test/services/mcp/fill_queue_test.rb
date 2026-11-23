@@ -26,14 +26,15 @@ class Mcp::FillQueueTest < ActiveSupport::TestCase
     assert_equal 2, data["open"]
     assert_equal [ older.id, newer.id ], data["slots"].map { |s| s["id"] }
     first = data["slots"].first
-    assert_equal [ "example_sentences", "Sentences for the conditional after dá", "admin@example.com" ],
+    assert_equal [ "example_sentences", "Sentences for the conditional after dá", "admin" ],
                  first.values_at("type", "spec", "added_by")
     assert_equal({ "number" => @lesson.number, "title" => @lesson.title, "published" => false }, first["lesson"])
     assert_equal [ { "number" => @lesson.number, "title" => @lesson.title, "published" => false, "open" => 2 } ], data["by_lesson"]
     assert_not_includes res.content.first[:text], "Gone"
+    assert_not_includes res.content.first[:text], "@example.com"
   end
 
-  test "can keep to one lesson and still counts each lesson" do
+  test "can keep to one lesson, counting only that lesson" do
     other = Lesson.create!(number: 950, title: "Another draft", position: 950, published: false)
     slot("Mine", at: 1.day.ago)
     slot("Theirs", at: 2.days.ago, lesson: other)
@@ -43,6 +44,14 @@ class Mcp::FillQueueTest < ActiveSupport::TestCase
     assert_equal [ "Mine" ], data["slots"].map { |s| s["spec"] }
     assert_equal 1, data["open"]
     assert_equal [ @lesson.number ], data["by_lesson"].map { |l| l["number"] }
+  end
+
+  test "a lesson with no open slots gives an empty list" do
+    slot("Elsewhere", at: 1.day.ago, lesson: Lesson.create!(number: 951, title: "Other", position: 951, published: false))
+
+    _, data = call(lesson: @lesson.number)
+
+    assert_equal [ 0, [], [] ], data.values_at("open", "by_lesson", "slots")
   end
 
   test "an unknown lesson is an error" do

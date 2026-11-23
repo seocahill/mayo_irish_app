@@ -54,7 +54,7 @@ module Mcp
         {
           id: slot.id, type: slot.slot_type, spec: slot.spec,
           lesson: { number: slot.lesson.number, title: slot.lesson.title, published: slot.lesson.published? },
-          added_by: slot.created_by, added_at: slot.created_at.iso8601
+          added_by: slot.created_by.to_s.split("@").first.presence, added_at: slot.created_at.iso8601
         }
       end
       private_class_method :by_lesson, :describe
