@@ -931,7 +931,7 @@ en:
         other: Spoken for %{count} minutes in one conversation
     followed:
       next: 'next: %{count}'
-      not_yet: Whole conversations you follow count here. Say so at the end of each
+      not_yet: Conversations you say you followed count here
       reached:
         one: You followed a whole conversation from Mayo speakers
         other: You followed %{count} whole conversations from Mayo speakers

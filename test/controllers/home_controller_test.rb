@@ -142,7 +142,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     sign_in_as(users(:two))
 
     get root_path
-    assert_select "li", text: /Whole conversations you follow count here.*next: 1/m
+    assert_select "li", text: /Conversations you say you followed count here.*next: 1/m
 
     users(:two).listening_times.create!(abairt_recording_id: 15, seconds: 300, followed: true)
     get root_path

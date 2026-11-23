@@ -1,5 +1,6 @@
 # Honest markers of how far a learner has got, from what they have actually done:
-# words known, time spent listening, sentences made out, whole conversations followed, and speaking. Each strand is a short ladder;
+# words known, time spent listening, sentences made out, whole conversations
+# followed, and speaking. Each strand is a short ladder;
 # a learner sees the last step they reached and the next one, never points or streaks.
 class Milestones
   WORD_STEPS = [ 10, 25, 50, 100, 250, 500, 1000 ].freeze
@@ -10,7 +11,8 @@ class Milestones
   UNDERSTOOD_CLIP_STEPS = [ 5, 10, 25, 50, 100, 250, 500 ].freeze
   # Whole recordings (a conversation or story from Mayo speakers) the learner
   # said they followed: their own word, one per recording, not a test. Only
-  # recordings still offered count (behind a listed clip), like phrases made out.
+  # recordings still offered count (behind a listed clip), like phrases made out;
+  # Your listening still lists every recording heard, so it can show one more.
   FOLLOWED_RECORDING_STEPS = [ 1, 3, 5, 10, 25, 50 ].freeze
   # The longest single conversation, in minutes of the learner's own speech.
   CONVERSATION_MINUTE_STEPS = [ 1, 3, 5, 10, 20 ].freeze

@@ -137,6 +137,7 @@ class MilestonesTest < ActiveSupport::TestCase
     @user.listening_times.create!(abairt_recording_id: 17, seconds: 60, followed: true)
     @user.listening_times.create!(abairt_recording_id: 18, seconds: 60, followed: false)
     @user.listening_times.create!(abairt_recording_id: 99, seconds: 60, followed: true) # no longer offered
+    @user.listening_times.create!(abairt_recording_id: 19, seconds: 60) # listened, never answered
     users(:one).listening_times.create!(abairt_recording_id: 18, seconds: 60, followed: true)
     followed = -> { Milestones.new(@user, known_words: 0).strands.find { |s| s.key == :followed } }
 
