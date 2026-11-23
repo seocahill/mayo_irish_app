@@ -1,0 +1,24 @@
+<%# Course words in the prompt, to help write the answer. Read-only. %>
+<section aria-labelledby="<%= dom_id(words.exercise, :course_words) %>">
+  <h4 id="<%= dom_id(words.exercise, :course_words) %>" class="editor-label"><%= t(".heading") %></h4>
+  <% if words.matches.empty? && words.substitutions.empty? %>
+    <p class="text-xs text-muted"><%= t(".none") %></p>
+  <% else %>
+    <p class="text-xs text-muted mb-1"><%= words.english? ? t(".english_prompt") : t(".irish_prompt") %></p>
+    <ul class="text-sm space-y-0.5">
+      <% words.substitutions.each do |pair| %>
+        <li class="text-ink"><%= t(".mayo_forms") %> <span lang="ga"><%= pair.other_form %></span> → <strong lang="ga"><%= pair.mayo_form %></strong></li>
+      <% end %>
+      <% words.matches.each do |match| %>
+        <li class="text-ink">
+          <span lang="ga" class="font-medium"><%= match.item.irish %></span>
+          <span class="text-muted">· <%= match.item.english %> ·
+            <%= match.lesson.id == words.exercise.lesson_id ? t(".this_lesson") : t(".lesson", number: match.lesson.number) %></span>
+        </li>
+      <% end %>
+    </ul>
+    <% if words.more? %>
+      <p class="text-xs text-muted mt-1"><%= t(".more", count: ExerciseWords::LIMIT) %></p>
+    <% end %>
+  <% end %>
+</section>

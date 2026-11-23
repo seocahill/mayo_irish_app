@@ -13,6 +13,7 @@
         <%= f.text_area :answer, rows: 2, lang: "ga", class: "editor-input", placeholder: t(".answer_placeholder") %>
         <p class="text-xs text-muted mt-1"><%= t(".answer_help") %></p>
       </div>
+      <%= render "exercises/course_words", words: ExerciseWords.new(@exercise) %>
     </div>
     <div class="px-5 py-3 flex items-center justify-between">
       <a href="<%= edit_lesson_path(@exercise.lesson) %>"
