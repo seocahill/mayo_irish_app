@@ -850,6 +850,8 @@ en:
       asked_ago: Asked %{time} ago
       back_to_lesson: "← Back to lesson %{number}, %{title}"
       course_use:
+        accepted: A course designer has decided to use your question in the course.
+          Thank you.
         saved: A course designer saved your question to help improve the course. Thank
           you.
         used: Your question helped change the course. Thank you.

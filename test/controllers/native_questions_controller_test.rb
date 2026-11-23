@@ -92,6 +92,11 @@ class NativeQuestionsControllerTest < ActionDispatch::IntegrationTest
     idea.update!(status: "accepted")
     with_abairt_token { get native_questions_path }
 
+    assert_select "##{ActionView::RecordIdentifier.dom_id(question)} [data-course-use=accepted]", text: I18n.t("native_questions.index.course_use.accepted")
+
+    idea.update!(status: "applied")
+    with_abairt_token { get native_questions_path }
+
     assert_select "##{ActionView::RecordIdentifier.dom_id(question)} [data-course-use=used]", text: I18n.t("native_questions.index.course_use.used")
   end
 
@@ -104,10 +109,12 @@ class NativeQuestionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "another learner's saved question isn't shown" do
+    mine = @learner.native_questions.create!(abairt_question_id: 12, status: "answered", answer_audio_url: "https://abairt.test/a12")
     users(:one).native_questions.create!(abairt_question_id: 11, status: "sent").save_as_idea!("Theirs", origin: "admin")
 
     with_abairt_token { get native_questions_path }
 
+    assert_select "##{ActionView::RecordIdentifier.dom_id(mine)}"
     assert_select "[data-course-use]", count: 0
   end
 end

@@ -124,7 +124,7 @@ class NativeQuestionTest < ActiveSupport::TestCase
     assert_equal [ first, second ], NativeQuestion.includes(proposal_evidence: :course_proposal).find(question.id).ideas
   end
 
-  test "course use is nil until a designer saves an idea, saved while it is open or parked, used once it is in the course" do
+  test "course use is nil until a designer saves an idea, saved while it is open or parked, accepted, then used once it is in the course" do
     question = NativeQuestion.create!(user: users(:two), abairt_question_id: 77, status: "sent")
     assert_nil question.course_use
 
@@ -134,7 +134,10 @@ class NativeQuestionTest < ActiveSupport::TestCase
     idea.update!(status: "dismissed")
     assert_equal :saved, question.reload.course_use
 
-    %w[accepted applied edited].each do |status|
+    idea.update!(status: "accepted")
+    assert_equal :accepted, question.reload.course_use
+
+    %w[applied edited].each do |status|
       idea.update!(status: status)
       assert_equal :used, question.reload.course_use, status
     end

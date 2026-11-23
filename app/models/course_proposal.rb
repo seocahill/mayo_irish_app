@@ -35,6 +35,8 @@ class CourseProposal < ApplicationRecord
                 "reopen" => "proposed" }.freeze
 
   PARKED_STATUSES = %w[dismissed deferred].freeze
+  # Statuses meaning the proposal has changed the course.
+  USED_STATUSES = %w[applied edited].freeze
 
   # Decisions allowed now: open ones can be discussed, deferred or dismissed,
   # parked ones reopened. Accepted, applied and edited ones are left alone.
