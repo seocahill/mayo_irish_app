@@ -1,0 +1,48 @@
+<div class="max-w-2xl mx-auto flex flex-col gap-6">
+  <header>
+    <p class="eyebrow"><%= link_to t(".eyebrow"), course_tools_path, class: "hover:underline" %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
+    <p class="text-muted mt-1 text-sm"><%= t(".summary") %></p>
+    <% if @total.positive? %>
+      <p class="mt-2 text-sm tabular-nums" id="learner-questions-count"><%= t(".count", answered: @answered, total: @total) %></p>
+    <% end %>
+  </header>
+
+  <% if @questions.empty? %>
+    <p class="card px-4 py-3 text-sm text-muted" id="learner-questions-none"><%= t(".none") %></p>
+  <% else %>
+    <% status_labels = { "answered" => t(".status.answered"), "sent" => t(".status.sent"), "waiting" => t(".status.waiting") } %>
+    <ul class="flex flex-col gap-3" id="learner-questions">
+      <% @questions.each do |question| %>
+        <li class="card px-4 py-4 flex flex-col gap-3 text-sm" id="<%= dom_id(question) %>">
+          <div class="flex flex-wrap items-baseline justify-between gap-2 text-xs text-muted">
+            <span>
+              <%= t(".asked_ago", time: time_ago_in_words(question.created_at)) %>
+              <% if question.lesson %>
+                · <%= link_to question.lesson.display_title, lesson_path(question.lesson), class: "underline underline-offset-2 hover:text-ink" %>
+              <% else %>
+                · <%= t(".no_lesson") %>
+              <% end %>
+            </span>
+            <span class="chip <%= 'border-eist text-eist' if question.answered? %>"><%= status_labels.fetch(question.status) %></span>
+          </div>
+          <% if question.audio_url.present? %>
+            <div>
+              <p class="eyebrow mb-1"><%= t(".question") %></p>
+              <audio controls preload="none" src="<%= question.audio_url %>" class="h-8 w-full max-w-xs"></audio>
+            </div>
+          <% end %>
+          <% if question.answered? && question.answer_audio_url.present? %>
+            <div>
+              <p class="eyebrow mb-1 text-eist"><%= t(".answer") %></p>
+              <audio controls preload="none" src="<%= question.answer_audio_url %>" class="h-8 w-full max-w-xs"></audio>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+    <% if @total > @questions.size %>
+      <p class="text-xs text-muted"><%= t(".showing", shown: @questions.size, total: @total) %></p>
+    <% end %>
+  <% end %>
+</div>

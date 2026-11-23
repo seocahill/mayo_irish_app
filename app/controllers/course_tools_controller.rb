@@ -6,6 +6,7 @@ class CourseToolsController < ApplicationController
     gaps: :vocabulary_gaps_path,
     where_taught: :where_taught_path,
     hard_words: :hard_words_path,
+    learner_questions: :learner_questions_path,
     proposals: :course_proposals_path,
     substitutions: :dialect_substitutions_path,
     usage: :usage_path,
