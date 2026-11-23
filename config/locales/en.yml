@@ -128,6 +128,10 @@ en:
           description: The Mayo speakers' phrases learners most often couldn't make
             out on listening clips.
           name: Phrases learners couldn't make out
+        hard_recordings:
+          description: The whole conversations from Mayo speakers learners most often
+            said they couldn't follow yet.
+          name: Conversations learners couldn't follow
         hard_words:
           description: The words learners get wrong most often in review, hardest
             first.
@@ -349,6 +353,23 @@ en:
         not admins, and hidden clips are left out. It only looks; nothing changes.
       title: Phrases learners couldn't make out
       word: Picked for the word
+  hard_recordings:
+    show:
+      add_questions: Add questions to listen for
+      draft: Draft
+      eyebrow: Course tools
+      lesson: First lesson that leads to it
+      none: No learner has said "Not yet" on a whole conversation yet.
+      not_yet: Couldn't follow it yet
+      not_yet_value: "%{not_yet} of %{answers} who answered (%{percent}%)"
+      open_recording: Open the conversation
+      questions: Questions to listen for
+      summary: Whole conversations learners answered "Not yet" on when asked whether
+        they followed it, hardest first. Each learner counts once per conversation,
+        with their latest answer. Only learners count, not admins, and conversations
+        no listed clip leads to are left out. It only looks; nothing changes.
+      title: Conversations learners couldn't follow
+      untitled: A recording from Abairt
   hard_words:
     show:
       draft: Draft

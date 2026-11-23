@@ -7,6 +7,7 @@ class CourseToolsController < ApplicationController
     where_taught: :where_taught_path,
     hard_words: :hard_words_path,
     hard_clips: :hard_clips_path,
+    hard_recordings: :hard_recordings_path,
     learner_questions: :learner_questions_path,
     proposals: :course_proposals_path,
     substitutions: :dialect_substitutions_path,
