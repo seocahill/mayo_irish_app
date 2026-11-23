@@ -43,8 +43,12 @@
   <% end %>
 
 <% elsif block.audio? && block.file.attached? %>
-  <figure class="bg-surface rounded-sm border border-line px-5 py-4" data-controller="playback">
-    <audio controls src="<%= rails_blob_url(block.file) %>" class="w-full" data-playback-target="audio"></audio>
+  <%# In "View as learner" an editor's listening isn't counted as theirs. %>
+  <figure class="bg-surface rounded-sm border border-line px-5 py-4" data-controller="playback<%= " listen-time" unless @preview %>"
+          <% unless @preview %>data-listen-time-report-url-value="<%= lesson_block_listening_time_path(block) %>"<% end %>>
+    <audio controls src="<%= rails_blob_url(block.file) %>" class="w-full"
+           data-playback-target="audio" data-listen-time-target="audio"
+           data-action="play->listen-time#started timeupdate->listen-time#count pause->listen-time#stopped ended->listen-time#stopped"></audio>
     <div class="flex flex-wrap gap-2 mt-3">
       <%= render "shared/playback_back" %>
       <%= render "shared/playback_speed" %>

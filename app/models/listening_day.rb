@@ -1,7 +1,8 @@
 # Seconds a learner spent listening on one day, kept so Today can show an
 # honest "this week" figure (the lifetime total in ListeningTime cannot say
 # when the listening happened). `seconds` is all of it: whole Abairt
-# recordings and short clips; `clip_seconds` is the part that was clips, which
+# recordings, listening clips and lessons' own audio; `clip_seconds` is the
+# part that wasn't a whole recording (clips and lesson audio), which
 # ListeningTime doesn't hold, so the lifetime total can add it.
 class ListeningDay < ApplicationRecord
   belongs_to :user
@@ -21,7 +22,7 @@ class ListeningDay < ApplicationRecord
     ]))
   end
 
-  # Time spent playing a listening clip, as reported by its page.
+  # Time spent playing a listening clip or a lesson's audio, as reported by its page.
   def self.add_clip(user, seconds)
     add(user, seconds.to_s.to_i.clamp(0, ListeningTime::MAX_REPORT), clip: true)
   end

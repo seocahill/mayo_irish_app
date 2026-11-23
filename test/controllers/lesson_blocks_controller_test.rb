@@ -50,7 +50,7 @@ class LessonBlocksControllerTest < ActionDispatch::IntegrationTest
 
     get lesson_path(@block.lesson)
 
-    assert_select "figure[data-controller='playback'] audio[data-playback-target='audio']"
+    assert_select "figure[data-controller~='playback'] audio[data-playback-target='audio']"
     assert_select "figure button[data-action='playback#cycleSpeed'] [data-playback-target=speedLabel]", text: "1×"
     assert_select "figure [data-playback-target=speedStatus][aria-live=polite]"
     assert_select "figure button[data-action='playback#toggleLoop']", text: I18n.t("lesson_blocks.show_block.repeat")
