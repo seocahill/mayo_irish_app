@@ -11,7 +11,7 @@
        data-listen-time-report-url-value="<%= listening_clip_listening_time_path(@clip) %>">
     <audio controls preload="auto" src="<%= @clip.audio_url %>" class="w-full"
            data-playback-target="audio" data-listen-time-target="audio"
-           data-action="play->listen-time#started timeupdate->listen-time#count pause->listen-time#report ended->listen-time#report"></audio>
+           data-action="play->listen-time#started timeupdate->listen-time#count pause->listen-time#stopped ended->listen-time#stopped"></audio>
     <div class="flex flex-wrap justify-center gap-2">
       <%= render "shared/playback_back" %>
       <%= render "shared/playback_speed" %>

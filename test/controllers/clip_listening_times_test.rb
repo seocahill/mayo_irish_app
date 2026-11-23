@@ -14,7 +14,7 @@ class ClipListeningTimesTest < ActionDispatch::IntegrationTest
 
     assert_select "[data-controller~='listen-time'][data-listen-time-report-url-value=?]", listening_clip_listening_time_path(@clip) do
       assert_select "audio[data-listen-time-target=audio][data-playback-target=audio]" \
-                    "[data-action~='timeupdate->listen-time#count'][data-action~='pause->listen-time#report']"
+                    "[data-action~='timeupdate->listen-time#count'][data-action~='pause->listen-time#stopped']"
     end
   end
 

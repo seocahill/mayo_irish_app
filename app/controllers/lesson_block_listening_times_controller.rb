@@ -6,7 +6,7 @@ class LessonBlockListeningTimesController < ApplicationController
   rate_limit to: 30, within: 1.minute, by: -> { current_user.id }, with: -> { head :too_many_requests }
 
   def update
-    LessonBlock.where(block_type: "audio", lesson: Lesson.visible_to(current_user)).find(params[:lesson_block_id])
+    LessonBlock.where(block_type: "audio", lesson: Lesson.visible_to(current_user)).joins(:file_attachment).find(params[:lesson_block_id])
     ListeningDay.add_clip(current_user, params[:seconds].to_s)
     head :no_content
   end
