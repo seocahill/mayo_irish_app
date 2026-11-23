@@ -905,6 +905,7 @@ en:
       ago: "%{time} ago"
       conversations: Conversations
       eyebrow: Listen
+      followed: Followed
       got_it: Got it
       listened:
         one: 1 minute
@@ -913,6 +914,7 @@ en:
         from.
       no_phrases: None yet. A new phrase comes up on the daily path once you've finished
         a lesson.
+      not_followed_yet: Not followed yet
       not_yet: Not yet
       phrases: Phrases
       summary: Everything you've listened to, to go back to. Phrases you didn't get
@@ -1099,6 +1101,11 @@ en:
       keep_going: Keep going
       round_complete: Round complete
       score: "%{correct} of %{answered}"
+  recording_follows:
+    update:
+      followed: Saved. You followed it.
+      listen_first: Listen to it first, then say whether you followed it.
+      not_yet: Saved. Give it another listen in a while.
   recording_questions:
     create:
       saved: Question added. Learners see it above the player.
@@ -1123,18 +1130,25 @@ en:
       carry_on: Carry on from %{time}
       carry_on_fallback: Carry on where you stopped
       eyebrow: Listen · conversation
+      followed_heading: Did you follow it?
+      followed_how: Your own word, not a test. Say you followed it when you could
+        keep up with what was said, even if you missed some words.
       from_abairt: Recorded and transcribed on Abairt. Only checked lines are shown,
         so there are some gaps.
       hidden_line: Line hidden, %{time}. Play from here
       hide_words: Hide Irish
       how_to_listen: Don't try to catch every word. Listen for the rhythm of the talk
         and for words you know, and tap a line to hear it again.
+      i_followed: I followed it
       no_transcript: This recording hasn't been transcribed yet. Listen anyway.
+      not_yet: Not yet
       repeat: Repeat line
       show_english: English
       speaker_unknown: Abairt
       unavailable: The recording couldn't be loaded from Abairt. Try again later.
       untitled: A recording from Abairt
+      you_followed: You said you followed this one. Come back to it any time.
+      you_not_yet: Not yet. It's worth another listen in a while; it gets easier.
   registrations:
     invite_only:
       have_account_html: Already have an account? %{link}
