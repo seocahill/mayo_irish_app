@@ -18,7 +18,8 @@ module Mcp
       Tools::WhatChanged,
       Tools::SearchCourse,
       Tools::ReviewQueue,
-      Tools::CourseGaps
+      Tools::CourseGaps,
+      Tools::LearnerQuestions
     ].freeze
 
     def self.build(user)

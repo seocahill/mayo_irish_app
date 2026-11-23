@@ -117,6 +117,7 @@ read-only; no tool deletes anything.
 |---|---|
 | `what_changed` | opens a session: what became of his ideas, what is waiting on him |
 | `review_queue` | next 3 to 5 proposals, two lines each, ranked |
+| `learner_questions` | what learners asked native speakers, the answers, and ideas saved from them (read-only, learners unnamed) |
 | `get_proposal` | rationale, evidence, quotes, audio links |
 | `respond` | accept, dismiss, edit, ask a question or defer, with a note |
 | `capture_idea` | stores his idea verbatim; Irish terms go in a separate field (§7) |
