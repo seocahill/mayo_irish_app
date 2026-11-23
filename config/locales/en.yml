@@ -472,6 +472,12 @@ en:
       text: Text
       video: Video
   lesson_chat:
+    message:
+      daily_limit: That's today's limit for the tutor. Come back tomorrow.
+      no_speech_service: The speech service couldn't be reached. Try typing instead.
+      not_heard: Didn't catch that. Try again, or type it.
+      too_fast: Slow down a little, then try again.
+      too_long: That recording is too long. Keep it under 30 seconds.
     show:
       ai_generated: AI-generated
       ai_notice: The tutor's replies are written by AI. It is told to quote Irish
@@ -479,8 +485,14 @@ en:
         the lesson or ask a native speaker.
       back_to_lesson: "← Back to the lesson"
       empty_state: Type "start" or anything to begin the lesson.
+      heard_as: Heard as
+      heard_as_note: "“Heard as” shows what ABAIR's speech recogniser made of what
+        you said. It can mishear Mayo forms, so it isn't a mark of how well you spoke."
       placeholder: Write your answer...
       practise_label: Practise · Lesson %{number}
+      record: Say your answer in Irish
+      record_hint: Tap the microphone to say an answer in Irish, and again to send.
+        The recogniser only knows Irish, so type answers in English.
       send: Send
       start_again: Start again
   lesson_conversation_messages:
