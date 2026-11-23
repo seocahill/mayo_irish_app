@@ -125,6 +125,10 @@ en:
           description: The words learners get wrong most often in review, hardest
             first.
           name: Words learners miss
+        learner_questions:
+          description: The spoken questions learners have sent to native speakers,
+            and the speakers' answers.
+          name: Learners' questions
         learners:
           description: Approve new learners and see how each one is getting on.
           name: Learners
@@ -395,6 +399,25 @@ en:
   learner_approvals:
     create:
       approved: "%{email} can now sign in to the course."
+  learner_questions:
+    index:
+      answer: The speaker's answer
+      asked_ago: Asked %{time} ago
+      count: "%{answered} of %{total} answered"
+      eyebrow: Course tools
+      no_lesson: Not about a lesson
+      none: No learner has asked a native speaker anything yet.
+      question: The learner's question
+      showing: Showing the newest %{shown} of %{total}.
+      status:
+        answered: Answered
+        sent: With a speaker
+        waiting: Waiting for a speaker
+      summary: What learners have asked native speakers by voice, newest first, with
+        the speaker's spoken answer once there is one. Learners aren't named, but
+        these are their own voices. Listen for where a lesson is unclear, and for
+        answers worth folding into the course.
+      title: Learners' questions
   learners:
     index:
       answers: Answers
