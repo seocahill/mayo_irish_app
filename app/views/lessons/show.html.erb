@@ -40,19 +40,7 @@
     <template data-speakable-target="inline">
       <%= render "shared/speak_button", src: "", label: "", compact: true %>
     </template>
-    <div hidden class="absolute z-30" data-speakable-target="selection" data-controller="pronounce" data-pronounce-src-value="">
-      <button type="button"
-              data-pronounce-target="button"
-              data-action="mousedown->speakable#keepSelection click->pronounce#play"
-              class="btn-solid gap-1.5 px-3 py-1.5 text-xs shadow-lg data-[state=loading]:animate-pulse data-[state=error]:bg-red-600"
-              title="<%= t("shared.speak_button.title") %>">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M11 5L6 9H2v6h4l5 4V5z"/>
-        </svg>
-        <%= t(".hear_selection") %>
-      </button>
-      <span data-pronounce-target="status" class="sr-only" aria-live="polite"></span>
-    </div>
+    <%= render "shared/hear_selection" %>
     <p class="-mt-4 mb-6 text-xs text-muted" data-synthetic-note><%= t(".synthetic_note") %></p>
   <% end %>
 

@@ -263,6 +263,11 @@
   title: Hear what came of your question
   body: On Ask a native speaker, a question now says when a course designer has saved it to help improve the course, and later when it is used to change the course. Your questions to native speakers shape the lessons.
   path: /native_questions
+- id: 46
+  date: 2026-11-23
+  title: Hear the Irish in the tutor chat
+  body: In a lesson's Practise chat, select any Irish, in the tutor's replies or your own answers, and tap "Hear it" to hear it read aloud. It's ABAIR's synthetic voice, not a Mayo speaker, so use it to get a feel for the sounds and check against the lesson's recordings.
+  path: /lessons
 - id: 47
   date: 2026-11-23
   title: Phrases you made out

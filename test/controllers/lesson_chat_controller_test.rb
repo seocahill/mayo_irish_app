@@ -194,4 +194,23 @@ class LessonChatControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to lesson_chat_path(@lesson)
     assert_not_requested :post, OpenaiTestHelper::CHAT_URL
   end
+
+  test "any Irish in the tutor chat can be selected and heard, saying the voice is synthetic" do
+    with_abair_key { get lesson_chat_path(@lesson) }
+
+    assert_select "[data-controller=speakable][data-speakable-src-value=?]", speech_path do
+      assert_select "[data-speakable-target=selection] button", text: /Hear it \(synthetic\)/
+      assert_select "#chat-messages[data-action=?]", "scroll->speakable#hide"
+      assert_select "form[data-speakable-ignore] textarea"
+    end
+    assert_select "[data-synthetic-note]", text: /synthetic voice, not a Mayo speaker/
+  end
+
+  test "without a speech key the tutor chat offers no read-aloud" do
+    with_abair_key("") { get lesson_chat_path(@lesson) }
+
+    assert_select "[data-controller=speakable]", count: 0
+    assert_select "[data-synthetic-note]", count: 0
+    assert_select "#chat-messages"
+  end
 end
