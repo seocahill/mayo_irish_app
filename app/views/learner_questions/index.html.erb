@@ -26,13 +26,13 @@
             </span>
             <span class="chip <%= 'border-eist text-eist' if question.answered? %>"><%= status_labels.fetch(question.status) %></span>
           </div>
-          <% if question.audio_url.present? %>
+          <% if question.audio_url.to_s.start_with?("https://") %>
             <div>
               <p class="eyebrow mb-1"><%= t(".question") %></p>
               <audio controls preload="none" src="<%= question.audio_url %>" class="h-8 w-full max-w-xs"></audio>
             </div>
           <% end %>
-          <% if question.answered? && question.answer_audio_url.present? %>
+          <% if question.answered? && question.answer_audio_url.to_s.start_with?("https://") %>
             <div>
               <p class="eyebrow mb-1 text-eist"><%= t(".answer") %></p>
               <audio controls preload="none" src="<%= question.answer_audio_url %>" class="h-8 w-full max-w-xs"></audio>

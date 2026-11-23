@@ -414,8 +414,9 @@ en:
         sent: With a speaker
         waiting: Waiting for a speaker
       summary: What learners have asked native speakers by voice, newest first, with
-        the speaker's spoken answer once there is one. Learners aren't named. Listen
-        for where a lesson is unclear, and for answers worth folding into the course.
+        the speaker's spoken answer once there is one. Learners aren't named, but
+        these are their own voices. Listen for where a lesson is unclear, and for
+        answers worth folding into the course.
       title: Learners' questions
   learners:
     index:
