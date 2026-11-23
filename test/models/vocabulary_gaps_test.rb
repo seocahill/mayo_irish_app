@@ -261,12 +261,14 @@ class VocabularyGapsTest < ActiveSupport::TestCase
     clip.(later_item, 1, 15, "A Story")
     clip.(early_item, 2, 15, "A Story")
     clip.(later_item, 3, 16, "")
+    clip.(later_item, 6, 18, "Second")
+    clip.(later_item, 7, 18, "")
     clip.(later_item, 4, 17, "Hidden one", status: "hidden")
     clip.(later_item, 5, nil, nil)
 
     rows = VocabularyGaps.new.unquestioned_lessons
-    assert_equal [ [ first, [ [ 15, "A Story" ] ] ], [ later, [ [ 16, nil ] ] ] ], rows.map { |r| [ r.lesson, r.recordings.map { |rec| [ rec.id, rec.title ] } ] }
-    assert_equal [ 1, 1 ], rows.map(&:count)
+    assert_equal [ [ first, [ [ 15, "A Story" ] ] ], [ later, [ [ 16, nil ], [ 18, "Second" ] ] ] ], rows.map { |r| [ r.lesson, r.recordings.map { |rec| [ rec.id, rec.title ] } ] }
+    assert_equal [ 1, 2 ], rows.map(&:count)
 
     RecordingQuestion.create!(abairt_recording_id: 15, question: "Q", answer: "A")
     assert_equal [ later ], VocabularyGaps.new.unquestioned_lessons.map(&:lesson)

@@ -129,11 +129,12 @@ class VocabularyGaps
                           .where.not(abairt_recording_id: RecordingQuestion.select(:abairt_recording_id))
                           .joins(vocabulary_item: :lesson).order("lessons.position", "lessons.number", :abairt_recording_id)
                           .pluck("lessons.id", :abairt_recording_id, :abairt_recording_title)
-      rows = rows.uniq { |_, recording_id, _| recording_id }
+      titles = rows.group_by(&:second).transform_values { |same| same.map(&:last).find(&:present?) }
+      rows = rows.uniq(&:second)
       lessons = Lesson.where(id: rows.map(&:first)).index_by(&:id)
       rows.group_by(&:first).map do |lesson_id, recordings|
         Unquestioned.new(lesson: lessons.fetch(lesson_id),
-                         recordings: recordings.map { |_, id, title| Recording.new(id: id, title: title.presence) })
+                         recordings: recordings.map { |_, id, _| Recording.new(id: id, title: titles[id]) })
       end
     end
   end

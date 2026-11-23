@@ -185,7 +185,7 @@
       <ul class="flex flex-col gap-2">
         <% @unquestioned_lessons.each do |row| %>
           <li class="card px-4 py-3 text-sm">
-            <span class="font-medium"><%= row.lesson.display_title %></span>
+            <%= link_to row.lesson.display_title, edit_lesson_path(row.lesson), class: "underline font-medium" %>
             <span class="text-muted">· <%= t(".unquestioned_count", count: row.count) %></span>
             <ul class="mt-1 flex flex-col">
               <% row.recordings.each do |recording| %>

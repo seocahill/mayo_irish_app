@@ -62,8 +62,15 @@ class Mcp::CourseGapsTest < ActiveSupport::TestCase
 
     _, data = call
 
-    assert_equal [ { "number" => 1, "title" => "Lesson One", "words" => 1 } ], data["checks"]["conversations_without_questions"]["lessons"]
+    assert_equal [ { "number" => 1, "title" => "Lesson One", "words" => 1, "recordings" => [ { "abairt_recording_id" => 15, "title" => "A Story" } ] } ],
+                 data["checks"]["conversations_without_questions"]["lessons"]
     assert_includes call(lesson: 1).last["fails"], "conversations_without_questions"
+    assert_not_includes data["checks"]["no_words"]["lessons"].first.keys, "recordings"
+
+    # A later lesson leading to the same conversation doesn't list it again.
+    ListeningClip.create!(vocabulary_item: VocabularyItem.create!(lesson: @empty, irish: "zz", english: "zz"), abairt_entry_id: 2, irish: "x y z", english: "x y z",
+                          audio_url: "https://example.org/2.mp3", word_count: 3, abairt_recording_id: 15)
+    assert_not_includes call(lesson: 2).last["fails"], "conversations_without_questions"
 
     RecordingQuestion.create!(abairt_recording_id: 15, question: "Q", answer: "A")
     assert_not_includes call(lesson: 1).last["fails"], "conversations_without_questions"
