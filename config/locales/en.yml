@@ -399,15 +399,28 @@ en:
   learner_approvals:
     create:
       approved: "%{email} can now sign in to the course."
+  learner_question_ideas:
+    create:
+      blank: Write the idea first.
+      not_saved: The idea couldn't be saved with this question. Try again, or add
+        it on Proposals.
+      saved: Idea saved to Proposals, with this question as evidence.
+      too_long: That idea is too long. Keep it under 2,000 characters.
   learner_questions:
     index:
       answer: The speaker's answer
       asked_ago: Asked %{time} ago
       count: "%{answered} of %{total} answered"
       eyebrow: Course tools
+      idea_label: What does this question show? In your own words, for the Proposals
+        inbox.
+      idea_save: Save idea
+      ideas_saved: 'Ideas from this question:'
       no_lesson: Not about a lesson
       none: No learner has asked a native speaker anything yet.
       question: The learner's question
+      save_another_idea: Save another idea from it
+      save_idea: Save as an idea
       showing: Showing the newest %{shown} of %{total}.
       status:
         answered: Answered
@@ -822,6 +835,10 @@ en:
       not_yet: Your first words come from a lesson's quiz
       of_course: "%{known} of %{total} in the course"
       reached: "%{count} words known"
+  native_question:
+    evidence_source: A learner's question to a native speaker (Abairt question %{id}),
+      asked on %{date} from %{lesson}
+    no_lesson: no lesson
   native_questions:
     create:
       no_recording: Record your question first.

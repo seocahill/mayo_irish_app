@@ -7,6 +7,8 @@
 class NativeQuestion < ApplicationRecord
   belongs_to :user
   belongs_to :lesson, optional: true
+  # Evidence behind ideas a designer saved from this question.
+  has_many :proposal_evidence, -> { order(:created_at, :id) }, class_name: "ProposalEvidence", dependent: :nullify
 
   enum :status, { waiting: "waiting", sent: "sent", answered: "answered" }, validate: true
 
@@ -40,4 +42,36 @@ class NativeQuestion < ApplicationRecord
   end
 
   def new_answer? = answered? && answer_seen_at.nil?
+
+  # Saves a designer's own words about this question as an idea in the
+  # proposals inbox, with the question as evidence: where it was asked and,
+  # if it is answered by then, a link to the speaker's answer (the question
+  # stays linked, so a later answer shows on its page). The learner's recording
+  # is not attached, so their voice goes no further.
+  def save_as_idea!(text, origin:)
+    transaction do
+      proposal = CourseProposal.capture(text, origin: origin)
+      proposal.save!
+      proposal.proposal_evidence.create!(native_question: self, source: evidence_source, audio_url: https_answer_audio_url)
+      proposal
+    end
+  end
+
+  def ideas = proposal_evidence.map(&:course_proposal).uniq
+
+  private
+
+  def evidence_source
+    I18n.t("native_question.evidence_source", id: abairt_question_id, date: I18n.l(created_at.to_date, format: :long),
+           lesson: lesson&.display_title&.truncate(LESSON_TITLE_LENGTH) || I18n.t("native_question.no_lesson"))
+  end
+
+  LESSON_TITLE_LENGTH = 200
+  AUDIO_URL_LENGTH = 500
+
+  # Only a plain https link that fits the evidence's audio field.
+  def https_answer_audio_url
+    url = answer_audio_url.to_s
+    url if answered? && url.start_with?("https://") && url.length <= AUDIO_URL_LENGTH
+  end
 end
