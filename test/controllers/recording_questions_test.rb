@@ -36,6 +36,23 @@ class RecordingQuestionsTest < ActionDispatch::IntegrationTest
     assert flash[:alert].present?
   end
 
+  test "a question or answer can't run past the limit" do
+    sign_in_as(users(:admin))
+
+    assert_no_difference -> { RecordingQuestion.count } do
+      post recording_questions_path(15), params: { recording_question: { question: "Q", answer: "a" * (RecordingQuestion::MAX_LENGTH + 1) } }
+    end
+    assert flash[:alert].present?
+  end
+
+  test "removing a question that's already gone is not found" do
+    sign_in_as(users(:admin))
+
+    delete recording_question_path(12345)
+
+    assert_response :not_found
+  end
+
   test "only recordings the course offers take questions" do
     sign_in_as(users(:admin))
 
@@ -78,7 +95,8 @@ class RecordingQuestionsTest < ActionDispatch::IntegrationTest
     assert_select "section#questions h2", text: I18n.t("recording_questions.section.heading")
     assert_select "[data-testid=recording-question]", count: 2
     assert_select "[data-testid=recording-question]:first-child p", text: "Who is speaking?"
-    assert_select "[data-testid=recording-question] details summary", text: I18n.t("recording_questions.section.show_answer")
+    assert_select "[data-testid=recording-question] details summary", text: /#{I18n.t("recording_questions.section.show_answer")}/
+    assert_select "[data-testid=recording-question]:first-child summary .sr-only", text: I18n.t("recording_questions.section.to_question", n: 1).strip
     assert_select "[data-testid=recording-question] details p", text: "In the field"
     assert_select "section#questions form", false
     assert_select "section#questions button", false
@@ -103,7 +121,10 @@ class RecordingQuestionsTest < ActionDispatch::IntegrationTest
       assert_select "textarea[name='recording_question[question]'][required]"
       assert_select "textarea[name='recording_question[answer]'][required]"
     end
-    assert_select "section#questions form[action=?] button", recording_question_path(RecordingQuestion.last), text: I18n.t("recording_questions.section.remove")
+    question = RecordingQuestion.last
+    assert_select "section#questions form[action=?] button[aria-describedby=?]", recording_question_path(question), "recording-question-#{question.id}",
+                  text: I18n.t("recording_questions.section.remove")
+    assert_select "p#recording-question-#{question.id}", text: "Q"
   end
 
   test "an editor's account can go without losing the questions they wrote" do

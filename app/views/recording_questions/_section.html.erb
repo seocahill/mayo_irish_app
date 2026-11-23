@@ -10,17 +10,18 @@
 
     <% if questions.any? %>
       <ol class="flex flex-col gap-2 list-decimal pl-5">
-        <% questions.each do |q| %>
+        <% questions.each.with_index(1) do |q, n| %>
           <li data-testid="recording-question">
-            <p class="break-words"><%= q.question %></p>
-            <details class="mt-1">
-              <summary class="cursor-pointer text-sm text-muted min-h-8"><%= t(".show_answer") %></summary>
-              <p class="text-sm mt-1 break-words"><%= q.answer %></p>
+            <p id="recording-question-<%= q.id %>" class="break-words"><%= q.question %></p>
+            <details>
+              <summary class="cursor-pointer text-sm text-muted py-3"><%= t(".show_answer") %><span class="sr-only"><%= t(".to_question", n: n) %></span></summary>
+              <p class="text-sm break-words"><%= q.answer %></p>
             </details>
             <% if current_user.admin? %>
               <%= button_to t(".remove"), recording_question_path(q), method: :delete,
-                            form: { class: "mt-1", data: { turbo_confirm: t(".remove_confirm") } },
-                            class: "text-xs text-muted underline min-h-8" %>
+                            form: { data: { turbo_confirm: t(".remove_confirm") } },
+                            "aria-describedby": "recording-question-#{q.id}",
+                            class: "text-xs text-muted underline min-h-11" %>
             <% end %>
           </li>
         <% end %>

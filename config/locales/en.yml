@@ -945,6 +945,7 @@ en:
       remove: Remove
       remove_confirm: Remove this question?
       show_answer: Show the answer
+      to_question: " to question %{n}"
   recordings:
     show:
       carry_on: Carry on from %{time}
