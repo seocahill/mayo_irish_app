@@ -280,4 +280,23 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
     get vocabulary_gaps_path
     assert_select "#unsourced-lessons a", count: 0
   end
+
+  test "admins see conversations with no questions to listen for, each linking to where they're written" do
+    ListeningClip.delete_all
+    lesson = Lesson.first
+    item = VocabularyItem.create!(lesson: lesson, irish: "zz", english: "zz")
+    ListeningClip.create!(vocabulary_item: item, abairt_entry_id: 1, irish: "x y z", english: "x y z", audio_url: "https://example.com/a.mp3",
+                          word_count: 3, abairt_recording_id: 15, abairt_recording_title: "A Story")
+    sign_in_as(users(:admin))
+
+    get vocabulary_gaps_path
+
+    assert_select "#unquestioned-lessons", text: /#{Regexp.escape(lesson.display_title)}/
+    assert_select "#unquestioned-lessons", text: /1 conversation/
+    assert_select "#unquestioned-lessons a[href=?]", recording_path(15, anchor: "questions"), text: "A Story"
+
+    RecordingQuestion.create!(abairt_recording_id: 15, question: "Q", answer: "A")
+    get vocabulary_gaps_path
+    assert_select "#unquestioned-lessons p", text: I18n.t("vocabulary_gaps.show.unquestioned_empty")
+  end
 end

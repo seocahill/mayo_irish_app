@@ -176,6 +176,28 @@
     <% end %>
   </section>
 
+  <section id="unquestioned-lessons" class="flex flex-col gap-3">
+    <h2 class="font-display text-2xl"><%= t(".unquestioned_title") %></h2>
+    <p class="text-muted text-sm"><%= t(".unquestioned_summary") %></p>
+    <% if @unquestioned_lessons.empty? %>
+      <p class="text-sm text-muted"><%= t(".unquestioned_empty") %></p>
+    <% else %>
+      <ul class="flex flex-col gap-2">
+        <% @unquestioned_lessons.each do |row| %>
+          <li class="card px-4 py-3 text-sm">
+            <%= link_to row.lesson.display_title, edit_lesson_path(row.lesson), class: "underline font-medium" %>
+            <span class="text-muted">· <%= t(".unquestioned_count", count: row.count) %></span>
+            <ul class="mt-1 flex flex-col">
+              <% row.recordings.each do |recording| %>
+                <li><%= link_to recording.title || t(".untitled_recording"), recording_path(recording.id, anchor: "questions"), class: "underline inline-block py-1.5" %></li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
+
   <section id="uncredited-lessons" class="flex flex-col gap-3">
     <h2 class="font-display text-2xl"><%= t(".uncredited_title") %></h2>
     <p class="text-muted text-sm"><%= t(".uncredited_summary") %></p>

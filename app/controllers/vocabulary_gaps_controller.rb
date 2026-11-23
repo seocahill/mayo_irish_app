@@ -11,6 +11,7 @@ class VocabularyGapsController < ApplicationController
     @unpractised_lessons = report.unpractised_lessons
     @ungrammared_lessons = report.ungrammared_lessons
     @unlistened_lessons = report.unlistened_lessons
+    @unquestioned_lessons = report.unquestioned_lessons
     @uncredited_lessons = report.uncredited_lessons
     @unreviewed_lessons = report.unreviewed_lessons
     @unread_lessons = report.unread_lessons

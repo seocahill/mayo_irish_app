@@ -7,13 +7,15 @@ module Mcp
 
       # Each lesson-level check: what it means, and the report method that lists
       # the lessons failing it. `words` on each lesson is the number of words the
-      # check counts (all of them, or only those missing the thing).
+      # check counts (all of them, or only those missing the thing), or for
+      # conversations_without_questions, the number of conversations.
       CHECKS = {
         no_words: [ "Lessons with no vocabulary at all", :empty_lessons ],
         no_recordings: [ "Lessons where no word has a speaker recording", :silent_lessons ],
         nothing_to_practise: [ "Lessons with words but no exercises and no phrases", :unpractised_lessons ],
         no_grammar_notes: [ "Lessons with words but no grammar rules", :ungrammared_lessons ],
         no_listening_clips: [ "Lessons where no word has a listed Abairt listening clip", :unlistened_lessons ],
+        conversations_without_questions: [ "Whole Abairt conversations behind listed listening clips with no questions to listen for, each under the first lesson that leads to it (words = how many conversations; recordings = their Abairt ids and titles)", :unquestioned_lessons ],
         no_reading_text: [ "Lessons with words but no reading text", :unread_lessons ],
         recordings_without_speaker: [ "Lessons with recorded words that name no speaker (words = how many)", :uncredited_lessons ],
         words_without_source: [ "Lessons with words that have no source note (words = how many)", :unsourced_lessons ],
@@ -23,7 +25,7 @@ module Mcp
       tool_name "course_gaps"
       description "What the course is missing, from the same report as the Vocabulary gaps page. With no lesson: " \
                   "each check (no words, no recordings, nothing to practise, no grammar notes, no listening clips, " \
-                  "no reading text, recordings with no speaker, words with no source, not reviewed) with the lessons " \
+                  "conversations with no questions to listen for, no reading text, recordings with no speaker, words with no source, not reviewed) with the lessons " \
                   "that fail it (up to #{LESSONS_PER_CHECK} each), how many words lack a genitive, plural or recording " \
                   "and in how many lessons, " \
                   "words not yet marked noun/verb/etc., repeated words, thin everyday themes, and words used before " \
@@ -96,7 +98,9 @@ module Mcp
 
       def self.lesson_entry(entry)
         lesson = lesson_of(entry)
-        { number: lesson.number, title: lesson.title, words: entry.is_a?(Lesson) ? 0 : entry.count }
+        found = { number: lesson.number, title: lesson.title, words: entry.is_a?(Lesson) ? 0 : entry.count }
+        found[:recordings] = entry.recordings.map { |r| { abairt_recording_id: r.id, title: r.title } } if entry.respond_to?(:recordings)
+        found
       end
 
       def self.lesson_of(entry) = entry.is_a?(Lesson) ? entry : entry.lesson

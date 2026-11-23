@@ -115,6 +115,30 @@ class VocabularyGaps
     end
   end
 
+  Unquestioned = Struct.new(:lesson, :recordings, keyword_init: true) do
+    def count = recordings.size
+  end
+  Recording = Struct.new(:id, :title, keyword_init: true)
+
+  # Whole conversations (the Abairt recordings behind listed listening clips)
+  # with no questions to listen for yet, under the first lesson in the course
+  # that leads to each, so designers can see where to write some. Read-only.
+  def unquestioned_lessons
+    @unquestioned_lessons ||= begin
+      rows = ListeningClip.listed.where.not(abairt_recording_id: nil)
+                          .where.not(abairt_recording_id: RecordingQuestion.select(:abairt_recording_id))
+                          .joins(vocabulary_item: :lesson).order("lessons.position", "lessons.number", :abairt_recording_id)
+                          .pluck("lessons.id", :abairt_recording_id, :abairt_recording_title)
+      titles = rows.group_by(&:second).transform_values { |same| same.map(&:last).find(&:present?) }
+      rows = rows.uniq(&:second)
+      lessons = Lesson.where(id: rows.map(&:first)).index_by(&:id)
+      rows.group_by(&:first).map do |lesson_id, recordings|
+        Unquestioned.new(lesson: lessons.fetch(lesson_id),
+                         recordings: recordings.map { |_, id, _| Recording.new(id: id, title: titles[id]) })
+      end
+    end
+  end
+
   Uncredited = Struct.new(:lesson, :count, keyword_init: true)
 
   # Lessons where some words have a recording but no named speaker, so
