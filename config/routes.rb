@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   resource :course_tools, only: :show
   resource :where_taught, only: :show, controller: "where_taught"
   resource :hard_words, only: :show
+  resource :hard_clips, only: :show
   resources :learner_questions, only: :index do
     resource :idea, only: :create, controller: "learner_question_ideas"
   end

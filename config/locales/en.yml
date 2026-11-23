@@ -121,6 +121,10 @@ en:
           description: Words missing a plural, genitive or recording, words taught
             twice, thin themes and lessons with no recordings.
           name: Vocabulary gaps
+        hard_clips:
+          description: The Mayo speakers' phrases learners most often couldn't make
+            out on listening clips.
+          name: Phrases learners couldn't make out
         hard_words:
           description: The words learners get wrong most often in review, hardest
             first.
@@ -284,6 +288,21 @@ en:
         an invitation link, open it to register.
       more: How the course works
       title: A course in the Irish of Mayo
+  hard_clips:
+    show:
+      draft: Draft
+      eyebrow: Course tools
+      lesson: Lesson
+      lesson_clips: The lesson's listening clips
+      none: No learner has said "Not yet" on a listening clip yet.
+      not_yet: Couldn't make it out
+      not_yet_value: "%{not_yet} of %{answers} who answered (%{percent}%)"
+      open_clip: Open the clip
+      summary: Listening clips learners answered "Not yet" on, hardest first. Each
+        learner counts once per clip, with their latest answer. Only learners count,
+        not admins, and hidden clips are left out. It only looks; nothing changes.
+      title: Phrases learners couldn't make out
+      word: Picked for the word
   hard_words:
     show:
       draft: Draft
