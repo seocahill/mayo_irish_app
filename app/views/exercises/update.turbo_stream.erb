@@ -1,0 +1,2 @@
+<%= turbo_stream.replace dom_id(@exercise), partial: "exercises/exercise", locals: { exercise: @exercise } %>
+<%= turbo_stream.replace "exercises_count", partial: "exercises/count", locals: { lesson: @exercise.lesson } %>

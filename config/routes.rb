@@ -84,6 +84,7 @@ Rails.application.routes.draw do
     end
     resources :grammar_rules, only: [:edit, :update], shallow: true
     resources :grammar_sections, only: [:edit, :update], shallow: true
+    resources :exercises, only: [:edit, :update], shallow: true
     resources :lesson_blocks, only: [:create, :edit, :update, :destroy], shallow: true do
       resource :listening_time, only: :update, controller: "lesson_block_listening_times"
       post :reorder, on: :collection

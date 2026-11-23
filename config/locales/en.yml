@@ -4,6 +4,9 @@ en:
     attributes:
       action_text/rich_text:
         body: Text
+      exercise:
+        answer: Answer
+        prompt: Exercise
       grammar_rule:
         title: Title
       grammar_section:
@@ -252,6 +255,21 @@ en:
       unsupported_embed: isn't an Abairt page. Use an https://abairt.com link.
       unsupported_video: isn't a supported video. Use a YouTube or Vimeo link, an
         embed code, or an https link to an .mp4 or .webm file.
+  exercises:
+    count:
+      description: "%{answered} of %{count} have an answer. Write each answer in Mayo
+        Irish; learners will be able to compare their own try with it."
+    edit:
+      answer: Answer in Mayo Irish
+      answer_help: Leave it empty if you're not sure yet. Saving is in the lesson's
+        history and can be undone.
+      answer_placeholder: How a Mayo speaker would say it
+      prompt: Exercise %{number}
+    exercise:
+      answer: Answer
+      edit_label: Edit exercise %{number}
+      no_answer: No answer yet
+    label: Exercise %{number}
   flagged_replies:
     destroy:
       dismissed: Flag dismissed.
@@ -321,6 +339,7 @@ en:
   history:
     kinds:
       action_text_rich_text: Text
+      exercise: Exercise
       grammar_rule: Grammar rule
       grammar_section: Grammar section
       lesson: Lesson
@@ -648,12 +667,13 @@ en:
       add_block: Add a new block
       back_to_lesson: "← Back to the lesson"
       clear_review: Clear review
-      content_description: Grammar notes parsed from the book
+      content_description: Grammar notes and exercises parsed from the book
       content_title: Lesson content
       details_description: Title, vocabulary and notes
       details_title: Lesson details
       editing: Editing · Lesson %{number}
       english: English
+      exercises: Exercises
       gender: Gender
       gender_label: Gender
       genitive: Genitive

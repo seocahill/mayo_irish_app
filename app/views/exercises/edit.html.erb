@@ -1,0 +1,24 @@
+<turbo-frame id="<%= dom_id(@exercise) %>">
+  <%= form_with model: @exercise do |f| %>
+    <div class="px-5 py-4 bg-canvas border-b border-line space-y-3">
+      <% if @exercise.errors.any? %>
+        <p class="text-sm text-red-700 dark:text-red-400" role="alert"><%= @exercise.errors.full_messages.to_sentence %></p>
+      <% end %>
+      <div>
+        <%= f.label :prompt, t(".prompt", number: @exercise.number), class: "editor-label" %>
+        <%= f.text_area :prompt, rows: 2, class: "editor-input" %>
+      </div>
+      <div>
+        <%= f.label :answer, t(".answer"), class: "editor-label" %>
+        <%= f.text_area :answer, rows: 2, lang: "ga", class: "editor-input", placeholder: t(".answer_placeholder") %>
+        <p class="text-xs text-muted mt-1"><%= t(".answer_help") %></p>
+      </div>
+    </div>
+    <div class="px-5 py-3 flex items-center justify-between">
+      <a href="<%= edit_lesson_path(@exercise.lesson) %>"
+         data-turbo-frame="<%= dom_id(@exercise) %>"
+         class="text-sm text-muted hover:text-ink transition-colors"><%= t("shared.cancel") %></a>
+      <%= f.submit t("shared.save"), class: "btn-solid" %>
+    </div>
+  <% end %>
+</turbo-frame>
