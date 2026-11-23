@@ -25,7 +25,7 @@
     </ul>
   <% end %>
 
-  <% unless lesson.published? %>
+  <% unless lesson.published_in_database %>
     <%= form_with model: LessonSlot.new, url: lesson_slots_path(lesson), class: "flex flex-col gap-3" do |f| %>
       <div class="grid gap-3 sm:grid-cols-3">
         <div>

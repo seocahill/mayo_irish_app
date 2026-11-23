@@ -1,7 +1,7 @@
 class CreateLessonSlots < ActiveRecord::Migration[8.1]
   def change
     create_table :lesson_slots do |t|
-      t.references :lesson, null: false, foreign_key: true
+      t.references :lesson, null: false, foreign_key: true, index: false
       t.string :slot_type, null: false
       t.text :spec, null: false
       t.string :status, null: false, default: "open"

@@ -51,6 +51,9 @@ class LessonSlotsControllerTest < ActionDispatch::IntegrationTest
     get edit_lesson_path(@lesson)
     assert_select "##{ActionView::RecordIdentifier.dom_id(slot)}", count: 0
     assert_select "[data-open-slots]", count: 0
+
+    delete slot_path(slot)
+    assert_equal I18n.t("lesson_slots.destroy.already_removed"), flash[:notice]
   end
 
   test "ticking Published with an open slot is refused and says how many are open" do
@@ -60,6 +63,7 @@ class LessonSlotsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :unprocessable_entity
     assert_select "[role=alert]", text: /1 slot is open/
+    assert_select "#slots form[action=?]", lesson_slots_path(@lesson)
     assert_not @lesson.reload.published?
   end
 

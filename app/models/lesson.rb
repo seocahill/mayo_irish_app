@@ -154,6 +154,7 @@ class Lesson < ApplicationRecord
 
   # A draft with open slots still needs Irish, so it can't go live until each
   # slot is filled or removed. Lessons already published aren't affected.
+  # (When slots gain more unfilled statuses, count those here too.)
   def no_open_slots_when_publishing
     return unless published? && will_save_change_to_published?
 

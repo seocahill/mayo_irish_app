@@ -613,6 +613,7 @@ en:
       added: Slot added.
       published: Slots are only for draft lessons. Untick Published first.
     destroy:
+      already_removed: That slot was already removed.
       removed: Slot removed.
     types:
       dialogue: Dialogue

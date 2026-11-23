@@ -193,7 +193,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_23_180000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["lesson_id", "status"], name: "index_lesson_slots_on_lesson_id_and_status"
-    t.index ["lesson_id"], name: "index_lesson_slots_on_lesson_id"
   end
 
   create_table "lesson_visits", force: :cascade do |t|

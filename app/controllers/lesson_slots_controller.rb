@@ -17,8 +17,8 @@ class LessonSlotsController < ApplicationController
 
   def destroy
     slot = LessonSlot.find(params[:id])
-    slot.remove!(by: current_user.email_address)
-    redirect_to edit_lesson_path(slot.lesson, anchor: "slots"), notice: t(".removed")
+    notice = slot.remove!(by: current_user.email_address) ? t(".removed") : t(".already_removed")
+    redirect_to edit_lesson_path(slot.lesson, anchor: "slots"), notice: notice
   end
 
   private
