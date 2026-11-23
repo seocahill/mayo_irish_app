@@ -9,7 +9,11 @@ class ExercisesController < ApplicationController
 
   def update
     if @exercise.update(exercise_params)
-      redirect_to edit_lesson_path(@exercise.lesson, anchor: "exercises")
+      # With Turbo, the row and the "answered" count update in place.
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to edit_lesson_path(@exercise.lesson, anchor: "exercises") }
+      end
     else
       render :edit, status: :unprocessable_entity
     end

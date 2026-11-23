@@ -1,5 +1,5 @@
-<turbo-frame id="<%= dom_id(exercise) %>">
-  <div class="border-b border-line last:border-0 flex items-start justify-between gap-4 px-5 py-3 hover:bg-canvas transition-colors">
+<turbo-frame id="<%= dom_id(exercise) %>" class="block border-b border-line last:border-0">
+  <div class="flex items-start justify-between gap-4 px-5 py-3 hover:bg-canvas transition-colors">
     <div class="flex-1 min-w-0">
       <p class="text-sm text-ink"><span class="text-muted tabular-nums"><%= exercise.number %>.</span> <%= exercise.prompt %></p>
       <% if exercise.answer.present? %>

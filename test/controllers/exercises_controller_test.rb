@@ -87,4 +87,23 @@ class ExercisesControllerTest < ActionDispatch::IntegrationTest
     post lesson_version_undo_path(@lesson, version)
     assert_nil @exercise.reload.answer
   end
+
+  test "with Turbo, saving updates the row and the answered count in place" do
+    sign_in_as(@admin)
+
+    patch exercise_path(@exercise), params: { exercise: { answer: "Dia dhuit" } }, as: :turbo_stream
+
+    assert_response :success
+    assert_select "turbo-stream[action=replace][target=?]", ActionView::RecordIdentifier.dom_id(@exercise) do
+      assert_select "template p[lang=ga]", text: /Dia dhuit/
+    end
+    assert_select "turbo-stream[action=replace][target=exercises_count] template", text: /1 of 1 have an answer/
+  end
+
+  test "an answer of only spaces doesn't count as answered" do
+    @exercise.update_column(:answer, "   ")
+    assert_not_includes Exercise.answered, @exercise
+    @exercise.update_column(:answer, "Dia dhuit")
+    assert_includes Exercise.answered, @exercise
+  end
 end

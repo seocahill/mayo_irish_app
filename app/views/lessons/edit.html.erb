@@ -253,7 +253,7 @@
       <% if @lesson.exercises.any? %>
         <div id="exercises" class="scroll-mt-4">
           <h3 class="text-xs font-semibold text-muted uppercase tracking-widest mb-1"><%= t(".exercises") %></h3>
-          <p class="text-xs text-muted mb-3"><%= t(".exercises_description", answered: @lesson.exercises.answered.count, count: @lesson.exercises.size) %></p>
+          <%= render "exercises/count", lesson: @lesson %>
           <div class="bg-surface rounded-sm border border-line overflow-hidden">
             <%= render partial: "exercises/exercise", collection: @lesson.exercises %>
           </div>

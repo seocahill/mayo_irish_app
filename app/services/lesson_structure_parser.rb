@@ -117,11 +117,16 @@ class LessonStructureParser
     content = content.gsub(/\A```(?:json)?\n?/, '').gsub(/\n?```\z/, '').strip
     data = JSON.parse(content)
 
+    # Exercise answers are written by editors in the lesson editor. Once any
+    # exercise in a lesson has one, a re-parse leaves the exercises alone, so
+    # their answers are never lost.
+    keep_exercises = @lesson.exercises.answered.exists?
+
     ActiveRecord::Base.transaction do
       if replace
         @lesson.grammar_rules.destroy_all
         @lesson.text_passages.destroy_all
-        @lesson.exercises.destroy_all
+        @lesson.exercises.destroy_all unless keep_exercises
         @lesson.phrases.destroy_all
       end
 
@@ -190,14 +195,15 @@ class LessonStructureParser
         end
       end
 
-      # Exercises
-      Array(data['exercises']).each do |ex_data|
-        @lesson.exercises.create!(
-          number:   ex_data['number'],
-          prompt:   ex_data['prompt'],
-          answer:   ex_data['answer'],
-          position: ex_data['position']
-        )
+      # Exercises. The answer is never taken from the parse: editors write it.
+      unless keep_exercises
+        Array(data['exercises']).each do |ex_data|
+          @lesson.exercises.create!(
+            number:   ex_data['number'],
+            prompt:   ex_data['prompt'],
+            position: ex_data['position']
+          )
+        end
       end
     end
 

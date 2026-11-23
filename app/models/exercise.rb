@@ -3,8 +3,7 @@ class Exercise < ApplicationRecord
   include EditHistory
 
   tracked_in_lesson_history lesson_id: ->(e) { e.lesson_id },
-                            label: ->(e) { I18n.t("exercises.label", number: e.number) },
-                            only: %i[prompt answer]
+                            label: ->(e) { I18n.t("exercises.label", number: e.number) }
 
   belongs_to :lesson
   has_many :phrases, as: :source, dependent: :destroy
@@ -14,7 +13,9 @@ class Exercise < ApplicationRecord
 
   normalizes :answer, with: ->(answer) { answer.strip.presence }
 
-  scope :answered, -> { where.not(answer: [ nil, "" ]) }
+  # Answers are normalized to nil when blank, but a row written another way
+  # (update_column, raw SQL) could still hold only spaces.
+  scope :answered, -> { where.not(answer: nil).where("TRIM(answer) <> ''") }
 
   searchable title: ->(e) { "Exercise #{e.number}" },
              body: ->(e) { [e.prompt, e.answer] },

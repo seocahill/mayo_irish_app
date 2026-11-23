@@ -256,6 +256,9 @@ en:
       unsupported_video: isn't a supported video. Use a YouTube or Vimeo link, an
         embed code, or an https link to an .mp4 or .webm file.
   exercises:
+    count:
+      description: "%{answered} of %{count} have an answer. Write each answer in Mayo
+        Irish; learners will be able to compare their own try with it."
     edit:
       answer: Answer in Mayo Irish
       answer_help: Leave it empty if you're not sure yet. Saving is in the lesson's
@@ -671,8 +674,6 @@ en:
       editing: Editing · Lesson %{number}
       english: English
       exercises: Exercises
-      exercises_description: "%{answered} of %{count} have an answer. Write each answer
-        in Mayo Irish; learners will be able to compare their own try with it."
       gender: Gender
       gender_label: Gender
       genitive: Genitive
