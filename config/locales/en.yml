@@ -525,6 +525,8 @@ en:
         the lesson or ask a native speaker.
       back_to_lesson: "← Back to the lesson"
       empty_state: Type "start" or anything to begin the lesson.
+      hear_selection_note: Select any Irish in the chat to hear it. It's read by ABAIR's
+        synthetic voice, not a Mayo speaker.
       heard_as: Heard as
       heard_as_note: "“Heard as” shows what ABAIR's speech recogniser made of what
         you said. It can mishear Mayo forms, so it isn't a mark of how well you spoke."
@@ -753,7 +755,6 @@ en:
       genitive: Genitive
       genitive_short: gen.
       grammar: Grammar
-      hear_selection: Hear it (synthetic)
       hear_word: Hear %{word}
       intro_video: Lesson introduction
       irish: Irish
@@ -1174,6 +1175,8 @@ en:
     edit: Edit
     embed:
       title: A page from Abairt
+    hear_selection:
+      text: Hear it (synthetic)
     playback_back:
       label: Back 5 seconds
       text: Back 5 s

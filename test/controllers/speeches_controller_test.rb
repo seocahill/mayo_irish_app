@@ -49,7 +49,7 @@ class SpeechesControllerTest < ActionDispatch::IntegrationTest
 
     with_abair_key { get lesson_path(lesson) }
     assert_select "[data-controller=speakable][data-speakable-src-value=?]", speech_path
-    assert_select "[data-controller=speakable] [data-speakable-target=selection]"
+    assert_select "[data-controller=speakable] [data-speakable-target=selection] button", text: /Hear it \(synthetic\)/
 
     with_abair_key("") { get lesson_path(lesson) }
     assert_select "[data-controller=speakable]", count: 0
