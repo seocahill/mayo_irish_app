@@ -8,7 +8,14 @@ class LearnerQuestionIdeasController < ApplicationController
     question.save_as_idea!(params[:raw_text], origin: current_user.email_address.split("@").first)
     redirect_to learner_questions_path(anchor: helpers.dom_id(question)), notice: t(".saved")
   rescue ActiveRecord::RecordInvalid => e
-    redirect_to learner_questions_path(anchor: helpers.dom_id(question)),
-                alert: e.record.errors.include?(:raw_text) ? t(".too_long") : t(".blank")
+    redirect_to learner_questions_path(anchor: helpers.dom_id(question)), alert: alert_for(e.record)
+  end
+
+  private
+
+  def alert_for(record)
+    return t("learner_question_ideas.create.not_saved") unless record.is_a?(CourseProposal)
+
+    record.errors.include?(:raw_text) ? t("learner_question_ideas.create.too_long") : t("learner_question_ideas.create.blank")
   end
 end

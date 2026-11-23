@@ -402,6 +402,8 @@ en:
   learner_question_ideas:
     create:
       blank: Write the idea first.
+      not_saved: The idea couldn't be saved with this question. Try again, or add
+        it on Proposals.
       saved: Idea saved to Proposals, with this question as evidence.
       too_long: That idea is too long. Keep it under 2,000 characters.
   learner_questions:
@@ -834,11 +836,9 @@ en:
       of_course: "%{known} of %{total} in the course"
       reached: "%{count} words known"
   native_question:
-    answered: answered
     evidence_source: A learner's question to a native speaker (Abairt question %{id}),
-      asked on %{date} from %{lesson}, %{status}
+      asked on %{date} from %{lesson}
     no_lesson: no lesson
-    unanswered: not answered yet
   native_questions:
     create:
       no_recording: Record your question first.

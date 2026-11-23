@@ -69,7 +69,6 @@ class NativeQuestionTest < ActiveSupport::TestCase
     assert_equal "https://abairt.test/a70", evidence.audio_url
     assert_includes evidence.source, "Abairt question 70"
     assert_includes evidence.source, lessons(:one).display_title
-    assert_includes evidence.source, "answered"
     assert_not_includes evidence.source, "q70"
     assert_equal [ idea ], question.reload.ideas
   end
@@ -81,7 +80,6 @@ class NativeQuestionTest < ActiveSupport::TestCase
 
     assert_nil evidence.audio_url
     assert_includes evidence.source, "no lesson"
-    assert_includes evidence.source, "not answered yet"
   end
 
   test "a blank idea saves nothing" do
@@ -99,5 +97,30 @@ class NativeQuestionTest < ActiveSupport::TestCase
     question.destroy!
 
     assert_nil evidence.reload.native_question_id
+  end
+
+  test "an answer link that isn't https or is too long for the evidence is left out" do
+    question = NativeQuestion.create!(user: users(:two), abairt_question_id: 74, status: "answered", answer_audio_url: "http://abairt.test/a74")
+    assert_nil question.save_as_idea!("Plain http", origin: "admin").proposal_evidence.sole.audio_url
+
+    question.update!(answer_audio_url: "https://abairt.test/#{"a" * 600}")
+    assert_nil question.save_as_idea!("Too long", origin: "admin").proposal_evidence.last.audio_url
+  end
+
+  test "if the evidence can't be saved, neither is the idea" do
+    question = NativeQuestion.create!(user: users(:two), abairt_question_id: 75, status: "sent")
+    question.define_singleton_method(:evidence_source) { "" }
+
+    assert_no_difference -> { CourseProposal.count + ProposalEvidence.count } do
+      assert_raises(ActiveRecord::RecordInvalid) { question.save_as_idea!("Rolled back", origin: "admin") }
+    end
+  end
+
+  test "ideas are listed in the order they were saved" do
+    question = NativeQuestion.create!(user: users(:two), abairt_question_id: 76, status: "sent")
+    first = question.save_as_idea!("First", origin: "admin")
+    second = question.save_as_idea!("Second", origin: "admin")
+
+    assert_equal [ first, second ], NativeQuestion.includes(proposal_evidence: :course_proposal).find(question.id).ideas
   end
 end

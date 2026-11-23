@@ -173,4 +173,31 @@ class LearnerQuestionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to root_path
   end
+
+  test "an idea that is too long says so" do
+    question = @learner.native_questions.create!(abairt_question_id: 7, status: "sent")
+    sign_in_as(users(:admin))
+
+    post learner_question_idea_path(question), params: { raw_text: "a" * 2001 }
+
+    assert_equal "That idea is too long. Keep it under 2,000 characters.", flash[:alert]
+  end
+
+  test "an unknown question is not found" do
+    sign_in_as(users(:admin))
+
+    post learner_question_idea_path(learner_question_id: 0), params: { raw_text: "Lost" }
+
+    assert_response :not_found
+  end
+
+  test "signed-out visitors cannot save ideas" do
+    question = @learner.native_questions.create!(abairt_question_id: 7, status: "sent")
+
+    assert_no_difference -> { CourseProposal.count } do
+      post learner_question_idea_path(question), params: { raw_text: "Sneaky" }
+    end
+
+    assert_redirected_to new_session_path
+  end
 end
