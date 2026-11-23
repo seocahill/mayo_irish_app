@@ -37,6 +37,8 @@
   </div>
 </div>
 
+<%= render "lessons/slots", lesson: @lesson if !@lesson.published_in_database || @lesson.lesson_slots.open.exists? %>
+
 <%= render "lessons/dialect_hits", lesson: @lesson %>
 
 <%# ══════════════════════════════════════════════════════════════

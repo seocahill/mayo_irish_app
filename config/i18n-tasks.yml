@@ -31,6 +31,7 @@ ignore_unused:
   - lessons.genders.*
   - lessons.index.sections.*
   - lesson_blocks.types.*
+  - lesson_slots.types.*
   - onboardings.regions.*
   - onboardings.doors.*
   - course_proposals.index.kinds.*

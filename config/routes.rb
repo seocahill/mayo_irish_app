@@ -74,6 +74,7 @@ Rails.application.routes.draw do
   resource :speech, only: :show
   resources :lessons, only: [:index, :new, :create, :show, :edit, :update] do
     resource :review, only: %i[create destroy], controller: "lesson_reviews"
+    resources :slots, only: %i[create destroy], controller: "lesson_slots", shallow: true
     resources :recording_suggestions, only: :index, controller: "lesson_recording_suggestions"
     resource :recording_approval, only: :create, controller: "lesson_recording_approvals"
     resources :listening_clips, only: :index, controller: "lesson_listening_clips"
