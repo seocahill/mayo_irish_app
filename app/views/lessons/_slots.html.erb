@@ -1,0 +1,45 @@
+<%# Slots: Irish this draft still needs, described in English. Open ones block publishing. %>
+<% open_slots = lesson.lesson_slots.open.oldest_first.to_a %>
+<section id="slots" class="mb-8 card px-5 py-4 flex flex-col gap-4" aria-labelledby="slots-title">
+  <div>
+    <h2 id="slots-title" class="eyebrow"><%= t(".title") %></h2>
+    <p class="text-sm mt-1 text-muted"><%= t(".summary") %></p>
+    <% if open_slots.any? %>
+      <p class="text-sm mt-2 font-medium" data-open-slots="<%= open_slots.size %>"><%= t(".open", count: open_slots.size) %></p>
+    <% end %>
+  </div>
+
+  <% if open_slots.any? %>
+    <ul class="flex flex-col gap-2">
+      <% open_slots.each do |slot| %>
+        <li class="border border-line rounded-sm px-3 py-2 flex flex-wrap items-start justify-between gap-2 text-sm" id="<%= dom_id(slot) %>">
+          <div class="min-w-0 flex-1">
+            <p class="text-xs text-muted uppercase tracking-wide"><%= t("lesson_slots.types.#{slot.slot_type}") %></p>
+            <p class="mt-0.5 break-words"><%= slot.spec %></p>
+            <p class="text-xs text-muted mt-1"><%= t(".added_by", name: slot.created_by.presence || t(".someone"), date: l(slot.created_at.to_date, format: :long)) %></p>
+          </div>
+          <%= button_to t(".remove"), slot_path(slot), method: :delete, class: "btn-outline border-line text-muted !py-1 text-xs",
+                form: { data: { turbo_confirm: t(".remove_confirm") } } %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% unless lesson.published? %>
+    <%= form_with model: LessonSlot.new, url: lesson_slots_path(lesson), class: "flex flex-col gap-3" do |f| %>
+      <div class="grid gap-3 sm:grid-cols-3">
+        <div>
+          <%= f.label :slot_type, t(".type"), class: "editor-label" %>
+          <%= f.select :slot_type, LessonSlot::SLOT_TYPES.map { |type| [ t("lesson_slots.types.#{type}"), type ] }, {}, class: "editor-input" %>
+        </div>
+        <div class="sm:col-span-2">
+          <%= f.label :spec, t(".spec"), class: "editor-label" %>
+          <%= f.text_area :spec, rows: 2, required: true, maxlength: LessonSlot::SPEC_LENGTH, class: "editor-input", placeholder: t(".spec_placeholder") %>
+        </div>
+      </div>
+      <div class="flex justify-end">
+        <%= f.submit t(".add"), class: "btn-solid !py-2" %>
+      </div>
+    <% end %>
+  <% end %>
+</section>

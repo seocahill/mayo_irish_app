@@ -241,6 +241,10 @@ en:
       you_typed: you typed
   errors:
     messages:
+      open_slots:
+        one: can't be ticked while 1 slot is open. Fill or remove it first.
+        other: can't be ticked while %{count} slots are open. Fill or remove them
+          first.
       unsupported_embed: isn't an Abairt page. Use an https://abairt.com link.
       unsupported_video: isn't a supported video. Use a YouTube or Vimeo link, an
         embed code, or an https link to an .mp4 or .webm file.
@@ -604,6 +608,19 @@ en:
     flash:
       cleared: Review cleared.
       reviewed: Marked as reviewed.
+  lesson_slots:
+    create:
+      added: Slot added.
+      published: Slots are only for draft lessons. Untick Published first.
+    destroy:
+      removed: Slot removed.
+    types:
+      dialogue: Dialogue
+      example_sentences: Example sentences
+      grammar_table: Grammar table
+      listening_clip: Listening clip
+      phrases: Phrases
+      vocabulary: Vocabulary
   lessons:
     edit:
       add_block: Add a new block
@@ -757,6 +774,24 @@ en:
       view_as_learner: View as learner
       vocabulary: Vocabulary
       vocabulary_notes: Vocabulary notes
+    slots:
+      add: Add slot
+      added_by: Added by %{name} on %{date}
+      open:
+        one: 1 slot open. This lesson can't be published until it is filled or removed.
+        other: "%{count} slots open. This lesson can't be published until each is
+          filled or removed."
+      remove: Remove
+      remove_confirm: Remove this slot? It is kept, marked removed.
+      someone: someone
+      spec: What's needed, in English
+      spec_placeholder: e.g. 3 to 5 example sentences for the conditional after dá,
+        Erris preferred
+      summary: Irish this draft still needs, described in English. A slot never holds
+        Irish, so no placeholder Irish goes into the lesson. Filling slots comes later;
+        for now add the Irish as usual and remove the slot.
+      title: Slots
+      type: Type
     types:
       curriculum: Core course
       dias_material: Field recordings

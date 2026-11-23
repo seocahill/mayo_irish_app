@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_23_150000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_23_180000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -180,6 +180,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_23_150000) do
     t.string "section"
     t.datetime "updated_at", null: false
     t.index ["lesson_id", "section", "position"], name: "index_lesson_rows_on_lesson_id_and_section_and_position"
+  end
+
+  create_table "lesson_slots", force: :cascade do |t|
+    t.integer "lesson_id", null: false
+    t.string "slot_type", null: false
+    t.text "spec", null: false
+    t.string "status", default: "open", null: false
+    t.string "created_by"
+    t.string "removed_by"
+    t.datetime "removed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id", "status"], name: "index_lesson_slots_on_lesson_id_and_status"
+    t.index ["lesson_id"], name: "index_lesson_slots_on_lesson_id"
   end
 
   create_table "lesson_visits", force: :cascade do |t|
@@ -556,6 +570,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_23_150000) do
   add_foreign_key "invitations", "users", on_delete: :nullify
   add_foreign_key "lesson_blocks", "lessons"
   add_foreign_key "lesson_rows", "lessons"
+  add_foreign_key "lesson_slots", "lessons"
   add_foreign_key "lesson_visits", "lessons"
   add_foreign_key "lesson_visits", "users"
   add_foreign_key "lessons", "users", column: "reviewed_by_id"

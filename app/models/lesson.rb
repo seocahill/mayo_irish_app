@@ -37,11 +37,14 @@ class Lesson < ApplicationRecord
   has_many :section_progresses, dependent: :destroy
   has_many :quiz_questions, dependent: :destroy
   has_many :lesson_visits, dependent: :destroy
+  # Irish the lesson still needs, described in English; open ones block publishing.
+  has_many :lesson_slots, dependent: :destroy
   accepts_nested_attributes_for :vocabulary_items,
                                 allow_destroy: true,
                                 reject_if: :all_blank
 
   validate :intro_video_must_be_embeddable
+  validate :no_open_slots_when_publishing
 
   validates :number, presence: true, uniqueness: true
   validates :title, presence: true
@@ -147,5 +150,14 @@ class Lesson < ApplicationRecord
     return if intro_video_url.blank? || intro_video
 
     errors.add(:intro_video_url, :unsupported_video)
+  end
+
+  # A draft with open slots still needs Irish, so it can't go live until each
+  # slot is filled or removed. Lessons already published aren't affected.
+  def no_open_slots_when_publishing
+    return unless published? && will_save_change_to_published?
+
+    open = lesson_slots.open.count
+    errors.add(:published, :open_slots, count: open) if open.positive?
   end
 end
