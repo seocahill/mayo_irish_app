@@ -1,9 +1,13 @@
 # Honest markers of how far a learner has got, from what they have actually done:
-# words known, time spent listening, and speaking. Each strand is a short ladder;
+# words known, time spent listening, sentences made out, and speaking. Each strand is a short ladder;
 # a learner sees the last step they reached and the next one, never points or streaks.
 class Milestones
   WORD_STEPS = [ 10, 25, 50, 100, 250, 500, 1000 ].freeze
   LISTENING_MINUTE_STEPS = [ 5, 15, 30, 60, 180, 600 ].freeze
+  # Listening clips (a short phrase from a Mayo speaker) the learner said they
+  # made out: their own answer, one per clip, not a test score. Counted the way
+  # their listening page lists them, so a clip an editor hides drops out of both.
+  UNDERSTOOD_CLIP_STEPS = [ 5, 10, 25, 50, 100, 250, 500 ].freeze
   # The longest single conversation, in minutes of the learner's own speech.
   CONVERSATION_MINUTE_STEPS = [ 1, 3, 5, 10, 20 ].freeze
   # Lessons whose grammar the learner has shown they can use in conversation with the tutor.
@@ -24,6 +28,7 @@ class Milestones
   def strands
     [ strand(:words, known_words, WORD_STEPS),
       strand(:listening, @listening_minutes || ListeningTime.minutes_for(@user), LISTENING_MINUTE_STEPS),
+      strand(:understood, understood_clips, UNDERSTOOD_CLIP_STEPS),
       strand(:conversation, longest_conversation_minutes, CONVERSATION_MINUTE_STEPS),
       strand(:grammar, grammar_lessons, GRAMMAR_LESSON_STEPS) ]
   end
@@ -35,6 +40,10 @@ class Milestones
   def strand(key, value, steps)
     Strand.new(key: key, value: value, reached: steps.select { |step| step <= value }.max,
                next_step: steps.find { |step| step > value })
+  end
+
+  def understood_clips
+    @user.listens.where(understood: true).joins(:listening_clip).merge(ListeningClip.visible_to(@user)).count
   end
 
   def grammar_lessons

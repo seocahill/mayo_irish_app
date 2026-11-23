@@ -857,7 +857,9 @@ en:
         one: Spoken for a minute in one conversation
         other: Spoken for %{count} minutes in one conversation
     grammar:
-      next: 'next: %{count} lessons'
+      next:
+        one: 'next: %{count} lesson'
+        other: 'next: %{count} lessons'
       not_yet: Grammar shows here once you've used a lesson's grammar in conversation
       reached:
         one: Used the grammar of 1 lesson in conversation
@@ -866,6 +868,10 @@ en:
       next: 'next: %{count} minutes'
       not_yet: Listening time starts with any Mayo recording
       reached: Listened for %{count} minutes to Mayo speakers
+    understood:
+      next: 'next: %{count}'
+      not_yet: Phrases you make out on listening clips count here
+      reached: You made out %{count} phrases from Mayo speakers
     words:
       next: 'next: %{count}'
       not_yet: Your first words come from a lesson's quiz
