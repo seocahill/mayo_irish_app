@@ -278,6 +278,15 @@ en:
     count:
       description: "%{answered} of %{count} have an answer. Write each answer in Mayo
         Irish; learners will be able to compare their own try with it."
+    course_words:
+      english_prompt: Course words whose English is in this exercise.
+      heading: From the course
+      irish_prompt: Course words whose Irish is in this exercise.
+      lesson: Lesson %{number}
+      mayo_form: 'Mayo forms list: %{other} → %{mayo}'
+      more: Only the first %{count} are shown.
+      none: No course words found in this exercise.
+      this_lesson: this lesson
     edit:
       answer: Answer in Mayo Irish
       answer_help: Leave it empty if you're not sure yet. Saving is in the lesson's

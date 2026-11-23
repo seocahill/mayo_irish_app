@@ -106,4 +106,31 @@ class ExercisesControllerTest < ActionDispatch::IntegrationTest
     @exercise.update_column(:answer, "Dia dhuit")
     assert_includes Exercise.answered, @exercise
   end
+
+  test "the edit form shows the course words in the exercise" do
+    @exercise.update!(prompt: "Is the dog in the house?")
+    DialectSubstitution.create!(other_form: "deacair", mayo_form: "doiligh")
+    sign_in_as(@admin)
+
+    get edit_exercise_path(@exercise)
+
+    assert_response :success
+    assert_select "section h4", text: I18n.t("exercises.course_words.heading")
+    assert_select "section li", count: 2
+    assert_select "section li span[lang=ga]", text: "madra"
+    assert_select "section li", text: /teach\s+· house · this lesson/
+    assert_select "section li", text: /doiligh/, count: 0
+  end
+
+  test "the edit form lists a Mayo forms pair in an Irish prompt, and says when nothing matched" do
+    sign_in_as(@admin)
+    @exercise.update!(prompt: "Ní raibh sé ró-dheacair.")
+    get edit_exercise_path(@exercise)
+    assert_select "section p", text: I18n.t("exercises.course_words.none")
+
+    DialectSubstitution.create!(other_form: "deacair", mayo_form: "doiligh")
+    @exercise.update!(prompt: "Tá sé deacair.")
+    get edit_exercise_path(@exercise)
+    assert_select "section li", text: I18n.t("exercises.course_words.mayo_form", other: "deacair", mayo: "doiligh")
+  end
 end
