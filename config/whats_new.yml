@@ -253,3 +253,8 @@
   title: See what the recogniser heard
   body: In a lesson's conversation, what you say aloud now shows as "Heard as", so you can tell it's what ABAIR's speech recogniser made of your words, not a word-for-word record. It can mishear Mayo forms, so it isn't a mark of how well you spoke. Typed turns look the same as before.
   path: /lessons
+- id: 44
+  date: 2026-11-23
+  title: Questions to listen for
+  body: Some whole conversations now have a few questions at the top, written by the course's editors. Read them before you play, listen for the answers, then tap to check. More will come as editors add them.
+  path: /listens

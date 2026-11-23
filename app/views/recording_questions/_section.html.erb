@@ -1,0 +1,45 @@
+<%# Questions an editor wrote for this recording, for learners to listen for. Editors add and remove them here. Renders nothing for a learner when there are none. %>
+<% if questions.any? || current_user.admin? %>
+  <section id="questions" class="card px-4 py-4 flex flex-col gap-3" aria-labelledby="questions-heading">
+    <div>
+      <h2 id="questions-heading" class="eyebrow text-eist"><%= t(".heading") %></h2>
+      <% if questions.any? %>
+        <p class="text-sm text-muted mt-1"><%= t(".how_to_use") %></p>
+      <% end %>
+    </div>
+
+    <% if questions.any? %>
+      <ol class="flex flex-col gap-2 list-decimal pl-5">
+        <% questions.each do |q| %>
+          <li data-testid="recording-question">
+            <p class="break-words"><%= q.question %></p>
+            <details class="mt-1">
+              <summary class="cursor-pointer text-sm text-muted min-h-8"><%= t(".show_answer") %></summary>
+              <p class="text-sm mt-1 break-words"><%= q.answer %></p>
+            </details>
+            <% if current_user.admin? %>
+              <%= button_to t(".remove"), recording_question_path(q), method: :delete,
+                            form: { class: "mt-1", data: { turbo_confirm: t(".remove_confirm") } },
+                            class: "text-xs text-muted underline min-h-8" %>
+            <% end %>
+          </li>
+        <% end %>
+      </ol>
+    <% end %>
+
+    <% if current_user.admin? %>
+      <%= form_with model: RecordingQuestion.new, url: recording_questions_path(recording_id), class: "flex flex-col gap-2 pt-3 border-t border-line" do |f| %>
+        <p class="text-xs text-muted"><%= t(".editor_note") %></p>
+        <div>
+          <%= f.label :question, t(".question"), class: "editor-label" %>
+          <%= f.text_area :question, rows: 2, required: true, maxlength: RecordingQuestion::MAX_LENGTH, class: "editor-input" %>
+        </div>
+        <div>
+          <%= f.label :answer, t(".answer"), class: "editor-label" %>
+          <%= f.text_area :answer, rows: 2, required: true, maxlength: RecordingQuestion::MAX_LENGTH, class: "editor-input" %>
+        </div>
+        <div><%= f.submit t(".add"), class: "btn-solid text-sm" %></div>
+      <% end %>
+    <% end %>
+  </section>
+<% end %>

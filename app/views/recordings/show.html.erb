@@ -11,6 +11,8 @@
   <% if @error %>
     <p class="card px-4 py-6 text-center text-muted text-sm"><%= @error %></p>
   <% else %>
+    <%= render "recording_questions/section", questions: @questions, recording_id: @recording.id %>
+
     <div class="flex flex-col gap-4"
          data-controller="playback transcript media-session listening-place"
          data-action="media-session:skipped->transcript#skipped listening-place:skipped->transcript#skipped playback:skipped->transcript#skipped"
