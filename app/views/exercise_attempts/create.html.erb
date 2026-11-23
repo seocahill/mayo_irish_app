@@ -1,0 +1,8 @@
+<%# With Turbo only the frame is used. Without it, this is a small page of its own. %>
+<div class="max-w-2xl mx-auto">
+  <p class="mb-4"><%= link_to t("exercise_attempts.create.back"), lesson_path(@exercise.lesson, anchor: "exercises"), class: "text-sm text-muted hover:text-ink" %></p>
+  <div class="card px-5 py-4">
+    <p class="mb-3"><span class="font-mono text-sm text-muted tabular-nums"><%= @exercise.number %>.</span> <%= @exercise.prompt %></p>
+    <%= render "exercise_attempts/frame", exercise: @exercise, comparison: @comparison %>
+  </div>
+</div>

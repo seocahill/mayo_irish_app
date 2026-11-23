@@ -42,6 +42,9 @@ Rails.application.routes.draw do
     resources :questions, only: :create, controller: "recording_questions"
   end
   resources :recording_questions, only: :destroy
+  resources :exercises, only: [] do
+    resource :attempt, only: :create, controller: "exercise_attempts"
+  end
   resources :chat_messages, only: [] do
     resource :pronunciation, only: :show, controller: "chat_message_pronunciations"
     resource :flag, only: :create, controller: "chat_message_flags"

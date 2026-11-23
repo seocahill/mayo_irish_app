@@ -1,0 +1,9 @@
+<%# "Put it into Irish" for one exercise (see ExerciseAttemptsController). Rendered before and after a comparison. %>
+<%= form_with url: exercise_attempt_path(exercise), class: "flex flex-col gap-2" do |f| %>
+  <%= f.label :attempt, t("exercise_attempts.form.label"), class: "text-sm font-medium", for: dom_id(exercise, :attempt_field) %>
+  <%= f.text_area :attempt, value: attempt, rows: 2, maxlength: Dictation::MAX_LENGTH, lang: "ga",
+                  id: dom_id(exercise, :attempt_field),
+                  autocomplete: "off", autocapitalize: "off", autocorrect: "off", spellcheck: false,
+                  class: "field text-base resize-none" %>
+  <%= f.submit t("exercise_attempts.form.compare"), class: "btn-outline self-start" %>
+<% end %>

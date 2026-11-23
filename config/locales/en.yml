@@ -255,6 +255,24 @@ en:
       unsupported_embed: isn't an Abairt page. Use an https://abairt.com link.
       unsupported_video: isn't a supported video. Use a YouTube or Vimeo link, an
         embed code, or an https link to an .mp4 or .webm file.
+  exercise_attempts:
+    create:
+      back: "← Back to the lesson"
+    form:
+      compare: Compare
+      label: Your Irish
+    frame:
+      all_match: Every word matches the answer.
+      answer: The editors' answer
+      legend: 'Plain: the same as yours. Wavy line: different (yours is in brackets).
+        Dotted and grey: not in yours. FADA: you left out its fada, which doesn''t
+        count against you.'
+      matched: "%{count} of the %{total} words match the answer."
+      more_than_one_way: There is often more than one right way to say it. If yours
+        is different, it may still be good Irish; ask a native speaker if you're not
+        sure.
+      not_in_yours: not in yours
+      you_wrote: you wrote
   exercises:
     count:
       description: "%{answered} of %{count} have an answer. Write each answer in Mayo
@@ -789,6 +807,9 @@ en:
       attested_in_abairt: Attested in native speech recorded on Abairt
       conversation: Conversation
       english: English
+      exercises: Exercises
+      exercises_intro: Put each one into Irish, then compare yours with the answer
+        the course's editors wrote.
       exit_preview: Exit preview
       feminine: f.
       genitive: Genitive

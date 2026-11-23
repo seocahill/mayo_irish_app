@@ -1,0 +1,26 @@
+<%# One exercise: the learner's Irish, and once compared, lined up word by word against the editors' answer. %>
+<%= turbo_frame_tag dom_id(exercise, :attempt) do %>
+  <% if comparison&.attempted? %>
+    <div class="flex flex-col gap-2 mb-4 pb-4 border-b border-line" data-testid="exercise-result">
+      <p class="text-sm font-medium focus:outline-none" role="status" tabindex="-1" autofocus>
+        <%= comparison.all_heard? ? t("exercise_attempts.frame.all_match") : t("exercise_attempts.frame.matched", count: comparison.heard_count, total: comparison.words.size) %>
+      </p>
+      <p class="eyebrow"><%= t("exercise_attempts.frame.answer") %></p>
+      <p lang="ga" class="text-lg leading-relaxed break-words">
+        <% comparison.words.each do |word| %>
+          <% case word.status %>
+          <% when :heard %>
+            <span data-status="same"><%= word.text %><% if word.fada_missing? %><span class="sr-only" lang="en"> (<%= t("dictations.frame.fada") %>)</span><sup class="font-mono text-[9px] uppercase tracking-wider text-muted ml-0.5" lang="en" aria-hidden="true"><%= t("dictations.frame.fada_mark") %></sup><% end %></span>
+          <% when :different %>
+            <span data-status="different"><span class="underline decoration-wavy decoration-labhair underline-offset-4"><%= word.text %></span><span class="sr-only" lang="en">, <%= t("exercise_attempts.frame.you_wrote") %></span> <span class="text-xs text-muted">(<%= word.typed %>)</span></span>
+          <% else %>
+            <span class="text-muted underline decoration-dotted underline-offset-4" data-status="missing"><%= word.text %><span class="sr-only" lang="en"> (<%= t("exercise_attempts.frame.not_in_yours") %>)</span></span>
+          <% end %>
+        <% end %>
+      </p>
+      <p class="text-xs text-muted"><%= t("exercise_attempts.frame.legend") %></p>
+      <p class="text-xs text-muted"><%= t("exercise_attempts.frame.more_than_one_way") %></p>
+    </div>
+  <% end %>
+  <%= render "exercise_attempts/form", exercise: exercise, attempt: comparison&.heard %>
+<% end %>
