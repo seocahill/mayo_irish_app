@@ -950,6 +950,12 @@ en:
       reached:
         one: Spoken for a minute in one conversation
         other: Spoken for %{count} minutes in one conversation
+    followed:
+      next: 'next: %{count}'
+      not_yet: Conversations you say you followed count here
+      reached:
+        one: You followed a whole conversation from Mayo speakers
+        other: You followed %{count} whole conversations from Mayo speakers
     grammar:
       next:
         one: 'next: %{count} lesson'

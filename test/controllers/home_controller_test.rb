@@ -136,6 +136,22 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "shows the whole conversations the learner followed, and links to their listening" do
+    ListeningClip.create!(vocabulary_item: vocabulary_items(:dog), abairt_entry_id: 250, irish: "one madra two", english: "a phrase",
+                          audio_url: "https://clips.test/250", word_count: 3, abairt_recording_id: 15)
+    sign_in_as(users(:two))
+
+    get root_path
+    assert_select "li", text: /Conversations you say you followed count here.*next: 1/m
+
+    users(:two).listening_times.create!(abairt_recording_id: 15, seconds: 300, followed: true)
+    get root_path
+
+    assert_select "li", text: /You followed a whole conversation from Mayo speakers.*next: 3/m do
+      assert_select "a[href=?]", listens_path
+    end
+  end
+
   test "shows minutes listened this week" do
     ListeningDay.add(users(:two), 150)
     sign_in_as(users(:two))
