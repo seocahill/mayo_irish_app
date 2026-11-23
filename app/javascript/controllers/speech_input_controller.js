@@ -84,13 +84,13 @@ export default class extends Controller {
 
   // While the form waits for the reply.
   busy() {
-    this.micButtonTarget.disabled = true
+    if (this.hasMicButtonTarget) this.micButtonTarget.disabled = true
   }
 
   // When the reply has arrived without the page reloading: the learner can
   // ask again, and the last recording isn't sent a second time.
   ready() {
-    this.micButtonTarget.disabled = false
+    if (this.hasMicButtonTarget) this.micButtonTarget.disabled = false
     this.audioTarget.value = ""
     this.setStatus("")
   }

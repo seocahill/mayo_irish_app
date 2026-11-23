@@ -1,4 +1,12 @@
 class LessonChatController < ApplicationController
+  include SpokenAnswer
+
+  # Each answer, typed or spoken, is a call to the tutor (and a spoken one to ABAIR's recogniser too).
+  rate_limit to: 10, within: 1.minute, by: -> { current_user.id }, name: "minute", only: :message,
+             with: -> { back_with t("lesson_chat.message.too_fast") }
+  rate_limit to: 150, within: 1.day, by: -> { current_user.id }, name: "day", only: :message,
+             with: -> { back_with t("lesson_chat.message.daily_limit") }
+
   before_action :set_lesson
   before_action :set_chat_session
 
@@ -34,6 +42,10 @@ class LessonChatController < ApplicationController
     When they write Irish beyond the lesson material, say which lesson words they used
     well. You can't check the rest, so say that once, briefly, without correcting it, and
     mention that "Ask a native speaker" on the lesson page can check it for them.
+
+    The student may type or speak. Spoken answers come through a speech recogniser, so
+    expect missing accents and odd word breaks, and read them charitably: never mark an
+    answer wrong for those alone.
   RULES
 
   MASTERY_MARKER_INSTRUCTIONS = <<~INSTRUCTIONS.freeze
@@ -50,13 +62,15 @@ class LessonChatController < ApplicationController
   def show
     @messages = @chat_session.chat_messages
     @progress = current_user_progress
+    @speech = AbairClient.configured?
   end
 
+  # The learner's answer, typed or said aloud. A spoken answer is what ABAIR's recogniser heard.
   def message
-    user_text = params[:message].to_s.strip
+    user_text = params[:message].to_s.strip.presence || transcribe(params[:audio])
     return redirect_to lesson_chat_path(@lesson) if user_text.blank?
 
-    @chat_session.chat_messages.create!(role: "user", content: user_text)
+    @chat_session.chat_messages.create!(role: "user", content: user_text, spoken_seconds: spoken_seconds)
 
     history = @chat_session.chat_messages.map { |m| { role: m.role, content: m.content } }
 
@@ -81,6 +95,12 @@ class LessonChatController < ApplicationController
     record_mastery(mastered_sections)
 
     redirect_to lesson_chat_path(@lesson)
+  rescue RecordingTooLong
+    back_with t("lesson_chat.message.too_long")
+  rescue NothingHeard
+    back_with t("lesson_chat.message.not_heard")
+  rescue AbairClient::Error
+    back_with t("lesson_chat.message.no_speech_service")
   end
 
   def clear
@@ -91,13 +111,17 @@ class LessonChatController < ApplicationController
 
   private
 
+  def back_with(alert)
+    redirect_to lesson_chat_path(params[:lesson_id]), alert: alert
+  end
+
   def set_lesson
-    @lesson = Lesson.find_by!(number: params[:lesson_id])
+    @lesson = Lesson.visible_to(current_user).find_by!(number: params[:lesson_id])
   end
 
   def set_chat_session
     chat_session_id = session[session_key]
-    @chat_session = ChatSession.tutor.find_by(id: chat_session_id, lesson: @lesson)
+    @chat_session = current_user.chat_sessions.tutor.find_by(id: chat_session_id, lesson: @lesson)
 
     unless @chat_session
       @chat_session = ChatSession.tutor.create!(lesson: @lesson, user: current_user)

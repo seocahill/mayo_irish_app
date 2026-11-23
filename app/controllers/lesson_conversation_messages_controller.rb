@@ -3,9 +3,7 @@
 # The page then reads the reply aloud in ABAIR's voice.
 class LessonConversationMessagesController < ApplicationController
   include LessonConversationScoped
-
-  class RecordingTooLong < StandardError; end
-  class NothingHeard < StandardError; end
+  include SpokenAnswer
 
   rate_limit to: 10, within: 1.minute, by: -> { current_user.id }, name: "minute",
              with: -> { back_with t("lesson_conversation_messages.create.too_fast") }
@@ -30,19 +28,6 @@ class LessonConversationMessagesController < ApplicationController
   end
 
   private
-
-  def transcribe(audio)
-    return if audio.blank?
-    raise RecordingTooLong if audio.size > AbairClient::MAX_AUDIO_BYTES
-
-    heard = AbairClient.new.recognise(audio.read, filename: audio.original_filename.presence || "speech.webm").squish
-    heard.presence || raise(NothingHeard)
-  end
-
-  # How long the learner spoke, as the page measured it, for a recorded turn.
-  def spoken_seconds
-    params[:spoken_seconds].to_i.clamp(ChatMessage::SPOKEN_SECONDS) if params[:message].blank? && params[:audio].present?
-  end
 
   def back_with(alert)
     redirect_to lesson_conversation_path(params[:lesson_id]), alert: alert
