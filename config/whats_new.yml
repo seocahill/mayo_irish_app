@@ -247,4 +247,8 @@
   date: 2026-11-23
   title: Lesson audio counts as listening
   body: Listening to the audio on a lesson's page, with Repeat too, now counts towards your minutes listened on Today, So far and Your weeks, like listening clips and whole conversations. Only time the audio is actually playing counts.
+- id: 43
+  date: 2026-11-23
+  title: See what the recogniser heard
+  body: In a lesson's conversation, what you say aloud now shows as "Heard as", so you can tell it's what ABAIR's speech recogniser made of your words, not a word-for-word record. It can mishear Mayo forms, so it isn't a mark of how well you spoke. Typed turns look the same as before.
   path: /lessons

@@ -95,6 +95,32 @@ class LessonConversationsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ 30, nil ], conversation.chat_messages.where(role: "user").map(&:spoken_seconds)
   end
 
+  test "a spoken turn says it is what the recogniser heard; a typed turn doesn't" do
+    session = @learner.chat_sessions.create!(lesson: @lesson, kind: "conversation")
+    session.chat_messages.create!(role: "user", content: "typed words")
+    session.chat_messages.create!(role: "assistant", content: "reply in irish")
+    session.chat_messages.create!(role: "user", content: "what was heard", spoken_seconds: 4)
+
+    get lesson_conversation_path(@lesson)
+
+    assert_select "[data-testid=spoken-turn]", count: 1 do
+      assert_select "p", text: I18n.t("lesson_conversations.show.heard_as")
+      assert_select "div[lang=ga]", text: "what was heard"
+    end
+    assert_select "div", text: "typed words"
+    assert_select "[data-testid=heard-as-note]", text: I18n.t("lesson_conversations.show.heard_as_note")
+  end
+
+  test "with only typed turns there is no Heard as note" do
+    session = @learner.chat_sessions.create!(lesson: @lesson, kind: "conversation")
+    session.chat_messages.create!(role: "user", content: "typed words")
+
+    get lesson_conversation_path(@lesson)
+
+    assert_select "[data-testid=spoken-turn]", count: 0
+    assert_select "[data-testid=heard-as-note]", count: 0
+  end
+
   test "a recording with nothing in it is not sent on" do
     stub_request(:post, RECOGNITION_URL).to_return(status: 200, body: { text: " " }.to_json)
 
