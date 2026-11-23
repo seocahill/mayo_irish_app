@@ -43,7 +43,9 @@ export default class extends Controller {
   selectionChanged() {
     clearTimeout(this.hideTimer)
     const selection = document.getSelection()
-    const text = selection.isCollapsed ? "" : speakableText(selection.toString())
+    // Text selected in a box the learner types in (the tutor chat's answer) isn't read.
+    const typing = document.activeElement?.matches("textarea, input")
+    const text = selection.isCollapsed || typing ? "" : speakableText(selection.toString())
 
     if (text && this.element.contains(selection.anchorNode) && this.element.contains(selection.focusNode)) {
       this.showSelectionButton(text, selection.getRangeAt(0).getBoundingClientRect())
@@ -51,6 +53,12 @@ export default class extends Controller {
       // A tap on the button can clear the selection before the tap lands, so wait a moment.
       this.hideTimer = setTimeout(() => (this.selectionTarget.hidden = true), 300)
     }
+  }
+
+  // When the text under it scrolls away (the tutor chat's message list), the
+  // button would float over the wrong words, so it goes until the next selection.
+  hide() {
+    this.selectionTarget.hidden = true
   }
 
   // Below the selection, clear of the phone's selection handles.
