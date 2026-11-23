@@ -40,7 +40,7 @@ class McpControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     body = JSON.parse(@response.body)
     names = body.dig("result", "tools").map { |t| t["name"] }
-    assert_equal %w[add_proposal_evidence capture_idea comment_on_proposal course_gaps create_record get_proposal get_record learner_questions list_ideas list_records mayo_forms review_queue search_course update_record what_changed where_is_taught], names.sort
+    assert_equal %w[add_proposal_evidence capture_idea comment_on_proposal course_gaps create_record fill_queue get_proposal get_record learner_questions list_ideas list_records mayo_forms review_queue search_course update_record what_changed where_is_taught], names.sort
   end
 
   test "capture_idea saves an idea through the endpoint" do
@@ -87,6 +87,17 @@ class McpControllerTest < ActionDispatch::IntegrationTest
       name: "course_gaps", arguments: { lesson: "one" }
     }).to_json
     assert_includes @response.body, "Invalid arguments"
+  end
+
+  test "fill_queue works through the endpoint" do
+    lesson = lessons(:one)
+    lesson.update!(published: false)
+    lesson.lesson_slots.create!(slot_type: "dialogue", spec: "A short dialogue at the shop")
+    post mcp_path, headers: auth_headers, params: rpc("tools/call", {
+      name: "fill_queue", arguments: { lesson: lesson.number }
+    }).to_json
+    assert_response :success
+    assert_includes @response.body, "A short dialogue at the shop"
   end
 
   test "learner_questions works through the endpoint" do

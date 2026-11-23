@@ -122,7 +122,7 @@ read-only; no tool deletes anything.
 | `respond` | accept, dismiss, edit, ask a question or defer, with a note |
 | `capture_idea` | stores his idea verbatim; Irish terms go in a separate field (§7) |
 | `answer_question` | answers one of the designer's open questions |
-| `fill_queue` | open slots, one job at a time, with candidates |
+| `fill_queue` | open slots on drafts, oldest first (read-only, English specs only; candidates not yet) |
 | `fill_slot` | pick a candidate, attach a recording or enter typed Irish |
 | `where_is_taught` | where a word or rule is taught, heard and reviewed |
 | `mayo_forms` | Mayo forms pairs and where the other form still appears |
