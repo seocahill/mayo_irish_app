@@ -84,4 +84,42 @@ class Mcp::LearnerQuestionsTest < ActiveSupport::TestCase
       call
     end
   end
+
+  test "a draft lesson's questions show it as unpublished, and both filters work together with their own counts" do
+    draft = Lesson.create!(number: 77, title: "Draft lesson", position: 77, published: false)
+    question(1, at: 3.hours.ago, lesson: draft, status: "answered", answer_audio_url: "https://abairt.test/a1")
+    question(2, at: 2.hours.ago, lesson: draft).save_as_idea!("Done", origin: "admin")
+    question(3, at: 1.hour.ago)
+
+    _, data = call(lesson: 77, without_idea: true)
+
+    assert_equal 1, data["questions"].size
+    assert_equal({ "number" => 77, "title" => "Draft lesson", "published" => false }, data["questions"].first["lesson"])
+    assert_equal [ 1, 1 ], [ data["total"], data["answered"] ]
+    assert_equal({ "total" => 3, "answered" => 1 }, data["course_wide"])
+  end
+
+  test "an answer link only shows on an answered question" do
+    question(1, at: 1.hour.ago, status: "sent", answer_audio_url: "https://abairt.test/a1")
+
+    _, data = call
+
+    assert_nil data["questions"].first["answer_audio_url"]
+  end
+
+  test "nothing about the learner is returned" do
+    question(1, at: 1.hour.ago)
+
+    _, data = call
+
+    assert_equal %w[answer_audio_url answered_at asked_at id ideas lesson status], data["questions"].first.keys.sort
+  end
+
+  test "questions asked at the same moment come back in a fixed order" do
+    at = 1.hour.ago
+    first = question(1, at: at)
+    second = question(2, at: at)
+
+    assert_equal [ second.id, first.id ], call.last["questions"].map { |q| q["id"] }
+  end
 end

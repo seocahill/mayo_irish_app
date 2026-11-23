@@ -12,8 +12,10 @@ module Mcp
                   "which lesson it was asked from (if any), whether it is waiting, with a speaker or answered, a link to the " \
                   "speaker's spoken answer once there is one, and the ideas a designer has already saved from it (open one with get_proposal). " \
                   "Learners are not named and their own recordings are not included; to hear a question, use the Learners' questions page. " \
+                  "Status is as last checked with Abairt; opening the Learners' questions page checks for new answers. " \
                   "Optionally only one lesson's questions, or only those with no idea saved yet. Returns up to #{MAX_LIMIT} " \
-                  "(default #{DEFAULT_LIMIT}) and the totals. Changes nothing."
+                  "(default #{DEFAULT_LIMIT}), how many match and how many of those are answered, and the same two counts for the whole course. " \
+                  "Changes nothing."
       annotations(
         title: "Learners' questions",
         read_only_hint: true,
@@ -30,9 +32,9 @@ module Mcp
       def self.call(server_context:, lesson: nil, without_idea: false, limit: nil)
         limit = (limit || DEFAULT_LIMIT).to_i.clamp(1, MAX_LIMIT)
         scope = NativeQuestion.all
-        if lesson.present?
-          found = Lesson.find_by(number: lesson.to_i)
-          return error("There is no lesson #{lesson.to_i}.") unless found
+        unless lesson.nil?
+          found = Lesson.find_by(number: lesson)
+          return error("There is no lesson #{lesson}.") unless found
           scope = scope.where(lesson: found)
         end
         scope = scope.where.not(id: ProposalEvidence.where.not(native_question_id: nil).select(:native_question_id)) if without_idea
@@ -40,6 +42,7 @@ module Mcp
 
         json_response(
           total: scope.count, answered: scope.answered.count,
+          course_wide: { total: NativeQuestion.count, answered: NativeQuestion.answered.count },
           questions: questions.map { |q| describe(q) }
         )
       end

@@ -14,7 +14,7 @@ class NativeQuestion < ApplicationRecord
 
   validates :abairt_question_id, presence: true, uniqueness: true
 
-  scope :newest_first, -> { order(created_at: :desc) }
+  scope :newest_first, -> { order(created_at: :desc, id: :desc) }
   scope :unseen_answers, -> { answered.where(answer_seen_at: nil) }
 
   # Sends the recording to Abairt, then records the question, so nothing is

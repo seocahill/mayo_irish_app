@@ -97,6 +97,11 @@ class McpControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_includes @response.body, "https://abairt.test/a7"
     assert_includes @response.body, "answered"
+
+    post mcp_path, headers: auth_headers, params: rpc("tools/call", {
+      name: "learner_questions", arguments: { without_idea: "yes" }
+    }).to_json
+    assert_includes @response.body, "Invalid arguments"
   end
 
   test "review_queue works through the endpoint" do
