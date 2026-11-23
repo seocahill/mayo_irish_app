@@ -7,7 +7,7 @@ class MilestonesTest < ActiveSupport::TestCase
   end
 
   test "a new learner has reached nothing and the first steps are next" do
-    words, listening, understood, conversation = Milestones.new(@user, known_words: 0).strands
+    words, listening, understood, followed, conversation = Milestones.new(@user, known_words: 0).strands
 
     assert_nil words.reached
     assert_equal 10, words.next_step
@@ -15,6 +15,8 @@ class MilestonesTest < ActiveSupport::TestCase
     assert_nil listening.reached
     assert_nil understood.reached
     assert_equal 5, understood.next_step
+    assert_nil followed.reached
+    assert_equal 1, followed.next_step
     assert_nil conversation.reached
     assert_not words.started?
   end
@@ -123,5 +125,28 @@ class MilestonesTest < ActiveSupport::TestCase
     assert_equal 1, understood.call
     clip.update!(status: "hidden")
     assert_equal 0, understood.call
+  end
+
+  test "conversations followed count the whole recordings the learner said they followed, still offered" do
+    [ 15, 16, 17, 18 ].each.with_index do |recording, i|
+      ListeningClip.create!(vocabulary_item: vocabulary_items(:dog), abairt_entry_id: 400 + i, irish: "one madra two",
+                            english: "a phrase", audio_url: "https://clips.test/4#{i}", word_count: 3, abairt_recording_id: recording)
+    end
+    @user.listening_times.create!(abairt_recording_id: 15, seconds: 60, followed: true)
+    @user.listening_times.create!(abairt_recording_id: 16, seconds: 60, followed: true)
+    @user.listening_times.create!(abairt_recording_id: 17, seconds: 60, followed: true)
+    @user.listening_times.create!(abairt_recording_id: 18, seconds: 60, followed: false)
+    @user.listening_times.create!(abairt_recording_id: 99, seconds: 60, followed: true) # no longer offered
+    @user.listening_times.create!(abairt_recording_id: 19, seconds: 60) # listened, never answered
+    users(:one).listening_times.create!(abairt_recording_id: 18, seconds: 60, followed: true)
+    followed = -> { Milestones.new(@user, known_words: 0).strands.find { |s| s.key == :followed } }
+
+    assert_equal 3, followed.call.value
+    assert_equal 3, followed.call.reached
+    assert_equal 5, followed.call.next_step
+
+    ListeningClip.find_by(abairt_recording_id: 17).update!(status: "hidden")
+    assert_equal 2, followed.call.value
+    assert_equal 1, followed.call.reached
   end
 end
