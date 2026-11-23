@@ -10,6 +10,9 @@
   <p class="mb-4 bg-eist/10 border border-eist/30 rounded-sm px-4 py-3 text-sm text-ink" role="note">
     <%= t(".ai_notice") %>
   </p>
+  <% if @messages.any?(&:spoken?) %>
+    <p id="heard-as-note" class="-mt-2 mb-4 text-xs text-muted" data-testid="heard-as-note"><%= t(".heard_as_note") %></p>
+  <% end %>
 
   <div class="card flex flex-col h-[55dvh] sm:h-[65dvh] min-h-80">
     <%# Reversed so the newest message is in view without any script. %>
@@ -24,7 +27,13 @@
       <% end %>
 
       <% @messages.each do |message| %>
-        <% if message.role == "user" %>
+        <% if message.spoken? %>
+          <%# A spoken turn's words are the recogniser's, not the learner's own: say so. %>
+          <div class="flex flex-col items-end gap-1" data-testid="spoken-turn">
+            <p class="text-xs text-muted" aria-describedby="heard-as-note"><%= t(".heard_as") %></p>
+            <div lang="ga" class="bg-ink text-surface rounded-2xl rounded-tr-sm px-4 py-2.5 max-w-[85%] text-sm break-words"><%= message.content %></div>
+          </div>
+        <% elsif message.role == "user" %>
           <div class="flex justify-end">
             <div class="bg-ink text-surface rounded-2xl rounded-tr-sm px-4 py-2.5 max-w-[85%] text-sm break-words"><%= message.content %></div>
           </div>

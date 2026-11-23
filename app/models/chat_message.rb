@@ -11,6 +11,10 @@ class ChatMessage < ApplicationRecord
   scope :spoken_by, ->(user) { where(role: "user").where.not(spoken_seconds: nil).joins(:chat_session).merge(user.chat_sessions) }
   scope :conversation_replies_to, ->(user) { where(role: "assistant").joins(:chat_session).merge(user.chat_sessions.conversation) }
 
+  # A turn the learner recorded rather than typed: its words are what ABAIR's
+  # recogniser heard.
+  def spoken? = role == "user" && spoken_seconds.present?
+
   # Comhrá replies a learner thinks have wrong Irish, for an editor to check.
   def flagged? = flagged_at.present?
 
