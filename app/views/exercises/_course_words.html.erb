@@ -7,7 +7,7 @@
     <p class="text-xs text-muted mb-1"><%= words.english? ? t(".english_prompt") : t(".irish_prompt") %></p>
     <ul class="text-sm space-y-0.5">
       <% words.substitutions.each do |pair| %>
-        <li class="text-ink"><%= t(".mayo_form", other: pair.other_form, mayo: pair.mayo_form) %></li>
+        <li class="text-ink"><%= t(".mayo_forms") %> <span lang="ga"><%= pair.other_form %></span> → <strong lang="ga"><%= pair.mayo_form %></strong></li>
       <% end %>
       <% words.matches.each do |match| %>
         <li class="text-ink">

@@ -116,10 +116,11 @@ class ExercisesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "section h4", text: I18n.t("exercises.course_words.heading")
-    assert_select "section li", count: 2
-    assert_select "section li span[lang=ga]", text: "madra"
-    assert_select "section li", text: /teach\s+· house · this lesson/
-    assert_select "section li", text: /doiligh/, count: 0
+    section = "section[aria-labelledby=#{ActionView::RecordIdentifier.dom_id(@exercise, :course_words)}]"
+    assert_select "#{section} li", count: 2
+    assert_select "#{section} li span[lang=ga]", text: "madra"
+    assert_select "#{section} li", text: /teach\s+· house · this lesson/
+    assert_select "#{section} li", text: /doiligh/, count: 0
   end
 
   test "the edit form lists a Mayo forms pair in an Irish prompt, and says when nothing matched" do
@@ -131,6 +132,9 @@ class ExercisesControllerTest < ActionDispatch::IntegrationTest
     DialectSubstitution.create!(other_form: "deacair", mayo_form: "doiligh")
     @exercise.update!(prompt: "Tá sé deacair.")
     get edit_exercise_path(@exercise)
-    assert_select "section li", text: I18n.t("exercises.course_words.mayo_form", other: "deacair", mayo: "doiligh")
+    assert_select "section li", text: /#{I18n.t("exercises.course_words.mayo_forms")}/ do
+      assert_select "span[lang=ga]", text: "deacair"
+      assert_select "strong[lang=ga]", text: "doiligh"
+    end
   end
 end

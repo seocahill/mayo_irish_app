@@ -67,4 +67,42 @@ class ExerciseWordsTest < ActiveSupport::TestCase
     assert_equal [ pair ], words_for("Tá sé deacair.").substitutions
     assert_empty words_for("It was deacair, they said.").substitutions
   end
+
+  test "words from later lessons are left out" do
+    VocabularyItem.create!(lesson: @later, irish: "cat", english: "cat", position: 1)
+
+    assert_empty words_for("Is the cat in it?", lesson: @lesson).matches
+    assert_equal [ "cat" ], words_for("Is the cat in it?").matches.map { |m| m.item.irish }
+  end
+
+  test "a word taught in two lessons is shown as in this lesson" do
+    VocabularyItem.create!(lesson: @later, irish: "madra", english: "dog", position: 9)
+
+    assert_equal [ @later ], words_for("A dog.").matches.map(&:lesson)
+  end
+
+  test "only the prompt's word is taken back to its base form" do
+    VocabularyItem.create!(lesson: @later, irish: "hata", english: "hat", position: 1)
+    VocabularyItem.create!(lesson: @later, irish: "fuil", english: "blood", position: 2)
+    VocabularyItem.create!(lesson: @later, irish: "seomra", english: "room", position: 3)
+    VocabularyItem.create!(lesson: @later, irish: "fearr", english: "better", position: 4)
+
+    assert_empty words_for("Céard atá ann? An bhfuil sé ann?").matches
+    assert_equal %w[fearr seomra], words_for("B'fhearr liom fanacht san tseomra.").matches.map { |m| m.item.irish }.sort
+  end
+
+  test "an Irish headword with a comma or brackets matches each part" do
+    VocabularyItem.create!(lesson: @later, irish: "sé, seisean", english: "he", position: 1)
+    VocabularyItem.create!(lesson: @later, irish: "cúpla (with sing.)", english: "a couple", position: 2)
+
+    assert_equal [ "sé, seisean", "cúpla (with sing.)" ], words_for("Ní seisean a bhí ann ach cúpla duine.").matches.map { |m| m.item.irish }
+  end
+
+  test "am is Irish: an Irish prompt with an t-am in it is matched as Irish" do
+    VocabularyItem.create!(lesson: @later, irish: "scoil", english: "school", position: 1)
+
+    words = words_for("Tá an t-am ann don scoil.")
+    assert_not words.english?
+    assert_equal [ "scoil" ], words.matches.map { |m| m.item.irish }
+  end
 end
