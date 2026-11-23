@@ -1,0 +1,14 @@
+<turbo-frame id="<%= dom_id(exercise) %>">
+  <div class="border-b border-line last:border-0 flex items-start justify-between gap-4 px-5 py-3 hover:bg-canvas transition-colors">
+    <div class="flex-1 min-w-0">
+      <p class="text-sm text-ink"><span class="text-muted tabular-nums"><%= exercise.number %>.</span> <%= exercise.prompt %></p>
+      <% if exercise.answer.present? %>
+        <p class="text-sm text-ink mt-1" lang="ga"><span class="sr-only"><%= t("exercises.exercise.answer") %>: </span><span aria-hidden="true" class="text-muted">→ </span><%= exercise.answer %></p>
+      <% else %>
+        <p class="text-xs text-muted mt-1"><%= t("exercises.exercise.no_answer") %></p>
+      <% end %>
+    </div>
+    <a href="<%= edit_exercise_path(exercise) %>" class="text-muted hover:text-ink text-xs shrink-0 transition-colors"
+       aria-label="<%= t("exercises.exercise.edit_label", number: exercise.number) %>"><%= t("shared.edit") %></a>
+  </div>
+</turbo-frame>
