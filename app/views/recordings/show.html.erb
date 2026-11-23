@@ -75,5 +75,22 @@
       <% end %>
       <p class="text-xs text-muted"><%= t(".from_abairt") %></p>
     </div>
+
+    <%# The learner's own word on whether they followed it, like "I got it" on a clip: never a test or a score. %>
+    <section id="followed" class="card px-4 py-4 flex flex-col gap-3" aria-labelledby="followed-heading">
+      <div>
+        <h2 id="followed-heading" class="eyebrow text-eist"><%= t(".followed_heading") %></h2>
+        <p class="text-sm text-muted mt-1"><%= t(".followed_how") %></p>
+      </div>
+      <% unless @followed.nil? %>
+        <p class="text-sm" data-testid="followed-answer"><%= @followed ? t(".you_followed") : t(".you_not_yet") %></p>
+      <% end %>
+      <div class="flex flex-wrap gap-2">
+        <%= button_to t(".i_followed"), recording_follow_path(@recording.id), method: :patch, params: { followed: true },
+                      class: @followed == true ? "btn-solid" : "btn-outline", "aria-pressed": @followed == true %>
+        <%= button_to t(".not_yet"), recording_follow_path(@recording.id), method: :patch, params: { followed: false },
+                      class: @followed == false ? "btn-solid" : "btn-outline", "aria-pressed": @followed == false %>
+      </div>
+    </section>
   <% end %>
 </div>

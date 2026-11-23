@@ -9,6 +9,7 @@ class RecordingsController < ApplicationController
 
     @start = (params[:t].to_f - LEAD_IN).clamp(0..)
     @questions = RecordingQuestion.for_recording(params[:id].to_i)
+    @followed = current_user.listening_times.find_by(abairt_recording_id: params[:id].to_i)&.followed
     @recording = AbairtRecording.find(params[:id])
   rescue AbairtClient::Error
     @error = t(".unavailable")

@@ -273,3 +273,8 @@
   title: Phrases you made out
   body: Today's "So far" now counts the phrases from Mayo speakers you made out. Each listening clip where you tapped "I got it" counts once. It's your own word, not a test, so it's a record of what you can follow, not a score.
   path: /
+- id: 48
+  date: 2026-11-23
+  title: Say whether you followed a conversation
+  body: At the end of a whole conversation from a Mayo speaker there's now "Did you follow it?". Tap "I followed it" when you could keep up with what was said, even with a few words missed, or "Not yet". It's your own word, not a test, and Your listening shows it next to each conversation.
+  path: /listens

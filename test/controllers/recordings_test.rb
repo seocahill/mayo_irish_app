@@ -172,4 +172,70 @@ class RecordingsTest < ActionDispatch::IntegrationTest
       assert_select "[data-playback-target=speedStatus][aria-live=polite]"
     end
   end
+
+  test "the learner can say they followed a whole recording, their own word kept with their listening" do
+    users(:two).listening_times.create!(abairt_recording_id: 15, seconds: 300, updated_at: 2.days.ago)
+
+    patch recording_follow_path(15), params: { followed: true }
+
+    assert_redirected_to recording_path(15, anchor: "followed")
+    assert_equal I18n.t("recording_follows.update.followed"), flash[:notice]
+    time = users(:two).listening_times.sole
+    assert time.followed
+    assert_equal 300, time.seconds
+    assert_in_delta 2.days.ago, time.updated_at, 1.minute, "saying so isn't listening, so the last-listened time stays"
+
+    patch recording_follow_path(15), params: { followed: false }
+
+    assert_equal false, time.reload.followed
+    assert_equal I18n.t("recording_follows.update.not_yet"), flash[:notice]
+  end
+
+  test "saying so before any listening time is reported still keeps the answer" do
+    patch recording_follow_path(15), params: { followed: "true" }
+
+    time = users(:two).listening_times.sole
+    assert time.followed
+    assert_equal 0, time.seconds
+  end
+
+  test "only offered recordings can be marked as followed" do
+    patch recording_follow_path(99), params: { followed: true }
+    assert_response :not_found
+
+    @clip.hide!(by: users(:admin))
+    patch recording_follow_path(15), params: { followed: true }
+    assert_response :not_found
+    assert_empty users(:two).listening_times
+  end
+
+  test "the recording page asks whether the learner followed it and shows their answer" do
+    stub_recording
+
+    with_abairt_token { get recording_path(15) }
+
+    assert_select "section#followed h2", text: I18n.t("recordings.show.followed_heading")
+    assert_select "section#followed form[action=?]", recording_follow_path(15), count: 2
+    assert_select "section#followed button[aria-pressed=false]", count: 2
+    assert_select "[data-testid=followed-answer]", count: 0
+
+    users(:two).listening_times.create!(abairt_recording_id: 15, seconds: 60, followed: true)
+    with_abairt_token { get recording_path(15) }
+
+    assert_select "[data-testid=followed-answer]", text: I18n.t("recordings.show.you_followed")
+    assert_select "section#followed button[aria-pressed=true]", text: I18n.t("recordings.show.i_followed")
+  end
+
+  test "Your listening shows which conversations the learner followed" do
+    users(:two).listening_times.create!(abairt_recording_id: 15, seconds: 60, followed: true)
+    users(:two).listening_times.create!(abairt_recording_id: 16, seconds: 0, followed: false)
+    users(:two).listening_times.create!(abairt_recording_id: 17, seconds: 90)
+
+    get listens_path
+
+    assert_select "#conversations-heading + ul li", count: 3
+    assert_select "#conversations-heading + ul span", text: I18n.t("listens.index.followed"), count: 1
+    assert_select "#conversations-heading + ul span", text: I18n.t("listens.index.not_followed_yet"), count: 1
+    assert_select "#conversations-heading + ul", text: /No listening yet/
+  end
 end

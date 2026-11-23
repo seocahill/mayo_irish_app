@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   resource :weeks, only: :show
   resources :recordings, only: :show do
     resource :listening_time, only: :update
+    resource :follow, only: :update, controller: "recording_follows"
     resources :questions, only: :create, controller: "recording_questions"
   end
   resources :recording_questions, only: :destroy
