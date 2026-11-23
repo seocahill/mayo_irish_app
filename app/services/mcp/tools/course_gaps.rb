@@ -14,6 +14,7 @@ module Mcp
         nothing_to_practise: [ "Lessons with words but no exercises and no phrases", :unpractised_lessons ],
         no_grammar_notes: [ "Lessons with words but no grammar rules", :ungrammared_lessons ],
         no_listening_clips: [ "Lessons where no word has a listed Abairt listening clip", :unlistened_lessons ],
+        conversations_without_questions: [ "Lessons whose listening clips lead to whole Abairt conversations with no questions to listen for (words = how many conversations; editors write the questions on each conversation's page)", :unquestioned_lessons ],
         no_reading_text: [ "Lessons with words but no reading text", :unread_lessons ],
         recordings_without_speaker: [ "Lessons with recorded words that name no speaker (words = how many)", :uncredited_lessons ],
         words_without_source: [ "Lessons with words that have no source note (words = how many)", :unsourced_lessons ],
@@ -23,7 +24,7 @@ module Mcp
       tool_name "course_gaps"
       description "What the course is missing, from the same report as the Vocabulary gaps page. With no lesson: " \
                   "each check (no words, no recordings, nothing to practise, no grammar notes, no listening clips, " \
-                  "no reading text, recordings with no speaker, words with no source, not reviewed) with the lessons " \
+                  "conversations with no questions to listen for, no reading text, recordings with no speaker, words with no source, not reviewed) with the lessons " \
                   "that fail it (up to #{LESSONS_PER_CHECK} each), how many words lack a genitive, plural or recording " \
                   "and in how many lessons, " \
                   "words not yet marked noun/verb/etc., repeated words, thin everyday themes, and words used before " \

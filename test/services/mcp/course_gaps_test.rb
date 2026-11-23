@@ -56,6 +56,19 @@ class Mcp::CourseGapsTest < ActiveSupport::TestCase
     assert_equal 1, data["lessons_with_words_missing"]
   end
 
+  test "conversations with no questions to listen for are counted per lesson, and a lesson fails until each has some" do
+    ListeningClip.create!(vocabulary_item: vocabulary_items(:dog), abairt_entry_id: 1, irish: "x y z", english: "x y z", audio_url: "https://example.org/1.mp3",
+                          word_count: 3, abairt_recording_id: 15, abairt_recording_title: "A Story")
+
+    _, data = call
+
+    assert_equal [ { "number" => 1, "title" => "Lesson One", "words" => 1 } ], data["checks"]["conversations_without_questions"]["lessons"]
+    assert_includes call(lesson: 1).last["fails"], "conversations_without_questions"
+
+    RecordingQuestion.create!(abairt_recording_id: 15, question: "Q", answer: "A")
+    assert_not_includes call(lesson: 1).last["fails"], "conversations_without_questions"
+  end
+
   test "draft lessons are included and say so" do
     draft = Lesson.create!(number: 7, title: "Draft", position: 7, published: false)
 

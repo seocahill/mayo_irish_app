@@ -246,4 +246,29 @@ class VocabularyGapsTest < ActiveSupport::TestCase
     assert_equal [ "cathaoir" ], early.map { |e| e.item.irish }, "madra is first taught in lesson one"
     assert_equal two, early.first.used_in
   end
+
+  test "whole conversations with no questions to listen for are listed under the first lesson that leads to each" do
+    ListeningClip.delete_all
+    VocabularyItem.delete_all
+    first = Lesson.first
+    later = Lesson.create!(number: 97, title: "Later", position: first.position.to_i + 50)
+    early_item = VocabularyItem.create!(lesson: first, irish: "a", english: "one")
+    later_item = VocabularyItem.create!(lesson: later, irish: "b", english: "two")
+    clip = ->(item, entry, recording, title, status: "listed") do
+      ListeningClip.create!(vocabulary_item: item, abairt_entry_id: entry, irish: "x y z", english: "x y z", audio_url: "https://example.com/#{entry}.mp3",
+                            word_count: 3, abairt_recording_id: recording, abairt_recording_title: title, status: status)
+    end
+    clip.(later_item, 1, 15, "A Story")
+    clip.(early_item, 2, 15, "A Story")
+    clip.(later_item, 3, 16, "")
+    clip.(later_item, 4, 17, "Hidden one", status: "hidden")
+    clip.(later_item, 5, nil, nil)
+
+    rows = VocabularyGaps.new.unquestioned_lessons
+    assert_equal [ [ first, [ [ 15, "A Story" ] ] ], [ later, [ [ 16, nil ] ] ] ], rows.map { |r| [ r.lesson, r.recordings.map { |rec| [ rec.id, rec.title ] } ] }
+    assert_equal [ 1, 1 ], rows.map(&:count)
+
+    RecordingQuestion.create!(abairt_recording_id: 15, question: "Q", answer: "A")
+    assert_equal [ later ], VocabularyGaps.new.unquestioned_lessons.map(&:lesson)
+  end
 end

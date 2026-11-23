@@ -1239,6 +1239,15 @@ en:
       unpractised_summary: Lessons that teach words but have no exercises and no phrases
         yet. A prompt for where learners have nothing to practise on.
       unpractised_title: Lessons with no exercises or phrases
+      unquestioned_count:
+        one: 1 conversation
+        other: "%{count} conversations"
+      unquestioned_empty: Every whole conversation behind a listening clip has questions
+        to listen for.
+      unquestioned_summary: Whole conversations from Abairt that learners reach from
+        a lesson's listening clips but that have no questions to listen for yet, under
+        the first lesson that leads to each. Open one to listen and write a few.
+      unquestioned_title: Conversations with no questions to listen for
       unread_empty: Every lesson with vocabulary has a reading text.
       unread_summary: Lessons that teach words but have no reading text yet. A prompt
         for where a short passage could be added to read and hear.
@@ -1257,6 +1266,7 @@ en:
       unsourced_summary: Lessons with words that have no note on where they come from
         (book and page, or speaker) yet.
       unsourced_title: Words with no source note
+      untitled_recording: A recording from Abairt
   vocabulary_item_form_acceptances:
     create:
       not_saved: Not saved. The field already has a value, or the form wasn't a single
