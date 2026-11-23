@@ -201,6 +201,7 @@ class LessonChatControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-controller=speakable][data-speakable-src-value=?]", speech_path do
       assert_select "[data-speakable-target=selection] button", text: /Hear it \(synthetic\)/
       assert_select "#chat-messages[data-action=?]", "scroll->speakable#hide"
+      assert_select "form[data-speakable-ignore] textarea"
     end
     assert_select "[data-synthetic-note]", text: /synthetic voice, not a Mayo speaker/
   end

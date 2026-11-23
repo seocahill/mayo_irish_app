@@ -43,9 +43,7 @@ export default class extends Controller {
   selectionChanged() {
     clearTimeout(this.hideTimer)
     const selection = document.getSelection()
-    // Text selected in a box the learner types in (the tutor chat's answer) isn't read.
-    const typing = document.activeElement?.matches("textarea, input")
-    const text = selection.isCollapsed || typing ? "" : speakableText(selection.toString())
+    const text = selection.isCollapsed || ignored(selection.anchorNode) ? "" : speakableText(selection.toString())
 
     if (text && this.element.contains(selection.anchorNode) && this.element.contains(selection.focusNode)) {
       this.showSelectionButton(text, selection.getRangeAt(0).getBoundingClientRect())
@@ -76,6 +74,13 @@ export default class extends Controller {
     url.searchParams.set("text", text)
     return `${url.pathname}${url.search}`
   }
+}
+
+// Text selected where the learner types (the tutor chat's answer box, marked
+// data-speakable-ignore) isn't read.
+function ignored(node) {
+  const element = node?.nodeType === Node.ELEMENT_NODE ? node : node?.parentElement
+  return Boolean(element?.closest("[data-speakable-ignore]"))
 }
 
 // The selected text to read: without phonetics or the course's section

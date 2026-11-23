@@ -63,7 +63,7 @@
       <%# Input %>
       <div class="border-t border-line px-4 py-3">
         <%= form_with url: message_lesson_chat_path(@lesson), method: :post, multipart: true,
-              data: { controller: "chat speech-input", action: "submit->speech-input#submit turbo:submit-start->speech-input#busy" } do |f| %>
+              data: { controller: "chat speech-input", action: "submit->speech-input#submit turbo:submit-start->speech-input#busy", speakable_ignore: true } do |f| %>
           <%= f.file_field :audio, accept: "audio/*", class: "hidden", tabindex: -1, "aria-hidden": true,
                 data: { speech_input_target: "audio" } %>
           <%= hidden_field_tag :spoken_seconds, nil, id: nil, data: { speech_input_target: "spokenSeconds" } %>
