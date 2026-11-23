@@ -32,4 +32,28 @@ class ListeningDayTest < ActiveSupport::TestCase
     time.add(5000)
     assert_equal ListeningTime::MAX_REPORT, @user.listening_days.sole.seconds
   end
+
+  test "clip time counts in the day's total and is kept apart for the lifetime total" do
+    ListeningDay.add(@user, 90)
+    ListeningDay.add_clip(@user, 30)
+    ListeningDay.add_clip(@user, 30)
+
+    day = @user.listening_days.sole
+    assert_equal [ 150, 60 ], [ day.seconds, day.clip_seconds ]
+  end
+
+  test "lifetime minutes add clip time to whole recordings" do
+    @user.listening_times.create!(abairt_recording_id: 7, seconds: 120)
+    ListeningDay.add_clip(@user, 60)
+    ListeningDay.add_clip(@user, 60)
+
+    assert_equal 4, ListeningTime.minutes_for(@user)
+  end
+
+  test "a clip report is clamped like a recording's" do
+    ListeningDay.add_clip(@user, "5000")
+    ListeningDay.add_clip(@user, "-3")
+
+    assert_equal ListeningTime::MAX_REPORT, @user.listening_days.sole.clip_seconds
+  end
 end

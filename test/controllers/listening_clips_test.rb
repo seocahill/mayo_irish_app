@@ -26,11 +26,11 @@ class ListeningClipsTest < ActionDispatch::IntegrationTest
 
     get listening_clip_path(@clip)
 
-    assert_select "[data-controller=playback] button[data-playback-target=speed][data-action='playback#cycleSpeed']",
+    assert_select "[data-controller~=playback] button[data-playback-target=speed][data-action='playback#cycleSpeed']",
                   text: "#{I18n.t("shared.playback_speed.text")} 1×" do
       assert_select "[data-playback-target=speedLabel]", text: "1×"
     end
-    assert_select "[data-controller=playback] [data-playback-target=speedStatus][aria-live=polite]"
+    assert_select "[data-controller~=playback] [data-playback-target=speedStatus][aria-live=polite]"
     assert_select "button[data-playback-target=loop][data-action='playback#toggleLoop'][aria-pressed=false]",
                   text: I18n.t("listening_clips.show.repeat")
   end
@@ -40,9 +40,9 @@ class ListeningClipsTest < ActionDispatch::IntegrationTest
 
     get listening_clip_path(@clip)
 
-    assert_select "[data-controller=playback] button[data-action='playback#back'][aria-label=?]", I18n.t("shared.playback_back.label"),
+    assert_select "[data-controller~=playback] button[data-action='playback#back'][aria-label=?]", I18n.t("shared.playback_back.label"),
                   text: I18n.t("shared.playback_back.text")
-    assert_select "[data-controller=playback] [data-playback-keys]", text: I18n.t("shared.playback_keys.hint")
+    assert_select "[data-controller~=playback] [data-playback-keys]", text: I18n.t("shared.playback_keys.hint")
   end
 
   test "behind the reveal, the learner can say the phrase after the speaker and play it back" do
@@ -57,7 +57,7 @@ class ListeningClipsTest < ActionDispatch::IntegrationTest
       assert_select "button[data-action='recorder#play'][disabled][aria-label=?]", I18n.t("shared.record_yourself.play_recording")
     end
     assert_select "details #clip-shadow", text: I18n.t("listening_clips.show.say_it_after")
-    assert_select "[data-controller=playback] [data-controller=recorder]", count: 0
+    assert_select "[data-controller~=playback] [data-controller=recorder]", count: 0
   end
 
   test "saying whether they got it sets the clip aside" do

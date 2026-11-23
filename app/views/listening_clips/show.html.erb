@@ -7,8 +7,11 @@
     </p>
   </header>
 
-  <div class="card px-4 py-5 flex flex-col items-center gap-3" data-controller="playback">
-    <audio controls preload="auto" src="<%= @clip.audio_url %>" class="w-full" data-playback-target="audio"></audio>
+  <div class="card px-4 py-5 flex flex-col items-center gap-3" data-controller="playback listen-time"
+       data-listen-time-report-url-value="<%= listening_clip_listening_time_path(@clip) %>">
+    <audio controls preload="auto" src="<%= @clip.audio_url %>" class="w-full"
+           data-playback-target="audio" data-listen-time-target="audio"
+           data-action="play->listen-time#started timeupdate->listen-time#count pause->listen-time#report ended->listen-time#report"></audio>
     <div class="flex flex-wrap justify-center gap-2">
       <%= render "shared/playback_back" %>
       <%= render "shared/playback_speed" %>

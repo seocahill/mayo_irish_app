@@ -35,6 +35,14 @@ class UsageReportTest < ActiveSupport::TestCase
     end
   end
 
+  test "playing a listening clip counts as active" do
+    travel_to Time.zone.parse("2026-10-28 12:00") do
+      ListeningDay.add_clip(users(:two), 30)
+
+      assert_equal 1, UsageReport.new.weeks.last.active
+    end
+  end
+
   test "leaves out admins" do
     travel_to Time.zone.parse("2026-10-28 12:00") do
       answer(users(:admin), at: 1.hour.ago, correct: true)

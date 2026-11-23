@@ -46,6 +46,7 @@ class LearnerActivity
       ReviewLog.group(:user_id).maximum(:answered_at),
       Listen.group(:user_id).maximum(:created_at),
       ListeningTime.group(:user_id).maximum(:updated_at),
+      ListeningDay.group(:user_id).maximum(:updated_at),
       spoken_turns.group("chat_sessions.user_id").maximum(:created_at),
       SpeakingDay.group(:user_id).maximum(:updated_at)
     ].reduce { |latest, times| latest.merge(times) { |_, a, b| [ a, b ].max } }

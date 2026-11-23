@@ -238,3 +238,8 @@
   title: Type what you hear
   body: On a listening clip you can now type what you think the speaker said and tap Check. You'll see the speaker's words with the ones you heard, heard differently or missed marked, and the English. Missing fadas don't count against you. It's optional, and you still say how it went yourself.
   path: /listens
+- id: 41
+  date: 2026-11-23
+  title: Listening clips count as listening
+  body: Time you spend playing a listening clip, over and over with Repeat too, now counts towards your minutes listened on Today, So far and Your weeks, like whole conversations do. Only time the clip is actually playing counts.
+  path: /weeks
