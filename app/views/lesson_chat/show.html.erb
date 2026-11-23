@@ -78,10 +78,7 @@
               </svg>
             </button>
           <% end %>
-          <button type="submit"
-                  class="btn-solid shrink-0">
-            <%= t(".send") %>
-          </button>
+          <%= f.button t(".send"), class: "btn-solid shrink-0", data: { turbo_submits_with: t(".thinking") } %>
         </div>
         <% if @speech %>
           <p data-speech-input-target="status" class="text-xs text-muted mt-2 min-h-4" aria-live="polite"><%= t(".record_hint") %></p>

@@ -495,6 +495,7 @@ en:
         The recogniser only knows Irish, so type answers in English.
       send: Send
       start_again: Start again
+      thinking: Thinking…
   lesson_conversation_messages:
     create:
       daily_limit: That's today's limit for conversation. Come back tomorrow.

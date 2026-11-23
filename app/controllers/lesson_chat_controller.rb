@@ -42,6 +42,10 @@ class LessonChatController < ApplicationController
     When they write Irish beyond the lesson material, say which lesson words they used
     well. You can't check the rest, so say that once, briefly, without correcting it, and
     mention that "Ask a native speaker" on the lesson page can check it for them.
+
+    The student may type or speak. Spoken answers come through a speech recogniser, so
+    expect missing accents and odd word breaks, and read them charitably: never mark an
+    answer wrong for those alone.
   RULES
 
   MASTERY_MARKER_INSTRUCTIONS = <<~INSTRUCTIONS.freeze
@@ -112,12 +116,12 @@ class LessonChatController < ApplicationController
   end
 
   def set_lesson
-    @lesson = Lesson.find_by!(number: params[:lesson_id])
+    @lesson = Lesson.visible_to(current_user).find_by!(number: params[:lesson_id])
   end
 
   def set_chat_session
     chat_session_id = session[session_key]
-    @chat_session = ChatSession.tutor.find_by(id: chat_session_id, lesson: @lesson)
+    @chat_session = current_user.chat_sessions.tutor.find_by(id: chat_session_id, lesson: @lesson)
 
     unless @chat_session
       @chat_session = ChatSession.tutor.create!(lesson: @lesson, user: current_user)

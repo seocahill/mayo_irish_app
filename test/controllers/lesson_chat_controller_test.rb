@@ -153,4 +153,45 @@ class LessonChatControllerTest < ActionDispatch::IntegrationTest
     assert_equal I18n.t("lesson_chat.message.too_long"), flash[:alert]
     assert_not_requested :post, RECOGNITION_URL
   end
+
+  test "the tutor is told spoken answers come through a recogniser, whatever the lesson's own instructions" do
+    @lesson.update!(tutor_prompt: "Ask about the dog.")
+    stub_openai_chat("a question in English")
+
+    post message_lesson_chat_path(@lesson), params: { message: "start" }
+
+    assert_requested(:post, OpenaiTestHelper::CHAT_URL) do |request|
+      system = JSON.parse(request.body)["messages"].first["content"].squish
+      system.include?("Ask about the dog.") && system.include?("never mark an answer wrong for those alone")
+    end
+  end
+
+  test "a learner never carries on someone else's tutor chat in the same browser" do
+    stub_openai_chat("Well done.")
+    post message_lesson_chat_path(@lesson), params: { message: "mine" }
+    first = ChatSession.tutor.last
+
+    sign_in_as(users(:admin))
+    get lesson_chat_path(@lesson)
+
+    assert_response :success
+    assert_select "#chat-messages", text: /mine/, count: 0
+    assert_equal users(:admin), ChatSession.tutor.last.user
+    assert_not_equal first, ChatSession.tutor.last
+  end
+
+  test "learners can't practise lessons they can't see" do
+    @lesson.update!(published: false)
+
+    get lesson_chat_path(@lesson)
+
+    assert_response :not_found
+  end
+
+  test "a non-file audio parameter is ignored, not an error" do
+    post message_lesson_chat_path(@lesson), params: { audio: "not a file" }
+
+    assert_redirected_to lesson_chat_path(@lesson)
+    assert_not_requested :post, OpenaiTestHelper::CHAT_URL
+  end
 end

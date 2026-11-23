@@ -10,7 +10,7 @@ module SpokenAnswer
   private
 
   def transcribe(audio)
-    return if audio.blank?
+    return unless audio.respond_to?(:read)
     raise RecordingTooLong if audio.size > AbairClient::MAX_AUDIO_BYTES
 
     heard = AbairClient.new.recognise(audio.read, filename: audio.original_filename.presence || "speech.webm").squish
