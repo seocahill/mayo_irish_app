@@ -29,17 +29,21 @@ module Mcp
         found = Lesson.find_by(number: lesson)
         return error("There is no lesson #{lesson}.") unless found
 
-        exercises = found.exercises.order(:position, :number)
-        exercises = exercises.where(number: exercise) unless exercise.nil?
+        exercises = found.exercises.order(:number)
+        unless exercise.nil?
+          exercises = exercises.where(number: exercise)
+          return error("Lesson #{lesson} has no exercise #{exercise}.") if exercises.none?
+        end
+        # An answered exercise asked for by number with unanswered_only gives an empty list.
         exercises = exercises.where.not(id: Exercise.answered) if unanswered_only
-        return error("Lesson #{lesson} has no exercise #{exercise}.") if exercise && exercises.none?
 
+        context = ::ExerciseWords::Context.new(found)
         json_response(lesson: { number: found.number, title: found.title },
-                      exercises: exercises.map { |e| describe(e) })
+                      exercises: exercises.map { |e| describe(e, context) })
       end
 
-      def self.describe(exercise)
-        words = ::ExerciseWords.new(exercise)
+      def self.describe(exercise, context)
+        words = ::ExerciseWords.new(exercise, context: context)
         {
           id: exercise.id, number: exercise.number, prompt: exercise.prompt, answer: exercise.answer,
           prompt_language: words.english? ? "english" : "irish",
