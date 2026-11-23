@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_23_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_23_150000) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -366,7 +366,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_23_120000) do
     t.string "audio_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "native_question_id"
     t.index ["course_proposal_id"], name: "index_proposal_evidence_on_course_proposal_id"
+    t.index ["native_question_id"], name: "index_proposal_evidence_on_native_question_id"
   end
 
   create_table "quiz_questions", force: :cascade do |t|

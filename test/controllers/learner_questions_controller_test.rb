@@ -134,4 +134,43 @@ class LearnerQuestionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to new_session_path
   end
+
+  test "an admin saves a question as an idea and the card links to it" do
+    question = @learner.native_questions.create!(abairt_question_id: 7, status: "answered", answer_audio_url: "https://abairt.test/a7")
+    sign_in_as(users(:admin))
+
+    assert_difference -> { CourseProposal.count } => 1, -> { ProposalEvidence.count } => 1 do
+      post learner_question_idea_path(question), params: { raw_text: "Learners mix up the two verbs to be" }
+    end
+
+    assert_redirected_to learner_questions_path(anchor: ActionView::RecordIdentifier.dom_id(question))
+    idea = CourseProposal.last
+    assert_equal [ "admin", "idea" ], [ idea.origin, idea.kind ]
+    follow_redirect!
+    assert_select "##{ActionView::RecordIdentifier.dom_id(question, :ideas)} a[href=?]", course_proposals_path(anchor: "proposal-#{idea.id}"),
+                  text: "Learners mix up the two verbs to be"
+    assert_select "summary", text: "Save another idea from it"
+  end
+
+  test "a blank idea isn't saved" do
+    question = @learner.native_questions.create!(abairt_question_id: 7, status: "sent")
+    sign_in_as(users(:admin))
+
+    assert_no_difference -> { CourseProposal.count } do
+      post learner_question_idea_path(question), params: { raw_text: " " }
+    end
+
+    assert_equal "Write the idea first.", flash[:alert]
+  end
+
+  test "learners cannot save ideas" do
+    question = @learner.native_questions.create!(abairt_question_id: 7, status: "sent")
+    sign_in_as(@learner)
+
+    assert_no_difference -> { CourseProposal.count } do
+      post learner_question_idea_path(question), params: { raw_text: "Sneaky" }
+    end
+
+    assert_redirected_to root_path
+  end
 end

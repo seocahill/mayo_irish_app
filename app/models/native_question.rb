@@ -7,6 +7,8 @@
 class NativeQuestion < ApplicationRecord
   belongs_to :user
   belongs_to :lesson, optional: true
+  # Evidence behind ideas a designer saved from this question.
+  has_many :proposal_evidence, class_name: "ProposalEvidence", dependent: :nullify
 
   enum :status, { waiting: "waiting", sent: "sent", answered: "answered" }, validate: true
 
@@ -40,4 +42,31 @@ class NativeQuestion < ApplicationRecord
   end
 
   def new_answer? = answered? && answer_seen_at.nil?
+
+  # Saves a designer's own words about this question as an idea in the
+  # proposals inbox, with the question as evidence: where it was asked and,
+  # once answered, a link to the speaker's answer. The learner's recording
+  # is not attached, so their voice goes no further.
+  def save_as_idea!(text, origin:)
+    transaction do
+      proposal = CourseProposal.capture(text, origin: origin)
+      proposal.save!
+      proposal.proposal_evidence.create!(native_question: self, source: evidence_source, audio_url: https_answer_audio_url)
+      proposal
+    end
+  end
+
+  def ideas = proposal_evidence.map(&:course_proposal).uniq
+
+  private
+
+  def evidence_source
+    I18n.t("native_question.evidence_source", id: abairt_question_id, date: I18n.l(created_at.to_date, format: :long),
+           lesson: lesson&.display_title || I18n.t("native_question.no_lesson"),
+           status: answered? ? I18n.t("native_question.answered") : I18n.t("native_question.unanswered"))
+  end
+
+  def https_answer_audio_url
+    answer_audio_url if answered? && answer_audio_url.to_s.start_with?("https://")
+  end
 end

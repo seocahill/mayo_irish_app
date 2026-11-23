@@ -55,4 +55,49 @@ class NativeQuestionTest < ActiveSupport::TestCase
 
     assert question.answered?
   end
+
+  test "saving a question as an idea keeps the designer's words and attaches the answer, not the learner's voice" do
+    question = NativeQuestion.create!(user: users(:two), lesson: lessons(:one), abairt_question_id: 70, status: "answered",
+                                      audio_url: "https://abairt.test/q70", answer_audio_url: "https://abairt.test/a70")
+
+    idea = question.save_as_idea!("Lesson 1 never says when to use tá", origin: "admin")
+
+    assert_equal [ "idea", "captured", "admin", "Lesson 1 never says when to use tá" ],
+                 [ idea.kind, idea.status, idea.origin, idea.raw_text ]
+    evidence = idea.proposal_evidence.sole
+    assert_equal question, evidence.native_question
+    assert_equal "https://abairt.test/a70", evidence.audio_url
+    assert_includes evidence.source, "Abairt question 70"
+    assert_includes evidence.source, lessons(:one).display_title
+    assert_includes evidence.source, "answered"
+    assert_not_includes evidence.source, "q70"
+    assert_equal [ idea ], question.reload.ideas
+  end
+
+  test "an unanswered question is saved without audio" do
+    question = NativeQuestion.create!(user: users(:two), abairt_question_id: 71, status: "sent", audio_url: "https://abairt.test/q71")
+
+    evidence = question.save_as_idea!("Something about numbers", origin: "admin").proposal_evidence.sole
+
+    assert_nil evidence.audio_url
+    assert_includes evidence.source, "no lesson"
+    assert_includes evidence.source, "not answered yet"
+  end
+
+  test "a blank idea saves nothing" do
+    question = NativeQuestion.create!(user: users(:two), abairt_question_id: 72, status: "sent")
+
+    assert_no_difference -> { CourseProposal.count + ProposalEvidence.count } do
+      assert_raises(ActiveRecord::RecordInvalid) { question.save_as_idea!("  ", origin: "admin") }
+    end
+  end
+
+  test "deleting a question leaves the idea and its evidence, unlinked" do
+    question = NativeQuestion.create!(user: users(:two), abairt_question_id: 73, status: "sent")
+    evidence = question.save_as_idea!("Keep me", origin: "admin").proposal_evidence.sole
+
+    question.destroy!
+
+    assert_nil evidence.reload.native_question_id
+  end
 end

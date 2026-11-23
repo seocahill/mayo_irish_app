@@ -10,7 +10,7 @@ class LearnerQuestionsController < ApplicationController
   before_action :require_admin
 
   def index
-    @questions = NativeQuestion.newest_first.includes(:lesson).limit(LIMIT).to_a
+    @questions = NativeQuestion.newest_first.includes(:lesson, proposal_evidence: :course_proposal).limit(LIMIT).to_a
     refresh(@questions.reject(&:answered?).first(REFRESH_AT_MOST)) if AbairtClient.configured?
     @answered = NativeQuestion.answered.count
     @total = NativeQuestion.count

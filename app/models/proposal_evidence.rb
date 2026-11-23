@@ -6,6 +6,8 @@ class ProposalEvidence < ApplicationRecord
   self.table_name = "proposal_evidence"
 
   belongs_to :course_proposal
+  # Set when the evidence is a learner's question to a native speaker.
+  belongs_to :native_question, optional: true
   validates :source, presence: true, length: { maximum: 500 }
   validates :quote, length: { maximum: 2000 }
   validates :audio_url, length: { maximum: 500 }
