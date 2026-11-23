@@ -59,6 +59,20 @@ class NativeQuestion < ApplicationRecord
 
   def ideas = proposal_evidence.map(&:course_proposal).uniq
 
+  # What came of the question in the course, for the learner who asked it:
+  # :used once an idea saved from it changed the course (applied or edited),
+  # :accepted once a designer decided to use one, :saved while a designer has
+  # it as an idea (open or parked), nil otherwise. Nothing about the idea
+  # itself (its words, who saved it) goes back to the learner.
+  def course_use
+    statuses = ideas.map(&:status)
+    if statuses.empty? then nil
+    elsif statuses.intersect?(CourseProposal::USED_STATUSES) then :used
+    elsif statuses.include?("accepted") then :accepted
+    else :saved
+    end
+  end
+
   private
 
   def evidence_source

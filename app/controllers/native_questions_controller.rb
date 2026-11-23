@@ -8,7 +8,7 @@ class NativeQuestionsController < ApplicationController
   before_action :set_lesson
 
   def index
-    @questions = current_user.native_questions.newest_first.includes(:lesson).to_a
+    @questions = current_user.native_questions.newest_first.includes(:lesson, proposal_evidence: :course_proposal).to_a
     @questions.reject(&:answered?).first(REFRESH_AT_MOST).each { |question| refresh(question) }
     current_user.native_questions.unseen_answers.update_all(answer_seen_at: Time.current)
   end

@@ -258,3 +258,8 @@
   title: Answer the tutor aloud
   body: In a lesson's Practise chat you can now tap the microphone and say your answer in Irish instead of typing it. ABAIR's speech recogniser writes down what it heard and sends that to the tutor, marked "Heard as". The time you spoke counts towards your minutes spoken. The recogniser only knows Irish, so keep typing answers in English.
   path: /lessons
+- id: 45
+  date: 2026-11-23
+  title: Hear what came of your question
+  body: On Ask a native speaker, a question now says when a course designer has saved it to help improve the course, and later when it is used to change the course. Your questions to native speakers shape the lessons.
+  path: /native_questions

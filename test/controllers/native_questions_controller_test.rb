@@ -79,4 +79,42 @@ class NativeQuestionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "a[href=?]", native_questions_path(lesson: @lesson.number)
   end
+
+  test "a question a designer saved for the course says so, without the idea's words" do
+    question = @learner.native_questions.create!(abairt_question_id: 9, status: "answered", answer_audio_url: "https://abairt.test/a9")
+    idea = question.save_as_idea!("Secret designer note about lesson one", origin: "admin")
+
+    with_abairt_token { get native_questions_path }
+
+    assert_select "##{ActionView::RecordIdentifier.dom_id(question)} [data-course-use=saved]", text: I18n.t("native_questions.index.course_use.saved")
+    assert_no_match "Secret designer note", response.body
+
+    idea.update!(status: "accepted")
+    with_abairt_token { get native_questions_path }
+
+    assert_select "##{ActionView::RecordIdentifier.dom_id(question)} [data-course-use=accepted]", text: I18n.t("native_questions.index.course_use.accepted")
+
+    idea.update!(status: "applied")
+    with_abairt_token { get native_questions_path }
+
+    assert_select "##{ActionView::RecordIdentifier.dom_id(question)} [data-course-use=used]", text: I18n.t("native_questions.index.course_use.used")
+  end
+
+  test "a question with no idea saved from it says nothing about the course" do
+    @learner.native_questions.create!(abairt_question_id: 10, status: "answered", answer_audio_url: "https://abairt.test/a10")
+
+    with_abairt_token { get native_questions_path }
+
+    assert_select "[data-course-use]", count: 0
+  end
+
+  test "another learner's saved question isn't shown" do
+    mine = @learner.native_questions.create!(abairt_question_id: 12, status: "answered", answer_audio_url: "https://abairt.test/a12")
+    users(:one).native_questions.create!(abairt_question_id: 11, status: "sent").save_as_idea!("Theirs", origin: "admin")
+
+    with_abairt_token { get native_questions_path }
+
+    assert_select "##{ActionView::RecordIdentifier.dom_id(mine)}"
+    assert_select "[data-course-use]", count: 0
+  end
 end
