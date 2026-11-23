@@ -910,7 +910,6 @@ en:
       listened:
         one: 1 minute
         other: "%{count} minutes"
-        zero: No listening yet
       no_conversations: None yet. Each phrase leads on to the conversation it came
         from.
       no_phrases: None yet. A new phrase comes up on the daily path once you've finished
@@ -1105,6 +1104,7 @@ en:
   recording_follows:
     update:
       followed: Saved. You followed it.
+      listen_first: Listen to it first, then say whether you followed it.
       not_yet: Saved. Give it another listen in a while.
   recording_questions:
     create:

@@ -191,12 +191,35 @@ class RecordingsTest < ActionDispatch::IntegrationTest
     assert_equal I18n.t("recording_follows.update.not_yet"), flash[:notice]
   end
 
-  test "saying so before any listening time is reported still keeps the answer" do
+  test "saying so before any listening is kept asks the learner to listen first, and records nothing" do
     patch recording_follow_path(15), params: { followed: "true" }
 
-    time = users(:two).listening_times.sole
-    assert time.followed
-    assert_equal 0, time.seconds
+    assert_redirected_to recording_path(15, anchor: "followed")
+    assert_equal I18n.t("recording_follows.update.listen_first"), flash[:alert]
+    assert_empty users(:two).listening_times
+    assert_empty users(:two).listening_days
+  end
+
+  test "saying so leaves the minutes listened alone" do
+    users(:two).listening_times.create!(abairt_recording_id: 15, seconds: 90)
+
+    assert_no_difference -> { ListeningDay.count } do
+      patch recording_follow_path(15), params: { followed: true }
+    end
+    assert_equal 90, users(:two).listening_times.sole.seconds
+  end
+
+  test "an answer needs the followed param, and a signed-in learner" do
+    users(:two).listening_times.create!(abairt_recording_id: 15, seconds: 90)
+
+    patch recording_follow_path(15)
+    assert_response :bad_request
+    assert_nil users(:two).listening_times.sole.followed
+
+    sign_out
+    patch recording_follow_path(15), params: { followed: true }
+    assert_redirected_to new_session_path
+    assert_nil users(:two).listening_times.sole.followed
   end
 
   test "only offered recordings can be marked as followed" do
@@ -224,6 +247,12 @@ class RecordingsTest < ActionDispatch::IntegrationTest
 
     assert_select "[data-testid=followed-answer]", text: I18n.t("recordings.show.you_followed")
     assert_select "section#followed button[aria-pressed=true]", text: I18n.t("recordings.show.i_followed")
+
+    users(:two).listening_times.sole.update!(followed: false)
+    with_abairt_token { get recording_path(15) }
+
+    assert_select "[data-testid=followed-answer]", text: I18n.t("recordings.show.you_not_yet")
+    assert_select "section#followed button[aria-pressed=true]", text: I18n.t("recordings.show.not_yet")
   end
 
   test "Your listening shows which conversations the learner followed" do
@@ -236,6 +265,5 @@ class RecordingsTest < ActionDispatch::IntegrationTest
     assert_select "#conversations-heading + ul li", count: 3
     assert_select "#conversations-heading + ul span", text: I18n.t("listens.index.followed"), count: 1
     assert_select "#conversations-heading + ul span", text: I18n.t("listens.index.not_followed_yet"), count: 1
-    assert_select "#conversations-heading + ul", text: /No listening yet/
   end
 end

@@ -18,7 +18,7 @@
               <span class="text-xs text-muted">
                 <%= t(".listened", count: time.seconds.fdiv(60).ceil) %> · <%= t(".ago", time: time_ago_in_words(time.updated_at)) %>
                 <% unless time.followed.nil? %>
-                  · <span class="<%= time.followed? ? "text-foghlaim" : "text-labhair" %>"><%= time.followed? ? t(".followed") : t(".not_followed_yet") %></span>
+                  <span class="chip ml-1 <%= time.followed? ? "border-foghlaim text-foghlaim" : "border-labhair text-labhair" %>"><%= time.followed? ? t(".followed") : t(".not_followed_yet") %></span>
                 <% end %>
               </span>
             <% end %>
