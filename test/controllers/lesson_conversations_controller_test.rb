@@ -93,6 +93,11 @@ class LessonConversationsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal [ 30, nil ], conversation.chat_messages.where(role: "user").map(&:spoken_seconds)
+
+    get lesson_conversation_path(@lesson)
+    assert_select "[data-testid=spoken-turn]", count: 1 do
+      assert_select "div[lang=ga]", text: "what was heard"
+    end
   end
 
   test "a spoken turn says it is what the recogniser heard; a typed turn doesn't" do
@@ -107,8 +112,10 @@ class LessonConversationsControllerTest < ActionDispatch::IntegrationTest
       assert_select "p", text: I18n.t("lesson_conversations.show.heard_as")
       assert_select "div[lang=ga]", text: "what was heard"
     end
-    assert_select "div", text: "typed words"
-    assert_select "[data-testid=heard-as-note]", text: I18n.t("lesson_conversations.show.heard_as_note")
+    assert_select "[data-testid=spoken-turn] div", text: "typed words", count: 0
+    assert_select ".flex.justify-end > div", text: "typed words"
+    assert_select "[data-testid=spoken-turn] p[aria-describedby=heard-as-note]"
+    assert_select "#heard-as-note[data-testid=heard-as-note]", text: I18n.t("lesson_conversations.show.heard_as_note")
   end
 
   test "with only typed turns there is no Heard as note" do
