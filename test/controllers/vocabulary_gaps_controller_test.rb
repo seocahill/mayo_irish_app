@@ -299,4 +299,18 @@ class VocabularyGapsControllerTest < ActionDispatch::IntegrationTest
     get vocabulary_gaps_path
     assert_select "#unquestioned-lessons p", text: I18n.t("vocabulary_gaps.show.unquestioned_empty")
   end
+
+  test "lessons with exercises that have no answer link to the lesson editor's exercises" do
+    sign_in_as(users(:admin))
+    lesson = exercises(:one).lesson
+
+    get vocabulary_gaps_path
+
+    assert_select "#unanswered-lessons a[href=?]", edit_lesson_path(lesson, anchor: "exercises"), text: /#{Regexp.escape(lesson.display_title)}/
+    assert_select "#unanswered-lessons", text: /#{I18n.t("vocabulary_gaps.show.unanswered_count", count: 1)}/
+
+    exercises(:one).update!(answer: "An answer")
+    get vocabulary_gaps_path
+    assert_select "#unanswered-lessons", text: /#{I18n.t("vocabulary_gaps.show.unanswered_empty")}/
+  end
 end

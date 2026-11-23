@@ -90,6 +90,19 @@ class VocabularyGaps
     end
   end
 
+  Unanswered = Struct.new(:lesson, :count, keyword_init: true)
+
+  # Lessons with exercises that no editor has written an answer for yet, with
+  # how many. Learners only see an exercise once it has an answer. Read-only.
+  def unanswered_lessons
+    @unanswered_lessons ||= begin
+      counts = Exercise.where.not(id: Exercise.answered.select(:id)).group(:lesson_id).count
+      Lesson.where(id: counts.keys).order(:position, :number).map do |lesson|
+        Unanswered.new(lesson: lesson, count: counts[lesson.id])
+      end
+    end
+  end
+
   Ungrammared = Struct.new(:lesson, :count, keyword_init: true)
 
   # Lessons with vocabulary but no grammar rules, so designers can see where no
