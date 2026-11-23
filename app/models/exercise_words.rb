@@ -26,16 +26,42 @@ class ExerciseWords
 
   Match = Data.define(:item, :lesson)
 
+  # What every exercise in one lesson shares: the lessons so far, ranked with
+  # this one first, their vocabulary with each headword and gloss split into
+  # words once, the Mayo forms pairs and the course's language detector. Pass
+  # one to ExerciseWords.new when looking at many exercises of a lesson.
+  class Context
+    Entry = Data.define(:item, :irish, :english)
+
+    attr_reader :lessons, :entries, :substitutions, :language
+
+    def initialize(lesson)
+      # This lesson and the lessons before it in the course, so the words
+      # shown are ones a learner has already met.
+      lessons = Lesson.where(id: VocabularyItem.select(:lesson_id))
+                      .where("position < :position OR id = :id", position: lesson.position, id: lesson.id).to_a
+      @lessons = lessons.index_by(&:id)
+      rank = lessons.sort_by { |l| [ l.id == lesson.id ? 0 : 1, l.position, l.id ] }
+                    .each_with_index.to_h { |l, index| [ l.id, index ] }
+      @entries = VocabularyItem.where(lesson_id: @lessons.keys).select(:id, :lesson_id, :irish, :english, :position)
+                               .sort_by { |item| [ rank[item.lesson_id], item.position, item.id ] }
+                               .map { |item| Entry.new(item: item, irish: ExerciseWords.pieces(item.irish), english: ExerciseWords.pieces(item.english)) }
+      @substitutions = DialectSubstitution.ordered.to_a
+      @language = CourseLanguage.current
+    end
+  end
+
   attr_reader :exercise
 
-  def initialize(exercise)
+  def initialize(exercise, context: nil)
     @exercise = exercise
+    @context = context
   end
 
   def english?
     return @english if defined?(@english)
 
-    language = CourseLanguage.current.of(exercise.prompt)
+    language = context.language.of(exercise.prompt)
     @english = language ? language == :english : IrishText.words(exercise.prompt).any? { |word| ENGLISH_MARKERS.include?(word) }
   end
 
@@ -49,62 +75,57 @@ class ExerciseWords
   def substitutions
     return [] if english?
 
-    @substitutions ||= DialectSubstitution.ordered.select { |s| IrishText.includes?(exercise.prompt, s.other_form) }
-  end
-
-  private
-
-  def all_matches
-    @all_matches ||= begin
-      prompt_words = IrishText.words(exercise.prompt)
-      bare_words = (prompt_words + prompt_words.map { |word| demutate(word) }).to_set
-      lessons = lessons_so_far.index_by(&:id)
-      rank = lessons.values.sort_by { |l| [ l.id == exercise.lesson_id ? 0 : 1, l.position, l.id ] }
-                    .each_with_index.to_h { |lesson, index| [ lesson.id, index ] }
-
-      VocabularyItem.where(lesson_id: lessons.keys).select(:id, :lesson_id, :irish, :english, :position)
-                    .select { |item| english? ? english_match?(item, prompt_words) : irish_match?(item, prompt_words, bare_words) }
-                    .sort_by { |item| [ rank[item.lesson_id], item.position, item.id ] }
-                    .uniq { |item| [ IrishText.words(item.irish), item.english.downcase ] }
-                    .map { |item| Match.new(item: item, lesson: lessons[item.lesson_id]) }
-    end
-  end
-
-  # This lesson and the lessons before it in the course, so the words shown
-  # are ones a learner has already met.
-  def lessons_so_far
-    lesson = exercise.lesson
-    Lesson.where(id: VocabularyItem.select(:lesson_id))
-          .where("position < :position OR id = :id", position: lesson.position, id: lesson.id).to_a
-  end
-
-  def irish_match?(item, prompt_words, bare_words)
-    pieces(item.irish).any? do |needle|
-      # Two-letter words ("an", "ar", "ná") are everywhere and would crowd out the rest.
-      next false if needle.join.length < MIN_LENGTH
-      next true if prompt_words.each_cons(needle.size).include?(needle)
-
-      # A single word also matches a mutated form in the prompt: "bhean" for "bean".
-      needle.size == 1 && bare_words.include?(needle.first)
-    end
-  end
-
-  def english_match?(item, prompt_words)
-    pieces(item.english).any? do |words|
-      next false if words.join.length < MIN_LENGTH || (words.size == 1 && STOP_GLOSSES.include?(words.first))
-
-      prompt_words.each_cons(words.size).include?(words)
-    end
+    @substitutions ||= context.substitutions.select { |s| IrishText.includes?(exercise.prompt, s.other_form) }
   end
 
   # Each part of a headword or gloss as its words: "palm (of hand)" ->
   # [["palm"]]; "sé, seisean" -> [["se"], ["seisean"]]. A leading "a", "an",
   # "the" or "to" is dropped from a part of several words.
-  def pieces(text)
+  def self.pieces(text)
     text.to_s.gsub(/\([^)]*\)/, " ").split(/[,;\/]/).filter_map do |part|
       words = IrishText.words(part)
       words.shift if words.size > 1 && %w[a an the to].include?(words.first)
       words.presence
+    end
+  end
+
+  private
+
+  def context
+    @context ||= Context.new(exercise.lesson)
+  end
+
+  def all_matches
+    @all_matches ||= begin
+      prompt_words = IrishText.words(exercise.prompt)
+      bare_words = (prompt_words + prompt_words.map { |word| demutate(word) }).to_set
+      prompt_set = prompt_words.to_set
+      english = english?
+
+      context.entries
+             .select { |entry| english ? english_match?(entry.english, prompt_words, prompt_set) : irish_match?(entry.irish, prompt_words, bare_words) }
+             .uniq { |entry| [ entry.irish, entry.item.english.downcase ] }
+             .map { |entry| Match.new(item: entry.item, lesson: context.lessons[entry.item.lesson_id]) }
+    end
+  end
+
+  def irish_match?(needles, prompt_words, bare_words)
+    needles.any? do |needle|
+      # Two-letter words ("an", "ar", "ná") are everywhere and would crowd out the rest.
+      next false if needle.join.length < MIN_LENGTH
+      # A single word also matches a mutated form in the prompt: "bhean" for
+      # "bean" (bare_words holds the prompt's words as written, too).
+      next bare_words.include?(needle.first) if needle.size == 1
+
+      bare_words.include?(needle.first) && prompt_words.each_cons(needle.size).include?(needle)
+    end
+  end
+
+  def english_match?(glosses, prompt_words, prompt_set)
+    glosses.any? do |words|
+      next false if words.join.length < MIN_LENGTH || (words.size == 1 && STOP_GLOSSES.include?(words.first))
+
+      prompt_set.include?(words.first) && (words.size == 1 || prompt_words.each_cons(words.size).include?(words))
     end
   end
 

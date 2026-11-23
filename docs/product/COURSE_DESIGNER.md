@@ -125,6 +125,7 @@ read-only; no tool deletes anything.
 | `fill_queue` | open slots on drafts, oldest first (read-only, English specs only; candidates not yet) |
 | `fill_slot` | pick a candidate, attach a recording or enter typed Irish |
 | `where_is_taught` | where a word or rule is taught, heard and reviewed |
+| `exercise_words` | a lesson's exercises with the course words in each prompt and any Mayo forms pair (read-only; answers are written by designers) |
 | `mayo_forms` | Mayo forms pairs and where the other form still appears |
 | `search_corpus` | search lessons, Abairt, monograph reports |
 
