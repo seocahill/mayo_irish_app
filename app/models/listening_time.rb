@@ -11,7 +11,11 @@ class ListeningTime < ApplicationRecord
 
   scope :recent, -> { where(updated_at: 1.week.ago..) }
 
-  def self.minutes_for(user) = where(user: user).sum(:seconds).fdiv(60).round
+  # Everything the learner has listened to: whole recordings, and the clips
+  # counted day by day in ListeningDay.
+  def self.minutes_for(user)
+    (where(user: user).sum(:seconds) + ListeningDay.where(user: user).sum(:clip_seconds)).fdiv(60).round
+  end
 
   def add(seconds)
     seconds = seconds.to_i.clamp(0, MAX_REPORT)

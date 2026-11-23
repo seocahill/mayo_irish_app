@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   resources :listening_clips, only: %i[show update] do
     resource :listen, only: :create
     resource :dictation, only: :create
+    resource :listening_time, only: :update, controller: "clip_listening_times"
   end
   resources :listens, only: :index
   resource :speaking_time, only: :create
