@@ -219,4 +219,11 @@ class DailyPathListeningTest < ActiveSupport::TestCase
     assert_not_equal Rails.application.routes.url_helpers.review_path, path.next_step_after_review&.path
     assert_equal path.items.reject { |i| i.path == Rails.application.routes.url_helpers.review_path }.first, path.next_step_after_review
   end
+
+  test "course_words doesn't count a word's plural and genitive cards as words" do
+    before = DailyPath.new(@user).course_words
+    vocabulary_items(:dog).update!(plural: "dog-pl", genitive: "dog-gen")
+    QuizQuestion.sync_for(vocabulary_items(:dog).lesson)
+    assert_equal before, DailyPath.new(@user).course_words
+  end
 end

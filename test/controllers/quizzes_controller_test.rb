@@ -98,4 +98,12 @@ class QuizzesControllerTest < ActionDispatch::IntegrationTest
     exercise_question = QuizQuestion.find_by!(source: exercises(:one))
     assert_not_includes session["quiz_round_lesson_#{@lesson.id}"]["ids"], exercise_question.id
   end
+
+  test "the lesson quiz never asks for a plural or genitive" do
+    sign_in_as(@user)
+    vocabulary_items(:dog).update!(plural: "dog-pl", genitive: "dog-gen")
+    get lesson_quiz_path(@lesson)
+    ids = session.to_h.values.find { |v| v.is_a?(Hash) && v["ids"] }["ids"]
+    assert_empty QuizQuestion.where(id: ids).noun_form_cards
+  end
 end

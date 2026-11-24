@@ -1263,6 +1263,13 @@ en:
       how_did_it_go: How did it go?
       how_to_say_in_irish: How do you say this in Irish?
       meaning_in_english: What does this mean in English?
+      noun_form:
+        answer: In the course
+        genitive: Genitive · say the form
+        hint: Say it aloud, then tap Show.
+        plural: Plural · say the form
+        prompt_genitive_html: The genitive of %{word}?
+        prompt_plural_html: The plural of %{word}?
       question_count: Question %{position}/%{count}
       quit: Quit
       rating:

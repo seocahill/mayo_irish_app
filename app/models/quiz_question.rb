@@ -1,5 +1,8 @@
 class QuizQuestion < ApplicationRecord
   DIRECTIONS = %w[ga_en en_ga].freeze
+  # A noun's plural and genitive, as the course holds them, recalled from the
+  # word itself once the learner knows what it means (see sync_noun_forms).
+  FORM_DIRECTIONS = %w[plural genitive].freeze
   DISTRACTOR_COUNT = 3
 
   belongs_to :lesson
@@ -7,7 +10,7 @@ class QuizQuestion < ApplicationRecord
 
   has_many :quiz_reviews, dependent: :destroy
 
-  validates :direction, inclusion: { in: DIRECTIONS }
+  validates :direction, inclusion: { in: DIRECTIONS + FORM_DIRECTIONS }
   validates :prompt, :answer, presence: true
 
   # Returns the answer plus distractors, shuffled — ready to render as MC options.
@@ -15,15 +18,21 @@ class QuizQuestion < ApplicationRecord
     ([ answer ] + Array(distractors)).shuffle
   end
 
-  def prompt_lang = direction == "ga_en" ? "ga" : "en"
+  def prompt_lang = direction == "en_ga" ? "en" : "ga"
   def answer_lang = direction == "ga_en" ? "en" : "ga"
 
-  # Exercise cards have no multiple choice: the learner says or writes their
-  # Irish, sees the editors' answer, and rates themselves.
-  def self_rated? = source_type == "Exercise"
+  def noun_form? = FORM_DIRECTIONS.include?(direction)
+
+  # Exercise and noun-form cards have no multiple choice: the learner says or
+  # writes their Irish, sees the course's answer, and rates themselves.
+  def self_rated? = source_type == "Exercise" || noun_form?
 
   scope :exercise_cards, -> { where(source_type: "Exercise") }
-  scope :word_cards, -> { where.not(source_type: "Exercise") }
+  # Multiple-choice cards: a word or phrase in either direction.
+  scope :word_cards, -> { where.not(source_type: "Exercise").where(direction: DIRECTIONS) }
+  # A word's meaning in either direction: what "words known" counts.
+  scope :meaning_cards, -> { where(source_type: "VocabularyItem", direction: DIRECTIONS) }
+  scope :noun_form_cards, -> { where(source_type: "VocabularyItem", direction: FORM_DIRECTIONS) }
 
   # Exercise cards whose exercise no longer has an editor's answer are left out
   # of reviews (the card and its history stay, in case the answer comes back).
@@ -58,6 +67,7 @@ class QuizQuestion < ApplicationRecord
       end
     end
 
+    keep_ids += sync_noun_forms(items)
     keep_ids += sync_phrases(lesson)
     keep_ids += sync_exercises(lesson)
 
@@ -123,6 +133,26 @@ class QuizQuestion < ApplicationRecord
       question.distractors = []
       question.save! if question.changed?
       question.id
+    end
+  end
+
+  # A word with a plural or genitive in the course gets one card for each,
+  # the word to its form. Only the course's own form is ever shown; a word
+  # without one gets no card, and sync_for prunes the card if it is removed.
+  def self.sync_noun_forms(items)
+    items.flat_map do |item|
+      FORM_DIRECTIONS.filter_map do |direction|
+        form = item.public_send(direction)
+        next if form.blank? || item.irish.blank?
+
+        question = find_or_initialize_by(source: item, direction: direction)
+        question.lesson_id = item.lesson_id
+        question.prompt = item.irish
+        question.answer = form
+        question.distractors = []
+        question.save! if question.changed?
+        question.id
+      end
     end
   end
 

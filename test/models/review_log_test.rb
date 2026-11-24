@@ -24,6 +24,13 @@ class ReviewLogTest < ActiveSupport::TestCase
     assert_empty ReviewLog.tricky_words_for(@user)
   end
 
+  test "missed plurals and genitives don't make a word tricky" do
+    vocabulary_items(:dog).update!(plural: "madraí")
+    plural = QuizQuestion.find_by!(source: vocabulary_items(:dog), direction: "plural")
+    3.times { log(plural) }
+    assert_empty ReviewLog.tricky_words_for(@user)
+  end
+
   test "can leave out words" do
     3.times { log(@question) }
     assert_empty ReviewLog.tricky_words_for(@user, except: [ @question.source_id ])

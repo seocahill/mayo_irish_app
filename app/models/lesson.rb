@@ -90,11 +90,11 @@ class Lesson < ApplicationRecord
   # Words known per lesson for a user (a word counts once all its questions are
   # known), computed in a couple of grouped queries rather than per lesson.
   def self.known_word_counts_for(user)
-    questions = QuizQuestion.where(source_type: "VocabularyItem")
+    questions = QuizQuestion.meaning_cards
                             .group(:lesson_id, :source_id).count
     known = QuizReview.known
                       .joins(:quiz_question)
-                      .where(user: user, quiz_questions: { source_type: "VocabularyItem" })
+                      .where(user: user, quiz_questions: { source_type: "VocabularyItem", direction: QuizQuestion::DIRECTIONS })
                       .group("quiz_questions.lesson_id", "quiz_questions.source_id").count
 
     questions.each_with_object(Hash.new(0)) do |((lesson_id, source_id), n), acc|
@@ -123,10 +123,10 @@ class Lesson < ApplicationRecord
   def known_word_ids(user)
     return Set.new unless user
 
-    questions_per_word = quiz_questions.where(source_type: "VocabularyItem").group(:source_id).count
+    questions_per_word = quiz_questions.meaning_cards.group(:source_id).count
     known_per_word = QuizReview.known
                                .joins(:quiz_question)
-                               .where(quiz_questions: { lesson_id: id, source_type: "VocabularyItem" })
+                               .where(quiz_questions: { lesson_id: id, source_type: "VocabularyItem", direction: QuizQuestion::DIRECTIONS })
                                .where(user: user)
                                .group("quiz_questions.source_id").count
 
@@ -134,7 +134,8 @@ class Lesson < ApplicationRecord
   end
 
   # Quiz-based progress for a given user, counted in vocabulary words: a word
-  # is "known" once every one of its quiz questions (both directions) is known
+  # is "known" once both directions of its meaning are known (noun-form cards
+  # don't count)
   # (see known_word_ids). Total is the word count, so the bar is meaningful
   # even before any questions have been generated. Pass known_ids when the
   # caller already has them, to skip the lookup.

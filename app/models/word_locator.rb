@@ -29,7 +29,7 @@ class WordLocator
       items = items.first(LIMIT)
       ids = items.map(&:id)
       clips = ListeningClip.where(vocabulary_item_id: ids).group(:vocabulary_item_id).count
-      quizzes = QuizQuestion.where(source_type: "VocabularyItem", source_id: ids).group(:source_id).count
+      quizzes = QuizQuestion.meaning_cards.where(source_id: ids).group(:source_id).count
       items.map do |item|
         Match.new(item: item, has_recording: item.audio.attached? || item.audio_url.present?,
                   listening_clips: clips[item.id].to_i, quiz_questions: quizzes[item.id].to_i)

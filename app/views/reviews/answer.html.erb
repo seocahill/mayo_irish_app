@@ -12,12 +12,19 @@
     <% end %>
 
     <p class="mt-6 pt-6 border-t border-line text-lg">
-      <span class="text-muted <%= @question.prompt_lang == 'ga' ? 'italic' : '' %>"><%= @question.prompt %></span>
-      <span class="text-muted px-2">=</span>
-      <span class="font-semibold <%= @question.answer_lang == 'ga' ? 'italic' : '' %>"><%= @question.answer %></span>
-      <span class="ml-2 align-middle"><%= render "reviews/audio", question: @question %></span>
+      <% if @question.noun_form? %>
+        <span class="text-muted"><%= noun_form_prompt(@question) %></span>
+        <span lang="ga" class="font-semibold italic ml-1"><%= @question.answer %></span>
+      <% else %>
+        <span class="text-muted <%= @question.prompt_lang == 'ga' ? 'italic' : '' %>"><%= @question.prompt %></span>
+        <span class="text-muted px-2">=</span>
+        <span class="font-semibold <%= @question.answer_lang == 'ga' ? 'italic' : '' %>"><%= @question.answer %></span>
+      <% end %>
+      <%# The recording is of the word itself, so it isn't offered beside a plural or genitive. %>
+      <% unless @question.noun_form? %><span class="ml-2 align-middle"><%= render "reviews/audio", question: @question %></span><% end %>
     </p>
-    <%= render "reviews/noun_forms", question: @question %>
+    <%# After a plural or genitive card the other form would give away its own card. %>
+    <%= render "reviews/noun_forms", question: @question unless @question.noun_form? %>
 
     <div class="mt-8">
       <%= link_to (@last ? t(".see_results") : t(".next")), review_path, class: "btn-solid w-full sm:w-auto" %>

@@ -53,7 +53,7 @@ class DailyPath
   # How many words can be known in all: the same words known_words counts over
   # (those with quiz questions), in the lessons this learner can see.
   def course_words
-    QuizQuestion.where(source_type: "VocabularyItem", lesson_id: Lesson.visible_to(user).select(:id))
+    QuizQuestion.meaning_cards.where(lesson_id: Lesson.visible_to(user).select(:id))
                 .group(:lesson_id, :source_id).count.size
   end
 

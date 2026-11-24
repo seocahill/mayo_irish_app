@@ -118,4 +118,50 @@ class QuizQuestionTest < ActiveSupport::TestCase
       exercise.destroy!
     end
   end
+
+  test "a word's plural and genitive get their own self-rated cards" do
+    dog = vocabulary_items(:dog)
+    dog.update_columns(plural: "madraí", genitive: "madra")
+    QuizQuestion.sync_for(lessons(:one))
+
+    plural = QuizQuestion.find_by!(source: dog, direction: "plural")
+    genitive = QuizQuestion.find_by!(source: dog, direction: "genitive")
+    assert_equal [ "madra", "madraí" ], [ plural.prompt, plural.answer ]
+    assert_equal "madra", genitive.answer
+    assert plural.noun_form?
+    assert plural.self_rated?
+    assert_equal [ "ga", "ga" ], [ plural.prompt_lang, plural.answer_lang ]
+    assert_empty plural.distractors
+    assert_not QuizQuestion.exists?(source: vocabulary_items(:house), direction: "plural"), "no form, no card"
+  end
+
+  test "noun-form cards are kept out of the multiple-choice and meaning scopes" do
+    vocabulary_items(:dog).update_columns(plural: "madraí")
+    QuizQuestion.sync_for(lessons(:one))
+    plural = QuizQuestion.find_by!(source: vocabulary_items(:dog), direction: "plural")
+
+    assert_not_includes QuizQuestion.word_cards, plural
+    assert_not_includes QuizQuestion.meaning_cards, plural
+    assert_includes QuizQuestion.noun_form_cards, plural
+    assert_includes QuizQuestion.still_answerable, plural
+  end
+
+  test "a noun-form card follows an editor's change and goes when the form is removed" do
+    dog = vocabulary_items(:dog)
+    QuizQuestion.sync_for(lessons(:one))
+    dog.update!(plural: "dog-pl-1", genitive: "dog-gen")
+    plural = QuizQuestion.find_by!(source: dog, direction: "plural")
+
+    dog.update!(plural: "dog-pl-2")
+    assert_equal "dog-pl-2", plural.reload.answer
+
+    dog.update!(plural: "")
+    assert_not QuizQuestion.exists?(plural.id), "removed without waiting for a sync"
+    assert QuizQuestion.exists?(source: dog, direction: "genitive"), "the other form stays"
+    assert QuizQuestion.exists?(source: dog, direction: "ga_en"), "the meaning cards stay"
+
+    dog.update!(genitive: "")
+    QuizQuestion.sync_for(lessons(:one))
+    assert_empty QuizQuestion.noun_form_cards.where(source: dog)
+  end
 end

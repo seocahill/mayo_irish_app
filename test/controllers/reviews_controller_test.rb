@@ -508,4 +508,108 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to review_path
     assert_equal 1, session[ReviewsController::ROUND_KEY]["pos"]
   end
+
+  def know_meaning(item)
+    QuizQuestion.meaning_cards.where(source: item).find_each do |q|
+      QuizReview.create!(user: @user, quiz_question: q, box: 2, fsrs_state: 2, stability: 30.0, difficulty: 5.0,
+                         times_correct: 1, due_at: 1.month.from_now, last_reviewed_at: 1.day.ago)
+    end
+  end
+
+  test "a noun's plural joins the round once the learner has got its meaning right" do
+    sign_in_as(@user)
+    dog = vocabulary_items(:dog)
+    dog.update!(plural: "madraí")
+    know_meaning(dog)
+
+    get review_path
+    plural = QuizQuestion.find_by!(source: dog, direction: "plural")
+    ids = session[ReviewsController::ROUND_KEY]["ids"]
+    assert_includes ids, plural.id
+    assert_operator ids.size, :<=, ReviewsController::NEW_WORDS
+
+    ids.index(plural.id).times do
+      q = QuizQuestion.find(session[ReviewsController::ROUND_KEY]["ids"][session[ReviewsController::ROUND_KEY]["pos"]])
+      post answer_review_path, params: { question_id: q.id, choice: q.answer }
+      get review_path
+    end
+    assert_select "[data-testid=noun-form-card]"
+    assert_match "Plural", response.body
+    assert_select "[lang=ga]", text: "madra"
+    assert_select "[lang=ga]", text: "madraí"
+    assert_select "button[name=rating][value=good]"
+    assert_select "button[name=choice]", count: 0
+
+    post answer_review_path, params: { question_id: plural.id, rating: "again" }
+    assert_response :success
+    assert_match "The plural of", response.body
+    assert_equal 1, QuizReview.find_by!(user: @user, quiz_question: plural).times_wrong
+  end
+
+  test "a noun's forms don't join the round before the learner knows its meaning" do
+    sign_in_as(@user)
+    vocabulary_items(:dog).update!(plural: "madraí", genitive: "madra")
+
+    get review_path
+    ids = session[ReviewsController::ROUND_KEY]["ids"]
+    assert_empty QuizQuestion.where(id: ids).noun_form_cards
+  end
+
+  test "no more than one new noun form joins a round" do
+    sign_in_as(@user)
+    %i[dog house].each do |key|
+      item = vocabulary_items(key)
+      item.update!(plural: "#{item.irish}-pl", genitive: "#{item.irish}-gen")
+      know_meaning(item)
+    end
+
+    get review_path
+    ids = session[ReviewsController::ROUND_KEY]["ids"]
+    assert_equal ReviewsController::NEW_FORMS, QuizQuestion.where(id: ids).noun_form_cards.count
+  end
+
+  test "noun-form cards don't change the words a learner knows" do
+    dog = vocabulary_items(:dog)
+    dog.update!(plural: "madraí")
+    know_meaning(dog)
+    assert_includes @lesson.known_word_ids(@user), dog.id
+
+    plural = QuizQuestion.find_by!(source: dog, direction: "plural")
+    QuizReview.create!(user: @user, quiz_question: plural, box: 1, fsrs_state: 1, stability: 0.5, difficulty: 5.0, due_at: 1.hour.ago)
+    assert_includes @lesson.known_word_ids(@user), dog.id
+    assert_equal 1, Lesson.known_word_counts_for(@user)[@lesson.id]
+  end
+
+  test "a missed plural is listed to look at again without hiding the word from tricky words" do
+    sign_in_as(@user)
+    dog = vocabulary_items(:dog)
+    dog.update!(plural: "dog-pl")
+    know_meaning(dog)
+    plural = QuizQuestion.find_by!(source: dog, direction: "plural")
+    QuizReview.create!(user: @user, quiz_question: plural, box: 1, fsrs_state: 2, stability: 2.0, difficulty: 5.0,
+                       times_correct: 1, due_at: 1.hour.ago, last_reviewed_at: 3.days.ago)
+    meaning = QuizQuestion.find_by!(source: dog, direction: "ga_en")
+    3.times do
+      ReviewLog.create!(user: @user, quiz_question: meaning, prompt: meaning.prompt, correct: false,
+                        answered_at: 1.day.ago, box_before: 1, box_after: 1)
+    end
+
+    get review_path
+    session[ReviewsController::ROUND_KEY]["ids"].size.times do
+      q = QuizQuestion.find(session[ReviewsController::ROUND_KEY]["ids"][session[ReviewsController::ROUND_KEY]["pos"]])
+      if q == plural
+        post answer_review_path, params: { question_id: q.id, rating: "again" }
+      elsif q.self_rated?
+        post answer_review_path, params: { question_id: q.id, rating: "good" }
+      else
+        post answer_review_path, params: { question_id: q.id, choice: q.answer }
+      end
+      get review_path
+    end
+    assert_match "Round complete", response.body
+    assert_select "#missed-heading"
+    assert_match "The plural of", response.body
+    assert_select "[lang=ga]", text: "dog-pl"
+    assert_match "Words to watch", response.body
+  end
 end
