@@ -3,6 +3,9 @@ class QuizQuestion < ApplicationRecord
   # A noun's plural and genitive, as the course holds them, recalled from the
   # word itself once the learner knows what it means (see sync_noun_forms).
   FORM_DIRECTIONS = %w[plural genitive].freeze
+  # A noun's gender as an editor marked it: masculine or feminine, two choices.
+  GENDER = "gender".freeze
+  GENDERS = %w[m f].freeze
   DISTRACTOR_COUNT = 3
 
   belongs_to :lesson
@@ -10,7 +13,7 @@ class QuizQuestion < ApplicationRecord
 
   has_many :quiz_reviews, dependent: :destroy
 
-  validates :direction, inclusion: { in: DIRECTIONS + FORM_DIRECTIONS }
+  validates :direction, inclusion: { in: DIRECTIONS + FORM_DIRECTIONS + [ GENDER ] }
   validates :prompt, :answer, presence: true
 
   # Returns the answer plus distractors, shuffled — ready to render as MC options.
@@ -22,6 +25,9 @@ class QuizQuestion < ApplicationRecord
   def answer_lang = direction == "ga_en" ? "en" : "ga"
 
   def noun_form? = FORM_DIRECTIONS.include?(direction)
+  def gender? = direction == GENDER
+  # A word's or phrase's meaning, as against one of a noun's forms or its gender.
+  def meaning? = DIRECTIONS.include?(direction)
 
   # Exercise and noun-form cards have no multiple choice: the learner says or
   # writes their Irish, sees the course's answer, and rates themselves.
@@ -33,6 +39,9 @@ class QuizQuestion < ApplicationRecord
   # A word's meaning in either direction: what "words known" counts.
   scope :meaning_cards, -> { where(source_type: "VocabularyItem", direction: DIRECTIONS) }
   scope :noun_form_cards, -> { where(source_type: "VocabularyItem", direction: FORM_DIRECTIONS) }
+  scope :gender_cards, -> { where(source_type: "VocabularyItem", direction: GENDER) }
+  # Everything learned about a noun after its meaning: forms and gender.
+  scope :grammar_of_word_cards, -> { where(source_type: "VocabularyItem", direction: FORM_DIRECTIONS + [ GENDER ]) }
 
   # Exercise cards whose exercise no longer has an editor's answer are left out
   # of reviews (the card and its history stay, in case the answer comes back).
@@ -153,6 +162,22 @@ class QuizQuestion < ApplicationRecord
         question.save! if question.changed?
         question.id
       end
+    end + sync_genders(items)
+  end
+
+  # A noun an editor marked masculine or feminine gets a two-choice gender card,
+  # the word to its gender. The answer is the course's own "m" or "f".
+  def self.sync_genders(items)
+    items.filter_map do |item|
+      next unless GENDERS.include?(item.gender) && item.irish.present?
+
+      question = find_or_initialize_by(source: item, direction: GENDER)
+      question.lesson_id = item.lesson_id
+      question.prompt = item.irish
+      question.answer = item.gender
+      question.distractors = GENDERS - [ item.gender ]
+      question.save! if question.changed?
+      question.id
     end
   end
 

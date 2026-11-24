@@ -519,7 +519,7 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
   test "a noun's plural joins the round once the learner has got its meaning right" do
     sign_in_as(@user)
     dog = vocabulary_items(:dog)
-    dog.update!(plural: "madraí")
+    dog.update!(plural: "madraí", gender: nil)
     know_meaning(dog)
 
     get review_path
@@ -565,7 +565,7 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
 
     get review_path
     ids = session[ReviewsController::ROUND_KEY]["ids"]
-    assert_equal ReviewsController::NEW_FORMS, QuizQuestion.where(id: ids).noun_form_cards.count
+    assert_equal ReviewsController::NEW_FORMS, QuizQuestion.where(id: ids).grammar_of_word_cards.count
   end
 
   test "noun-form cards don't change the words a learner knows" do
@@ -611,5 +611,50 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     assert_match "The plural of", response.body
     assert_select "[lang=ga]", text: "dog-pl"
     assert_match "Words to watch", response.body
+  end
+
+  test "a noun's gender joins the round as a two-choice card once its meaning is right" do
+    sign_in_as(@user)
+    dog = vocabulary_items(:dog)
+    know_meaning(dog)
+
+    get review_path
+    gender = QuizQuestion.find_by!(source: dog, direction: "gender")
+    ids = session[ReviewsController::ROUND_KEY]["ids"]
+    assert_includes ids, gender.id
+
+    ids.index(gender.id).times do
+      q = QuizQuestion.find(session[ReviewsController::ROUND_KEY]["ids"][session[ReviewsController::ROUND_KEY]["pos"]])
+      post answer_review_path, params: { question_id: q.id, choice: q.answer }
+      get review_path
+    end
+    assert_select "[data-testid=gender-card]"
+    assert_select "[lang=ga]", text: "madra"
+    assert_select "button[name=choice]", count: 2
+    assert_select "button[name=choice][value=m]", text: /Masculine/
+    assert_select "button[name=rating]", count: 0
+
+    post answer_review_path, params: { question_id: gender.id, choice: "f" }
+    assert_response :success
+    assert_match "Not quite", response.body
+    assert_match "Feminine", response.body
+    assert_select "[data-test=noun-forms]", count: 0
+    assert_equal 1, QuizReview.find_by!(user: @user, quiz_question: gender).times_wrong
+  end
+
+  test "a gender card answered right before stays two-choice, never a Say it card" do
+    sign_in_as(@user)
+    dog = vocabulary_items(:dog)
+    know_meaning(dog)
+    QuizQuestion.sync_for(@lesson)
+    gender = QuizQuestion.find_by!(source: dog, direction: "gender")
+    QuizReview.create!(user: @user, quiz_question: gender, box: 2, fsrs_state: 2, stability: 1.0, difficulty: 5.0,
+                       times_correct: 2, due_at: 1.year.ago, last_reviewed_at: 3.days.ago)
+
+    get review_path
+    assert_equal gender.id, session[ReviewsController::ROUND_KEY]["ids"].first
+    assert_select "[data-testid=gender-card]"
+    post answer_review_path, params: { question_id: gender.id, rating: "good" }
+    assert_match "Not quite", response.body, "a rating isn't accepted in place of a choice"
   end
 end

@@ -3,10 +3,10 @@ require "test_helper"
 class QuizQuestionTest < ActiveSupport::TestCase
   setup { @lesson = lessons(:one) }
 
-  test "sync_for builds two questions per vocabulary item" do
+  test "sync_for builds two meaning questions per vocabulary item" do
     QuizQuestion.sync_for(@lesson)
-    assert_equal @lesson.vocabulary_items.count * 2, @lesson.quiz_questions.count
-    assert_equal QuizQuestion::DIRECTIONS.sort, @lesson.quiz_questions.distinct.pluck(:direction).sort
+    assert_equal @lesson.vocabulary_items.count * 2, @lesson.quiz_questions.meaning_cards.count
+    assert_equal QuizQuestion::DIRECTIONS.sort, @lesson.quiz_questions.meaning_cards.distinct.pluck(:direction).sort
   end
 
   test "sync_for is idempotent" do
@@ -16,9 +16,9 @@ class QuizQuestionTest < ActiveSupport::TestCase
     end
   end
 
-  test "each question gets distractors that exclude the answer" do
+  test "each meaning question gets distractors that exclude the answer" do
     QuizQuestion.sync_for(@lesson)
-    @lesson.quiz_questions.each do |q|
+    @lesson.quiz_questions.meaning_cards.each do |q|
       assert_equal QuizQuestion::DISTRACTOR_COUNT, q.distractors.size
       assert_not_includes q.distractors, q.answer
       assert_includes q.choices, q.answer
@@ -163,5 +163,26 @@ class QuizQuestionTest < ActiveSupport::TestCase
     dog.update!(genitive: "")
     QuizQuestion.sync_for(lessons(:one))
     assert_empty QuizQuestion.noun_form_cards.where(source: dog)
+  end
+
+  test "a noun marked masculine or feminine gets a two-choice gender card that follows the editor" do
+    dog = vocabulary_items(:dog)
+    QuizQuestion.sync_for(@lesson)
+    gender = QuizQuestion.find_by!(source: dog, direction: "gender")
+    assert_equal [ "madra", "m", [ "f" ] ], [ gender.prompt, gender.answer, gender.distractors ]
+    assert gender.gender?
+    assert_not gender.self_rated?
+    assert_not gender.meaning?
+    assert_not_includes QuizQuestion.word_cards, gender
+    assert_not_includes QuizQuestion.meaning_cards, gender
+    assert_not_includes QuizQuestion.noun_form_cards, gender
+    assert_includes QuizQuestion.grammar_of_word_cards, gender
+
+    dog.update!(gender: "f")
+    assert_equal [ "f", [ "m" ] ], [ gender.reload.answer, gender.distractors ]
+
+    dog.update!(gender: nil)
+    assert_not QuizQuestion.exists?(gender.id)
+    assert QuizQuestion.exists?(source: dog, direction: "ga_en")
   end
 end

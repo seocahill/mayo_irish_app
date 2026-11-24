@@ -9,6 +9,15 @@ module ReviewsHelper
     end
   end
 
+  # "Masculine" or "Feminine" for the course's "m" or "f" (blank for anything else).
+  def gender_name(gender)
+    case gender
+    when "m" then t("reviews.noun_forms.masculine")
+    when "f" then t("reviews.noun_forms.feminine")
+    else ""
+    end
+  end
+
   # The eyebrow over a noun-form card.
   def noun_form_label(question)
     question.direction == "plural" ? t("reviews.show.noun_form.plural") : t("reviews.show.noun_form.genitive")

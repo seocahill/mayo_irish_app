@@ -33,10 +33,10 @@ class VocabularyItem < ApplicationRecord
     self.genitive_source_entry_id = nil if genitive_changed? && !genitive_source_entry_id_changed?
   end
 
-  # Keep the plural and genitive review cards in step with an editor's change:
-  # a changed form updates its card, a removed form removes it.
+  # Keep the plural, genitive and gender review cards in step with an editor's
+  # change: a changed form updates its card, a removed one removes it.
   after_update_commit :refresh_noun_form_cards,
-                      if: -> { saved_change_to_plural? || saved_change_to_genitive? || saved_change_to_irish? }
+                      if: -> { saved_change_to_plural? || saved_change_to_genitive? || saved_change_to_gender? || saved_change_to_irish? }
 
   scope :unclassified, -> { where(part_of_speech: nil) }
   scope :ordered, -> { order(:position) }
@@ -46,6 +46,7 @@ class VocabularyItem < ApplicationRecord
   def refresh_noun_form_cards
     QuizQuestion.sync_noun_forms([ self ])
     blank = QuizQuestion::FORM_DIRECTIONS.select { |direction| public_send(direction).blank? }
+    blank << QuizQuestion::GENDER unless QuizQuestion::GENDERS.include?(gender)
     quiz_questions.where(direction: blank).destroy_all if blank.any?
   end
 

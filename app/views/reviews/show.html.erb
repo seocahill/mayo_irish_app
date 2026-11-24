@@ -8,7 +8,26 @@
     <span class="eyebrow tabular-nums shrink-0"><%= t(".question_count", position: @position, count: @count) %></span>
   </div>
 
-  <% if @question.noun_form? %>
+  <% if @question.gender? %>
+    <%# A noun's gender as an editor marked it: two choices, graded like the other multiple-choice cards. %>
+    <div class="card p-6 sm:p-8" data-testid="gender-card">
+      <p class="eyebrow text-foghlaim mb-3"><%= t(".gender.eyebrow") %></p>
+      <p class="font-display text-3xl sm:text-4xl leading-tight mb-1 break-words">
+        <span lang="ga" class="italic"><%= @question.prompt %></span>
+        <span class="ml-2 align-middle"><%= render "reviews/audio", question: @question %></span>
+      </p>
+      <p class="text-sm text-muted mb-8"><%= @question.source.english %></p>
+      <%= form_with url: answer_review_path, method: :post, class: "grid grid-cols-2 gap-2", data: { turbo: false } do |f| %>
+        <%= f.hidden_field :question_id, value: @question.id %>
+        <% QuizQuestion::GENDERS.each do |gender| %>
+          <button type="submit" name="choice" value="<%= gender %>"
+                  class="px-4 py-4 rounded-sm border border-line bg-surface hover:bg-canvas hover:border-ink focus-visible:outline-2 focus-visible:outline-ink transition-colors text-lg cursor-pointer">
+            <%= gender_name(gender) %>
+          </button>
+        <% end %>
+      <% end %>
+    </div>
+  <% elsif @question.noun_form? %>
     <%# A noun's plural or genitive as the course holds it: the learner says it, then sees the course's form. %>
     <% item = @question.source %>
     <% attested = item.public_send("#{@question.direction}_source_entry_id").present? %>

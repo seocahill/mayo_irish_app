@@ -12,7 +12,10 @@
           <% @missed.each do |question| %>
             <li class="py-3 flex flex-col gap-1">
               <% source = question.source %>
-              <% if question.noun_form? %>
+              <% if question.gender? %>
+                <span lang="ga" class="font-display text-xl italic"><%= question.prompt %></span>
+                <span class="text-muted"><%= gender_name(question.answer) %></span>
+              <% elsif question.noun_form? %>
                 <span class="text-muted"><%= noun_form_prompt(question) %></span>
                 <span lang="ga" class="font-display text-xl"><%= question.answer %></span>
               <% elsif question.self_rated? %>

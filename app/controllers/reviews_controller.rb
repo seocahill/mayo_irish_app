@@ -16,7 +16,7 @@ class ReviewsController < ApplicationController
       session.delete(ROUND_KEY)
       @forecast = QuizReview.forecast_for(current_user)
       @missed = missed_questions(round)
-      @tricky = ReviewLog.tricky_words_for(current_user, except: @missed.select { |q| q.source_type == "VocabularyItem" && !q.noun_form? }.map(&:source_id))
+      @tricky = ReviewLog.tricky_words_for(current_user, except: @missed.select { |q| q.source_type == "VocabularyItem" && q.meaning? }.map(&:source_id))
       @next_step = DailyPath.new(current_user).next_step_after_review
       return render :summary
     end
@@ -34,7 +34,8 @@ class ReviewsController < ApplicationController
 
     @position = round["pos"] + 1
     @count = round["ids"].size
-    @say_it = @question.self_rated? || QuizReview.say_it?(current_user, @question)
+    # A gender card stays a two-choice question: there is nothing to say aloud.
+    @say_it = @question.self_rated? || (!@question.gender? && QuizReview.say_it?(current_user, @question))
   end
 
   def answer
@@ -46,7 +47,7 @@ class ReviewsController < ApplicationController
 
     review = QuizReview.find_or_initialize_by(user: current_user, quiz_question: @question)
     rating = params[:rating].to_s.to_sym
-    if QuizReview::RATINGS.key?(rating) && (@question.self_rated? || QuizReview.say_it?(current_user, @question))
+    if QuizReview::RATINGS.key?(rating) && (@question.self_rated? || (!@question.gender? && QuizReview.say_it?(current_user, @question)))
       # A "Say it" or exercise card: the learner marks themselves, nothing is graded for them.
       @self_rated = true
       @correct = rating != :again
@@ -77,7 +78,7 @@ class ReviewsController < ApplicationController
     return [] if ids.empty?
 
     QuizQuestion.where(id: ids).includes(:source, :lesson).sort_by { |q| ids.index(q.id) }
-                .uniq { |q| [ q.source_type, q.source_id, q.noun_form? && q.direction ] }
+                .uniq { |q| [ q.source_type, q.source_id, !q.meaning? && q.direction ] }
   end
 
   # An exercise card whose answer an editor has removed since the round began.
@@ -118,7 +119,7 @@ class ReviewsController < ApplicationController
   # A few unseen questions from the lesson the learner is on, only on top of due
   # words and never more than NEW_WORDS. One of them may be an exercise the
   # editors have answered (see new_exercise_ids), so grammar comes back too,
-  # and one a noun's plural or genitive for a word they know (new_form_ids).
+  # and one a noun's plural, genitive or gender for a word they know (new_form_ids).
   def new_ids(room)
     limit = [ room, NEW_WORDS ].min
     lesson = DailyPath.new(current_user).current_lesson
@@ -131,19 +132,23 @@ class ReviewsController < ApplicationController
     (words + exercises + forms).shuffle
   end
 
-  # Up to n unseen plural and genitive cards for words whose meaning the
-  # learner has answered right at least once (in review or a lesson quiz), in
-  # visible lessons, earliest lesson first. Words given forms before this
-  # feature get their cards here, once.
+  # Up to n unseen plural, genitive and gender cards for words whose meaning
+  # the learner has answered right at least once (in review or a lesson quiz),
+  # in visible lessons, earliest lesson first. Words given forms or a gender
+  # before these cards existed get them here, once.
   def new_form_ids(n)
     return [] unless n.positive?
 
     answered = QuizReview.where(user: current_user, times_correct: 1..).joins(:quiz_question)
                          .merge(QuizQuestion.meaning_cards).select("quiz_questions.source_id")
     items = VocabularyItem.where(id: answered, lesson_id: Lesson.visible_to(current_user).select(:id))
-                          .where("COALESCE(plural, '') <> '' OR COALESCE(genitive, '') <> ''")
-    QuizQuestion.sync_noun_forms(items.where.not(id: QuizQuestion.noun_form_cards.select(:source_id)))
-    QuizQuestion.noun_form_cards.where(source_id: items.select(:id)).where.not(id: seen_ids)
+    with_forms = items.where("COALESCE(plural, '') <> '' OR COALESCE(genitive, '') <> ''")
+    with_gender = items.where(gender: QuizQuestion::GENDERS)
+    QuizQuestion.sync_noun_forms(
+      with_forms.where.not(id: QuizQuestion.noun_form_cards.select(:source_id))
+        .or(with_gender.where.not(id: QuizQuestion.gender_cards.select(:source_id)))
+    )
+    QuizQuestion.grammar_of_word_cards.where(source_id: items.select(:id)).where.not(id: seen_ids)
                 .joins(:lesson).order("lessons.position", Arel.sql("RANDOM()")).limit(n).pluck(:id)
   end
 

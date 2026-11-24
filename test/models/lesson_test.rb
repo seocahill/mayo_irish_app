@@ -15,7 +15,7 @@ class LessonTest < ActiveSupport::TestCase
 
   test "a word counts as known only once all its directions are known" do
     word = @lesson.vocabulary_items.first
-    questions = @lesson.quiz_questions.where(source: word).to_a
+    questions = @lesson.quiz_questions.meaning_cards.where(source: word).to_a
     assert_equal 2, questions.size
 
     # Only one direction known -> word not yet counted.

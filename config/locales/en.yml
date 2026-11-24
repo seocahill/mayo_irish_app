@@ -1260,6 +1260,8 @@ en:
       exercise_hint: Say or write your Irish, then tap Show.
       exercise_more_than_one_way: There is often more than one way to say it. Rate
         yourself on the meaning and the grammar.
+      gender:
+        eyebrow: Masculine or feminine?
       how_did_it_go: How did it go?
       how_to_say_in_irish: How do you say this in Irish?
       meaning_in_english: What does this mean in English?

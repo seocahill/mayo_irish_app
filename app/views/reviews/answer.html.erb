@@ -7,12 +7,16 @@
       <p class="eyebrow text-red-700 mb-2"><%= t(".incorrect") %></p>
       <p class="font-display text-3xl mb-1"><%= t(".not_quite") %></p>
       <% unless @self_rated %>
-        <p class="text-sm text-muted"><%= t(".your_answer") %> <span class="line-through"><%= @choice %></span></p>
+        <p class="text-sm text-muted"><%= t(".your_answer") %> <span class="line-through"><%= @question.gender? ? gender_name(@choice) : @choice %></span></p>
       <% end %>
     <% end %>
 
     <p class="mt-6 pt-6 border-t border-line text-lg">
-      <% if @question.noun_form? %>
+      <% if @question.gender? %>
+        <span lang="ga" class="text-muted italic"><%= @question.prompt %></span>
+        <span class="text-muted px-2">=</span>
+        <span class="font-semibold"><%= gender_name(@question.answer) %></span>
+      <% elsif @question.noun_form? %>
         <span class="text-muted"><%= noun_form_prompt(@question) %></span>
         <span lang="ga" class="font-semibold italic ml-1"><%= @question.answer %></span>
       <% else %>
@@ -23,8 +27,8 @@
       <%# The recording is of the word itself, so it isn't offered beside a plural or genitive. %>
       <% unless @question.noun_form? %><span class="ml-2 align-middle"><%= render "reviews/audio", question: @question %></span><% end %>
     </p>
-    <%# After a plural or genitive card the other form would give away its own card. %>
-    <%= render "reviews/noun_forms", question: @question unless @question.noun_form? %>
+    <%# After a plural, genitive or gender card the other forms would give away their own cards. %>
+    <%= render "reviews/noun_forms", question: @question if @question.meaning? %>
 
     <div class="mt-8">
       <%= link_to (@last ? t(".see_results") : t(".next")), review_path, class: "btn-solid w-full sm:w-auto" %>
