@@ -3,6 +3,7 @@
 class ReviewsController < ApplicationController
   ROUND_SIZE = 20
   NEW_WORDS = 3
+  NEW_EXERCISES = 1
   ROUND_KEY = "daily_review_round".freeze
 
   def show
@@ -28,11 +29,11 @@ class ReviewsController < ApplicationController
     end
 
     @question = QuizQuestion.includes(:lesson).find_by(id: round["ids"][round["pos"]])
-    return skip_unavailable(round) unless @question && still_wanted?(round)
+    return skip_unavailable(round) unless @question && answerable?(@question) && still_wanted?(round)
 
     @position = round["pos"] + 1
     @count = round["ids"].size
-    @say_it = QuizReview.say_it?(current_user, @question)
+    @say_it = @question.self_rated? || QuizReview.say_it?(current_user, @question)
   end
 
   def answer
@@ -44,8 +45,8 @@ class ReviewsController < ApplicationController
 
     review = QuizReview.find_or_initialize_by(user: current_user, quiz_question: @question)
     rating = params[:rating].to_s.to_sym
-    if QuizReview::RATINGS.key?(rating) && QuizReview.say_it?(current_user, @question)
-      # A "Say it" card: the learner marks themselves, nothing is graded for them.
+    if QuizReview::RATINGS.key?(rating) && (@question.self_rated? || QuizReview.say_it?(current_user, @question))
+      # A "Say it" or exercise card: the learner marks themselves, nothing is graded for them.
       @self_rated = true
       @correct = rating != :again
       review.record_answer(correct: @correct, rating: rating)
@@ -78,6 +79,11 @@ class ReviewsController < ApplicationController
                 .uniq { |q| [ q.source_type, q.source_id ] }
   end
 
+  # An exercise card whose answer an editor has removed since the round began.
+  def answerable?(question)
+    QuizQuestion.still_answerable.exists?(question.id)
+  end
+
   # A word the learner has answered elsewhere since the round began (for
   # example in a lesson quiz) is skipped, so FSRS isn't run on it early.
   def still_wanted?(round)
@@ -102,19 +108,25 @@ class ReviewsController < ApplicationController
     visible = Lesson.visible_to(current_user).select(:id)
     due_ids = QuizReview.due.where(user: current_user)
                         .joins(:quiz_question).where(quiz_questions: { lesson_id: visible })
+                        .merge(QuizQuestion.still_answerable)
                         .order(:due_at).limit(ROUND_SIZE).pluck(:quiz_question_id)
     due_ids += new_ids(ROUND_SIZE - due_ids.size) if due_ids.size < ROUND_SIZE
     due_ids.first(ROUND_SIZE)
   end
 
   # A few unseen questions from the lesson the learner is on, only on top of due
-  # words and never more than NEW_WORDS.
+  # words and never more than NEW_WORDS. One of them may be an exercise the
+  # editors have answered, so the lesson's grammar comes back too.
   def new_ids(room)
     lesson = DailyPath.new(current_user).current_lesson
     return [] unless lesson
 
     QuizQuestion.sync_for(lesson)
     seen = QuizReview.where(user: current_user).select(:quiz_question_id)
-    lesson.quiz_questions.where.not(id: seen).pluck(:id).shuffle.first([ room, NEW_WORDS ].min)
+    unseen = lesson.quiz_questions.where.not(id: seen).still_answerable
+    limit = [ room, NEW_WORDS ].min
+    exercises = unseen.where(source_type: "Exercise").pluck(:id).shuffle.first([ limit, NEW_EXERCISES ].min)
+    words = unseen.where.not(source_type: "Exercise").pluck(:id).shuffle.first(limit - exercises.size)
+    (words + exercises).shuffle
   end
 end

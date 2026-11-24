@@ -1,0 +1,10 @@
+<%# Again / Hard / Good / Easy for a card the learner marks themselves (Say it and exercise cards). %>
+<%= form_with url: answer_review_path, method: :post, class: "grid grid-cols-2 sm:grid-cols-4 gap-2", data: { turbo: false } do |f| %>
+  <%= f.hidden_field :question_id, value: question.id %>
+  <% { "again" => t("reviews.show.rating.again"), "hard" => t("reviews.show.rating.hard"), "good" => t("reviews.show.rating.good"), "easy" => t("reviews.show.rating.easy") }.each do |rating, label| %>
+    <button type="submit" name="rating" value="<%= rating %>"
+            class="px-3 py-3 rounded-sm border border-line bg-surface hover:bg-canvas hover:border-ink focus-visible:outline-2 focus-visible:outline-ink transition-colors cursor-pointer">
+      <%= label %>
+    </button>
+  <% end %>
+<% end %>

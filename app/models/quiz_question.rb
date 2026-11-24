@@ -18,6 +18,16 @@ class QuizQuestion < ApplicationRecord
   def prompt_lang = direction == "ga_en" ? "ga" : "en"
   def answer_lang = direction == "ga_en" ? "en" : "ga"
 
+  # Exercise cards have no multiple choice: the learner says or writes their
+  # Irish, sees the editors' answer, and rates themselves.
+  def self_rated? = source_type == "Exercise"
+
+  # Exercise cards whose exercise no longer has an editor's answer are left out
+  # of reviews (the card and its history stay, in case the answer comes back).
+  scope :still_answerable, -> {
+    where.not(source_type: "Exercise", source_id: Exercise.where.not(id: Exercise.answered.select(:id)).select(:id))
+  }
+
   # Idempotently rebuild the question bank for a lesson from its vocabulary.
   # Cheap and deterministic — no LLM. Creates missing rows, refreshes distractors,
   # and prunes questions whose source vocabulary no longer exists.
@@ -46,6 +56,7 @@ class QuizQuestion < ApplicationRecord
     end
 
     keep_ids += sync_phrases(lesson)
+    keep_ids += sync_exercises(lesson)
 
     # Only vocabulary questions are pruned here. A phrase that becomes
     # ineligible (edited long, English removed) keeps its questions so learners'
@@ -94,6 +105,22 @@ class QuizQuestion < ApplicationRecord
     end
 
     keep_ids
+  end
+
+  # Exercises an editor has answered join the bank as one card each, English
+  # prompt to the editors' Irish. Only the editors' answer is ever shown; nothing
+  # is generated. Like phrases, a card is never pruned here when its answer is
+  # removed (see still_answerable); deleting the exercise removes it.
+  def self.sync_exercises(lesson)
+    lesson.exercises.answered.map do |exercise|
+      question = find_or_initialize_by(source: exercise, direction: "en_ga")
+      question.lesson = lesson
+      question.prompt = exercise.prompt
+      question.answer = exercise.answer
+      question.distractors = []
+      question.save! if question.changed?
+      question.id
+    end
   end
 
   # Pick up to DISTRACTOR_COUNT wrong answers from sibling vocab (same lesson first,

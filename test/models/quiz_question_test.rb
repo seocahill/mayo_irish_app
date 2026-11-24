@@ -73,4 +73,49 @@ class QuizQuestionTest < ActiveSupport::TestCase
     short.destroy
     assert_equal base, @lesson.reload.quiz_questions.count
   end
+
+  test "answered exercises get one self-rated card, unanswered ones none" do
+    lesson = lessons(:one)
+    exercise = exercises(:one)
+    QuizQuestion.sync_for(lesson)
+    assert_not QuizQuestion.exists?(source: exercise)
+
+    exercise.update!(answer: "Dia dhuit")
+    2.times { QuizQuestion.sync_for(lesson) }
+    questions = QuizQuestion.where(source: exercise)
+    assert_equal 1, questions.count
+    question = questions.first
+    assert question.self_rated?
+    assert_equal "en_ga", question.direction
+    assert_equal exercise.prompt, question.prompt
+    assert_equal "Dia dhuit", question.answer
+    assert_includes QuizQuestion.still_answerable, question
+  end
+
+  test "an exercise card follows its answer and leaves reviews when the answer is removed" do
+    exercise = exercises(:one)
+    exercise.update!(answer: "Dia dhuit")
+    QuizQuestion.sync_for(lessons(:one))
+    question = QuizQuestion.find_by!(source: exercise)
+
+    exercise.update!(answer: "Dia dhuit, a Mháire")
+    assert_equal "Dia dhuit, a Mháire", question.reload.answer
+
+    exercise.update!(answer: "")
+    assert_equal "Dia dhuit, a Mháire", question.reload.answer, "the card is kept, not rewritten"
+    assert_not_includes QuizQuestion.still_answerable, question
+    assert_includes QuizQuestion.still_answerable, lessons(:one).quiz_questions.where(source_type: "VocabularyItem").first
+
+    QuizQuestion.sync_for(lessons(:one))
+    assert QuizQuestion.exists?(question.id), "sync never prunes exercise cards"
+  end
+
+  test "deleting an exercise removes its card" do
+    exercise = exercises(:one)
+    exercise.update!(answer: "Dia dhuit")
+    QuizQuestion.sync_for(lessons(:one))
+    assert_difference -> { QuizQuestion.where(source_type: "Exercise").count }, -1 do
+      exercise.destroy!
+    end
+  end
 end

@@ -283,3 +283,8 @@
   title: Conversations you followed
   body: Today's "So far" now counts the whole conversations from Mayo speakers you said you followed, at the end of each one. It's your own word, not a test.
   path: /
+- id: 50
+  date: 2026-11-24
+  title: Exercises come back in your daily review
+  body: The exercises editors have answered in Mayo Irish now come back in the daily review, so the grammar they practise comes round again before you forget it. Say or write your Irish, tap Show to see the editors' answer, and rate yourself. At most one new exercise joins a round.
+  path: /review

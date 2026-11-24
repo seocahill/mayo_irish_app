@@ -8,7 +8,26 @@
     <span class="eyebrow tabular-nums shrink-0"><%= t(".question_count", position: @position, count: @count) %></span>
   </div>
 
-  <% if @say_it %>
+  <% if @question.self_rated? %>
+    <%# An exercise the editors have answered: the learner's own Irish first, then the editors' answer. %>
+    <div class="card p-6 sm:p-8" data-controller="reveal" data-testid="exercise-card">
+      <p class="eyebrow text-foghlaim mb-3"><%= t(".exercise") %></p>
+      <p class="font-display text-2xl sm:text-3xl leading-snug mb-3 break-words"><%= @question.prompt %></p>
+      <p class="text-sm text-muted mb-8"><%= t(".exercise_hint") %></p>
+
+      <button type="button" data-reveal-target="button" data-action="reveal#show" class="btn-solid w-full sm:w-auto"><%= t(".show") %></button>
+
+      <div hidden data-reveal-target="hidden" class="grid gap-4">
+        <div class="pt-2 border-t border-line">
+          <p class="eyebrow mb-1"><%= t(".exercise_answer") %></p>
+          <p lang="ga" class="text-lg font-semibold italic break-words"><%= @question.answer %></p>
+          <p class="text-xs text-muted mt-1"><%= t(".exercise_more_than_one_way") %></p>
+        </div>
+        <p class="eyebrow"><%= t(".how_did_it_go") %></p>
+        <%= render "reviews/ratings", question: @question %>
+      </div>
+    </div>
+  <% elsif @say_it %>
     <% audio_html = render("reviews/audio", question: @question) %>
     <% audio_first = prompt_lang == "ga" && audio_html.present? %>
     <div class="card p-6 sm:p-8" data-controller="reveal">
@@ -37,15 +56,7 @@
           </div>
         <% end %>
         <p class="eyebrow"><%= t(".how_did_it_go") %></p>
-        <%= form_with url: answer_review_path, method: :post, class: "grid grid-cols-2 sm:grid-cols-4 gap-2", data: { turbo: false } do |f| %>
-          <%= f.hidden_field :question_id, value: @question.id %>
-          <% { "again" => t(".rating.again"), "hard" => t(".rating.hard"), "good" => t(".rating.good"), "easy" => t(".rating.easy") }.each do |rating, label| %>
-            <button type="submit" name="rating" value="<%= rating %>"
-                    class="px-3 py-3 rounded-sm border border-line bg-surface hover:bg-canvas hover:border-ink focus-visible:outline-2 focus-visible:outline-ink transition-colors cursor-pointer">
-              <%= label %>
-            </button>
-          <% end %>
-        <% end %>
+        <%= render "reviews/ratings", question: @question %>
       </div>
     </div>
   <% else %>
