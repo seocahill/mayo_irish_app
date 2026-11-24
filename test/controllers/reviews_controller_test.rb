@@ -405,4 +405,107 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
   def session_reset
     delete reset_review_path
   end
+
+  test "an answered exercise joins the round as a self-rated card" do
+    sign_in_as(@user)
+    exercise = exercises(:one)
+    exercise.update!(answer: "Dia dhuit")
+    get review_path
+    question = QuizQuestion.find_by!(source: exercise)
+    assert_includes session[ReviewsController::ROUND_KEY]["ids"], question.id
+    assert_operator session[ReviewsController::ROUND_KEY]["ids"].size, :<=, ReviewsController::NEW_WORDS
+
+    session[ReviewsController::ROUND_KEY]["ids"].index(question.id).times do
+      q = QuizQuestion.find(session[ReviewsController::ROUND_KEY]["ids"][session[ReviewsController::ROUND_KEY]["pos"]])
+      post answer_review_path, params: { question_id: q.id, choice: q.answer }
+      get review_path
+    end
+    assert_select "[data-testid=exercise-card]"
+    assert_match "What is the Irish for hello?", response.body
+    assert_select "[lang=ga]", text: "Dia dhuit"
+    assert_select "button[name=rating][value=good]"
+    assert_select "button[name=choice]", count: 0
+
+    assert_difference -> { ReviewLog.count }, 1 do
+      post answer_review_path, params: { question_id: question.id, rating: "hard" }
+    end
+    review = QuizReview.find_by!(user: @user, quiz_question: question)
+    assert_equal 1, review.times_correct
+    assert review.due_at.future?
+  end
+
+  test "an exercise rated Again is listed to look at again" do
+    sign_in_as(@user)
+    exercise = exercises(:one)
+    exercise.update!(answer: "Dia dhuit")
+    QuizQuestion.sync_for(@lesson)
+    question = QuizQuestion.find_by!(source: exercise)
+    QuizReview.create!(user: @user, quiz_question: question, box: 2, fsrs_state: 2, stability: 1.0, difficulty: 5.0, due_at: 1.hour.ago)
+    @lesson.quiz_questions.where.not(id: question.id).find_each do |q|
+      QuizReview.create!(user: @user, quiz_question: q, box: 2, fsrs_state: 2, stability: 30.0, difficulty: 5.0, due_at: 1.week.from_now)
+    end
+
+    get review_path
+    assert_equal [ question.id ], session[ReviewsController::ROUND_KEY]["ids"]
+    post answer_review_path, params: { question_id: question.id, rating: "again" }
+    get review_path
+    assert_match(/Round complete/, response.body)
+    assert_select "[lang=ga]", text: "Dia dhuit"
+  end
+
+  test "an exercise whose answer was removed is left out" do
+    sign_in_as(@user)
+    exercise = exercises(:one)
+    exercise.update!(answer: "Dia dhuit")
+    QuizQuestion.sync_for(@lesson)
+    question = QuizQuestion.find_by!(source: exercise)
+    QuizReview.create!(user: @user, quiz_question: question, box: 2, fsrs_state: 2, stability: 1.0, difficulty: 5.0, due_at: 1.hour.ago)
+    exercise.update!(answer: "")
+
+    get review_path
+    ids = session[ReviewsController::ROUND_KEY]&.dig("ids") || []
+    assert_not_includes ids, question.id
+    assert QuizReview.exists?(user: @user, quiz_question: question), "the learner's review is kept"
+  end
+
+  test "no more than one new exercise joins a round" do
+    sign_in_as(@user)
+    exercises(:one).update!(answer: "Dia dhuit")
+    2.times { |i| @lesson.exercises.create!(number: 10 + i, prompt: "Prompt #{i}", answer: "Freagra #{i}", position: 10 + i) }
+    get review_path
+    ids = session[ReviewsController::ROUND_KEY]["ids"]
+    assert_equal ReviewsController::NEW_EXERCISES, QuizQuestion.where(id: ids).exercise_cards.count
+    assert_operator ids.size, :<=, ReviewsController::NEW_WORDS
+  end
+
+  test "an exercise answered in a lesson the learner already finished still reaches them" do
+    sign_in_as(@user)
+    finished = Lesson.create!(number: 98, title: "Finished", lesson_type: "curriculum", position: 0, published: true)
+    finished.vocabulary_items.create!(irish: "bó", english: "cow")
+    QuizQuestion.sync_for(finished)
+    finished.quiz_questions.each do |q|
+      QuizReview.create!(user: @user, quiz_question: q, box: 2, fsrs_state: 2, stability: 30.0, difficulty: 5.0, due_at: 1.month.from_now)
+    end
+    exercise = finished.exercises.create!(number: 1, prompt: "The cow is here.", answer: "Freagra", position: 1)
+    assert_not_equal finished, DailyPath.new(@user).current_lesson
+
+    get review_path
+    assert_includes session[ReviewsController::ROUND_KEY]["ids"], QuizQuestion.find_by!(source: exercise).id
+  end
+
+  test "an exercise whose answer is removed during the round is skipped" do
+    sign_in_as(@user)
+    exercise = exercises(:one)
+    exercise.update!(answer: "Dia dhuit")
+    QuizQuestion.sync_for(@lesson)
+    question = QuizQuestion.find_by!(source: exercise)
+    QuizReview.create!(user: @user, quiz_question: question, box: 2, fsrs_state: 2, stability: 1.0, difficulty: 5.0, due_at: 1.hour.ago)
+    get review_path
+    assert_equal question.id, session[ReviewsController::ROUND_KEY]["ids"].first
+
+    exercise.update!(answer: "")
+    get review_path
+    assert_redirected_to review_path
+    assert_equal 1, session[ReviewsController::ROUND_KEY]["pos"]
+  end
 end

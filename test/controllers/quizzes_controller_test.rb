@@ -90,4 +90,12 @@ class QuizzesControllerTest < ActionDispatch::IntegrationTest
     assert id, "expected a question id in the response"
     QuizQuestion.find(id)
   end
+
+  test "exercise cards stay out of the lesson's word quiz" do
+    sign_in_as(@user)
+    exercises(:one).update!(answer: "Dia dhuit")
+    get lesson_quiz_path(@lesson)
+    exercise_question = QuizQuestion.find_by!(source: exercises(:one))
+    assert_not_includes session["quiz_round_lesson_#{@lesson.id}"]["ids"], exercise_question.id
+  end
 end

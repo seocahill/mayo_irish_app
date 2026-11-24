@@ -37,4 +37,17 @@ class LessonStructureParserTest < ActiveSupport::TestCase
     assert_equal "Old prompt", exercise.prompt
     assert_equal "An editor's answer", exercise.answer
   end
+
+  test "a re-parse leaves exercises alone once learners have reviewed one, even with its answer removed" do
+    exercise = @lesson.exercises.first
+    exercise.update!(answer: "An editor's answer")
+    QuizQuestion.sync_exercises(@lesson)
+    QuizReview.create!(user: users(:two), quiz_question: QuizQuestion.find_by!(source: exercise), due_at: 1.day.from_now)
+    exercise.update!(answer: "")
+
+    assert_no_difference -> { QuizReview.count } do
+      parse([ { "number" => 1, "prompt" => "The sun is shining.", "position" => 1 } ])
+    end
+    assert_equal "Old prompt", @lesson.exercises.reload.sole.prompt
+  end
 end

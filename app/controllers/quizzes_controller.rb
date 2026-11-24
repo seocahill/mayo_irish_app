@@ -82,7 +82,8 @@ class QuizzesController < ApplicationController
   end
 
   def build_queue
-    question_ids = @lesson.quiz_questions.pluck(:id)
+    # Exercise cards are self-rated, so they belong to the daily review only.
+    question_ids = @lesson.quiz_questions.word_cards.pluck(:id)
     return [] if question_ids.empty?
 
     reviews = QuizReview.where(user: current_user, quiz_question_id: question_ids)

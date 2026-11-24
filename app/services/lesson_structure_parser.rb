@@ -118,9 +118,11 @@ class LessonStructureParser
     data = JSON.parse(content)
 
     # Exercise answers are written by editors in the lesson editor. Once any
-    # exercise in a lesson has one, a re-parse leaves the exercises alone, so
-    # their answers are never lost.
-    keep_exercises = @lesson.exercises.answered.exists?
+    # exercise in a lesson has one, or learners have reviewed one in the daily
+    # review, a re-parse leaves the exercises alone, so neither is ever lost.
+    keep_exercises = @lesson.exercises.answered.exists? ||
+                     QuizReview.joins(:quiz_question)
+                               .where(quiz_questions: { source_type: "Exercise", source_id: @lesson.exercises.select(:id) }).exists?
 
     ActiveRecord::Base.transaction do
       if replace

@@ -12,8 +12,13 @@
           <% @missed.each do |question| %>
             <li class="py-3 flex flex-col gap-1">
               <% source = question.source %>
-              <span class="font-display text-xl"><%= source.irish %></span>
-              <span class="text-muted"><%= source.english %></span>
+              <% if question.self_rated? %>
+                <span class="text-muted"><%= question.prompt %></span>
+                <span lang="ga" class="font-display text-xl"><%= question.answer %></span>
+              <% else %>
+                <span class="font-display text-xl"><%= source.irish %></span>
+                <span class="text-muted"><%= source.english %></span>
+              <% end %>
               <%= render "audio", question: question %>
               <% if question.lesson.published? || current_user&.admin? %>
                 <%= link_to t(".in_lesson", lesson: question.lesson.display_title), lesson_path(question.lesson), class: "text-sm underline text-muted" %>

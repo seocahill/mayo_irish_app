@@ -34,7 +34,7 @@ class QuizReview < ApplicationRecord
 
   # Cards due now, per lesson, for the given lessons (ids or a subquery).
   def self.due_counts_by_lesson(user, lesson_ids)
-    due.where(user: user).joins(:quiz_question)
+    due.where(user: user).joins(:quiz_question).merge(QuizQuestion.still_answerable)
        .where(quiz_questions: { lesson_id: lesson_ids })
        .group("quiz_questions.lesson_id").count
   end
@@ -42,7 +42,8 @@ class QuizReview < ApplicationRecord
   # Counts for the line under the review button: still to do today (including
   # anything overdue), due tomorrow, and due in the following days.
   def self.forecast_for(user, now: Time.current)
-    scope = where(user: user)
+    # Exercise cards whose answer an editor removed are never shown, so not counted.
+    scope = where(user: user).joins(:quiz_question).merge(QuizQuestion.still_answerable)
     tomorrow = (now.to_date + 1).all_day
     later = (now.to_date + 2).beginning_of_day..(now.to_date + 7).end_of_day
     { today: scope.due(now.end_of_day).count,
