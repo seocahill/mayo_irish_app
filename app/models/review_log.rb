@@ -18,14 +18,14 @@ class ReviewLog < ApplicationRecord
     visible = Lesson.visible_to(user).select(:id)
     counts = joins(:quiz_question)
              .where(user: user, correct: false, answered_at: TRICKY_DAYS.days.ago..,
-                    quiz_questions: { source_type: "VocabularyItem", lesson_id: visible })
+                    quiz_questions: { source_type: "VocabularyItem", direction: QuizQuestion::DIRECTIONS, lesson_id: visible })
              .group("quiz_questions.source_id").having("COUNT(*) >= ?", TRICKY_MISSES)
              .order(Arel.sql("COUNT(*) DESC"), "quiz_questions.source_id").count
     ids = counts.keys - Array(except)
     return [] if ids.empty?
 
     ids = ids.first(TRICKY_LIMIT)
-    questions = QuizQuestion.where(source_type: "VocabularyItem", source_id: ids).includes(:source, :lesson)
+    questions = QuizQuestion.meaning_cards.where(source_id: ids).includes(:source, :lesson)
                             .group_by(&:source_id)
     ids.filter_map { |id| questions[id]&.min_by(&:id) }
   end

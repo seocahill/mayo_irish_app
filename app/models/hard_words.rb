@@ -38,6 +38,6 @@ class HardWords
   def logs
     ReviewLog.joins(:quiz_question)
              .where(user_id: User.where(approved: true, admin: false).select(:id), answered_at: @since..,
-                    quiz_questions: { source_type: "VocabularyItem" })
+                    quiz_questions: { source_type: "VocabularyItem", direction: QuizQuestion::DIRECTIONS })
   end
 end

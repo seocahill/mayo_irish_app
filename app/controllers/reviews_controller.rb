@@ -4,6 +4,7 @@ class ReviewsController < ApplicationController
   ROUND_SIZE = 20
   NEW_WORDS = 3
   NEW_EXERCISES = 1
+  NEW_FORMS = 1
   ROUND_KEY = "daily_review_round".freeze
 
   def show
@@ -76,7 +77,7 @@ class ReviewsController < ApplicationController
     return [] if ids.empty?
 
     QuizQuestion.where(id: ids).includes(:source, :lesson).sort_by { |q| ids.index(q.id) }
-                .uniq { |q| [ q.source_type, q.source_id ] }
+                .uniq { |q| [ q.source_type, q.source_id, q.noun_form? && q.direction ] }
   end
 
   # An exercise card whose answer an editor has removed since the round began.
@@ -116,16 +117,31 @@ class ReviewsController < ApplicationController
 
   # A few unseen questions from the lesson the learner is on, only on top of due
   # words and never more than NEW_WORDS. One of them may be an exercise the
-  # editors have answered (see new_exercise_ids), so grammar comes back too.
+  # editors have answered (see new_exercise_ids), so grammar comes back too,
+  # and one a noun's plural or genitive for a word they know (new_form_ids).
   def new_ids(room)
     limit = [ room, NEW_WORDS ].min
     lesson = DailyPath.new(current_user).current_lesson
     exercises = new_exercise_ids(lesson).first([ limit, NEW_EXERCISES ].min)
-    return exercises unless lesson
+    forms = new_form_ids.first([ limit - exercises.size, NEW_FORMS ].min)
+    return exercises + forms unless lesson
 
     QuizQuestion.sync_for(lesson)
-    words = lesson.quiz_questions.word_cards.where.not(id: seen_ids).pluck(:id).shuffle.first(limit - exercises.size)
-    (words + exercises).shuffle
+    words = lesson.quiz_questions.word_cards.where.not(id: seen_ids).pluck(:id).shuffle.first(limit - exercises.size - forms.size)
+    (words + exercises + forms).shuffle
+  end
+
+  # Unseen plural and genitive cards for words whose meaning the learner has
+  # already answered right in review, in visible lessons, earliest lesson first.
+  def new_form_ids
+    answered = QuizReview.where(user: current_user, times_correct: 1..).joins(:quiz_question)
+                         .merge(QuizQuestion.meaning_cards).select("quiz_questions.source_id")
+    items = VocabularyItem.where(id: answered, lesson_id: Lesson.visible_to(current_user).select(:id))
+                          .where("COALESCE(plural, '') <> '' OR COALESCE(genitive, '') <> ''")
+    QuizQuestion.sync_noun_forms(items.where.not(id: QuizQuestion.noun_form_cards.select(:source_id)))
+    unseen = QuizQuestion.noun_form_cards.where(source_id: items.select(:id)).where.not(id: seen_ids)
+                         .joins(:lesson).pluck(:id, "lessons.position")
+    unseen.sort_by { |_, position| [ position.to_i, rand ] }.map(&:first)
   end
 
   # Unseen exercise cards from the lesson the learner is on, then from the

@@ -33,6 +33,11 @@ class VocabularyItem < ApplicationRecord
     self.genitive_source_entry_id = nil if genitive_changed? && !genitive_source_entry_id_changed?
   end
 
+  # Keep the plural and genitive review cards in step with an editor's change.
+  # (A form removed here loses its card on the lesson's next question sync.)
+  after_update_commit -> { QuizQuestion.sync_noun_forms([ self ]) },
+                      if: -> { saved_change_to_plural? || saved_change_to_genitive? || saved_change_to_irish? }
+
   scope :unclassified, -> { where(part_of_speech: nil) }
   scope :ordered, -> { order(:position) }
   # Said by a speaker: an uploaded recording or an approved one from Abairt.

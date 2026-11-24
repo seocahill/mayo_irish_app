@@ -8,7 +8,33 @@
     <span class="eyebrow tabular-nums shrink-0"><%= t(".question_count", position: @position, count: @count) %></span>
   </div>
 
-  <% if @question.self_rated? %>
+  <% if @question.noun_form? %>
+    <%# A noun's plural or genitive as the course holds it: the learner says it, then sees the course's form. %>
+    <% item = @question.source %>
+    <% attested = item.public_send("#{@question.direction}_source_entry_id").present? %>
+    <div class="card p-6 sm:p-8" data-controller="reveal" data-testid="noun-form-card">
+      <p class="eyebrow text-foghlaim mb-3"><%= noun_form_label(@question) %></p>
+      <p class="font-display text-2xl sm:text-3xl leading-snug mb-1 break-words">
+        <%= noun_form_prompt(@question) %>
+      </p>
+      <p class="text-sm text-muted mb-1"><%= item.english %><% if item.gender_label.present? %> · <%= item.gender == "f" ? t("reviews.noun_forms.feminine") : t("reviews.noun_forms.masculine") %><% end %></p>
+      <p class="text-sm text-muted mb-8"><%= t(".noun_form.hint") %></p>
+
+      <button type="button" data-reveal-target="button" data-action="reveal#show" class="btn-solid w-full sm:w-auto"><%= t(".show") %></button>
+
+      <div hidden data-reveal-target="hidden" class="grid gap-4">
+        <div class="pt-2 border-t border-line">
+          <p class="eyebrow mb-1"><%= t(".noun_form.answer") %></p>
+          <p class="text-lg">
+            <span lang="ga" class="font-semibold italic break-words"><%= @question.answer %></span>
+            <% if attested %><span class="chip text-[10px] ml-1" title="<%= t("reviews.noun_forms.attested_in_abairt") %>"><%= t("reviews.noun_forms.abairt") %></span><% end %>
+          </p>
+        </div>
+        <p class="eyebrow"><%= t(".how_did_it_go") %></p>
+        <%= render "reviews/ratings", question: @question %>
+      </div>
+    </div>
+  <% elsif @question.self_rated? %>
     <%# An exercise the editors have answered: the learner's own Irish first, then the editors' answer. %>
     <div class="card p-6 sm:p-8" data-controller="reveal" data-testid="exercise-card">
       <p class="eyebrow text-foghlaim mb-3"><%= t(".exercise") %></p>

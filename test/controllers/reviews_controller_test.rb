@@ -508,4 +508,75 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to review_path
     assert_equal 1, session[ReviewsController::ROUND_KEY]["pos"]
   end
+
+  def know_meaning(item)
+    QuizQuestion.meaning_cards.where(source: item).find_each do |q|
+      QuizReview.create!(user: @user, quiz_question: q, box: 2, fsrs_state: 2, stability: 30.0, difficulty: 5.0,
+                         times_correct: 1, due_at: 1.month.from_now, last_reviewed_at: 1.day.ago)
+    end
+  end
+
+  test "a noun's plural joins the round once the learner has got its meaning right" do
+    sign_in_as(@user)
+    dog = vocabulary_items(:dog)
+    dog.update!(plural: "madraí")
+    know_meaning(dog)
+
+    get review_path
+    plural = QuizQuestion.find_by!(source: dog, direction: "plural")
+    ids = session[ReviewsController::ROUND_KEY]["ids"]
+    assert_includes ids, plural.id
+    assert_operator ids.size, :<=, ReviewsController::NEW_WORDS
+
+    ids.index(plural.id).times do
+      q = QuizQuestion.find(session[ReviewsController::ROUND_KEY]["ids"][session[ReviewsController::ROUND_KEY]["pos"]])
+      post answer_review_path, params: { question_id: q.id, choice: q.answer }
+      get review_path
+    end
+    assert_select "[data-testid=noun-form-card]"
+    assert_match "Plural", response.body
+    assert_select "[lang=ga]", text: "madra"
+    assert_select "[lang=ga]", text: "madraí"
+    assert_select "button[name=rating][value=good]"
+    assert_select "button[name=choice]", count: 0
+
+    post answer_review_path, params: { question_id: plural.id, rating: "again" }
+    assert_response :success
+    assert_match "The plural of", response.body
+    assert_equal 1, QuizReview.find_by!(user: @user, quiz_question: plural).times_wrong
+  end
+
+  test "a noun's forms don't join the round before the learner knows its meaning" do
+    sign_in_as(@user)
+    vocabulary_items(:dog).update!(plural: "madraí", genitive: "madra")
+
+    get review_path
+    ids = session[ReviewsController::ROUND_KEY]["ids"]
+    assert_empty QuizQuestion.where(id: ids).noun_form_cards
+  end
+
+  test "no more than one new noun form joins a round" do
+    sign_in_as(@user)
+    %i[dog house].each do |key|
+      item = vocabulary_items(key)
+      item.update!(plural: "#{item.irish}-pl", genitive: "#{item.irish}-gen")
+      know_meaning(item)
+    end
+
+    get review_path
+    ids = session[ReviewsController::ROUND_KEY]["ids"]
+    assert_equal ReviewsController::NEW_FORMS, QuizQuestion.where(id: ids).noun_form_cards.count
+  end
+
+  test "noun-form cards don't change the words a learner knows" do
+    dog = vocabulary_items(:dog)
+    dog.update!(plural: "madraí")
+    know_meaning(dog)
+    assert_includes @lesson.known_word_ids(@user), dog.id
+
+    plural = QuizQuestion.find_by!(source: dog, direction: "plural")
+    QuizReview.create!(user: @user, quiz_question: plural, box: 1, fsrs_state: 1, stability: 0.5, difficulty: 5.0, due_at: 1.hour.ago)
+    assert_includes @lesson.known_word_ids(@user), dog.id
+    assert_equal 1, Lesson.known_word_counts_for(@user)[@lesson.id]
+  end
 end
