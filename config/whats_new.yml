@@ -298,3 +298,8 @@
   title: Plurals and genitives in your daily review
   body: Irish plurals and genitives don't follow simple rules, so they are worth learning with the word. Once you know what a noun means, its plural and genitive from the course now come back in the daily review as their own cards. Say the form aloud, tap Show to see it, and rate yourself. At most one new form joins a round, and they don't change your count of words known.
   path: /review
+- id: 53
+  date: 2026-11-24
+  title: Plurals and genitives you know
+  body: Today's "So far" now counts the plurals and genitives you know from your daily review. It's your own rating, not a test, and it's kept apart from your words known. A form counts once you've rated it Good or Easy over a week or more, the same bar as a known word.
+  path: /

@@ -196,4 +196,40 @@ class MilestonesTest < ActiveSupport::TestCase
     known_review(QuizQuestion.find_by!(source: hidden_exercise))
     assert_equal 1, exercise_strand.value
   end
+
+  def noun_form_strand = Milestones.new(@user, known_words: 0).strands.find { |s| s.key == :noun_forms }
+
+  test "plurals and genitives known count once the course has a noun form" do
+    VocabularyItem.update_all(plural: nil, genitive: nil)
+    assert_not_includes Milestones.new(@user, known_words: 0).strands.map(&:key), :noun_forms
+
+    dog = vocabulary_items(:dog)
+    dog.update!(plural: "dog-pl", genitive: "dog-gen")
+    assert_equal 0, noun_form_strand.value
+    assert_equal 1, noun_form_strand.next_step
+
+    plural = QuizQuestion.find_by!(source: dog, direction: "plural")
+    review = known_review(plural, stability: 3.0)
+    assert_equal 0, noun_form_strand.value, "not yet stable"
+
+    review.update!(stability: QuizReview::KNOWN_STABILITY)
+    assert_equal 1, noun_form_strand.value
+    assert_equal 1, noun_form_strand.reached
+    assert_equal 5, noun_form_strand.next_step
+  end
+
+  test "known meanings and forms in hidden lessons don't count as noun forms" do
+    dog = vocabulary_items(:dog)
+    dog.update!(plural: "dog-pl")
+    QuizQuestion.sync_for(dog.lesson)
+    QuizQuestion.meaning_cards.where(source: dog).each { |q| known_review(q) }
+    assert_equal 0, noun_form_strand.value
+
+    known_review(QuizQuestion.find_by!(source: dog, direction: "plural"))
+    assert_equal 1, noun_form_strand.value
+    other = Lesson.create!(number: 97, title: "Other", lesson_type: "curriculum", position: 50, published: true)
+    other.vocabulary_items.create!(irish: "cat", english: "cat", plural: "cat-pl")
+    dog.lesson.update_columns(published: false)
+    assert_equal 0, noun_form_strand.value
+  end
 end
