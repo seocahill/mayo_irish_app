@@ -1,0 +1,45 @@
+<div class="max-w-2xl mx-auto flex flex-col gap-6">
+  <header>
+    <p class="eyebrow"><%= link_to t(".eyebrow"), course_tools_path, class: "hover:underline" %></p>
+    <h1 class="font-display text-3xl leading-tight"><%= t(".title") %></h1>
+    <p class="text-muted mt-1 text-sm"><%= t(".summary", days: HardExercises::DAYS, min: HardExercises::MIN_ANSWERS) %></p>
+  </header>
+
+  <% if @rows.empty? %>
+    <p class="card px-4 py-3 text-sm text-muted" id="hard-exercises-none"><%= t(".none") %></p>
+  <% else %>
+    <ol class="flex flex-col gap-3" id="hard-exercises">
+      <% @rows.each do |row| %>
+        <% exercise = row.exercise %>
+        <li class="card px-4 py-3 text-sm" id="hard-exercise-<%= exercise.id %>">
+          <p><span class="font-mono text-xs text-muted tabular-nums"><%= t("exercises.label", number: exercise.number) %></span> <%= exercise.prompt %></p>
+          <p class="mt-1">
+            <span class="text-xs text-muted"><%= t(".answer") %></span>
+            <% if exercise.answer.present? %>
+              <span lang="ga" class="font-semibold"><%= exercise.answer %></span>
+            <% else %>
+              <span class="text-muted"><%= t(".no_answer") %></span>
+            <% end %>
+          </p>
+          <dl class="mt-2 grid grid-cols-3 gap-x-4 gap-y-1">
+            <div>
+              <dt class="text-xs text-muted"><%= t(".again") %></dt>
+              <dd class="tabular-nums"><%= t(".again_value", misses: row.misses, answers: row.answers, percent: row.miss_percent) %></dd>
+            </div>
+            <div>
+              <dt class="text-xs text-muted"><%= t(".learners") %></dt>
+              <dd class="tabular-nums"><%= row.learners %></dd>
+            </div>
+            <div>
+              <dt class="text-xs text-muted"><%= t(".lesson") %></dt>
+              <dd><%= link_to exercise.lesson.display_title, lesson_path(exercise.lesson, anchor: ("exercises" if exercise.answer.present?)), class: "underline" %><% unless exercise.lesson.published? %> <span class="chip text-[10px]"><%= t(".draft") %></span><% end %></dd>
+            </div>
+          </dl>
+          <p class="mt-1 text-xs flex flex-wrap gap-x-4">
+            <%= link_to edit_exercise_path(exercise), class: "underline inline-flex items-center min-h-12 sm:min-h-0" do %><%= t(".edit") %><span class="sr-only"> <%= t("exercises.label", number: exercise.number) %>, <%= exercise.lesson.display_title %></span><% end %>
+          </p>
+        </li>
+      <% end %>
+    </ol>
+  <% end %>
+</div>

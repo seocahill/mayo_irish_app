@@ -128,6 +128,10 @@ en:
           description: The Mayo speakers' phrases learners most often couldn't make
             out on listening clips.
           name: Phrases learners couldn't make out
+        hard_exercises:
+          description: The exercises learners most often rate Again in review, hardest
+            first.
+          name: Exercises learners find hard
         hard_recordings:
           description: The whole conversations from Mayo speakers learners most often
             said they couldn't follow yet.
@@ -353,6 +357,24 @@ en:
         not admins, and hidden clips are left out. It only looks; nothing changes.
       title: Phrases learners couldn't make out
       word: Picked for the word
+  hard_exercises:
+    show:
+      again: Rated Again
+      again_value: "%{misses} of %{answers} (%{percent}%)"
+      answer: 'Editors'' answer:'
+      draft: Draft
+      edit: Edit the answer
+      eyebrow: Course tools
+      learners: Learners who rated Again
+      lesson: Lesson
+      no_answer: No answer now, so it is out of the review
+      none: No exercise has been rated Again often enough yet to show here.
+      summary: Exercises from the daily review that learners rated Again (they couldn't
+        put it into Irish) over the last %{days} days, hardest first. Learners rate
+        these themselves, so it is their own word, not a test. Only exercises answered
+        at least %{min} times are shown, and the counts include answers given before
+        the exercise was last edited. It only looks; nothing changes.
+      title: Exercises learners find hard
   hard_recordings:
     show:
       add_questions: Add questions to listen for
