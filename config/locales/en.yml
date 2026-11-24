@@ -997,6 +997,14 @@ en:
       next: 'next: %{count} minutes'
       not_yet: Listening time starts with any Mayo recording
       reached: Listened for %{count} minutes to Mayo speakers
+    noun_forms:
+      next: 'next: %{count}'
+      not_yet: Plurals and genitives come back in your review once you've got the
+        word right; the ones you know count here
+      reached:
+        one: You know 1 plural or genitive from your review, by your own rating
+        other: You know %{count} plurals and genitives from your review, by your own
+          rating
     understood:
       next: 'next: %{count}'
       not_yet: Phrases you make out on listening clips count here
