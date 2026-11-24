@@ -372,7 +372,8 @@ en:
       summary: Exercises from the daily review that learners rated Again (they couldn't
         put it into Irish) over the last %{days} days, hardest first. Learners rate
         these themselves, so it is their own word, not a test. Only exercises answered
-        at least %{min} times are shown. It only looks; nothing changes.
+        at least %{min} times are shown, and the counts include answers given before
+        the exercise was last edited. It only looks; nothing changes.
       title: Exercises learners find hard
   hard_recordings:
     show:

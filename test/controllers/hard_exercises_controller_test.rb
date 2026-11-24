@@ -22,7 +22,7 @@ class HardExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#hard-exercise-#{@exercise.id}" do
       assert_select "span[lang=ga]", text: "Dia dhuit"
-      assert_match "What is the Irish for hello?", response.body
+      assert_select "p", text: /What is the Irish for hello\?/
       assert_select "dd", text: "2 of 3 (67%)"
       assert_select "dd", text: "1"
       assert_select "a[href='#{lesson_path(lessons(:one), anchor: 'exercises')}']"
@@ -61,6 +61,12 @@ class HardExercisesControllerTest < ActionDispatch::IntegrationTest
     sign_in_as(users(:admin))
     get course_tools_path
     assert_select "a[href='#{hard_exercises_path}']"
+  end
+
+  test "signed-out visitors are sent to sign in" do
+    get hard_exercises_path
+
+    assert_redirected_to new_session_path
   end
 
   test "learners cannot open it" do

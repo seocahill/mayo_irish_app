@@ -32,7 +32,7 @@
             </div>
             <div>
               <dt class="text-xs text-muted"><%= t(".lesson") %></dt>
-              <dd><%= link_to exercise.lesson.display_title, lesson_path(exercise.lesson, anchor: "exercises"), class: "underline" %><% unless exercise.lesson.published? %> <span class="chip text-[10px]"><%= t(".draft") %></span><% end %></dd>
+              <dd><%= link_to exercise.lesson.display_title, lesson_path(exercise.lesson, anchor: ("exercises" if exercise.answer.present?)), class: "underline" %><% unless exercise.lesson.published? %> <span class="chip text-[10px]"><%= t(".draft") %></span><% end %></dd>
             </div>
           </dl>
           <p class="mt-1 text-xs flex flex-wrap gap-x-4">

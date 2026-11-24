@@ -31,7 +31,7 @@ class HardExercises
                        Arel.sql("COUNT(DISTINCT CASE WHEN review_logs.correct THEN NULL ELSE review_logs.user_id END)"))
     exercises = Exercise.where(id: stats.map(&:first)).includes(:lesson).index_by(&:id)
     stats.filter_map { |id, answers, misses, learners| exercises[id] && Row.new(exercise: exercises[id], answers:, misses:, learners:) }
-         .sort_by { |row| [ -row.misses.fdiv(row.answers), -row.misses, row.exercise.lesson.position.to_i, row.exercise.position ] }
+         .sort_by { |row| [ -row.misses.fdiv(row.answers), -row.misses, row.exercise.lesson.position.to_i, row.exercise.number, row.exercise.id ] }
          .first(@limit)
   end
 
