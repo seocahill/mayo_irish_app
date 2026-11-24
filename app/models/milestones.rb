@@ -1,6 +1,6 @@
 # Honest markers of how far a learner has got, from what they have actually done:
 # words known, time spent listening, sentences made out, whole conversations
-# followed, and speaking. Each strand is a short ladder;
+# followed, speaking, grammar used and exercises known. Each strand is a short ladder;
 # a learner sees the last step they reached and the next one, never points or streaks.
 class Milestones
   WORD_STEPS = [ 10, 25, 50, 100, 250, 500, 1000 ].freeze
@@ -18,6 +18,9 @@ class Milestones
   CONVERSATION_MINUTE_STEPS = [ 1, 3, 5, 10, 20 ].freeze
   # Lessons whose grammar the learner has shown they can use in conversation with the tutor.
   GRAMMAR_LESSON_STEPS = [ 1, 3, 5, 10, 20, 40 ].freeze
+  # Exercises (answered by editors) the learner knows from the daily review:
+  # the same bar as a known word, so one lucky answer isn't enough.
+  EXERCISE_STEPS = [ 1, 3, 5, 10, 25, 50, 100 ].freeze
 
   Strand = Data.define(:key, :value, :reached, :next_step) do
     def started? = reached.present? || value.positive?
@@ -37,7 +40,8 @@ class Milestones
       strand(:understood, understood_clips, UNDERSTOOD_CLIP_STEPS),
       strand(:followed, followed_recordings, FOLLOWED_RECORDING_STEPS),
       strand(:conversation, longest_conversation_minutes, CONVERSATION_MINUTE_STEPS),
-      strand(:grammar, grammar_lessons, GRAMMAR_LESSON_STEPS) ]
+      strand(:grammar, grammar_lessons, GRAMMAR_LESSON_STEPS),
+      (strand(:exercises, known_exercises, EXERCISE_STEPS) if exercises_offered?) ].compact
   end
 
   private
@@ -56,6 +60,17 @@ class Milestones
   def followed_recordings
     offered = ListeningClip.visible_to(@user).where.not(abairt_recording_id: nil).select(:abairt_recording_id)
     @user.listening_times.where(followed: true, abairt_recording_id: offered).count
+  end
+
+  # Only once the course has an answered exercise this learner can see.
+  def exercises_offered?
+    Exercise.answered.where(lesson: Lesson.visible_to(@user)).exists?
+  end
+
+  def known_exercises
+    QuizReview.known.where(user: @user).joins(:quiz_question)
+              .merge(QuizQuestion.exercise_cards.still_answerable)
+              .where(quiz_questions: { lesson_id: Lesson.visible_to(@user).select(:id) }).count
   end
 
   def grammar_lessons

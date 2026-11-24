@@ -230,4 +230,18 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert labels.size >= 2
     assert_equal labels.compact.uniq.size, labels.size, "navs need distinct labels: #{labels.inspect}"
   end
+
+  test "shows the exercises the learner knows, and links to the review" do
+    exercise = exercises(:one)
+    exercise.update!(answer: "Dia dhuit")
+    QuizQuestion.sync_for(lessons(:one))
+    QuizReview.create!(user: users(:two), quiz_question: QuizQuestion.find_by!(source: exercise),
+                       fsrs_state: QuizReview::REVIEW_STATE, stability: 10.0, due_at: 1.week.from_now)
+    sign_in_as(users(:two))
+
+    get root_path
+    assert_select "li", text: /You know 1 exercise from your review, by your own rating.*next: 3/m do
+      assert_select "a[href=?]", review_path
+    end
+  end
 end

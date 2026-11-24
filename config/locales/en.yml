@@ -950,6 +950,13 @@ en:
       reached:
         one: Spoken for a minute in one conversation
         other: Spoken for %{count} minutes in one conversation
+    exercises:
+      next: 'next: %{count}'
+      not_yet: Exercises come back in your review as you work through the lessons;
+        the ones you know count here
+      reached:
+        one: You know 1 exercise from your review, by your own rating
+        other: You know %{count} exercises from your review, by your own rating
     followed:
       next: 'next: %{count}'
       not_yet: Conversations you say you followed count here
