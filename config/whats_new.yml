@@ -291,5 +291,5 @@
 - id: 51
   date: 2026-11-24
   title: Exercises you know
-  body: Today's "So far" now counts the exercises you know from your daily review. An exercise counts once it has stuck, at the same bar as a known word, so one lucky answer isn't enough.
+  body: Today's "So far" now counts the exercises you know from your daily review. It's your own rating, not a test. An exercise counts once you've rated it Good or Easy over a week or more, the same bar as a known word, so one lucky answer isn't enough.
   path: /

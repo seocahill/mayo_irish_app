@@ -240,7 +240,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     sign_in_as(users(:two))
 
     get root_path
-    assert_select "li", text: /You know 1 exercise by heart from your review.*next: 3/m do
+    assert_select "li", text: /You know 1 exercise from your review, by your own rating.*next: 3/m do
       assert_select "a[href=?]", review_path
     end
   end

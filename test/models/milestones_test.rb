@@ -150,27 +150,50 @@ class MilestonesTest < ActiveSupport::TestCase
     assert_equal 1, followed.call.reached
   end
 
+  def exercise_strand = Milestones.new(@user, known_words: 0).strands.find { |s| s.key == :exercises }
+
+  def known_review(question, stability: QuizReview::KNOWN_STABILITY)
+    QuizReview.create!(user: @user, quiz_question: question, fsrs_state: QuizReview::REVIEW_STATE, stability: stability, due_at: 1.day.from_now)
+  end
+
   test "exercises known count once the course has an answered exercise" do
     assert_not_includes Milestones.new(@user, known_words: 0).strands.map(&:key), :exercises
 
     exercise = exercises(:one)
     exercise.update!(answer: "Dia dhuit")
     QuizQuestion.sync_for(lessons(:one))
-    strand = Milestones.new(@user, known_words: 0).strands.find { |s| s.key == :exercises }
-    assert_equal 0, strand.value
-    assert_equal 1, strand.next_step
+    assert_equal 0, exercise_strand.value
+    assert_equal 1, exercise_strand.next_step
 
-    question = QuizQuestion.find_by!(source: exercise)
-    review = QuizReview.create!(user: @user, quiz_question: question, fsrs_state: QuizReview::REVIEW_STATE, stability: 3.0, due_at: 1.day.from_now)
-    assert_equal 0, Milestones.new(@user, known_words: 0).strands.find { |s| s.key == :exercises }.value, "not yet stable"
+    review = known_review(QuizQuestion.find_by!(source: exercise), stability: 3.0)
+    assert_equal 0, exercise_strand.value, "not yet stable"
 
     review.update!(stability: QuizReview::KNOWN_STABILITY)
-    strand = Milestones.new(@user, known_words: 0).strands.find { |s| s.key == :exercises }
-    assert_equal 1, strand.value
-    assert_equal 1, strand.reached
-    assert_equal 3, strand.next_step
+    assert_equal 1, exercise_strand.value
+    assert_equal 1, exercise_strand.reached
+    assert_equal 3, exercise_strand.next_step
 
     exercise.update!(answer: "")
     assert_not_includes Milestones.new(@user, known_words: 0).strands.map(&:key), :exercises
+  end
+
+  test "known words, exercises whose answer was removed and exercises in hidden lessons don't count" do
+    lessons(:one).exercises.create!(number: 2, prompt: "Another", answer: "Freagra", position: 2)
+    exercise = exercises(:one)
+    exercise.update!(answer: "Dia dhuit")
+    QuizQuestion.sync_for(lessons(:one))
+    known_review(lessons(:one).quiz_questions.word_cards.first)
+    known_review(QuizQuestion.find_by!(source: exercise))
+    assert_equal 1, exercise_strand.value
+
+    exercise.update!(answer: "")
+    assert_equal 0, exercise_strand.value, "the other answered exercise keeps the line"
+
+    exercise.update!(answer: "Dia dhuit")
+    hidden = Lesson.create!(number: 97, title: "Hidden", lesson_type: "curriculum", position: 97, published: false)
+    hidden_exercise = hidden.exercises.create!(number: 1, prompt: "Hidden", answer: "Folaithe", position: 1)
+    QuizQuestion.sync_for(hidden)
+    known_review(QuizQuestion.find_by!(source: hidden_exercise))
+    assert_equal 1, exercise_strand.value
   end
 end
