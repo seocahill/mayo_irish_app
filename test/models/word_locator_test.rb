@@ -27,4 +27,11 @@ class WordLocatorTest < ActiveSupport::TestCase
   test "wildcards are taken literally" do
     assert_empty WordLocator.new("%_").matches
   end
+
+  test "counts a word's meaning cards, not its plural and genitive cards" do
+    item = vocabulary_items(:dog)
+    QuizQuestion.create!(lesson: item.lesson, source: item, direction: "ga_en", prompt: "madra", answer: "dog", distractors: [])
+    QuizQuestion.create!(lesson: item.lesson, source: item, direction: "plural", prompt: "madra", answer: "dog-pl", distractors: [])
+    assert_equal 1, WordLocator.new("dog").matches.sole.quiz_questions
+  end
 end

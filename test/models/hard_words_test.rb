@@ -77,4 +77,14 @@ class HardWordsTest < ActiveSupport::TestCase
 
     assert_equal [ dog ], HardWords.new(limit: 1).rows.map(&:item)
   end
+
+  test "missed plurals and genitives are left out" do
+    vocabulary_items(:dog).update!(plural: "dog-pl")
+    question = QuizQuestion.find_by!(source: vocabulary_items(:dog), direction: "plural")
+    3.times do
+      ReviewLog.create!(user: @learner, quiz_question: question, prompt: question.prompt, correct: false,
+                        answered_at: 1.day.ago, box_before: 1, box_after: 1)
+    end
+    assert_empty HardWords.new.rows
+  end
 end

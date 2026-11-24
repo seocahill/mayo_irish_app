@@ -148,15 +148,20 @@ class QuizQuestionTest < ActiveSupport::TestCase
 
   test "a noun-form card follows an editor's change and goes when the form is removed" do
     dog = vocabulary_items(:dog)
-    dog.update!(plural: "madraí")
+    QuizQuestion.sync_for(lessons(:one))
+    dog.update!(plural: "dog-pl-1", genitive: "dog-gen")
     plural = QuizQuestion.find_by!(source: dog, direction: "plural")
 
-    dog.update!(plural: "madrannaí")
-    assert_equal "madrannaí", plural.reload.answer
+    dog.update!(plural: "dog-pl-2")
+    assert_equal "dog-pl-2", plural.reload.answer
 
     dog.update!(plural: "")
-    QuizQuestion.sync_for(lessons(:one))
-    assert_not QuizQuestion.exists?(plural.id)
+    assert_not QuizQuestion.exists?(plural.id), "removed without waiting for a sync"
+    assert QuizQuestion.exists?(source: dog, direction: "genitive"), "the other form stays"
     assert QuizQuestion.exists?(source: dog, direction: "ga_en"), "the meaning cards stay"
+
+    dog.update!(genitive: "")
+    QuizQuestion.sync_for(lessons(:one))
+    assert_empty QuizQuestion.noun_form_cards.where(source: dog)
   end
 end

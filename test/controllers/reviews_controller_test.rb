@@ -579,4 +579,37 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     assert_includes @lesson.known_word_ids(@user), dog.id
     assert_equal 1, Lesson.known_word_counts_for(@user)[@lesson.id]
   end
+
+  test "a missed plural is listed to look at again without hiding the word from tricky words" do
+    sign_in_as(@user)
+    dog = vocabulary_items(:dog)
+    dog.update!(plural: "dog-pl")
+    know_meaning(dog)
+    plural = QuizQuestion.find_by!(source: dog, direction: "plural")
+    QuizReview.create!(user: @user, quiz_question: plural, box: 1, fsrs_state: 2, stability: 2.0, difficulty: 5.0,
+                       times_correct: 1, due_at: 1.hour.ago, last_reviewed_at: 3.days.ago)
+    meaning = QuizQuestion.find_by!(source: dog, direction: "ga_en")
+    3.times do
+      ReviewLog.create!(user: @user, quiz_question: meaning, prompt: meaning.prompt, correct: false,
+                        answered_at: 1.day.ago, box_before: 1, box_after: 1)
+    end
+
+    get review_path
+    session[ReviewsController::ROUND_KEY]["ids"].size.times do
+      q = QuizQuestion.find(session[ReviewsController::ROUND_KEY]["ids"][session[ReviewsController::ROUND_KEY]["pos"]])
+      if q == plural
+        post answer_review_path, params: { question_id: q.id, rating: "again" }
+      elsif q.self_rated?
+        post answer_review_path, params: { question_id: q.id, rating: "good" }
+      else
+        post answer_review_path, params: { question_id: q.id, choice: q.answer }
+      end
+      get review_path
+    end
+    assert_match "Round complete", response.body
+    assert_select "#missed-heading"
+    assert_match "The plural of", response.body
+    assert_select "[lang=ga]", text: "dog-pl"
+    assert_match "Words to watch", response.body
+  end
 end

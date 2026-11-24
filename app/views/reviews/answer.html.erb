@@ -23,7 +23,8 @@
       <%# The recording is of the word itself, so it isn't offered beside a plural or genitive. %>
       <% unless @question.noun_form? %><span class="ml-2 align-middle"><%= render "reviews/audio", question: @question %></span><% end %>
     </p>
-    <%= render "reviews/noun_forms", question: @question %>
+    <%# After a plural or genitive card the other form would give away its own card. %>
+    <%= render "reviews/noun_forms", question: @question unless @question.noun_form? %>
 
     <div class="mt-8">
       <%= link_to (@last ? t(".see_results") : t(".next")), review_path, class: "btn-solid w-full sm:w-auto" %>
