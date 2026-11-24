@@ -999,8 +999,8 @@ en:
       reached: Listened for %{count} minutes to Mayo speakers
     noun_forms:
       next: 'next: %{count}'
-      not_yet: Plurals and genitives come back in your review once you know the word;
-        the ones you know count here
+      not_yet: Plurals and genitives come back in your review once you've got the
+        word right; the ones you know count here
       reached:
         one: You know 1 plural or genitive from your review, by your own rating
         other: You know %{count} plurals and genitives from your review, by your own

@@ -1,7 +1,8 @@
 # Honest markers of how far a learner has got, from what they have actually done:
 # words known, time spent listening, sentences made out, whole conversations
-# followed, speaking, grammar used, exercises known and noun forms known. Each strand is a short ladder;
-# a learner sees the last step they reached and the next one, never points or streaks.
+# followed, speaking, grammar used, exercises known and noun forms known. Each
+# strand is a short ladder; a learner sees the last step they reached and the
+# next one, never points or streaks.
 class Milestones
   WORD_STEPS = [ 10, 25, 50, 100, 250, 500, 1000 ].freeze
   LISTENING_MINUTE_STEPS = [ 5, 15, 30, 60, 180, 600 ].freeze
@@ -46,7 +47,7 @@ class Milestones
       strand(:conversation, longest_conversation_minutes, CONVERSATION_MINUTE_STEPS),
       strand(:grammar, grammar_lessons, GRAMMAR_LESSON_STEPS),
       (strand(:exercises, known_exercises, EXERCISE_STEPS) if exercises_offered?),
-      (strand(:noun_forms, known_noun_forms, NOUN_FORM_STEPS) if noun_forms_offered?) ].compact
+      noun_form_strand ].compact
   end
 
   private
@@ -78,7 +79,13 @@ class Milestones
               .where(quiz_questions: { lesson_id: Lesson.visible_to(@user).select(:id) }).count
   end
 
-  # Only once a lesson this learner can see has a word with a plural or genitive.
+  # Only once a lesson this learner can see has a word with a plural or
+  # genitive (checked only while the learner knows none, to spare the query).
+  def noun_form_strand
+    known = known_noun_forms
+    strand(:noun_forms, known, NOUN_FORM_STEPS) if known.positive? || noun_forms_offered?
+  end
+
   def noun_forms_offered?
     VocabularyItem.where(lesson: Lesson.visible_to(@user))
                   .where("COALESCE(plural, '') <> '' OR COALESCE(genitive, '') <> ''").exists?

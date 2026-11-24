@@ -216,6 +216,9 @@ class MilestonesTest < ActiveSupport::TestCase
     assert_equal 1, noun_form_strand.value
     assert_equal 1, noun_form_strand.reached
     assert_equal 5, noun_form_strand.next_step
+
+    dog.update!(plural: "")
+    assert_equal 0, noun_form_strand.value, "a form an editor removed no longer counts"
   end
 
   test "known meanings and forms in hidden lessons don't count as noun forms" do
