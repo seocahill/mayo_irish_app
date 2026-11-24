@@ -36,7 +36,7 @@ class VocabularyItem < ApplicationRecord
   # Keep the plural, genitive and gender review cards in step with an editor's
   # change: a changed form updates its card, a removed one removes it.
   after_update_commit :refresh_noun_form_cards,
-                      if: -> { saved_change_to_plural? || saved_change_to_genitive? || saved_change_to_gender? || saved_change_to_irish? }
+                      if: -> { saved_change_to_plural? || saved_change_to_genitive? || saved_change_to_gender? || saved_change_to_part_of_speech? || saved_change_to_irish? }
 
   scope :unclassified, -> { where(part_of_speech: nil) }
   scope :ordered, -> { order(:position) }
@@ -46,9 +46,13 @@ class VocabularyItem < ApplicationRecord
   def refresh_noun_form_cards
     QuizQuestion.sync_noun_forms([ self ])
     blank = QuizQuestion::FORM_DIRECTIONS.select { |direction| public_send(direction).blank? }
-    blank << QuizQuestion::GENDER unless QuizQuestion::GENDERS.include?(gender)
+    blank << QuizQuestion::GENDER unless gender_card?
     quiz_questions.where(direction: blank).destroy_all if blank.any?
   end
+
+  # Only a word an editor has marked as a noun is asked for its gender: every
+  # word has one by default (masculine), so the gender alone says nothing.
+  def gender_card? = part_of_speech == "noun" && GENDERS.key?(gender)
 
   def gender_label
     GENDERS[gender] || ''

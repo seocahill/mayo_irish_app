@@ -3,9 +3,10 @@ class QuizQuestion < ApplicationRecord
   # A noun's plural and genitive, as the course holds them, recalled from the
   # word itself once the learner knows what it means (see sync_noun_forms).
   FORM_DIRECTIONS = %w[plural genitive].freeze
-  # A noun's gender as an editor marked it: masculine or feminine, two choices.
+  # A noun's gender: masculine or feminine, two choices. Only for words an
+  # editor has marked as a noun, since every word has a gender by default.
   GENDER = "gender".freeze
-  GENDERS = %w[m f].freeze
+  GENDERS = VocabularyItem::GENDERS.keys.freeze
   DISTRACTOR_COUNT = 3
 
   belongs_to :lesson
@@ -165,11 +166,11 @@ class QuizQuestion < ApplicationRecord
     end + sync_genders(items)
   end
 
-  # A noun an editor marked masculine or feminine gets a two-choice gender card,
-  # the word to its gender. The answer is the course's own "m" or "f".
+  # A word an editor marked as a noun gets a two-choice gender card, the word
+  # to its gender. The answer is the course's own "m" or "f".
   def self.sync_genders(items)
     items.filter_map do |item|
-      next unless GENDERS.include?(item.gender) && item.irish.present?
+      next unless item.gender_card? && item.irish.present?
 
       question = find_or_initialize_by(source: item, direction: GENDER)
       question.lesson_id = item.lesson_id

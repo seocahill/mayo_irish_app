@@ -616,6 +616,7 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
   test "a noun's gender joins the round as a two-choice card once its meaning is right" do
     sign_in_as(@user)
     dog = vocabulary_items(:dog)
+    dog.update!(part_of_speech: "noun")
     know_meaning(dog)
 
     get review_path
@@ -645,8 +646,8 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
   test "a gender card answered right before stays two-choice, never a Say it card" do
     sign_in_as(@user)
     dog = vocabulary_items(:dog)
+    dog.update!(part_of_speech: "noun")
     know_meaning(dog)
-    QuizQuestion.sync_for(@lesson)
     gender = QuizQuestion.find_by!(source: dog, direction: "gender")
     QuizReview.create!(user: @user, quiz_question: gender, box: 2, fsrs_state: 2, stability: 1.0, difficulty: 5.0,
                        times_correct: 2, due_at: 1.year.ago, last_reviewed_at: 3.days.ago)
@@ -656,5 +657,41 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-testid=gender-card]"
     post answer_review_path, params: { question_id: gender.id, rating: "good" }
     assert_match "Not quite", response.body, "a rating isn't accepted in place of a choice"
+  end
+
+  test "a word not marked as a noun is never asked for its gender" do
+    sign_in_as(@user)
+    dog = vocabulary_items(:dog)
+    know_meaning(dog)
+    get review_path
+    assert_not QuizQuestion.exists?(source: dog, direction: "gender")
+    assert_empty QuizQuestion.where(id: session[ReviewsController::ROUND_KEY]["ids"]).gender_cards
+  end
+
+  test "a missed gender card is listed by its word and gender, and doesn't make the word tricky" do
+    sign_in_as(@user)
+    dog = vocabulary_items(:dog)
+    dog.update!(part_of_speech: "noun")
+    know_meaning(dog)
+    gender = QuizQuestion.find_by!(source: dog, direction: "gender")
+    QuizReview.where(user: @user).update_all(due_at: 1.month.from_now)
+    QuizReview.create!(user: @user, quiz_question: gender, box: 1, fsrs_state: 2, stability: 1.0, difficulty: 5.0,
+                       times_correct: 1, due_at: 1.hour.ago, last_reviewed_at: 3.days.ago)
+
+    get review_path
+    session[ReviewsController::ROUND_KEY]["ids"].size.times do
+      q = QuizQuestion.find(session[ReviewsController::ROUND_KEY]["ids"][session[ReviewsController::ROUND_KEY]["pos"]])
+      if q == gender
+        post answer_review_path, params: { question_id: q.id, choice: "f" }
+      elsif q.self_rated?
+        post answer_review_path, params: { question_id: q.id, rating: "good" }
+      else
+        post answer_review_path, params: { question_id: q.id, choice: q.answer }
+      end
+      get review_path
+    end
+    assert_select "#missed-heading"
+    assert_select "li", text: /madra\s+Masculine/
+    assert_no_match "Words to watch", response.body
   end
 end

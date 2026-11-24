@@ -36,7 +36,8 @@
       <p class="font-display text-2xl sm:text-3xl leading-snug mb-1 break-words">
         <%= noun_form_prompt(@question) %>
       </p>
-      <p class="text-sm text-muted mb-1"><%= item.english %><% if item.gender_label.present? %> · <%= item.gender == "f" ? t("reviews.noun_forms.feminine") : t("reviews.noun_forms.masculine") %><% end %></p>
+      <%# No gender here: it has a card of its own. %>
+      <p class="text-sm text-muted mb-1"><%= item.english %></p>
       <p class="text-sm text-muted mb-8"><%= t(".noun_form.hint") %></p>
 
       <button type="button" data-reveal-target="button" data-action="reveal#show" class="btn-solid w-full sm:w-auto"><%= t(".show") %></button>

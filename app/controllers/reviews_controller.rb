@@ -5,6 +5,7 @@ class ReviewsController < ApplicationController
   NEW_WORDS = 3
   NEW_EXERCISES = 1
   NEW_FORMS = 1
+  LAZY_SYNC_LIMIT = 50
   ROUND_KEY = "daily_review_round".freeze
 
   def show
@@ -143,10 +144,13 @@ class ReviewsController < ApplicationController
                          .merge(QuizQuestion.meaning_cards).select("quiz_questions.source_id")
     items = VocabularyItem.where(id: answered, lesson_id: Lesson.visible_to(current_user).select(:id))
     with_forms = items.where("COALESCE(plural, '') <> '' OR COALESCE(genitive, '') <> ''")
-    with_gender = items.where(gender: QuizQuestion::GENDERS)
+    with_gender = items.where(part_of_speech: "noun", gender: QuizQuestion::GENDERS)
+    # A bounded batch per visit, so a learner who already knows many words
+    # doesn't build all their cards in one request; the rest follow next time.
     QuizQuestion.sync_noun_forms(
       with_forms.where.not(id: QuizQuestion.noun_form_cards.select(:source_id))
         .or(with_gender.where.not(id: QuizQuestion.gender_cards.select(:source_id)))
+        .limit(LAZY_SYNC_LIMIT)
     )
     QuizQuestion.grammar_of_word_cards.where(source_id: items.select(:id)).where.not(id: seen_ids)
                 .joins(:lesson).order("lessons.position", Arel.sql("RANDOM()")).limit(n).pluck(:id)

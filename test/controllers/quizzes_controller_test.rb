@@ -101,9 +101,9 @@ class QuizzesControllerTest < ActionDispatch::IntegrationTest
 
   test "the lesson quiz never asks for a plural or genitive" do
     sign_in_as(@user)
-    vocabulary_items(:dog).update!(plural: "dog-pl", genitive: "dog-gen")
+    vocabulary_items(:dog).update!(plural: "dog-pl", genitive: "dog-gen", part_of_speech: "noun")
     get lesson_quiz_path(@lesson)
     ids = session.to_h.values.find { |v| v.is_a?(Hash) && v["ids"] }["ids"]
-    assert_empty QuizQuestion.where(id: ids).noun_form_cards
+    assert_empty QuizQuestion.where(id: ids).grammar_of_word_cards
   end
 end

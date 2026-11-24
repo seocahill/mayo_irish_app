@@ -165,9 +165,12 @@ class QuizQuestionTest < ActiveSupport::TestCase
     assert_empty QuizQuestion.noun_form_cards.where(source: dog)
   end
 
-  test "a noun marked masculine or feminine gets a two-choice gender card that follows the editor" do
+  test "a word marked as a noun gets a two-choice gender card that follows the editor" do
     dog = vocabulary_items(:dog)
     QuizQuestion.sync_for(@lesson)
+    assert_empty QuizQuestion.gender_cards, "not until an editor marks it a noun"
+
+    dog.update!(part_of_speech: "noun")
     gender = QuizQuestion.find_by!(source: dog, direction: "gender")
     assert_equal [ "madra", "m", [ "f" ] ], [ gender.prompt, gender.answer, gender.distractors ]
     assert gender.gender?
@@ -181,6 +184,14 @@ class QuizQuestionTest < ActiveSupport::TestCase
     dog.update!(gender: "f")
     assert_equal [ "f", [ "m" ] ], [ gender.reload.answer, gender.distractors ]
 
+    dog.update!(irish: "madra rua")
+    assert_equal "madra rua", gender.reload.prompt
+
+    dog.update!(part_of_speech: "verb")
+    assert_not QuizQuestion.exists?(gender.id), "no longer a noun, no gender card"
+
+    dog.update!(part_of_speech: "noun")
+    gender = QuizQuestion.find_by!(source: dog, direction: "gender")
     dog.update!(gender: nil)
     assert_not QuizQuestion.exists?(gender.id)
     assert QuizQuestion.exists?(source: dog, direction: "ga_en")
