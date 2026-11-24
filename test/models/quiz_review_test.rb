@@ -118,4 +118,20 @@ class QuizReviewTest < ActiveSupport::TestCase
     assert_equal 1, forecast[:tomorrow]
     assert_equal 2, forecast[:week] # tomorrow plus the days after
   end
+
+  test "an exercise card whose answer was removed is not counted as due" do
+    exercise = exercises(:one)
+    exercise.update!(answer: "Dia dhuit")
+    QuizQuestion.sync_for(lessons(:one))
+    question = QuizQuestion.find_by!(source: exercise)
+    QuizReview.create!(user: @user, quiz_question: question, due_at: 1.hour.ago, last_reviewed_at: 2.days.ago)
+
+    assert_equal 1, QuizReview.forecast_for(@user)[:today]
+    assert_equal({ lessons(:one).id => 1 }, QuizReview.due_counts_by_lesson(@user, [ lessons(:one).id ]))
+
+    exercise.update!(answer: "")
+    assert_equal 0, QuizReview.forecast_for(@user)[:today]
+    assert_empty QuizReview.due_counts_by_lesson(@user, [ lessons(:one).id ])
+    assert_equal 0, DailyPath.new(@user).due_count
+  end
 end

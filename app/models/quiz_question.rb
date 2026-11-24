@@ -22,6 +22,9 @@ class QuizQuestion < ApplicationRecord
   # Irish, sees the editors' answer, and rates themselves.
   def self_rated? = source_type == "Exercise"
 
+  scope :exercise_cards, -> { where(source_type: "Exercise") }
+  scope :word_cards, -> { where.not(source_type: "Exercise") }
+
   # Exercise cards whose exercise no longer has an editor's answer are left out
   # of reviews (the card and its history stay, in case the answer comes back).
   scope :still_answerable, -> {
@@ -111,10 +114,10 @@ class QuizQuestion < ApplicationRecord
   # prompt to the editors' Irish. Only the editors' answer is ever shown; nothing
   # is generated. Like phrases, a card is never pruned here when its answer is
   # removed (see still_answerable); deleting the exercise removes it.
-  def self.sync_exercises(lesson)
-    lesson.exercises.answered.map do |exercise|
+  def self.sync_exercises(lesson_or_ids)
+    Exercise.answered.where(lesson: lesson_or_ids).map do |exercise|
       question = find_or_initialize_by(source: exercise, direction: "en_ga")
-      question.lesson = lesson
+      question.lesson_id = exercise.lesson_id
       question.prompt = exercise.prompt
       question.answer = exercise.answer
       question.distractors = []

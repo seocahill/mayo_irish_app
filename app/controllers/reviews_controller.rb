@@ -15,7 +15,7 @@ class ReviewsController < ApplicationController
       session.delete(ROUND_KEY)
       @forecast = QuizReview.forecast_for(current_user)
       @missed = missed_questions(round)
-      @tricky = ReviewLog.tricky_words_for(current_user, except: @missed.map(&:source_id))
+      @tricky = ReviewLog.tricky_words_for(current_user, except: @missed.select { |q| q.source_type == "VocabularyItem" }.map(&:source_id))
       @next_step = DailyPath.new(current_user).next_step_after_review
       return render :summary
     end
@@ -116,17 +116,33 @@ class ReviewsController < ApplicationController
 
   # A few unseen questions from the lesson the learner is on, only on top of due
   # words and never more than NEW_WORDS. One of them may be an exercise the
-  # editors have answered, so the lesson's grammar comes back too.
+  # editors have answered (see new_exercise_ids), so grammar comes back too.
   def new_ids(room)
+    limit = [ room, NEW_WORDS ].min
     lesson = DailyPath.new(current_user).current_lesson
-    return [] unless lesson
+    exercises = new_exercise_ids(lesson).first([ limit, NEW_EXERCISES ].min)
+    return exercises unless lesson
 
     QuizQuestion.sync_for(lesson)
-    seen = QuizReview.where(user: current_user).select(:quiz_question_id)
-    unseen = lesson.quiz_questions.where.not(id: seen).still_answerable
-    limit = [ room, NEW_WORDS ].min
-    exercises = unseen.where(source_type: "Exercise").pluck(:id).shuffle.first([ limit, NEW_EXERCISES ].min)
-    words = unseen.where.not(source_type: "Exercise").pluck(:id).shuffle.first(limit - exercises.size)
+    words = lesson.quiz_questions.word_cards.where.not(id: seen_ids).pluck(:id).shuffle.first(limit - exercises.size)
     (words + exercises).shuffle
+  end
+
+  # Unseen exercise cards from the lesson the learner is on, then from the
+  # lessons they have already started, earliest lesson first, so an answer an
+  # editor writes for a finished lesson still reaches them.
+  def new_exercise_ids(current)
+    started = QuizQuestion.where(id: seen_ids).select(:lesson_id)
+    lesson_ids = [ current&.id, *Lesson.visible_to(current_user).where(id: started).ordered.pluck(:id) ].compact.uniq
+    return [] if lesson_ids.empty?
+
+    QuizQuestion.sync_exercises(lesson_ids)
+    unseen = QuizQuestion.exercise_cards.still_answerable.where(lesson_id: lesson_ids).where.not(id: seen_ids)
+                         .pluck(:id, :lesson_id)
+    unseen.sort_by { |_, lesson_id| [ lesson_ids.index(lesson_id), rand ] }.map(&:first)
+  end
+
+  def seen_ids
+    QuizReview.where(user: current_user).select(:quiz_question_id)
   end
 end
