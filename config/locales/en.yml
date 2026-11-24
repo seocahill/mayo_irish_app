@@ -950,6 +950,12 @@ en:
       reached:
         one: Spoken for a minute in one conversation
         other: Spoken for %{count} minutes in one conversation
+    exercises:
+      next: 'next: %{count}'
+      not_yet: Exercises from your daily review count here once you know them
+      reached:
+        one: You know 1 exercise by heart from your review
+        other: You know %{count} exercises by heart from your review
     followed:
       next: 'next: %{count}'
       not_yet: Conversations you say you followed count here

@@ -288,3 +288,8 @@
   title: Exercises come back in your daily review
   body: The exercises editors have answered in Mayo Irish now come back in the daily review, so the grammar they practise comes round again before you forget it. Say or write your Irish, tap Show to see the editors' answer, and rate yourself. At most one new exercise joins a round.
   path: /review
+- id: 51
+  date: 2026-11-24
+  title: Exercises you know
+  body: Today's "So far" now counts the exercises you know from your daily review. An exercise counts once it has stuck, at the same bar as a known word, so one lucky answer isn't enough.
+  path: /

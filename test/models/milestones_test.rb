@@ -149,4 +149,28 @@ class MilestonesTest < ActiveSupport::TestCase
     assert_equal 2, followed.call.value
     assert_equal 1, followed.call.reached
   end
+
+  test "exercises known count once the course has an answered exercise" do
+    assert_not_includes Milestones.new(@user, known_words: 0).strands.map(&:key), :exercises
+
+    exercise = exercises(:one)
+    exercise.update!(answer: "Dia dhuit")
+    QuizQuestion.sync_for(lessons(:one))
+    strand = Milestones.new(@user, known_words: 0).strands.find { |s| s.key == :exercises }
+    assert_equal 0, strand.value
+    assert_equal 1, strand.next_step
+
+    question = QuizQuestion.find_by!(source: exercise)
+    review = QuizReview.create!(user: @user, quiz_question: question, fsrs_state: QuizReview::REVIEW_STATE, stability: 3.0, due_at: 1.day.from_now)
+    assert_equal 0, Milestones.new(@user, known_words: 0).strands.find { |s| s.key == :exercises }.value, "not yet stable"
+
+    review.update!(stability: QuizReview::KNOWN_STABILITY)
+    strand = Milestones.new(@user, known_words: 0).strands.find { |s| s.key == :exercises }
+    assert_equal 1, strand.value
+    assert_equal 1, strand.reached
+    assert_equal 3, strand.next_step
+
+    exercise.update!(answer: "")
+    assert_not_includes Milestones.new(@user, known_words: 0).strands.map(&:key), :exercises
+  end
 end
